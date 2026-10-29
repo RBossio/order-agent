@@ -1,0 +1,192 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<Order xmlns="urn:oasis:names:specification:ubl:schema:xsd:Order-2" xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2">
+  <cbc:CustomizationID>urn:fdc:peppol.eu:poacc:trns:order:3</cbc:CustomizationID>
+  <cbc:ProfileID>urn:fdc:peppol.eu:poacc:bis:ordering:3</cbc:ProfileID>
+  <cbc:ID>4500012345</cbc:ID>
+  <cbc:IssueDate>2026-11-03</cbc:IssueDate>
+  <cbc:Note>Deliver Mon-Fri 7am-3pm. Reference PO on packing slip.</cbc:Note>
+  <cbc:DocumentCurrencyCode>USD</cbc:DocumentCurrencyCode>
+  <cbc:CustomerReference>Maint. Dept / WO-7781</cbc:CustomerReference>
+  <cac:BuyerCustomerParty>
+    <cac:Party>
+      <cbc:EndpointID schemeID="0088">9999900000429</cbc:EndpointID>
+      <cac:PartyIdentification>
+        <cbc:ID schemeID="0088">9999900000429</cbc:ID>
+      </cac:PartyIdentification>
+      <cac:PartyName>
+        <cbc:Name>Acme Manufacturing Inc. (SYNTHETIC)</cbc:Name>
+      </cac:PartyName>
+      <cac:PostalAddress>
+        <cbc:StreetName>1200 Industrial Pkwy</cbc:StreetName>
+        <cbc:CityName>Toledo</cbc:CityName>
+        <cbc:PostalZone>43601</cbc:PostalZone>
+        <cbc:CountrySubentity>OH</cbc:CountrySubentity>
+        <cac:Country>
+          <cbc:IdentificationCode>US</cbc:IdentificationCode>
+        </cac:Country>
+      </cac:PostalAddress>
+      <cac:PartyLegalEntity>
+        <cbc:RegistrationName>Acme Manufacturing Inc. (SYNTHETIC)</cbc:RegistrationName>
+      </cac:PartyLegalEntity>
+    </cac:Party>
+  </cac:BuyerCustomerParty>
+  <cac:SellerSupplierParty>
+    <cac:Party>
+      <cbc:EndpointID schemeID="0088">9999900000016</cbc:EndpointID>
+      <cac:PartyIdentification>
+        <cbc:ID schemeID="0088">9999900000016</cbc:ID>
+      </cac:PartyIdentification>
+      <cac:PartyName>
+        <cbc:Name>Delta Industrial Supply LLC (SYNTHETIC)</cbc:Name>
+      </cac:PartyName>
+      <cac:PostalAddress>
+        <cbc:StreetName>55 Commerce Dr</cbc:StreetName>
+        <cbc:CityName>Dayton</cbc:CityName>
+        <cbc:PostalZone>45402</cbc:PostalZone>
+        <cbc:CountrySubentity>OH</cbc:CountrySubentity>
+        <cac:Country>
+          <cbc:IdentificationCode>US</cbc:IdentificationCode>
+        </cac:Country>
+      </cac:PostalAddress>
+      <cac:PartyLegalEntity>
+        <cbc:RegistrationName>Delta Industrial Supply LLC (SYNTHETIC)</cbc:RegistrationName>
+      </cac:PartyLegalEntity>
+    </cac:Party>
+  </cac:SellerSupplierParty>
+  <cac:Delivery>
+    <cac:DeliveryLocation>
+      <cbc:ID>PLANT-02</cbc:ID>
+      <cac:Address>
+        <cbc:StreetName>4400 Maumee Ave</cbc:StreetName>
+        <cbc:AdditionalStreetName>Dock B</cbc:AdditionalStreetName>
+        <cbc:CityName>Toledo</cbc:CityName>
+        <cbc:PostalZone>43609</cbc:PostalZone>
+        <cbc:CountrySubentity>OH</cbc:CountrySubentity>
+        <cac:Country>
+          <cbc:IdentificationCode>US</cbc:IdentificationCode>
+        </cac:Country>
+      </cac:Address>
+    </cac:DeliveryLocation>
+    <cac:RequestedDeliveryPeriod>
+      <cbc:EndDate>2026-11-10</cbc:EndDate>
+    </cac:RequestedDeliveryPeriod>
+  </cac:Delivery>
+  <cac:PaymentTerms>
+    <cbc:Note>Net 30</cbc:Note>
+  </cac:PaymentTerms>
+  <cac:AnticipatedMonetaryTotal>
+    <cbc:LineExtensionAmount currencyID="USD">769.10</cbc:LineExtensionAmount>
+    <cbc:PayableAmount currencyID="USD">769.10</cbc:PayableAmount>
+  </cac:AnticipatedMonetaryTotal>
+  <cac:OrderLine>
+    <cac:LineItem>
+      <cbc:ID>1</cbc:ID>
+      <cbc:Quantity unitCode="BX">4</cbc:Quantity>
+      <cbc:LineExtensionAmount currencyID="USD">75.00</cbc:LineExtensionAmount>
+      <cac:Price>
+        <cbc:PriceAmount currencyID="USD">18.75</cbc:PriceAmount>
+        <cbc:BaseQuantity unitCode="BX">1</cbc:BaseQuantity>
+      </cac:Price>
+      <cac:Item>
+        <cbc:Description>HEX CAP SCREW 1/2-13 X 2 GR5 ZINC</cbc:Description>
+        <cbc:Name>HEX CAP SCREW 1/2-13 X 2 GR5 ZINC</cbc:Name>
+        <cac:BuyersItemIdentification>
+          <cbc:ID>ACM-HW-00412</cbc:ID>
+        </cac:BuyersItemIdentification>
+        <cac:SellersItemIdentification>
+          <cbc:ID>FST-HCS-12-13X2-G5Z-B50</cbc:ID>
+        </cac:SellersItemIdentification>
+      </cac:Item>
+    </cac:LineItem>
+  </cac:OrderLine>
+  <cac:OrderLine>
+    <cac:LineItem>
+      <cbc:ID>2</cbc:ID>
+      <cbc:Quantity unitCode="BX">30</cbc:Quantity>
+      <cbc:LineExtensionAmount currencyID="USD">268.50</cbc:LineExtensionAmount>
+      <cac:Price>
+        <cbc:PriceAmount currencyID="USD">8.95</cbc:PriceAmount>
+        <cbc:BaseQuantity unitCode="BX">1</cbc:BaseQuantity>
+      </cac:Price>
+      <cac:Item>
+        <cbc:Description>Nitrile exam gloves 6 mil, powder-free, blue, size L, 100/bx, 10 bx/cs</cbc:Description>
+        <cbc:Name>Nitrile exam gloves 6 mil, powder-free, blue, size L, 100/bx, 10 bx/cs</cbc:Name>
+        <cac:BuyersItemIdentification>
+          <cbc:ID>ACM-PPE-1033</cbc:ID>
+        </cac:BuyersItemIdentification>
+        <cac:SellersItemIdentification>
+          <cbc:ID>PPE-GLV-NIT6-L-BLU</cbc:ID>
+        </cac:SellersItemIdentification>
+        <cac:StandardItemIdentification>
+          <cbc:ID schemeID="0160">00012345678905</cbc:ID>
+        </cac:StandardItemIdentification>
+      </cac:Item>
+    </cac:LineItem>
+  </cac:OrderLine>
+  <cac:OrderLine>
+    <cac:LineItem>
+      <cbc:ID>3</cbc:ID>
+      <cbc:Quantity unitCode="CS">6</cbc:Quantity>
+      <cbc:LineExtensionAmount currencyID="USD">247.20</cbc:LineExtensionAmount>
+      <cac:Price>
+        <cbc:PriceAmount currencyID="USD">41.2</cbc:PriceAmount>
+        <cbc:BaseQuantity unitCode="CS">1</cbc:BaseQuantity>
+      </cac:Price>
+      <cac:Item>
+        <cbc:Description>Can liner 40x46 1.5 mil black 100/cs</cbc:Description>
+        <cbc:Name>Can liner 40x46 1.5 mil black 100/cs</cbc:Name>
+        <cac:BuyersItemIdentification>
+          <cbc:ID>JS-0457</cbc:ID>
+        </cac:BuyersItemIdentification>
+        <cac:SellersItemIdentification>
+          <cbc:ID>JAN-LNR-4046-15-BK</cbc:ID>
+        </cac:SellersItemIdentification>
+      </cac:Item>
+    </cac:LineItem>
+  </cac:OrderLine>
+  <cac:OrderLine>
+    <cac:LineItem>
+      <cbc:ID>4</cbc:ID>
+      <cbc:Quantity unitCode="CS">2</cbc:Quantity>
+      <cbc:LineExtensionAmount currencyID="USD">104.00</cbc:LineExtensionAmount>
+      <cac:Price>
+        <cbc:PriceAmount currencyID="USD">52</cbc:PriceAmount>
+        <cbc:BaseQuantity unitCode="CS">1</cbc:BaseQuantity>
+      </cac:Price>
+      <cac:Item>
+        <cbc:Description>Neutral floor cleaner concentrate 4/1 GAL</cbc:Description>
+        <cbc:Name>Neutral floor cleaner concentrate 4/1 GAL</cbc:Name>
+        <cac:BuyersItemIdentification>
+          <cbc:ID>JS-0112</cbc:ID>
+        </cac:BuyersItemIdentification>
+        <cac:SellersItemIdentification>
+          <cbc:ID>JAN-NFC-4X1G</cbc:ID>
+        </cac:SellersItemIdentification>
+      </cac:Item>
+    </cac:LineItem>
+  </cac:OrderLine>
+  <cac:OrderLine>
+    <cac:LineItem>
+      <cbc:ID>5</cbc:ID>
+      <cbc:Quantity unitCode="EA">24</cbc:Quantity>
+      <cbc:LineExtensionAmount currencyID="USD">74.40</cbc:LineExtensionAmount>
+      <cac:Price>
+        <cbc:PriceAmount currencyID="USD">3.1</cbc:PriceAmount>
+        <cbc:BaseQuantity unitCode="EA">1</cbc:BaseQuantity>
+      </cac:Price>
+      <cac:Item>
+        <cbc:Description>Safety glasses clear lens anti-fog ANSI Z87.1</cbc:Description>
+        <cbc:Name>Safety glasses clear lens anti-fog ANSI Z87.1</cbc:Name>
+        <cac:BuyersItemIdentification>
+          <cbc:ID>ACM-PPE-2210</cbc:ID>
+        </cac:BuyersItemIdentification>
+        <cac:SellersItemIdentification>
+          <cbc:ID>PPE-GLS-AF-CLR</cbc:ID>
+        </cac:SellersItemIdentification>
+        <cac:ManufacturersItemIdentification>
+          <cbc:ID>SV-AF200</cbc:ID>
+        </cac:ManufacturersItemIdentification>
+      </cac:Item>
+    </cac:LineItem>
+  </cac:OrderLine>
+</Order>

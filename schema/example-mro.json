@@ -1,0 +1,402 @@
+{
+  "schema_version": "1.0",
+  "order_id": "7b1e6c2a-3f4d-4e8a-9c51-2d0f6a9b1e77",
+  "tenant_id": "delta-industrial-supply",
+  "document_type": "ORIGINAL",
+  "status": "NEEDS_REVIEW",
+  "source": {
+    "channel": "EMAIL_IMAP",
+    "message_id": "<po-4500012345@acme-mfg.example>",
+    "from_address": "purchasing@acme-mfg.example",
+    "subject": "PO 4500012345 - Plant 2 MRO replenishment",
+    "received_at": "2026-11-03T14:22:05Z",
+    "documents": [
+      {
+        "document_id": "doc-01",
+        "kind": "PDF_TEXT",
+        "filename": "PO_4500012345.pdf",
+        "mime_type": "application/pdf",
+        "sha256": "3f5a0c9e1b7d4a2f8e6c0b9a7d5e3f1a2c4b6d8e0f1a3c5e7b9d1f3a5c7e9b1d",
+        "page_count": 2
+      }
+    ]
+  },
+  "buyer": {
+    "name": "Acme Manufacturing Inc. (SYNTHETIC)",
+    "code_on_document": null,
+    "tax_id": null,
+    "gln": null,
+    "peppol_endpoint": null,
+    "address": {
+      "line1": "1200 Industrial Pkwy",
+      "line2": null,
+      "city": "Toledo",
+      "region": "OH",
+      "postal_code": "43601",
+      "country": "US"
+    },
+    "contact": {
+      "name": "Jordan Lee (fictitious)",
+      "email": "purchasing@acme-mfg.example",
+      "phone": "+1-555-0100"
+    },
+    "resolved": {
+      "erp_partner_id": 42,
+      "erp_partner_ref": "C-ACME",
+      "method": "EMAIL_DOMAIN",
+      "score": 0.99
+    }
+  },
+  "seller": {
+    "name": "Delta Industrial Supply LLC (SYNTHETIC)",
+    "code_on_document": "VEND-00871",
+    "tax_id": null,
+    "gln": null,
+    "peppol_endpoint": null,
+    "address": {
+      "line1": "55 Commerce Dr",
+      "line2": null,
+      "city": "Dayton",
+      "region": "OH",
+      "postal_code": "45402",
+      "country": "US"
+    },
+    "contact": null,
+    "resolved": null
+  },
+  "bill_to": {
+    "name": "Acme Manufacturing Inc. - Accounts Payable",
+    "address": {
+      "line1": "PO Box 900",
+      "line2": null,
+      "city": "Toledo",
+      "region": "OH",
+      "postal_code": "43601",
+      "country": "US"
+    },
+    "resolved": {
+      "erp_partner_id": 43,
+      "erp_partner_ref": null,
+      "method": "ADDRESS",
+      "score": 0.96
+    }
+  },
+  "ship_to": {
+    "name": "Acme Plant 2 - Receiving Dock B",
+    "code_on_document": "PLANT-02",
+    "address": {
+      "line1": "4400 Maumee Ave",
+      "line2": "Dock B",
+      "city": "Toledo",
+      "region": "OH",
+      "postal_code": "43609",
+      "country": "US"
+    },
+    "resolved": {
+      "erp_partner_id": 44,
+      "erp_partner_ref": null,
+      "method": "CODE",
+      "score": 1.0
+    }
+  },
+  "header": {
+    "po_number": "4500012345",
+    "po_revision": 0,
+    "po_date": "2026-11-03",
+    "requested_delivery_date": "2026-11-10",
+    "currency": "USD",
+    "buyer_reference": "Maint. Dept / WO-7781",
+    "payment_terms_text": "Net 30",
+    "incoterms": null,
+    "ship_via": "Best Way Ground",
+    "notes": "Deliver Mon-Fri 7am-3pm. Reference PO on packing slip.",
+    "language": "en"
+  },
+  "lines": [
+    {
+      "line_no": 1,
+      "buyer_item_code": "ACM-HW-00412",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "HEX CAP SCREW 1/2-13 X 2 GR5 ZINC",
+      "quantity": 4,
+      "uom_raw": "BX/50",
+      "uom": "BX",
+      "pack": {
+        "raw": "BX/50",
+        "inner_count": 50,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 18.75,
+      "price_uom": "BX",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 75.0,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "FST-HCS-12-13X2-G5Z-B50",
+        "erp_product_id": 1012,
+        "erp_uom": "BX",
+        "erp_uom_id": 31,
+        "erp_quantity": 4,
+        "conversion_factor": 1,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 18.75
+      }
+    },
+    {
+      "line_no": 2,
+      "buyer_item_code": "ACM-PPE-1033",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": "00012345678905",
+      "description": "Nitrile exam gloves 6 mil, powder-free, blue, size L, 100/bx, 10 bx/cs",
+      "quantity": 3,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "100/BX 10BX/CS",
+        "inner_count": 1000,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 89.5,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 268.5,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "PPE-GLV-NIT6-L-BLU",
+        "erp_product_id": 2207,
+        "erp_uom": "BX",
+        "erp_uom_id": 31,
+        "erp_quantity": 30,
+        "conversion_factor": 10,
+        "method": "GTIN",
+        "score": 0.99,
+        "candidates": [],
+        "erp_list_price": 8.95
+      }
+    },
+    {
+      "line_no": 3,
+      "buyer_item_code": "JS-0457",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Can liner 40x46 1.5 mil black 100/cs",
+      "quantity": 6,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "100/cs",
+        "inner_count": 100,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 41.2,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 247.2,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "JAN-LNR-4046-15-BK",
+        "erp_product_id": 3110,
+        "erp_uom": "CS",
+        "erp_uom_id": 33,
+        "erp_quantity": 6,
+        "conversion_factor": 1,
+        "method": "FUZZY",
+        "score": 0.88,
+        "candidates": [
+          {
+            "sku": "JAN-LNR-4046-15-BK",
+            "erp_product_id": 3110,
+            "description": "Can Liner 40x46 1.5mil Black 100/CS",
+            "score": 0.88,
+            "method": "FUZZY"
+          },
+          {
+            "sku": "JAN-LNR-4046-12-BK",
+            "erp_product_id": 3109,
+            "description": "Can Liner 40x46 1.2mil Black 100/CS",
+            "score": 0.81,
+            "method": "FUZZY"
+          },
+          {
+            "sku": "JAN-LNR-4048-15-CL",
+            "erp_product_id": 3115,
+            "description": "Can Liner 40x48 1.5mil Clear 100/CS",
+            "score": 0.72,
+            "method": "FUZZY"
+          }
+        ],
+        "erp_list_price": 41.2
+      }
+    },
+    {
+      "line_no": 4,
+      "buyer_item_code": "JS-0112",
+      "seller_item_code": "JAN-NFC-4X1G",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Neutral floor cleaner concentrate 4/1 GAL",
+      "quantity": 2,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "4/1 GAL",
+        "inner_count": 4,
+        "inner_size": 1,
+        "inner_uom": "GLL"
+      },
+      "unit_price": 52.0,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 104.0,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "JAN-NFC-4X1G",
+        "erp_product_id": 3301,
+        "erp_uom": "CS",
+        "erp_uom_id": 33,
+        "erp_quantity": 2,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 47.0
+      }
+    },
+    {
+      "line_no": 5,
+      "buyer_item_code": "ACM-PPE-2210",
+      "seller_item_code": null,
+      "manufacturer_name": "SafeView (fictitious)",
+      "manufacturer_part_number": "SV-AF200",
+      "gtin": null,
+      "description": "Safety glasses clear lens anti-fog ANSI Z87.1",
+      "quantity": 2,
+      "uom_raw": "DZ",
+      "uom": "DZN",
+      "pack": null,
+      "unit_price": 3.1,
+      "price_uom": "EA",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 74.4,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "PPE-GLS-AF-CLR",
+        "erp_product_id": 2350,
+        "erp_uom": "EA",
+        "erp_uom_id": 1,
+        "erp_quantity": 24,
+        "conversion_factor": 12,
+        "method": "MPN",
+        "score": 0.97,
+        "candidates": [],
+        "erp_list_price": 3.1
+      }
+    }
+  ],
+  "charges": [],
+  "totals": {
+    "lines_amount_declared": 769.1,
+    "tax_amount_declared": null,
+    "total_amount_declared": 769.1,
+    "lines_amount_computed": 769.1
+  },
+  "evidence": {
+    "/header/po_number": {
+      "confidence": 0.99,
+      "document_id": "doc-01",
+      "page": 1,
+      "bbox": [
+        412.0,
+        88.5,
+        498.2,
+        101.0
+      ],
+      "cell": null,
+      "snippet": "PO Number: 4500012345",
+      "corrected_by": null
+    },
+    "/lines/2/resolution/sku": {
+      "confidence": 0.88,
+      "document_id": "doc-01",
+      "page": 1,
+      "bbox": null,
+      "cell": null,
+      "snippet": "JS-0457 Can liner 40x46 1.5 mil black 100/cs",
+      "corrected_by": null
+    },
+    "/lines/4/quantity": {
+      "confidence": 0.93,
+      "document_id": "doc-01",
+      "page": 2,
+      "bbox": [
+        60.0,
+        210.0,
+        90.0,
+        222.0
+      ],
+      "cell": null,
+      "snippet": "2 DZ  @ 3.10/EA  74.40",
+      "corrected_by": null
+    }
+  },
+  "validation": {
+    "issues": [
+      {
+        "code": "ITM-03",
+        "severity": "REVIEW",
+        "path": "/lines/2/resolution",
+        "message": "Articolo riconosciuto solo per similarità (0,88) e codice cliente JS-0457 non presente nel cross-reference."
+      },
+      {
+        "code": "PRC-01",
+        "severity": "REVIEW",
+        "path": "/lines/3/unit_price",
+        "message": "Prezzo PO 52,00 superiore al listino Odoo 47,00 (+10,6%, soglia ±2%)."
+      },
+      {
+        "code": "UOM-03",
+        "severity": "INFO",
+        "path": "/lines/4",
+        "message": "Ordine in DZ con prezzo per EA: convertito 2 DZ = 24 EA; importo 24 x 3,10 = 74,40 coerente."
+      }
+    ]
+  },
+  "decision": {
+    "score": 0.86,
+    "route": "REVIEW",
+    "reasons": [
+      "ITM-03",
+      "PRC-01"
+    ]
+  },
+  "erp_ref": null,
+  "processing": {
+    "extractor": "ollama/qwen3:8b",
+    "prompt_version": "po-extract-v3",
+    "created_at": "2026-11-03T14:22:41Z",
+    "updated_at": null
+  }
+}

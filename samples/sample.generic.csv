@@ -1,0 +1,6 @@
+vo_order_id,po_number,po_revision,po_date,customer_ref,ship_to_code,requested_date,currency,line_no,sku,customer_item_code,description,quantity,uom,unit_price,line_amount,match_method,match_score
+7b1e6c2a-3f4d-4e8a-9c51-2d0f6a9b1e77,4500012345,0,2026-11-03,C-ACME,PLANT-02,2026-11-10,USD,1,FST-HCS-12-13X2-G5Z-B50,ACM-HW-00412,HEX CAP SCREW 1/2-13 X 2 GR5 ZINC,4,BX,18.75,75,XREF,1.0
+7b1e6c2a-3f4d-4e8a-9c51-2d0f6a9b1e77,4500012345,0,2026-11-03,C-ACME,PLANT-02,2026-11-10,USD,2,PPE-GLV-NIT6-L-BLU,ACM-PPE-1033,"Nitrile exam gloves 6 mil, powder-free, blue, size L, 100/bx, 10 bx/cs",30,BX,8.95,268.5,GTIN,0.99
+7b1e6c2a-3f4d-4e8a-9c51-2d0f6a9b1e77,4500012345,0,2026-11-03,C-ACME,PLANT-02,2026-11-10,USD,3,JAN-LNR-4046-15-BK,JS-0457,Can liner 40x46 1.5 mil black 100/cs,6,CS,41.2,247.2,FUZZY,0.88
+7b1e6c2a-3f4d-4e8a-9c51-2d0f6a9b1e77,4500012345,0,2026-11-03,C-ACME,PLANT-02,2026-11-10,USD,4,JAN-NFC-4X1G,JS-0112,Neutral floor cleaner concentrate 4/1 GAL,2,CS,52,104,SELLER_CODE,0.98
+7b1e6c2a-3f4d-4e8a-9c51-2d0f6a9b1e77,4500012345,0,2026-11-03,C-ACME,PLANT-02,2026-11-10,USD,5,PPE-GLS-AF-CLR,ACM-PPE-2210,Safety glasses clear lens anti-fog ANSI Z87.1,24,EA,3.1,74.4,MPN,0.97
