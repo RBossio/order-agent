@@ -1,0 +1,312 @@
+[
+  {
+    "ref": "C-ACME",
+    "name": "Acme Industries LLC (SYNTHETIC)",
+    "tax_id": "18-8678589",
+    "email": "purchasing@acme.example",
+    "phone": "+1-555-6170",
+    "billing_address": {
+      "line1": "705 Enterprise Ave",
+      "city": "Toledo",
+      "region": "OH",
+      "postal_code": "43601",
+      "country": "US"
+    },
+    "shipping_addresses": [
+      {
+        "line1": "3368 Industrial Pkwy",
+        "city": "Toledo",
+        "region": "OH",
+        "postal_code": "43601",
+        "country": "US"
+      }
+    ],
+    "pricelist_name": "Acme Pricelist"
+  },
+  {
+    "ref": "C-DELTA",
+    "name": "Delta Corp. (SYNTHETIC)",
+    "tax_id": "75-7681090",
+    "email": "purchasing@delta.example",
+    "phone": "+1-555-5476",
+    "billing_address": {
+      "line1": "8997 Tech Center Blvd",
+      "city": "Dayton",
+      "region": "OH",
+      "postal_code": "45402",
+      "country": "US"
+    },
+    "shipping_addresses": [
+      {
+        "line1": "3231 Enterprise Ave",
+        "city": "Toledo",
+        "region": "OH",
+        "postal_code": "43601",
+        "country": "US"
+      },
+      {
+        "line1": "883 Business Park Rd",
+        "city": "Detroit",
+        "region": "MI",
+        "postal_code": "48201",
+        "country": "US"
+      }
+    ],
+    "pricelist_name": "Delta Pricelist"
+  },
+  {
+    "ref": "C-OMEGA",
+    "name": "Omega Manufacturing Inc. (SYNTHETIC)",
+    "tax_id": "57-8330827",
+    "email": "purchasing@omega.example",
+    "phone": "+1-555-2353",
+    "billing_address": {
+      "line1": "6653 Tech Center Blvd",
+      "city": "Cleveland",
+      "region": "OH",
+      "postal_code": "44101",
+      "country": "US"
+    },
+    "shipping_addresses": [
+      {
+        "line1": "3160 Tech Center Blvd",
+        "city": "Detroit",
+        "region": "MI",
+        "postal_code": "48201",
+        "country": "US"
+      },
+      {
+        "line1": "6118 Enterprise Ave",
+        "city": "Indianapolis",
+        "region": "IN",
+        "postal_code": "46201",
+        "country": "US"
+      }
+    ],
+    "pricelist_name": "Omega Pricelist"
+  },
+  {
+    "ref": "C-APEX",
+    "name": "Apex Group (SYNTHETIC)",
+    "tax_id": "64-2324175",
+    "email": "purchasing@apex.example",
+    "phone": "+1-555-3730",
+    "billing_address": {
+      "line1": "7155 Factory Blvd",
+      "city": "Columbus",
+      "region": "OH",
+      "postal_code": "43215",
+      "country": "US"
+    },
+    "shipping_addresses": [
+      {
+        "line1": "5362 Commerce Dr",
+        "city": "Cincinnati",
+        "region": "OH",
+        "postal_code": "45202",
+        "country": "US"
+      },
+      {
+        "line1": "5472 Enterprise Ave",
+        "city": "Dayton",
+        "region": "OH",
+        "postal_code": "45402",
+        "country": "US"
+      },
+      {
+        "line1": "7405 Corporate Dr",
+        "city": "Cincinnati",
+        "region": "OH",
+        "postal_code": "45202",
+        "country": "US"
+      }
+    ],
+    "pricelist_name": "Apex Pricelist"
+  },
+  {
+    "ref": "C-SUMMIT",
+    "name": "Summit Group (SYNTHETIC)",
+    "tax_id": "66-6897979",
+    "email": "purchasing@summit.example",
+    "phone": "+1-555-1510",
+    "billing_address": {
+      "line1": "7425 Industrial Pkwy",
+      "city": "Cincinnati",
+      "region": "OH",
+      "postal_code": "45202",
+      "country": "US"
+    },
+    "shipping_addresses": [
+      {
+        "line1": "7226 Enterprise Ave",
+        "city": "Detroit",
+        "region": "MI",
+        "postal_code": "48201",
+        "country": "US"
+      },
+      {
+        "line1": "1329 Corporate Dr",
+        "city": "Toledo",
+        "region": "OH",
+        "postal_code": "43601",
+        "country": "US"
+      },
+      {
+        "line1": "8506 Factory Blvd",
+        "city": "Detroit",
+        "region": "MI",
+        "postal_code": "48201",
+        "country": "US"
+      }
+    ],
+    "pricelist_name": "Summit Pricelist"
+  },
+  {
+    "ref": "C-PRIME",
+    "name": "Prime Industries LLC (SYNTHETIC)",
+    "tax_id": "87-8351320",
+    "email": "purchasing@prime.example",
+    "phone": "+1-555-7272",
+    "billing_address": {
+      "line1": "670 Factory Blvd",
+      "city": "Detroit",
+      "region": "MI",
+      "postal_code": "48201",
+      "country": "US"
+    },
+    "shipping_addresses": [
+      {
+        "line1": "6101 Business Park Rd",
+        "city": "Columbus",
+        "region": "OH",
+        "postal_code": "43215",
+        "country": "US"
+      }
+    ],
+    "pricelist_name": "Prime Pricelist"
+  },
+  {
+    "ref": "C-ATLAS",
+    "name": "Atlas Holdings (SYNTHETIC)",
+    "tax_id": "14-3574265",
+    "email": "purchasing@atlas.example",
+    "phone": "+1-555-6150",
+    "billing_address": {
+      "line1": "7471 Business Park Rd",
+      "city": "Grand Rapids",
+      "region": "MI",
+      "postal_code": "49503",
+      "country": "US"
+    },
+    "shipping_addresses": [
+      {
+        "line1": "1359 Factory Blvd",
+        "city": "Indianapolis",
+        "region": "IN",
+        "postal_code": "46201",
+        "country": "US"
+      },
+      {
+        "line1": "6112 Corporate Dr",
+        "city": "Fort Wayne",
+        "region": "IN",
+        "postal_code": "46802",
+        "country": "US"
+      }
+    ],
+    "pricelist_name": "Atlas Pricelist"
+  },
+  {
+    "ref": "C-NOVA",
+    "name": "Nova Group (SYNTHETIC)",
+    "tax_id": "45-5187788",
+    "email": "purchasing@nova.example",
+    "phone": "+1-555-5678",
+    "billing_address": {
+      "line1": "1958 Industrial Pkwy",
+      "city": "Indianapolis",
+      "region": "IN",
+      "postal_code": "46201",
+      "country": "US"
+    },
+    "shipping_addresses": [
+      {
+        "line1": "8276 Corporate Dr",
+        "city": "Cleveland",
+        "region": "OH",
+        "postal_code": "44101",
+        "country": "US"
+      },
+      {
+        "line1": "2029 Enterprise Ave",
+        "city": "Fort Wayne",
+        "region": "IN",
+        "postal_code": "46802",
+        "country": "US"
+      },
+      {
+        "line1": "7411 Manufacturing Way",
+        "city": "Cincinnati",
+        "region": "OH",
+        "postal_code": "45202",
+        "country": "US"
+      }
+    ],
+    "pricelist_name": "Nova Pricelist"
+  },
+  {
+    "ref": "C-TITAN",
+    "name": "Titan Group (SYNTHETIC)",
+    "tax_id": "72-4358435",
+    "email": "purchasing@titan.example",
+    "phone": "+1-555-2438",
+    "billing_address": {
+      "line1": "2109 Factory Blvd",
+      "city": "Fort Wayne",
+      "region": "IN",
+      "postal_code": "46802",
+      "country": "US"
+    },
+    "shipping_addresses": [
+      {
+        "line1": "2928 Tech Center Blvd",
+        "city": "Indianapolis",
+        "region": "IN",
+        "postal_code": "46201",
+        "country": "US"
+      }
+    ],
+    "pricelist_name": "Titan Pricelist"
+  },
+  {
+    "ref": "C-GLOBAL",
+    "name": "Global Group (SYNTHETIC)",
+    "tax_id": "50-6828829",
+    "email": "purchasing@global.example",
+    "phone": "+1-555-4292",
+    "billing_address": {
+      "line1": "1163 Enterprise Ave",
+      "city": "Chicago",
+      "region": "IL",
+      "postal_code": "60601",
+      "country": "US"
+    },
+    "shipping_addresses": [
+      {
+        "line1": "2952 Business Park Rd",
+        "city": "Cleveland",
+        "region": "OH",
+        "postal_code": "44101",
+        "country": "US"
+      },
+      {
+        "line1": "3773 Commerce Dr",
+        "city": "Fort Wayne",
+        "region": "IN",
+        "postal_code": "46802",
+        "country": "US"
+      }
+    ],
+    "pricelist_name": "Global Pricelist"
+  }
+]

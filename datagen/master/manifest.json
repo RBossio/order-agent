@@ -1,0 +1,15 @@
+{
+  "seed": 42,
+  "generated_at": "2026-10-29",
+  "counts": {
+    "products": 300,
+    "customers": 10,
+    "xrefs": 1825
+  },
+  "files": [
+    "products.json",
+    "customers.json",
+    "customer_xref.json",
+    "uom_definitions.json"
+  ]
+}
