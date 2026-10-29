@@ -1,0 +1,18 @@
+# VentureOrder - Configurazione regole di validazione
+# Configurazione predefinita, sovrascrivibile per tenant
+
+# Regole disabilitate (per codice)
+disabled_rules:
+  - SEC-02  # Verifica SPF/DKIM disabilitata di default
+
+# Override severità per regola
+# severity_overrides:
+#   HDR-04: INFO  # Abbassa severità data consegna
+#   CUS-02: BLOCK  # Alza severità match fuzzy cliente
+
+# Configurazione per area (futura estensione)
+# area_config:
+#   HDR:
+#     enabled: true
+#   CUS:
+#     enabled: true

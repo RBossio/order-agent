@@ -1,0 +1,23 @@
+# VentureOrder - Soglie di validazione
+# Configurazione predefinita, sovrascrivibile per tenant
+
+# Tolleranza prezzo rispetto al listino (percentuale)
+price_tolerance_pct: 2.0
+
+# Confidenza minima per campi estratti
+confidence_min: 0.90
+
+# Moltiplicatore per quantità anomala (rispetto alla media storica)
+qty_anomaly_multiple: 10
+
+# Tolleranza totale ordine rispetto a somma righe (percentuale)
+total_tolerance_pct: 0.01
+
+# Giorni per ricerca ordini simili
+similar_order_days: 7
+
+# Tolleranza percentuale per ordini simili (stesso totale)
+similar_order_tolerance_pct: 5.0
+
+# Lunghezza massima campi per export
+max_field_length: 256
