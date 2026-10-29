@@ -13,16 +13,16 @@ def generate_customers(
     output_path: Path | None = None
 ) -> list[dict[str, Any]]:
     """Genera 10 clienti fittizi con stili d'ordine e codici articolo propri.
-    
+
     Args:
         catalog: Lista articoli del catalogo.
         output_path: Percorso opzionale per salvare il JSON.
-        
+
     Returns:
         Lista di clienti con anagrafica, stile ordine e cross-reference.
     """
     random.seed(SEED + 1)
-    
+
     customers: list[dict[str, Any]] = [
         {
             "customer_id": "C001",
@@ -269,15 +269,15 @@ def generate_customers(
             "xref_coverage": 0.55
         },
     ]
-    
+
     for customer in customers:
         if customer["order_style"]["uses_own_codes"] and customer.get("xref_coverage", 0) > 0:
             coverage = customer["xref_coverage"]
             prefix = customer["order_style"].get("code_prefix", "")
-            
+
             n_items = int(len(catalog) * coverage)
             selected_items = random.sample(catalog, n_items)
-            
+
             xref = []
             for item in selected_items:
                 cat_abbr = {
@@ -291,7 +291,7 @@ def generate_customers(
                     "LUBRICANTS": "LUB",
                     "MISC": "MIS"
                 }.get(item.get("category", "MISC"), "MIS")
-                
+
                 customer_code = f"{prefix}{cat_abbr}-{random.randint(1000, 9999):04d}"
                 xref.append({
                     "customer_code": customer_code,
@@ -299,22 +299,22 @@ def generate_customers(
                     "erp_product_id": item["erp_product_id"],
                     "status": "TRUSTED"
                 })
-            
+
             customer["xref"] = xref
         else:
             customer["xref"] = []
-    
+
     if output_path:
         output_path.parent.mkdir(parents=True, exist_ok=True)
         with open(output_path, "w", encoding="utf-8") as f:
             json.dump(customers, f, indent=2, ensure_ascii=False)
-    
+
     return customers
 
 
 if __name__ == "__main__":
     from .catalog import generate_catalog
-    
+
     catalog = generate_catalog()
     customers = generate_customers(catalog, Path(__file__).parent / "data" / "customers.json")
     print(f"Generated {len(customers)} customers")

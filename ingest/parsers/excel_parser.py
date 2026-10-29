@@ -42,13 +42,13 @@ class ExcelParser:
     def parse(self, file_path: Path | str) -> NormalizedInput:
         """Parsa un file Excel."""
         file_path = Path(file_path)
-        
+
         with open(file_path, "rb") as f:
             content = f.read()
-        
+
         file_ext = file_path.suffix.lower()
         file_type = FileType.XLSX if file_ext == ".xlsx" else FileType.XLS
-        
+
         return self.parse_bytes(
             content,
             filename=file_path.name,
@@ -72,26 +72,26 @@ class ExcelParser:
             file_path=file_path,
             file_size_bytes=len(content),
         )
-        
+
         result = NormalizedInput(source=source)
-        
+
         if file_type == FileType.XLS:
             self._parse_xls(content, result)
         else:
             self._parse_xlsx(content, result)
-        
+
         return result
 
     def _parse_xlsx(self, content: bytes, result: NormalizedInput) -> None:
         """Parsa file .xlsx usando openpyxl."""
         from openpyxl import load_workbook
-        
+
         # Verifica zip bomb prima di aprire
         is_safe, decompressed_size, bomb_msg = check_zip_bomb(
-            content, 
+            content,
             self.config.max_xlsx_decompressed_size_bytes
         )
-        
+
         if not is_safe:
             result.warnings.append(Warning(
                 code=WarningCodes.SIZE_ZIP_BOMB,
@@ -103,17 +103,17 @@ class ExcelParser:
                 severity=WarningSeverity.ERROR,
             ))
             return
-        
+
         buffer = BytesIO(content)
-        
+
         try:
             wb = load_workbook(buffer, data_only=True, read_only=False)
-            
+
             for sheet_idx, sheet_name in enumerate(wb.sheetnames):
                 ws = wb[sheet_name]
                 part = self._process_xlsx_sheet(ws, sheet_name, sheet_idx, result)
                 result.parts.append(part)
-                
+
         except Exception as e:  # noqa: BLE001
             result.warnings.append(Warning(
                 code=WarningCodes.XLS_PARSE_ERROR,
@@ -135,7 +135,7 @@ class ExcelParser:
             sheet_index=sheet_idx,
             mime_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
         )
-        
+
         merged_ranges: dict[str, str] = {}
         if hasattr(ws, "merged_cells") and ws.merged_cells:
             for merge_range in ws.merged_cells.ranges:
@@ -143,16 +143,16 @@ class ExcelParser:
                     for col in range(merge_range.min_col, merge_range.max_col + 1):
                         cell_ref = _get_cell_ref(row - 1, col - 1)
                         merged_ranges[cell_ref] = str(merge_range)
-        
+
         table = Table()
         text_lines = []
-        
+
         max_row = ws.max_row or 0
         max_col = ws.max_column or 0
-        
+
         first_data_row = None
         last_data_row = None
-        
+
         for row_idx in range(1, max_row + 1):
             row_has_data = False
             for col_idx in range(1, max_col + 1):
@@ -160,32 +160,32 @@ class ExcelParser:
                 if cell.value is not None:
                     row_has_data = True
                     break
-            
+
             if row_has_data:
                 if first_data_row is None:
                     first_data_row = row_idx
                 last_data_row = row_idx
-        
+
         if first_data_row is None:
             part.text = ""
             part.compute_sha256("")
             return part
-        
+
         for row_idx in range(first_data_row, last_data_row + 1):
             row_cells: list[Cell] = []
             row_text_parts: list[str] = []
-            
+
             for col_idx in range(1, max_col + 1):
                 cell = ws.cell(row=row_idx, column=col_idx)
                 cell_ref = _get_cell_ref(row_idx - 1, col_idx - 1)
-                
+
                 value = cell.value
-                if value is not None and not isinstance(value, (str, int, float, bool)):
+                if value is not None and not isinstance(value, str | int | float | bool):
                     value = str(value)
-                
+
                 is_merged = cell_ref in merged_ranges
                 merge_range = merged_ranges.get(cell_ref)
-                
+
                 table_cell = Cell(
                     value=value,
                     raw_value=str(value) if value is not None else None,
@@ -194,21 +194,21 @@ class ExcelParser:
                     merge_range=merge_range,
                 )
                 row_cells.append(table_cell)
-                
+
                 if value is not None:
                     row_text_parts.append(str(value))
-            
+
             table.rows.append(row_cells)
             if row_text_parts:
                 text_lines.append("\t".join(row_text_parts))
-        
+
         header_idx = self._detect_header_row(table.rows)
         table.header_row_index = header_idx
         part.tables = [table]
-        
+
         part.text = "\n".join(text_lines)
         part.compute_sha256(part.text)
-        
+
         return part
 
     def _parse_xls(self, content: bytes, result: NormalizedInput) -> None:
@@ -222,15 +222,15 @@ class ExcelParser:
                 details={"suggestion": "Installa xlrd con: pip install xlrd"},
             ))
             return
-        
+
         try:
             wb = xlrd.open_workbook(file_contents=content)
-            
+
             for sheet_idx in range(wb.nsheets):
                 ws = wb.sheet_by_index(sheet_idx)
                 part = self._process_xls_sheet(ws, sheet_idx, result)
                 result.parts.append(part)
-                
+
         except Exception as e:  # noqa: BLE001
             result.warnings.append(Warning(
                 code=WarningCodes.XLS_XLS_ERROR,
@@ -251,50 +251,50 @@ class ExcelParser:
             sheet_index=sheet_idx,
             mime_type="application/vnd.ms-excel",
         )
-        
+
         table = Table()
         text_lines = []
-        
+
         for row_idx in range(ws.nrows):
             row_cells: list[Cell] = []
             row_text_parts: list[str] = []
-            
+
             for col_idx in range(ws.ncols):
                 cell = ws.cell(row_idx, col_idx)
                 value = cell.value
                 cell_ref = _get_cell_ref(row_idx, col_idx)
-                
+
                 if value == "":
                     value = None
-                
+
                 table_cell = Cell(
                     value=value,
                     raw_value=str(value) if value is not None else None,
                     cell_ref=cell_ref,
                 )
                 row_cells.append(table_cell)
-                
+
                 if value is not None:
                     row_text_parts.append(str(value))
-            
+
             table.rows.append(row_cells)
             if row_text_parts:
                 text_lines.append("\t".join(row_text_parts))
-        
+
         header_idx = self._detect_header_row(table.rows)
         table.header_row_index = header_idx
         part.tables = [table]
-        
+
         part.text = "\n".join(text_lines)
         part.compute_sha256(part.text)
-        
+
         return part
 
     def _detect_header_row(self, rows: list[list[Cell]]) -> int | None:
         """Rileva euristicamente la riga di intestazione."""
         if not rows:
             return None
-        
+
         header_keywords = {
             "item", "qty", "quantity", "price", "amount", "description",
             "code", "sku", "unit", "uom", "line", "total", "product",
@@ -302,12 +302,12 @@ class ExcelParser:
             "codice", "unità", "riga", "totale", "prodotto",
             "company", "po number", "date", "ship to",
         }
-        
+
         for idx, row in enumerate(rows[:10]):
             text_cells = 0
             header_matches = 0
             non_empty = 0
-            
+
             for cell in row:
                 if cell.value is not None:
                     non_empty += 1
@@ -320,10 +320,10 @@ class ExcelParser:
                             if kw in cell_lower:
                                 header_matches += 0.5
                                 break
-            
+
             if header_matches >= 2:
                 return idx
-        
+
         for idx, row in enumerate(rows[:10]):
             non_empty = sum(1 for c in row if c.value is not None)
             if non_empty >= 3:
@@ -334,10 +334,10 @@ class ExcelParser:
                     next_row_has_nums = False
                     if idx + 1 < len(rows):
                         for c in rows[idx + 1]:
-                            if isinstance(c.value, (int, float)):
+                            if isinstance(c.value, int | float):
                                 next_row_has_nums = True
                                 break
                     if next_row_has_nums:
                         return idx
-        
+
         return None

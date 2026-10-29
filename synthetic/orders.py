@@ -108,38 +108,38 @@ def generate_pdf_order(
         Table,
         TableStyle,
     )
-    
+
     buffer = BytesIO()
     doc = SimpleDocTemplate(buffer, pagesize=letter, topMargin=0.5*inch, bottomMargin=0.5*inch)
     styles = getSampleStyleSheet()
     story = []
-    
+
     title_style = ParagraphStyle("Title", parent=styles["Heading1"], fontSize=16, spaceAfter=12)
     normal_style = styles["Normal"]
-    
+
     story.append(Paragraph("<b>PURCHASE ORDER</b>", title_style))
     story.append(Spacer(1, 0.2*inch))
-    
+
     buyer = order_data["buyer"]
     header = order_data["header"]
-    
+
     po_display = header["po_number"] if "MISSING_PO_NUMBER" not in hard_cases else ""
     date_display = header["po_date"]
-    
+
     if "DATE_FORMAT" in hard_cases:
         formats = ["Jan 15, 2026", "15-Jan-26", "1/15/26", "15.01.2026"]
         date_display = random.choice(formats)
-    
+
     header_data = [
         ["From:", buyer["name"]],
         ["PO Number:", po_display],
         ["Date:", date_display],
         ["Ship To:", order_data.get("ship_to", {}).get("name", buyer["name"])],
     ]
-    
+
     if header.get("requested_delivery_date"):
         header_data.append(["Delivery Date:", header["requested_delivery_date"]])
-    
+
     header_table = Table(header_data, colWidths=[1.5*inch, 4*inch])
     header_table.setStyle(TableStyle([
         ("FONTNAME", (0, 0), (0, -1), "Helvetica-Bold"),
@@ -147,14 +147,14 @@ def generate_pdf_order(
     ]))
     story.append(header_table)
     story.append(Spacer(1, 0.3*inch))
-    
+
     lines = order_data["lines"]
     line_data = [["Line", "Item Code", "Description", "Qty", "UoM", "Price", "Amount"]]
-    
+
     for i, line in enumerate(lines):
         desc = line["description"]
         qty = line["quantity"]
-        
+
         if "TYPO_DESC" in hard_cases and i == 0:
             desc = _add_typos(desc)
         if "AMBIGUOUS_DESC" in hard_cases and i == 1 and len(lines) > 1:
@@ -163,7 +163,7 @@ def generate_pdf_order(
             qty = NUM_IN_WORDS.get(int(qty), str(qty))
         if "MISSING_QTY" in hard_cases and i == len(lines) - 1:
             qty = ""
-        
+
         line_data.append([
             str(line["line_no"]),
             line.get("buyer_item_code") or line.get("seller_item_code") or "",
@@ -173,11 +173,11 @@ def generate_pdf_order(
             f"${line.get('unit_price', 0):.2f}" if line.get("unit_price") else "",
             f"${line.get('line_amount', 0):.2f}" if line.get("line_amount") else ""
         ])
-    
+
     if "TOTAL_MIXED" in hard_cases:
         line_data.append(["", "", "*** Please confirm availability ***", "", "", "", ""])
         line_data.append(["", "", "SUBTOTAL", "", "", "", f"${order_data.get('totals', {}).get('lines_amount_declared', 0):.2f}"])
-    
+
     line_table = Table(line_data, colWidths=[0.5*inch, 1*inch, 2.5*inch, 0.6*inch, 0.5*inch, 0.8*inch, 0.8*inch])
     line_table.setStyle(TableStyle([
         ("BACKGROUND", (0, 0), (-1, 0), colors.grey),
@@ -190,7 +190,7 @@ def generate_pdf_order(
         ("ALIGN", (5, 1), (-1, -1), "RIGHT"),
     ]))
     story.append(line_table)
-    
+
     if "MULTIPAGE_PDF" in hard_cases:
         story.append(Spacer(1, 4*inch))
         story.append(Paragraph("<b>Page 2 - Terms and Conditions</b>", title_style))
@@ -200,14 +200,14 @@ def generate_pdf_order(
                                    "Payment terms as agreed. All prices in USD unless otherwise specified. "
                                    "Subject to availability.", normal_style))
             story.append(Spacer(1, 0.1*inch))
-    
+
     story.append(Spacer(1, 0.3*inch))
     if header.get("notes"):
         story.append(Paragraph(f"<b>Notes:</b> {header['notes']}", normal_style))
-    
+
     doc.build(story)
     pdf_bytes = buffer.getvalue()
-    
+
     doc_info = {
         "document_id": f"doc-{uuid.uuid4().hex[:8]}",
         "kind": "PDF_TEXT",
@@ -216,11 +216,11 @@ def generate_pdf_order(
         "sha256": _sha256(pdf_bytes),
         "page_count": 2 if "MULTIPAGE_PDF" in hard_cases else 1
     }
-    
+
     output_path.parent.mkdir(parents=True, exist_ok=True)
     with open(output_path, "wb") as f:
         f.write(pdf_bytes)
-    
+
     return pdf_bytes, doc_info
 
 
@@ -233,11 +233,11 @@ def generate_xlsx_order(
     """Genera un ordine in formato Excel."""
     from openpyxl import Workbook
     from openpyxl.styles import Alignment, Border, Font, PatternFill, Side
-    
+
     wb = Workbook()
     ws = wb.active
     ws.title = "Purchase Order"
-    
+
     header_font = Font(bold=True, size=14)
     label_font = Font(bold=True)
     header_fill = PatternFill(start_color="4472C4", end_color="4472C4", fill_type="solid")
@@ -248,40 +248,40 @@ def generate_xlsx_order(
         top=Side(style="thin"),
         bottom=Side(style="thin")
     )
-    
+
     ws.merge_cells("A1:G1")
     ws["A1"] = "PURCHASE ORDER"
     ws["A1"].font = header_font
     ws["A1"].alignment = Alignment(horizontal="center")
-    
+
     buyer = order_data["buyer"]
     header = order_data["header"]
-    
+
     po_display = header["po_number"] if "MISSING_PO_NUMBER" not in hard_cases else ""
     date_display = header["po_date"]
     if "DATE_FORMAT" in hard_cases:
         formats = ["15-Jan-2026", "01/15/26", "January 15, 2026"]
         date_display = random.choice(formats)
-    
+
     ws["A3"] = "Company:"
     ws["B3"] = buyer["name"]
     ws["A3"].font = label_font
-    
+
     ws["A4"] = "PO Number:"
     ws["B4"] = po_display
     ws["A4"].font = label_font
-    
+
     ws["A5"] = "Date:"
     ws["B5"] = date_display
     ws["A5"].font = label_font
-    
+
     if "MISSING_DATE" in hard_cases:
         ws["B5"] = ""
-    
+
     ws["A6"] = "Ship To:"
     ws["B6"] = order_data.get("ship_to", {}).get("name", "")
     ws["A6"].font = label_font
-    
+
     start_row = 8
     headers_row = ["Line", "Item Code", "Description", "Quantity", "UoM", "Unit Price", "Amount"]
     for col, h in enumerate(headers_row, 1):
@@ -290,13 +290,13 @@ def generate_xlsx_order(
         cell.fill = header_fill
         cell.border = thin_border
         cell.alignment = Alignment(horizontal="center")
-    
+
     lines = order_data["lines"]
     for i, line in enumerate(lines):
         row = start_row + 1 + i
         desc = line["description"]
         qty = line["quantity"]
-        
+
         if "TYPO_DESC" in hard_cases and i == 0:
             desc = _add_typos(desc)
         if "AMBIGUOUS_DESC" in hard_cases and i == 1 and len(lines) > 1:
@@ -305,7 +305,7 @@ def generate_xlsx_order(
             qty = NUM_IN_WORDS.get(int(qty), str(qty))
         if "MISSING_QTY" in hard_cases and i == len(lines) - 1:
             qty = None
-        
+
         ws.cell(row=row, column=1, value=line["line_no"]).border = thin_border
         ws.cell(row=row, column=2, value=line.get("buyer_item_code") or line.get("seller_item_code") or "").border = thin_border
         ws.cell(row=row, column=3, value=desc).border = thin_border
@@ -313,14 +313,14 @@ def generate_xlsx_order(
         ws.cell(row=row, column=5, value=line["uom_raw"]).border = thin_border
         ws.cell(row=row, column=6, value=line.get("unit_price")).border = thin_border
         ws.cell(row=row, column=7, value=line.get("line_amount")).border = thin_border
-    
+
     if "TOTAL_MIXED" in hard_cases:
         note_row = start_row + len(lines) + 1
         ws.cell(row=note_row, column=3, value="Note: Confirm stock before shipping")
         total_row = note_row + 1
         ws.cell(row=total_row, column=6, value="TOTAL:")
         ws.cell(row=total_row, column=7, value=order_data.get("totals", {}).get("lines_amount_declared"))
-    
+
     ws.column_dimensions["A"].width = 6
     ws.column_dimensions["B"].width = 15
     ws.column_dimensions["C"].width = 40
@@ -328,11 +328,11 @@ def generate_xlsx_order(
     ws.column_dimensions["E"].width = 8
     ws.column_dimensions["F"].width = 12
     ws.column_dimensions["G"].width = 12
-    
+
     buffer = BytesIO()
     wb.save(buffer)
     xlsx_bytes = buffer.getvalue()
-    
+
     doc_info = {
         "document_id": f"doc-{uuid.uuid4().hex[:8]}",
         "kind": "XLSX",
@@ -341,11 +341,11 @@ def generate_xlsx_order(
         "sha256": _sha256(xlsx_bytes),
         "page_count": None
     }
-    
+
     output_path.parent.mkdir(parents=True, exist_ok=True)
     with open(output_path, "wb") as f:
         f.write(xlsx_bytes)
-    
+
     return xlsx_bytes, doc_info
 
 
@@ -360,23 +360,23 @@ def generate_eml_order(
     buyer = order_data["buyer"]
     header = order_data["header"]
     contact = buyer.get("contact", {})
-    
+
     msg = MIMEMultipart()
     msg["From"] = contact.get("email", "orders@example.com")
     msg["To"] = "orders@delta-industrial.example"
     msg["Subject"] = f"PO {header['po_number']} - Order from {buyer['name']}"
     msg["Message-ID"] = f"<po-{header['po_number']}@{buyer.get('email_domain', 'example.com')}>"
     msg["Date"] = datetime.now().strftime("%a, %d %b %Y %H:%M:%S +0000")
-    
+
     date_display = header["po_date"]
     if "DATE_FORMAT" in hard_cases:
         formats = ["Jan 15th, 2026", "15/01/2026", "2026.01.15"]
         date_display = random.choice(formats)
     if "MISSING_DATE" in hard_cases:
         date_display = ""
-    
+
     po_display = header["po_number"] if "MISSING_PO_NUMBER" not in hard_cases else "[see attached]"
-    
+
     body_lines = [
         "Hello,",
         "",
@@ -389,12 +389,12 @@ def generate_eml_order(
         "Items:",
         "------",
     ]
-    
+
     lines = order_data["lines"]
     for i, line in enumerate(lines):
         desc = line["description"]
         qty = line["quantity"]
-        
+
         if "TYPO_DESC" in hard_cases and i == 0:
             desc = _add_typos(desc)
         if "AMBIGUOUS_DESC" in hard_cases and i == 1 and len(lines) > 1:
@@ -403,17 +403,17 @@ def generate_eml_order(
             qty = NUM_IN_WORDS.get(int(qty), str(qty))
         if "MISSING_QTY" in hard_cases and i == len(lines) - 1:
             qty = "TBD"
-        
+
         item_code = line.get("buyer_item_code") or line.get("seller_item_code") or "N/A"
         price_str = f"@ ${line['unit_price']:.2f}" if line.get("unit_price") else ""
         body_lines.append(f"  {line['line_no']}. [{item_code}] {desc}")
         body_lines.append(f"     Qty: {qty} {line['uom_raw']} {price_str}")
-    
+
     if "TOTAL_MIXED" in hard_cases:
         body_lines.append("")
         body_lines.append("Please confirm stock availability before shipping.")
         body_lines.append(f"Expected Total: ${order_data.get('totals', {}).get('lines_amount_declared', 0):.2f}")
-    
+
     body_lines.extend([
         "",
         f"Delivery requested by: {header.get('requested_delivery_date', 'ASAP')}",
@@ -423,12 +423,12 @@ def generate_eml_order(
         buyer["name"],
         contact.get("phone", ""),
     ])
-    
+
     body_text = "\n".join(body_lines)
     msg.attach(MIMEText(body_text, "plain"))
-    
+
     docs = []
-    
+
     email_body_doc = {
         "document_id": f"doc-{uuid.uuid4().hex[:8]}",
         "kind": "EMAIL_BODY",
@@ -438,7 +438,7 @@ def generate_eml_order(
         "page_count": None
     }
     docs.append(email_body_doc)
-    
+
     if include_attachment or "EMAIL_CONTRADICTORY" in hard_cases:
         if "EMAIL_CONTRADICTORY" in hard_cases:
             modified_order = json.loads(json.dumps(order_data))
@@ -459,18 +459,18 @@ def generate_eml_order(
                 [],
                 catalog
             )
-        
+
         attachment = MIMEApplication(attach_bytes, _subtype="vnd.openxmlformats-officedocument.spreadsheetml.sheet")
         attachment.add_header("Content-Disposition", "attachment", filename=f"PO_{header['po_number']}.xlsx")
         msg.attach(attachment)
         docs.append(attach_doc)
-    
+
     eml_bytes = msg.as_bytes()
-    
+
     output_path.parent.mkdir(parents=True, exist_ok=True)
     with open(output_path, "wb") as f:
         f.write(eml_bytes)
-    
+
     return eml_bytes, docs
 
 
@@ -484,10 +484,10 @@ def _create_ground_truth(
     order_id = str(uuid.uuid4())
     buyer = order_data["buyer"]
     header = order_data["header"]
-    
+
     status = "VALIDATED"
     validation_issues = []
-    
+
     if "MISSING_PO_NUMBER" in hard_cases:
         status = "NEEDS_REVIEW"
         validation_issues.append({
@@ -496,7 +496,7 @@ def _create_ground_truth(
             "path": "/header/po_number",
             "message": "Manca il numero d'ordine (PO number)"
         })
-    
+
     if "MISSING_QTY" in hard_cases:
         status = "NEEDS_REVIEW"
         validation_issues.append({
@@ -505,7 +505,7 @@ def _create_ground_truth(
             "path": f"/lines/{len(order_data['lines'])-1}/quantity",
             "message": "Quantità mancante o non valida"
         })
-    
+
     if "MISSING_DATE" in hard_cases:
         status = "NEEDS_REVIEW"
         validation_issues.append({
@@ -514,7 +514,7 @@ def _create_ground_truth(
             "path": "/header/po_date",
             "message": "Data ordine mancante o non plausibile"
         })
-    
+
     if "EMAIL_CONTRADICTORY" in hard_cases:
         status = "NEEDS_REVIEW"
         validation_issues.append({
@@ -523,7 +523,7 @@ def _create_ground_truth(
             "path": "/lines",
             "message": "Quantità nel corpo email diverse dall'allegato"
         })
-    
+
     if "AMBIGUOUS_DESC" in hard_cases:
         status = "NEEDS_REVIEW"
         validation_issues.append({
@@ -532,7 +532,7 @@ def _create_ground_truth(
             "path": "/lines/1/description",
             "message": "Descrizione ambigua, richiede conferma articolo"
         })
-    
+
     if "UOM_CONVERSION" in hard_cases:
         validation_issues.append({
             "code": "UOM-03",
@@ -540,7 +540,7 @@ def _create_ground_truth(
             "path": "/lines/0",
             "message": "Conversione UoM applicata"
         })
-    
+
     lines_gt = []
     for line in order_data["lines"]:
         line_gt = {
@@ -565,7 +565,7 @@ def _create_ground_truth(
             "resolution": line.get("resolution")
         }
         lines_gt.append(line_gt)
-    
+
     ground_truth = {
         "schema_version": "1.0",
         "order_id": order_id,
@@ -624,13 +624,13 @@ def _create_ground_truth(
             "updated_at": None
         }
     }
-    
+
     if order_data.get("ship_to"):
         ground_truth["ship_to"] = order_data["ship_to"]
-    
+
     if validation_issues:
         ground_truth["validation"] = {"issues": validation_issues}
-    
+
     if hard_cases:
         ground_truth["_synthetic_metadata"] = {
             "hard_case_types": hard_cases,
@@ -641,7 +641,7 @@ def _create_ground_truth(
             "hard_case_types": [],
             "is_hard_case": False
         }
-    
+
     return ground_truth
 
 
@@ -653,22 +653,22 @@ def generate_orders(
     hard_case_pct: float = 0.15
 ) -> tuple[list[dict], dict]:
     """Genera tutti gli ordini con documenti e ground truth.
-    
+
     Args:
         catalog: Lista articoli.
         customers: Lista clienti.
         output_dir: Directory di output.
         num_orders: Numero totale ordini.
         hard_case_pct: Percentuale casi difficili.
-    
+
     Returns:
         (lista ground truth, manifest)
     """
     random.seed(SEED + 2)
-    
+
     num_hard = int(num_orders * hard_case_pct)
     num_normal = num_orders - num_hard
-    
+
     hard_case_assignments = []
     for hc_type in HARD_CASE_TYPES:
         hard_case_assignments.append([hc_type])
@@ -677,63 +677,63 @@ def generate_orders(
         hard_case_assignments.append(combo)
     random.shuffle(hard_case_assignments)
     hard_case_assignments = hard_case_assignments[:num_hard]
-    
+
     order_configs: list[list[str]] = [[] for _ in range(num_normal)]
     order_configs.extend(hard_case_assignments)
     random.shuffle(order_configs)
-    
+
     pdf_dir = output_dir / "documents" / "pdf"
     xlsx_dir = output_dir / "documents" / "xlsx"
     eml_dir = output_dir / "documents" / "eml"
     gt_dir = output_dir / "ground_truth"
-    
+
     for d in [pdf_dir, xlsx_dir, eml_dir, gt_dir]:
         d.mkdir(parents=True, exist_ok=True)
-    
+
     ground_truths = []
     manifest_entries = []
-    
+
     base_date = datetime(2026, 1, 15)
     po_counter = 1000
-    
+
     formats_count = {"PDF": 0, "XLSX": 0, "EML": 0}
     target_per_format = num_orders // 3
-    
+
     for order_idx, hard_cases in enumerate(order_configs):
         customer = random.choice(customers)
         style = customer["order_style"]
-        
+
         available_formats = []
         for fmt in style["format_preference"]:
             if formats_count[fmt] < target_per_format + 5:
                 available_formats.append(fmt)
         if not available_formats:
             available_formats = ["PDF", "XLSX", "EML"]
-        
+
         if "MULTIPAGE_PDF" in hard_cases:
             doc_format = "PDF"
         elif "EMAIL_CONTRADICTORY" in hard_cases:
             doc_format = "EML"
         else:
             doc_format = random.choice(available_formats)
-        
+
         formats_count[doc_format] += 1
-        
+
         po_number = f"{style['po_prefix']}{po_counter:05d}"
         po_counter += 1
-        
+
         order_date = base_date + timedelta(days=random.randint(0, 180))
         delivery_date = order_date + timedelta(days=random.randint(5, 21))
-        
+
         num_lines = random.randint(*style["typical_lines"])
         selected_items = random.sample(catalog, min(num_lines, len(catalog)))
-        
+
         lines = []
         total_amount = 0.0
-        
+
         for line_no, item in enumerate(selected_items, 1):
             qty_base = random.choice([1, 2, 3, 4, 5, 6, 10, 12, 24])
-            
+
             if "UOM_CONVERSION" in hard_cases and line_no == 1:
                 if item.get("pack"):
                     pack = item["pack"]
@@ -743,10 +743,10 @@ def generate_orders(
                     qty_base = random.choice([1, 2, 3])
             else:
                 uom_raw = item["uom"]
-            
+
             buyer_item_code = None
             seller_item_code = None
-            
+
             if style.get("uses_own_codes") and customer.get("xref"):
                 xref_match = next((x for x in customer["xref"] if x["sku"] == item["sku"]), None)
                 if xref_match:
@@ -758,11 +758,11 @@ def generate_orders(
                     seller_item_code = item["sku"]
             else:
                 seller_item_code = item["sku"]
-            
+
             unit_price = item["price"]
             line_amount = round(qty_base * unit_price, 2)
             total_amount += line_amount
-            
+
             line = {
                 "line_no": line_no,
                 "buyer_item_code": buyer_item_code,
@@ -796,7 +796,7 @@ def generate_orders(
                 }
             }
             lines.append(line)
-        
+
         ship_to_choice = random.choice(customer["ship_to"])
         ship_to = {
             "name": ship_to_choice["name"],
@@ -809,7 +809,7 @@ def generate_orders(
                 "score": 1.0
             }
         }
-        
+
         order_data = {
             "buyer": {
                 "name": customer["name"],
@@ -842,9 +842,9 @@ def generate_orders(
                 "lines_amount_computed": round(total_amount, 2)
             }
         }
-        
+
         filename_base = f"order_{order_idx+1:03d}_{po_number.replace('/', '-')}"
-        
+
         if doc_format == "PDF":
             channel = "FOLDER"
             _, doc_info = generate_pdf_order(
@@ -873,15 +873,15 @@ def generate_orders(
                 catalog,
                 include_attachment=include_attach
             )
-        
+
         ground_truth = _create_ground_truth(order_data, documents, channel, hard_cases)
-        
+
         gt_path = gt_dir / f"{filename_base}.json"
         with open(gt_path, "w", encoding="utf-8") as f:
             json.dump(ground_truth, f, indent=2, ensure_ascii=False)
-        
+
         ground_truths.append(ground_truth)
-        
+
         manifest_entries.append({
             "order_index": order_idx + 1,
             "po_number": po_number,
@@ -895,7 +895,7 @@ def generate_orders(
             "document_path": str(gt_path.relative_to(output_dir)),
             "ground_truth_path": str(gt_path.relative_to(output_dir))
         })
-    
+
     manifest = {
         "generated_at": datetime.now(tz=None).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "seed": SEED,
@@ -905,12 +905,12 @@ def generate_orders(
         "format_distribution": formats_count,
         "orders": manifest_entries
     }
-    
+
     manifest_path = output_dir / "data" / "manifest.json"
     manifest_path.parent.mkdir(parents=True, exist_ok=True)
     with open(manifest_path, "w", encoding="utf-8") as f:
         json.dump(manifest, f, indent=2, ensure_ascii=False)
-    
+
     import csv
     csv_path = output_dir / "data" / "manifest.csv"
     with open(csv_path, "w", newline="", encoding="utf-8") as f:
@@ -924,22 +924,22 @@ def generate_orders(
             row = entry.copy()
             row["hard_case_types"] = ";".join(entry["hard_case_types"])
             writer.writerow(row)
-    
+
     return ground_truths, manifest
 
 
 if __name__ == "__main__":
     from .catalog import generate_catalog
     from .customers import generate_customers
-    
+
     output_dir = Path(__file__).parent
-    
+
     catalog = generate_catalog(output_dir / "data" / "catalog.json")
     print(f"Generated {len(catalog)} catalog items")
-    
+
     customers = generate_customers(catalog, output_dir / "data" / "customers.json")
     print(f"Generated {len(customers)} customers")
-    
+
     ground_truths, manifest = generate_orders(catalog, customers, output_dir)
     print(f"Generated {len(ground_truths)} orders")
     print(f"Hard cases: {manifest['hard_cases']} ({manifest['hard_case_percentage']}%)")

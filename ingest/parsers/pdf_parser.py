@@ -30,10 +30,10 @@ class PdfParser:
     def parse(self, file_path: Path | str) -> NormalizedInput:
         """Parsa un file PDF."""
         file_path = Path(file_path)
-        
+
         with open(file_path, "rb") as f:
             content = f.read()
-        
+
         return self.parse_bytes(content, filename=file_path.name, file_path=str(file_path))
 
     def parse_bytes(
@@ -44,7 +44,7 @@ class PdfParser:
     ) -> NormalizedInput:
         """Parsa contenuto PDF da bytes."""
         import pdfplumber
-        
+
         sha256 = hashlib.sha256(content).hexdigest()
         source = Source(
             filename=filename,
@@ -53,28 +53,28 @@ class PdfParser:
             file_path=file_path,
             file_size_bytes=len(content),
         )
-        
+
         result = NormalizedInput(source=source)
-        
+
         buffer = BytesIO(content)
-        
+
         try:
             with pdfplumber.open(buffer) as pdf:
                 total_text_chars = 0
-                
+
                 for page_num, page in enumerate(pdf.pages, start=1):
                     page_part = self._process_page(page, page_num, result)
                     result.parts.append(page_part)
-                    
+
                     if page_part.text:
                         total_text_chars += len(page_part.text.strip())
-                
+
                 if len(pdf.pages) > 0:
                     avg_chars = total_text_chars / len(pdf.pages)
                     if avg_chars < self.MIN_TEXT_CHARS_PER_PAGE:
                         for part in result.parts:
                             part.needs_ocr = True
-                        
+
                         result.warnings.append(Warning(
                             code="PDF-01",
                             message="PDF sembra essere una scansione, richiede OCR",
@@ -83,14 +83,14 @@ class PdfParser:
                                 "total_pages": len(pdf.pages),
                             }
                         ))
-                        
+
         except Exception as e:  # noqa: BLE001
             result.warnings.append(Warning(
                 code="PDF-02",
                 message=f"Errore nel parsing del PDF: {e!s}",
                 details={"error": str(e)},
             ))
-        
+
         return result
 
     def _process_page(
@@ -105,13 +105,13 @@ class PdfParser:
             page_number=page_num,
             mime_type="application/pdf",
         )
-        
+
         try:
             text = page.extract_text() or ""
             part.text = text
         except Exception:  # noqa: BLE001
             part.text = ""
-        
+
         try:
             text_layout = page.extract_text(
                 layout=True,
@@ -121,13 +121,13 @@ class PdfParser:
             part.text_layout = text_layout
         except Exception:  # noqa: BLE001
             part.text_layout = part.text
-        
+
         content_for_hash = part.text or ""
         part.compute_sha256(content_for_hash)
-        
+
         tables = self._extract_tables(page, page_num, result)
         part.tables = tables
-        
+
         return part
 
     def _extract_tables(
@@ -138,7 +138,7 @@ class PdfParser:
     ) -> list[Table]:
         """Estrae tabelle da una pagina."""
         tables = []
-        
+
         try:
             pdf_tables = page.extract_tables(table_settings={
                 "vertical_strategy": "lines",
@@ -146,7 +146,7 @@ class PdfParser:
                 "snap_tolerance": 3,
                 "join_tolerance": 3,
             })
-            
+
             if not pdf_tables:
                 pdf_tables = page.extract_tables(table_settings={
                     "vertical_strategy": "text",
@@ -154,15 +154,15 @@ class PdfParser:
                     "snap_tolerance": 5,
                     "join_tolerance": 5,
                 })
-            
+
             for table_data in pdf_tables or []:
                 if not table_data or len(table_data) < 2:
                     continue
-                
+
                 table = Table(
                     page_number=page_num,
                 )
-                
+
                 for row_data in table_data:
                     if row_data is None:
                         continue
@@ -175,49 +175,49 @@ class PdfParser:
                         row.append(cell)
                     if row:
                         table.rows.append(row)
-                
+
                 if table.rows:
                     header_idx = self._detect_header_row(table.rows)
                     table.header_row_index = header_idx
                     tables.append(table)
-                    
+
         except Exception as e:  # noqa: BLE001
             result.warnings.append(Warning(
                 code="PDF-03",
                 message=f"Errore nell'estrazione delle tabelle dalla pagina {page_num}",
                 details={"error": str(e), "page": page_num},
             ))
-        
+
         return tables
 
     def _detect_header_row(self, rows: list[list[Cell]]) -> int | None:
         """Rileva euristicamente la riga di intestazione."""
         if not rows:
             return None
-        
+
         header_keywords = {
             "item", "qty", "quantity", "price", "amount", "description",
             "code", "sku", "unit", "uom", "line", "total", "product",
             "articolo", "quantità", "prezzo", "importo", "descrizione",
             "codice", "unità", "riga", "totale", "prodotto",
         }
-        
+
         for idx, row in enumerate(rows[:3]):
             text_cells = 0
             header_matches = 0
-            
+
             for cell in row:
                 if cell.value and isinstance(cell.value, str):
                     text_cells += 1
                     if cell.value.lower().strip() in header_keywords:
                         header_matches += 1
-            
+
             if text_cells > 0 and header_matches >= 2:
                 return idx
-            
+
             if text_cells > 0 and header_matches >= 1 and text_cells >= len(row) * 0.5:
                 return idx
-        
+
         if rows and len(rows) > 1:
             first_row = rows[0]
             all_text = all(
@@ -225,5 +225,5 @@ class PdfParser:
             )
             if all_text:
                 return 0
-        
+
         return None
