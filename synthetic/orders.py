@@ -136,104 +136,116 @@ def generate_pdf_order(
         TableStyle,
     )
     
-    buffer = BytesIO()
-    doc = SimpleDocTemplate(buffer, pagesize=letter, topMargin=0.5*inch, bottomMargin=0.5*inch)
-    styles = getSampleStyleSheet()
-    story = []
+    from reportlab.rl_config import invariant as rl_invariant
     
-    title_style = ParagraphStyle("Title", parent=styles["Heading1"], fontSize=16, spaceAfter=12)
-    normal_style = styles["Normal"]
+    old_invariant = rl_invariant
+    import reportlab.rl_config
+    reportlab.rl_config.invariant = 1
     
-    story.append(Paragraph("<b>PURCHASE ORDER</b>", title_style))
-    story.append(Spacer(1, 0.2*inch))
-    
-    buyer = order_data["buyer"]
-    header = order_data["header"]
-    
-    po_display = header["po_number"] if "MISSING_PO_NUMBER" not in hard_cases else ""
-    date_display = header["po_date"]
-    
-    if "DATE_FORMAT" in hard_cases:
-        formats = ["Jan 15, 2026", "15-Jan-26", "1/15/26", "15.01.2026"]
-        date_display = random.choice(formats)
-    
-    header_data = [
-        ["From:", buyer["name"]],
-        ["PO Number:", po_display],
-        ["Date:", date_display],
-        ["Ship To:", order_data.get("ship_to", {}).get("name", buyer["name"])],
-    ]
-    
-    if header.get("requested_delivery_date"):
-        header_data.append(["Delivery Date:", header["requested_delivery_date"]])
-    
-    header_table = Table(header_data, colWidths=[1.5*inch, 4*inch])
-    header_table.setStyle(TableStyle([
-        ("FONTNAME", (0, 0), (0, -1), "Helvetica-Bold"),
-        ("VALIGN", (0, 0), (-1, -1), "TOP"),
-    ]))
-    story.append(header_table)
-    story.append(Spacer(1, 0.3*inch))
-    
-    lines = order_data["lines"]
-    line_data = [["Line", "Item Code", "Description", "Qty", "UoM", "Price", "Amount"]]
-    
-    for i, line in enumerate(lines):
-        desc = line["description"]
-        qty = line["quantity"]
+    try:
+        buffer = BytesIO()
+        doc = SimpleDocTemplate(buffer, pagesize=letter, topMargin=0.5*inch, bottomMargin=0.5*inch)
+        doc.title = f"Purchase Order {order_data['header']['po_number']}"
+        doc.author = "VentureOrder Synthetic Generator"
+        doc.creator = "VentureOrder"
+        styles = getSampleStyleSheet()
+        story = []
         
-        if "TYPO_DESC" in hard_cases and i == 0:
-            desc = _add_typos(desc)
-        if "AMBIGUOUS_DESC" in hard_cases and i == 1 and len(lines) > 1:
-            desc = _make_ambiguous(desc, catalog)
-        if "QTY_WORDS" in hard_cases and i == 0:
-            qty = NUM_IN_WORDS.get(int(qty), str(qty))
-        if "MISSING_QTY" in hard_cases and i == len(lines) - 1:
-            qty = ""
+        title_style = ParagraphStyle("Title", parent=styles["Heading1"], fontSize=16, spaceAfter=12)
+        normal_style = styles["Normal"]
         
-        line_data.append([
-            str(line["line_no"]),
-            line.get("buyer_item_code") or line.get("seller_item_code") or "",
-            desc[:50] + "..." if len(desc) > 50 else desc,
-            str(qty),
-            line["uom_raw"],
-            f"${line.get('unit_price', 0):.2f}" if line.get("unit_price") else "",
-            f"${line.get('line_amount', 0):.2f}" if line.get("line_amount") else ""
-        ])
-    
-    if "TOTAL_MIXED" in hard_cases:
-        line_data.append(["", "", "*** Please confirm availability ***", "", "", "", ""])
-        line_data.append(["", "", "SUBTOTAL", "", "", "", f"${order_data.get('totals', {}).get('lines_amount_declared', 0):.2f}"])
-    
-    line_table = Table(line_data, colWidths=[0.5*inch, 1*inch, 2.5*inch, 0.6*inch, 0.5*inch, 0.8*inch, 0.8*inch])
-    line_table.setStyle(TableStyle([
-        ("BACKGROUND", (0, 0), (-1, 0), colors.grey),
-        ("TEXTCOLOR", (0, 0), (-1, 0), colors.whitesmoke),
-        ("FONTNAME", (0, 0), (-1, 0), "Helvetica-Bold"),
-        ("FONTSIZE", (0, 0), (-1, -1), 9),
-        ("GRID", (0, 0), (-1, -1), 0.5, colors.black),
-        ("VALIGN", (0, 0), (-1, -1), "MIDDLE"),
-        ("ALIGN", (3, 1), (3, -1), "CENTER"),
-        ("ALIGN", (5, 1), (-1, -1), "RIGHT"),
-    ]))
-    story.append(line_table)
-    
-    if "MULTIPAGE_PDF" in hard_cases:
-        story.append(Spacer(1, 4*inch))
-        story.append(Paragraph("<b>Page 2 - Terms and Conditions</b>", title_style))
+        story.append(Paragraph("<b>PURCHASE ORDER</b>", title_style))
         story.append(Spacer(1, 0.2*inch))
-        for _ in range(20):
-            story.append(Paragraph("Standard terms and conditions apply. Delivery within stated timeframe. "
-                                   "Payment terms as agreed. All prices in USD unless otherwise specified. "
-                                   "Subject to availability.", normal_style))
-            story.append(Spacer(1, 0.1*inch))
-    
-    story.append(Spacer(1, 0.3*inch))
-    if header.get("notes"):
-        story.append(Paragraph(f"<b>Notes:</b> {header['notes']}", normal_style))
-    
-    doc.build(story)
-    pdf_bytes = buffer.getvalue()
+        
+        buyer = order_data["buyer"]
+        header = order_data["header"]
+        
+        po_display = header["po_number"] if "MISSING_PO_NUMBER" not in hard_cases else ""
+        date_display = header["po_date"]
+        
+        if "DATE_FORMAT" in hard_cases:
+            formats = ["Jan 15, 2026", "15-Jan-26", "1/15/26", "15.01.2026"]
+            date_display = random.choice(formats)
+        
+        header_data = [
+            ["From:", buyer["name"]],
+            ["PO Number:", po_display],
+            ["Date:", date_display],
+            ["Ship To:", order_data.get("ship_to", {}).get("name", buyer["name"])],
+        ]
+        
+        if header.get("requested_delivery_date"):
+            header_data.append(["Delivery Date:", header["requested_delivery_date"]])
+        
+        header_table = Table(header_data, colWidths=[1.5*inch, 4*inch])
+        header_table.setStyle(TableStyle([
+            ("FONTNAME", (0, 0), (0, -1), "Helvetica-Bold"),
+            ("VALIGN", (0, 0), (-1, -1), "TOP"),
+        ]))
+        story.append(header_table)
+        story.append(Spacer(1, 0.3*inch))
+        
+        lines = order_data["lines"]
+        line_data = [["Line", "Item Code", "Description", "Qty", "UoM", "Price", "Amount"]]
+        
+        for i, line in enumerate(lines):
+            desc = line["description"]
+            qty = line["quantity"]
+            
+            if "TYPO_DESC" in hard_cases and i == 0:
+                desc = _add_typos(desc)
+            if "AMBIGUOUS_DESC" in hard_cases and i == 1 and len(lines) > 1:
+                desc = _make_ambiguous(desc, catalog)
+            if "QTY_WORDS" in hard_cases and i == 0:
+                qty = NUM_IN_WORDS.get(int(qty), str(qty))
+            if "MISSING_QTY" in hard_cases and i == len(lines) - 1:
+                qty = ""
+            
+            line_data.append([
+                str(line["line_no"]),
+                line.get("buyer_item_code") or line.get("seller_item_code") or "",
+                desc[:50] + "..." if len(desc) > 50 else desc,
+                str(qty),
+                line["uom_raw"],
+                f"${line.get('unit_price', 0):.2f}" if line.get("unit_price") else "",
+                f"${line.get('line_amount', 0):.2f}" if line.get("line_amount") else ""
+            ])
+        
+        if "TOTAL_MIXED" in hard_cases:
+            line_data.append(["", "", "*** Please confirm availability ***", "", "", "", ""])
+            line_data.append(["", "", "SUBTOTAL", "", "", "", f"${order_data.get('totals', {}).get('lines_amount_declared', 0):.2f}"])
+        
+        line_table = Table(line_data, colWidths=[0.5*inch, 1*inch, 2.5*inch, 0.6*inch, 0.5*inch, 0.8*inch, 0.8*inch])
+        line_table.setStyle(TableStyle([
+            ("BACKGROUND", (0, 0), (-1, 0), colors.grey),
+            ("TEXTCOLOR", (0, 0), (-1, 0), colors.whitesmoke),
+            ("FONTNAME", (0, 0), (-1, 0), "Helvetica-Bold"),
+            ("FONTSIZE", (0, 0), (-1, -1), 9),
+            ("GRID", (0, 0), (-1, -1), 0.5, colors.black),
+            ("VALIGN", (0, 0), (-1, -1), "MIDDLE"),
+            ("ALIGN", (3, 1), (3, -1), "CENTER"),
+            ("ALIGN", (5, 1), (-1, -1), "RIGHT"),
+        ]))
+        story.append(line_table)
+        
+        if "MULTIPAGE_PDF" in hard_cases:
+            story.append(Spacer(1, 4*inch))
+            story.append(Paragraph("<b>Page 2 - Terms and Conditions</b>", title_style))
+            story.append(Spacer(1, 0.2*inch))
+            for _ in range(20):
+                story.append(Paragraph("Standard terms and conditions apply. Delivery within stated timeframe. "
+                                       "Payment terms as agreed. All prices in USD unless otherwise specified. "
+                                       "Subject to availability.", normal_style))
+                story.append(Spacer(1, 0.1*inch))
+        
+        story.append(Spacer(1, 0.3*inch))
+        if header.get("notes"):
+            story.append(Paragraph(f"<b>Notes:</b> {header['notes']}", normal_style))
+        
+        doc.build(story)
+        pdf_bytes = buffer.getvalue()
+    finally:
+        reportlab.rl_config.invariant = old_invariant
     
     doc_info = {
         "document_id": _deterministic_doc_id(order_idx, "pdf"),
@@ -357,8 +369,15 @@ def generate_xlsx_order(
     ws.column_dimensions["F"].width = 12
     ws.column_dimensions["G"].width = 12
     
+    wb.properties.created = FIXED_GENERATION_TIMESTAMP
+    wb.properties.modified = FIXED_GENERATION_TIMESTAMP
+    
+    from unittest.mock import patch
     buffer = BytesIO()
-    wb.save(buffer)
+    with patch('openpyxl.packaging.core.datetime') as mock_datetime:
+        mock_datetime.datetime.now.return_value = FIXED_GENERATION_TIMESTAMP
+        mock_datetime.datetime.utcnow.return_value = FIXED_GENERATION_TIMESTAMP
+        wb.save(buffer)
     xlsx_bytes = buffer.getvalue()
     
     doc_info = {
