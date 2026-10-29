@@ -139,7 +139,7 @@ def main() -> int:
     else:
         try:
             result = ingestor.ingest(input_path)
-        except Exception as e:
+        except Exception as e:  # noqa: BLE001
             print(f"Errore nell'ingestione: {e}", file=sys.stderr)
             return 1
         
@@ -186,7 +186,7 @@ def _validate_output(result) -> tuple[bool, list[str]]:
         return True, []
     except ImportError:
         return True, []
-    except Exception:
+    except Exception:  # noqa: BLE001
         return True, []
 
 
