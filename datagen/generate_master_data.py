@@ -17,7 +17,6 @@ import random
 import re
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Optional
 
 SEED = 42
 MASTER_DIR = Path(__file__).parent / "master"
@@ -53,7 +52,7 @@ class Product:
     gtin: str
     manufacturer_code: str
     manufacturer_name: str
-    pack_description: Optional[str] = None
+    pack_description: str | None = None
     conversions: list[UomConversion] = field(default_factory=list)
 
 
@@ -90,10 +89,10 @@ class CustomerXref:
     customer_item_code: str
     product_sku: str
     customer_uom: str
-    customer_description: Optional[str] = None
+    customer_description: str | None = None
 
 
-def parse_pack_description(pack_desc: Optional[str], sale_uom: str) -> list[UomConversion]:
+def parse_pack_description(pack_desc: str | None, sale_uom: str) -> list[UomConversion]:
     """
     Parsa pack_description e restituisce le conversioni UoM corrette.
 
@@ -479,7 +478,7 @@ def generate_customers(rng: random.Random) -> list[Customer]:
         )
 
         shipping_addresses = []
-        for ship_idx in range(rng.randint(1, 3)):
+        for _ship_idx in range(rng.randint(1, 3)):
             ship_city, ship_state, ship_zip = rng.choice(US_CITIES)
             ship_street_num = rng.randint(100, 9999)
             ship_street = rng.choice(STREET_NAMES)

@@ -19,7 +19,7 @@ import os
 import sys
 import xmlrpc.client
 from pathlib import Path
-from typing import Any, Optional
+from typing import Any
 
 MASTER_DIR = Path(__file__).parent.parent / "datagen" / "master"
 
@@ -38,8 +38,8 @@ class OdooClient:
         self.db = db
         self.username = username
         self.password = password
-        self.uid: Optional[int] = None
-        self.version_info: Optional[dict] = None
+        self.uid: int | None = None
+        self.version_info: dict | None = None
 
         self.common = xmlrpc.client.ServerProxy(f"{self.url}/xmlrpc/2/common", allow_none=True)
         self.models = xmlrpc.client.ServerProxy(f"{self.url}/xmlrpc/2/object", allow_none=True)

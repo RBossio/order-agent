@@ -8,6 +8,8 @@ import pytest
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
+import random
+
 from datagen.generate_master_data import (
     generate_customers,
     generate_products,
@@ -15,7 +17,6 @@ from datagen.generate_master_data import (
     gtin13_check_digit,
     parse_pack_description,
 )
-import random
 
 
 class TestGtin:
@@ -198,7 +199,7 @@ class TestGeneratedData:
         products2 = generate_products(rng2)
 
         assert len(products1) == len(products2)
-        for p1, p2 in zip(products1, products2):
+        for p1, p2 in zip(products1, products2, strict=False):
             assert p1.default_code == p2.default_code
             assert p1.name == p2.name
             assert p1.list_price == p2.list_price
