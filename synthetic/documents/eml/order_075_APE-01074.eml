@@ -1,0 +1,41 @@
+Content-Type: multipart/mixed; boundary="===============4830478012883670584=="
+MIME-Version: 1.0
+From: purchasing@summit.example
+To: orders@delta-industrial.example
+Subject: PO APE-01074 - Order from Summit Group (SYNTHETIC)
+Message-ID: <po-APE-01074@summit.example>
+Date: Thu, 15 Jan 2026 10:30:00 +0000
+
+--===============4830478012883670584==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+Hello,
+
+Please process the following order:
+
+PO Number: APE-01074
+Date: 2026/03/14
+Ship To: Summit Shipping Location 3
+
+Items:
+------
+  1. [SUMMIT-TOO-9690] Screwdriver {type} M8 x 2-1/2 (SYNTHETIC)
+     Qty: 2 EA @ $9.44
+  2. [PPE-GLS-CLE-ANTI-FOG] Safety Glasses Clear Anti-Fog (SYNTHETIC)
+     Qty: 6 EA @ $5.71
+  3. [ABR-SPS-120G-1] Sandpaper Sheet 120 Grit (SYNTHETIC)
+     Qty: 4 PK @ $18.94
+  4. [JAN-FPD-17-WHI] Floor Pad 17in White (SYNTHETIC)
+     Qty: 10 CS @ $36.81
+  5. [SUMMIT-FAS-8951] Lock Washer M8 Zinc (SYNTHETIC)
+     Qty: 12 BX @ $15.66
+
+Delivery requested by: 2026-03-29
+
+Thank you,
+Summit Purchasing
+Summit Group (SYNTHETIC)
++1-555-5961
+--===============4830478012883670584==--

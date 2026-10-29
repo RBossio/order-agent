@@ -1,0 +1,49 @@
+Content-Type: multipart/mixed; boundary="===============2332508742066950336=="
+MIME-Version: 1.0
+From: purchasing@apex.example
+To: orders@delta-industrial.example
+Subject: PO MBM01099 - Order from Apex Corp. (SYNTHETIC)
+Message-ID: <po-MBM01099@apex.example>
+Date: Thu, 15 Jan 2026 10:30:00 +0000
+
+--===============2332508742066950336==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+Hello,
+
+Please process the following order:
+
+PO Number: MBM01099
+Date: 6/1/26
+Ship To: Apex Shipping Location 1
+
+Items:
+------
+  1. [APEX-JAN-9661] Hand Sanitizer Gel 70% (SYNTHETIC)
+     Qty: 10 CS @ $82.52
+  2. [APEX-ABR-9246] Cut-Off Wheel 6in (SYNTHETIC)
+     Qty: 12 BX @ $39.84
+  3. [APEX-PAC-0885] Stretch Wrap 18in (SYNTHETIC)
+     Qty: 2 CS @ $133.33
+  4. [APEX-TOO-4337] Utility Blade Standard (SYNTHETIC)
+     Qty: 6 PK @ $6.76
+  5. [APEX-JAN-3992] Facial Tissue Flat Box (SYNTHETIC)
+     Qty: 4 CS @ $41.92
+  6. [JAN-DSP-128] Disinfectant Spray (SYNTHETIC)
+     Qty: 1 CS @ $46.13
+  7. [APEX-SAF-5427] Ear Plugs Foam Disposable (SYNTHETIC)
+     Qty: 3 BX @ $20.48
+  8. [PKG-BBW-225] Bubble Wrap 12in (SYNTHETIC)
+     Qty: 6 RO @ $38.71
+  9. [FST-HCS-58-11-112] Hex Cap Screw 5/8-11 x 1-1/2 Grade 5 Zinc (SYNTHETIC)
+     Qty: 5 BX @ $23.91
+
+Delivery requested by: 2026-06-14
+
+Thank you,
+Apex Purchasing
+Apex Corp. (SYNTHETIC)
++1-555-3504
+--===============2332508742066950336==--

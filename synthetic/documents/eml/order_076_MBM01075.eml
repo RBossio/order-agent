@@ -1,0 +1,71 @@
+Content-Type: multipart/mixed; boundary="===============1157670889467326050=="
+MIME-Version: 1.0
+From: purchasing@apex.example
+To: orders@delta-industrial.example
+Subject: PO MBM01075 - Order from Apex Corp. (SYNTHETIC)
+Message-ID: <po-MBM01075@apex.example>
+Date: Thu, 15 Jan 2026 10:30:00 +0000
+
+--===============1157670889467326050==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+Hello,
+
+Please process the following order:
+
+PO Number: MBM01075
+Date: 7/5/26
+Ship To: Apex Shipping Location 1
+
+Items:
+------
+  1. [APEX-TOO-4985] Utility Blade Standard (SYNTHETIC)
+     Qty: 4 PK @ $4.73
+  2. [APEX-FAS-2695] Lock Washer 1/4-20 Zinc (SYNTHETIC)
+     Qty: 10 BX @ $15.27
+  3. [APEX-FAS-2350] Flat Washer M10 Zinc (SYNTHETIC)
+     Qty: 12 BX @ $8.14
+  4. [APEX-JAN-1998] Floor Pad 17in Red (SYNTHETIC)
+     Qty: 5 CS @ $38.22
+  5. [JAN-FST-166] Floor Stripper Heavy Duty (SYNTHETIC)
+     Qty: 10 CS @ $64.02
+  6. [JAN-FFN-194] Floor Finish High Gloss (SYNTHETIC)
+     Qty: 6 CS @ $72.09
+  7. [APEX-LUB-6838] Penetrating Oil Spray (SYNTHETIC)
+     Qty: 1 CS @ $67.65
+  8. [APEX-JAN-4427] Facial Tissue Flat Box (SYNTHETIC)
+     Qty: 12 CS @ $64.85
+  9. [PKG-PTC-093] Packing Tape Clear 2in (SYNTHETIC)
+     Qty: 10 CS @ $55.32
+  10. [JAN-TTI-114] Toilet Tissue 2P Standard (SYNTHETIC)
+     Qty: 2 CS @ $65.87
+  11. [FST-HCS-M10-112] Hex Cap Screw M10 x 1-1/2 Grade 5 Zinc (SYNTHETIC)
+     Qty: 3 BX @ $26.78
+  12. [LUB-MOL-031] Machine Oil Light (SYNTHETIC)
+     Qty: 10 CS @ $53.66
+  13. [APEX-ADH-2551] Epoxy 2-Part Quick Set (SYNTHETIC)
+     Qty: 6 PK @ $40.73
+  14. [APEX-LUB-2893] Machine Oil Light (SYNTHETIC)
+     Qty: 10 CS @ $83.15
+  15. [APEX-TOO-4187] Screwdriver {type} 5/16-18 x 2 (SYNTHETIC)
+     Qty: 3 EA @ $8.65
+  16. [JAN-NFC-053] Floor Cleaner Neutral Concentrate (SYNTHETIC)
+     Qty: 12 CS @ $59.43
+  17. [JAN-LNR-3339-15-CL] Can Liner 33x39 1.5mil Clear Roll (SYNTHETIC)
+     Qty: 5 RO @ $24.77
+  18. [APEX-JAN-9472] Can Liner 38x58 0.7mil Black (SYNTHETIC)
+     Qty: 5 CS @ $62.00
+  19. [APEX-SAF-7975] Safety Glasses Smoke Anti-Fog (SYNTHETIC)
+     Qty: 3 EA @ $8.00
+  20. [PKG-PTC-066] Packing Tape Clear 2in (SYNTHETIC)
+     Qty: 4 CS @ $63.17
+
+Delivery requested by: 2026-07-25
+
+Thank you,
+Apex Purchasing
+Apex Corp. (SYNTHETIC)
++1-555-3504
+--===============1157670889467326050==--

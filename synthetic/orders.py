@@ -14,6 +14,32 @@ from pathlib import Path
 
 from . import SEED
 
+NAMESPACE_VENTURA = uuid.UUID("a1b2c3d4-e5f6-7890-abcd-ef1234567890")
+
+FIXED_GENERATION_TIMESTAMP = datetime(2026, 1, 15, 10, 30, 0)
+
+
+def _deterministic_uuid(order_idx: int, suffix: str = "") -> str:
+    """Genera un UUID deterministico basato su order_idx e suffix."""
+    name = f"order-{order_idx}-{suffix}-seed{SEED}"
+    return str(uuid.uuid5(NAMESPACE_VENTURA, name))
+
+
+def _deterministic_doc_id(order_idx: int, doc_type: str) -> str:
+    """Genera un document_id deterministico."""
+    u = uuid.uuid5(NAMESPACE_VENTURA, f"doc-{order_idx}-{doc_type}-seed{SEED}")
+    return f"doc-{u.hex[:8]}"
+
+
+def _fixed_timestamp_iso() -> str:
+    """Restituisce il timestamp fisso in formato ISO."""
+    return FIXED_GENERATION_TIMESTAMP.strftime("%Y-%m-%dT%H:%M:%SZ")
+
+
+def _fixed_email_date() -> str:
+    """Restituisce il timestamp fisso per header email."""
+    return FIXED_GENERATION_TIMESTAMP.strftime("%a, %d %b %Y %H:%M:%S +0000")
+
 NUM_IN_WORDS = {
     1: "one", 2: "two", 3: "three", 4: "four", 5: "five",
     6: "six", 7: "seven", 8: "eight", 9: "nine", 10: "ten",
@@ -94,7 +120,8 @@ def generate_pdf_order(
     order_data: dict,
     output_path: Path,
     hard_cases: list[str],
-    catalog: list[dict]
+    catalog: list[dict],
+    order_idx: int = 0
 ) -> tuple[bytes, dict]:
     """Genera un ordine in formato PDF."""
     from reportlab.lib import colors
@@ -108,108 +135,119 @@ def generate_pdf_order(
         Table,
         TableStyle,
     )
+    from reportlab.rl_config import invariant as rl_invariant
 
-    buffer = BytesIO()
-    doc = SimpleDocTemplate(buffer, pagesize=letter, topMargin=0.5*inch, bottomMargin=0.5*inch)
-    styles = getSampleStyleSheet()
-    story = []
+    old_invariant = rl_invariant
+    import reportlab.rl_config
+    reportlab.rl_config.invariant = 1
 
-    title_style = ParagraphStyle("Title", parent=styles["Heading1"], fontSize=16, spaceAfter=12)
-    normal_style = styles["Normal"]
+    try:
+        buffer = BytesIO()
+        doc = SimpleDocTemplate(buffer, pagesize=letter, topMargin=0.5*inch, bottomMargin=0.5*inch)
+        doc.title = f"Purchase Order {order_data['header']['po_number']}"
+        doc.author = "VentureOrder Synthetic Generator"
+        doc.creator = "VentureOrder"
+        styles = getSampleStyleSheet()
+        story = []
 
-    story.append(Paragraph("<b>PURCHASE ORDER</b>", title_style))
-    story.append(Spacer(1, 0.2*inch))
+        title_style = ParagraphStyle("Title", parent=styles["Heading1"], fontSize=16, spaceAfter=12)
+        normal_style = styles["Normal"]
 
-    buyer = order_data["buyer"]
-    header = order_data["header"]
-
-    po_display = header["po_number"] if "MISSING_PO_NUMBER" not in hard_cases else ""
-    date_display = header["po_date"]
-
-    if "DATE_FORMAT" in hard_cases:
-        formats = ["Jan 15, 2026", "15-Jan-26", "1/15/26", "15.01.2026"]
-        date_display = random.choice(formats)
-
-    header_data = [
-        ["From:", buyer["name"]],
-        ["PO Number:", po_display],
-        ["Date:", date_display],
-        ["Ship To:", order_data.get("ship_to", {}).get("name", buyer["name"])],
-    ]
-
-    if header.get("requested_delivery_date"):
-        header_data.append(["Delivery Date:", header["requested_delivery_date"]])
-
-    header_table = Table(header_data, colWidths=[1.5*inch, 4*inch])
-    header_table.setStyle(TableStyle([
-        ("FONTNAME", (0, 0), (0, -1), "Helvetica-Bold"),
-        ("VALIGN", (0, 0), (-1, -1), "TOP"),
-    ]))
-    story.append(header_table)
-    story.append(Spacer(1, 0.3*inch))
-
-    lines = order_data["lines"]
-    line_data = [["Line", "Item Code", "Description", "Qty", "UoM", "Price", "Amount"]]
-
-    for i, line in enumerate(lines):
-        desc = line["description"]
-        qty = line["quantity"]
-
-        if "TYPO_DESC" in hard_cases and i == 0:
-            desc = _add_typos(desc)
-        if "AMBIGUOUS_DESC" in hard_cases and i == 1 and len(lines) > 1:
-            desc = _make_ambiguous(desc, catalog)
-        if "QTY_WORDS" in hard_cases and i == 0:
-            qty = NUM_IN_WORDS.get(int(qty), str(qty))
-        if "MISSING_QTY" in hard_cases and i == len(lines) - 1:
-            qty = ""
-
-        line_data.append([
-            str(line["line_no"]),
-            line.get("buyer_item_code") or line.get("seller_item_code") or "",
-            desc[:50] + "..." if len(desc) > 50 else desc,
-            str(qty),
-            line["uom_raw"],
-            f"${line.get('unit_price', 0):.2f}" if line.get("unit_price") else "",
-            f"${line.get('line_amount', 0):.2f}" if line.get("line_amount") else ""
-        ])
-
-    if "TOTAL_MIXED" in hard_cases:
-        line_data.append(["", "", "*** Please confirm availability ***", "", "", "", ""])
-        line_data.append(["", "", "SUBTOTAL", "", "", "", f"${order_data.get('totals', {}).get('lines_amount_declared', 0):.2f}"])
-
-    line_table = Table(line_data, colWidths=[0.5*inch, 1*inch, 2.5*inch, 0.6*inch, 0.5*inch, 0.8*inch, 0.8*inch])
-    line_table.setStyle(TableStyle([
-        ("BACKGROUND", (0, 0), (-1, 0), colors.grey),
-        ("TEXTCOLOR", (0, 0), (-1, 0), colors.whitesmoke),
-        ("FONTNAME", (0, 0), (-1, 0), "Helvetica-Bold"),
-        ("FONTSIZE", (0, 0), (-1, -1), 9),
-        ("GRID", (0, 0), (-1, -1), 0.5, colors.black),
-        ("VALIGN", (0, 0), (-1, -1), "MIDDLE"),
-        ("ALIGN", (3, 1), (3, -1), "CENTER"),
-        ("ALIGN", (5, 1), (-1, -1), "RIGHT"),
-    ]))
-    story.append(line_table)
-
-    if "MULTIPAGE_PDF" in hard_cases:
-        story.append(Spacer(1, 4*inch))
-        story.append(Paragraph("<b>Page 2 - Terms and Conditions</b>", title_style))
+        story.append(Paragraph("<b>PURCHASE ORDER</b>", title_style))
         story.append(Spacer(1, 0.2*inch))
-        for _ in range(20):
-            story.append(Paragraph("Standard terms and conditions apply. Delivery within stated timeframe. "
-                                   "Payment terms as agreed. All prices in USD unless otherwise specified. "
-                                   "Subject to availability.", normal_style))
-            story.append(Spacer(1, 0.1*inch))
 
-    story.append(Spacer(1, 0.3*inch))
-    if header.get("notes"):
-        story.append(Paragraph(f"<b>Notes:</b> {header['notes']}", normal_style))
+        buyer = order_data["buyer"]
+        header = order_data["header"]
 
-    doc.build(story)
-    pdf_bytes = buffer.getvalue()
+        po_display = header["po_number"] if "MISSING_PO_NUMBER" not in hard_cases else ""
+        date_display = header["po_date"]
+
+        if "DATE_FORMAT" in hard_cases:
+            formats = ["Jan 15, 2026", "15-Jan-26", "1/15/26", "15.01.2026"]
+            date_display = random.choice(formats)
+
+        header_data = [
+            ["From:", buyer["name"]],
+            ["PO Number:", po_display],
+            ["Date:", date_display],
+            ["Ship To:", order_data.get("ship_to", {}).get("name", buyer["name"])],
+        ]
+
+        if header.get("requested_delivery_date"):
+            header_data.append(["Delivery Date:", header["requested_delivery_date"]])
+
+        header_table = Table(header_data, colWidths=[1.5*inch, 4*inch])
+        header_table.setStyle(TableStyle([
+            ("FONTNAME", (0, 0), (0, -1), "Helvetica-Bold"),
+            ("VALIGN", (0, 0), (-1, -1), "TOP"),
+        ]))
+        story.append(header_table)
+        story.append(Spacer(1, 0.3*inch))
+
+        lines = order_data["lines"]
+        line_data = [["Line", "Item Code", "Description", "Qty", "UoM", "Price", "Amount"]]
+
+        for i, line in enumerate(lines):
+            desc = line["description"]
+            qty = line["quantity"]
+
+            if "TYPO_DESC" in hard_cases and i == 0:
+                desc = _add_typos(desc)
+            if "AMBIGUOUS_DESC" in hard_cases and i == 1 and len(lines) > 1:
+                desc = _make_ambiguous(desc, catalog)
+            if "QTY_WORDS" in hard_cases and i == 0:
+                qty = NUM_IN_WORDS.get(int(qty), str(qty))
+            if "MISSING_QTY" in hard_cases and i == len(lines) - 1:
+                qty = ""
+
+            line_data.append([
+                str(line["line_no"]),
+                line.get("buyer_item_code") or line.get("seller_item_code") or "",
+                desc[:50] + "..." if len(desc) > 50 else desc,
+                str(qty),
+                line["uom_raw"],
+                f"${line.get('unit_price', 0):.2f}" if line.get("unit_price") else "",
+                f"${line.get('line_amount', 0):.2f}" if line.get("line_amount") else ""
+            ])
+
+        if "TOTAL_MIXED" in hard_cases:
+            line_data.append(["", "", "*** Please confirm availability ***", "", "", "", ""])
+            line_data.append(["", "", "SUBTOTAL", "", "", "", f"${order_data.get('totals', {}).get('lines_amount_declared', 0):.2f}"])
+
+        line_table = Table(line_data, colWidths=[0.5*inch, 1*inch, 2.5*inch, 0.6*inch, 0.5*inch, 0.8*inch, 0.8*inch])
+        line_table.setStyle(TableStyle([
+            ("BACKGROUND", (0, 0), (-1, 0), colors.grey),
+            ("TEXTCOLOR", (0, 0), (-1, 0), colors.whitesmoke),
+            ("FONTNAME", (0, 0), (-1, 0), "Helvetica-Bold"),
+            ("FONTSIZE", (0, 0), (-1, -1), 9),
+            ("GRID", (0, 0), (-1, -1), 0.5, colors.black),
+            ("VALIGN", (0, 0), (-1, -1), "MIDDLE"),
+            ("ALIGN", (3, 1), (3, -1), "CENTER"),
+            ("ALIGN", (5, 1), (-1, -1), "RIGHT"),
+        ]))
+        story.append(line_table)
+
+        if "MULTIPAGE_PDF" in hard_cases:
+            story.append(Spacer(1, 4*inch))
+            story.append(Paragraph("<b>Page 2 - Terms and Conditions</b>", title_style))
+            story.append(Spacer(1, 0.2*inch))
+            for _ in range(20):
+                story.append(Paragraph("Standard terms and conditions apply. Delivery within stated timeframe. "
+                                       "Payment terms as agreed. All prices in USD unless otherwise specified. "
+                                       "Subject to availability.", normal_style))
+                story.append(Spacer(1, 0.1*inch))
+
+        story.append(Spacer(1, 0.3*inch))
+        if header.get("notes"):
+            story.append(Paragraph(f"<b>Notes:</b> {header['notes']}", normal_style))
+
+        doc.build(story)
+        pdf_bytes = buffer.getvalue()
+    finally:
+        reportlab.rl_config.invariant = old_invariant
 
     doc_info = {
-        "document_id": f"doc-{uuid.uuid4().hex[:8]}",
+        "document_id": _deterministic_doc_id(order_idx, "pdf"),
         "kind": "PDF_TEXT",
         "filename": f"{header['po_number']}.pdf",
         "mime_type": "application/pdf",
@@ -228,7 +266,8 @@ def generate_xlsx_order(
     order_data: dict,
     output_path: Path,
     hard_cases: list[str],
-    catalog: list[dict]
+    catalog: list[dict],
+    order_idx: int = 0
 ) -> tuple[bytes, dict]:
     """Genera un ordine in formato Excel."""
     from openpyxl import Workbook
@@ -329,12 +368,19 @@ def generate_xlsx_order(
     ws.column_dimensions["F"].width = 12
     ws.column_dimensions["G"].width = 12
 
+    wb.properties.created = FIXED_GENERATION_TIMESTAMP
+    wb.properties.modified = FIXED_GENERATION_TIMESTAMP
+
+    from unittest.mock import patch
     buffer = BytesIO()
-    wb.save(buffer)
+    with patch('openpyxl.packaging.core.datetime') as mock_datetime:
+        mock_datetime.datetime.now.return_value = FIXED_GENERATION_TIMESTAMP
+        mock_datetime.datetime.utcnow.return_value = FIXED_GENERATION_TIMESTAMP
+        wb.save(buffer)
     xlsx_bytes = buffer.getvalue()
 
     doc_info = {
-        "document_id": f"doc-{uuid.uuid4().hex[:8]}",
+        "document_id": _deterministic_doc_id(order_idx, "xlsx"),
         "kind": "XLSX",
         "filename": f"{header['po_number']}.xlsx",
         "mime_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
@@ -354,7 +400,8 @@ def generate_eml_order(
     output_path: Path,
     hard_cases: list[str],
     catalog: list[dict],
-    include_attachment: bool = False
+    include_attachment: bool = False,
+    order_idx: int = 0
 ) -> tuple[bytes, list[dict]]:
     """Genera un ordine in formato email EML."""
     buyer = order_data["buyer"]
@@ -366,7 +413,7 @@ def generate_eml_order(
     msg["To"] = "orders@delta-industrial.example"
     msg["Subject"] = f"PO {header['po_number']} - Order from {buyer['name']}"
     msg["Message-ID"] = f"<po-{header['po_number']}@{buyer.get('email_domain', 'example.com')}>"
-    msg["Date"] = datetime.now().strftime("%a, %d %b %Y %H:%M:%S +0000")
+    msg["Date"] = _fixed_email_date()
 
     date_display = header["po_date"]
     if "DATE_FORMAT" in hard_cases:
@@ -430,7 +477,7 @@ def generate_eml_order(
     docs = []
 
     email_body_doc = {
-        "document_id": f"doc-{uuid.uuid4().hex[:8]}",
+        "document_id": _deterministic_doc_id(order_idx, "email-body"),
         "kind": "EMAIL_BODY",
         "filename": None,
         "mime_type": "text/plain",
@@ -450,14 +497,16 @@ def generate_eml_order(
                 modified_order,
                 output_path.with_suffix(".xlsx"),
                 [],
-                catalog
+                catalog,
+                order_idx=order_idx
             )
         else:
             attach_bytes, attach_doc = generate_xlsx_order(
                 order_data,
                 output_path.with_suffix(".xlsx"),
                 [],
-                catalog
+                catalog,
+                order_idx=order_idx
             )
 
         attachment = MIMEApplication(attach_bytes, _subtype="vnd.openxmlformats-officedocument.spreadsheetml.sheet")
@@ -478,10 +527,11 @@ def _create_ground_truth(
     order_data: dict,
     documents: list[dict],
     channel: str,
-    hard_cases: list[str]
+    hard_cases: list[str],
+    order_idx: int = 0
 ) -> dict:
     """Crea il ground truth JSON conforme allo schema VOF."""
-    order_id = str(uuid.uuid4())
+    order_id = _deterministic_uuid(order_idx, "order")
     buyer = order_data["buyer"]
     header = order_data["header"]
 
@@ -577,7 +627,7 @@ def _create_ground_truth(
             "message_id": f"<po-{header['po_number']}@{buyer.get('email_domain', 'example.com')}>" if channel.startswith("EMAIL") else None,
             "from_address": buyer.get("contact", {}).get("email") if channel.startswith("EMAIL") else None,
             "subject": f"PO {header['po_number']} - Order from {buyer['name']}" if channel.startswith("EMAIL") else None,
-            "received_at": datetime.now(tz=None).strftime("%Y-%m-%dT%H:%M:%SZ"),
+            "received_at": _fixed_timestamp_iso(),
             "documents": documents
         },
         "buyer": {
@@ -620,7 +670,7 @@ def _create_ground_truth(
         "processing": {
             "extractor": "synthetic/generator.py",
             "prompt_version": None,
-            "created_at": datetime.now(tz=None).strftime("%Y-%m-%dT%H:%M:%SZ"),
+            "created_at": _fixed_timestamp_iso(),
             "updated_at": None
         }
     }
@@ -678,7 +728,7 @@ def generate_orders(
     random.shuffle(hard_case_assignments)
     hard_case_assignments = hard_case_assignments[:num_hard]
 
-    order_configs: list[list[str]] = [[] for _ in range(num_normal)]
+    order_configs = [[] for _ in range(num_normal)]
     order_configs.extend(hard_case_assignments)
     random.shuffle(order_configs)
 
@@ -851,7 +901,8 @@ def generate_orders(
                 order_data,
                 pdf_dir / f"{filename_base}.pdf",
                 hard_cases,
-                catalog
+                catalog,
+                order_idx=order_idx
             )
             documents = [doc_info]
         elif doc_format == "XLSX":
@@ -860,7 +911,8 @@ def generate_orders(
                 order_data,
                 xlsx_dir / f"{filename_base}.xlsx",
                 hard_cases,
-                catalog
+                catalog,
+                order_idx=order_idx
             )
             documents = [doc_info]
         else:
@@ -871,10 +923,11 @@ def generate_orders(
                 eml_dir / f"{filename_base}.eml",
                 hard_cases,
                 catalog,
-                include_attachment=include_attach
+                include_attachment=include_attach,
+                order_idx=order_idx
             )
 
-        ground_truth = _create_ground_truth(order_data, documents, channel, hard_cases)
+        ground_truth = _create_ground_truth(order_data, documents, channel, hard_cases, order_idx=order_idx)
 
         gt_path = gt_dir / f"{filename_base}.json"
         with open(gt_path, "w", encoding="utf-8") as f:
@@ -897,7 +950,7 @@ def generate_orders(
         })
 
     manifest = {
-        "generated_at": datetime.now(tz=None).strftime("%Y-%m-%dT%H:%M:%SZ"),
+        "generated_at": _fixed_timestamp_iso(),
         "seed": SEED,
         "total_orders": num_orders,
         "hard_cases": num_hard,

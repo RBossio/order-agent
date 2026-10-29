@@ -1,151 +1,151 @@
 order_index,po_number,customer_id,customer_name,format,num_lines,total_amount,is_hard_case,hard_case_types,document_path,ground_truth_path
-1,PTD-01000,C009,Premier Tool & Die (SYNTHETIC),PDF,2,809.98,False,,ground_truth/order_001_PTD-01000.json,ground_truth/order_001_PTD-01000.json
-2,FCH-01001,C006,FreshClean Hospitality Group (SYNTHETIC),PDF,6,1358.68,False,,ground_truth/order_002_FCH-01001.json,ground_truth/order_002_FCH-01001.json
-3,SW-01002,C008,SafeWork Solutions Inc. (SYNTHETIC),EML,12,3330.31,False,,ground_truth/order_003_SW-01002.json,ground_truth/order_003_SW-01002.json
-4,QS-01003,C010,QuickServ Facilities Management (SYNTHETIC),PDF,21,9313.18,False,,ground_truth/order_004_QS-01003.json,ground_truth/order_004_QS-01003.json
-5,TIT-PO-01004,C003,Titan Industrial Supply Co. (SYNTHETIC),XLSX,3,508.74,False,,ground_truth/order_005_TIT-PO-01004.json,ground_truth/order_005_TIT-PO-01004.json
-6,SW-01005,C008,SafeWork Solutions Inc. (SYNTHETIC),XLSX,9,3300.56,False,,ground_truth/order_006_SW-01005.json,ground_truth/order_006_SW-01005.json
-7,FCH-01006,C006,FreshClean Hospitality Group (SYNTHETIC),PDF,6,1213.57,True,MISSING_DATE;MISSING_QTY,ground_truth/order_007_FCH-01006.json,ground_truth/order_007_FCH-01006.json
-8,NMC-01007,C007,Northern Manufacturing Corp. (SYNTHETIC),PDF,3,761.67,False,,ground_truth/order_008_NMC-01007.json,ground_truth/order_008_NMC-01007.json
-9,SW-01008,C008,SafeWork Solutions Inc. (SYNTHETIC),XLSX,8,2473.49,False,,ground_truth/order_009_SW-01008.json,ground_truth/order_009_SW-01008.json
-10,4500001009,C001,Acme Manufacturing Inc. (SYNTHETIC),PDF,5,2013.21,False,,ground_truth/order_010_4500001009.json,ground_truth/order_010_4500001009.json
-11,SW-01010,C008,SafeWork Solutions Inc. (SYNTHETIC),EML,8,1522.88,False,,ground_truth/order_011_SW-01010.json,ground_truth/order_011_SW-01010.json
-12,TIT-PO-01011,C003,Titan Industrial Supply Co. (SYNTHETIC),XLSX,6,803.06,False,,ground_truth/order_012_TIT-PO-01011.json,ground_truth/order_012_TIT-PO-01011.json
-13,PTD-01012,C009,Premier Tool & Die (SYNTHETIC),PDF,2,286.17,False,,ground_truth/order_013_PTD-01012.json,ground_truth/order_013_PTD-01012.json
-14,MBM01013,C004,Midwest Building Maintenance (SYNTHETIC),EML,19,4731.24,False,,ground_truth/order_014_MBM01013.json,ground_truth/order_014_MBM01013.json
-15,TIT-PO-01014,C003,Titan Industrial Supply Co. (SYNTHETIC),XLSX,4,415.4,False,,ground_truth/order_015_TIT-PO-01014.json,ground_truth/order_015_TIT-PO-01014.json
-16,SW-01015,C008,SafeWork Solutions Inc. (SYNTHETIC),EML,7,2268.05,True,QTY_WORDS,ground_truth/order_016_SW-01015.json,ground_truth/order_016_SW-01015.json
-17,NMC-01016,C007,Northern Manufacturing Corp. (SYNTHETIC),XLSX,3,1346.13,False,,ground_truth/order_017_NMC-01016.json,ground_truth/order_017_NMC-01016.json
-18,PTD-01017,C009,Premier Tool & Die (SYNTHETIC),PDF,2,151.52,False,,ground_truth/order_018_PTD-01017.json,ground_truth/order_018_PTD-01017.json
-19,FCH-01018,C006,FreshClean Hospitality Group (SYNTHETIC),PDF,6,2601.75,True,MULTIPAGE_PDF,ground_truth/order_019_FCH-01018.json,ground_truth/order_019_FCH-01018.json
-20,PTD-01019,C009,Premier Tool & Die (SYNTHETIC),PDF,3,1467.62,False,,ground_truth/order_020_PTD-01019.json,ground_truth/order_020_PTD-01019.json
-21,MBM01020,C004,Midwest Building Maintenance (SYNTHETIC),EML,8,3105.61,False,,ground_truth/order_021_MBM01020.json,ground_truth/order_021_MBM01020.json
-22,TIT-PO-01021,C003,Titan Industrial Supply Co. (SYNTHETIC),XLSX,6,1713.79,False,,ground_truth/order_022_TIT-PO-01021.json,ground_truth/order_022_TIT-PO-01021.json
-23,BW-01022,C002,Brightway Janitorial Services (SYNTHETIC),EML,13,1956.7,False,,ground_truth/order_023_BW-01022.json,ground_truth/order_023_BW-01022.json
-24,APE-01023,C005,AutoParts Express LLC (SYNTHETIC),EML,10,2883.07,False,,ground_truth/order_024_APE-01023.json,ground_truth/order_024_APE-01023.json
-25,FCH-01024,C006,FreshClean Hospitality Group (SYNTHETIC),PDF,11,3777.52,False,,ground_truth/order_025_FCH-01024.json,ground_truth/order_025_FCH-01024.json
-26,4500001025,C001,Acme Manufacturing Inc. (SYNTHETIC),XLSX,3,308.59,False,,ground_truth/order_026_4500001025.json,ground_truth/order_026_4500001025.json
-27,QS-01026,C010,QuickServ Facilities Management (SYNTHETIC),EML,19,10280.97,False,,ground_truth/order_027_QS-01026.json,ground_truth/order_027_QS-01026.json
-28,QS-01027,C010,QuickServ Facilities Management (SYNTHETIC),PDF,19,3267.86,True,DATE_FORMAT,ground_truth/order_028_QS-01027.json,ground_truth/order_028_QS-01027.json
-29,SW-01028,C008,SafeWork Solutions Inc. (SYNTHETIC),EML,11,2617.07,False,,ground_truth/order_029_SW-01028.json,ground_truth/order_029_SW-01028.json
-30,APE-01029,C005,AutoParts Express LLC (SYNTHETIC),EML,6,4666.62,False,,ground_truth/order_030_APE-01029.json,ground_truth/order_030_APE-01029.json
-31,MBM01030,C004,Midwest Building Maintenance (SYNTHETIC),EML,15,2901.0,False,,ground_truth/order_031_MBM01030.json,ground_truth/order_031_MBM01030.json
-32,NMC-01031,C007,Northern Manufacturing Corp. (SYNTHETIC),XLSX,7,1531.37,False,,ground_truth/order_032_NMC-01031.json,ground_truth/order_032_NMC-01031.json
-33,QS-01032,C010,QuickServ Facilities Management (SYNTHETIC),PDF,18,3404.22,True,MISSING_PO_NUMBER,ground_truth/order_033_QS-01032.json,ground_truth/order_033_QS-01032.json
-34,APE-01033,C005,AutoParts Express LLC (SYNTHETIC),EML,10,2324.12,False,,ground_truth/order_034_APE-01033.json,ground_truth/order_034_APE-01033.json
-35,APE-01034,C005,AutoParts Express LLC (SYNTHETIC),EML,5,1475.12,False,,ground_truth/order_035_APE-01034.json,ground_truth/order_035_APE-01034.json
-36,PTD-01035,C009,Premier Tool & Die (SYNTHETIC),PDF,2,674.8,False,,ground_truth/order_036_PTD-01035.json,ground_truth/order_036_PTD-01035.json
-37,MBM01036,C004,Midwest Building Maintenance (SYNTHETIC),EML,10,1263.81,False,,ground_truth/order_037_MBM01036.json,ground_truth/order_037_MBM01036.json
-38,BW-01037,C002,Brightway Janitorial Services (SYNTHETIC),EML,10,1832.13,False,,ground_truth/order_038_BW-01037.json,ground_truth/order_038_BW-01037.json
-39,TIT-PO-01038,C003,Titan Industrial Supply Co. (SYNTHETIC),XLSX,3,849.71,False,,ground_truth/order_039_TIT-PO-01038.json,ground_truth/order_039_TIT-PO-01038.json
-40,TIT-PO-01039,C003,Titan Industrial Supply Co. (SYNTHETIC),XLSX,4,1594.28,False,,ground_truth/order_040_TIT-PO-01039.json,ground_truth/order_040_TIT-PO-01039.json
-41,4500001040,C001,Acme Manufacturing Inc. (SYNTHETIC),PDF,6,2843.04,False,,ground_truth/order_041_4500001040.json,ground_truth/order_041_4500001040.json
-42,SW-01041,C008,SafeWork Solutions Inc. (SYNTHETIC),XLSX,5,1119.64,True,TYPO_DESC,ground_truth/order_042_SW-01041.json,ground_truth/order_042_SW-01041.json
-43,4500001042,C001,Acme Manufacturing Inc. (SYNTHETIC),PDF,7,1455.18,False,,ground_truth/order_043_4500001042.json,ground_truth/order_043_4500001042.json
-44,PTD-01043,C009,Premier Tool & Die (SYNTHETIC),PDF,4,570.57,False,,ground_truth/order_044_PTD-01043.json,ground_truth/order_044_PTD-01043.json
-45,MBM01044,C004,Midwest Building Maintenance (SYNTHETIC),EML,14,3235.45,False,,ground_truth/order_045_MBM01044.json,ground_truth/order_045_MBM01044.json
-46,BW-01045,C002,Brightway Janitorial Services (SYNTHETIC),PDF,11,2023.42,False,,ground_truth/order_046_BW-01045.json,ground_truth/order_046_BW-01045.json
-47,PTD-01046,C009,Premier Tool & Die (SYNTHETIC),PDF,5,1522.04,False,,ground_truth/order_047_PTD-01046.json,ground_truth/order_047_PTD-01046.json
-48,BW-01047,C002,Brightway Janitorial Services (SYNTHETIC),EML,9,3691.84,False,,ground_truth/order_048_BW-01047.json,ground_truth/order_048_BW-01047.json
-49,PTD-01048,C009,Premier Tool & Die (SYNTHETIC),PDF,5,1530.26,False,,ground_truth/order_049_PTD-01048.json,ground_truth/order_049_PTD-01048.json
-50,PTD-01049,C009,Premier Tool & Die (SYNTHETIC),PDF,4,1021.04,False,,ground_truth/order_050_PTD-01049.json,ground_truth/order_050_PTD-01049.json
-51,SW-01050,C008,SafeWork Solutions Inc. (SYNTHETIC),EML,8,2282.07,False,,ground_truth/order_051_SW-01050.json,ground_truth/order_051_SW-01050.json
-52,QS-01051,C010,QuickServ Facilities Management (SYNTHETIC),XLSX,17,4420.72,False,,ground_truth/order_052_QS-01051.json,ground_truth/order_052_QS-01051.json
-53,TIT-PO-01052,C003,Titan Industrial Supply Co. (SYNTHETIC),XLSX,2,394.45,True,MISSING_PO_NUMBER;DATE_FORMAT,ground_truth/order_053_TIT-PO-01052.json,ground_truth/order_053_TIT-PO-01052.json
-54,TIT-PO-01053,C003,Titan Industrial Supply Co. (SYNTHETIC),XLSX,6,726.88,False,,ground_truth/order_054_TIT-PO-01053.json,ground_truth/order_054_TIT-PO-01053.json
-55,4500001054,C001,Acme Manufacturing Inc. (SYNTHETIC),XLSX,8,2455.3,False,,ground_truth/order_055_4500001054.json,ground_truth/order_055_4500001054.json
-56,SW-01055,C008,SafeWork Solutions Inc. (SYNTHETIC),XLSX,7,3393.45,False,,ground_truth/order_056_SW-01055.json,ground_truth/order_056_SW-01055.json
-57,NMC-01056,C007,Northern Manufacturing Corp. (SYNTHETIC),XLSX,5,750.13,False,,ground_truth/order_057_NMC-01056.json,ground_truth/order_057_NMC-01056.json
-58,TIT-PO-01057,C003,Titan Industrial Supply Co. (SYNTHETIC),XLSX,2,591.96,True,UOM_CONVERSION,ground_truth/order_058_TIT-PO-01057.json,ground_truth/order_058_TIT-PO-01057.json
-59,NMC-01058,C007,Northern Manufacturing Corp. (SYNTHETIC),XLSX,4,1643.89,False,,ground_truth/order_059_NMC-01058.json,ground_truth/order_059_NMC-01058.json
-60,4500001059,C001,Acme Manufacturing Inc. (SYNTHETIC),PDF,6,821.89,False,,ground_truth/order_060_4500001059.json,ground_truth/order_060_4500001059.json
-61,BW-01060,C002,Brightway Janitorial Services (SYNTHETIC),EML,5,924.64,False,,ground_truth/order_061_BW-01060.json,ground_truth/order_061_BW-01060.json
-62,FCH-01061,C006,FreshClean Hospitality Group (SYNTHETIC),PDF,7,2308.59,False,,ground_truth/order_062_FCH-01061.json,ground_truth/order_062_FCH-01061.json
-63,TIT-PO-01062,C003,Titan Industrial Supply Co. (SYNTHETIC),XLSX,6,1295.51,False,,ground_truth/order_063_TIT-PO-01062.json,ground_truth/order_063_TIT-PO-01062.json
-64,FCH-01063,C006,FreshClean Hospitality Group (SYNTHETIC),EML,11,3720.5,True,EMAIL_CONTRADICTORY,ground_truth/order_064_FCH-01063.json,ground_truth/order_064_FCH-01063.json
-65,MBM01064,C004,Midwest Building Maintenance (SYNTHETIC),PDF,16,2135.49,True,MULTIPAGE_PDF;CUSTOMER_CODES,ground_truth/order_065_MBM01064.json,ground_truth/order_065_MBM01064.json
-66,FCH-01065,C006,FreshClean Hospitality Group (SYNTHETIC),PDF,9,2225.63,False,,ground_truth/order_066_FCH-01065.json,ground_truth/order_066_FCH-01065.json
-67,MBM01066,C004,Midwest Building Maintenance (SYNTHETIC),EML,14,2898.7,False,,ground_truth/order_067_MBM01066.json,ground_truth/order_067_MBM01066.json
-68,BW-01067,C002,Brightway Janitorial Services (SYNTHETIC),EML,13,5125.21,True,CUSTOMER_CODES,ground_truth/order_068_BW-01067.json,ground_truth/order_068_BW-01067.json
-69,APE-01068,C005,AutoParts Express LLC (SYNTHETIC),EML,6,1399.52,True,EMAIL_CONTRADICTORY;MISSING_DATE,ground_truth/order_069_APE-01068.json,ground_truth/order_069_APE-01068.json
-70,TIT-PO-01069,C003,Titan Industrial Supply Co. (SYNTHETIC),XLSX,2,123.42,False,,ground_truth/order_070_TIT-PO-01069.json,ground_truth/order_070_TIT-PO-01069.json
-71,NMC-01070,C007,Northern Manufacturing Corp. (SYNTHETIC),XLSX,4,777.23,True,TOTAL_MIXED,ground_truth/order_071_NMC-01070.json,ground_truth/order_071_NMC-01070.json
-72,APE-01071,C005,AutoParts Express LLC (SYNTHETIC),PDF,4,547.23,False,,ground_truth/order_072_APE-01071.json,ground_truth/order_072_APE-01071.json
-73,SW-01072,C008,SafeWork Solutions Inc. (SYNTHETIC),XLSX,11,1651.59,False,,ground_truth/order_073_SW-01072.json,ground_truth/order_073_SW-01072.json
-74,QS-01073,C010,QuickServ Facilities Management (SYNTHETIC),EML,10,2256.89,False,,ground_truth/order_074_QS-01073.json,ground_truth/order_074_QS-01073.json
-75,QS-01074,C010,QuickServ Facilities Management (SYNTHETIC),XLSX,10,2315.46,False,,ground_truth/order_075_QS-01074.json,ground_truth/order_075_QS-01074.json
-76,4500001075,C001,Acme Manufacturing Inc. (SYNTHETIC),PDF,7,2459.39,False,,ground_truth/order_076_4500001075.json,ground_truth/order_076_4500001075.json
-77,SW-01076,C008,SafeWork Solutions Inc. (SYNTHETIC),XLSX,7,1930.5,False,,ground_truth/order_077_SW-01076.json,ground_truth/order_077_SW-01076.json
-78,QS-01077,C010,QuickServ Facilities Management (SYNTHETIC),XLSX,17,5466.67,True,MISSING_QTY,ground_truth/order_078_QS-01077.json,ground_truth/order_078_QS-01077.json
-79,NMC-01078,C007,Northern Manufacturing Corp. (SYNTHETIC),XLSX,4,844.12,False,,ground_truth/order_079_NMC-01078.json,ground_truth/order_079_NMC-01078.json
-80,BW-01079,C002,Brightway Janitorial Services (SYNTHETIC),PDF,7,948.31,False,,ground_truth/order_080_BW-01079.json,ground_truth/order_080_BW-01079.json
-81,APE-01080,C005,AutoParts Express LLC (SYNTHETIC),PDF,9,2725.7,True,MISSING_PO_NUMBER,ground_truth/order_081_APE-01080.json,ground_truth/order_081_APE-01080.json
-82,SW-01081,C008,SafeWork Solutions Inc. (SYNTHETIC),EML,9,1557.26,False,,ground_truth/order_082_SW-01081.json,ground_truth/order_082_SW-01081.json
-83,BW-01082,C002,Brightway Janitorial Services (SYNTHETIC),PDF,11,3025.68,False,,ground_truth/order_083_BW-01082.json,ground_truth/order_083_BW-01082.json
-84,SW-01083,C008,SafeWork Solutions Inc. (SYNTHETIC),XLSX,8,2516.28,False,,ground_truth/order_084_SW-01083.json,ground_truth/order_084_SW-01083.json
-85,PTD-01084,C009,Premier Tool & Die (SYNTHETIC),PDF,5,3131.34,False,,ground_truth/order_085_PTD-01084.json,ground_truth/order_085_PTD-01084.json
-86,PTD-01085,C009,Premier Tool & Die (SYNTHETIC),PDF,4,474.89,False,,ground_truth/order_086_PTD-01085.json,ground_truth/order_086_PTD-01085.json
-87,FCH-01086,C006,FreshClean Hospitality Group (SYNTHETIC),PDF,7,4308.0,False,,ground_truth/order_087_FCH-01086.json,ground_truth/order_087_FCH-01086.json
-88,BW-01087,C002,Brightway Janitorial Services (SYNTHETIC),EML,13,5253.36,False,,ground_truth/order_088_BW-01087.json,ground_truth/order_088_BW-01087.json
-89,QS-01088,C010,QuickServ Facilities Management (SYNTHETIC),EML,18,5077.87,True,AMBIGUOUS_DESC,ground_truth/order_089_QS-01088.json,ground_truth/order_089_QS-01088.json
-90,APE-01089,C005,AutoParts Express LLC (SYNTHETIC),PDF,8,830.52,False,,ground_truth/order_090_APE-01089.json,ground_truth/order_090_APE-01089.json
-91,APE-01090,C005,AutoParts Express LLC (SYNTHETIC),EML,9,1712.37,False,,ground_truth/order_091_APE-01090.json,ground_truth/order_091_APE-01090.json
-92,SW-01091,C008,SafeWork Solutions Inc. (SYNTHETIC),XLSX,6,1440.97,False,,ground_truth/order_092_SW-01091.json,ground_truth/order_092_SW-01091.json
-93,4500001092,C001,Acme Manufacturing Inc. (SYNTHETIC),PDF,8,5756.12,False,,ground_truth/order_093_4500001092.json,ground_truth/order_093_4500001092.json
-94,FCH-01093,C006,FreshClean Hospitality Group (SYNTHETIC),PDF,12,2559.84,False,,ground_truth/order_094_FCH-01093.json,ground_truth/order_094_FCH-01093.json
-95,4500001094,C001,Acme Manufacturing Inc. (SYNTHETIC),XLSX,3,338.42,False,,ground_truth/order_095_4500001094.json,ground_truth/order_095_4500001094.json
-96,TIT-PO-01095,C003,Titan Industrial Supply Co. (SYNTHETIC),XLSX,5,1566.6,False,,ground_truth/order_096_TIT-PO-01095.json,ground_truth/order_096_TIT-PO-01095.json
-97,BW-01096,C002,Brightway Janitorial Services (SYNTHETIC),PDF,8,4397.49,True,CUSTOMER_CODES,ground_truth/order_097_BW-01096.json,ground_truth/order_097_BW-01096.json
-98,APE-01097,C005,AutoParts Express LLC (SYNTHETIC),PDF,8,1895.3,True,MISSING_DATE,ground_truth/order_098_APE-01097.json,ground_truth/order_098_APE-01097.json
-99,BW-01098,C002,Brightway Janitorial Services (SYNTHETIC),PDF,13,2526.85,False,,ground_truth/order_099_BW-01098.json,ground_truth/order_099_BW-01098.json
-100,BW-01099,C002,Brightway Janitorial Services (SYNTHETIC),EML,5,2570.09,False,,ground_truth/order_100_BW-01099.json,ground_truth/order_100_BW-01099.json
-101,PTD-01100,C009,Premier Tool & Die (SYNTHETIC),PDF,5,1334.05,False,,ground_truth/order_101_PTD-01100.json,ground_truth/order_101_PTD-01100.json
-102,MBM01101,C004,Midwest Building Maintenance (SYNTHETIC),EML,9,1559.54,False,,ground_truth/order_102_MBM01101.json,ground_truth/order_102_MBM01101.json
-103,BW-01102,C002,Brightway Janitorial Services (SYNTHETIC),EML,8,1697.91,False,,ground_truth/order_103_BW-01102.json,ground_truth/order_103_BW-01102.json
-104,BW-01103,C002,Brightway Janitorial Services (SYNTHETIC),PDF,7,3217.69,False,,ground_truth/order_104_BW-01103.json,ground_truth/order_104_BW-01103.json
-105,MBM01104,C004,Midwest Building Maintenance (SYNTHETIC),EML,19,3926.94,False,,ground_truth/order_105_MBM01104.json,ground_truth/order_105_MBM01104.json
-106,BW-01105,C002,Brightway Janitorial Services (SYNTHETIC),EML,7,2419.76,False,,ground_truth/order_106_BW-01105.json,ground_truth/order_106_BW-01105.json
-107,PTD-01106,C009,Premier Tool & Die (SYNTHETIC),PDF,3,578.56,False,,ground_truth/order_107_PTD-01106.json,ground_truth/order_107_PTD-01106.json
-108,4500001107,C001,Acme Manufacturing Inc. (SYNTHETIC),XLSX,8,1478.36,False,,ground_truth/order_108_4500001107.json,ground_truth/order_108_4500001107.json
-109,4500001108,C001,Acme Manufacturing Inc. (SYNTHETIC),XLSX,4,5354.9,False,,ground_truth/order_109_4500001108.json,ground_truth/order_109_4500001108.json
-110,SW-01109,C008,SafeWork Solutions Inc. (SYNTHETIC),EML,9,2768.3,False,,ground_truth/order_110_SW-01109.json,ground_truth/order_110_SW-01109.json
-111,APE-01110,C005,AutoParts Express LLC (SYNTHETIC),EML,5,951.05,False,,ground_truth/order_111_APE-01110.json,ground_truth/order_111_APE-01110.json
-112,QS-01111,C010,QuickServ Facilities Management (SYNTHETIC),EML,20,5362.02,False,,ground_truth/order_112_QS-01111.json,ground_truth/order_112_QS-01111.json
-113,FCH-01112,C006,FreshClean Hospitality Group (SYNTHETIC),PDF,7,972.8,False,,ground_truth/order_113_FCH-01112.json,ground_truth/order_113_FCH-01112.json
-114,4500001113,C001,Acme Manufacturing Inc. (SYNTHETIC),PDF,3,781.01,False,,ground_truth/order_114_4500001113.json,ground_truth/order_114_4500001113.json
-115,MBM01114,C004,Midwest Building Maintenance (SYNTHETIC),EML,11,1692.71,False,,ground_truth/order_115_MBM01114.json,ground_truth/order_115_MBM01114.json
-116,NMC-01115,C007,Northern Manufacturing Corp. (SYNTHETIC),PDF,7,1020.97,False,,ground_truth/order_116_NMC-01115.json,ground_truth/order_116_NMC-01115.json
-117,NMC-01116,C007,Northern Manufacturing Corp. (SYNTHETIC),XLSX,7,4175.63,False,,ground_truth/order_117_NMC-01116.json,ground_truth/order_117_NMC-01116.json
-118,PTD-01117,C009,Premier Tool & Die (SYNTHETIC),PDF,3,647.1,False,,ground_truth/order_118_PTD-01117.json,ground_truth/order_118_PTD-01117.json
-119,APE-01118,C005,AutoParts Express LLC (SYNTHETIC),PDF,8,857.56,False,,ground_truth/order_119_APE-01118.json,ground_truth/order_119_APE-01118.json
-120,APE-01119,C005,AutoParts Express LLC (SYNTHETIC),PDF,8,1633.47,False,,ground_truth/order_120_APE-01119.json,ground_truth/order_120_APE-01119.json
-121,FCH-01120,C006,FreshClean Hospitality Group (SYNTHETIC),PDF,6,2056.1,False,,ground_truth/order_121_FCH-01120.json,ground_truth/order_121_FCH-01120.json
-122,4500001121,C001,Acme Manufacturing Inc. (SYNTHETIC),XLSX,3,1371.24,False,,ground_truth/order_122_4500001121.json,ground_truth/order_122_4500001121.json
-123,MBM01122,C004,Midwest Building Maintenance (SYNTHETIC),EML,9,3252.58,True,TYPO_DESC;TOTAL_MIXED,ground_truth/order_123_MBM01122.json,ground_truth/order_123_MBM01122.json
-124,BW-01123,C002,Brightway Janitorial Services (SYNTHETIC),EML,6,605.98,False,,ground_truth/order_124_BW-01123.json,ground_truth/order_124_BW-01123.json
-125,MBM01124,C004,Midwest Building Maintenance (SYNTHETIC),EML,12,3652.67,False,,ground_truth/order_125_MBM01124.json,ground_truth/order_125_MBM01124.json
-126,4500001125,C001,Acme Manufacturing Inc. (SYNTHETIC),XLSX,4,1507.19,False,,ground_truth/order_126_4500001125.json,ground_truth/order_126_4500001125.json
-127,BW-01126,C002,Brightway Janitorial Services (SYNTHETIC),PDF,11,2478.45,False,,ground_truth/order_127_BW-01126.json,ground_truth/order_127_BW-01126.json
-128,SW-01127,C008,SafeWork Solutions Inc. (SYNTHETIC),XLSX,6,989.33,False,,ground_truth/order_128_SW-01127.json,ground_truth/order_128_SW-01127.json
-129,APE-01128,C005,AutoParts Express LLC (SYNTHETIC),PDF,8,675.6,False,,ground_truth/order_129_APE-01128.json,ground_truth/order_129_APE-01128.json
-130,SW-01129,C008,SafeWork Solutions Inc. (SYNTHETIC),XLSX,9,2986.87,False,,ground_truth/order_130_SW-01129.json,ground_truth/order_130_SW-01129.json
-131,PTD-01130,C009,Premier Tool & Die (SYNTHETIC),PDF,3,948.93,False,,ground_truth/order_131_PTD-01130.json,ground_truth/order_131_PTD-01130.json
-132,NMC-01131,C007,Northern Manufacturing Corp. (SYNTHETIC),PDF,5,875.9,False,,ground_truth/order_132_NMC-01131.json,ground_truth/order_132_NMC-01131.json
-133,APE-01132,C005,AutoParts Express LLC (SYNTHETIC),EML,8,972.75,True,TYPO_DESC,ground_truth/order_133_APE-01132.json,ground_truth/order_133_APE-01132.json
-134,APE-01133,C005,AutoParts Express LLC (SYNTHETIC),EML,8,3441.14,False,,ground_truth/order_134_APE-01133.json,ground_truth/order_134_APE-01133.json
-135,FCH-01134,C006,FreshClean Hospitality Group (SYNTHETIC),EML,8,1911.63,True,EMAIL_CONTRADICTORY,ground_truth/order_135_FCH-01134.json,ground_truth/order_135_FCH-01134.json
-136,TIT-PO-01135,C003,Titan Industrial Supply Co. (SYNTHETIC),XLSX,3,802.44,False,,ground_truth/order_136_TIT-PO-01135.json,ground_truth/order_136_TIT-PO-01135.json
-137,QS-01136,C010,QuickServ Facilities Management (SYNTHETIC),PDF,22,4925.09,False,,ground_truth/order_137_QS-01136.json,ground_truth/order_137_QS-01136.json
-138,APE-01137,C005,AutoParts Express LLC (SYNTHETIC),EML,6,1584.74,False,,ground_truth/order_138_APE-01137.json,ground_truth/order_138_APE-01137.json
-139,TIT-PO-01138,C003,Titan Industrial Supply Co. (SYNTHETIC),XLSX,6,1799.76,True,AMBIGUOUS_DESC,ground_truth/order_139_TIT-PO-01138.json,ground_truth/order_139_TIT-PO-01138.json
-140,FCH-01139,C006,FreshClean Hospitality Group (SYNTHETIC),PDF,10,2478.24,False,,ground_truth/order_140_FCH-01139.json,ground_truth/order_140_FCH-01139.json
-141,TIT-PO-01140,C003,Titan Industrial Supply Co. (SYNTHETIC),XLSX,5,1829.08,False,,ground_truth/order_141_TIT-PO-01140.json,ground_truth/order_141_TIT-PO-01140.json
-142,QS-01141,C010,QuickServ Facilities Management (SYNTHETIC),XLSX,23,6517.0,False,,ground_truth/order_142_QS-01141.json,ground_truth/order_142_QS-01141.json
-143,BW-01142,C002,Brightway Janitorial Services (SYNTHETIC),EML,14,1875.54,False,,ground_truth/order_143_BW-01142.json,ground_truth/order_143_BW-01142.json
-144,TIT-PO-01143,C003,Titan Industrial Supply Co. (SYNTHETIC),XLSX,6,2050.44,False,,ground_truth/order_144_TIT-PO-01143.json,ground_truth/order_144_TIT-PO-01143.json
-145,PTD-01144,C009,Premier Tool & Die (SYNTHETIC),XLSX,5,1568.57,False,,ground_truth/order_145_PTD-01144.json,ground_truth/order_145_PTD-01144.json
-146,4500001145,C001,Acme Manufacturing Inc. (SYNTHETIC),XLSX,5,1756.76,False,,ground_truth/order_146_4500001145.json,ground_truth/order_146_4500001145.json
-147,APE-01146,C005,AutoParts Express LLC (SYNTHETIC),EML,10,4122.83,False,,ground_truth/order_147_APE-01146.json,ground_truth/order_147_APE-01146.json
-148,4500001147,C001,Acme Manufacturing Inc. (SYNTHETIC),XLSX,5,1996.2,False,,ground_truth/order_148_4500001147.json,ground_truth/order_148_4500001147.json
-149,TIT-PO-01148,C003,Titan Industrial Supply Co. (SYNTHETIC),XLSX,6,1455.95,False,,ground_truth/order_149_TIT-PO-01148.json,ground_truth/order_149_TIT-PO-01148.json
-150,NMC-01149,C007,Northern Manufacturing Corp. (SYNTHETIC),XLSX,5,1125.98,False,,ground_truth/order_150_NMC-01149.json,ground_truth/order_150_NMC-01149.json
+1,PTD-01000,C-TITAN,Titan Holdings (SYNTHETIC),PDF,2,1242.51,False,,ground_truth/order_001_PTD-01000.json,ground_truth/order_001_PTD-01000.json
+2,FCH-01001,C-PRIME,Prime Corp. (SYNTHETIC),PDF,6,2092.83,False,,ground_truth/order_002_FCH-01001.json,ground_truth/order_002_FCH-01001.json
+3,SW-01002,C-NOVA,Nova Company (SYNTHETIC),EML,12,3594.87,False,,ground_truth/order_003_SW-01002.json,ground_truth/order_003_SW-01002.json
+4,SW-01003,C-NOVA,Nova Company (SYNTHETIC),EML,9,4514.95,False,,ground_truth/order_004_SW-01003.json,ground_truth/order_004_SW-01003.json
+5,SW-01004,C-NOVA,Nova Company (SYNTHETIC),EML,6,5457.81,False,,ground_truth/order_005_SW-01004.json,ground_truth/order_005_SW-01004.json
+6,FCH-01005,C-PRIME,Prime Corp. (SYNTHETIC),PDF,9,2587.81,False,,ground_truth/order_006_FCH-01005.json,ground_truth/order_006_FCH-01005.json
+7,NMC-01006,C-ATLAS,Atlas Group (SYNTHETIC),PDF,7,2760.22,True,MISSING_DATE;MISSING_QTY,ground_truth/order_007_NMC-01006.json,ground_truth/order_007_NMC-01006.json
+8,TIT-PO-01007,C-OMEGA,Omega Manufacturing Inc. (SYNTHETIC),XLSX,5,1495.68,False,,ground_truth/order_008_TIT-PO-01007.json,ground_truth/order_008_TIT-PO-01007.json
+9,NMC-01008,C-ATLAS,Atlas Group (SYNTHETIC),XLSX,6,1060.48,False,,ground_truth/order_009_NMC-01008.json,ground_truth/order_009_NMC-01008.json
+10,FCH-01009,C-PRIME,Prime Corp. (SYNTHETIC),PDF,11,2486.41,False,,ground_truth/order_010_FCH-01009.json,ground_truth/order_010_FCH-01009.json
+11,SW-01010,C-NOVA,Nova Company (SYNTHETIC),EML,8,3144.88,False,,ground_truth/order_011_SW-01010.json,ground_truth/order_011_SW-01010.json
+12,BW-01011,C-DELTA,Delta Holdings (SYNTHETIC),EML,6,665.59,False,,ground_truth/order_012_BW-01011.json,ground_truth/order_012_BW-01011.json
+13,NMC-01012,C-ATLAS,Atlas Group (SYNTHETIC),XLSX,5,1041.69,False,,ground_truth/order_013_NMC-01012.json,ground_truth/order_013_NMC-01012.json
+14,TIT-PO-01013,C-OMEGA,Omega Manufacturing Inc. (SYNTHETIC),XLSX,6,2172.59,False,,ground_truth/order_014_TIT-PO-01013.json,ground_truth/order_014_TIT-PO-01013.json
+15,NMC-01014,C-ATLAS,Atlas Group (SYNTHETIC),XLSX,4,3182.15,False,,ground_truth/order_015_NMC-01014.json,ground_truth/order_015_NMC-01014.json
+16,BW-01015,C-DELTA,Delta Holdings (SYNTHETIC),EML,11,6151.27,True,QTY_WORDS,ground_truth/order_016_BW-01015.json,ground_truth/order_016_BW-01015.json
+17,QS-01016,C-GLOBAL,Global Corp. (SYNTHETIC),XLSX,20,9263.21,False,,ground_truth/order_017_QS-01016.json,ground_truth/order_017_QS-01016.json
+18,PTD-01017,C-TITAN,Titan Holdings (SYNTHETIC),PDF,3,2231.74,False,,ground_truth/order_018_PTD-01017.json,ground_truth/order_018_PTD-01017.json
+19,MBM01018,C-APEX,Apex Corp. (SYNTHETIC),PDF,15,4328.24,True,MULTIPAGE_PDF,ground_truth/order_019_MBM01018.json,ground_truth/order_019_MBM01018.json
+20,PTD-01019,C-TITAN,Titan Holdings (SYNTHETIC),PDF,2,293.52,False,,ground_truth/order_020_PTD-01019.json,ground_truth/order_020_PTD-01019.json
+21,4500001020,C-ACME,Acme Company (SYNTHETIC),XLSX,3,507.98,False,,ground_truth/order_021_4500001020.json,ground_truth/order_021_4500001020.json
+22,FCH-01021,C-PRIME,Prime Corp. (SYNTHETIC),PDF,10,3531.13,False,,ground_truth/order_022_FCH-01021.json,ground_truth/order_022_FCH-01021.json
+23,PTD-01022,C-TITAN,Titan Holdings (SYNTHETIC),PDF,2,1828.16,False,,ground_truth/order_023_PTD-01022.json,ground_truth/order_023_PTD-01022.json
+24,PTD-01023,C-TITAN,Titan Holdings (SYNTHETIC),PDF,2,306.99,False,,ground_truth/order_024_PTD-01023.json,ground_truth/order_024_PTD-01023.json
+25,4500001024,C-ACME,Acme Company (SYNTHETIC),PDF,6,2558.08,False,,ground_truth/order_025_4500001024.json,ground_truth/order_025_4500001024.json
+26,FCH-01025,C-PRIME,Prime Corp. (SYNTHETIC),PDF,12,5470.56,False,,ground_truth/order_026_FCH-01025.json,ground_truth/order_026_FCH-01025.json
+27,NMC-01026,C-ATLAS,Atlas Group (SYNTHETIC),PDF,6,1932.55,False,,ground_truth/order_027_NMC-01026.json,ground_truth/order_027_NMC-01026.json
+28,SW-01027,C-NOVA,Nova Company (SYNTHETIC),XLSX,9,2843.97,True,DATE_FORMAT,ground_truth/order_028_SW-01027.json,ground_truth/order_028_SW-01027.json
+29,FCH-01028,C-PRIME,Prime Corp. (SYNTHETIC),PDF,9,1083.88,False,,ground_truth/order_029_FCH-01028.json,ground_truth/order_029_FCH-01028.json
+30,FCH-01029,C-PRIME,Prime Corp. (SYNTHETIC),PDF,6,1880.68,False,,ground_truth/order_030_FCH-01029.json,ground_truth/order_030_FCH-01029.json
+31,MBM01030,C-APEX,Apex Corp. (SYNTHETIC),EML,18,7840.49,False,,ground_truth/order_031_MBM01030.json,ground_truth/order_031_MBM01030.json
+32,BW-01031,C-DELTA,Delta Holdings (SYNTHETIC),EML,10,4034.11,False,,ground_truth/order_032_BW-01031.json,ground_truth/order_032_BW-01031.json
+33,PTD-01032,C-TITAN,Titan Holdings (SYNTHETIC),PDF,2,169.0,True,MISSING_PO_NUMBER,ground_truth/order_033_PTD-01032.json,ground_truth/order_033_PTD-01032.json
+34,SW-01033,C-NOVA,Nova Company (SYNTHETIC),EML,8,2825.22,False,,ground_truth/order_034_SW-01033.json,ground_truth/order_034_SW-01033.json
+35,SW-01034,C-NOVA,Nova Company (SYNTHETIC),XLSX,11,3013.77,False,,ground_truth/order_035_SW-01034.json,ground_truth/order_035_SW-01034.json
+36,4500001035,C-ACME,Acme Company (SYNTHETIC),PDF,6,2268.72,False,,ground_truth/order_036_4500001035.json,ground_truth/order_036_4500001035.json
+37,4500001036,C-ACME,Acme Company (SYNTHETIC),XLSX,4,4639.21,False,,ground_truth/order_037_4500001036.json,ground_truth/order_037_4500001036.json
+38,FCH-01037,C-PRIME,Prime Corp. (SYNTHETIC),PDF,8,2462.48,False,,ground_truth/order_038_FCH-01037.json,ground_truth/order_038_FCH-01037.json
+39,TIT-PO-01038,C-OMEGA,Omega Manufacturing Inc. (SYNTHETIC),XLSX,2,302.4,False,,ground_truth/order_039_TIT-PO-01038.json,ground_truth/order_039_TIT-PO-01038.json
+40,SW-01039,C-NOVA,Nova Company (SYNTHETIC),EML,12,4556.49,False,,ground_truth/order_040_SW-01039.json,ground_truth/order_040_SW-01039.json
+41,BW-01040,C-DELTA,Delta Holdings (SYNTHETIC),EML,9,2055.41,False,,ground_truth/order_041_BW-01040.json,ground_truth/order_041_BW-01040.json
+42,PTD-01041,C-TITAN,Titan Holdings (SYNTHETIC),PDF,4,891.03,True,TYPO_DESC,ground_truth/order_042_PTD-01041.json,ground_truth/order_042_PTD-01041.json
+43,BW-01042,C-DELTA,Delta Holdings (SYNTHETIC),EML,10,3659.93,False,,ground_truth/order_043_BW-01042.json,ground_truth/order_043_BW-01042.json
+44,MBM01043,C-APEX,Apex Corp. (SYNTHETIC),EML,15,5159.45,False,,ground_truth/order_044_MBM01043.json,ground_truth/order_044_MBM01043.json
+45,APE-01044,C-SUMMIT,Summit Group (SYNTHETIC),PDF,6,1499.5,False,,ground_truth/order_045_APE-01044.json,ground_truth/order_045_APE-01044.json
+46,TIT-PO-01045,C-OMEGA,Omega Manufacturing Inc. (SYNTHETIC),XLSX,2,970.08,False,,ground_truth/order_046_TIT-PO-01045.json,ground_truth/order_046_TIT-PO-01045.json
+47,BW-01046,C-DELTA,Delta Holdings (SYNTHETIC),PDF,14,6340.54,False,,ground_truth/order_047_BW-01046.json,ground_truth/order_047_BW-01046.json
+48,APE-01047,C-SUMMIT,Summit Group (SYNTHETIC),PDF,8,2196.08,False,,ground_truth/order_048_APE-01047.json,ground_truth/order_048_APE-01047.json
+49,4500001048,C-ACME,Acme Company (SYNTHETIC),PDF,8,3324.93,False,,ground_truth/order_049_4500001048.json,ground_truth/order_049_4500001048.json
+50,TIT-PO-01049,C-OMEGA,Omega Manufacturing Inc. (SYNTHETIC),XLSX,4,252.5,False,,ground_truth/order_050_TIT-PO-01049.json,ground_truth/order_050_TIT-PO-01049.json
+51,MBM01050,C-APEX,Apex Corp. (SYNTHETIC),EML,17,5693.91,False,,ground_truth/order_051_MBM01050.json,ground_truth/order_051_MBM01050.json
+52,SW-01051,C-NOVA,Nova Company (SYNTHETIC),EML,8,4980.58,False,,ground_truth/order_052_SW-01051.json,ground_truth/order_052_SW-01051.json
+53,QS-01052,C-GLOBAL,Global Corp. (SYNTHETIC),XLSX,17,6954.85,True,MISSING_PO_NUMBER;DATE_FORMAT,ground_truth/order_053_QS-01052.json,ground_truth/order_053_QS-01052.json
+54,4500001053,C-ACME,Acme Company (SYNTHETIC),PDF,7,1724.35,False,,ground_truth/order_054_4500001053.json,ground_truth/order_054_4500001053.json
+55,FCH-01054,C-PRIME,Prime Corp. (SYNTHETIC),PDF,9,1500.77,False,,ground_truth/order_055_FCH-01054.json,ground_truth/order_055_FCH-01054.json
+56,BW-01055,C-DELTA,Delta Holdings (SYNTHETIC),EML,11,3351.7,False,,ground_truth/order_056_BW-01055.json,ground_truth/order_056_BW-01055.json
+57,QS-01056,C-GLOBAL,Global Corp. (SYNTHETIC),EML,24,6411.06,False,,ground_truth/order_057_QS-01056.json,ground_truth/order_057_QS-01056.json
+58,NMC-01057,C-ATLAS,Atlas Group (SYNTHETIC),XLSX,6,3938.5,True,UOM_CONVERSION,ground_truth/order_058_NMC-01057.json,ground_truth/order_058_NMC-01057.json
+59,APE-01058,C-SUMMIT,Summit Group (SYNTHETIC),EML,4,502.6,False,,ground_truth/order_059_APE-01058.json,ground_truth/order_059_APE-01058.json
+60,QS-01059,C-GLOBAL,Global Corp. (SYNTHETIC),EML,22,8692.93,False,,ground_truth/order_060_QS-01059.json,ground_truth/order_060_QS-01059.json
+61,PTD-01060,C-TITAN,Titan Holdings (SYNTHETIC),PDF,2,1104.56,False,,ground_truth/order_061_PTD-01060.json,ground_truth/order_061_PTD-01060.json
+62,BW-01061,C-DELTA,Delta Holdings (SYNTHETIC),EML,12,1910.61,False,,ground_truth/order_062_BW-01061.json,ground_truth/order_062_BW-01061.json
+63,FCH-01062,C-PRIME,Prime Corp. (SYNTHETIC),PDF,6,994.43,False,,ground_truth/order_063_FCH-01062.json,ground_truth/order_063_FCH-01062.json
+64,FCH-01063,C-PRIME,Prime Corp. (SYNTHETIC),EML,12,3933.07,True,EMAIL_CONTRADICTORY,ground_truth/order_064_FCH-01063.json,ground_truth/order_064_FCH-01063.json
+65,PTD-01064,C-TITAN,Titan Holdings (SYNTHETIC),PDF,2,1018.2,True,MULTIPAGE_PDF;CUSTOMER_CODES,ground_truth/order_065_PTD-01064.json,ground_truth/order_065_PTD-01064.json
+66,MBM01065,C-APEX,Apex Corp. (SYNTHETIC),EML,18,4155.04,False,,ground_truth/order_066_MBM01065.json,ground_truth/order_066_MBM01065.json
+67,BW-01066,C-DELTA,Delta Holdings (SYNTHETIC),PDF,13,4496.37,False,,ground_truth/order_067_BW-01066.json,ground_truth/order_067_BW-01066.json
+68,QS-01067,C-GLOBAL,Global Corp. (SYNTHETIC),EML,22,7498.19,True,CUSTOMER_CODES,ground_truth/order_068_QS-01067.json,ground_truth/order_068_QS-01067.json
+69,QS-01068,C-GLOBAL,Global Corp. (SYNTHETIC),EML,11,2593.1,True,EMAIL_CONTRADICTORY;MISSING_DATE,ground_truth/order_069_QS-01068.json,ground_truth/order_069_QS-01068.json
+70,QS-01069,C-GLOBAL,Global Corp. (SYNTHETIC),EML,18,4055.14,False,,ground_truth/order_070_QS-01069.json,ground_truth/order_070_QS-01069.json
+71,NMC-01070,C-ATLAS,Atlas Group (SYNTHETIC),PDF,7,2149.26,True,TOTAL_MIXED,ground_truth/order_071_NMC-01070.json,ground_truth/order_071_NMC-01070.json
+72,TIT-PO-01071,C-OMEGA,Omega Manufacturing Inc. (SYNTHETIC),XLSX,4,480.4,False,,ground_truth/order_072_TIT-PO-01071.json,ground_truth/order_072_TIT-PO-01071.json
+73,FCH-01072,C-PRIME,Prime Corp. (SYNTHETIC),PDF,9,3624.73,False,,ground_truth/order_073_FCH-01072.json,ground_truth/order_073_FCH-01072.json
+74,QS-01073,C-GLOBAL,Global Corp. (SYNTHETIC),EML,17,4742.97,False,,ground_truth/order_074_QS-01073.json,ground_truth/order_074_QS-01073.json
+75,APE-01074,C-SUMMIT,Summit Group (SYNTHETIC),EML,5,684.92,False,,ground_truth/order_075_APE-01074.json,ground_truth/order_075_APE-01074.json
+76,MBM01075,C-APEX,Apex Corp. (SYNTHETIC),EML,20,6206.39,False,,ground_truth/order_076_MBM01075.json,ground_truth/order_076_MBM01075.json
+77,SW-01076,C-NOVA,Nova Company (SYNTHETIC),XLSX,8,2629.1,False,,ground_truth/order_077_SW-01076.json,ground_truth/order_077_SW-01076.json
+78,FCH-01077,C-PRIME,Prime Corp. (SYNTHETIC),PDF,11,4225.82,True,MISSING_QTY,ground_truth/order_078_FCH-01077.json,ground_truth/order_078_FCH-01077.json
+79,FCH-01078,C-PRIME,Prime Corp. (SYNTHETIC),PDF,11,4972.78,False,,ground_truth/order_079_FCH-01078.json,ground_truth/order_079_FCH-01078.json
+80,TIT-PO-01079,C-OMEGA,Omega Manufacturing Inc. (SYNTHETIC),XLSX,5,2408.12,False,,ground_truth/order_080_TIT-PO-01079.json,ground_truth/order_080_TIT-PO-01079.json
+81,PTD-01080,C-TITAN,Titan Holdings (SYNTHETIC),PDF,3,575.78,True,MISSING_PO_NUMBER,ground_truth/order_081_PTD-01080.json,ground_truth/order_081_PTD-01080.json
+82,4500001081,C-ACME,Acme Company (SYNTHETIC),PDF,7,1454.05,False,,ground_truth/order_082_4500001081.json,ground_truth/order_082_4500001081.json
+83,QS-01082,C-GLOBAL,Global Corp. (SYNTHETIC),EML,25,8155.26,False,,ground_truth/order_083_QS-01082.json,ground_truth/order_083_QS-01082.json
+84,SW-01083,C-NOVA,Nova Company (SYNTHETIC),XLSX,8,1906.2,False,,ground_truth/order_084_SW-01083.json,ground_truth/order_084_SW-01083.json
+85,MBM01084,C-APEX,Apex Corp. (SYNTHETIC),EML,11,5716.51,False,,ground_truth/order_085_MBM01084.json,ground_truth/order_085_MBM01084.json
+86,FCH-01085,C-PRIME,Prime Corp. (SYNTHETIC),PDF,10,3659.8,False,,ground_truth/order_086_FCH-01085.json,ground_truth/order_086_FCH-01085.json
+87,FCH-01086,C-PRIME,Prime Corp. (SYNTHETIC),PDF,6,3093.62,False,,ground_truth/order_087_FCH-01086.json,ground_truth/order_087_FCH-01086.json
+88,SW-01087,C-NOVA,Nova Company (SYNTHETIC),EML,8,2560.45,False,,ground_truth/order_088_SW-01087.json,ground_truth/order_088_SW-01087.json
+89,QS-01088,C-GLOBAL,Global Corp. (SYNTHETIC),EML,25,5930.99,True,AMBIGUOUS_DESC,ground_truth/order_089_QS-01088.json,ground_truth/order_089_QS-01088.json
+90,TIT-PO-01089,C-OMEGA,Omega Manufacturing Inc. (SYNTHETIC),XLSX,3,332.28,False,,ground_truth/order_090_TIT-PO-01089.json,ground_truth/order_090_TIT-PO-01089.json
+91,BW-01090,C-DELTA,Delta Holdings (SYNTHETIC),EML,12,4029.92,False,,ground_truth/order_091_BW-01090.json,ground_truth/order_091_BW-01090.json
+92,NMC-01091,C-ATLAS,Atlas Group (SYNTHETIC),XLSX,6,1241.18,False,,ground_truth/order_092_NMC-01091.json,ground_truth/order_092_NMC-01091.json
+93,TIT-PO-01092,C-OMEGA,Omega Manufacturing Inc. (SYNTHETIC),XLSX,3,1335.6,False,,ground_truth/order_093_TIT-PO-01092.json,ground_truth/order_093_TIT-PO-01092.json
+94,APE-01093,C-SUMMIT,Summit Group (SYNTHETIC),EML,8,3060.19,False,,ground_truth/order_094_APE-01093.json,ground_truth/order_094_APE-01093.json
+95,FCH-01094,C-PRIME,Prime Corp. (SYNTHETIC),PDF,12,2910.0,False,,ground_truth/order_095_FCH-01094.json,ground_truth/order_095_FCH-01094.json
+96,APE-01095,C-SUMMIT,Summit Group (SYNTHETIC),PDF,9,1396.98,False,,ground_truth/order_096_APE-01095.json,ground_truth/order_096_APE-01095.json
+97,NMC-01096,C-ATLAS,Atlas Group (SYNTHETIC),PDF,4,1201.81,True,CUSTOMER_CODES,ground_truth/order_097_NMC-01096.json,ground_truth/order_097_NMC-01096.json
+98,QS-01097,C-GLOBAL,Global Corp. (SYNTHETIC),PDF,18,8346.56,True,MISSING_DATE,ground_truth/order_098_QS-01097.json,ground_truth/order_098_QS-01097.json
+99,TIT-PO-01098,C-OMEGA,Omega Manufacturing Inc. (SYNTHETIC),XLSX,5,2931.4,False,,ground_truth/order_099_TIT-PO-01098.json,ground_truth/order_099_TIT-PO-01098.json
+100,MBM01099,C-APEX,Apex Corp. (SYNTHETIC),EML,9,2237.56,False,,ground_truth/order_100_MBM01099.json,ground_truth/order_100_MBM01099.json
+101,4500001100,C-ACME,Acme Company (SYNTHETIC),PDF,6,4099.03,False,,ground_truth/order_101_4500001100.json,ground_truth/order_101_4500001100.json
+102,PTD-01101,C-TITAN,Titan Holdings (SYNTHETIC),PDF,4,1363.33,False,,ground_truth/order_102_PTD-01101.json,ground_truth/order_102_PTD-01101.json
+103,PTD-01102,C-TITAN,Titan Holdings (SYNTHETIC),PDF,3,650.48,False,,ground_truth/order_103_PTD-01102.json,ground_truth/order_103_PTD-01102.json
+104,APE-01103,C-SUMMIT,Summit Group (SYNTHETIC),PDF,6,867.41,False,,ground_truth/order_104_APE-01103.json,ground_truth/order_104_APE-01103.json
+105,APE-01104,C-SUMMIT,Summit Group (SYNTHETIC),PDF,7,3111.83,False,,ground_truth/order_105_APE-01104.json,ground_truth/order_105_APE-01104.json
+106,MBM01105,C-APEX,Apex Corp. (SYNTHETIC),EML,13,3890.41,False,,ground_truth/order_106_MBM01105.json,ground_truth/order_106_MBM01105.json
+107,NMC-01106,C-ATLAS,Atlas Group (SYNTHETIC),XLSX,5,1871.52,False,,ground_truth/order_107_NMC-01106.json,ground_truth/order_107_NMC-01106.json
+108,PTD-01107,C-TITAN,Titan Holdings (SYNTHETIC),PDF,2,1503.72,False,,ground_truth/order_108_PTD-01107.json,ground_truth/order_108_PTD-01107.json
+109,PTD-01108,C-TITAN,Titan Holdings (SYNTHETIC),PDF,3,502.41,False,,ground_truth/order_109_PTD-01108.json,ground_truth/order_109_PTD-01108.json
+110,APE-01109,C-SUMMIT,Summit Group (SYNTHETIC),PDF,8,2101.77,False,,ground_truth/order_110_APE-01109.json,ground_truth/order_110_APE-01109.json
+111,4500001110,C-ACME,Acme Company (SYNTHETIC),PDF,4,585.0,False,,ground_truth/order_111_4500001110.json,ground_truth/order_111_4500001110.json
+112,BW-01111,C-DELTA,Delta Holdings (SYNTHETIC),EML,11,5048.98,False,,ground_truth/order_112_BW-01111.json,ground_truth/order_112_BW-01111.json
+113,APE-01112,C-SUMMIT,Summit Group (SYNTHETIC),PDF,5,1212.44,False,,ground_truth/order_113_APE-01112.json,ground_truth/order_113_APE-01112.json
+114,SW-01113,C-NOVA,Nova Company (SYNTHETIC),XLSX,8,1345.84,False,,ground_truth/order_114_SW-01113.json,ground_truth/order_114_SW-01113.json
+115,4500001114,C-ACME,Acme Company (SYNTHETIC),PDF,3,283.24,False,,ground_truth/order_115_4500001114.json,ground_truth/order_115_4500001114.json
+116,TIT-PO-01115,C-OMEGA,Omega Manufacturing Inc. (SYNTHETIC),XLSX,2,892.18,False,,ground_truth/order_116_TIT-PO-01115.json,ground_truth/order_116_TIT-PO-01115.json
+117,NMC-01116,C-ATLAS,Atlas Group (SYNTHETIC),XLSX,5,1705.95,False,,ground_truth/order_117_NMC-01116.json,ground_truth/order_117_NMC-01116.json
+118,FCH-01117,C-PRIME,Prime Corp. (SYNTHETIC),PDF,8,1732.55,False,,ground_truth/order_118_FCH-01117.json,ground_truth/order_118_FCH-01117.json
+119,FCH-01118,C-PRIME,Prime Corp. (SYNTHETIC),PDF,9,4200.11,False,,ground_truth/order_119_FCH-01118.json,ground_truth/order_119_FCH-01118.json
+120,4500001119,C-ACME,Acme Company (SYNTHETIC),XLSX,6,3297.71,False,,ground_truth/order_120_4500001119.json,ground_truth/order_120_4500001119.json
+121,APE-01120,C-SUMMIT,Summit Group (SYNTHETIC),EML,8,1921.61,False,,ground_truth/order_121_APE-01120.json,ground_truth/order_121_APE-01120.json
+122,MBM01121,C-APEX,Apex Corp. (SYNTHETIC),EML,17,7702.26,False,,ground_truth/order_122_MBM01121.json,ground_truth/order_122_MBM01121.json
+123,NMC-01122,C-ATLAS,Atlas Group (SYNTHETIC),XLSX,3,1481.2,True,TYPO_DESC;TOTAL_MIXED,ground_truth/order_123_NMC-01122.json,ground_truth/order_123_NMC-01122.json
+124,4500001123,C-ACME,Acme Company (SYNTHETIC),XLSX,8,976.42,False,,ground_truth/order_124_4500001123.json,ground_truth/order_124_4500001123.json
+125,NMC-01124,C-ATLAS,Atlas Group (SYNTHETIC),XLSX,3,474.99,False,,ground_truth/order_125_NMC-01124.json,ground_truth/order_125_NMC-01124.json
+126,PTD-01125,C-TITAN,Titan Holdings (SYNTHETIC),EML,2,1487.08,False,,ground_truth/order_126_PTD-01125.json,ground_truth/order_126_PTD-01125.json
+127,APE-01126,C-SUMMIT,Summit Group (SYNTHETIC),EML,10,1330.99,False,,ground_truth/order_127_APE-01126.json,ground_truth/order_127_APE-01126.json
+128,PTD-01127,C-TITAN,Titan Holdings (SYNTHETIC),XLSX,5,1028.09,False,,ground_truth/order_128_PTD-01127.json,ground_truth/order_128_PTD-01127.json
+129,MBM01128,C-APEX,Apex Corp. (SYNTHETIC),EML,13,2947.87,False,,ground_truth/order_129_MBM01128.json,ground_truth/order_129_MBM01128.json
+130,TIT-PO-01129,C-OMEGA,Omega Manufacturing Inc. (SYNTHETIC),XLSX,3,393.75,False,,ground_truth/order_130_TIT-PO-01129.json,ground_truth/order_130_TIT-PO-01129.json
+131,APE-01130,C-SUMMIT,Summit Group (SYNTHETIC),EML,4,3079.26,False,,ground_truth/order_131_APE-01130.json,ground_truth/order_131_APE-01130.json
+132,TIT-PO-01131,C-OMEGA,Omega Manufacturing Inc. (SYNTHETIC),XLSX,6,1487.0,False,,ground_truth/order_132_TIT-PO-01131.json,ground_truth/order_132_TIT-PO-01131.json
+133,QS-01132,C-GLOBAL,Global Corp. (SYNTHETIC),EML,21,8866.79,True,TYPO_DESC,ground_truth/order_133_QS-01132.json,ground_truth/order_133_QS-01132.json
+134,4500001133,C-ACME,Acme Company (SYNTHETIC),XLSX,3,1084.39,False,,ground_truth/order_134_4500001133.json,ground_truth/order_134_4500001133.json
+135,MBM01134,C-APEX,Apex Corp. (SYNTHETIC),EML,20,4285.1,True,EMAIL_CONTRADICTORY,ground_truth/order_135_MBM01134.json,ground_truth/order_135_MBM01134.json
+136,QS-01135,C-GLOBAL,Global Corp. (SYNTHETIC),EML,12,3145.4,False,,ground_truth/order_136_QS-01135.json,ground_truth/order_136_QS-01135.json
+137,SW-01136,C-NOVA,Nova Company (SYNTHETIC),EML,5,511.17,False,,ground_truth/order_137_SW-01136.json,ground_truth/order_137_SW-01136.json
+138,TIT-PO-01137,C-OMEGA,Omega Manufacturing Inc. (SYNTHETIC),XLSX,4,1468.39,False,,ground_truth/order_138_TIT-PO-01137.json,ground_truth/order_138_TIT-PO-01137.json
+139,SW-01138,C-NOVA,Nova Company (SYNTHETIC),EML,10,3956.47,True,AMBIGUOUS_DESC,ground_truth/order_139_SW-01138.json,ground_truth/order_139_SW-01138.json
+140,BW-01139,C-DELTA,Delta Holdings (SYNTHETIC),EML,13,4687.13,False,,ground_truth/order_140_BW-01139.json,ground_truth/order_140_BW-01139.json
+141,FCH-01140,C-PRIME,Prime Corp. (SYNTHETIC),EML,8,3332.56,False,,ground_truth/order_141_FCH-01140.json,ground_truth/order_141_FCH-01140.json
+142,NMC-01141,C-ATLAS,Atlas Group (SYNTHETIC),XLSX,6,1110.28,False,,ground_truth/order_142_NMC-01141.json,ground_truth/order_142_NMC-01141.json
+143,MBM01142,C-APEX,Apex Corp. (SYNTHETIC),EML,19,5686.94,False,,ground_truth/order_143_MBM01142.json,ground_truth/order_143_MBM01142.json
+144,PTD-01143,C-TITAN,Titan Holdings (SYNTHETIC),EML,2,1069.6,False,,ground_truth/order_144_PTD-01143.json,ground_truth/order_144_PTD-01143.json
+145,MBM01144,C-APEX,Apex Corp. (SYNTHETIC),EML,20,5861.28,False,,ground_truth/order_145_MBM01144.json,ground_truth/order_145_MBM01144.json
+146,PTD-01145,C-TITAN,Titan Holdings (SYNTHETIC),XLSX,3,988.17,False,,ground_truth/order_146_PTD-01145.json,ground_truth/order_146_PTD-01145.json
+147,NMC-01146,C-ATLAS,Atlas Group (SYNTHETIC),XLSX,7,3713.92,False,,ground_truth/order_147_NMC-01146.json,ground_truth/order_147_NMC-01146.json
+148,BW-01147,C-DELTA,Delta Holdings (SYNTHETIC),EML,9,3720.1,False,,ground_truth/order_148_BW-01147.json,ground_truth/order_148_BW-01147.json
+149,SW-01148,C-NOVA,Nova Company (SYNTHETIC),XLSX,12,3738.29,False,,ground_truth/order_149_SW-01148.json,ground_truth/order_149_SW-01148.json
+150,MBM01149,C-APEX,Apex Corp. (SYNTHETIC),EML,9,3031.16,False,,ground_truth/order_150_MBM01149.json,ground_truth/order_150_MBM01149.json

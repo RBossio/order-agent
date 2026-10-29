@@ -1,0 +1,53 @@
+Content-Type: multipart/mixed; boundary="===============5385460188979552723=="
+MIME-Version: 1.0
+From: purchasing@apex.example
+To: orders@delta-industrial.example
+Subject: PO MBM01084 - Order from Apex Corp. (SYNTHETIC)
+Message-ID: <po-MBM01084@apex.example>
+Date: Thu, 15 Jan 2026 10:30:00 +0000
+
+--===============5385460188979552723==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+Hello,
+
+Please process the following order:
+
+PO Number: MBM01084
+Date: 1/19/26
+Ship To: Apex Shipping Location 1
+
+Items:
+------
+  1. [TLS-TPM-25FT-1] Tape Measure 25ft (SYNTHETIC)
+     Qty: 6 EA @ $20.88
+  2. [FST-SHC-12-13-1] Socket Head Cap Screw 1/2-13 x 1 (SYNTHETIC)
+     Qty: 12 BX @ $41.98
+  3. [PKG-BBW-225] Bubble Wrap 12in (SYNTHETIC)
+     Qty: 10 RO @ $38.71
+  4. [APEX-PAC-7921] Bubble Wrap 12in (SYNTHETIC)
+     Qty: 3 RO @ $37.59
+  5. [ADH-SGG-110] Super Glue Gel (SYNTHETIC)
+     Qty: 6 PK @ $21.82
+  6. [FST-FWS-58-11] Flat Washer 5/8-11 Zinc (SYNTHETIC)
+     Qty: 12 BX @ $14.82
+  7. [APEX-TOO-2997] Adjustable Wrench 8in (SYNTHETIC)
+     Qty: 3 EA @ $31.74
+  8. [JAN-HSF-252] Hand Soap Foam (SYNTHETIC)
+     Qty: 6 CS @ $94.24
+  9. [PKG-STW-002] Stretch Wrap 18in (SYNTHETIC)
+     Qty: 5 CS @ $90.22
+  10. [APEX-PAC-9870] Stretch Wrap 18in (SYNTHETIC)
+     Qty: 24 CS @ $128.45
+  11. [LUB-MOL-157] Machine Oil Light (SYNTHETIC)
+     Qty: 1 CS @ $84.28
+
+Delivery requested by: 2026-01-28
+
+Thank you,
+Apex Purchasing
+Apex Corp. (SYNTHETIC)
++1-555-3504
+--===============5385460188979552723==--

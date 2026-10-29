@@ -1,0 +1,61 @@
+Content-Type: multipart/mixed; boundary="===============2322731341365518645=="
+MIME-Version: 1.0
+From: purchasing@apex.example
+To: orders@delta-industrial.example
+Subject: PO MBM01043 - Order from Apex Corp. (SYNTHETIC)
+Message-ID: <po-MBM01043@apex.example>
+Date: Thu, 15 Jan 2026 10:30:00 +0000
+
+--===============2322731341365518645==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+Hello,
+
+Please process the following order:
+
+PO Number: MBM01043
+Date: 5/1/26
+Ship To: Apex Shipping Location 1
+
+Items:
+------
+  1. [PKG-BBW-073] Bubble Wrap 12in (SYNTHETIC)
+     Qty: 12 RO @ $41.37
+  2. [FST-HNT-34-10] Hex Nut 3/4-10 Grade 5 Zinc (SYNTHETIC)
+     Qty: 10 BX @ $20.92
+  3. [APEX-JAN-0302] Floor Pad 20in Blue (SYNTHETIC)
+     Qty: 2 CS @ $29.48
+  4. [ADH-SGG-102] Super Glue Gel (SYNTHETIC)
+     Qty: 2 PK @ $22.47
+  5. [APEX-SAF-2608] Safety Glasses Amber Anti-Fog (SYNTHETIC)
+     Qty: 6 EA @ $10.02
+  6. [APEX-FAS-9421] Hex Cap Screw 5/8-11 x 1-1/2 Grade 5 Zinc (SYNTHETIC)
+     Qty: 4 BX @ $23.91
+  7. [TLS-UTB-023] Utility Blade Standard (SYNTHETIC)
+     Qty: 2 PK @ $4.73
+  8. [APEX-SAF-5715] Hard Hat Orange ANSI Type I (SYNTHETIC)
+     Qty: 12 EA @ $8.73
+  9. [ADH-CON-233] Construction Adhesive (SYNTHETIC)
+     Qty: 24 CS @ $67.36
+  10. [FST-HCS-38-16-2] Hex Cap Screw 3/8-16 x 2 Grade 5 Zinc (SYNTHETIC)
+     Qty: 5 BX @ $9.68
+  11. [APEX-LUB-2240] Multi-Purpose Grease (SYNTHETIC)
+     Qty: 24 CS @ $65.95
+  12. [JAN-DSP-200] Disinfectant Spray (SYNTHETIC)
+     Qty: 4 CS @ $45.69
+  13. [PPE-GLV-LAT-8-L-WHI] Latex Gloves L PF (SYNTHETIC)
+     Qty: 6 CS @ $83.29
+  14. [APEX-SAF-6004] Hard Hat Orange ANSI Type I (SYNTHETIC)
+     Qty: 2 EA @ $16.96
+  15. [PKG-STW-097] Stretch Wrap 18in (SYNTHETIC)
+     Qty: 1 CS @ $115.67
+
+Delivery requested by: 2026-05-17
+
+Thank you,
+Apex Purchasing
+Apex Corp. (SYNTHETIC)
++1-555-3504
+--===============2322731341365518645==--

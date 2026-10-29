@@ -1,0 +1,47 @@
+Content-Type: multipart/mixed; boundary="===============6733214413370421116=="
+MIME-Version: 1.0
+From: purchasing@summit.example
+To: orders@delta-industrial.example
+Subject: PO APE-01120 - Order from Summit Group (SYNTHETIC)
+Message-ID: <po-APE-01120@summit.example>
+Date: Thu, 15 Jan 2026 10:30:00 +0000
+
+--===============6733214413370421116==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+Hello,
+
+Please process the following order:
+
+PO Number: APE-01120
+Date: 2026/05/12
+Ship To: Summit Shipping Location 2
+
+Items:
+------
+  1. [SUMMIT-JAN-1494] Disinfectant Spray (SYNTHETIC)
+     Qty: 1 CS @ $63.11
+  2. [SUMMIT-JAN-6265] Can Liner 24x24 1.5mil Clear Roll (SYNTHETIC)
+     Qty: 24 RO @ $21.74
+  3. [SUMMIT-JAN-6742] Floor Cleaner Neutral Concentrate (SYNTHETIC)
+     Qty: 1 CS @ $59.43
+  4. [SUMMIT-ABR-3751] Cut-Off Wheel 4in (SYNTHETIC)
+     Qty: 5 BX @ $37.97
+  5. [SUMMIT-PAC-4580] Bubble Wrap 12in (SYNTHETIC)
+     Qty: 10 RO @ $44.38
+  6. [SUMMIT-ADH-5989] Super Glue Gel (SYNTHETIC)
+     Qty: 2 PK @ $25.28
+  7. [FST-HCS-M10-4] Hex Cap Screw M10 x 4 Grade 5 Zinc (SYNTHETIC)
+     Qty: 3 BX @ $34.62
+  8. [SUMMIT-FAS-5532] Socket Head Cap Screw 1/2-13 x 2 (SYNTHETIC)
+     Qty: 12 BX @ $40.77
+
+Delivery requested by: 2026-05-29
+
+Thank you,
+Summit Purchasing
+Summit Group (SYNTHETIC)
++1-555-5961
+--===============6733214413370421116==--

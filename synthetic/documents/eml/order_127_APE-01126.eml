@@ -1,0 +1,51 @@
+Content-Type: multipart/mixed; boundary="===============7725936474118692691=="
+MIME-Version: 1.0
+From: purchasing@summit.example
+To: orders@delta-industrial.example
+Subject: PO APE-01126 - Order from Summit Group (SYNTHETIC)
+Message-ID: <po-APE-01126@summit.example>
+Date: Thu, 15 Jan 2026 10:30:00 +0000
+
+--===============7725936474118692691==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+Hello,
+
+Please process the following order:
+
+PO Number: APE-01126
+Date: 2026/06/28
+Ship To: Summit Shipping Location 2
+
+Items:
+------
+  1. [SUMMIT-PAC-4580] Bubble Wrap 12in (SYNTHETIC)
+     Qty: 3 RO @ $44.38
+  2. [SUMMIT-JAN-7998] Can Liner 38x58 1.2mil Black Roll (SYNTHETIC)
+     Qty: 4 RO @ $34.24
+  3. [SUMMIT-SAF-0604] Latex Gloves L PF (SYNTHETIC)
+     Qty: 4 CS @ $61.51
+  4. [TLS-TPM-30FT-1] Tape Measure 30ft (SYNTHETIC)
+     Qty: 12 EA @ $31.64
+  5. [SUMMIT-ELE-9041] Electrical Tape White 3/4in (SYNTHETIC)
+     Qty: 3 RO @ $2.24
+  6. [SUMMIT-ADH-9004] Epoxy 2-Part Quick Set (SYNTHETIC)
+     Qty: 2 PK @ $40.73
+  7. [SUMMIT-FAS-2460] Hex Nut 3/4-10 Grade 5 Zinc (SYNTHETIC)
+     Qty: 6 BX @ $20.92
+  8. [FST-LWS-M6-2] Lock Washer M6 Zinc (SYNTHETIC)
+     Qty: 1 BX @ $9.97
+  9. [SUMMIT-JAN-9633] Can Liner 40x46 1.2mil White Roll (SYNTHETIC)
+     Qty: 3 RO @ $25.56
+  10. [ADH-SGG-102] Super Glue Gel (SYNTHETIC)
+     Qty: 6 PK @ $22.47
+
+Delivery requested by: 2026-07-12
+
+Thank you,
+Summit Purchasing
+Summit Group (SYNTHETIC)
++1-555-5961
+--===============7725936474118692691==--

@@ -1,0 +1,55 @@
+Content-Type: multipart/mixed; boundary="===============0488220398055628404=="
+MIME-Version: 1.0
+From: purchasing@delta.example
+To: orders@delta-industrial.example
+Subject: PO BW-01061 - Order from Delta Holdings (SYNTHETIC)
+Message-ID: <po-BW-01061@delta.example>
+Date: Thu, 15 Jan 2026 10:30:00 +0000
+
+--===============0488220398055628404==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+Hello,
+
+Please process the following order:
+
+PO Number: BW-01061
+Date: 03/23/2026
+Ship To: Delta Shipping Location 1
+
+Items:
+------
+  1. [JAN-FPD-13-TAN] Floor Pad 13in Tan (SYNTHETIC)
+     Qty: 6 CS @ $22.20
+  2. [PPE-GLV-LAT-5-XXL-BLU] Latex Gloves XXL PF (SYNTHETIC)
+     Qty: 4 CS @ $81.27
+  3. [JAN-LNR-4046-10-CL] Can Liner 40x46 1.0mil Clear (SYNTHETIC)
+     Qty: 6 CS @ $37.07
+  4. [TLS-UTB-023] Utility Blade Standard (SYNTHETIC)
+     Qty: 4 PK @ $4.73
+  5. [TLS-UTB-197] Utility Blade Standard (SYNTHETIC)
+     Qty: 4 PK @ $7.32
+  6. [PKG-STW-097] Stretch Wrap 18in (SYNTHETIC)
+     Qty: 4 CS @ $115.67
+  7. [TLS-AWR-10IN] Adjustable Wrench 10in (SYNTHETIC)
+     Qty: 5 EA @ $43.93
+  8. [LUB-MOL-031] Machine Oil Light (SYNTHETIC)
+     Qty: 2 CS @ $53.66
+  9. [FST-SHC-12-13-4] Socket Head Cap Screw 1/2-13 x 4 (SYNTHETIC)
+     Qty: 4 BX @ $43.14
+  10. [TLS-AWR-6IN] Adjustable Wrench 6in (SYNTHETIC)
+     Qty: 2 EA @ $14.94
+  11. [PKG-PTC-066] Packing Tape Clear 2in (SYNTHETIC)
+     Qty: 1 CS @ $63.17
+  12. [PKG-BBW-205] Bubble Wrap 12in (SYNTHETIC)
+     Qty: 3 RO @ $42.15
+
+Delivery requested by: 2026-04-10
+
+Thank you,
+Delta Purchasing
+Delta Holdings (SYNTHETIC)
++1-555-9584
+--===============0488220398055628404==--

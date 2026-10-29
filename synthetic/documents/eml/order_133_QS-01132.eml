@@ -1,0 +1,73 @@
+Content-Type: multipart/mixed; boundary="===============7559008202599393889=="
+MIME-Version: 1.0
+From: purchasing@global.example
+To: orders@delta-industrial.example
+Subject: PO QS-01132 - Order from Global Corp. (SYNTHETIC)
+Message-ID: <po-QS-01132@global.example>
+Date: Thu, 15 Jan 2026 10:30:00 +0000
+
+--===============7559008202599393889==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+Hello,
+
+Please process the following order:
+
+PO Number: QS-01132
+Date: Apr 17, 2026
+Ship To: Global Shipping Location 1
+
+Items:
+------
+  1. [JAN-DGR-076] Degreaser Industrial (SYNTHETIC)
+     Qty: 4 CS @ $73.38
+  2. [GLOBAL-TOO-6538] Adjustable Wrench 10in (SYNTHETIC)
+     Qty: 3 EA @ $43.93
+  3. [JAN-PTR-1P-NAT] Paper Towel Roll 1P Natural (SYNTHETIC)
+     Qty: 3 CS @ $53.51
+  4. [GLOBAL-JAN-3800] Toilet Tissue 2P Standard (SYNTHETIC)
+     Qty: 4 CS @ $75.22
+  5. [GLOBAL-SAF-1975] Latex Gloves M PF (SYNTHETIC)
+     Qty: 5 CS @ $60.61
+  6. [PPE-N95-288] N95 Respirator (SYNTHETIC)
+     Qty: 24 BX @ $37.47
+  7. [GLOBAL-TOO-3473] Screwdriver {type} M10 x 2-1/2 (SYNTHETIC)
+     Qty: 3 EA @ $4.32
+  8. [JAN-NFC-192] Floor Cleaner Neutral Concentrate (SYNTHETIC)
+     Qty: 2 CS @ $58.32
+  9. [PKG-BBW-205] Bubble Wrap 12in (SYNTHETIC)
+     Qty: 2 RO @ $42.15
+  10. [GLOBAL-ABR-9783] Flap Disc 4in 220 (SYNTHETIC)
+     Qty: 2 BX @ $64.73
+  11. [PPE-GLV-LAT-5-XXL-BLA] Latex Gloves XXL PF (SYNTHETIC)
+     Qty: 6 CS @ $92.03
+  12. [JAN-FST-166] Floor Stripper Heavy Duty (SYNTHETIC)
+     Qty: 24 CS @ $64.02
+  13. [JAN-FTI-295] Facial Tissue Flat Box (SYNTHETIC)
+     Qty: 10 CS @ $41.62
+  14. [GLOBAL-SAF-8828] Safety Glasses Clear Anti-Fog (SYNTHETIC)
+     Qty: 3 EA @ $5.90
+  15. [GLOBAL-LUB-0422] Multi-Purpose Grease (SYNTHETIC)
+     Qty: 24 CS @ $73.89
+  16. [JAN-NFC-251] Floor Cleaner Neutral Concentrate (SYNTHETIC)
+     Qty: 5 CS @ $54.45
+  17. [PPE-GLV-NIT-8-XL-BLU] Nitrile Gloves XL Blue 8mil PF (SYNTHETIC)
+     Qty: 5 CS @ $96.34
+  18. [GLOBAL-PAC-0445] Bubble Wrap 12in (SYNTHETIC)
+     Qty: 1 RO @ $31.59
+  19. [ABR-FLD-4IN-2] Flap Disc 4in 120 (SYNTHETIC)
+     Qty: 12 BX @ $62.68
+  20. [ADH-SGG-110] Super Glue Gel (SYNTHETIC)
+     Qty: 3 PK @ $21.82
+  21. [JAN-NFC-287] Floor Cleaner Neutral Concentrate (SYNTHETIC)
+     Qty: 10 CS @ $53.53
+
+Delivery requested by: 2026-04-22
+
+Thank you,
+Global Purchasing
+Global Corp. (SYNTHETIC)
++1-555-3112
+--===============7559008202599393889==--

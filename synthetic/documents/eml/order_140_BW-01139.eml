@@ -1,0 +1,57 @@
+Content-Type: multipart/mixed; boundary="===============4426815266277930536=="
+MIME-Version: 1.0
+From: purchasing@delta.example
+To: orders@delta-industrial.example
+Subject: PO BW-01139 - Order from Delta Holdings (SYNTHETIC)
+Message-ID: <po-BW-01139@delta.example>
+Date: Thu, 15 Jan 2026 10:30:00 +0000
+
+--===============4426815266277930536==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+Hello,
+
+Please process the following order:
+
+PO Number: BW-01139
+Date: 06/29/2026
+Ship To: Delta Shipping Location 1
+
+Items:
+------
+  1. [ADH-SGG-191] Super Glue Gel (SYNTHETIC)
+     Qty: 24 PK @ $26.38
+  2. [FST-SHC-38-16-2] Socket Head Cap Screw 3/8-16 x 2 (SYNTHETIC)
+     Qty: 10 BX @ $37.59
+  3. [TLS-SDR-516-18-1] Screwdriver {type} 5/16-18 x 1 (SYNTHETIC)
+     Qty: 1 EA @ $24.44
+  4. [PPE-GLS-CLE-ANTI-FOG-1] Safety Glasses Clear Anti-Fog (SYNTHETIC)
+     Qty: 3 EA @ $5.90
+  5. [PKG-PTC-066] Packing Tape Clear 2in (SYNTHETIC)
+     Qty: 24 CS @ $63.17
+  6. [JAN-TTI-294] Toilet Tissue 2P Standard (SYNTHETIC)
+     Qty: 3 CS @ $74.47
+  7. [LUB-MPG-261] Multi-Purpose Grease (SYNTHETIC)
+     Qty: 3 CS @ $65.95
+  8. [TLS-UTK-104] Utility Knife Retractable (SYNTHETIC)
+     Qty: 2 EA @ $5.93
+  9. [PPE-GLV-LAT-5-XXL-BLA] Latex Gloves XXL PF (SYNTHETIC)
+     Qty: 5 CS @ $92.03
+  10. [PPE-HAT-ORA] Hard Hat Orange ANSI Type I (SYNTHETIC)
+     Qty: 2 EA @ $8.73
+  11. [TLS-UTB-023] Utility Blade Standard (SYNTHETIC)
+     Qty: 24 PK @ $4.73
+  12. [TLS-UTK-163] Utility Knife Retractable (SYNTHETIC)
+     Qty: 5 EA @ $9.92
+  13. [JAN-TTI-238] Toilet Tissue 2P Standard (SYNTHETIC)
+     Qty: 12 CS @ $87.17
+
+Delivery requested by: 2026-07-19
+
+Thank you,
+Delta Purchasing
+Delta Holdings (SYNTHETIC)
++1-555-9584
+--===============4426815266277930536==--

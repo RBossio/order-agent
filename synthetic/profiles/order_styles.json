@@ -1,0 +1,129 @@
+{
+  "C-ACME": {
+    "order_style": {
+      "format_preference": ["PDF", "XLSX"],
+      "po_prefix": "45000",
+      "date_format": "YYYY-MM-DD",
+      "uses_own_codes": true,
+      "code_prefix": "ACM-",
+      "typical_lines": [3, 8],
+      "currency": "USD",
+      "language": "en"
+    },
+    "xref_coverage": 0.7
+  },
+  "C-DELTA": {
+    "order_style": {
+      "format_preference": ["EML", "PDF"],
+      "po_prefix": "BW-",
+      "date_format": "MM/DD/YYYY",
+      "uses_own_codes": false,
+      "typical_lines": [5, 15],
+      "currency": "USD",
+      "language": "en"
+    },
+    "xref_coverage": 0.0
+  },
+  "C-OMEGA": {
+    "order_style": {
+      "format_preference": ["XLSX"],
+      "po_prefix": "TIT-PO-",
+      "date_format": "DD-MMM-YYYY",
+      "uses_own_codes": true,
+      "code_prefix": "TIS-",
+      "typical_lines": [2, 6],
+      "currency": "USD",
+      "language": "en"
+    },
+    "xref_coverage": 0.8
+  },
+  "C-APEX": {
+    "order_style": {
+      "format_preference": ["EML"],
+      "po_prefix": "MBM",
+      "date_format": "M/D/YY",
+      "uses_own_codes": true,
+      "code_prefix": "MB-",
+      "typical_lines": [8, 20],
+      "currency": "USD",
+      "language": "en"
+    },
+    "xref_coverage": 0.5
+  },
+  "C-SUMMIT": {
+    "order_style": {
+      "format_preference": ["PDF", "EML"],
+      "po_prefix": "APE-",
+      "date_format": "YYYY/MM/DD",
+      "uses_own_codes": true,
+      "code_prefix": "AP-",
+      "typical_lines": [4, 10],
+      "currency": "USD",
+      "language": "en"
+    },
+    "xref_coverage": 0.6
+  },
+  "C-PRIME": {
+    "order_style": {
+      "format_preference": ["PDF"],
+      "po_prefix": "FCH-",
+      "date_format": "DD/MM/YYYY",
+      "uses_own_codes": false,
+      "typical_lines": [6, 12],
+      "currency": "USD",
+      "language": "en"
+    },
+    "xref_coverage": 0.0
+  },
+  "C-ATLAS": {
+    "order_style": {
+      "format_preference": ["XLSX", "PDF"],
+      "po_prefix": "NMC-",
+      "date_format": "YYYY-MM-DD",
+      "uses_own_codes": true,
+      "code_prefix": "NM-",
+      "typical_lines": [3, 7],
+      "currency": "USD",
+      "language": "en"
+    },
+    "xref_coverage": 0.75
+  },
+  "C-NOVA": {
+    "order_style": {
+      "format_preference": ["EML", "XLSX"],
+      "po_prefix": "SW-",
+      "date_format": "MM-DD-YYYY",
+      "uses_own_codes": true,
+      "code_prefix": "SWS-",
+      "typical_lines": [5, 12],
+      "currency": "USD",
+      "language": "en"
+    },
+    "xref_coverage": 0.65
+  },
+  "C-TITAN": {
+    "order_style": {
+      "format_preference": ["PDF"],
+      "po_prefix": "PTD-",
+      "date_format": "DD.MM.YYYY",
+      "uses_own_codes": false,
+      "typical_lines": [2, 5],
+      "currency": "USD",
+      "language": "en"
+    },
+    "xref_coverage": 0.0
+  },
+  "C-GLOBAL": {
+    "order_style": {
+      "format_preference": ["EML", "PDF", "XLSX"],
+      "po_prefix": "QS-",
+      "date_format": "MMM DD, YYYY",
+      "uses_own_codes": true,
+      "code_prefix": "QSF-",
+      "typical_lines": [10, 25],
+      "currency": "USD",
+      "language": "en"
+    },
+    "xref_coverage": 0.55
+  }
+}

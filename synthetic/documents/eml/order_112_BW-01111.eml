@@ -1,0 +1,53 @@
+Content-Type: multipart/mixed; boundary="===============1230790862298318810=="
+MIME-Version: 1.0
+From: purchasing@delta.example
+To: orders@delta-industrial.example
+Subject: PO BW-01111 - Order from Delta Holdings (SYNTHETIC)
+Message-ID: <po-BW-01111@delta.example>
+Date: Thu, 15 Jan 2026 10:30:00 +0000
+
+--===============1230790862298318810==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+Hello,
+
+Please process the following order:
+
+PO Number: BW-01111
+Date: 04/20/2026
+Ship To: Delta Shipping Location 1
+
+Items:
+------
+  1. [PKG-BBW-173] Bubble Wrap 12in (SYNTHETIC)
+     Qty: 3 RO @ $27.14
+  2. [PKG-BBW-283] Bubble Wrap 12in (SYNTHETIC)
+     Qty: 12 RO @ $25.87
+  3. [TLS-UTB-293] Utility Blade Standard (SYNTHETIC)
+     Qty: 2 PK @ $6.76
+  4. [ABR-COW-4IN-2] Cut-Off Wheel 4in (SYNTHETIC)
+     Qty: 24 BX @ $50.25
+  5. [PPE-GLV-NIT-5-XL-BLU] Nitrile Gloves XL Blue 5mil PF (SYNTHETIC)
+     Qty: 10 CS @ $72.06
+  6. [JAN-PTR-1P-NAT] Paper Towel Roll 1P Natural (SYNTHETIC)
+     Qty: 10 CS @ $53.51
+  7. [JAN-DGR-217] Degreaser Industrial (SYNTHETIC)
+     Qty: 6 CS @ $61.81
+  8. [LUB-POS-168] Penetrating Oil Spray (SYNTHETIC)
+     Qty: 24 CS @ $57.41
+  9. [PPE-GLS-SMO-ANTI-FOG] Safety Glasses Smoke Anti-Fog (SYNTHETIC)
+     Qty: 12 EA @ $3.05
+  10. [ABR-COW-412IN-1] Cut-Off Wheel 4-1/2in (SYNTHETIC)
+     Qty: 10 BX @ $34.25
+  11. [ADH-EPX-099] Epoxy 2-Part Quick Set (SYNTHETIC)
+     Qty: 2 PK @ $27.05
+
+Delivery requested by: 2026-05-06
+
+Thank you,
+Delta Purchasing
+Delta Holdings (SYNTHETIC)
++1-555-9584
+--===============1230790862298318810==--

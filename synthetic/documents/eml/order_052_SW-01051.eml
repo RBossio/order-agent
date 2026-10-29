@@ -1,0 +1,47 @@
+Content-Type: multipart/mixed; boundary="===============6678085082511178294=="
+MIME-Version: 1.0
+From: purchasing@nova.example
+To: orders@delta-industrial.example
+Subject: PO SW-01051 - Order from Nova Company (SYNTHETIC)
+Message-ID: <po-SW-01051@nova.example>
+Date: Thu, 15 Jan 2026 10:30:00 +0000
+
+--===============6678085082511178294==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+Hello,
+
+Please process the following order:
+
+PO Number: SW-01051
+Date: 04-23-2026
+Ship To: Nova Shipping Location 1
+
+Items:
+------
+  1. [TLS-AWR-12IN] Adjustable Wrench 12in (SYNTHETIC)
+     Qty: 6 EA @ $32.70
+  2. [PPE-GLV-NIT-8-S-WHI] Nitrile Gloves S White 8mil PF (SYNTHETIC)
+     Qty: 24 CS @ $98.35
+  3. [JAN-FST-166] Floor Stripper Heavy Duty (SYNTHETIC)
+     Qty: 12 CS @ $64.02
+  4. [ABR-COW-6IN-5] Cut-Off Wheel 6in (SYNTHETIC)
+     Qty: 24 BX @ $39.84
+  5. [NOVA-ADH-6138] Super Glue Gel (SYNTHETIC)
+     Qty: 5 PK @ $17.49
+  6. [PKG-STW-100] Stretch Wrap 18in (SYNTHETIC)
+     Qty: 4 CS @ $98.48
+  7. [ADH-SGG-110] Super Glue Gel (SYNTHETIC)
+     Qty: 6 PK @ $21.82
+  8. [PPE-GLV-LAT-6-L-WHI] Latex Gloves L PF (SYNTHETIC)
+     Qty: 1 CS @ $87.29
+
+Delivery requested by: 2026-05-13
+
+Thank you,
+Nova Purchasing
+Nova Company (SYNTHETIC)
++1-555-9586
+--===============6678085082511178294==--

@@ -1,0 +1,35 @@
+Content-Type: multipart/mixed; boundary="===============5079378869890127883=="
+MIME-Version: 1.0
+From: purchasing@titan.example
+To: orders@delta-industrial.example
+Subject: PO PTD-01125 - Order from Titan Holdings (SYNTHETIC)
+Message-ID: <po-PTD-01125@titan.example>
+Date: Thu, 15 Jan 2026 10:30:00 +0000
+
+--===============5079378869890127883==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+Hello,
+
+Please process the following order:
+
+PO Number: PTD-01125
+Date: 19.05.2026
+Ship To: Titan Shipping Location 2
+
+Items:
+------
+  1. [FST-LWS-14-20-1] Lock Washer 1/4-20 Zinc (SYNTHETIC)
+     Qty: 1 BX @ $9.64
+  2. [PPE-N95-237] N95 Respirator (SYNTHETIC)
+     Qty: 24 BX @ $61.56
+
+Delivery requested by: 2026-05-26
+
+Thank you,
+Titan Purchasing
+Titan Holdings (SYNTHETIC)
++1-555-2079
+--===============5079378869890127883==--

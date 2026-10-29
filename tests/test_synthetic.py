@@ -114,7 +114,7 @@ class TestCatalog:
             cat = item.get("category", "UNKNOWN")
             categories[cat] = categories.get(cat, 0) + 1
 
-        expected_cats = ["FASTENERS", "PPE", "JANSAN_LINERS", "JANSAN_CHEMICALS"]
+        expected_cats = ["Fasteners", "Safety/PPE", "Janitorial"]
         for cat in expected_cats:
             assert cat in categories, f"Categoria {cat} non presente nel catalogo"
 
@@ -377,15 +377,187 @@ class TestReproducibility:
         assert SEED is not None
         assert isinstance(SEED, int)
 
-    def test_catalog_deterministic(self, catalog):
-        """Verifica che il catalogo sia deterministico."""
-        from synthetic.catalog import generate_catalog
+    def test_catalog_deterministic_with_datagen(self):
+        """Verifica che il catalogo da DatagenLoader sia deterministico."""
+        from synthetic.loaders import get_loader
 
-        catalog2 = generate_catalog()
+        loader1 = get_loader(prefer_datagen=True)
+        loader2 = get_loader(prefer_datagen=True)
 
-        assert len(catalog) == len(catalog2)
-        assert catalog[0]["sku"] == catalog2[0]["sku"]
-        assert catalog[-1]["sku"] == catalog2[-1]["sku"]
+        catalog1 = loader1.load_catalog()
+        catalog2 = loader2.load_catalog()
+
+        assert len(catalog1) == len(catalog2)
+        assert catalog1[0]["sku"] == catalog2[0]["sku"]
+        assert catalog1[-1]["sku"] == catalog2[-1]["sku"]
+        for i in range(len(catalog1)):
+            assert catalog1[i]["sku"] == catalog2[i]["sku"]
+            assert catalog1[i]["price"] == catalog2[i]["price"]
+
+    def test_generator_deterministic_two_runs(self):
+        """Verifica che due run del generatore producano ordini identici."""
+        import tempfile
+        from pathlib import Path
+
+        from synthetic.loaders import get_loader
+        from synthetic.orders import generate_orders
+
+        loader = get_loader(prefer_datagen=True)
+        catalog = loader.load_catalog()
+        customers = loader.load_customers(catalog)
+
+        with tempfile.TemporaryDirectory() as tmpdir1, tempfile.TemporaryDirectory() as tmpdir2:
+            output1 = Path(tmpdir1)
+            output2 = Path(tmpdir2)
+
+            gts1, _ = generate_orders(catalog, customers, output1, num_orders=10)
+            gts2, _ = generate_orders(catalog, customers, output2, num_orders=10)
+
+            assert len(gts1) == len(gts2)
+            for g1, g2 in zip(gts1, gts2, strict=False):
+                assert g1["order_id"] == g2["order_id"], "Order ID deve essere identico"
+                assert g1["header"]["po_number"] == g2["header"]["po_number"]
+                assert len(g1["lines"]) == len(g2["lines"])
+                for l1, l2 in zip(g1["lines"], g2["lines"], strict=False):
+                    assert l1["description"] == l2["description"]
+                    assert l1["quantity"] == l2["quantity"]
+
+
+class TestDatagenIntegration:
+    """Test per l'integrazione con datagen/master/."""
+
+    def test_catalog_has_300_items(self):
+        """Verifica che il catalogo abbia esattamente 300 articoli."""
+        from synthetic.loaders import get_loader
+
+        loader = get_loader(prefer_datagen=True)
+        catalog = loader.load_catalog()
+
+        assert len(catalog) == 300, f"Catalogo deve avere 300 articoli, trovati {len(catalog)}"
+
+    def test_customers_has_10_entries(self):
+        """Verifica che ci siano esattamente 10 clienti."""
+        from synthetic.loaders import get_loader
+
+        loader = get_loader(prefer_datagen=True)
+        catalog = loader.load_catalog()
+        customers = loader.load_customers(catalog)
+
+        assert len(customers) == 10, f"Devono esserci 10 clienti, trovati {len(customers)}"
+
+    def test_all_xref_skus_exist_in_catalog(self):
+        """Verifica che ogni SKU negli xref esista nel catalogo."""
+        from synthetic.loaders import get_loader
+
+        loader = get_loader(prefer_datagen=True)
+        catalog = loader.load_catalog()
+        customers = loader.load_customers(catalog)
+
+        catalog_skus = {item["sku"] for item in catalog}
+
+        missing_skus = []
+        for customer in customers:
+            for xref in customer.get("xref", []):
+                if xref["sku"] not in catalog_skus:
+                    missing_skus.append(f"{customer['customer_id']}: {xref['sku']}")
+
+        assert not missing_skus, (
+            f"Trovati {len(missing_skus)} SKU negli xref non presenti nel catalogo:\n"
+            + "\n".join(missing_skus[:10])
+        )
+
+    def test_pack_conversion_coherence(self):
+        """Verifica che i prodotti con conversioni abbiano il from_uom corretto."""
+        import json
+        from pathlib import Path
+
+        datagen_path = Path(__file__).parent.parent / "datagen" / "master"
+        if not datagen_path.exists():
+            pytest.skip("datagen/master non disponibile")
+
+        with open(datagen_path / "products.json") as f:
+            products = json.load(f)
+
+        for prod in products:
+            conversions = prod.get("conversions", [])
+            for conv in conversions:
+                assert "from_uom" in conv, (
+                    f"{prod['default_code']}: conversione senza from_uom"
+                )
+                assert "to_uom" in conv, (
+                    f"{prod['default_code']}: conversione senza to_uom"
+                )
+                assert "factor" in conv and conv["factor"] > 0, (
+                    f"{prod['default_code']}: conversione con factor invalido"
+                )
+
+    def test_customer_xref_unique_codes(self):
+        """Verifica che ogni cliente non abbia codici articolo duplicati."""
+        from synthetic.loaders import get_loader
+
+        loader = get_loader(prefer_datagen=True)
+        catalog = loader.load_catalog()
+        customers = loader.load_customers(catalog)
+
+        duplicates = []
+        for customer in customers:
+            seen_codes = set()
+            for xref in customer.get("xref", []):
+                code = xref["customer_code"]
+                if code in seen_codes:
+                    duplicates.append(f"{customer['customer_id']}: {code}")
+                seen_codes.add(code)
+
+        assert not duplicates, (
+            f"Trovati {len(duplicates)} codici cliente duplicati:\n"
+            + "\n".join(duplicates[:10])
+        )
+
+    def test_catalog_fields_mapping(self):
+        """Verifica la mappatura corretta dei campi prodotto."""
+        from synthetic.loaders import get_loader
+
+        loader = get_loader(prefer_datagen=True)
+        catalog = loader.load_catalog()
+
+        required_fields = ["sku", "description", "uom", "price", "erp_product_id", "category"]
+
+        for item in catalog:
+            for field in required_fields:
+                assert field in item, f"Campo '{field}' mancante in {item.get('sku', 'unknown')}"
+            assert item["sku"], "SKU non può essere vuoto"
+            assert item["price"] > 0, f"Prezzo non valido per {item['sku']}"
+
+    def test_customer_fields_mapping(self):
+        """Verifica la mappatura corretta dei campi cliente."""
+        from synthetic.loaders import get_loader
+
+        loader = get_loader(prefer_datagen=True)
+        catalog = loader.load_catalog()
+        customers = loader.load_customers(catalog)
+
+        required_fields = [
+            "customer_id", "name", "erp_partner_id", "erp_partner_ref",
+            "email_domain", "contact", "address", "ship_to", "order_style"
+        ]
+
+        for customer in customers:
+            for field in required_fields:
+                assert field in customer, (
+                    f"Campo '{field}' mancante in cliente {customer.get('customer_id', 'unknown')}"
+                )
+
+            assert customer["customer_id"].startswith("C-"), (
+                f"customer_id deve iniziare con 'C-': {customer['customer_id']}"
+            )
+
+            assert len(customer["ship_to"]) >= 1, (
+                f"Cliente {customer['customer_id']} senza indirizzi di spedizione"
+            )
+            for ship in customer["ship_to"]:
+                assert ship["code"].startswith("SHIP-"), (
+                    f"Codice ship_to deve iniziare con 'SHIP-': {ship['code']}"
+                )
 
 
 if __name__ == "__main__":

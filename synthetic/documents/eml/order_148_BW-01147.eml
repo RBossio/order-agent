@@ -1,0 +1,49 @@
+Content-Type: multipart/mixed; boundary="===============6798258270998906750=="
+MIME-Version: 1.0
+From: purchasing@delta.example
+To: orders@delta-industrial.example
+Subject: PO BW-01147 - Order from Delta Holdings (SYNTHETIC)
+Message-ID: <po-BW-01147@delta.example>
+Date: Thu, 15 Jan 2026 10:30:00 +0000
+
+--===============6798258270998906750==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+Hello,
+
+Please process the following order:
+
+PO Number: BW-01147
+Date: 03/10/2026
+Ship To: Delta Shipping Location 1
+
+Items:
+------
+  1. [TLS-UTB-055] Utility Blade Standard (SYNTHETIC)
+     Qty: 12 PK @ $5.26
+  2. [ABR-COW-4IN-1] Cut-Off Wheel 4in (SYNTHETIC)
+     Qty: 2 BX @ $57.68
+  3. [LUB-POS-227] Penetrating Oil Spray (SYNTHETIC)
+     Qty: 24 CS @ $94.71
+  4. [ELE-TPE-WHI-1] Electrical Tape White 3/4in (SYNTHETIC)
+     Qty: 2 RO @ $1.88
+  5. [JAN-PTR-1P-WHI] Paper Towel Roll 1P White (SYNTHETIC)
+     Qty: 3 CS @ $62.73
+  6. [PKG-BBW-173] Bubble Wrap 12in (SYNTHETIC)
+     Qty: 1 RO @ $27.14
+  7. [PKG-BBW-147] Bubble Wrap 12in (SYNTHETIC)
+     Qty: 5 RO @ $41.67
+  8. [ADH-SGG-132] Super Glue Gel (SYNTHETIC)
+     Qty: 10 PK @ $17.49
+  9. [JAN-GCL-180] Glass Cleaner RTU (SYNTHETIC)
+     Qty: 24 CS @ $27.76
+
+Delivery requested by: 2026-03-24
+
+Thank you,
+Delta Purchasing
+Delta Holdings (SYNTHETIC)
++1-555-9584
+--===============6798258270998906750==--
