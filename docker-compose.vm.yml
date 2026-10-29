@@ -14,11 +14,12 @@ services:
   odoo:
     network_mode: host
     ports: []
+    environment:
+      HOST: localhost
     command: >
       --database=${POSTGRES_DB:-vo_demo}
       --db_host=localhost
       --db_user=${POSTGRES_USER:-odoo}
       --db_password=${POSTGRES_PASSWORD}
-      --admin_passwd=${ODOO_ADMIN_PASSWORD}
       --no-database-list
       --without-demo=all

@@ -46,7 +46,6 @@ services:
       --db_host=db
       --db_user=${POSTGRES_USER:-odoo}
       --db_password=${POSTGRES_PASSWORD}
-      --admin_passwd=${ODOO_ADMIN_PASSWORD:?ODOO_ADMIN_PASSWORD is required}
       --no-database-list
       --without-demo=all
 
