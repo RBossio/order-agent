@@ -23,12 +23,19 @@ if [[ -z "$ODOO_ADMIN_PASSWORD" ]]; then
     exit 1
 fi
 
-# Genera il file di configurazione usando envsubst
-export DB_HOST="${DB_HOST:-db}"
-export DB_PORT="${DB_PORT:-5432}"
-export POSTGRES_USER="${POSTGRES_USER:-odoo}"
-export POSTGRES_DB="${POSTGRES_DB:-vo_demo}"
+# Valori di default
+DB_HOST="${DB_HOST:-db}"
+DB_PORT="${DB_PORT:-5432}"
+POSTGRES_USER="${POSTGRES_USER:-odoo}"
+POSTGRES_DB="${POSTGRES_DB:-vo_demo}"
 
-envsubst < "$TEMPLATE" > "$OUTPUT"
+# Genera il file di configurazione usando sed
+sed -e "s|\${DB_HOST:-db}|$DB_HOST|g" \
+    -e "s|\${DB_PORT:-5432}|$DB_PORT|g" \
+    -e "s|\${POSTGRES_USER:-odoo}|$POSTGRES_USER|g" \
+    -e "s|\${POSTGRES_PASSWORD}|$POSTGRES_PASSWORD|g" \
+    -e "s|\${POSTGRES_DB:-vo_demo}|$POSTGRES_DB|g" \
+    -e "s|\${ODOO_ADMIN_PASSWORD}|$ODOO_ADMIN_PASSWORD|g" \
+    "$TEMPLATE" > "$OUTPUT"
 
 echo "Generato: $OUTPUT"
