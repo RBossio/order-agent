@@ -678,11 +678,8 @@ def generate_orders(
     random.shuffle(hard_case_assignments)
     hard_case_assignments = hard_case_assignments[:num_hard]
     
-    order_configs = []
-    for _ in range(num_normal):
-        order_configs.append([])
-    for hc in hard_case_assignments:
-        order_configs.append(hc)
+    order_configs: list[list[str]] = [[] for _ in range(num_normal)]
+    order_configs.extend(hard_case_assignments)
     random.shuffle(order_configs)
     
     pdf_dir = output_dir / "documents" / "pdf"

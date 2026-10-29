@@ -35,15 +35,15 @@ class TestMockBackend:
         prompt = """
         PO Number: TEST-001
         Date: 2026-01-15
-        
+
         Item | Description | Qty | UOM
         ABC-123 | Test Product | 10 | EA
         """
         response = backend.generate(prompt)
-        
+
         assert isinstance(response, LLMResponse)
         assert response.content
-        
+
         data = json.loads(response.content)
         assert "header" in data or "lines" in data
 
@@ -52,7 +52,7 @@ class TestMockBackend:
         backend = MockBackend()
         prompt = "Purchase Order: PO-2026-001\nDate: 01/15/2026"
         response = backend.generate(prompt)
-        
+
         data = json.loads(response.content)
         po_number = data.get("header", {}).get("po_number", "")
         assert "PO" in po_number or "2026" in po_number
@@ -61,13 +61,13 @@ class TestMockBackend:
         """Traccia il numero di chiamate."""
         backend = MockBackend()
         assert backend.call_count == 0
-        
+
         backend.generate("test")
         assert backend.call_count == 1
-        
+
         backend.generate("test2")
         assert backend.call_count == 2
-        
+
         backend.reset_call_count()
         assert backend.call_count == 0
 
@@ -79,7 +79,7 @@ class TestPreprocessor:
         """Gestisce input vuoto."""
         preprocessor = Preprocessor()
         result = preprocessor.preprocess({"parts": []})
-        
+
         assert isinstance(result, PreprocessedData)
         assert result.lines == []
 
@@ -95,9 +95,9 @@ class TestPreprocessor:
             },
             "parts": [],
         }
-        
+
         result = preprocessor.preprocess(normalized)
-        
+
         assert result.header is not None
         assert result.header.po_number == "ABC-123"
         assert result.header.buyer_name == "Test Customer Inc."
@@ -119,9 +119,9 @@ class TestPreprocessor:
                 }],
             }],
         }
-        
+
         result = preprocessor.preprocess(normalized)
-        
+
         assert len(result.lines) == 2
         assert result.lines[0].seller_item_code == "SKU-001"
         assert result.lines[0].description == "Test Product"
@@ -145,9 +145,9 @@ class TestPreprocessor:
                 }],
             }],
         }
-        
+
         result = preprocessor.preprocess(normalized)
-        
+
         assert len(result.lines) == 1
 
 
@@ -158,7 +158,7 @@ class TestOrderExtractor:
         """Estrazione base con backend mock."""
         backend = MockBackend()
         extractor = OrderExtractor(backend=backend, validate_output=False)
-        
+
         normalized = {
             "input_id": "test-123",
             "source": {
@@ -182,9 +182,9 @@ class TestOrderExtractor:
                 }],
             }],
         }
-        
+
         result = extractor.extract(normalized)
-        
+
         assert isinstance(result, ExtractionResult)
         assert isinstance(result.order, ExtractedOrder)
         assert result.llm_calls >= 1
@@ -194,7 +194,7 @@ class TestOrderExtractor:
         """Preserva informazioni sorgente."""
         backend = MockBackend()
         extractor = OrderExtractor(backend=backend, validate_output=False)
-        
+
         normalized = {
             "input_id": "test-456",
             "source": {
@@ -215,9 +215,9 @@ class TestOrderExtractor:
                 "text": "Purchase Order\nPO: REQ-2026-001\nDate: 01/15/2026",
             }],
         }
-        
+
         result = extractor.extract(normalized)
-        
+
         assert result.order.source_message_id == "<msg-123@test.example>"
         assert result.order.source_from_address == "buyer@customer.example"
 
@@ -225,7 +225,7 @@ class TestOrderExtractor:
         """Genera avvisi per campi mancanti o estrazione incompleta."""
         backend = MockBackend()
         extractor = OrderExtractor(backend=backend, validate_output=False)
-        
+
         normalized = {
             "input_id": "test-789",
             "source": {
@@ -241,9 +241,9 @@ class TestOrderExtractor:
                 "text": "Some random text without order data",
             }],
         }
-        
+
         result = extractor.extract(normalized)
-        
+
         assert isinstance(result, ExtractionResult)
         assert result.order is not None
 
@@ -252,14 +252,14 @@ class TestOrderExtractor:
         class BadJsonBackend(LLMBackend):
             def __init__(self):
                 self._calls = 0
-            
+
             @property
             def model_name(self):
                 return "test/bad-json"
-            
+
             def is_available(self):
                 return True
-            
+
             def generate(self, prompt, **kwargs):
                 self._calls += 1
                 if self._calls == 1:
@@ -271,19 +271,19 @@ class TestOrderExtractor:
                     content='{"header": {"po_number": "TEST", "po_date": "2026-01-01"}, "lines": []}',
                     model=self.model_name,
                 )
-        
+
         backend = BadJsonBackend()
         extractor = OrderExtractor(backend=backend, max_retries=1, validate_output=False)
-        
+
         normalized = {
             "input_id": "test",
             "source": {"filename": "test.txt", "sha256": "0" * 64, "file_type": "CSV"},
             "ingested_at": "2026-01-01T00:00:00Z",
             "parts": [{"part_id": "p1", "part_type": "CSV_DATA", "sha256": "1" * 64, "text": "test"}],
         }
-        
+
         result = extractor.extract(normalized)
-        
+
         assert result.llm_calls == 2
 
 
@@ -300,9 +300,9 @@ class TestExtractedModels:
             seller_item_code="SKU-001",
             unit_price=25.50,
         )
-        
+
         d = line.to_dict()
-        
+
         assert d["line_no"] == 1
         assert d["description"] == "Test Product"
         assert d["quantity"] == 10.0
@@ -313,7 +313,7 @@ class TestExtractedModels:
     def test_extraction_result_to_dict(self):
         """Serializzazione risultato completo."""
         from extract.models import ExtractedHeader, ExtractionWarning, FieldConfidence
-        
+
         order = ExtractedOrder()
         order.header = ExtractedHeader(
             po_number="TEST-001",
@@ -328,7 +328,7 @@ class TestExtractedModels:
                 uom_raw="EA",
             ),
         ]
-        
+
         result = ExtractionResult(
             order=order,
             field_confidences=[
@@ -342,9 +342,9 @@ class TestExtractedModels:
                 ),
             ],
         )
-        
+
         d = result.to_dict()
-        
+
         assert d["schema_version"] == "1.0"
         assert d["header"]["po_number"] == "TEST-001"
         assert len(d["lines"]) == 1
@@ -384,20 +384,20 @@ class TestIntegrationWithIngest:
                 "text": "Purchase Order\nPO#: INT-TEST-001\nDate: January 15, 2026\nCustomer: Integration Test Corp.",
             }],
         }
-        
+
         file_path = tmp_path / "normalized_input.json"
         with open(file_path, "w") as f:
             json.dump(normalized, f)
-        
+
         return file_path
 
     def test_extract_from_file(self, sample_normalized_path):
         """Estrae da file JSON."""
         backend = MockBackend()
         extractor = OrderExtractor(backend=backend, validate_output=False)
-        
+
         result = extractor.extract_from_file(sample_normalized_path)
-        
+
         assert isinstance(result, ExtractionResult)
         assert result.order.header is not None
         assert len(result.order.lines) >= 1
@@ -406,18 +406,18 @@ class TestIntegrationWithIngest:
         """Pipeline completa con pre-elaborazione."""
         with open(sample_normalized_path) as f:
             normalized = json.load(f)
-        
+
         preprocessor = Preprocessor()
         preprocessed = preprocessor.preprocess(normalized)
-        
+
         assert len(preprocessed.lines) == 2
         assert preprocessed.lines[0].seller_item_code == "JAN-LNR-3340"
         assert preprocessed.lines[0].quantity == 10
-        
+
         backend = MockBackend()
         extractor = OrderExtractor(backend=backend, validate_output=False)
         result = extractor.extract(normalized)
-        
+
         assert len(result.order.lines) >= 1
 
 
@@ -427,7 +427,7 @@ class TestEvaluation:
     def test_compare_values_numbers(self):
         """Confronto numerico con tolleranza."""
         from extract.eval import compare_values
-        
+
         assert compare_values(10.0, 10) is True
         assert compare_values(10.01, 10.0) is True
         assert compare_values(11.0, 10.0) is False
@@ -437,7 +437,7 @@ class TestEvaluation:
     def test_compare_values_strings(self):
         """Confronto stringhe con fuzzy matching."""
         from extract.eval import compare_values
-        
+
         assert compare_values("ABC-123", "ABC-123") is True
         assert compare_values("abc-123", "ABC-123", fuzzy=True) is True
         assert compare_values("ABC123", "ABC-123", fuzzy=True) is True
@@ -445,7 +445,7 @@ class TestEvaluation:
     def test_evaluate_order_basic(self):
         """Valutazione base ordine."""
         from extract.eval import evaluate_order
-        
+
         extracted = {
             "header": {
                 "po_number": "TEST-001",
@@ -456,7 +456,7 @@ class TestEvaluation:
                 {"line_no": 1, "seller_item_code": "SKU-001", "description": "Product A", "quantity": 10, "uom_raw": "EA"},
             ],
         }
-        
+
         ground_truth = {
             "order_id": "gt-001",
             "header": {
@@ -469,9 +469,9 @@ class TestEvaluation:
             ],
             "_synthetic_metadata": {"is_hard_case": False},
         }
-        
+
         score = evaluate_order(extracted, ground_truth)
-        
+
         assert score.header_accuracy() > 0.9
         assert score.lines_matched == 1
         assert score.lines_expected == 1

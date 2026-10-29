@@ -13,7 +13,7 @@ from .base import LLMBackend, LLMResponse
 class MockBackend(LLMBackend):
     """
     Backend deterministico per test (nessuna GPU richiesta).
-    
+
     Estrae informazioni dal prompt usando regex e pattern matching.
     Utile per test CI dove non è disponibile un LLM reale.
     """
@@ -39,15 +39,15 @@ class MockBackend(LLMBackend):
     ) -> LLMResponse:
         """
         Genera una risposta deterministica basata sul prompt.
-        
+
         Estrae informazioni usando pattern matching e heuristics.
         """
         self._call_count += 1
-        
+
         content = self._extract_from_prompt(prompt)
-        
+
         prompt_hash = hashlib.md5(prompt.encode()).hexdigest()[:8]
-        
+
         return LLMResponse(
             content=content,
             model=self.model_name,
@@ -64,7 +64,7 @@ class MockBackend(LLMBackend):
             "buyer": {},
             "lines": [],
         }
-        
+
         po_match = re.search(
             r'(?:PO|P\.O\.|Purchase Order|Order)[\s#:]*([A-Z0-9]+-?[A-Z0-9]+)',
             prompt,
@@ -72,7 +72,7 @@ class MockBackend(LLMBackend):
         )
         if po_match:
             result["header"]["po_number"] = po_match.group(1)
-        
+
         date_patterns = [
             r'(\d{1,2}[-/]\d{1,2}[-/]\d{2,4})',
             r'(\d{4}[-/]\d{1,2}[-/]\d{1,2})',
@@ -83,13 +83,13 @@ class MockBackend(LLMBackend):
             if date_match:
                 result["header"]["po_date"] = date_match.group(1)
                 break
-        
+
         if "po_date" not in result["header"]:
             result["header"]["po_date"] = "2026-01-01"
-        
+
         currency_match = re.search(r'\b(USD|EUR|GBP|CAD)\b', prompt)
         result["header"]["currency"] = currency_match.group(1) if currency_match else "USD"
-        
+
         buyer_patterns = [
             r'(?:From|Buyer|Customer|Company)[:\s]+([A-Za-z0-9\s&.,]+?)(?:\n|$)',
             r'([A-Za-z]+(?:\s+[A-Za-z]+)*\s+(?:Inc\.|LLC|Corp\.|Ltd\.))',
@@ -99,17 +99,17 @@ class MockBackend(LLMBackend):
             if buyer_match:
                 result["buyer"]["name"] = buyer_match.group(1).strip()
                 break
-        
+
         lines = self._extract_lines_from_prompt(prompt)
         result["lines"] = lines
-        
+
         return json.dumps(result, ensure_ascii=False)
 
     def _extract_lines_from_prompt(self, prompt: str) -> list[dict]:
         """Estrae righe ordine dal prompt."""
         lines = []
         line_no = 1
-        
+
         line_pattern = re.compile(
             r'(\d+)\s*[|\t]+\s*'
             r'([A-Z0-9]+-?[A-Z0-9-]*)\s*[|\t]+\s*'
@@ -118,7 +118,7 @@ class MockBackend(LLMBackend):
             r'([A-Z]{2,3})\s*[|\t]*'
             r'(?:\$?\s*(\d+(?:\.\d{2})?)\s*[|\t]*)?'
         )
-        
+
         for match in line_pattern.finditer(prompt):
             lines.append({
                 "line_no": int(match.group(1)) if match.group(1).isdigit() else line_no,
@@ -129,7 +129,7 @@ class MockBackend(LLMBackend):
                 "unit_price": float(match.group(6)) if match.group(6) else None,
             })
             line_no += 1
-        
+
         if not lines:
             simple_pattern = re.compile(
                 r'([A-Z]{2,4}-[A-Z0-9-]+)\s+'
@@ -146,7 +146,7 @@ class MockBackend(LLMBackend):
                     "uom_raw": match.group(4) or "EA",
                 })
                 line_no += 1
-        
+
         if not lines:
             lines.append({
                 "line_no": 1,
@@ -154,7 +154,7 @@ class MockBackend(LLMBackend):
                 "quantity": 1,
                 "uom_raw": "EA",
             })
-        
+
         return lines
 
     @property
