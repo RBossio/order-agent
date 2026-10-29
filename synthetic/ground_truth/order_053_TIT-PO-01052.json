@@ -1,0 +1,205 @@
+{
+  "schema_version": "1.0",
+  "order_id": "0d4f2f7a-7e65-454e-968e-e039f3df7802",
+  "tenant_id": "delta-industrial-supply",
+  "document_type": "ORIGINAL",
+  "status": "NEEDS_REVIEW",
+  "source": {
+    "channel": "FOLDER",
+    "message_id": null,
+    "from_address": null,
+    "subject": null,
+    "received_at": "2026-10-29T20:23:08Z",
+    "documents": [
+      {
+        "document_id": "doc-fbee03ba",
+        "kind": "XLSX",
+        "filename": "TIT-PO-01052.xlsx",
+        "mime_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        "sha256": "e07e0b9c32aa2de4d1ff380f5d2d98e4800cf9aa25ec02dc11342142af94b1e4",
+        "page_count": null
+      }
+    ]
+  },
+  "buyer": {
+    "name": "Titan Industrial Supply Co. (SYNTHETIC)",
+    "code_on_document": "C-TITAN",
+    "tax_id": "US55-1234567",
+    "gln": null,
+    "peppol_endpoint": null,
+    "address": {
+      "line1": "7800 Commerce Blvd",
+      "city": "Cleveland",
+      "region": "OH",
+      "postal_code": "44114",
+      "country": "US"
+    },
+    "contact": {
+      "name": "Robert Chen (fictitious)",
+      "email": "purchasing@titan-ind.example",
+      "phone": "+1-555-0300"
+    },
+    "resolved": {
+      "erp_partner_id": 48,
+      "erp_partner_ref": "C-TITAN",
+      "method": "CODE",
+      "score": 0.99
+    }
+  },
+  "seller": {
+    "name": "Delta Industrial Supply LLC (SYNTHETIC)",
+    "code_on_document": null,
+    "tax_id": null,
+    "address": {
+      "line1": "55 Commerce Dr",
+      "city": "Dayton",
+      "region": "OH",
+      "postal_code": "45402",
+      "country": "US"
+    },
+    "resolved": null
+  },
+  "header": {
+    "po_number": "TIT-PO-01052",
+    "po_revision": 0,
+    "po_date": "23-Feb-2026",
+    "requested_delivery_date": "2026-03-16",
+    "currency": "USD",
+    "buyer_reference": "Dept 350",
+    "payment_terms_text": "2% 10 Net 30",
+    "incoterms": null,
+    "ship_via": null,
+    "notes": "Confirm availability",
+    "language": "en"
+  },
+  "lines": [
+    {
+      "line_no": 1,
+      "buyer_item_code": "TIS-MIS-2194",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Batteries D Alkaline",
+      "quantity": 10,
+      "uom_raw": "PK",
+      "uom": "PK",
+      "pack": {
+        "raw": "12/PK",
+        "inner_count": 12,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 18.31,
+      "price_uom": "PK",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 183.1,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "ELEC-BATT-D",
+        "erp_product_id": 1284,
+        "erp_uom": "PK",
+        "erp_uom_id": 31,
+        "erp_quantity": 10,
+        "conversion_factor": 1,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 18.31
+      }
+    },
+    {
+      "line_no": 2,
+      "buyer_item_code": "TIS-JS-8389",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Centerfeed Paper Towels Brown",
+      "quantity": 5,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "6/600/CS",
+        "inner_count": 6,
+        "inner_size": 600,
+        "inner_uom": "EA"
+      },
+      "unit_price": 42.27,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 211.35,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "JAN-TWL-CF-BR",
+        "erp_product_id": 1179,
+        "erp_uom": "CS",
+        "erp_uom_id": 9,
+        "erp_quantity": 5,
+        "conversion_factor": 1,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 42.27
+      }
+    }
+  ],
+  "charges": [],
+  "totals": {
+    "lines_amount_declared": 394.45,
+    "tax_amount_declared": null,
+    "total_amount_declared": 394.45,
+    "lines_amount_computed": 394.45
+  },
+  "decision": {
+    "score": 0.75,
+    "route": "REVIEW",
+    "reasons": [
+      "HDR-01"
+    ]
+  },
+  "processing": {
+    "extractor": "synthetic/generator.py",
+    "prompt_version": null,
+    "created_at": "2026-10-29T20:23:08Z",
+    "updated_at": null
+  },
+  "ship_to": {
+    "name": "Titan East Branch",
+    "code_on_document": "EAST",
+    "address": {
+      "line1": "2200 Euclid Ave",
+      "city": "Cleveland",
+      "region": "OH",
+      "postal_code": "44115",
+      "country": "US"
+    },
+    "resolved": {
+      "erp_partner_id": 49,
+      "erp_partner_ref": "EAST",
+      "method": "CODE",
+      "score": 1.0
+    }
+  },
+  "validation": {
+    "issues": [
+      {
+        "code": "HDR-01",
+        "severity": "BLOCK",
+        "path": "/header/po_number",
+        "message": "Manca il numero d'ordine (PO number)"
+      }
+    ]
+  },
+  "_synthetic_metadata": {
+    "hard_case_types": [
+      "MISSING_PO_NUMBER",
+      "DATE_FORMAT"
+    ],
+    "is_hard_case": true
+  }
+}

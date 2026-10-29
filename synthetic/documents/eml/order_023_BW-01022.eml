@@ -1,0 +1,57 @@
+Content-Type: multipart/mixed; boundary="===============0771116116472143421=="
+MIME-Version: 1.0
+From: orders@brightway-jan.example
+To: orders@delta-industrial.example
+Subject: PO BW-01022 - Order from Brightway Janitorial Services (SYNTHETIC)
+Message-ID: <po-BW-01022@brightway-jan.example>
+Date: Thu, 29 Oct 2026 20:23:08 +0000
+
+--===============0771116116472143421==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+Hello,
+
+Please process the following order:
+
+PO Number: BW-01022
+Date: 06/12/2026
+Ship To: Detroit Warehouse
+
+Items:
+------
+  1. [TAP-STRP-TP] Strapping Tape 3/4 inch x 60 yd
+     Qty: 4 CS @ $85.65
+  2. [ABR-CUT-WHL-4-180] Cut-off Wheel 4.5x.045x7/8 180 grit
+     Qty: 1 BX @ $20.80
+  3. [JAN-LNR-4347-07-BL] Can Liner 43x47 0.7mil Black 200/CS
+     Qty: 12 CS @ $34.55
+  4. [FST-FW-3816-ZN-B100] Flat Washer 3/8-16 Zinc
+     Qty: 24 BX @ $22.22
+  5. [JAN-LNR-4046-10-BL] Can Liner 40x46 1.0mil Black 500/CS
+     Qty: 1 CS @ $28.20
+  6. [FST-FHCS-51618-112-SS-B100] Flat Head Cap Screw 5/16-18 x 1-1/2" Stainless 18-8
+     Qty: 5 BX @ $14.75
+  7. [FST-HCS-51618-112-SS-B25] Hex Cap Screw 5/16-18 x 1-1/2" Stainless 18-8
+     Qty: 3 BX @ $35.14
+  8. [ABR-SAND-DSC-5-40] Sanding Disc 5 inch hook & loop 40 grit
+     Qty: 1 PK @ $16.21
+  9. [JAN-LNR-2424-05-BL] Can Liner 24x24 0.5mil Black 100/CS
+     Qty: 1 CS @ $51.36
+  10. [ABR-CUT-WHL-4-220] Cut-off Wheel 4.5x.045x7/8 220 grit
+     Qty: 1 BX @ $37.98
+  11. [FST-SHCS-1213-112-SS-B25] Socket Head Cap Screw 1/2-13 x 1-1/2" Alloy Steel Black Oxide
+     Qty: 5 BX @ $22.01
+  12. [FST-CS-1420-ZN-B25] Carriage Bolt 1/4-20 Grade 5 Zinc
+     Qty: 6 BX @ $21.44
+  13. [JAN-TWL-RL-BR] Roll Paper Towels Brown 1-ply
+     Qty: 3 CS @ $31.27
+
+Delivery requested by: 2026-07-02
+
+Thank you,
+Maria Santos (fictitious)
+Brightway Janitorial Services (SYNTHETIC)
++1-555-0200
+--===============0771116116472143421==--

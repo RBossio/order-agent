@@ -1,0 +1,69 @@
+Content-Type: multipart/mixed; boundary="===============8548988359598190780=="
+MIME-Version: 1.0
+From: orders@quickserv-fm.example
+To: orders@delta-industrial.example
+Subject: PO QS-01026 - Order from QuickServ Facilities Management (SYNTHETIC)
+Message-ID: <po-QS-01026@quickserv-fm.example>
+Date: Thu, 29 Oct 2026 20:23:08 +0000
+
+--===============8548988359598190780==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+Hello,
+
+Please process the following order:
+
+PO Number: QS-01026
+Date: Feb 06, 2026
+Ship To: Dayton Supply Depot
+
+Items:
+------
+  1. [FST-HCS-3816-1-G8-B25] Hex Cap Screw 3/8-16 x 1" Grade 8 Yellow Zinc
+     Qty: 12 BX @ $36.20
+  2. [QSF-JS-4409] Odor Control concentrate 4/1 GAL
+     Qty: 6 CS @ $46.71
+  3. [QSF-MIS-4281] Batteries AA Alkaline
+     Qty: 12 PK @ $14.26
+  4. [QSF-LUB-1920] Anti-Seize Compound 8 oz
+     Qty: 24 CS @ $69.32
+  5. [JAN-HND-SAN] Hand Sanitizer Gel bulk 4/1 GAL
+     Qty: 24 CS @ $48.98
+  6. [QSF-HW-6526] Hex Cap Screw 1/2-13 x 1" Grade 8 Yellow Zinc
+     Qty: 12 BX @ $18.64
+  7. [ELEC-FLSH-2D] Flashlight 2D LED
+     Qty: 6 EA @ $12.16
+  8. [LUB-SIL-SPR] Silicone Spray 11 oz aerosol
+     Qty: 4 CS @ $51.29
+  9. [PPE-GLV-NIT5-L-BLU] Nitrile Exam Gloves 5 mil powder-free Blue size L
+     Qty: 24 CS @ $114.51
+  10. [QSF-JS-6208] Degreaser Heavy Duty concentrate 4/1 GAL
+     Qty: 12 CS @ $51.78
+  11. [JAN-TWL-HRT-BR] Hardwound Roll Towels Brown 8x800
+     Qty: 24 CS @ $53.13
+  12. [JAN-LNR-4347-07-BL] Can Liner 43x47 0.7mil Black 200/CS
+     Qty: 4 CS @ $34.55
+  13. [JAN-LNR-4046-07-BL] Can Liner 40x46 0.7mil Black 500/CS
+     Qty: 5 CS @ $44.07
+  14. [TOOL-LVL-48] Level 48 inch
+     Qty: 10 EA @ $39.52
+  15. [PPE-FSH-CLR] Face Shield clear 8x15.5 inch
+     Qty: 1 EA @ $4.50
+  16. [QSF-PPE-9389] Nitrile Work Gloves industrial Orange size M
+     Qty: 1 DZN @ $26.26
+  17. [ABR-SAND-DSC-5-220] Sanding Disc 5 inch hook & loop 220 grit
+     Qty: 3 PK @ $22.17
+  18. [JAN-TWL-RL] Roll Paper Towels White 2-ply
+     Qty: 5 CS @ $36.19
+  19. [JAN-AIR-FRSH] Air Freshener aerosol 12/10 OZ
+     Qty: 10 CS @ $37.75
+
+Delivery requested by: 2026-02-25
+
+Thank you,
+Amanda Miller (fictitious)
+QuickServ Facilities Management (SYNTHETIC)
++1-555-1000
+--===============8548988359598190780==--

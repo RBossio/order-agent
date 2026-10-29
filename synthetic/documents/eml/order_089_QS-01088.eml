@@ -1,0 +1,67 @@
+Content-Type: multipart/mixed; boundary="===============1028427071978452659=="
+MIME-Version: 1.0
+From: orders@quickserv-fm.example
+To: orders@delta-industrial.example
+Subject: PO QS-01088 - Order from QuickServ Facilities Management (SYNTHETIC)
+Message-ID: <po-QS-01088@quickserv-fm.example>
+Date: Thu, 29 Oct 2026 20:23:08 +0000
+
+--===============1028427071978452659==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+Hello,
+
+Please process the following order:
+
+PO Number: QS-01088
+Date: Jan 31, 2026
+Ship To: Dayton Supply Depot
+
+Items:
+------
+  1. [QSF-PPE-8670] N95 Respirator with valve NIOSH approved
+     Qty: 5 BX @ $32.00
+  2. [FST-HCS-51618-112-SS-B25] Hex Screw 5/16-18 x 1-1/2" Stainless 18-8
+     Qty: 6 BX @ $35.14
+  3. [FST-LN-1420-ZN-B100] Lock Nut 1/4-20 Nylon Insert Zinc
+     Qty: 1 BX @ $22.52
+  4. [JAN-TWL-RL] Roll Paper Towels White 2-ply
+     Qty: 12 CS @ $36.19
+  5. [FST-FHCS-3816-1-SS-B100] Flat Head Cap Screw 3/8-16 x 1" Stainless 18-8
+     Qty: 5 BX @ $17.44
+  6. [ELEC-BATT-9V] Batteries 9V Alkaline
+     Qty: 10 PK @ $22.55
+  7. [QSF-PPE-4245] Ear Plugs foam disposable NRR 32
+     Qty: 12 BX @ $18.75
+  8. [QSF-LUB-8280] Thread Sealant PTFE 8 oz
+     Qty: 4 CS @ $47.62
+  9. [FST-FHCS-1213-1-SS-B100] Flat Head Cap Screw 1/2-13 x 1" Stainless 18-8
+     Qty: 1 BX @ $33.62
+  10. [JAN-LNR-2424-07-CL] Can Liner 24x24 0.7mil Clear 200/CS
+     Qty: 12 CS @ $41.94
+  11. [QSF-HW-8149] Hex Cap Screw 5/16-18 x 1" Grade 8 Yellow Zinc
+     Qty: 2 BX @ $16.55
+  12. [QSF-PPE-8010] Safety equipment item 1103
+     Qty: 2 EA @ $26.84
+  13. [FST-FW-M81.25-ZN-B25] Flat Washer M8-1.25 Zinc
+     Qty: 2 BX @ $8.06
+  14. [QSF-JS-9344] Toilet Paper 2-ply standard roll
+     Qty: 24 CS @ $63.07
+  15. [QSF-JS-7121] Carpet Cleaner concentrate 4/1 GAL
+     Qty: 10 CS @ $58.12
+  16. [JAN-LNR-3340-10-CL] Can Liner 33x40 1.0mil Clear 250/CS
+     Qty: 24 CS @ $31.19
+  17. [QSF-MIS-7234] Caution Wet Floor Sign bilingual
+     Qty: 1 EA @ $27.14
+  18. [FST-HCS-3816-1-G5Z-B100] Hex Cap Screw 3/8-16 x 1" Grade 5 Zinc
+     Qty: 1 BX @ $11.67
+
+Delivery requested by: 2026-02-15
+
+Thank you,
+Amanda Miller (fictitious)
+QuickServ Facilities Management (SYNTHETIC)
++1-555-1000
+--===============1028427071978452659==--

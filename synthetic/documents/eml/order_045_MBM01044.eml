@@ -1,0 +1,59 @@
+Content-Type: multipart/mixed; boundary="===============8702307952301070029=="
+MIME-Version: 1.0
+From: po@mbm-services.example
+To: orders@delta-industrial.example
+Subject: PO MBM01044 - Order from Midwest Building Maintenance (SYNTHETIC)
+Message-ID: <po-MBM01044@mbm-services.example>
+Date: Thu, 29 Oct 2026 20:23:08 +0000
+
+--===============8702307952301070029==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+Hello,
+
+Please process the following order:
+
+PO Number: MBM01044
+Date: 2/26/26
+Ship To: Columbus Warehouse
+
+Items:
+------
+  1. [MB-HW-2107] Carriage Bolt 1/4-20 Grade 5 Zinc
+     Qty: 12 BX @ $21.44
+  2. [TOOL-LVL-24] Level 24 inch magnetic
+     Qty: 12 EA @ $21.94
+  3. [JAN-CRPT-CLN] Carpet Cleaner concentrate 4/1 GAL
+     Qty: 5 CS @ $58.12
+  4. [MB-HW-2199] Hex Cap Screw 5/16-18 x 1-1/2" Grade 8 Yellow Zinc
+     Qty: 12 BX @ $18.65
+  5. [MB-HW-4282] Hex Cap Screw 1/4-20 x 1" Grade 5 Zinc
+     Qty: 4 BX @ $12.56
+  6. [MB-MIS-8920] Parts Bin Large 8x15x7
+     Qty: 6 PK @ $31.73
+  7. [MB-MIS-9505] Tape Measure 25 ft
+     Qty: 10 EA @ $8.45
+  8. [FAID-KIT-50] First Aid Kit 50 person
+     Qty: 1 EA @ $71.29
+  9. [LUB-LOCK-LUBE] Lock Lubricant 3 oz
+     Qty: 24 CS @ $37.59
+  10. [MB-MIS-6962] Batteries AAA Alkaline
+     Qty: 2 PK @ $14.96
+  11. [JAN-CRPT-SPOT] Carpet Spot Remover ready to use 6/32 OZ
+     Qty: 6 CS @ $33.56
+  12. [FST-FHCS-3816-1-SS-B100] Flat Head Cap Screw 3/8-16 x 1" Stainless 18-8
+     Qty: 6 BX @ $17.44
+  13. [MB-MIS-4738] Exit Sign LED red
+     Qty: 10 EA @ $35.69
+  14. [MB-JS-1995] Can Liner 40x48 0.7mil Black 500/CS
+     Qty: 6 CS @ $34.85
+
+Delivery requested by: 2026-03-12
+
+Thank you,
+Patricia Johnson (fictitious)
+Midwest Building Maintenance (SYNTHETIC)
++1-555-0400
+--===============8702307952301070029==--

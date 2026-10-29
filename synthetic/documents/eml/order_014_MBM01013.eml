@@ -1,0 +1,69 @@
+Content-Type: multipart/mixed; boundary="===============3614901190140078038=="
+MIME-Version: 1.0
+From: po@mbm-services.example
+To: orders@delta-industrial.example
+Subject: PO MBM01013 - Order from Midwest Building Maintenance (SYNTHETIC)
+Message-ID: <po-MBM01013@mbm-services.example>
+Date: Thu, 29 Oct 2026 20:23:08 +0000
+
+--===============3614901190140078038==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+Hello,
+
+Please process the following order:
+
+PO Number: MBM01013
+Date: 4/5/26
+Ship To: Columbus Warehouse
+
+Items:
+------
+  1. [JAN-LNR-3340-07-CL] Can Liner 33x40 0.7mil Clear 250/CS
+     Qty: 10 CS @ $36.41
+  2. [MB-PPE-5807] Ear Plugs foam corded NRR 32
+     Qty: 10 BX @ $22.50
+  3. [ABR-CUT-WHL-4-180] Cut-off Wheel 4.5x.045x7/8 180 grit
+     Qty: 10 BX @ $20.80
+  4. [JAN-LNR-2424-07-CL] Can Liner 24x24 0.7mil Clear 200/CS
+     Qty: 24 CS @ $41.94
+  5. [TAP-WARN-TP-YB] Caution Tape Yellow/Black 3 inch x 1000 ft
+     Qty: 1 CS @ $67.77
+  6. [MB-HW-8245] Socket Head Cap Screw 5/16-18 x 1-1/2" Alloy Steel Black Oxide
+     Qty: 10 BX @ $44.46
+  7. [MB-JS-9719] Hand Soap Foam refill 6/1250 ML
+     Qty: 10 CS @ $53.74
+  8. [PPE-GLV-VIN8-L-CLE] Vinyl Exam Gloves 8 mil powder-free Clear size L
+     Qty: 4 CS @ $80.45
+  9. [FST-LW-1213-ZN-B50] Lock Washer 1/2-13 Zinc
+     Qty: 3 BX @ $22.69
+  10. [JAN-LNR-3037-07-CL] Can Liner 30x37 0.7mil Clear 100/CS
+     Qty: 2 CS @ $62.05
+  11. [FST-HCS-51618-1-SS-B50] Hex Cap Screw 5/16-18 x 1" Stainless 18-8
+     Qty: 3 BX @ $30.54
+  12. [LUB-ANTI-SEIZE] Anti-Seize Compound 8 oz
+     Qty: 3 CS @ $69.32
+  13. [MB-HW-3302] Hex Cap Screw 3/8-16 x 1-1/2" Grade 5 Zinc
+     Qty: 24 BX @ $9.66
+  14. [JAN-GPC] General Purpose Cleaner concentrate 4/1 GAL
+     Qty: 2 CS @ $41.16
+  15. [FAID-KIT-25] First Aid Kit 25 person
+     Qty: 1 EA @ $45.70
+  16. [JAN-TC-DISP] Toilet Seat Cover Dispenser chrome
+     Qty: 24 EA @ $12.40
+  17. [FST-HCS-1420-112-G5Z-B100] Hex Cap Screw 1/4-20 x 1-1/2" Grade 5 Zinc
+     Qty: 5 BX @ $18.54
+  18. [ABR-CUT-WHL-4-150] Cut-off Wheel 4.5x.045x7/8 150 grit
+     Qty: 12 BX @ $15.57
+  19. [ABR-GRND-WHL-4-80] Grinding Wheel 4.5x1/4x7/8 80 grit
+     Qty: 6 BX @ $21.21
+
+Delivery requested by: 2026-04-11
+
+Thank you,
+Patricia Johnson (fictitious)
+Midwest Building Maintenance (SYNTHETIC)
++1-555-0400
+--===============3614901190140078038==--

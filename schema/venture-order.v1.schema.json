@@ -1,0 +1,974 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ventureorder.example/schemas/venture-order.v1.json",
+  "title": "VentureOrder — Formato d'ordine interno unico (VOF) v1",
+  "description": "Rappresentazione canonica, indipendente dall'ERP, di un ordine d'acquisto ricevuto da un cliente. Unica fonte per connettore Odoo ed export CSV / X12 850 / EDIFACT ORDERS / Peppol BIS Order.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "order_id",
+    "tenant_id",
+    "document_type",
+    "source",
+    "buyer",
+    "header",
+    "lines",
+    "status"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "order_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "ID interno VentureOrder, immutabile; base della chiave di idempotenza."
+    },
+    "tenant_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Distributore (cliente di VentureOrder)."
+    },
+    "document_type": {
+      "enum": [
+        "ORIGINAL",
+        "CHANGE",
+        "CANCEL"
+      ],
+      "description": "Ordine nuovo, modifica o annullo."
+    },
+    "status": {
+      "enum": [
+        "RECEIVED",
+        "EXTRACTED",
+        "VALIDATED",
+        "NEEDS_REVIEW",
+        "READY_TO_POST",
+        "POSTED",
+        "EXPORTED",
+        "REJECTED",
+        "POST_FAILED"
+      ]
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "channel",
+        "received_at",
+        "documents"
+      ],
+      "properties": {
+        "channel": {
+          "enum": [
+            "EMAIL_IMAP",
+            "EMAIL_GRAPH",
+            "FOLDER",
+            "API"
+          ]
+        },
+        "message_id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Header Message-ID dell'email."
+        },
+        "from_address": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "email"
+        },
+        "subject": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "received_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "documents": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "document_id",
+              "kind",
+              "sha256"
+            ],
+            "properties": {
+              "document_id": {
+                "type": "string"
+              },
+              "kind": {
+                "enum": [
+                  "PDF_TEXT",
+                  "PDF_SCAN",
+                  "XLSX",
+                  "XLS",
+                  "CSV",
+                  "EMAIL_BODY",
+                  "IMAGE"
+                ]
+              },
+              "filename": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "mime_type": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "sha256": {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              },
+              "page_count": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "minimum": 1
+              }
+            }
+          }
+        }
+      }
+    },
+    "buyer": {
+      "$ref": "#/$defs/party"
+    },
+    "seller": {
+      "$ref": "#/$defs/party"
+    },
+    "bill_to": {
+      "$ref": "#/$defs/party"
+    },
+    "ship_to": {
+      "$ref": "#/$defs/party"
+    },
+    "header": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "po_number",
+        "po_date",
+        "currency"
+      ],
+      "properties": {
+        "po_number": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64
+        },
+        "po_revision": {
+          "type": "integer",
+          "minimum": 0,
+          "default": 0
+        },
+        "po_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "requested_delivery_date": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date"
+        },
+        "currency": {
+          "type": "string",
+          "pattern": "^[A-Z]{3}$",
+          "description": "ISO 4217"
+        },
+        "buyer_reference": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Reparto, centro di costo, richiedente o job/work order."
+        },
+        "payment_terms_text": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "incoterms": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "code": {
+              "type": "string",
+              "pattern": "^[A-Z]{3}$"
+            },
+            "place": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          }
+        },
+        "ship_via": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Vettore/metodo di spedizione richiesto."
+        },
+        "notes": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "language": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[a-z]{2}$"
+        }
+      }
+    },
+    "lines": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/line"
+      }
+    },
+    "charges": {
+      "type": "array",
+      "description": "Spese/sconti a livello documento (trasporto, minimo d'ordine...).",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "type",
+          "amount"
+        ],
+        "properties": {
+          "type": {
+            "enum": [
+              "FREIGHT",
+              "HANDLING",
+              "SMALL_ORDER",
+              "DISCOUNT",
+              "OTHER"
+            ]
+          },
+          "description": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "amount": {
+            "$ref": "#/$defs/money",
+            "description": "Positivo = addebito, negativo = sconto."
+          }
+        }
+      }
+    },
+    "totals": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "lines_amount_declared": {
+          "$ref": "#/$defs/money_or_null"
+        },
+        "tax_amount_declared": {
+          "$ref": "#/$defs/money_or_null"
+        },
+        "total_amount_declared": {
+          "$ref": "#/$defs/money_or_null"
+        },
+        "lines_amount_computed": {
+          "$ref": "#/$defs/money_or_null"
+        }
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "description": "Provenienza e confidenza per campo. Chiave = JSON Pointer del campo (es. /header/po_number, /lines/0/quantity).",
+      "propertyNames": {
+        "pattern": "^/"
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/evidence"
+      }
+    },
+    "validation": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "issues": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "code",
+              "severity",
+              "message"
+            ],
+            "properties": {
+              "code": {
+                "type": "string",
+                "pattern": "^[A-Z]{2,4}-[0-9]{2}$"
+              },
+              "severity": {
+                "enum": [
+                  "BLOCK",
+                  "REVIEW",
+                  "WARN",
+                  "INFO"
+                ]
+              },
+              "path": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "message": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "decision": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "score": {
+          "$ref": "#/$defs/score"
+        },
+        "route": {
+          "enum": [
+            "AUTO_POST",
+            "REVIEW",
+            "REJECT"
+          ]
+        },
+        "reasons": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "erp_ref": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "system": {
+          "enum": [
+            "ODOO",
+            "CSV",
+            "X12_850",
+            "EDIFACT_ORDERS",
+            "PEPPOL_ORDER"
+          ]
+        },
+        "external_id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Es. id sale.order o nome file prodotto."
+        },
+        "name": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Es. S00042."
+        },
+        "posted_at": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        }
+      }
+    },
+    "processing": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "extractor": {
+          "type": "string",
+          "description": "Es. ollama/qwen3:8b o template:<customer>."
+        },
+        "prompt_version": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updated_at": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        }
+      }
+    }
+  },
+  "$defs": {
+    "score": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "money": {
+      "type": "number"
+    },
+    "money_or_null": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "uom_code": {
+      "type": "string",
+      "description": "Codice UN/ECE Recommendation 20 normalizzato (es. EA, C62, H87, BX, CS, PK, CT, DZN, GLL, LTR, KGM, RO, PR, BG, DR).",
+      "pattern": "^[A-Z0-9]{2,3}$"
+    },
+    "address": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "line1": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "line2": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "city": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "region": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Stato/provincia (es. OH, MI)."
+        },
+        "postal_code": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "country": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[A-Z]{2}$",
+          "description": "ISO 3166-1 alpha-2"
+        }
+      }
+    },
+    "party": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "code_on_document": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Codice della parte come stampato (es. account number, plant code)."
+        },
+        "tax_id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "P.IVA / VAT / EIN."
+        },
+        "gln": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[0-9]{13}$"
+        },
+        "peppol_endpoint": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "scheme_id": {
+              "type": "string",
+              "description": "Es. 0088 (GLN), 0211 (P.IVA IT)."
+            },
+            "id": {
+              "type": "string"
+            }
+          }
+        },
+        "address": {
+          "$ref": "#/$defs/address"
+        },
+        "contact": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "name": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "email": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "format": "email"
+            },
+            "phone": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          }
+        },
+        "resolved": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "description": "Risultato del matching sull'anagrafica ERP.",
+          "additionalProperties": false,
+          "properties": {
+            "erp_partner_id": {
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "erp_partner_ref": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "method": {
+              "enum": [
+                "TAX_ID",
+                "CODE",
+                "EMAIL_DOMAIN",
+                "FUZZY_NAME",
+                "ADDRESS",
+                "MANUAL",
+                null
+              ]
+            },
+            "score": {
+              "$ref": "#/$defs/score"
+            }
+          }
+        }
+      }
+    },
+    "pack": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "description": "Struttura di confezione letta dal documento, es. '4/1 GAL' = 4 x 1 gallone per cartone; '100/BX' = 100 pezzi per scatola.",
+      "additionalProperties": false,
+      "properties": {
+        "raw": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "inner_count": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "exclusiveMinimum": 0
+        },
+        "inner_size": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "exclusiveMinimum": 0
+        },
+        "inner_uom": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/uom_code"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "candidate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sku",
+        "score"
+      ],
+      "properties": {
+        "sku": {
+          "type": "string"
+        },
+        "erp_product_id": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "description": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "score": {
+          "$ref": "#/$defs/score"
+        },
+        "method": {
+          "type": "string"
+        }
+      }
+    },
+    "line": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "line_no",
+        "description",
+        "quantity",
+        "uom_raw"
+      ],
+      "properties": {
+        "line_no": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "buyer_item_code": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Codice articolo del CLIENTE (part number interno del buyer)."
+        },
+        "seller_item_code": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Codice del distributore se il cliente lo riporta."
+        },
+        "manufacturer_name": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "manufacturer_part_number": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "gtin": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[0-9]{8}$|^[0-9]{12,14}$",
+          "description": "GTIN-8/12(UPC)/13(EAN)/14"
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "quantity": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "uom_raw": {
+          "type": "string",
+          "description": "Unità come scritta (EA, CS, BX/100, 'cs of 6'...)."
+        },
+        "uom": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/uom_code"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "pack": {
+          "$ref": "#/$defs/pack"
+        },
+        "unit_price": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "price_uom": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/uom_code"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "Unità a cui si riferisce il prezzo, se diversa da uom (es. ordine in DZ, prezzo per EA)."
+        },
+        "price_basis_qty": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "exclusiveMinimum": 0,
+          "description": "Prezzo per N unità (es. 'per 100' = 100). Default 1."
+        },
+        "discount_pct": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 100
+        },
+        "line_amount": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "requested_delivery_date": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date"
+        },
+        "notes": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "resolution": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "description": "Risultato del riconoscimento articolo (sezione 6).",
+          "additionalProperties": false,
+          "properties": {
+            "sku": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "default_code Odoo."
+            },
+            "erp_product_id": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "description": "product.product id."
+            },
+            "erp_uom": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/uom_code"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "erp_uom_id": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "description": "uom.uom id."
+            },
+            "erp_quantity": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "description": "Quantità convertita nell'unità di vendita ERP."
+            },
+            "conversion_factor": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "exclusiveMinimum": 0
+            },
+            "method": {
+              "enum": [
+                "XREF",
+                "SELLER_CODE",
+                "GTIN",
+                "MPN",
+                "FUZZY",
+                "SEMANTIC",
+                "MANUAL",
+                "UNRESOLVED"
+              ]
+            },
+            "score": {
+              "$ref": "#/$defs/score"
+            },
+            "candidates": {
+              "type": "array",
+              "maxItems": 5,
+              "items": {
+                "$ref": "#/$defs/candidate"
+              }
+            },
+            "erp_list_price": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "description": "Prezzo da listino Odoo per confronto."
+            }
+          }
+        }
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "confidence"
+      ],
+      "properties": {
+        "confidence": {
+          "$ref": "#/$defs/score"
+        },
+        "document_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "page": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1
+        },
+        "bbox": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": "number"
+          },
+          "minItems": 4,
+          "maxItems": 4,
+          "description": "[x0, y0, x1, y1] in punti PDF."
+        },
+        "cell": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Riferimento cella Excel, es. Sheet1!C12."
+        },
+        "snippet": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 500
+        },
+        "corrected_by": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Utente che ha corretto il campo in revisione."
+        }
+      }
+    }
+  }
+}
