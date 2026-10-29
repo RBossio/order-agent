@@ -1,0 +1,407 @@
+{
+  "schema_version": "1.0",
+  "order_id": "0f114d20-daf8-44a0-a7f8-72c77761ae2e",
+  "tenant_id": "delta-industrial-supply",
+  "document_type": "ORIGINAL",
+  "status": "VALIDATED",
+  "source": {
+    "channel": "EMAIL_IMAP",
+    "message_id": "<po-MBM01020@mbm-services.example>",
+    "from_address": "po@mbm-services.example",
+    "subject": "PO MBM01020 - Order from Midwest Building Maintenance (SYNTHETIC)",
+    "received_at": "2026-10-29T20:23:08Z",
+    "documents": [
+      {
+        "document_id": "doc-49aa97d5",
+        "kind": "EMAIL_BODY",
+        "filename": null,
+        "mime_type": "text/plain",
+        "sha256": "a808cb4c8ea388c07502f90ef1897ba3b508fc6045d832cf2483a7df0c4012f3",
+        "page_count": null
+      }
+    ]
+  },
+  "buyer": {
+    "name": "Midwest Building Maintenance (SYNTHETIC)",
+    "code_on_document": "C-MBM",
+    "tax_id": "US44-9876543",
+    "gln": null,
+    "peppol_endpoint": null,
+    "address": {
+      "line1": "3200 Service Lane",
+      "city": "Columbus",
+      "region": "OH",
+      "postal_code": "43215",
+      "country": "US"
+    },
+    "contact": {
+      "name": "Patricia Johnson (fictitious)",
+      "email": "po@mbm-services.example",
+      "phone": "+1-555-0400"
+    },
+    "resolved": {
+      "erp_partner_id": 51,
+      "erp_partner_ref": "C-MBM",
+      "method": "EMAIL_DOMAIN",
+      "score": 0.99
+    }
+  },
+  "seller": {
+    "name": "Delta Industrial Supply LLC (SYNTHETIC)",
+    "code_on_document": null,
+    "tax_id": null,
+    "address": {
+      "line1": "55 Commerce Dr",
+      "city": "Dayton",
+      "region": "OH",
+      "postal_code": "45402",
+      "country": "US"
+    },
+    "resolved": null
+  },
+  "header": {
+    "po_number": "MBM01020",
+    "po_revision": 0,
+    "po_date": "1/22/26",
+    "requested_delivery_date": "2026-02-11",
+    "currency": "USD",
+    "buyer_reference": "Dept 674",
+    "payment_terms_text": "2% 10 Net 30",
+    "incoterms": null,
+    "ship_via": null,
+    "notes": "Confirm availability",
+    "language": "en"
+  },
+  "lines": [
+    {
+      "line_no": 1,
+      "buyer_item_code": "MB-TAP-9824",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Packing Tape Clear 2 inch x 110 yd",
+      "quantity": 24,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "36/CS",
+        "inner_count": 36,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 68.72,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 1649.28,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "TAP-PT-2-CLR",
+        "erp_product_id": 1234,
+        "erp_uom": "CS",
+        "erp_uom_id": 50,
+        "erp_quantity": 24,
+        "conversion_factor": 1,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 68.72
+      }
+    },
+    {
+      "line_no": 2,
+      "buyer_item_code": null,
+      "seller_item_code": "STOR-BIN-MD",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Parts Bin Medium 6x9x5",
+      "quantity": 3,
+      "uom_raw": "PK",
+      "uom": "PK",
+      "pack": {
+        "raw": "6/PK",
+        "inner_count": 6,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 26.8,
+      "price_uom": "PK",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 80.4,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "STOR-BIN-MD",
+        "erp_product_id": 1291,
+        "erp_uom": "PK",
+        "erp_uom_id": 32,
+        "erp_quantity": 3,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 26.8
+      }
+    },
+    {
+      "line_no": 3,
+      "buyer_item_code": "MB-ABR-5156",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Sanding Disc 6 inch hook & loop 80 grit",
+      "quantity": 2,
+      "uom_raw": "PK",
+      "uom": "PK",
+      "pack": {
+        "raw": "50/PK",
+        "inner_count": 50,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 23.67,
+      "price_uom": "PK",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 47.34,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "ABR-SAND-DSC-6-80",
+        "erp_product_id": 1205,
+        "erp_uom": "PK",
+        "erp_uom_id": 42,
+        "erp_quantity": 2,
+        "conversion_factor": 1,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 23.67
+      }
+    },
+    {
+      "line_no": 4,
+      "buyer_item_code": "MB-HW-5522",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Hex Nut M8-1.25 Grade 5 Zinc",
+      "quantity": 1,
+      "uom_raw": "BX",
+      "uom": "BX",
+      "pack": {
+        "raw": "100/BX",
+        "inner_count": 100,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 11.29,
+      "price_uom": "BX",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 11.29,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "FST-HN-M81.25-ZN-B100",
+        "erp_product_id": 1042,
+        "erp_uom": "BX",
+        "erp_uom_id": 14,
+        "erp_quantity": 1,
+        "conversion_factor": 1,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 11.29
+      }
+    },
+    {
+      "line_no": 5,
+      "buyer_item_code": "MB-JS-9719",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Hand Soap Foam refill 6/1250 ML",
+      "quantity": 3,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "6/1250 ML",
+        "inner_count": 6,
+        "inner_size": 1250,
+        "inner_uom": "MLT"
+      },
+      "unit_price": 53.74,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 161.22,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "JAN-HND-SOAP-FM",
+        "erp_product_id": 1167,
+        "erp_uom": "CS",
+        "erp_uom_id": 46,
+        "erp_quantity": 3,
+        "conversion_factor": 1,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 53.74
+      }
+    },
+    {
+      "line_no": 6,
+      "buyer_item_code": "MB-JS-2725",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Carpet Spot Remover ready to use 6/32 OZ",
+      "quantity": 24,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "6/32 OZ",
+        "inner_count": 6,
+        "inner_size": 32,
+        "inner_uom": "OZA"
+      },
+      "unit_price": 33.56,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 805.44,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "JAN-CRPT-SPOT",
+        "erp_product_id": 1165,
+        "erp_uom": "CS",
+        "erp_uom_id": 10,
+        "erp_quantity": 24,
+        "conversion_factor": 1,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 33.56
+      }
+    },
+    {
+      "line_no": 7,
+      "buyer_item_code": "MB-MIS-1551",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Hard Hat Required Sign 10x14",
+      "quantity": 1,
+      "uom_raw": "EA",
+      "uom": "EA",
+      "pack": null,
+      "unit_price": 8.28,
+      "price_uom": "EA",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 8.28,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "SIGN-HRD-HAT",
+        "erp_product_id": 1297,
+        "erp_uom": "EA",
+        "erp_uom_id": 50,
+        "erp_quantity": 1,
+        "conversion_factor": 1,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 8.28
+      }
+    },
+    {
+      "line_no": 8,
+      "buyer_item_code": null,
+      "seller_item_code": "PPE-GLV-NITW-XL-BLA",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Nitrile Work Gloves industrial Black size XL",
+      "quantity": 12,
+      "uom_raw": "DZN",
+      "uom": "DZN",
+      "pack": {
+        "raw": "12/DZ",
+        "inner_count": 12,
+        "inner_size": 1,
+        "inner_uom": "PR"
+      },
+      "unit_price": 28.53,
+      "price_uom": "DZN",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 342.36,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "PPE-GLV-NITW-XL-BLA",
+        "erp_product_id": 1081,
+        "erp_uom": "DZN",
+        "erp_uom_id": 7,
+        "erp_quantity": 12,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 28.53
+      }
+    }
+  ],
+  "charges": [],
+  "totals": {
+    "lines_amount_declared": 3105.61,
+    "tax_amount_declared": null,
+    "total_amount_declared": 3105.61,
+    "lines_amount_computed": 3105.61
+  },
+  "decision": {
+    "score": 0.98,
+    "route": "AUTO_POST",
+    "reasons": []
+  },
+  "processing": {
+    "extractor": "synthetic/generator.py",
+    "prompt_version": null,
+    "created_at": "2026-10-29T20:23:08Z",
+    "updated_at": null
+  },
+  "ship_to": {
+    "name": "Columbus Warehouse",
+    "code_on_document": "COL-WH",
+    "address": {
+      "line1": "3200 Service Lane",
+      "city": "Columbus",
+      "region": "OH",
+      "postal_code": "43215",
+      "country": "US"
+    },
+    "resolved": {
+      "erp_partner_id": 52,
+      "erp_partner_ref": "COL-WH",
+      "method": "CODE",
+      "score": 1.0
+    }
+  },
+  "_synthetic_metadata": {
+    "hard_case_types": [],
+    "is_hard_case": false
+  }
+}

@@ -1,0 +1,365 @@
+{
+  "schema_version": "1.0",
+  "order_id": "1d713a60-86d4-4bf8-9eed-6664000c36d1",
+  "tenant_id": "delta-industrial-supply",
+  "document_type": "ORIGINAL",
+  "status": "VALIDATED",
+  "source": {
+    "channel": "FOLDER",
+    "message_id": null,
+    "from_address": null,
+    "subject": null,
+    "received_at": "2026-10-29T20:23:08Z",
+    "documents": [
+      {
+        "document_id": "doc-b014e026",
+        "kind": "PDF_TEXT",
+        "filename": "4500001075.pdf",
+        "mime_type": "application/pdf",
+        "sha256": "0e69765e6e72ff91ca4ee1d5ccf921c7c697563c839b2b0731d12d9a840a0708",
+        "page_count": 1
+      }
+    ]
+  },
+  "buyer": {
+    "name": "Acme Manufacturing Inc. (SYNTHETIC)",
+    "code_on_document": "C-ACME",
+    "tax_id": "US12-3456789",
+    "gln": null,
+    "peppol_endpoint": null,
+    "address": {
+      "line1": "1200 Industrial Pkwy",
+      "city": "Toledo",
+      "region": "OH",
+      "postal_code": "43601",
+      "country": "US"
+    },
+    "contact": {
+      "name": "Jordan Lee (fictitious)",
+      "email": "purchasing@acme-mfg.example",
+      "phone": "+1-555-0100"
+    },
+    "resolved": {
+      "erp_partner_id": 42,
+      "erp_partner_ref": "C-ACME",
+      "method": "CODE",
+      "score": 0.99
+    }
+  },
+  "seller": {
+    "name": "Delta Industrial Supply LLC (SYNTHETIC)",
+    "code_on_document": null,
+    "tax_id": null,
+    "address": {
+      "line1": "55 Commerce Dr",
+      "city": "Dayton",
+      "region": "OH",
+      "postal_code": "45402",
+      "country": "US"
+    },
+    "resolved": null
+  },
+  "header": {
+    "po_number": "4500001075",
+    "po_revision": 0,
+    "po_date": "2026-04-01",
+    "requested_delivery_date": "2026-04-12",
+    "currency": "USD",
+    "buyer_reference": "Dept 229",
+    "payment_terms_text": "Net 30",
+    "incoterms": null,
+    "ship_via": null,
+    "notes": "Confirm availability",
+    "language": "en"
+  },
+  "lines": [
+    {
+      "line_no": 1,
+      "buyer_item_code": "ACM-PPE-1324",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Vinyl Exam Gloves 8 mil powder-free Clear size S",
+      "quantity": 1,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "100/BX 10BX/CS",
+        "inner_count": 1000,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 119.78,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 119.78,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "PPE-GLV-VIN8-S-CLE",
+        "erp_product_id": 1072,
+        "erp_uom": "CS",
+        "erp_uom_id": 45,
+        "erp_quantity": 1,
+        "conversion_factor": 1,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 119.78
+      }
+    },
+    {
+      "line_no": 2,
+      "buyer_item_code": "ACM-PPE-1366",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Nitrile Exam Gloves 8 mil powder-free Black size S",
+      "quantity": 12,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "100/BX 10BX/CS",
+        "inner_count": 1000,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 75.88,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 910.56,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "PPE-GLV-NIT8-S-BLA",
+        "erp_product_id": 1061,
+        "erp_uom": "CS",
+        "erp_uom_id": 48,
+        "erp_quantity": 12,
+        "conversion_factor": 1,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 75.88
+      }
+    },
+    {
+      "line_no": 3,
+      "buyer_item_code": "ACM-HW-6388",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Socket Head Cap Screw 1/4-20 x 1\" Alloy Steel Black Oxide",
+      "quantity": 4,
+      "uom_raw": "BX",
+      "uom": "BX",
+      "pack": {
+        "raw": "50/BX",
+        "inner_count": 50,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 29.57,
+      "price_uom": "BX",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 118.28,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "FST-SHCS-1420-1-SS-B50",
+        "erp_product_id": 1024,
+        "erp_uom": "BX",
+        "erp_uom_id": 46,
+        "erp_quantity": 4,
+        "conversion_factor": 1,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 29.57
+      }
+    },
+    {
+      "line_no": 4,
+      "buyer_item_code": null,
+      "seller_item_code": "PPE-MISC-1104",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Safety equipment item 1104",
+      "quantity": 1,
+      "uom_raw": "EA",
+      "uom": "EA",
+      "pack": null,
+      "unit_price": 29.27,
+      "price_uom": "EA",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 29.27,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "PPE-MISC-1104",
+        "erp_product_id": 1104,
+        "erp_uom": "EA",
+        "erp_uom_id": 49,
+        "erp_quantity": 1,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 29.27
+      }
+    },
+    {
+      "line_no": 5,
+      "buyer_item_code": "ACM-JS-1187",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Soap Dispenser manual chrome",
+      "quantity": 2,
+      "uom_raw": "EA",
+      "uom": "EA",
+      "pack": null,
+      "unit_price": 18.25,
+      "price_uom": "EA",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 36.5,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "JAN-DISP-SOAP",
+        "erp_product_id": 1195,
+        "erp_uom": "EA",
+        "erp_uom_id": 28,
+        "erp_quantity": 2,
+        "conversion_factor": 1,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 18.25
+      }
+    },
+    {
+      "line_no": 6,
+      "buyer_item_code": "ACM-HW-8119",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Hex Cap Screw 3/8-16 x 1\" Grade 8 Yellow Zinc",
+      "quantity": 6,
+      "uom_raw": "BX",
+      "uom": "BX",
+      "pack": {
+        "raw": "25/BX",
+        "inner_count": 25,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 36.2,
+      "price_uom": "BX",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 217.2,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "FST-HCS-3816-1-G8-B25",
+        "erp_product_id": 1012,
+        "erp_uom": "BX",
+        "erp_uom_id": 37,
+        "erp_quantity": 6,
+        "conversion_factor": 1,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 36.2
+      }
+    },
+    {
+      "line_no": 7,
+      "buyer_item_code": "ACM-TAP-7504",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Strapping Tape 3/4 inch x 60 yd",
+      "quantity": 12,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "48/CS",
+        "inner_count": 48,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 85.65,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 1027.8,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "TAP-STRP-TP",
+        "erp_product_id": 1237,
+        "erp_uom": "CS",
+        "erp_uom_id": 30,
+        "erp_quantity": 12,
+        "conversion_factor": 1,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 85.65
+      }
+    }
+  ],
+  "charges": [],
+  "totals": {
+    "lines_amount_declared": 2459.39,
+    "tax_amount_declared": null,
+    "total_amount_declared": 2459.39,
+    "lines_amount_computed": 2459.39
+  },
+  "decision": {
+    "score": 0.98,
+    "route": "AUTO_POST",
+    "reasons": []
+  },
+  "processing": {
+    "extractor": "synthetic/generator.py",
+    "prompt_version": null,
+    "created_at": "2026-10-29T20:23:08Z",
+    "updated_at": null
+  },
+  "ship_to": {
+    "name": "Acme Plant 1 - Main",
+    "code_on_document": "PLANT-01",
+    "address": {
+      "line1": "1200 Industrial Pkwy",
+      "city": "Toledo",
+      "region": "OH",
+      "postal_code": "43601",
+      "country": "US"
+    },
+    "resolved": {
+      "erp_partner_id": 43,
+      "erp_partner_ref": "PLANT-01",
+      "method": "CODE",
+      "score": 1.0
+    }
+  },
+  "_synthetic_metadata": {
+    "hard_case_types": [],
+    "is_hard_case": false
+  }
+}

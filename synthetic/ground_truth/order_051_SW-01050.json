@@ -1,0 +1,402 @@
+{
+  "schema_version": "1.0",
+  "order_id": "9b7784e3-a82c-4bcb-bb7b-7eb828b8c96b",
+  "tenant_id": "delta-industrial-supply",
+  "document_type": "ORIGINAL",
+  "status": "VALIDATED",
+  "source": {
+    "channel": "EMAIL_IMAP",
+    "message_id": "<po-SW-01050@safework-sol.example>",
+    "from_address": "orders@safework-sol.example",
+    "subject": "PO SW-01050 - Order from SafeWork Solutions Inc. (SYNTHETIC)",
+    "received_at": "2026-10-29T20:23:08Z",
+    "documents": [
+      {
+        "document_id": "doc-4460b157",
+        "kind": "EMAIL_BODY",
+        "filename": null,
+        "mime_type": "text/plain",
+        "sha256": "33980fd6e66d53ec3c7a85d4383047c2c1ebd065dcb525ef259e218786634ee0",
+        "page_count": null
+      }
+    ]
+  },
+  "buyer": {
+    "name": "SafeWork Solutions Inc. (SYNTHETIC)",
+    "code_on_document": "C-SWS",
+    "tax_id": "US66-3333333",
+    "gln": null,
+    "peppol_endpoint": null,
+    "address": {
+      "line1": "800 Safety Lane",
+      "city": "Indianapolis",
+      "region": "IN",
+      "postal_code": "46204",
+      "country": "US"
+    },
+    "contact": {
+      "name": "Jennifer Kim (fictitious)",
+      "email": "orders@safework-sol.example",
+      "phone": "+1-555-0800"
+    },
+    "resolved": {
+      "erp_partner_id": 63,
+      "erp_partner_ref": "C-SWS",
+      "method": "EMAIL_DOMAIN",
+      "score": 0.99
+    }
+  },
+  "seller": {
+    "name": "Delta Industrial Supply LLC (SYNTHETIC)",
+    "code_on_document": null,
+    "tax_id": null,
+    "address": {
+      "line1": "55 Commerce Dr",
+      "city": "Dayton",
+      "region": "OH",
+      "postal_code": "45402",
+      "country": "US"
+    },
+    "resolved": null
+  },
+  "header": {
+    "po_number": "SW-01050",
+    "po_revision": 0,
+    "po_date": "04-23-2026",
+    "requested_delivery_date": "2026-05-13",
+    "currency": "USD",
+    "buyer_reference": "Dept 595",
+    "payment_terms_text": "Net 45",
+    "incoterms": null,
+    "ship_via": "Best Way",
+    "notes": "Rush order",
+    "language": "en"
+  },
+  "lines": [
+    {
+      "line_no": 1,
+      "buyer_item_code": null,
+      "seller_item_code": "PPE-MISC-1108",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Safety equipment item 1108",
+      "quantity": 6,
+      "uom_raw": "EA",
+      "uom": "EA",
+      "pack": null,
+      "unit_price": 15.93,
+      "price_uom": "EA",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 95.58,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "PPE-MISC-1108",
+        "erp_product_id": 1108,
+        "erp_uom": "EA",
+        "erp_uom_id": 4,
+        "erp_quantity": 6,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 15.93
+      }
+    },
+    {
+      "line_no": 2,
+      "buyer_item_code": null,
+      "seller_item_code": "JAN-CRPT-SPOT",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Carpet Spot Remover ready to use 6/32 OZ",
+      "quantity": 24,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "6/32 OZ",
+        "inner_count": 6,
+        "inner_size": 32,
+        "inner_uom": "OZA"
+      },
+      "unit_price": 33.56,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 805.44,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "JAN-CRPT-SPOT",
+        "erp_product_id": 1165,
+        "erp_uom": "CS",
+        "erp_uom_id": 31,
+        "erp_quantity": 24,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 33.56
+      }
+    },
+    {
+      "line_no": 3,
+      "buyer_item_code": null,
+      "seller_item_code": "JAN-HND-SOAP",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Hand Soap Liquid bulk 4/1 GAL",
+      "quantity": 24,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "4/1 GAL",
+        "inner_count": 4,
+        "inner_size": 1,
+        "inner_uom": "GLL"
+      },
+      "unit_price": 33.8,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 811.2,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "JAN-HND-SOAP",
+        "erp_product_id": 1166,
+        "erp_uom": "CS",
+        "erp_uom_id": 36,
+        "erp_quantity": 24,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 33.8
+      }
+    },
+    {
+      "line_no": 4,
+      "buyer_item_code": "SWS-LUB-1037",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Moly Grease EP 14 oz cartridge",
+      "quantity": 5,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "10/BX",
+        "inner_count": 10,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 58.95,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 294.75,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "LUB-MOLY-GRS",
+        "erp_product_id": 1248,
+        "erp_uom": "CS",
+        "erp_uom_id": 50,
+        "erp_quantity": 5,
+        "conversion_factor": 1,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 58.95
+      }
+    },
+    {
+      "line_no": 5,
+      "buyer_item_code": null,
+      "seller_item_code": "JAN-LNR-3340-10-CL",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Can Liner 33x40 1.0mil Clear 250/CS",
+      "quantity": 4,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "250/CS",
+        "inner_count": 250,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 31.19,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 124.76,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "JAN-LNR-3340-10-CL",
+        "erp_product_id": 1132,
+        "erp_uom": "CS",
+        "erp_uom_id": 21,
+        "erp_quantity": 4,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 31.19
+      }
+    },
+    {
+      "line_no": 6,
+      "buyer_item_code": null,
+      "seller_item_code": "PPE-VEST-HV-LM",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Hi-Vis Safety Vest Class 2 lime",
+      "quantity": 6,
+      "uom_raw": "EA",
+      "uom": "EA",
+      "pack": null,
+      "unit_price": 8.5,
+      "price_uom": "EA",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 51.0,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "PPE-VEST-HV-LM",
+        "erp_product_id": 1100,
+        "erp_uom": "EA",
+        "erp_uom_id": 46,
+        "erp_quantity": 6,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 8.5
+      }
+    },
+    {
+      "line_no": 7,
+      "buyer_item_code": "SWS-JS-2717",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Can Liner 24x24 0.5mil Clear 250/CS",
+      "quantity": 2,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "250/CS",
+        "inner_count": 250,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 32.62,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 65.24,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "JAN-LNR-2424-05-CL",
+        "erp_product_id": 1110,
+        "erp_uom": "CS",
+        "erp_uom_id": 43,
+        "erp_quantity": 2,
+        "conversion_factor": 1,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 32.62
+      }
+    },
+    {
+      "line_no": 8,
+      "buyer_item_code": null,
+      "seller_item_code": "FST-HCS-1420-112-G8-B100",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Hex Cap Screw 1/4-20 x 1-1/2\" Grade 8 Yellow Zinc",
+      "quantity": 1,
+      "uom_raw": "BX",
+      "uom": "BX",
+      "pack": {
+        "raw": "100/BX",
+        "inner_count": 100,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 34.1,
+      "price_uom": "BX",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 34.1,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "FST-HCS-1420-112-G8-B100",
+        "erp_product_id": 1009,
+        "erp_uom": "BX",
+        "erp_uom_id": 34,
+        "erp_quantity": 1,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 34.1
+      }
+    }
+  ],
+  "charges": [],
+  "totals": {
+    "lines_amount_declared": 2282.07,
+    "tax_amount_declared": null,
+    "total_amount_declared": 2282.07,
+    "lines_amount_computed": 2282.07
+  },
+  "decision": {
+    "score": 0.98,
+    "route": "AUTO_POST",
+    "reasons": []
+  },
+  "processing": {
+    "extractor": "synthetic/generator.py",
+    "prompt_version": null,
+    "created_at": "2026-10-29T20:23:08Z",
+    "updated_at": null
+  },
+  "ship_to": {
+    "name": "Indianapolis Warehouse",
+    "code_on_document": "IND-WH",
+    "address": {
+      "line1": "800 Safety Lane",
+      "city": "Indianapolis",
+      "region": "IN",
+      "postal_code": "46204",
+      "country": "US"
+    },
+    "resolved": {
+      "erp_partner_id": 64,
+      "erp_partner_ref": "IND-WH",
+      "method": "CODE",
+      "score": 1.0
+    }
+  },
+  "_synthetic_metadata": {
+    "hard_case_types": [],
+    "is_hard_case": false
+  }
+}

@@ -1,0 +1,53 @@
+Content-Type: multipart/mixed; boundary="===============6419968239068674590=="
+MIME-Version: 1.0
+From: po@mbm-services.example
+To: orders@delta-industrial.example
+Subject: PO MBM01114 - Order from Midwest Building Maintenance (SYNTHETIC)
+Message-ID: <po-MBM01114@mbm-services.example>
+Date: Thu, 29 Oct 2026 20:23:08 +0000
+
+--===============6419968239068674590==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+Hello,
+
+Please process the following order:
+
+PO Number: MBM01114
+Date: 3/19/26
+Ship To: Columbus Warehouse
+
+Items:
+------
+  1. [MB-MIS-1356] Extension Cord 25 ft 12/3 SJTW
+     Qty: 2 EA @ $30.48
+  2. [MB-JS-7690] Can Liner 40x48 0.7mil Clear 150/CS
+     Qty: 4 CS @ $41.15
+  3. [PPE-GLV-LAT5-M-NAT] Latex Exam Gloves 5 mil powder-free Natural size M
+     Qty: 2 CS @ $86.93
+  4. [MB-HW-8333] Hex Nut 1/4-20 Stainless 18-8
+     Qty: 1 BX @ $13.70
+  5. [MB-MIS-5182] Storage Tote 27 gallon with lid
+     Qty: 10 EA @ $14.69
+  6. [JAN-LNR-2424-10-CL] Can Liner 24x24 1.0mil Clear 100/CS
+     Qty: 5 CS @ $51.93
+  7. [JAN-GPC-RTU] General Purpose Cleaner ready to use 6/32 OZ
+     Qty: 4 CS @ $27.49
+  8. [JAN-LNR-4046-10-CL] Can Liner 40x46 1.0mil Clear 500/CS
+     Qty: 1 CS @ $31.30
+  9. [MB-JS-1834] Can Liner 24x24 0.7mil Black 250/CS
+     Qty: 10 CS @ $59.55
+  10. [ABR-FLAP-DSC-4-60] Flap Disc 4.5 inch Type 27 60 grit
+     Qty: 5 BX @ $12.82
+  11. [FST-HCS-1420-112-SS-B50] Hex Cap Screw 1/4-20 x 1-1/2" Stainless 18-8
+     Qty: 6 BX @ $12.03
+
+Delivery requested by: 2026-04-05
+
+Thank you,
+Patricia Johnson (fictitious)
+Midwest Building Maintenance (SYNTHETIC)
++1-555-0400
+--===============6419968239068674590==--

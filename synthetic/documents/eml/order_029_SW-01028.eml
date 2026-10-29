@@ -1,0 +1,53 @@
+Content-Type: multipart/mixed; boundary="===============2722901748707341234=="
+MIME-Version: 1.0
+From: orders@safework-sol.example
+To: orders@delta-industrial.example
+Subject: PO SW-01028 - Order from SafeWork Solutions Inc. (SYNTHETIC)
+Message-ID: <po-SW-01028@safework-sol.example>
+Date: Thu, 29 Oct 2026 20:23:08 +0000
+
+--===============2722901748707341234==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+Hello,
+
+Please process the following order:
+
+PO Number: SW-01028
+Date: 05-05-2026
+Ship To: Indianapolis Warehouse
+
+Items:
+------
+  1. [STOR-BIN-SM] Parts Bin Small 4x5x3
+     Qty: 1 PK @ $24.84
+  2. [PPE-GLS-AF-SMK] Safety Glasses smoke lens anti-fog ANSI Z87.1
+     Qty: 6 EA @ $3.45
+  3. [JAN-LNR-2432-07-BL] Can Liner 24x32 0.7mil Black 150/CS
+     Qty: 10 CS @ $41.88
+  4. [JAN-LNR-4046-05-BL] Can Liner 40x46 0.5mil Black 500/CS
+     Qty: 6 CS @ $27.44
+  5. [SWS-JS-8365] Can Liner 30x37 0.7mil Black 150/CS
+     Qty: 1 CS @ $31.65
+  6. [SWS-LUB-3519] Chain Lubricant 11 oz aerosol
+     Qty: 2 CS @ $45.55
+  7. [LUB-HYD-OIL] Hydraulic Oil AW32 5 gal pail
+     Qty: 6 EA @ $67.26
+  8. [SWS-ABR-9452] Grinding Wheel 4.5x1/4x7/8 220 grit
+     Qty: 24 BX @ $43.91
+  9. [JAN-BATH-CLN-RTU] Bathroom Cleaner ready to use 6/32 OZ
+     Qty: 5 CS @ $26.99
+  10. [SWS-TAP-2628] Duct Tape Black 2 inch x 60 yd
+     Qty: 5 CS @ $23.44
+  11. [SWS-JS-8469] Can Liner 24x24 1.0mil Clear 100/CS
+     Qty: 3 CS @ $51.93
+
+Delivery requested by: 2026-05-14
+
+Thank you,
+Jennifer Kim (fictitious)
+SafeWork Solutions Inc. (SYNTHETIC)
++1-555-0800
+--===============2722901748707341234==--

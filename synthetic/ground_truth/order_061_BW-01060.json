@@ -1,0 +1,296 @@
+{
+  "schema_version": "1.0",
+  "order_id": "ae6f46fd-8eb9-47ba-a87c-4a4f0a95a3cf",
+  "tenant_id": "delta-industrial-supply",
+  "document_type": "ORIGINAL",
+  "status": "VALIDATED",
+  "source": {
+    "channel": "EMAIL_IMAP",
+    "message_id": "<po-BW-01060@brightway-jan.example>",
+    "from_address": "orders@brightway-jan.example",
+    "subject": "PO BW-01060 - Order from Brightway Janitorial Services (SYNTHETIC)",
+    "received_at": "2026-10-29T20:23:08Z",
+    "documents": [
+      {
+        "document_id": "doc-6ba8a0c3",
+        "kind": "EMAIL_BODY",
+        "filename": null,
+        "mime_type": "text/plain",
+        "sha256": "0d92e44118ba47a80dbb786385dff06310fa0080450f4b5aa8eed53ed5ce8f7e",
+        "page_count": null
+      }
+    ]
+  },
+  "buyer": {
+    "name": "Brightway Janitorial Services (SYNTHETIC)",
+    "code_on_document": "C-BRIGHT",
+    "tax_id": "US98-7654321",
+    "gln": null,
+    "peppol_endpoint": null,
+    "address": {
+      "line1": "555 Clean Street",
+      "city": "Detroit",
+      "region": "MI",
+      "postal_code": "48201",
+      "country": "US"
+    },
+    "contact": {
+      "name": "Maria Santos (fictitious)",
+      "email": "orders@brightway-jan.example",
+      "phone": "+1-555-0200"
+    },
+    "resolved": {
+      "erp_partner_id": 45,
+      "erp_partner_ref": "C-BRIGHT",
+      "method": "EMAIL_DOMAIN",
+      "score": 0.99
+    }
+  },
+  "seller": {
+    "name": "Delta Industrial Supply LLC (SYNTHETIC)",
+    "code_on_document": null,
+    "tax_id": null,
+    "address": {
+      "line1": "55 Commerce Dr",
+      "city": "Dayton",
+      "region": "OH",
+      "postal_code": "45402",
+      "country": "US"
+    },
+    "resolved": null
+  },
+  "header": {
+    "po_number": "BW-01060",
+    "po_revision": 0,
+    "po_date": "03/26/2026",
+    "requested_delivery_date": "2026-04-09",
+    "currency": "USD",
+    "buyer_reference": "Dept 738",
+    "payment_terms_text": "Net 30",
+    "incoterms": null,
+    "ship_via": "UPS Ground",
+    "notes": "Call before delivery",
+    "language": "en"
+  },
+  "lines": [
+    {
+      "line_no": 1,
+      "buyer_item_code": null,
+      "seller_item_code": "JAN-LNR-3037-10-CL",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Can Liner 30x37 1.0mil Clear 250/CS",
+      "quantity": 10,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "250/CS",
+        "inner_count": 250,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 44.25,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 442.5,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "JAN-LNR-3037-10-CL",
+        "erp_product_id": 1126,
+        "erp_uom": "CS",
+        "erp_uom_id": 7,
+        "erp_quantity": 10,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 44.25
+      }
+    },
+    {
+      "line_no": 2,
+      "buyer_item_code": null,
+      "seller_item_code": "FST-HN-M81.25-ZN-B50",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Hex Nut M8-1.25 Grade 5 Zinc",
+      "quantity": 1,
+      "uom_raw": "BX",
+      "uom": "BX",
+      "pack": {
+        "raw": "50/BX",
+        "inner_count": 50,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 6.82,
+      "price_uom": "BX",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 6.82,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "FST-HN-M81.25-ZN-B50",
+        "erp_product_id": 1048,
+        "erp_uom": "BX",
+        "erp_uom_id": 45,
+        "erp_quantity": 1,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 6.82
+      }
+    },
+    {
+      "line_no": 3,
+      "buyer_item_code": null,
+      "seller_item_code": "JAN-DISF-BLC",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Disinfectant Bleach concentrate 6/1 GAL",
+      "quantity": 5,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "6/1 GAL",
+        "inner_count": 6,
+        "inner_size": 1,
+        "inner_uom": "GLL"
+      },
+      "unit_price": 40.8,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 204.0,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "JAN-DISF-BLC",
+        "erp_product_id": 1160,
+        "erp_uom": "CS",
+        "erp_uom_id": 18,
+        "erp_quantity": 5,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 40.8
+      }
+    },
+    {
+      "line_no": 4,
+      "buyer_item_code": null,
+      "seller_item_code": "ABR-WIRE-WHL-120",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Wire Wheel 4 inch crimped 120 grit",
+      "quantity": 4,
+      "uom_raw": "EA",
+      "uom": "EA",
+      "pack": null,
+      "unit_price": 44.02,
+      "price_uom": "EA",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 176.08,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "ABR-WIRE-WHL-120",
+        "erp_product_id": 1226,
+        "erp_uom": "EA",
+        "erp_uom_id": 39,
+        "erp_quantity": 4,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 44.02
+      }
+    },
+    {
+      "line_no": 5,
+      "buyer_item_code": null,
+      "seller_item_code": "LUB-THRD-SEAL",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Thread Sealant PTFE 8 oz",
+      "quantity": 2,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "12/CS",
+        "inner_count": 12,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 47.62,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 95.24,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "LUB-THRD-SEAL",
+        "erp_product_id": 1259,
+        "erp_uom": "CS",
+        "erp_uom_id": 17,
+        "erp_quantity": 2,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 47.62
+      }
+    }
+  ],
+  "charges": [],
+  "totals": {
+    "lines_amount_declared": 924.64,
+    "tax_amount_declared": null,
+    "total_amount_declared": 924.64,
+    "lines_amount_computed": 924.64
+  },
+  "decision": {
+    "score": 0.98,
+    "route": "AUTO_POST",
+    "reasons": []
+  },
+  "processing": {
+    "extractor": "synthetic/generator.py",
+    "prompt_version": null,
+    "created_at": "2026-10-29T20:23:08Z",
+    "updated_at": null
+  },
+  "ship_to": {
+    "name": "Detroit Warehouse",
+    "code_on_document": "WH-DET",
+    "address": {
+      "line1": "555 Clean Street",
+      "city": "Detroit",
+      "region": "MI",
+      "postal_code": "48201",
+      "country": "US"
+    },
+    "resolved": {
+      "erp_partner_id": 46,
+      "erp_partner_ref": "WH-DET",
+      "method": "CODE",
+      "score": 1.0
+    }
+  },
+  "_synthetic_metadata": {
+    "hard_case_types": [],
+    "is_hard_case": false
+  }
+}

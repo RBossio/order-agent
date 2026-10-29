@@ -1,0 +1,30 @@
+# Configurazione regole di validazione per VentureOrder
+# Permette di abilitare/disabilitare regole e modificare la severità per tenant.
+
+defaults:
+  # Esempio di override severità predefinita:
+  # HDR-06:
+  #   severity: INFO  # Declassa da WARN a INFO
+  
+  # Le regole SEC-02 (SPF/DKIM) sono disabilitate nel prototipo
+  SEC-02:
+    enabled: false
+
+# Esempio di configurazione per tenant specifico:
+# acme-manufacturing:
+#   ITM-06:
+#     enabled: false    # ACME ordina spesso lo stesso prodotto su più righe
+#   PRC-01:
+#     severity: WARN    # Declassa discrepanze prezzo da REVIEW a WARN
+
+# delta-industrial-supply:
+#   HDR-05:
+#     enabled: false    # Gestione automatica CHANGE/CANCEL
+
+# Prodotti servizio per le spese accessorie (TOT-03)
+charges_products:
+  FREIGHT: "SRV-FREIGHT"
+  HANDLING: "SRV-HANDLING"
+  SMALL_ORDER: "SRV-SMALL-ORDER"
+  DISCOUNT: null  # Applicato come sconto, non come riga
+  OTHER: "SRV-MISC"

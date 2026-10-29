@@ -1,0 +1,41 @@
+# Soglie di validazione per VentureOrder
+# Le soglie possono essere override per tenant.
+
+defaults:
+  # Prezzi
+  price_tolerance_pct: 2.0           # PRC-01: tolleranza prezzo PO vs listino
+  line_amount_tolerance_pct: 0.5     # PRC-03: tolleranza importo riga
+  line_amount_tolerance_abs: 0.01    # PRC-03: tolleranza assoluta minima
+  
+  # Totali
+  total_tolerance_pct: 0.1           # TOT-01: tolleranza totale
+  total_tolerance_abs: 0.02          # TOT-01: tolleranza assoluta minima
+  
+  # Confidenza
+  confidence_min: 0.90               # EXT-01: confidenza minima per campi critici
+  
+  # Matching articoli
+  fuzzy_match_min: 0.75              # ITM-01: soglia minima per risoluzione
+  fuzzy_match_review: 0.92           # ITM-03: sopra questa soglia suggerimento preselezionato
+  
+  # Date
+  po_date_future_days: 7             # HDR-02: giorni nel futuro
+  po_date_past_days: 90              # HDR-02: giorni nel passato
+  
+  # Quantità
+  quantity_anomaly_factor: 3.0       # QTY-02: fattore per quantità anomale
+  
+  # Duplicati
+  duplicate_similarity_pct: 80.0     # DUP-03: similarità minima per segnalare
+  duplicate_window_days: 3           # DUP-03: finestra temporale
+  
+  # Sicurezza
+  max_attachment_mb: 20              # SEC-01: dimensione massima allegato
+
+# Esempio di override per tenant specifico:
+# acme-manufacturing:
+#   price_tolerance_pct: 5.0          # ACME ha margini più ampi sui prezzi
+#   fuzzy_match_min: 0.80             # Match più permissivo
+
+# delta-industrial-supply:
+#   confidence_min: 0.85              # Soglia confidenza più bassa per testing

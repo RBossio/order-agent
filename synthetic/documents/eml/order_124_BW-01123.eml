@@ -1,0 +1,43 @@
+Content-Type: multipart/mixed; boundary="===============4685200839007523420=="
+MIME-Version: 1.0
+From: orders@brightway-jan.example
+To: orders@delta-industrial.example
+Subject: PO BW-01123 - Order from Brightway Janitorial Services (SYNTHETIC)
+Message-ID: <po-BW-01123@brightway-jan.example>
+Date: Thu, 29 Oct 2026 20:23:08 +0000
+
+--===============4685200839007523420==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+Hello,
+
+Please process the following order:
+
+PO Number: BW-01123
+Date: 02/06/2026
+Ship To: Detroit Warehouse
+
+Items:
+------
+  1. [FST-HCS-51618-112-SS-B25] Hex Cap Screw 5/16-18 x 1-1/2" Stainless 18-8
+     Qty: 6 BX @ $35.14
+  2. [STOR-TOTE-27] Storage Tote 27 gallon with lid
+     Qty: 10 EA @ $14.69
+  3. [FST-HCS-1213-1-SS-B50] Hex Cap Screw 1/2-13 x 1" Stainless 18-8
+     Qty: 1 BX @ $38.77
+  4. [JAN-GLS-CLN-GAL] Glass Cleaner concentrate 4/1 GAL
+     Qty: 2 CS @ $36.38
+  5. [JAN-LNR-3340-05-BL] Can Liner 33x40 0.5mil Black 250/CS
+     Qty: 2 CS @ $35.61
+  6. [FST-BHCS-M101.5-SS-B50] Button Head Cap Screw M10-1.5 Stainless 18-8
+     Qty: 3 BX @ $21.83
+
+Delivery requested by: 2026-02-11
+
+Thank you,
+Maria Santos (fictitious)
+Brightway Janitorial Services (SYNTHETIC)
++1-555-0200
+--===============4685200839007523420==--

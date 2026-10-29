@@ -1,0 +1,355 @@
+{
+  "schema_version": "1.0",
+  "order_id": "5d8cdf40-f65c-4bb4-9534-09b6ac58929d",
+  "tenant_id": "delta-industrial-supply",
+  "document_type": "ORIGINAL",
+  "status": "NEEDS_REVIEW",
+  "source": {
+    "channel": "FOLDER",
+    "message_id": null,
+    "from_address": null,
+    "subject": null,
+    "received_at": "2026-10-29T20:23:08Z",
+    "documents": [
+      {
+        "document_id": "doc-6bcc617f",
+        "kind": "PDF_TEXT",
+        "filename": "FCH-01006.pdf",
+        "mime_type": "application/pdf",
+        "sha256": "1a85591055e8a74ec64d217d330ae72614fedfb23111e966b0efa13054859cb0",
+        "page_count": 1
+      }
+    ]
+  },
+  "buyer": {
+    "name": "FreshClean Hospitality Group (SYNTHETIC)",
+    "code_on_document": "C-FCH",
+    "tax_id": "US22-8888888",
+    "gln": null,
+    "peppol_endpoint": null,
+    "address": {
+      "line1": "1500 Hospitality Blvd",
+      "city": "Cincinnati",
+      "region": "OH",
+      "postal_code": "45202",
+      "country": "US"
+    },
+    "contact": {
+      "name": "Lisa Anderson (fictitious)",
+      "email": "supply@freshclean-hosp.example",
+      "phone": "+1-555-0600"
+    },
+    "resolved": {
+      "erp_partner_id": 57,
+      "erp_partner_ref": "C-FCH",
+      "method": "CODE",
+      "score": 0.99
+    }
+  },
+  "seller": {
+    "name": "Delta Industrial Supply LLC (SYNTHETIC)",
+    "code_on_document": null,
+    "tax_id": null,
+    "address": {
+      "line1": "55 Commerce Dr",
+      "city": "Dayton",
+      "region": "OH",
+      "postal_code": "45402",
+      "country": "US"
+    },
+    "resolved": null
+  },
+  "header": {
+    "po_number": "FCH-01006",
+    "po_revision": 0,
+    "po_date": "20/04/2026",
+    "requested_delivery_date": "2026-05-03",
+    "currency": "USD",
+    "buyer_reference": "Dept 659",
+    "payment_terms_text": "Net 30",
+    "incoterms": null,
+    "ship_via": "Best Way",
+    "notes": "Confirm availability",
+    "language": "en"
+  },
+  "lines": [
+    {
+      "line_no": 1,
+      "buyer_item_code": null,
+      "seller_item_code": "FST-HCS-1213-112-SS-B100",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Hex Cap Screw 1/2-13 x 1-1/2\" Stainless 18-8",
+      "quantity": 10,
+      "uom_raw": "BX",
+      "uom": "BX",
+      "pack": {
+        "raw": "100/BX",
+        "inner_count": 100,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 40.82,
+      "price_uom": "BX",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 408.2,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "FST-HCS-1213-112-SS-B100",
+        "erp_product_id": 1023,
+        "erp_uom": "BX",
+        "erp_uom_id": 36,
+        "erp_quantity": 10,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 40.82
+      }
+    },
+    {
+      "line_no": 2,
+      "buyer_item_code": null,
+      "seller_item_code": "FST-LW-1213-ZN-B50",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Lock Washer 1/2-13 Zinc",
+      "quantity": 12,
+      "uom_raw": "BX",
+      "uom": "BX",
+      "pack": {
+        "raw": "50/BX",
+        "inner_count": 50,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 22.69,
+      "price_uom": "BX",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 272.28,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "FST-LW-1213-ZN-B50",
+        "erp_product_id": 1043,
+        "erp_uom": "BX",
+        "erp_uom_id": 23,
+        "erp_quantity": 12,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 22.69
+      }
+    },
+    {
+      "line_no": 3,
+      "buyer_item_code": null,
+      "seller_item_code": "ELEC-BATT-AA",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Batteries AA Alkaline",
+      "quantity": 3,
+      "uom_raw": "PK",
+      "uom": "PK",
+      "pack": {
+        "raw": "24/PK",
+        "inner_count": 24,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 14.26,
+      "price_uom": "PK",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 42.78,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "ELEC-BATT-AA",
+        "erp_product_id": 1281,
+        "erp_uom": "PK",
+        "erp_uom_id": 1,
+        "erp_quantity": 3,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 14.26
+      }
+    },
+    {
+      "line_no": 4,
+      "buyer_item_code": null,
+      "seller_item_code": "JAN-TWL-CF",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Centerfeed Paper Towels White",
+      "quantity": 3,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "6/600/CS",
+        "inner_count": 6,
+        "inner_size": 600,
+        "inner_uom": "EA"
+      },
+      "unit_price": 46.15,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 138.45,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "JAN-TWL-CF",
+        "erp_product_id": 1178,
+        "erp_uom": "CS",
+        "erp_uom_id": 17,
+        "erp_quantity": 3,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 46.15
+      }
+    },
+    {
+      "line_no": 5,
+      "buyer_item_code": null,
+      "seller_item_code": "TOOL-WRCH-ADJ",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Adjustable Wrench 10 inch",
+      "quantity": 12,
+      "uom_raw": "EA",
+      "uom": "EA",
+      "pack": null,
+      "unit_price": 13.78,
+      "price_uom": "EA",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 165.36,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "TOOL-WRCH-ADJ",
+        "erp_product_id": 1266,
+        "erp_uom": "EA",
+        "erp_uom_id": 47,
+        "erp_quantity": 12,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 13.78
+      }
+    },
+    {
+      "line_no": 6,
+      "buyer_item_code": null,
+      "seller_item_code": "FST-HCS-51618-112-G8-B100",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Hex Cap Screw 5/16-18 x 1-1/2\" Grade 8 Yellow Zinc",
+      "quantity": 10,
+      "uom_raw": "BX",
+      "uom": "BX",
+      "pack": {
+        "raw": "100/BX",
+        "inner_count": 100,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 18.65,
+      "price_uom": "BX",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 186.5,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "FST-HCS-51618-112-G8-B100",
+        "erp_product_id": 1011,
+        "erp_uom": "BX",
+        "erp_uom_id": 3,
+        "erp_quantity": 10,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 18.65
+      }
+    }
+  ],
+  "charges": [],
+  "totals": {
+    "lines_amount_declared": 1213.57,
+    "tax_amount_declared": null,
+    "total_amount_declared": 1213.57,
+    "lines_amount_computed": 1213.57
+  },
+  "decision": {
+    "score": 0.75,
+    "route": "REVIEW",
+    "reasons": [
+      "QTY-01",
+      "HDR-02"
+    ]
+  },
+  "processing": {
+    "extractor": "synthetic/generator.py",
+    "prompt_version": null,
+    "created_at": "2026-10-29T20:23:08Z",
+    "updated_at": null
+  },
+  "ship_to": {
+    "name": "Airport Hotel",
+    "code_on_document": "HOTEL-2",
+    "address": {
+      "line1": "2800 Terminal Dr",
+      "city": "Hebron",
+      "region": "KY",
+      "postal_code": "41048",
+      "country": "US"
+    },
+    "resolved": {
+      "erp_partner_id": 58,
+      "erp_partner_ref": "HOTEL-2",
+      "method": "CODE",
+      "score": 1.0
+    }
+  },
+  "validation": {
+    "issues": [
+      {
+        "code": "QTY-01",
+        "severity": "BLOCK",
+        "path": "/lines/5/quantity",
+        "message": "Quantità mancante o non valida"
+      },
+      {
+        "code": "HDR-02",
+        "severity": "REVIEW",
+        "path": "/header/po_date",
+        "message": "Data ordine mancante o non plausibile"
+      }
+    ]
+  },
+  "_synthetic_metadata": {
+    "hard_case_types": [
+      "MISSING_DATE",
+      "MISSING_QTY"
+    ],
+    "is_hard_case": true
+  }
+}

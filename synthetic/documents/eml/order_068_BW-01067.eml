@@ -1,0 +1,57 @@
+Content-Type: multipart/mixed; boundary="===============6101878204540624144=="
+MIME-Version: 1.0
+From: orders@brightway-jan.example
+To: orders@delta-industrial.example
+Subject: PO BW-01067 - Order from Brightway Janitorial Services (SYNTHETIC)
+Message-ID: <po-BW-01067@brightway-jan.example>
+Date: Thu, 29 Oct 2026 20:23:08 +0000
+
+--===============6101878204540624144==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+Hello,
+
+Please process the following order:
+
+PO Number: BW-01067
+Date: 03/28/2026
+Ship To: Detroit Warehouse
+
+Items:
+------
+  1. [FST-BHCS-M101.5-SS-B50] Button Head Cap Screw M10-1.5 Stainless 18-8
+     Qty: 2 BX @ $21.83
+  2. [FST-HCS-51618-1-SS-B50] Hex Cap Screw 5/16-18 x 1" Stainless 18-8
+     Qty: 10 BX @ $30.54
+  3. [JAN-DISF-BLC] Disinfectant Bleach concentrate 6/1 GAL
+     Qty: 10 CS @ $40.80
+  4. [FST-LN-1213-ZN-B100] Lock Nut 1/2-13 Nylon Insert Zinc
+     Qty: 10 BX @ $24.92
+  5. [TAP-ET-3/4] Electrical Tape Black 3/4 inch x 66 ft
+     Qty: 4 CS @ $81.67
+  6. [TOOL-PLIER-NED] Needle Nose Pliers 6 inch
+     Qty: 6 EA @ $11.17
+  7. [JAN-LNR-2424-05-BL] Can Liner 24x24 0.5mil Black 100/CS
+     Qty: 5 CS @ $51.36
+  8. [JAN-LNR-2432-05-CL] Can Liner 24x32 0.5mil Clear 200/CS
+     Qty: 4 CS @ $57.02
+  9. [PPE-GLV-NIT6-M-BLA] Nitrile Exam Gloves 6 mil powder-free Black size M
+     Qty: 24 CS @ $85.78
+  10. [FST-SHCS-51618-112-SS-B50] Socket Head Cap Screw 5/16-18 x 1-1/2" Alloy Steel Black Oxide
+     Qty: 4 BX @ $44.46
+  11. [FST-FHCS-51618-112-SS-B100] Flat Head Cap Screw 5/16-18 x 1-1/2" Stainless 18-8
+     Qty: 3 BX @ $14.75
+  12. [JAN-SS-CLN] Stainless Steel Cleaner ready to use 6/32 OZ
+     Qty: 24 CS @ $37.11
+  13. [JAN-TP-2P-48] Toilet Paper 2-ply standard roll
+     Qty: 2 CS @ $34.46
+
+Delivery requested by: 2026-04-15
+
+Thank you,
+Maria Santos (fictitious)
+Brightway Janitorial Services (SYNTHETIC)
++1-555-0200
+--===============6101878204540624144==--
