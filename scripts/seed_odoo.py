@@ -525,8 +525,13 @@ def seed_pricelists(
         client.write("res.partner", [cust_id], {"property_product_pricelist": pricelist_id})
 
 
-def setup_technical_user(client: OdooClient) -> None:
-    """Crea l'utente tecnico ventureorder-bot."""
+def setup_technical_user(client: OdooClient, bot_password: str) -> None:
+    """Crea l'utente tecnico ventureorder-bot.
+
+    Args:
+        client: Client Odoo connesso
+        bot_password: Password per l'utente bot (da ODOO_BOT_PASSWORD)
+    """
     print("\n=== Configurazione utente tecnico ===")
 
     existing = client.search(
@@ -549,7 +554,7 @@ def setup_technical_user(client: OdooClient) -> None:
         "name": "VentureOrder Bot (SYNTHETIC)",
         "login": "ventureorder-bot",
         "email": "bot@ventureorder.example",
-        "password": "changeme_in_production",
+        "password": bot_password,
     }
 
     # Odoo 19 usa group_ids, non groups_id
@@ -563,6 +568,13 @@ def setup_technical_user(client: OdooClient) -> None:
 
 def main():
     """Entry point principale."""
+    # Verifica variabile obbligatoria per il bot
+    bot_password = os.getenv("ODOO_BOT_PASSWORD")
+    if not bot_password:
+        print("ERRORE: ODOO_BOT_PASSWORD non definita.", file=sys.stderr)
+        print("Impostare la variabile d'ambiente con la password per l'utente bot.", file=sys.stderr)
+        sys.exit(1)
+
     # Configurazione da environment o default
     url = os.getenv("ODOO_URL", "http://localhost:8069")
     db = os.getenv("ODOO_DB", "vo_demo")
@@ -609,7 +621,7 @@ def main():
     product_map = seed_products(client, products, uom_map, cat_map)
     customer_map = seed_customers(client, customers)
     seed_pricelists(client, customers, customer_map, product_map, products)
-    setup_technical_user(client)
+    setup_technical_user(client, bot_password)
 
     print("\n" + "=" * 60)
     print("Seed completato!")
