@@ -159,23 +159,23 @@ def build_extraction_prompt(
 ) -> str:
     """
     Costruisce il prompt per l'estrazione.
-    
+
     Args:
         document_content: Contenuto testuale del documento.
         preprocessed_lines: Righe già estratte dal preprocessor.
         preprocessed_header: Header già estratti dal preprocessor.
-        
+
     Returns:
         Prompt completo per l'LLM.
     """
     context_parts = []
-    
+
     if preprocessed_header:
         context_parts.append("DATI TESTATA GIÀ ESTRATTI:")
         for key, value in preprocessed_header.items():
             if value:
                 context_parts.append(f"  - {key}: {value}")
-    
+
     if preprocessed_lines:
         context_parts.append("\nRIGHE GIÀ ESTRATTE DA TABELLA:")
         context_parts.append("(Verifica e completa con dati mancanti)")
@@ -188,13 +188,13 @@ def build_extraction_prompt(
             context_parts.append(line_str)
         if len(preprocessed_lines) > 10:
             context_parts.append(f"  ... e altre {len(preprocessed_lines) - 10} righe")
-    
+
     preprocessed_context = "\n".join(context_parts) if context_parts else "(Nessun dato pre-estratto)"
-    
+
     content_truncated = document_content[:8000]
     if len(document_content) > 8000:
         content_truncated += "\n\n[... contenuto troncato ...]"
-    
+
     return EXTRACTION_USER_PROMPT_TEMPLATE.format(
         preprocessed_context=preprocessed_context,
         document_content=content_truncated,

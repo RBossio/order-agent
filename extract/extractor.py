@@ -39,7 +39,7 @@ from .prompts import (
 class OrderExtractor:
     """
     Estrattore di ordini da NormalizedInput.
-    
+
     Combina:
     1. Pre-elaborazione deterministica (tabelle strutturate)
     2. Estrazione LLM (testata, righe ambigue, testo libero)
@@ -55,7 +55,7 @@ class OrderExtractor:
     ):
         """
         Inizializza l'estrattore.
-        
+
         Args:
             backend: Backend LLM da usare. Default: MockBackend.
             max_retries: Numero massimo di retry dopo errore validazione.
@@ -70,10 +70,10 @@ class OrderExtractor:
     def extract(self, normalized_input: dict) -> ExtractionResult:
         """
         Estrae un ordine da un NormalizedInput.
-        
+
         Args:
             normalized_input: Dizionario con struttura NormalizedInput.
-            
+
         Returns:
             ExtractionResult con ordine estratto e metadati.
         """
@@ -83,31 +83,31 @@ class OrderExtractor:
         llm_calls = 0
         total_tokens = 0
         preprocessed_fields: list[str] = []
-        
+
         preprocessed = self.preprocessor.preprocess(normalized_input)
-        
+
         if preprocessed.header and preprocessed.header.po_number:
             preprocessed_fields.append("/header/po_number")
-        
+
         for idx, line in enumerate(preprocessed.lines):
             if not line.needs_llm:
                 preprocessed_fields.append(f"/lines/{idx}")
-        
+
         document_content = self._build_document_content(normalized_input, preprocessed)
-        
+
         preprocessed_lines_dict = [
             {
-                "line_no": l.row_index,
-                "seller_item_code": l.seller_item_code,
-                "buyer_item_code": l.buyer_item_code,
-                "description": l.description,
-                "quantity": l.quantity,
-                "uom_raw": l.uom_raw,
-                "unit_price": l.unit_price,
+                "line_no": line.row_index,
+                "seller_item_code": line.seller_item_code,
+                "buyer_item_code": line.buyer_item_code,
+                "description": line.description,
+                "quantity": line.quantity,
+                "uom_raw": line.uom_raw,
+                "unit_price": line.unit_price,
             }
-            for l in preprocessed.lines
+            for line in preprocessed.lines
         ]
-        
+
         preprocessed_header_dict = None
         if preprocessed.header:
             preprocessed_header_dict = {
@@ -116,13 +116,13 @@ class OrderExtractor:
                 "currency": preprocessed.header.currency,
                 "buyer_name": preprocessed.header.buyer_name,
             }
-        
+
         prompt = build_extraction_prompt(
             document_content,
             preprocessed_lines=preprocessed_lines_dict if preprocessed.lines else None,
             preprocessed_header=preprocessed_header_dict,
         )
-        
+
         llm_response = self.backend.generate(
             prompt=prompt,
             system_prompt=EXTRACTION_SYSTEM_PROMPT,
@@ -131,15 +131,15 @@ class OrderExtractor:
         )
         llm_calls += 1
         total_tokens += llm_response.total_tokens
-        
+
         extracted_json, parse_error = self._parse_json_response(llm_response.content)
-        
+
         if parse_error and self.max_retries > 0:
             retry_prompt = build_retry_prompt(
                 error_message=parse_error,
                 document_summary=document_content[:2000],
             )
-            
+
             retry_response = self.backend.generate(
                 prompt=retry_prompt,
                 system_prompt=EXTRACTION_SYSTEM_PROMPT,
@@ -148,9 +148,9 @@ class OrderExtractor:
             )
             llm_calls += 1
             total_tokens += retry_response.total_tokens
-            
+
             extracted_json, parse_error = self._parse_json_response(retry_response.content)
-        
+
         if parse_error:
             warnings.append(ExtractionWarning(
                 code="EXT-01",
@@ -158,7 +158,7 @@ class OrderExtractor:
                 message=f"Errore parsing JSON: {parse_error}",
             ))
             extracted_json = {"header": {}, "lines": []}
-        
+
         order = self._build_order(
             extracted_json,
             preprocessed,
@@ -166,17 +166,17 @@ class OrderExtractor:
             field_confidences,
             warnings,
         )
-        
+
         if self.validate_output:
             validation_errors = self._validate_order(order)
             warnings.extend(validation_errors)
-        
+
         extraction_time = int((time.time() - start_time) * 1000)
-        
+
         order.status = "NEEDS_REVIEW" if any(
             w.severity == WarningSeverity.BLOCK for w in warnings
         ) else "EXTRACTED"
-        
+
         return ExtractionResult(
             order=order,
             field_confidences=field_confidences,
@@ -190,15 +190,15 @@ class OrderExtractor:
     def extract_from_file(self, file_path: Path | str) -> ExtractionResult:
         """
         Estrae da un file JSON NormalizedInput.
-        
+
         Args:
             file_path: Percorso al file JSON.
-            
+
         Returns:
             ExtractionResult con ordine estratto.
         """
         file_path = Path(file_path)
-        with open(file_path, "r", encoding="utf-8") as f:
+        with open(file_path, encoding="utf-8") as f:
             normalized_input = json.load(f)
         return self.extract(normalized_input)
 
@@ -209,7 +209,7 @@ class OrderExtractor:
     ) -> str:
         """Costruisce il contenuto testuale per il prompt."""
         parts = []
-        
+
         email_meta = normalized_input.get("email_metadata")
         if email_meta:
             parts.append("=== EMAIL METADATA ===")
@@ -222,10 +222,10 @@ class OrderExtractor:
             if email_meta.get("date"):
                 parts.append(f"Date: {email_meta['date']}")
             parts.append("")
-        
+
         if preprocessed.unstructured_text:
             parts.append(preprocessed.unstructured_text)
-        
+
         for part in normalized_input.get("parts", []):
             if part.get("part_type") in ("EXCEL_SHEET", "CSV_DATA"):
                 tables = part.get("tables", [])
@@ -234,7 +234,7 @@ class OrderExtractor:
                     if table_text:
                         parts.append(f"\n=== TABELLA ({part.get('sheet_name', 'Foglio')}) ===")
                         parts.append(table_text)
-        
+
         return "\n".join(parts)
 
     def _table_to_text(self, table: dict) -> str:
@@ -242,7 +242,7 @@ class OrderExtractor:
         rows = table.get("rows", [])
         if not rows:
             return ""
-        
+
         lines = []
         for row in rows[:30]:
             cells = []
@@ -253,21 +253,21 @@ class OrderExtractor:
                     val = cell
                 cells.append(str(val) if val is not None else "")
             lines.append(" | ".join(cells))
-        
+
         if len(rows) > 30:
             lines.append(f"... ({len(rows) - 30} righe aggiuntive)")
-        
+
         return "\n".join(lines)
 
     def _parse_json_response(self, content: str) -> tuple[dict | None, str | None]:
         """
         Parsa la risposta JSON dall'LLM.
-        
+
         Returns:
             Tuple (json_dict, error_message).
         """
         content = content.strip()
-        
+
         if content.startswith("```"):
             lines = content.split("\n")
             if lines[0].startswith("```"):
@@ -275,7 +275,7 @@ class OrderExtractor:
             if lines and lines[-1].strip() == "```":
                 lines = lines[:-1]
             content = "\n".join(lines)
-        
+
         try:
             data = json.loads(content)
             return data, None
@@ -299,34 +299,34 @@ class OrderExtractor:
     ) -> ExtractedOrder:
         """Costruisce l'ordine finale combinando preprocessed e LLM."""
         order = ExtractedOrder()
-        
+
         source = normalized_input.get("source", {})
         order.source_channel = self._infer_channel(source.get("file_type", ""))
-        
+
         email_meta = normalized_input.get("email_metadata")
         if email_meta:
             order.source_message_id = email_meta.get("message_id")
             order.source_from_address = email_meta.get("from_address")
             order.source_subject = email_meta.get("subject")
             order.source_received_at = email_meta.get("date_parsed")
-        
+
         order.source_documents = [{
             "document_id": f"doc-{normalized_input.get('input_id', 'unknown')[:8]}",
             "kind": self._file_type_to_kind(source.get("file_type", "")),
             "filename": source.get("filename"),
             "sha256": source.get("sha256", "0" * 64),
         }]
-        
+
         header_data = extracted_json.get("header", {})
-        
+
         po_number = header_data.get("po_number")
         if not po_number and preprocessed.header:
             po_number = preprocessed.header.po_number
-        
+
         po_date = header_data.get("po_date")
         if not po_date and preprocessed.header:
             po_date = preprocessed.header.po_date
-        
+
         if not po_number:
             warnings.append(ExtractionWarning(
                 code="HDR-01",
@@ -335,7 +335,7 @@ class OrderExtractor:
                 path="/header/po_number",
             ))
             po_number = "UNKNOWN"
-        
+
         if not po_date:
             warnings.append(ExtractionWarning(
                 code="HDR-02",
@@ -344,7 +344,7 @@ class OrderExtractor:
                 path="/header/po_date",
             ))
             po_date = "1970-01-01"
-        
+
         order.header = ExtractedHeader(
             po_number=po_number,
             po_date=po_date,
@@ -355,13 +355,13 @@ class OrderExtractor:
             ship_via=header_data.get("ship_via"),
             notes=header_data.get("notes"),
         )
-        
+
         field_confidences.append(FieldConfidence(
             path="/header/po_number",
             confidence=0.95 if po_number != "UNKNOWN" else 0.0,
             source="llm" if header_data.get("po_number") else "preprocessor",
         ))
-        
+
         buyer_data = extracted_json.get("buyer", {})
         if buyer_data:
             order.buyer = ExtractedParty(
@@ -372,7 +372,7 @@ class OrderExtractor:
             )
             if buyer_data.get("address"):
                 order.buyer.address_line1 = buyer_data["address"]
-        
+
         ship_to_data = extracted_json.get("ship_to", {})
         if ship_to_data:
             order.ship_to = ExtractedParty(
@@ -380,7 +380,7 @@ class OrderExtractor:
             )
             if ship_to_data.get("address"):
                 order.ship_to.address_line1 = ship_to_data["address"]
-        
+
         lines = self._build_lines(
             extracted_json.get("lines", []),
             preprocessed.lines,
@@ -388,14 +388,14 @@ class OrderExtractor:
             warnings,
         )
         order.lines = lines
-        
+
         if not lines:
             warnings.append(ExtractionWarning(
                 code="LIN-01",
                 severity=WarningSeverity.BLOCK,
                 message="Nessuna riga ordine estratta",
             ))
-        
+
         totals_data = extracted_json.get("totals", {})
         if totals_data:
             order.totals = ExtractedTotals(
@@ -403,11 +403,11 @@ class OrderExtractor:
                 tax_amount_declared=totals_data.get("tax"),
                 total_amount_declared=totals_data.get("total"),
             )
-        
+
         if field_confidences:
             avg_confidence = sum(fc.confidence for fc in field_confidences) / len(field_confidences)
             order.overall_confidence = avg_confidence
-        
+
         return order
 
     def _build_lines(
@@ -419,7 +419,7 @@ class OrderExtractor:
     ) -> list[ExtractedLine]:
         """Costruisce le righe ordine combinando preprocessed e LLM."""
         final_lines: list[ExtractedLine] = []
-        
+
         if preprocessed_lines and not llm_lines:
             for idx, pl in enumerate(preprocessed_lines, start=1):
                 if pl.description and pl.quantity is not None:
@@ -440,16 +440,16 @@ class OrderExtractor:
                         confidence=pl.confidence,
                         source="preprocessor",
                     ))
-        
+
         elif llm_lines:
             for idx, ll in enumerate(llm_lines, start=1):
                 description = ll.get("description", "")
                 quantity = ll.get("quantity")
                 uom_raw = ll.get("uom_raw", "EA")
-                
+
                 if not description:
                     continue
-                
+
                 if quantity is None:
                     warnings.append(ExtractionWarning(
                         code="QTY-01",
@@ -458,12 +458,12 @@ class OrderExtractor:
                         path=f"/lines/{idx-1}/quantity",
                     ))
                     quantity = 1
-                
+
                 pack = None
                 pack_info = ll.get("pack_info")
                 if pack_info:
                     pack = self._parse_pack_info(pack_info)
-                
+
                 line = ExtractedLine(
                     line_no=ll.get("line_no", idx),
                     description=description,
@@ -483,46 +483,46 @@ class OrderExtractor:
                     confidence=0.85,
                     source="llm",
                 ))
-        
+
         return final_lines
 
     def _parse_pack_info(self, pack_info: str) -> ExtractedPack | None:
         """Parsa informazioni confezione (es. '4/1 GAL', '100/BX')."""
         if not pack_info:
             return None
-        
+
         pack = ExtractedPack(raw=pack_info)
-        
+
         match = re.match(r'(\d+)/(\d+(?:\.\d+)?)\s*([A-Z]+)', pack_info, re.IGNORECASE)
         if match:
             pack.inner_count = float(match.group(1))
             pack.inner_size = float(match.group(2))
             pack.inner_uom = match.group(3).upper()
             return pack
-        
+
         match = re.match(r'(\d+)/([A-Z]+)', pack_info, re.IGNORECASE)
         if match:
             pack.inner_count = float(match.group(1))
             pack.inner_size = 1
             pack.inner_uom = match.group(2).upper()
             return pack
-        
+
         return pack
 
     def _validate_order(self, order: ExtractedOrder) -> list[ExtractionWarning]:
         """Valida l'ordine contro lo schema venture-order.v1."""
         warnings = []
-        
+
         if not self._schema_path.exists():
             return warnings
-        
+
         try:
             with open(self._schema_path) as f:
                 schema = json.load(f)
-            
+
             order_dict = order.to_dict()
             validator = jsonschema.Draft202012Validator(schema)
-            
+
             for error in validator.iter_errors(order_dict):
                 path = "/" + "/".join(str(p) for p in error.absolute_path) if error.absolute_path else ""
                 warnings.append(ExtractionWarning(
@@ -533,7 +533,7 @@ class OrderExtractor:
                 ))
         except (jsonschema.exceptions.SchemaError, KeyError, TypeError):
             pass
-        
+
         return warnings
 
     def _infer_channel(self, file_type: str) -> str:

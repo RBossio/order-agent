@@ -14,7 +14,7 @@ from .base import LLMBackend, LLMResponse
 class OllamaBackend(LLMBackend):
     """
     Backend per Ollama (LLM locale via HTTP).
-    
+
     Configurazione via variabili d'ambiente:
     - OLLAMA_HOST: URL base (default: http://localhost:11434)
     - OLLAMA_MODEL: Nome del modello (default: qwen2.5:7b-instruct)
@@ -72,7 +72,7 @@ class OllamaBackend(LLMBackend):
     ) -> LLMResponse:
         """
         Genera una risposta usando Ollama.
-        
+
         Usa format="json" se json_schema è fornito.
         """
         messages = []
