@@ -1,0 +1,51 @@
+Content-Type: multipart/mixed; boundary="===============8536623049273988510=="
+MIME-Version: 1.0
+From: purchasing@delta.example
+To: orders@delta-industrial.example
+Subject: PO BW-01031 - Order from Delta Holdings (SYNTHETIC)
+Message-ID: <po-BW-01031@delta.example>
+Date: Thu, 15 Jan 2026 10:30:00 +0000
+
+--===============8536623049273988510==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+Hello,
+
+Please process the following order:
+
+PO Number: BW-01031
+Date: 04/16/2026
+Ship To: Delta Shipping Location 1
+
+Items:
+------
+  1. [JAN-HSF-252] Hand Soap Foam (SYNTHETIC)
+     Qty: 4 CS @ $94.24
+  2. [JAN-HSG-080] Hand Sanitizer Gel 70% (SYNTHETIC)
+     Qty: 6 CS @ $79.77
+  3. [PPE-GLV-LAT-5-XXL-WHI] Latex Gloves XXL PF (SYNTHETIC)
+     Qty: 10 CS @ $72.20
+  4. [JAN-DSP-128] Disinfectant Spray (SYNTHETIC)
+     Qty: 5 CS @ $46.13
+  5. [JAN-FTI-154] Facial Tissue Flat Box (SYNTHETIC)
+     Qty: 10 CS @ $41.92
+  6. [FST-LWS-12-13] Lock Washer 1/2-13 Zinc (SYNTHETIC)
+     Qty: 6 BX @ $8.22
+  7. [JAN-DSP-084] Disinfectant Spray (SYNTHETIC)
+     Qty: 3 CS @ $39.61
+  8. [ADH-CON-015] Construction Adhesive (SYNTHETIC)
+     Qty: 1 CS @ $79.37
+  9. [JAN-DSP-200] Disinfectant Spray (SYNTHETIC)
+     Qty: 24 CS @ $45.69
+  10. [JAN-GCL-090] Glass Cleaner RTU (SYNTHETIC)
+     Qty: 12 CS @ $38.55
+
+Delivery requested by: 2026-04-30
+
+Thank you,
+Delta Purchasing
+Delta Holdings (SYNTHETIC)
++1-555-9584
+--===============8536623049273988510==--

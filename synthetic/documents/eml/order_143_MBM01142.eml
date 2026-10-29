@@ -1,0 +1,69 @@
+Content-Type: multipart/mixed; boundary="===============2832016523592357962=="
+MIME-Version: 1.0
+From: purchasing@apex.example
+To: orders@delta-industrial.example
+Subject: PO MBM01142 - Order from Apex Corp. (SYNTHETIC)
+Message-ID: <po-MBM01142@apex.example>
+Date: Thu, 15 Jan 2026 10:30:00 +0000
+
+--===============2832016523592357962==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+Hello,
+
+Please process the following order:
+
+PO Number: MBM01142
+Date: 3/14/26
+Ship To: Apex Shipping Location 1
+
+Items:
+------
+  1. [APEX-SAF-6004] Hard Hat Orange ANSI Type I (SYNTHETIC)
+     Qty: 4 EA @ $16.96
+  2. [APEX-ABR-7233] Cut-Off Wheel 6in (SYNTHETIC)
+     Qty: 5 BX @ $47.08
+  3. [PKG-BBW-147] Bubble Wrap 12in (SYNTHETIC)
+     Qty: 4 RO @ $41.67
+  4. [APEX-ABR-4176] Cut-Off Wheel 6in (SYNTHETIC)
+     Qty: 1 BX @ $56.38
+  5. [FST-LWS-M6] Lock Washer M6 Zinc (SYNTHETIC)
+     Qty: 1 BX @ $15.61
+  6. [JAN-FPD-17-BLA] Floor Pad 17in Black (SYNTHETIC)
+     Qty: 10 CS @ $20.93
+  7. [APEX-SAF-6974] Nitrile Gloves S White 8mil PF (SYNTHETIC)
+     Qty: 2 CS @ $98.35
+  8. [APEX-JAN-7359] Can Liner 38x58 1.2mil Black Roll (SYNTHETIC)
+     Qty: 5 RO @ $17.13
+  9. [JAN-PTR-2P-NAT] Paper Towel Roll 2P Natural (SYNTHETIC)
+     Qty: 10 CS @ $84.79
+  10. [APEX-JAN-1997] Glass Cleaner RTU (SYNTHETIC)
+     Qty: 1 CS @ $25.41
+  11. [APEX-JAN-8154] Toilet Tissue 2P Standard (SYNTHETIC)
+     Qty: 12 CS @ $61.32
+  12. [ABR-COW-5IN] Cut-Off Wheel 5in (SYNTHETIC)
+     Qty: 6 BX @ $62.33
+  13. [JAN-FTI-151] Facial Tissue Flat Box (SYNTHETIC)
+     Qty: 1 CS @ $46.07
+  14. [APEX-SAF-8131] Hard Hat Blue ANSI Type I (SYNTHETIC)
+     Qty: 10 EA @ $16.86
+  15. [APEX-ELE-1137] Wire Nut 3/4-10 {color} (SYNTHETIC)
+     Qty: 3 BX @ $20.66
+  16. [APEX-JAN-5741] Hand Soap Foam (SYNTHETIC)
+     Qty: 24 CS @ $82.47
+  17. [APEX-ABR-8800] Cut-Off Wheel 6in (SYNTHETIC)
+     Qty: 2 BX @ $51.91
+  18. [JAN-NFC-192] Floor Cleaner Neutral Concentrate (SYNTHETIC)
+     Qty: 4 CS @ $58.32
+  19. [APEX-SAF-7205] N95 Respirator (SYNTHETIC)
+     Qty: 2 BX @ $38.61
+
+Delivery requested by: 2026-04-03
+
+Thank you,
+Apex Purchasing
+Apex Corp. (SYNTHETIC)
++1-555-3504
+--===============2832016523592357962==--

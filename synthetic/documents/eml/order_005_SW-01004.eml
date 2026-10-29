@@ -1,0 +1,43 @@
+Content-Type: multipart/mixed; boundary="===============7823612428477795918=="
+MIME-Version: 1.0
+From: purchasing@nova.example
+To: orders@delta-industrial.example
+Subject: PO SW-01004 - Order from Nova Company (SYNTHETIC)
+Message-ID: <po-SW-01004@nova.example>
+Date: Thu, 15 Jan 2026 10:30:00 +0000
+
+--===============7823612428477795918==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+Hello,
+
+Please process the following order:
+
+PO Number: SW-01004
+Date: 02-03-2026
+Ship To: Nova Shipping Location 1
+
+Items:
+------
+  1. [JAN-GCL-268] Glass Cleaner RTU (SYNTHETIC)
+     Qty: 5 CS @ $25.41
+  2. [LUB-MOL-068] Machine Oil Light (SYNTHETIC)
+     Qty: 24 CS @ $74.55
+  3. [NOVA-ELE-7232] Cable Tie 8in Black (SYNTHETIC)
+     Qty: 2 BG @ $15.45
+  4. [NOVA-SAF-2459] Latex Gloves XXL PF (SYNTHETIC)
+     Qty: 24 CS @ $92.05
+  5. [JAN-DGR-130] Degreaser Industrial (SYNTHETIC)
+     Qty: 10 CS @ $71.91
+  6. [NOVA-FAS-4283] Socket Head Cap Screw 3/4-10 x 1 (SYNTHETIC)
+     Qty: 12 BX @ $48.53
+
+Delivery requested by: 2026-02-20
+
+Thank you,
+Nova Purchasing
+Nova Company (SYNTHETIC)
++1-555-9586
+--===============7823612428477795918==--

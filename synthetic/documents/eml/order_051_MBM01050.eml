@@ -1,0 +1,65 @@
+Content-Type: multipart/mixed; boundary="===============3648798997938552520=="
+MIME-Version: 1.0
+From: purchasing@apex.example
+To: orders@delta-industrial.example
+Subject: PO MBM01050 - Order from Apex Corp. (SYNTHETIC)
+Message-ID: <po-MBM01050@apex.example>
+Date: Thu, 15 Jan 2026 10:30:00 +0000
+
+--===============3648798997938552520==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+Hello,
+
+Please process the following order:
+
+PO Number: MBM01050
+Date: 5/11/26
+Ship To: Apex Shipping Location 1
+
+Items:
+------
+  1. [APEX-PAC-3099] Stretch Wrap 18in (SYNTHETIC)
+     Qty: 3 CS @ $125.90
+  2. [APEX-ADH-1197] Epoxy 2-Part Quick Set (SYNTHETIC)
+     Qty: 2 PK @ $18.68
+  3. [JAN-DSP-128] Disinfectant Spray (SYNTHETIC)
+     Qty: 12 CS @ $46.13
+  4. [APEX-FAS-1909] Hex Nut 3/4-10 Grade 5 Zinc (SYNTHETIC)
+     Qty: 5 BX @ $9.87
+  5. [PPE-HAT-ORA-1] Hard Hat Orange ANSI Type I (SYNTHETIC)
+     Qty: 6 EA @ $16.96
+  6. [APEX-ABR-4240] Sandpaper Sheet 150 Grit (SYNTHETIC)
+     Qty: 5 PK @ $19.59
+  7. [PPE-GLV-LAT-6-L-WHI] Latex Gloves L PF (SYNTHETIC)
+     Qty: 1 CS @ $87.29
+  8. [JAN-FST-166] Floor Stripper Heavy Duty (SYNTHETIC)
+     Qty: 12 CS @ $64.02
+  9. [APEX-FAS-3372] Lock Washer 1/4-20 Zinc (SYNTHETIC)
+     Qty: 3 BX @ $4.70
+  10. [APEX-ADH-6957] Epoxy 2-Part Quick Set (SYNTHETIC)
+     Qty: 2 PK @ $29.98
+  11. [APEX-ADH-8055] Super Glue Gel (SYNTHETIC)
+     Qty: 10 PK @ $26.38
+  12. [PKG-PTC-232] Packing Tape Clear 2in (SYNTHETIC)
+     Qty: 24 CS @ $53.85
+  13. [APEX-JAN-9661] Hand Sanitizer Gel 70% (SYNTHETIC)
+     Qty: 12 CS @ $82.52
+  14. [FST-FWS-34-10-1] Flat Washer 3/4-10 Zinc (SYNTHETIC)
+     Qty: 10 BX @ $11.79
+  15. [ABR-COW-412IN-1] Cut-Off Wheel 4-1/2in (SYNTHETIC)
+     Qty: 6 BX @ $34.25
+  16. [JAN-FST-214] Floor Stripper Heavy Duty (SYNTHETIC)
+     Qty: 6 CS @ $66.70
+  17. [APEX-ELE-1709] Wire Nut 3/8-16 {color} (SYNTHETIC)
+     Qty: 12 BX @ $23.05
+
+Delivery requested by: 2026-05-31
+
+Thank you,
+Apex Purchasing
+Apex Corp. (SYNTHETIC)
++1-555-3504
+--===============3648798997938552520==--

@@ -1,0 +1,266 @@
+{
+  "schema_version": "1.0",
+  "order_id": "0349b447-ef6d-5830-be91-7063a523f018",
+  "tenant_id": "delta-industrial-supply",
+  "document_type": "ORIGINAL",
+  "status": "VALIDATED",
+  "source": {
+    "channel": "FOLDER",
+    "message_id": null,
+    "from_address": null,
+    "subject": null,
+    "received_at": "2026-01-15T10:30:00Z",
+    "documents": [
+      {
+        "document_id": "doc-fdd2812b",
+        "kind": "PDF_TEXT",
+        "filename": "PTD-01041.pdf",
+        "mime_type": "application/pdf",
+        "sha256": "46db540ec265aec0ce4d8edf690786cbcdb10e2d5007938879f8f427b944120b",
+        "page_count": 1
+      }
+    ]
+  },
+  "buyer": {
+    "name": "Titan Holdings (SYNTHETIC)",
+    "code_on_document": "C-TITAN",
+    "tax_id": "US88-3663319",
+    "gln": null,
+    "peppol_endpoint": null,
+    "address": {
+      "line1": "6062 Business Park Rd",
+      "city": "Fort Wayne",
+      "region": "IN",
+      "postal_code": "46802",
+      "country": "US"
+    },
+    "contact": {
+      "name": "Titan Purchasing",
+      "email": "purchasing@titan.example",
+      "phone": "+1-555-2079"
+    },
+    "resolved": {
+      "erp_partner_id": 66,
+      "erp_partner_ref": "C-TITAN",
+      "method": "CODE",
+      "score": 0.99
+    }
+  },
+  "seller": {
+    "name": "Delta Industrial Supply LLC (SYNTHETIC)",
+    "code_on_document": null,
+    "tax_id": null,
+    "address": {
+      "line1": "55 Commerce Dr",
+      "city": "Dayton",
+      "region": "OH",
+      "postal_code": "45402",
+      "country": "US"
+    },
+    "resolved": null
+  },
+  "header": {
+    "po_number": "PTD-01041",
+    "po_revision": 0,
+    "po_date": "29.03.2026",
+    "requested_delivery_date": "2026-04-08",
+    "currency": "USD",
+    "buyer_reference": "Dept 119",
+    "payment_terms_text": "Net 45",
+    "incoterms": null,
+    "ship_via": "UPS Ground",
+    "notes": "Rush order",
+    "language": "en"
+  },
+  "lines": [
+    {
+      "line_no": 1,
+      "buyer_item_code": null,
+      "seller_item_code": "JAN-FST-181",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Floor Stripper Heavy Duty (SYNTHETIC)",
+      "quantity": 3,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "4/1GAL",
+        "inner_count": 4,
+        "inner_size": 1,
+        "inner_uom": "GLL"
+      },
+      "unit_price": 74.36,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 223.08,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "JAN-FST-181",
+        "erp_product_id": 1181,
+        "erp_uom": "CS",
+        "erp_uom_id": 7,
+        "erp_quantity": 3,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 74.36
+      }
+    },
+    {
+      "line_no": 2,
+      "buyer_item_code": null,
+      "seller_item_code": "ABR-COW-4IN-1",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Cut-Off Wheel 4in (SYNTHETIC)",
+      "quantity": 10,
+      "uom_raw": "BX",
+      "uom": "BX",
+      "pack": {
+        "raw": "25/BX",
+        "inner_count": 25,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 57.68,
+      "price_uom": "BX",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 576.8,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "ABR-COW-4IN-1",
+        "erp_product_id": 1065,
+        "erp_uom": "BX",
+        "erp_uom_id": 30,
+        "erp_quantity": 10,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 57.68
+      }
+    },
+    {
+      "line_no": 3,
+      "buyer_item_code": null,
+      "seller_item_code": "TLS-UTB-293",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Utility Blade Standard (SYNTHETIC)",
+      "quantity": 3,
+      "uom_raw": "PK",
+      "uom": "PK",
+      "pack": {
+        "raw": "100/PK",
+        "inner_count": 100,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 6.76,
+      "price_uom": "PK",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 20.28,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "TLS-UTB-293",
+        "erp_product_id": 1293,
+        "erp_uom": "PK",
+        "erp_uom_id": 2,
+        "erp_quantity": 3,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 6.76
+      }
+    },
+    {
+      "line_no": 4,
+      "buyer_item_code": null,
+      "seller_item_code": "LUB-POS-136",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Penetrating Oil Spray (SYNTHETIC)",
+      "quantity": 1,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "12/CS",
+        "inner_count": 12,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 70.87,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 70.87,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "LUB-POS-136",
+        "erp_product_id": 1136,
+        "erp_uom": "CS",
+        "erp_uom_id": 29,
+        "erp_quantity": 1,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 70.87
+      }
+    }
+  ],
+  "charges": [],
+  "totals": {
+    "lines_amount_declared": 891.03,
+    "tax_amount_declared": null,
+    "total_amount_declared": 891.03,
+    "lines_amount_computed": 891.03
+  },
+  "decision": {
+    "score": 0.98,
+    "route": "AUTO_POST",
+    "reasons": []
+  },
+  "processing": {
+    "extractor": "synthetic/generator.py",
+    "prompt_version": null,
+    "created_at": "2026-01-15T10:30:00Z",
+    "updated_at": null
+  },
+  "ship_to": {
+    "name": "Titan Shipping Location 2",
+    "code_on_document": "SHIP-02",
+    "address": {
+      "line1": "957 Business Park Rd",
+      "city": "Chicago",
+      "region": "IL",
+      "postal_code": "60601",
+      "country": "US"
+    },
+    "resolved": {
+      "erp_partner_id": 67,
+      "erp_partner_ref": "SHIP-02",
+      "method": "CODE",
+      "score": 1.0
+    }
+  },
+  "_synthetic_metadata": {
+    "hard_case_types": [
+      "TYPO_DESC"
+    ],
+    "is_hard_case": true
+  }
+}

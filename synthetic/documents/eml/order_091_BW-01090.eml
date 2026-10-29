@@ -1,0 +1,55 @@
+Content-Type: multipart/mixed; boundary="===============4671500772369581963=="
+MIME-Version: 1.0
+From: purchasing@delta.example
+To: orders@delta-industrial.example
+Subject: PO BW-01090 - Order from Delta Holdings (SYNTHETIC)
+Message-ID: <po-BW-01090@delta.example>
+Date: Thu, 15 Jan 2026 10:30:00 +0000
+
+--===============4671500772369581963==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+Hello,
+
+Please process the following order:
+
+PO Number: BW-01090
+Date: 05/06/2026
+Ship To: Delta Shipping Location 1
+
+Items:
+------
+  1. [FST-SHC-34-10-1] Socket Head Cap Screw 3/4-10 x 1 (SYNTHETIC)
+     Qty: 6 BX @ $48.53
+  2. [PKG-BBW-105] Bubble Wrap 12in (SYNTHETIC)
+     Qty: 6 RO @ $51.78
+  3. [PPE-GLV-LAT-4-XXL-BLA] Latex Gloves XXL PF (SYNTHETIC)
+     Qty: 10 CS @ $85.50
+  4. [PPE-EAR-290] Ear Plugs Foam Disposable (SYNTHETIC)
+     Qty: 4 BX @ $38.37
+  5. [PPE-GLV-NIT-4-S-WHI] Nitrile Gloves S White 4mil PF (SYNTHETIC)
+     Qty: 6 CS @ $102.14
+  6. [PPE-N95-170] N95 Respirator (SYNTHETIC)
+     Qty: 1 BX @ $31.95
+  7. [ABR-SPS-120G-1] Sandpaper Sheet 120 Grit (SYNTHETIC)
+     Qty: 12 PK @ $18.94
+  8. [JAN-FPD-17-RED] Floor Pad 17in Red (SYNTHETIC)
+     Qty: 5 CS @ $38.22
+  9. [ADH-CON-233] Construction Adhesive (SYNTHETIC)
+     Qty: 6 CS @ $67.36
+  10. [PKG-STW-097] Stretch Wrap 18in (SYNTHETIC)
+     Qty: 2 CS @ $115.67
+  11. [JAN-FFN-064] Floor Finish High Gloss (SYNTHETIC)
+     Qty: 10 CS @ $70.67
+  12. [TLS-AWR-10IN-1] Adjustable Wrench 10in (SYNTHETIC)
+     Qty: 1 EA @ $14.21
+
+Delivery requested by: 2026-05-17
+
+Thank you,
+Delta Purchasing
+Delta Holdings (SYNTHETIC)
++1-555-9584
+--===============4671500772369581963==--

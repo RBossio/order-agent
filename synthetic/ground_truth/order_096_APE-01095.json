@@ -1,0 +1,444 @@
+{
+  "schema_version": "1.0",
+  "order_id": "28f80573-5ced-58bf-9fcc-02980d3902ad",
+  "tenant_id": "delta-industrial-supply",
+  "document_type": "ORIGINAL",
+  "status": "VALIDATED",
+  "source": {
+    "channel": "FOLDER",
+    "message_id": null,
+    "from_address": null,
+    "subject": null,
+    "received_at": "2026-01-15T10:30:00Z",
+    "documents": [
+      {
+        "document_id": "doc-df69bfbd",
+        "kind": "PDF_TEXT",
+        "filename": "APE-01095.pdf",
+        "mime_type": "application/pdf",
+        "sha256": "d734fda4a2b89846447a1eda47e6954d8342634e23226bd4d7c8b1ff312ad4e7",
+        "page_count": 1
+      }
+    ]
+  },
+  "buyer": {
+    "name": "Summit Group (SYNTHETIC)",
+    "code_on_document": "C-SUMMIT",
+    "tax_id": "US19-3972018",
+    "gln": null,
+    "peppol_endpoint": null,
+    "address": {
+      "line1": "8195 Tech Center Blvd",
+      "city": "Cincinnati",
+      "region": "OH",
+      "postal_code": "45202",
+      "country": "US"
+    },
+    "contact": {
+      "name": "Summit Purchasing",
+      "email": "purchasing@summit.example",
+      "phone": "+1-555-5961"
+    },
+    "resolved": {
+      "erp_partner_id": 54,
+      "erp_partner_ref": "C-SUMMIT",
+      "method": "CODE",
+      "score": 0.99
+    }
+  },
+  "seller": {
+    "name": "Delta Industrial Supply LLC (SYNTHETIC)",
+    "code_on_document": null,
+    "tax_id": null,
+    "address": {
+      "line1": "55 Commerce Dr",
+      "city": "Dayton",
+      "region": "OH",
+      "postal_code": "45402",
+      "country": "US"
+    },
+    "resolved": null
+  },
+  "header": {
+    "po_number": "APE-01095",
+    "po_revision": 0,
+    "po_date": "2026/06/30",
+    "requested_delivery_date": "2026-07-21",
+    "currency": "USD",
+    "buyer_reference": "Dept 671",
+    "payment_terms_text": "Net 45",
+    "incoterms": null,
+    "ship_via": "FedEx",
+    "notes": null,
+    "language": "en"
+  },
+  "lines": [
+    {
+      "line_no": 1,
+      "buyer_item_code": null,
+      "seller_item_code": "ABR-FLD-5IN",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Flap Disc 5in 180 (SYNTHETIC)",
+      "quantity": 2,
+      "uom_raw": "BX",
+      "uom": "BX",
+      "pack": {
+        "raw": "10/BX",
+        "inner_count": 10,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 74.23,
+      "price_uom": "BX",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 148.46,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "ABR-FLD-5IN",
+        "erp_product_id": 1021,
+        "erp_uom": "BX",
+        "erp_uom_id": 11,
+        "erp_quantity": 2,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 74.23
+      }
+    },
+    {
+      "line_no": 2,
+      "buyer_item_code": "SUMMIT-JAN-5306",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Glass Cleaner RTU (SYNTHETIC)",
+      "quantity": 5,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "12/CS",
+        "inner_count": 12,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 38.55,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 192.75,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "JAN-GCL-090",
+        "erp_product_id": 1090,
+        "erp_uom": "CS",
+        "erp_uom_id": 25,
+        "erp_quantity": 5,
+        "conversion_factor": 1,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 38.55
+      }
+    },
+    {
+      "line_no": 3,
+      "buyer_item_code": "SUMMIT-PAC-8997",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Stretch Wrap 18in (SYNTHETIC)",
+      "quantity": 3,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "4RL/CS",
+        "inner_count": 4,
+        "inner_size": 1,
+        "inner_uom": "RL"
+      },
+      "unit_price": 128.45,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 385.35,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "PKG-STW-123",
+        "erp_product_id": 1123,
+        "erp_uom": "CS",
+        "erp_uom_id": 38,
+        "erp_quantity": 3,
+        "conversion_factor": 1,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 128.45
+      }
+    },
+    {
+      "line_no": 4,
+      "buyer_item_code": null,
+      "seller_item_code": "JAN-LNR-3339-12-CL",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Can Liner 33x39 1.2mil Clear (SYNTHETIC)",
+      "quantity": 1,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "100/CS",
+        "inner_count": 100,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 47.4,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 47.4,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "JAN-LNR-3339-12-CL",
+        "erp_product_id": 1146,
+        "erp_uom": "CS",
+        "erp_uom_id": 41,
+        "erp_quantity": 1,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 47.4
+      }
+    },
+    {
+      "line_no": 5,
+      "buyer_item_code": "SUMMIT-PAC-4712",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Packing Tape Clear 2in (SYNTHETIC)",
+      "quantity": 3,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "36RL/CS",
+        "inner_count": 36,
+        "inner_size": 1,
+        "inner_uom": "RL"
+      },
+      "unit_price": 55.32,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 165.96,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "PKG-PTC-093",
+        "erp_product_id": 1093,
+        "erp_uom": "CS",
+        "erp_uom_id": 33,
+        "erp_quantity": 3,
+        "conversion_factor": 1,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 55.32
+      }
+    },
+    {
+      "line_no": 6,
+      "buyer_item_code": "SUMMIT-SAF-3865",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Hard Hat Red ANSI Type I (SYNTHETIC)",
+      "quantity": 10,
+      "uom_raw": "EA",
+      "uom": "EA",
+      "pack": null,
+      "unit_price": 16.54,
+      "price_uom": "EA",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 165.4,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "PPE-HAT-RED",
+        "erp_product_id": 1061,
+        "erp_uom": "EA",
+        "erp_uom_id": 44,
+        "erp_quantity": 10,
+        "conversion_factor": 1,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 16.54
+      }
+    },
+    {
+      "line_no": 7,
+      "buyer_item_code": "SUMMIT-FAS-2293",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Flat Washer 5/16-18 Zinc (SYNTHETIC)",
+      "quantity": 1,
+      "uom_raw": "BX",
+      "uom": "BX",
+      "pack": {
+        "raw": "BX/100",
+        "inner_count": 100,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 5.62,
+      "price_uom": "BX",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 5.62,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "FST-FWS-516-18",
+        "erp_product_id": 1003,
+        "erp_uom": "BX",
+        "erp_uom_id": 29,
+        "erp_quantity": 1,
+        "conversion_factor": 1,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 5.62
+      }
+    },
+    {
+      "line_no": 8,
+      "buyer_item_code": "SUMMIT-JAN-6265",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Can Liner 24x24 1.5mil Clear Roll (SYNTHETIC)",
+      "quantity": 4,
+      "uom_raw": "RO",
+      "uom": "RO",
+      "pack": {
+        "raw": "50/RL",
+        "inner_count": 1,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 21.74,
+      "price_uom": "RO",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 86.96,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "JAN-LNR-2424-15-CL",
+        "erp_product_id": 1044,
+        "erp_uom": "RO",
+        "erp_uom_id": 39,
+        "erp_quantity": 4,
+        "conversion_factor": 1,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 21.74
+      }
+    },
+    {
+      "line_no": 9,
+      "buyer_item_code": null,
+      "seller_item_code": "JAN-LNR-4046-07-WH",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Can Liner 40x46 0.7mil White Roll (SYNTHETIC)",
+      "quantity": 6,
+      "uom_raw": "RO",
+      "uom": "RO",
+      "pack": {
+        "raw": "50/RL",
+        "inner_count": 1,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 33.18,
+      "price_uom": "RO",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 199.08,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "JAN-LNR-4046-07-WH",
+        "erp_product_id": 1089,
+        "erp_uom": "RO",
+        "erp_uom_id": 26,
+        "erp_quantity": 6,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 33.18
+      }
+    }
+  ],
+  "charges": [],
+  "totals": {
+    "lines_amount_declared": 1396.98,
+    "tax_amount_declared": null,
+    "total_amount_declared": 1396.98,
+    "lines_amount_computed": 1396.98
+  },
+  "decision": {
+    "score": 0.98,
+    "route": "AUTO_POST",
+    "reasons": []
+  },
+  "processing": {
+    "extractor": "synthetic/generator.py",
+    "prompt_version": null,
+    "created_at": "2026-01-15T10:30:00Z",
+    "updated_at": null
+  },
+  "ship_to": {
+    "name": "Summit Shipping Location 2",
+    "code_on_document": "SHIP-02",
+    "address": {
+      "line1": "2573 Tech Center Blvd",
+      "city": "Detroit",
+      "region": "MI",
+      "postal_code": "48201",
+      "country": "US"
+    },
+    "resolved": {
+      "erp_partner_id": 55,
+      "erp_partner_ref": "SHIP-02",
+      "method": "CODE",
+      "score": 1.0
+    }
+  },
+  "_synthetic_metadata": {
+    "hard_case_types": [],
+    "is_hard_case": false
+  }
+}

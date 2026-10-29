@@ -1,0 +1,75 @@
+Content-Type: multipart/mixed; boundary="===============5067445145322949178=="
+MIME-Version: 1.0
+From: purchasing@global.example
+To: orders@delta-industrial.example
+Subject: PO QS-01059 - Order from Global Corp. (SYNTHETIC)
+Message-ID: <po-QS-01059@global.example>
+Date: Thu, 15 Jan 2026 10:30:00 +0000
+
+--===============5067445145322949178==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+Hello,
+
+Please process the following order:
+
+PO Number: QS-01059
+Date: Apr 05, 2026
+Ship To: Global Shipping Location 2
+
+Items:
+------
+  1. [GLOBAL-ABR-1353] Cut-Off Wheel 4in (SYNTHETIC)
+     Qty: 3 BX @ $57.68
+  2. [ADH-CON-246] Construction Adhesive (SYNTHETIC)
+     Qty: 5 CS @ $59.67
+  3. [JAN-LNR-4046-07-WH] Can Liner 40x46 0.7mil White Roll (SYNTHETIC)
+     Qty: 24 RO @ $33.18
+  4. [TLS-AWR-12IN] Adjustable Wrench 12in (SYNTHETIC)
+     Qty: 2 EA @ $32.70
+  5. [TLS-UTB-197] Utility Blade Standard (SYNTHETIC)
+     Qty: 2 PK @ $7.32
+  6. [GLOBAL-JAN-5240] Disinfectant Spray (SYNTHETIC)
+     Qty: 24 CS @ $62.71
+  7. [JAN-LNR-3858-12-BL] Can Liner 38x58 1.2mil Black Roll (SYNTHETIC)
+     Qty: 10 RO @ $17.13
+  8. [GLOBAL-TOO-8618] Screwdriver {type} M6 x 3 (SYNTHETIC)
+     Qty: 2 EA @ $4.20
+  9. [PKG-PTC-202] Packing Tape Clear 2in (SYNTHETIC)
+     Qty: 10 CS @ $60.96
+  10. [JAN-DGR-217] Degreaser Industrial (SYNTHETIC)
+     Qty: 3 CS @ $61.81
+  11. [GLOBAL-JAN-5815] Facial Tissue Flat Box (SYNTHETIC)
+     Qty: 2 CS @ $41.92
+  12. [FST-HCS-38-16-2] Hex Cap Screw 3/8-16 x 2 Grade 5 Zinc (SYNTHETIC)
+     Qty: 4 BX @ $9.68
+  13. [JAN-NFC-014] Floor Cleaner Neutral Concentrate (SYNTHETIC)
+     Qty: 24 CS @ $63.97
+  14. [GLOBAL-ADH-7043] Epoxy 2-Part Quick Set (SYNTHETIC)
+     Qty: 5 PK @ $29.98
+  15. [JAN-PTR-1P-WHI] Paper Towel Roll 1P White (SYNTHETIC)
+     Qty: 3 CS @ $62.73
+  16. [GLOBAL-PAC-7756] Packing Tape Clear 2in (SYNTHETIC)
+     Qty: 2 CS @ $55.32
+  17. [GLOBAL-FAS-6402] Lock Washer 1/4-20 Zinc (SYNTHETIC)
+     Qty: 24 BX @ $9.64
+  18. [GLOBAL-ABR-7897] Cut-Off Wheel 4-1/2in (SYNTHETIC)
+     Qty: 10 BX @ $40.18
+  19. [JAN-TTI-238] Toilet Tissue 2P Standard (SYNTHETIC)
+     Qty: 6 CS @ $87.17
+  20. [GLOBAL-JAN-5618] Floor Stripper Heavy Duty (SYNTHETIC)
+     Qty: 10 CS @ $85.10
+  21. [GLOBAL-LUB-2402] Multi-Purpose Grease (SYNTHETIC)
+     Qty: 10 CS @ $65.95
+  22. [FST-LWS-38-16] Lock Washer 3/8-16 Zinc (SYNTHETIC)
+     Qty: 6 BX @ $15.36
+
+Delivery requested by: 2026-04-11
+
+Thank you,
+Global Purchasing
+Global Corp. (SYNTHETIC)
++1-555-3112
+--===============5067445145322949178==--

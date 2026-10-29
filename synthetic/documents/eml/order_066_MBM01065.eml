@@ -1,0 +1,67 @@
+Content-Type: multipart/mixed; boundary="===============7489753808903097298=="
+MIME-Version: 1.0
+From: purchasing@apex.example
+To: orders@delta-industrial.example
+Subject: PO MBM01065 - Order from Apex Corp. (SYNTHETIC)
+Message-ID: <po-MBM01065@apex.example>
+Date: Thu, 15 Jan 2026 10:30:00 +0000
+
+--===============7489753808903097298==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+Hello,
+
+Please process the following order:
+
+PO Number: MBM01065
+Date: 1/15/26
+Ship To: Apex Shipping Location 1
+
+Items:
+------
+  1. [PKG-BBW-225] Bubble Wrap 12in (SYNTHETIC)
+     Qty: 12 RO @ $38.71
+  2. [APEX-ABR-8800] Cut-Off Wheel 6in (SYNTHETIC)
+     Qty: 4 BX @ $51.91
+  3. [APEX-ABR-9259] Cut-Off Wheel 4in (SYNTHETIC)
+     Qty: 2 BX @ $57.68
+  4. [APEX-JAN-5733] Disinfectant Spray (SYNTHETIC)
+     Qty: 2 CS @ $62.75
+  5. [APEX-JAN-5065] Hand Sanitizer Gel 70% (SYNTHETIC)
+     Qty: 6 CS @ $79.77
+  6. [ABR-FLD-5IN-1] Flap Disc 5in 150 (SYNTHETIC)
+     Qty: 10 BX @ $88.62
+  7. [APEX-FAS-1909] Hex Nut 3/4-10 Grade 5 Zinc (SYNTHETIC)
+     Qty: 10 BX @ $9.87
+  8. [TLS-SDR-M10-212] Screwdriver {type} M10 x 2-1/2 (SYNTHETIC)
+     Qty: 4 EA @ $4.32
+  9. [JAN-LNR-3858-12-BL-1] Can Liner 38x58 1.2mil Black Roll (SYNTHETIC)
+     Qty: 6 RO @ $34.24
+  10. [FST-LWS-14-20-2] Lock Washer 1/4-20 Zinc (SYNTHETIC)
+     Qty: 5 BX @ $4.70
+  11. [APEX-ABR-2885] Cut-Off Wheel 5in (SYNTHETIC)
+     Qty: 4 BX @ $62.33
+  12. [APEX-JAN-0245] Hand Sanitizer Gel 70% (SYNTHETIC)
+     Qty: 4 CS @ $49.06
+  13. [APEX-ABR-4240] Sandpaper Sheet 150 Grit (SYNTHETIC)
+     Qty: 12 PK @ $19.59
+  14. [APEX-ABR-3960] Flap Disc 4in 120 (SYNTHETIC)
+     Qty: 2 BX @ $62.68
+  15. [ELE-TPE-WHI] Electrical Tape White 3/4in (SYNTHETIC)
+     Qty: 1 RO @ $2.24
+  16. [APEX-FAS-2695] Lock Washer 1/4-20 Zinc (SYNTHETIC)
+     Qty: 4 BX @ $15.27
+  17. [ABR-FLD-412IN-1] Flap Disc 4-1/2in 180 (SYNTHETIC)
+     Qty: 5 BX @ $88.42
+  18. [JAN-FPD-17-WHI] Floor Pad 17in White (SYNTHETIC)
+     Qty: 6 CS @ $36.81
+
+Delivery requested by: 2026-01-31
+
+Thank you,
+Apex Purchasing
+Apex Corp. (SYNTHETIC)
++1-555-3504
+--===============7489753808903097298==--

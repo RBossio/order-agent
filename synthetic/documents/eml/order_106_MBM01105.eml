@@ -1,0 +1,57 @@
+Content-Type: multipart/mixed; boundary="===============7467692229652920907=="
+MIME-Version: 1.0
+From: purchasing@apex.example
+To: orders@delta-industrial.example
+Subject: PO MBM01105 - Order from Apex Corp. (SYNTHETIC)
+Message-ID: <po-MBM01105@apex.example>
+Date: Thu, 15 Jan 2026 10:30:00 +0000
+
+--===============7467692229652920907==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+Hello,
+
+Please process the following order:
+
+PO Number: MBM01105
+Date: 1/23/26
+Ship To: Apex Shipping Location 1
+
+Items:
+------
+  1. [APEX-ABR-8800] Cut-Off Wheel 6in (SYNTHETIC)
+     Qty: 5 BX @ $51.91
+  2. [APEX-ADH-2292] Super Glue Gel (SYNTHETIC)
+     Qty: 4 PK @ $21.82
+  3. [APEX-SAF-0167] Safety Glasses Amber Anti-Fog (SYNTHETIC)
+     Qty: 12 EA @ $4.92
+  4. [TLS-SDR-516-18-1] Screwdriver {type} 5/16-18 x 1 (SYNTHETIC)
+     Qty: 24 EA @ $24.44
+  5. [FST-HCS-M12-3] Hex Cap Screw M12 x 3 Grade 5 Zinc (SYNTHETIC)
+     Qty: 5 BX @ $44.86
+  6. [FST-FWS-516-18-1] Flat Washer 5/16-18 Zinc (SYNTHETIC)
+     Qty: 6 BX @ $8.03
+  7. [APEX-JAN-6928] Floor Stripper Heavy Duty (SYNTHETIC)
+     Qty: 12 CS @ $74.36
+  8. [APEX-JAN-2267] Floor Cleaner Neutral Concentrate (SYNTHETIC)
+     Qty: 6 CS @ $41.78
+  9. [ABR-SPS-120G-1] Sandpaper Sheet 120 Grit (SYNTHETIC)
+     Qty: 10 PK @ $18.94
+  10. [APEX-SAF-5427] Ear Plugs Foam Disposable (SYNTHETIC)
+     Qty: 24 BX @ $20.48
+  11. [APEX-PAC-7850] Packing Tape Clear 2in (SYNTHETIC)
+     Qty: 6 CS @ $60.96
+  12. [LUB-MOL-025] Machine Oil Light (SYNTHETIC)
+     Qty: 5 CS @ $62.24
+  13. [APEX-JAN-1754] Can Liner 40x46 0.7mil Black Roll (SYNTHETIC)
+     Qty: 6 RO @ $20.77
+
+Delivery requested by: 2026-01-31
+
+Thank you,
+Apex Purchasing
+Apex Corp. (SYNTHETIC)
++1-555-3504
+--===============7467692229652920907==--

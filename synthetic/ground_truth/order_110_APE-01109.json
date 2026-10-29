@@ -1,0 +1,402 @@
+{
+  "schema_version": "1.0",
+  "order_id": "3042b5ac-9c82-5507-a1db-e4cb99450664",
+  "tenant_id": "delta-industrial-supply",
+  "document_type": "ORIGINAL",
+  "status": "VALIDATED",
+  "source": {
+    "channel": "FOLDER",
+    "message_id": null,
+    "from_address": null,
+    "subject": null,
+    "received_at": "2026-01-15T10:30:00Z",
+    "documents": [
+      {
+        "document_id": "doc-eb0d1e1f",
+        "kind": "PDF_TEXT",
+        "filename": "APE-01109.pdf",
+        "mime_type": "application/pdf",
+        "sha256": "25aa1ea1a76c8d2ddc93720574a6e45828d71c166587703faf49bd11e371416f",
+        "page_count": 1
+      }
+    ]
+  },
+  "buyer": {
+    "name": "Summit Group (SYNTHETIC)",
+    "code_on_document": "C-SUMMIT",
+    "tax_id": "US19-3972018",
+    "gln": null,
+    "peppol_endpoint": null,
+    "address": {
+      "line1": "8195 Tech Center Blvd",
+      "city": "Cincinnati",
+      "region": "OH",
+      "postal_code": "45202",
+      "country": "US"
+    },
+    "contact": {
+      "name": "Summit Purchasing",
+      "email": "purchasing@summit.example",
+      "phone": "+1-555-5961"
+    },
+    "resolved": {
+      "erp_partner_id": 54,
+      "erp_partner_ref": "C-SUMMIT",
+      "method": "CODE",
+      "score": 0.99
+    }
+  },
+  "seller": {
+    "name": "Delta Industrial Supply LLC (SYNTHETIC)",
+    "code_on_document": null,
+    "tax_id": null,
+    "address": {
+      "line1": "55 Commerce Dr",
+      "city": "Dayton",
+      "region": "OH",
+      "postal_code": "45402",
+      "country": "US"
+    },
+    "resolved": null
+  },
+  "header": {
+    "po_number": "APE-01109",
+    "po_revision": 0,
+    "po_date": "2026/07/09",
+    "requested_delivery_date": "2026-07-29",
+    "currency": "USD",
+    "buyer_reference": "Dept 733",
+    "payment_terms_text": "Net 30",
+    "incoterms": null,
+    "ship_via": "Best Way",
+    "notes": null,
+    "language": "en"
+  },
+  "lines": [
+    {
+      "line_no": 1,
+      "buyer_item_code": null,
+      "seller_item_code": "JAN-NFC-287",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Floor Cleaner Neutral Concentrate (SYNTHETIC)",
+      "quantity": 2,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "4/1GAL",
+        "inner_count": 4,
+        "inner_size": 1,
+        "inner_uom": "GLL"
+      },
+      "unit_price": 53.53,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 107.06,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "JAN-NFC-287",
+        "erp_product_id": 1287,
+        "erp_uom": "CS",
+        "erp_uom_id": 37,
+        "erp_quantity": 2,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 53.53
+      }
+    },
+    {
+      "line_no": 2,
+      "buyer_item_code": null,
+      "seller_item_code": "FST-HCS-58-11-112",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Hex Cap Screw 5/8-11 x 1-1/2 Grade 5 Zinc (SYNTHETIC)",
+      "quantity": 3,
+      "uom_raw": "BX",
+      "uom": "BX",
+      "pack": {
+        "raw": "BX/50",
+        "inner_count": 50,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 23.91,
+      "price_uom": "BX",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 71.73,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "FST-HCS-58-11-112",
+        "erp_product_id": 1095,
+        "erp_uom": "BX",
+        "erp_uom_id": 24,
+        "erp_quantity": 3,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 23.91
+      }
+    },
+    {
+      "line_no": 3,
+      "buyer_item_code": null,
+      "seller_item_code": "JAN-NFC-053",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Floor Cleaner Neutral Concentrate (SYNTHETIC)",
+      "quantity": 24,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "4/1GAL",
+        "inner_count": 4,
+        "inner_size": 1,
+        "inner_uom": "GLL"
+      },
+      "unit_price": 59.43,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 1426.32,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "JAN-NFC-053",
+        "erp_product_id": 1053,
+        "erp_uom": "CS",
+        "erp_uom_id": 15,
+        "erp_quantity": 24,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 59.43
+      }
+    },
+    {
+      "line_no": 4,
+      "buyer_item_code": "SUMMIT-ADH-1281",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Epoxy 2-Part Quick Set (SYNTHETIC)",
+      "quantity": 3,
+      "uom_raw": "PK",
+      "uom": "PK",
+      "pack": {
+        "raw": "6/PK",
+        "inner_count": 6,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 18.68,
+      "price_uom": "PK",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 56.04,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "ADH-EPX-000",
+        "erp_product_id": 1000,
+        "erp_uom": "PK",
+        "erp_uom_id": 16,
+        "erp_quantity": 3,
+        "conversion_factor": 1,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 18.68
+      }
+    },
+    {
+      "line_no": 5,
+      "buyer_item_code": "SUMMIT-TOO-9296",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Screwdriver {type} 5/16-18 x 1 (SYNTHETIC)",
+      "quantity": 5,
+      "uom_raw": "EA",
+      "uom": "EA",
+      "pack": null,
+      "unit_price": 24.44,
+      "price_uom": "EA",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 122.2,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "TLS-SDR-516-18-1",
+        "erp_product_id": 1193,
+        "erp_uom": "EA",
+        "erp_uom_id": 30,
+        "erp_quantity": 5,
+        "conversion_factor": 1,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 24.44
+      }
+    },
+    {
+      "line_no": 6,
+      "buyer_item_code": "SUMMIT-FAS-2025",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Flat Washer 5/16-18 Zinc (SYNTHETIC)",
+      "quantity": 1,
+      "uom_raw": "BX",
+      "uom": "BX",
+      "pack": {
+        "raw": "BX/100",
+        "inner_count": 100,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 6.77,
+      "price_uom": "BX",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 6.77,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "FST-FWS-516-18-2",
+        "erp_product_id": 1188,
+        "erp_uom": "BX",
+        "erp_uom_id": 9,
+        "erp_quantity": 1,
+        "conversion_factor": 1,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 6.77
+      }
+    },
+    {
+      "line_no": 7,
+      "buyer_item_code": null,
+      "seller_item_code": "TLS-TPM-25FT",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Tape Measure 25ft (SYNTHETIC)",
+      "quantity": 10,
+      "uom_raw": "EA",
+      "uom": "EA",
+      "pack": null,
+      "unit_price": 21.99,
+      "price_uom": "EA",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 219.9,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "TLS-TPM-25FT",
+        "erp_product_id": 1198,
+        "erp_uom": "EA",
+        "erp_uom_id": 32,
+        "erp_quantity": 10,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 21.99
+      }
+    },
+    {
+      "line_no": 8,
+      "buyer_item_code": "SUMMIT-JAN-1335",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Can Liner 43x47 1.0mil Black Roll (SYNTHETIC)",
+      "quantity": 5,
+      "uom_raw": "RO",
+      "uom": "RO",
+      "pack": {
+        "raw": "50/RL",
+        "inner_count": 1,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 18.35,
+      "price_uom": "RO",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 91.75,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "JAN-LNR-4347-10-BL",
+        "erp_product_id": 1199,
+        "erp_uom": "RO",
+        "erp_uom_id": 35,
+        "erp_quantity": 5,
+        "conversion_factor": 1,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 18.35
+      }
+    }
+  ],
+  "charges": [],
+  "totals": {
+    "lines_amount_declared": 2101.77,
+    "tax_amount_declared": null,
+    "total_amount_declared": 2101.77,
+    "lines_amount_computed": 2101.77
+  },
+  "decision": {
+    "score": 0.98,
+    "route": "AUTO_POST",
+    "reasons": []
+  },
+  "processing": {
+    "extractor": "synthetic/generator.py",
+    "prompt_version": null,
+    "created_at": "2026-01-15T10:30:00Z",
+    "updated_at": null
+  },
+  "ship_to": {
+    "name": "Summit Shipping Location 1",
+    "code_on_document": "SHIP-01",
+    "address": {
+      "line1": "7454 Business Park Rd",
+      "city": "Chicago",
+      "region": "IL",
+      "postal_code": "60601",
+      "country": "US"
+    },
+    "resolved": {
+      "erp_partner_id": 55,
+      "erp_partner_ref": "SHIP-01",
+      "method": "CODE",
+      "score": 1.0
+    }
+  },
+  "_synthetic_metadata": {
+    "hard_case_types": [],
+    "is_hard_case": false
+  }
+}

@@ -1,0 +1,407 @@
+{
+  "schema_version": "1.0",
+  "order_id": "549285dc-65f4-55fb-944c-8f00eaa937d8",
+  "tenant_id": "delta-industrial-supply",
+  "document_type": "ORIGINAL",
+  "status": "VALIDATED",
+  "source": {
+    "channel": "FOLDER",
+    "message_id": null,
+    "from_address": null,
+    "subject": null,
+    "received_at": "2026-01-15T10:30:00Z",
+    "documents": [
+      {
+        "document_id": "doc-a4f64d17",
+        "kind": "XLSX",
+        "filename": "SW-01113.xlsx",
+        "mime_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        "sha256": "ea21649fc6482edb014ce919b465ae173e044769e2a0e466ed8c24e8dd3079b2",
+        "page_count": null
+      }
+    ]
+  },
+  "buyer": {
+    "name": "Nova Company (SYNTHETIC)",
+    "code_on_document": "C-NOVA",
+    "tax_id": "US23-6761929",
+    "gln": null,
+    "peppol_endpoint": null,
+    "address": {
+      "line1": "1481 Factory Blvd",
+      "city": "Indianapolis",
+      "region": "IN",
+      "postal_code": "46201",
+      "country": "US"
+    },
+    "contact": {
+      "name": "Nova Purchasing",
+      "email": "purchasing@nova.example",
+      "phone": "+1-555-9586"
+    },
+    "resolved": {
+      "erp_partner_id": 63,
+      "erp_partner_ref": "C-NOVA",
+      "method": "CODE",
+      "score": 0.99
+    }
+  },
+  "seller": {
+    "name": "Delta Industrial Supply LLC (SYNTHETIC)",
+    "code_on_document": null,
+    "tax_id": null,
+    "address": {
+      "line1": "55 Commerce Dr",
+      "city": "Dayton",
+      "region": "OH",
+      "postal_code": "45402",
+      "country": "US"
+    },
+    "resolved": null
+  },
+  "header": {
+    "po_number": "SW-01113",
+    "po_revision": 0,
+    "po_date": "05-20-2026",
+    "requested_delivery_date": "2026-05-25",
+    "currency": "USD",
+    "buyer_reference": "Dept 457",
+    "payment_terms_text": "2% 10 Net 30",
+    "incoterms": null,
+    "ship_via": null,
+    "notes": "Rush order",
+    "language": "en"
+  },
+  "lines": [
+    {
+      "line_no": 1,
+      "buyer_item_code": null,
+      "seller_item_code": "ADH-EPX-215",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Epoxy 2-Part Quick Set (SYNTHETIC)",
+      "quantity": 12,
+      "uom_raw": "PK",
+      "uom": "PK",
+      "pack": {
+        "raw": "6/PK",
+        "inner_count": 6,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 29.98,
+      "price_uom": "PK",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 359.76,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "ADH-EPX-215",
+        "erp_product_id": 1215,
+        "erp_uom": "PK",
+        "erp_uom_id": 15,
+        "erp_quantity": 12,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 29.98
+      }
+    },
+    {
+      "line_no": 2,
+      "buyer_item_code": null,
+      "seller_item_code": "ABR-COW-4IN-3",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Cut-Off Wheel 4in (SYNTHETIC)",
+      "quantity": 1,
+      "uom_raw": "BX",
+      "uom": "BX",
+      "pack": {
+        "raw": "25/BX",
+        "inner_count": 25,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 36.04,
+      "price_uom": "BX",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 36.04,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "ABR-COW-4IN-3",
+        "erp_product_id": 1253,
+        "erp_uom": "BX",
+        "erp_uom_id": 43,
+        "erp_quantity": 1,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 36.04
+      }
+    },
+    {
+      "line_no": 3,
+      "buyer_item_code": null,
+      "seller_item_code": "JAN-FST-281",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Floor Stripper Heavy Duty (SYNTHETIC)",
+      "quantity": 6,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "4/1GAL",
+        "inner_count": 4,
+        "inner_size": 1,
+        "inner_uom": "GLL"
+      },
+      "unit_price": 87.26,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 523.56,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "JAN-FST-281",
+        "erp_product_id": 1281,
+        "erp_uom": "CS",
+        "erp_uom_id": 2,
+        "erp_quantity": 6,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 87.26
+      }
+    },
+    {
+      "line_no": 4,
+      "buyer_item_code": "NOVA-ELE-0678",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Electrical Tape Blue 3/4in (SYNTHETIC)",
+      "quantity": 24,
+      "uom_raw": "RO",
+      "uom": "RO",
+      "pack": null,
+      "unit_price": 4.49,
+      "price_uom": "RO",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 107.76,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "ELE-TPE-BLU-1",
+        "erp_product_id": 1022,
+        "erp_uom": "RO",
+        "erp_uom_id": 9,
+        "erp_quantity": 24,
+        "conversion_factor": 1,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 4.49
+      }
+    },
+    {
+      "line_no": 5,
+      "buyer_item_code": "NOVA-ABR-8804",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Cut-Off Wheel 5in (SYNTHETIC)",
+      "quantity": 2,
+      "uom_raw": "BX",
+      "uom": "BX",
+      "pack": {
+        "raw": "25/BX",
+        "inner_count": 25,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 47.08,
+      "price_uom": "BX",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 94.16,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "ABR-COW-5IN-1",
+        "erp_product_id": 1203,
+        "erp_uom": "BX",
+        "erp_uom_id": 47,
+        "erp_quantity": 2,
+        "conversion_factor": 1,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 47.08
+      }
+    },
+    {
+      "line_no": 6,
+      "buyer_item_code": "NOVA-FAS-4475",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Hex Nut 3/4-10 Grade 5 Zinc (SYNTHETIC)",
+      "quantity": 1,
+      "uom_raw": "BX",
+      "uom": "BX",
+      "pack": {
+        "raw": "BX/100",
+        "inner_count": 100,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 9.87,
+      "price_uom": "BX",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 9.87,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "FST-HNT-34-10-1",
+        "erp_product_id": 1255,
+        "erp_uom": "BX",
+        "erp_uom_id": 3,
+        "erp_quantity": 1,
+        "conversion_factor": 1,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 9.87
+      }
+    },
+    {
+      "line_no": 7,
+      "buyer_item_code": null,
+      "seller_item_code": "LUB-MPG-074",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Multi-Purpose Grease (SYNTHETIC)",
+      "quantity": 1,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "10/CS",
+        "inner_count": 10,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 73.89,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 73.89,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "LUB-MPG-074",
+        "erp_product_id": 1074,
+        "erp_uom": "CS",
+        "erp_uom_id": 20,
+        "erp_quantity": 1,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 73.89
+      }
+    },
+    {
+      "line_no": 8,
+      "buyer_item_code": null,
+      "seller_item_code": "PPE-N95-219",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "N95 Respirator (SYNTHETIC)",
+      "quantity": 5,
+      "uom_raw": "BX",
+      "uom": "BX",
+      "pack": {
+        "raw": "20/BX",
+        "inner_count": 20,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 28.16,
+      "price_uom": "BX",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 140.8,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "PPE-N95-219",
+        "erp_product_id": 1219,
+        "erp_uom": "BX",
+        "erp_uom_id": 48,
+        "erp_quantity": 5,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 28.16
+      }
+    }
+  ],
+  "charges": [],
+  "totals": {
+    "lines_amount_declared": 1345.84,
+    "tax_amount_declared": null,
+    "total_amount_declared": 1345.84,
+    "lines_amount_computed": 1345.84
+  },
+  "decision": {
+    "score": 0.98,
+    "route": "AUTO_POST",
+    "reasons": []
+  },
+  "processing": {
+    "extractor": "synthetic/generator.py",
+    "prompt_version": null,
+    "created_at": "2026-01-15T10:30:00Z",
+    "updated_at": null
+  },
+  "ship_to": {
+    "name": "Nova Shipping Location 1",
+    "code_on_document": "SHIP-01",
+    "address": {
+      "line1": "7272 Tech Center Blvd",
+      "city": "Columbus",
+      "region": "OH",
+      "postal_code": "43215",
+      "country": "US"
+    },
+    "resolved": {
+      "erp_partner_id": 64,
+      "erp_partner_ref": "SHIP-01",
+      "method": "CODE",
+      "score": 1.0
+    }
+  },
+  "_synthetic_metadata": {
+    "hard_case_types": [],
+    "is_hard_case": false
+  }
+}

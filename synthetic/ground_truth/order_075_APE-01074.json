@@ -1,0 +1,291 @@
+{
+  "schema_version": "1.0",
+  "order_id": "30f332e7-357a-5cc0-a8da-be1f2967e399",
+  "tenant_id": "delta-industrial-supply",
+  "document_type": "ORIGINAL",
+  "status": "VALIDATED",
+  "source": {
+    "channel": "EMAIL_IMAP",
+    "message_id": "<po-APE-01074@summit.example>",
+    "from_address": "purchasing@summit.example",
+    "subject": "PO APE-01074 - Order from Summit Group (SYNTHETIC)",
+    "received_at": "2026-01-15T10:30:00Z",
+    "documents": [
+      {
+        "document_id": "doc-938fa806",
+        "kind": "EMAIL_BODY",
+        "filename": null,
+        "mime_type": "text/plain",
+        "sha256": "b091d41eba6e00ca4e2511e4dcb090fa9858fb3340fccf881461e499fab2860d",
+        "page_count": null
+      }
+    ]
+  },
+  "buyer": {
+    "name": "Summit Group (SYNTHETIC)",
+    "code_on_document": "C-SUMMIT",
+    "tax_id": "US19-3972018",
+    "gln": null,
+    "peppol_endpoint": null,
+    "address": {
+      "line1": "8195 Tech Center Blvd",
+      "city": "Cincinnati",
+      "region": "OH",
+      "postal_code": "45202",
+      "country": "US"
+    },
+    "contact": {
+      "name": "Summit Purchasing",
+      "email": "purchasing@summit.example",
+      "phone": "+1-555-5961"
+    },
+    "resolved": {
+      "erp_partner_id": 54,
+      "erp_partner_ref": "C-SUMMIT",
+      "method": "EMAIL_DOMAIN",
+      "score": 0.99
+    }
+  },
+  "seller": {
+    "name": "Delta Industrial Supply LLC (SYNTHETIC)",
+    "code_on_document": null,
+    "tax_id": null,
+    "address": {
+      "line1": "55 Commerce Dr",
+      "city": "Dayton",
+      "region": "OH",
+      "postal_code": "45402",
+      "country": "US"
+    },
+    "resolved": null
+  },
+  "header": {
+    "po_number": "APE-01074",
+    "po_revision": 0,
+    "po_date": "2026/03/14",
+    "requested_delivery_date": "2026-03-29",
+    "currency": "USD",
+    "buyer_reference": "Dept 827",
+    "payment_terms_text": "Net 45",
+    "incoterms": null,
+    "ship_via": "UPS Ground",
+    "notes": null,
+    "language": "en"
+  },
+  "lines": [
+    {
+      "line_no": 1,
+      "buyer_item_code": "SUMMIT-TOO-9690",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Screwdriver {type} M8 x 2-1/2 (SYNTHETIC)",
+      "quantity": 2,
+      "uom_raw": "EA",
+      "uom": "EA",
+      "pack": null,
+      "unit_price": 9.44,
+      "price_uom": "EA",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 18.88,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "TLS-SDR-M8-212",
+        "erp_product_id": 1111,
+        "erp_uom": "EA",
+        "erp_uom_id": 6,
+        "erp_quantity": 2,
+        "conversion_factor": 1,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 9.44
+      }
+    },
+    {
+      "line_no": 2,
+      "buyer_item_code": null,
+      "seller_item_code": "PPE-GLS-CLE-ANTI-FOG",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Safety Glasses Clear Anti-Fog (SYNTHETIC)",
+      "quantity": 6,
+      "uom_raw": "EA",
+      "uom": "EA",
+      "pack": null,
+      "unit_price": 5.71,
+      "price_uom": "EA",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 34.26,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "PPE-GLS-CLE-ANTI-FOG",
+        "erp_product_id": 1039,
+        "erp_uom": "EA",
+        "erp_uom_id": 27,
+        "erp_quantity": 6,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 5.71
+      }
+    },
+    {
+      "line_no": 3,
+      "buyer_item_code": null,
+      "seller_item_code": "ABR-SPS-120G-1",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Sandpaper Sheet 120 Grit (SYNTHETIC)",
+      "quantity": 4,
+      "uom_raw": "PK",
+      "uom": "PK",
+      "pack": {
+        "raw": "50/PK",
+        "inner_count": 50,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 18.94,
+      "price_uom": "PK",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 75.76,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "ABR-SPS-120G-1",
+        "erp_product_id": 1265,
+        "erp_uom": "PK",
+        "erp_uom_id": 18,
+        "erp_quantity": 4,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 18.94
+      }
+    },
+    {
+      "line_no": 4,
+      "buyer_item_code": null,
+      "seller_item_code": "JAN-FPD-17-WHI",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Floor Pad 17in White (SYNTHETIC)",
+      "quantity": 10,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "5/CS",
+        "inner_count": 5,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 36.81,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 368.1,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "JAN-FPD-17-WHI",
+        "erp_product_id": 1051,
+        "erp_uom": "CS",
+        "erp_uom_id": 2,
+        "erp_quantity": 10,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 36.81
+      }
+    },
+    {
+      "line_no": 5,
+      "buyer_item_code": "SUMMIT-FAS-8951",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Lock Washer M8 Zinc (SYNTHETIC)",
+      "quantity": 12,
+      "uom_raw": "BX",
+      "uom": "BX",
+      "pack": {
+        "raw": "BX/100",
+        "inner_count": 100,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 15.66,
+      "price_uom": "BX",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 187.92,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "FST-LWS-M8",
+        "erp_product_id": 1229,
+        "erp_uom": "BX",
+        "erp_uom_id": 13,
+        "erp_quantity": 12,
+        "conversion_factor": 1,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 15.66
+      }
+    }
+  ],
+  "charges": [],
+  "totals": {
+    "lines_amount_declared": 684.92,
+    "tax_amount_declared": null,
+    "total_amount_declared": 684.92,
+    "lines_amount_computed": 684.92
+  },
+  "decision": {
+    "score": 0.98,
+    "route": "AUTO_POST",
+    "reasons": []
+  },
+  "processing": {
+    "extractor": "synthetic/generator.py",
+    "prompt_version": null,
+    "created_at": "2026-01-15T10:30:00Z",
+    "updated_at": null
+  },
+  "ship_to": {
+    "name": "Summit Shipping Location 3",
+    "code_on_document": "SHIP-03",
+    "address": {
+      "line1": "7782 Tech Center Blvd",
+      "city": "Dayton",
+      "region": "OH",
+      "postal_code": "45402",
+      "country": "US"
+    },
+    "resolved": {
+      "erp_partner_id": 55,
+      "erp_partner_ref": "SHIP-03",
+      "method": "CODE",
+      "score": 1.0
+    }
+  },
+  "_synthetic_metadata": {
+    "hard_case_types": [],
+    "is_hard_case": false
+  }
+}

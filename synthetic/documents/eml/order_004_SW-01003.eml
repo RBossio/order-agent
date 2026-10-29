@@ -1,0 +1,49 @@
+Content-Type: multipart/mixed; boundary="===============3585736529143443578=="
+MIME-Version: 1.0
+From: purchasing@nova.example
+To: orders@delta-industrial.example
+Subject: PO SW-01003 - Order from Nova Company (SYNTHETIC)
+Message-ID: <po-SW-01003@nova.example>
+Date: Thu, 15 Jan 2026 10:30:00 +0000
+
+--===============3585736529143443578==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+Hello,
+
+Please process the following order:
+
+PO Number: SW-01003
+Date: 07-11-2026
+Ship To: Nova Shipping Location 1
+
+Items:
+------
+  1. [NOVA-TOO-4511] Adjustable Wrench 8in (SYNTHETIC)
+     Qty: 6 EA @ $26.44
+  2. [PPE-HAT-RED] Hard Hat Red ANSI Type I (SYNTHETIC)
+     Qty: 1 EA @ $16.54
+  3. [JAN-DGR-083] Degreaser Industrial (SYNTHETIC)
+     Qty: 24 CS @ $60.39
+  4. [PKG-BBW-225] Bubble Wrap 12in (SYNTHETIC)
+     Qty: 6 RO @ $38.71
+  5. [NOVA-ADH-6138] Super Glue Gel (SYNTHETIC)
+     Qty: 12 PK @ $17.49
+  6. [LUB-MOL-031] Machine Oil Light (SYNTHETIC)
+     Qty: 6 CS @ $53.66
+  7. [JAN-HSG-118] Hand Sanitizer Gel 70% (SYNTHETIC)
+     Qty: 4 CS @ $83.00
+  8. [NOVA-SAF-4723] Latex Gloves XXL PF (SYNTHETIC)
+     Qty: 24 CS @ $72.20
+  9. [NOVA-SAF-7750] Latex Gloves L PF (SYNTHETIC)
+     Qty: 1 CS @ $61.51
+
+Delivery requested by: 2026-07-18
+
+Thank you,
+Nova Purchasing
+Nova Company (SYNTHETIC)
++1-555-9586
+--===============3585736529143443578==--

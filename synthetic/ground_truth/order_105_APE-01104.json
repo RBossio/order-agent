@@ -1,0 +1,370 @@
+{
+  "schema_version": "1.0",
+  "order_id": "082345f2-52b5-5f6f-83aa-ed987afa93dc",
+  "tenant_id": "delta-industrial-supply",
+  "document_type": "ORIGINAL",
+  "status": "VALIDATED",
+  "source": {
+    "channel": "FOLDER",
+    "message_id": null,
+    "from_address": null,
+    "subject": null,
+    "received_at": "2026-01-15T10:30:00Z",
+    "documents": [
+      {
+        "document_id": "doc-c544fe53",
+        "kind": "PDF_TEXT",
+        "filename": "APE-01104.pdf",
+        "mime_type": "application/pdf",
+        "sha256": "615ae4672b8ca3ba71a2b4557243ff96cfe7e54502ae493ab823ac7c85d0d1cf",
+        "page_count": 1
+      }
+    ]
+  },
+  "buyer": {
+    "name": "Summit Group (SYNTHETIC)",
+    "code_on_document": "C-SUMMIT",
+    "tax_id": "US19-3972018",
+    "gln": null,
+    "peppol_endpoint": null,
+    "address": {
+      "line1": "8195 Tech Center Blvd",
+      "city": "Cincinnati",
+      "region": "OH",
+      "postal_code": "45202",
+      "country": "US"
+    },
+    "contact": {
+      "name": "Summit Purchasing",
+      "email": "purchasing@summit.example",
+      "phone": "+1-555-5961"
+    },
+    "resolved": {
+      "erp_partner_id": 54,
+      "erp_partner_ref": "C-SUMMIT",
+      "method": "CODE",
+      "score": 0.99
+    }
+  },
+  "seller": {
+    "name": "Delta Industrial Supply LLC (SYNTHETIC)",
+    "code_on_document": null,
+    "tax_id": null,
+    "address": {
+      "line1": "55 Commerce Dr",
+      "city": "Dayton",
+      "region": "OH",
+      "postal_code": "45402",
+      "country": "US"
+    },
+    "resolved": null
+  },
+  "header": {
+    "po_number": "APE-01104",
+    "po_revision": 0,
+    "po_date": "2026/06/09",
+    "requested_delivery_date": "2026-06-21",
+    "currency": "USD",
+    "buyer_reference": "Dept 732",
+    "payment_terms_text": "2% 10 Net 30",
+    "incoterms": null,
+    "ship_via": "FedEx",
+    "notes": "Confirm availability",
+    "language": "en"
+  },
+  "lines": [
+    {
+      "line_no": 1,
+      "buyer_item_code": null,
+      "seller_item_code": "FST-HCS-38-16-2",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Hex Cap Screw 3/8-16 x 2 Grade 5 Zinc (SYNTHETIC)",
+      "quantity": 5,
+      "uom_raw": "BX",
+      "uom": "BX",
+      "pack": {
+        "raw": "BX/50",
+        "inner_count": 50,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 9.68,
+      "price_uom": "BX",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 48.4,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "FST-HCS-38-16-2",
+        "erp_product_id": 1159,
+        "erp_uom": "BX",
+        "erp_uom_id": 45,
+        "erp_quantity": 5,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 9.68
+      }
+    },
+    {
+      "line_no": 2,
+      "buyer_item_code": "SUMMIT-JAN-6018",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Floor Finish High Gloss (SYNTHETIC)",
+      "quantity": 24,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "4/1GAL",
+        "inner_count": 4,
+        "inner_size": 1,
+        "inner_uom": "GLL"
+      },
+      "unit_price": 62.67,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 1504.08,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "JAN-FFN-001",
+        "erp_product_id": 1001,
+        "erp_uom": "CS",
+        "erp_uom_id": 47,
+        "erp_quantity": 24,
+        "conversion_factor": 1,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 62.67
+      }
+    },
+    {
+      "line_no": 3,
+      "buyer_item_code": null,
+      "seller_item_code": "LUB-MOL-096",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Machine Oil Light (SYNTHETIC)",
+      "quantity": 2,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "12/CS",
+        "inner_count": 12,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 65.2,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 130.4,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "LUB-MOL-096",
+        "erp_product_id": 1096,
+        "erp_uom": "CS",
+        "erp_uom_id": 34,
+        "erp_quantity": 2,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 65.2
+      }
+    },
+    {
+      "line_no": 4,
+      "buyer_item_code": null,
+      "seller_item_code": "JAN-PTR-1P-NAT",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Paper Towel Roll 1P Natural (SYNTHETIC)",
+      "quantity": 24,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "12RL/CS",
+        "inner_count": 12,
+        "inner_size": 1,
+        "inner_uom": "RL"
+      },
+      "unit_price": 53.51,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 1284.24,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "JAN-PTR-1P-NAT",
+        "erp_product_id": 1019,
+        "erp_uom": "CS",
+        "erp_uom_id": 4,
+        "erp_quantity": 24,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 53.51
+      }
+    },
+    {
+      "line_no": 5,
+      "buyer_item_code": "SUMMIT-FAS-8951",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Lock Washer M8 Zinc (SYNTHETIC)",
+      "quantity": 3,
+      "uom_raw": "BX",
+      "uom": "BX",
+      "pack": {
+        "raw": "BX/100",
+        "inner_count": 100,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 15.66,
+      "price_uom": "BX",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 46.98,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "FST-LWS-M8",
+        "erp_product_id": 1229,
+        "erp_uom": "BX",
+        "erp_uom_id": 22,
+        "erp_quantity": 3,
+        "conversion_factor": 1,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 15.66
+      }
+    },
+    {
+      "line_no": 6,
+      "buyer_item_code": "SUMMIT-SAF-5037",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Safety Glasses Amber Anti-Fog (SYNTHETIC)",
+      "quantity": 4,
+      "uom_raw": "EA",
+      "uom": "EA",
+      "pack": null,
+      "unit_price": 4.92,
+      "price_uom": "EA",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 19.68,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "PPE-GLS-AMB-ANTI-FOG-1",
+        "erp_product_id": 1087,
+        "erp_uom": "EA",
+        "erp_uom_id": 36,
+        "erp_quantity": 4,
+        "conversion_factor": 1,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 4.92
+      }
+    },
+    {
+      "line_no": 7,
+      "buyer_item_code": "SUMMIT-FAS-2678",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Lock Washer M6 Zinc (SYNTHETIC)",
+      "quantity": 5,
+      "uom_raw": "BX",
+      "uom": "BX",
+      "pack": {
+        "raw": "BX/100",
+        "inner_count": 100,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 15.61,
+      "price_uom": "BX",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 78.05,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "FST-LWS-M6",
+        "erp_product_id": 1070,
+        "erp_uom": "BX",
+        "erp_uom_id": 37,
+        "erp_quantity": 5,
+        "conversion_factor": 1,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 15.61
+      }
+    }
+  ],
+  "charges": [],
+  "totals": {
+    "lines_amount_declared": 3111.83,
+    "tax_amount_declared": null,
+    "total_amount_declared": 3111.83,
+    "lines_amount_computed": 3111.83
+  },
+  "decision": {
+    "score": 0.98,
+    "route": "AUTO_POST",
+    "reasons": []
+  },
+  "processing": {
+    "extractor": "synthetic/generator.py",
+    "prompt_version": null,
+    "created_at": "2026-01-15T10:30:00Z",
+    "updated_at": null
+  },
+  "ship_to": {
+    "name": "Summit Shipping Location 1",
+    "code_on_document": "SHIP-01",
+    "address": {
+      "line1": "7454 Business Park Rd",
+      "city": "Chicago",
+      "region": "IL",
+      "postal_code": "60601",
+      "country": "US"
+    },
+    "resolved": {
+      "erp_partner_id": 55,
+      "erp_partner_ref": "SHIP-01",
+      "method": "CODE",
+      "score": 1.0
+    }
+  },
+  "_synthetic_metadata": {
+    "hard_case_types": [],
+    "is_hard_case": false
+  }
+}

@@ -1,0 +1,301 @@
+{
+  "schema_version": "1.0",
+  "order_id": "0759a3d5-c6eb-5818-9d45-641ed978fa9e",
+  "tenant_id": "delta-industrial-supply",
+  "document_type": "ORIGINAL",
+  "status": "VALIDATED",
+  "source": {
+    "channel": "FOLDER",
+    "message_id": null,
+    "from_address": null,
+    "subject": null,
+    "received_at": "2026-01-15T10:30:00Z",
+    "documents": [
+      {
+        "document_id": "doc-a582ae7c",
+        "kind": "XLSX",
+        "filename": "TIT-PO-01098.xlsx",
+        "mime_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        "sha256": "b90f371a58fcd0736ad771db89650ac3ac0fd783a63d2a0763016324e32cde6c",
+        "page_count": null
+      }
+    ]
+  },
+  "buyer": {
+    "name": "Omega Manufacturing Inc. (SYNTHETIC)",
+    "code_on_document": "C-OMEGA",
+    "tax_id": "US60-6205543",
+    "gln": null,
+    "peppol_endpoint": null,
+    "address": {
+      "line1": "5662 Manufacturing Way",
+      "city": "Cleveland",
+      "region": "OH",
+      "postal_code": "44101",
+      "country": "US"
+    },
+    "contact": {
+      "name": "Omega Purchasing",
+      "email": "purchasing@omega.example",
+      "phone": "+1-555-6724"
+    },
+    "resolved": {
+      "erp_partner_id": 48,
+      "erp_partner_ref": "C-OMEGA",
+      "method": "CODE",
+      "score": 0.99
+    }
+  },
+  "seller": {
+    "name": "Delta Industrial Supply LLC (SYNTHETIC)",
+    "code_on_document": null,
+    "tax_id": null,
+    "address": {
+      "line1": "55 Commerce Dr",
+      "city": "Dayton",
+      "region": "OH",
+      "postal_code": "45402",
+      "country": "US"
+    },
+    "resolved": null
+  },
+  "header": {
+    "po_number": "TIT-PO-01098",
+    "po_revision": 0,
+    "po_date": "04-May-2026",
+    "requested_delivery_date": "2026-05-14",
+    "currency": "USD",
+    "buyer_reference": "Dept 653",
+    "payment_terms_text": "Net 30",
+    "incoterms": null,
+    "ship_via": "UPS Ground",
+    "notes": "Confirm availability",
+    "language": "en"
+  },
+  "lines": [
+    {
+      "line_no": 1,
+      "buyer_item_code": null,
+      "seller_item_code": "TLS-UTB-293",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Utility Blade Standard (SYNTHETIC)",
+      "quantity": 24,
+      "uom_raw": "PK",
+      "uom": "PK",
+      "pack": {
+        "raw": "100/PK",
+        "inner_count": 100,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 6.76,
+      "price_uom": "PK",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 162.24,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "TLS-UTB-293",
+        "erp_product_id": 1293,
+        "erp_uom": "PK",
+        "erp_uom_id": 25,
+        "erp_quantity": 24,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 6.76
+      }
+    },
+    {
+      "line_no": 2,
+      "buyer_item_code": null,
+      "seller_item_code": "JAN-LNR-3858-20-WH",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Can Liner 38x58 2.0mil White (SYNTHETIC)",
+      "quantity": 24,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "100/CS",
+        "inner_count": 100,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 72.15,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 1731.6,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "JAN-LNR-3858-20-WH",
+        "erp_product_id": 1142,
+        "erp_uom": "CS",
+        "erp_uom_id": 31,
+        "erp_quantity": 24,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 72.15
+      }
+    },
+    {
+      "line_no": 3,
+      "buyer_item_code": null,
+      "seller_item_code": "ABR-FLD-5IN-1",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Flap Disc 5in 150 (SYNTHETIC)",
+      "quantity": 2,
+      "uom_raw": "BX",
+      "uom": "BX",
+      "pack": {
+        "raw": "10/BX",
+        "inner_count": 10,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 88.62,
+      "price_uom": "BX",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 177.24,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "ABR-FLD-5IN-1",
+        "erp_product_id": 1035,
+        "erp_uom": "BX",
+        "erp_uom_id": 20,
+        "erp_quantity": 2,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 88.62
+      }
+    },
+    {
+      "line_no": 4,
+      "buyer_item_code": "OMEGA-PAC-1376",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Stretch Wrap 18in (SYNTHETIC)",
+      "quantity": 5,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "4RL/CS",
+        "inner_count": 4,
+        "inner_size": 1,
+        "inner_uom": "RL"
+      },
+      "unit_price": 98.48,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 492.4,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "PKG-STW-100",
+        "erp_product_id": 1100,
+        "erp_uom": "CS",
+        "erp_uom_id": 11,
+        "erp_quantity": 5,
+        "conversion_factor": 1,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 98.48
+      }
+    },
+    {
+      "line_no": 5,
+      "buyer_item_code": null,
+      "seller_item_code": "JAN-TTI-223",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Toilet Tissue 2P Standard (SYNTHETIC)",
+      "quantity": 6,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "96RL/CS",
+        "inner_count": 96,
+        "inner_size": 1,
+        "inner_uom": "RL"
+      },
+      "unit_price": 61.32,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 367.92,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "JAN-TTI-223",
+        "erp_product_id": 1223,
+        "erp_uom": "CS",
+        "erp_uom_id": 7,
+        "erp_quantity": 6,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 61.32
+      }
+    }
+  ],
+  "charges": [],
+  "totals": {
+    "lines_amount_declared": 2931.4,
+    "tax_amount_declared": null,
+    "total_amount_declared": 2931.4,
+    "lines_amount_computed": 2931.4
+  },
+  "decision": {
+    "score": 0.98,
+    "route": "AUTO_POST",
+    "reasons": []
+  },
+  "processing": {
+    "extractor": "synthetic/generator.py",
+    "prompt_version": null,
+    "created_at": "2026-01-15T10:30:00Z",
+    "updated_at": null
+  },
+  "ship_to": {
+    "name": "Omega Shipping Location 1",
+    "code_on_document": "SHIP-01",
+    "address": {
+      "line1": "1351 Commerce Dr",
+      "city": "Cleveland",
+      "region": "OH",
+      "postal_code": "44101",
+      "country": "US"
+    },
+    "resolved": {
+      "erp_partner_id": 49,
+      "erp_partner_ref": "SHIP-01",
+      "method": "CODE",
+      "score": 1.0
+    }
+  },
+  "_synthetic_metadata": {
+    "hard_case_types": [],
+    "is_hard_case": false
+  }
+}

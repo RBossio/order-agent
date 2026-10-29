@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "order_id": "7799767b-8a1b-4b39-a63a-f0041f4312a7",
+  "order_id": "60c0dd76-8cdc-5324-99a0-fbf21ff4910d",
   "tenant_id": "delta-industrial-supply",
   "document_type": "ORIGINAL",
   "status": "VALIDATED",
@@ -9,39 +9,39 @@
     "message_id": null,
     "from_address": null,
     "subject": null,
-    "received_at": "2026-10-29T20:23:08Z",
+    "received_at": "2026-01-15T10:30:00Z",
     "documents": [
       {
-        "document_id": "doc-ba14f7bb",
+        "document_id": "doc-77edfc62",
         "kind": "PDF_TEXT",
         "filename": "PTD-01017.pdf",
         "mime_type": "application/pdf",
-        "sha256": "405c1aaec1fa9728fde244c028450a1c4b467b1df706afa03cda64eb408b42df",
+        "sha256": "87f01b9eb3a092089ab59e5b7786f9c535fbcaa48ee570c0f570dab6bfb56b8e",
         "page_count": 1
       }
     ]
   },
   "buyer": {
-    "name": "Premier Tool & Die (SYNTHETIC)",
-    "code_on_document": "C-PTD",
-    "tax_id": "US88-4444444",
+    "name": "Titan Holdings (SYNTHETIC)",
+    "code_on_document": "C-TITAN",
+    "tax_id": "US88-3663319",
     "gln": null,
     "peppol_endpoint": null,
     "address": {
-      "line1": "1000 Precision Dr",
+      "line1": "6062 Business Park Rd",
       "city": "Fort Wayne",
       "region": "IN",
       "postal_code": "46802",
       "country": "US"
     },
     "contact": {
-      "name": "William Brown (fictitious)",
-      "email": "purchasing@premier-td.example",
-      "phone": "+1-555-0900"
+      "name": "Titan Purchasing",
+      "email": "purchasing@titan.example",
+      "phone": "+1-555-2079"
     },
     "resolved": {
       "erp_partner_id": 66,
-      "erp_partner_ref": "C-PTD",
+      "erp_partner_ref": "C-TITAN",
       "method": "CODE",
       "score": 0.99
     }
@@ -62,10 +62,10 @@
   "header": {
     "po_number": "PTD-01017",
     "po_revision": 0,
-    "po_date": "02.03.2026",
-    "requested_delivery_date": "2026-03-17",
+    "po_date": "18.04.2026",
+    "requested_delivery_date": "2026-05-03",
     "currency": "USD",
-    "buyer_reference": "Dept 723",
+    "buyer_reference": "Dept 505",
     "payment_terms_text": "Net 45",
     "incoterms": null,
     "ship_via": "FedEx",
@@ -76,79 +76,121 @@
     {
       "line_no": 1,
       "buyer_item_code": null,
-      "seller_item_code": "ELEC-PWR-STRP",
+      "seller_item_code": "ADH-CON-233",
       "manufacturer_name": null,
       "manufacturer_part_number": null,
       "gtin": null,
-      "description": "Power Strip 6 outlet surge",
-      "quantity": 1,
-      "uom_raw": "EA",
-      "uom": "EA",
-      "pack": null,
-      "unit_price": 14.96,
-      "price_uom": "EA",
+      "description": "Construction Adhesive (SYNTHETIC)",
+      "quantity": 24,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "12/CS",
+        "inner_count": 12,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 67.36,
+      "price_uom": "CS",
       "price_basis_qty": 1,
       "discount_pct": null,
-      "line_amount": 14.96,
+      "line_amount": 1616.64,
       "requested_delivery_date": null,
       "notes": null,
       "resolution": {
-        "sku": "ELEC-PWR-STRP",
-        "erp_product_id": 1289,
-        "erp_uom": "EA",
-        "erp_uom_id": 13,
-        "erp_quantity": 1,
+        "sku": "ADH-CON-233",
+        "erp_product_id": 1233,
+        "erp_uom": "CS",
+        "erp_uom_id": 16,
+        "erp_quantity": 24,
         "conversion_factor": 1,
         "method": "SELLER_CODE",
         "score": 0.98,
         "candidates": [],
-        "erp_list_price": 14.96
+        "erp_list_price": 67.36
       }
     },
     {
       "line_no": 2,
       "buyer_item_code": null,
-      "seller_item_code": "FST-HCS-3816-112-SS-B50",
+      "seller_item_code": "JAN-TTI-294",
       "manufacturer_name": null,
       "manufacturer_part_number": null,
       "gtin": null,
-      "description": "Hex Cap Screw 3/8-16 x 1-1/2\" Stainless 18-8",
-      "quantity": 12,
-      "uom_raw": "BX",
-      "uom": "BX",
+      "description": "Toilet Tissue 2P Standard (SYNTHETIC)",
+      "quantity": 5,
+      "uom_raw": "CS",
+      "uom": "CS",
       "pack": {
-        "raw": "50/BX",
-        "inner_count": 50,
+        "raw": "96RL/CS",
+        "inner_count": 96,
         "inner_size": 1,
-        "inner_uom": "EA"
+        "inner_uom": "RL"
       },
-      "unit_price": 11.38,
-      "price_uom": "BX",
+      "unit_price": 74.47,
+      "price_uom": "CS",
       "price_basis_qty": 1,
       "discount_pct": null,
-      "line_amount": 136.56,
+      "line_amount": 372.35,
       "requested_delivery_date": null,
       "notes": null,
       "resolution": {
-        "sku": "FST-HCS-3816-112-SS-B50",
-        "erp_product_id": 1021,
-        "erp_uom": "BX",
-        "erp_uom_id": 36,
-        "erp_quantity": 12,
+        "sku": "JAN-TTI-294",
+        "erp_product_id": 1294,
+        "erp_uom": "CS",
+        "erp_uom_id": 50,
+        "erp_quantity": 5,
         "conversion_factor": 1,
         "method": "SELLER_CODE",
         "score": 0.98,
         "candidates": [],
-        "erp_list_price": 11.38
+        "erp_list_price": 74.47
+      }
+    },
+    {
+      "line_no": 3,
+      "buyer_item_code": null,
+      "seller_item_code": "ABR-FLD-412IN",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Flap Disc 4-1/2in 60 (SYNTHETIC)",
+      "quantity": 5,
+      "uom_raw": "BX",
+      "uom": "BX",
+      "pack": {
+        "raw": "10/BX",
+        "inner_count": 10,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 48.55,
+      "price_uom": "BX",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 242.75,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "ABR-FLD-412IN",
+        "erp_product_id": 1040,
+        "erp_uom": "BX",
+        "erp_uom_id": 32,
+        "erp_quantity": 5,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 48.55
       }
     }
   ],
   "charges": [],
   "totals": {
-    "lines_amount_declared": 151.52,
+    "lines_amount_declared": 2231.74,
     "tax_amount_declared": null,
-    "total_amount_declared": 151.52,
-    "lines_amount_computed": 151.52
+    "total_amount_declared": 2231.74,
+    "lines_amount_computed": 2231.74
   },
   "decision": {
     "score": 0.98,
@@ -158,22 +200,22 @@
   "processing": {
     "extractor": "synthetic/generator.py",
     "prompt_version": null,
-    "created_at": "2026-10-29T20:23:08Z",
+    "created_at": "2026-01-15T10:30:00Z",
     "updated_at": null
   },
   "ship_to": {
-    "name": "Fort Wayne Main",
-    "code_on_document": "FW-MAIN",
+    "name": "Titan Shipping Location 1",
+    "code_on_document": "SHIP-01",
     "address": {
-      "line1": "1000 Precision Dr",
-      "city": "Fort Wayne",
-      "region": "IN",
-      "postal_code": "46802",
+      "line1": "6797 Business Park Rd",
+      "city": "Grand Rapids",
+      "region": "MI",
+      "postal_code": "49503",
       "country": "US"
     },
     "resolved": {
       "erp_partner_id": 67,
-      "erp_partner_ref": "FW-MAIN",
+      "erp_partner_ref": "SHIP-01",
       "method": "CODE",
       "score": 1.0
     }

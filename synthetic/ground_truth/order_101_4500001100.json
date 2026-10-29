@@ -1,0 +1,338 @@
+{
+  "schema_version": "1.0",
+  "order_id": "9b17cd49-e59c-58e7-b73b-fb52c8661eb2",
+  "tenant_id": "delta-industrial-supply",
+  "document_type": "ORIGINAL",
+  "status": "VALIDATED",
+  "source": {
+    "channel": "FOLDER",
+    "message_id": null,
+    "from_address": null,
+    "subject": null,
+    "received_at": "2026-01-15T10:30:00Z",
+    "documents": [
+      {
+        "document_id": "doc-78abb42e",
+        "kind": "PDF_TEXT",
+        "filename": "4500001100.pdf",
+        "mime_type": "application/pdf",
+        "sha256": "8247f6e3cf0a0cb434783b2a7027c1089a456023cb38ad81516c5222b16351f1",
+        "page_count": 1
+      }
+    ]
+  },
+  "buyer": {
+    "name": "Acme Company (SYNTHETIC)",
+    "code_on_document": "C-ACME",
+    "tax_id": "US12-8713396",
+    "gln": null,
+    "peppol_endpoint": null,
+    "address": {
+      "line1": "1375 Business Park Rd",
+      "city": "Toledo",
+      "region": "OH",
+      "postal_code": "43601",
+      "country": "US"
+    },
+    "contact": {
+      "name": "Acme Purchasing",
+      "email": "purchasing@acme.example",
+      "phone": "+1-555-3815"
+    },
+    "resolved": {
+      "erp_partner_id": 42,
+      "erp_partner_ref": "C-ACME",
+      "method": "CODE",
+      "score": 0.99
+    }
+  },
+  "seller": {
+    "name": "Delta Industrial Supply LLC (SYNTHETIC)",
+    "code_on_document": null,
+    "tax_id": null,
+    "address": {
+      "line1": "55 Commerce Dr",
+      "city": "Dayton",
+      "region": "OH",
+      "postal_code": "45402",
+      "country": "US"
+    },
+    "resolved": null
+  },
+  "header": {
+    "po_number": "4500001100",
+    "po_revision": 0,
+    "po_date": "2026-01-23",
+    "requested_delivery_date": "2026-01-29",
+    "currency": "USD",
+    "buyer_reference": "Dept 842",
+    "payment_terms_text": "Net 45",
+    "incoterms": null,
+    "ship_via": null,
+    "notes": "Confirm availability",
+    "language": "en"
+  },
+  "lines": [
+    {
+      "line_no": 1,
+      "buyer_item_code": null,
+      "seller_item_code": "JAN-LNR-3858-15-BL",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Can Liner 38x58 1.5mil Black (SYNTHETIC)",
+      "quantity": 3,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "100/CS",
+        "inner_count": 100,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 74.86,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 224.58,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "JAN-LNR-3858-15-BL",
+        "erp_product_id": 1162,
+        "erp_uom": "CS",
+        "erp_uom_id": 8,
+        "erp_quantity": 3,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 74.86
+      }
+    },
+    {
+      "line_no": 2,
+      "buyer_item_code": "ACME-LUB-0695",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Penetrating Oil Spray (SYNTHETIC)",
+      "quantity": 4,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "12/CS",
+        "inner_count": 12,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 67.65,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 270.6,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "LUB-POS-059",
+        "erp_product_id": 1059,
+        "erp_uom": "CS",
+        "erp_uom_id": 23,
+        "erp_quantity": 4,
+        "conversion_factor": 1,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 67.65
+      }
+    },
+    {
+      "line_no": 3,
+      "buyer_item_code": "ACME-ABR-8774",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Cut-Off Wheel 4-1/2in (SYNTHETIC)",
+      "quantity": 24,
+      "uom_raw": "BX",
+      "uom": "BX",
+      "pack": {
+        "raw": "25/BX",
+        "inner_count": 25,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 33.78,
+      "price_uom": "BX",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 810.72,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "ABR-COW-412IN-2",
+        "erp_product_id": 1121,
+        "erp_uom": "BX",
+        "erp_uom_id": 23,
+        "erp_quantity": 24,
+        "conversion_factor": 1,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 33.78
+      }
+    },
+    {
+      "line_no": 4,
+      "buyer_item_code": null,
+      "seller_item_code": "JAN-HSG-080",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Hand Sanitizer Gel 70% (SYNTHETIC)",
+      "quantity": 4,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "12/CS",
+        "inner_count": 12,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 79.77,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 319.08,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "JAN-HSG-080",
+        "erp_product_id": 1080,
+        "erp_uom": "CS",
+        "erp_uom_id": 19,
+        "erp_quantity": 4,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 79.77
+      }
+    },
+    {
+      "line_no": 5,
+      "buyer_item_code": "ACME-SAF-6129",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Latex Gloves L PF (SYNTHETIC)",
+      "quantity": 5,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "100/BX 10BX/CS",
+        "inner_count": 10,
+        "inner_size": 1,
+        "inner_uom": "BX"
+      },
+      "unit_price": 87.29,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 436.45,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "PPE-GLV-LAT-6-L-WHI",
+        "erp_product_id": 1009,
+        "erp_uom": "CS",
+        "erp_uom_id": 39,
+        "erp_quantity": 5,
+        "conversion_factor": 1,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 87.29
+      }
+    },
+    {
+      "line_no": 6,
+      "buyer_item_code": "ACME-JAN-6676",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Toilet Tissue 2P Standard (SYNTHETIC)",
+      "quantity": 24,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "96RL/CS",
+        "inner_count": 96,
+        "inner_size": 1,
+        "inner_uom": "RL"
+      },
+      "unit_price": 84.9,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 2037.6,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "JAN-TTI-235",
+        "erp_product_id": 1235,
+        "erp_uom": "CS",
+        "erp_uom_id": 9,
+        "erp_quantity": 24,
+        "conversion_factor": 1,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 84.9
+      }
+    }
+  ],
+  "charges": [],
+  "totals": {
+    "lines_amount_declared": 4099.03,
+    "tax_amount_declared": null,
+    "total_amount_declared": 4099.03,
+    "lines_amount_computed": 4099.03
+  },
+  "decision": {
+    "score": 0.98,
+    "route": "AUTO_POST",
+    "reasons": []
+  },
+  "processing": {
+    "extractor": "synthetic/generator.py",
+    "prompt_version": null,
+    "created_at": "2026-01-15T10:30:00Z",
+    "updated_at": null
+  },
+  "ship_to": {
+    "name": "Acme Shipping Location 2",
+    "code_on_document": "SHIP-02",
+    "address": {
+      "line1": "4843 Commerce Dr",
+      "city": "Grand Rapids",
+      "region": "MI",
+      "postal_code": "49503",
+      "country": "US"
+    },
+    "resolved": {
+      "erp_partner_id": 43,
+      "erp_partner_ref": "SHIP-02",
+      "method": "CODE",
+      "score": 1.0
+    }
+  },
+  "_synthetic_metadata": {
+    "hard_case_types": [],
+    "is_hard_case": false
+  }
+}

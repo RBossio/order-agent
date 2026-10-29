@@ -1,0 +1,407 @@
+{
+  "schema_version": "1.0",
+  "order_id": "3a054418-a241-5095-8fa3-02e994daeadb",
+  "tenant_id": "delta-industrial-supply",
+  "document_type": "ORIGINAL",
+  "status": "VALIDATED",
+  "source": {
+    "channel": "FOLDER",
+    "message_id": null,
+    "from_address": null,
+    "subject": null,
+    "received_at": "2026-01-15T10:30:00Z",
+    "documents": [
+      {
+        "document_id": "doc-de63122a",
+        "kind": "PDF_TEXT",
+        "filename": "FCH-01117.pdf",
+        "mime_type": "application/pdf",
+        "sha256": "8cfbd0f8bf78456682b764617b59d9736ad5ad41182a45fa0438315a87045a9d",
+        "page_count": 1
+      }
+    ]
+  },
+  "buyer": {
+    "name": "Prime Corp. (SYNTHETIC)",
+    "code_on_document": "C-PRIME",
+    "tax_id": "US85-1942411",
+    "gln": null,
+    "peppol_endpoint": null,
+    "address": {
+      "line1": "5866 Commerce Dr",
+      "city": "Detroit",
+      "region": "MI",
+      "postal_code": "48201",
+      "country": "US"
+    },
+    "contact": {
+      "name": "Prime Purchasing",
+      "email": "purchasing@prime.example",
+      "phone": "+1-555-2257"
+    },
+    "resolved": {
+      "erp_partner_id": 57,
+      "erp_partner_ref": "C-PRIME",
+      "method": "CODE",
+      "score": 0.99
+    }
+  },
+  "seller": {
+    "name": "Delta Industrial Supply LLC (SYNTHETIC)",
+    "code_on_document": null,
+    "tax_id": null,
+    "address": {
+      "line1": "55 Commerce Dr",
+      "city": "Dayton",
+      "region": "OH",
+      "postal_code": "45402",
+      "country": "US"
+    },
+    "resolved": null
+  },
+  "header": {
+    "po_number": "FCH-01117",
+    "po_revision": 0,
+    "po_date": "01/07/2026",
+    "requested_delivery_date": "2026-07-06",
+    "currency": "USD",
+    "buyer_reference": "Dept 231",
+    "payment_terms_text": "Net 45",
+    "incoterms": null,
+    "ship_via": "Best Way",
+    "notes": "Confirm availability",
+    "language": "en"
+  },
+  "lines": [
+    {
+      "line_no": 1,
+      "buyer_item_code": null,
+      "seller_item_code": "ADH-SGG-191",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Super Glue Gel (SYNTHETIC)",
+      "quantity": 5,
+      "uom_raw": "PK",
+      "uom": "PK",
+      "pack": {
+        "raw": "12/PK",
+        "inner_count": 12,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 26.38,
+      "price_uom": "PK",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 131.9,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "ADH-SGG-191",
+        "erp_product_id": 1191,
+        "erp_uom": "PK",
+        "erp_uom_id": 46,
+        "erp_quantity": 5,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 26.38
+      }
+    },
+    {
+      "line_no": 2,
+      "buyer_item_code": null,
+      "seller_item_code": "PPE-GLV-NIT-6-XXL-BLA",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Nitrile Gloves XXL Black 6mil PF (SYNTHETIC)",
+      "quantity": 3,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "100/BX 10BX/CS",
+        "inner_count": 10,
+        "inner_size": 1,
+        "inner_uom": "BX"
+      },
+      "unit_price": 99.47,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 298.41,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "PPE-GLV-NIT-6-XXL-BLA",
+        "erp_product_id": 1212,
+        "erp_uom": "CS",
+        "erp_uom_id": 21,
+        "erp_quantity": 3,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 99.47
+      }
+    },
+    {
+      "line_no": 3,
+      "buyer_item_code": null,
+      "seller_item_code": "ELE-CTI-8IN",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Cable Tie 8in Black (SYNTHETIC)",
+      "quantity": 24,
+      "uom_raw": "BG",
+      "uom": "BG",
+      "pack": {
+        "raw": "100/BG",
+        "inner_count": 100,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 15.45,
+      "price_uom": "BG",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 370.8,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "ELE-CTI-8IN",
+        "erp_product_id": 1106,
+        "erp_uom": "BG",
+        "erp_uom_id": 32,
+        "erp_quantity": 24,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 15.45
+      }
+    },
+    {
+      "line_no": 4,
+      "buyer_item_code": null,
+      "seller_item_code": "LUB-MOL-031",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Machine Oil Light (SYNTHETIC)",
+      "quantity": 2,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "12/CS",
+        "inner_count": 12,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 53.66,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 107.32,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "LUB-MOL-031",
+        "erp_product_id": 1031,
+        "erp_uom": "CS",
+        "erp_uom_id": 39,
+        "erp_quantity": 2,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 53.66
+      }
+    },
+    {
+      "line_no": 5,
+      "buyer_item_code": null,
+      "seller_item_code": "JAN-HSF-038",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Hand Soap Foam (SYNTHETIC)",
+      "quantity": 5,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "6/CS",
+        "inner_count": 6,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 90.98,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 454.9,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "JAN-HSF-038",
+        "erp_product_id": 1038,
+        "erp_uom": "CS",
+        "erp_uom_id": 29,
+        "erp_quantity": 5,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 90.98
+      }
+    },
+    {
+      "line_no": 6,
+      "buyer_item_code": null,
+      "seller_item_code": "TLS-AWR-10IN-1",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Adjustable Wrench 10in (SYNTHETIC)",
+      "quantity": 2,
+      "uom_raw": "EA",
+      "uom": "EA",
+      "pack": null,
+      "unit_price": 14.21,
+      "price_uom": "EA",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 28.42,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "TLS-AWR-10IN-1",
+        "erp_product_id": 1134,
+        "erp_uom": "EA",
+        "erp_uom_id": 16,
+        "erp_quantity": 2,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 14.21
+      }
+    },
+    {
+      "line_no": 7,
+      "buyer_item_code": null,
+      "seller_item_code": "ABR-SPS-120G",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Sandpaper Sheet 120 Grit (SYNTHETIC)",
+      "quantity": 12,
+      "uom_raw": "PK",
+      "uom": "PK",
+      "pack": {
+        "raw": "50/PK",
+        "inner_count": 50,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 24.94,
+      "price_uom": "PK",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 299.28,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "ABR-SPS-120G",
+        "erp_product_id": 1152,
+        "erp_uom": "PK",
+        "erp_uom_id": 50,
+        "erp_quantity": 12,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 24.94
+      }
+    },
+    {
+      "line_no": 8,
+      "buyer_item_code": null,
+      "seller_item_code": "ELE-CTI-14IN",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Cable Tie 14in Black (SYNTHETIC)",
+      "quantity": 4,
+      "uom_raw": "BG",
+      "uom": "BG",
+      "pack": {
+        "raw": "100/BG",
+        "inner_count": 100,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 10.38,
+      "price_uom": "BG",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 41.52,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "ELE-CTI-14IN",
+        "erp_product_id": 1292,
+        "erp_uom": "BG",
+        "erp_uom_id": 5,
+        "erp_quantity": 4,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 10.38
+      }
+    }
+  ],
+  "charges": [],
+  "totals": {
+    "lines_amount_declared": 1732.55,
+    "tax_amount_declared": null,
+    "total_amount_declared": 1732.55,
+    "lines_amount_computed": 1732.55
+  },
+  "decision": {
+    "score": 0.98,
+    "route": "AUTO_POST",
+    "reasons": []
+  },
+  "processing": {
+    "extractor": "synthetic/generator.py",
+    "prompt_version": null,
+    "created_at": "2026-01-15T10:30:00Z",
+    "updated_at": null
+  },
+  "ship_to": {
+    "name": "Prime Shipping Location 2",
+    "code_on_document": "SHIP-02",
+    "address": {
+      "line1": "6141 Enterprise Ave",
+      "city": "Toledo",
+      "region": "OH",
+      "postal_code": "43601",
+      "country": "US"
+    },
+    "resolved": {
+      "erp_partner_id": 58,
+      "erp_partner_ref": "SHIP-02",
+      "method": "CODE",
+      "score": 1.0
+    }
+  },
+  "_synthetic_metadata": {
+    "hard_case_types": [],
+    "is_hard_case": false
+  }
+}

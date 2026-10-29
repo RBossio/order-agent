@@ -1,0 +1,53 @@
+Content-Type: multipart/mixed; boundary="===============1800568258843872049=="
+MIME-Version: 1.0
+From: purchasing@delta.example
+To: orders@delta-industrial.example
+Subject: PO BW-01055 - Order from Delta Holdings (SYNTHETIC)
+Message-ID: <po-BW-01055@delta.example>
+Date: Thu, 15 Jan 2026 10:30:00 +0000
+
+--===============1800568258843872049==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+Hello,
+
+Please process the following order:
+
+PO Number: BW-01055
+Date: 03/17/2026
+Ship To: Delta Shipping Location 1
+
+Items:
+------
+  1. [JAN-DGR-224] Degreaser Industrial (SYNTHETIC)
+     Qty: 2 CS @ $55.76
+  2. [PKG-BBW-284] Bubble Wrap 12in (SYNTHETIC)
+     Qty: 2 RO @ $52.65
+  3. [TLS-AWR-8IN-2] Adjustable Wrench 8in (SYNTHETIC)
+     Qty: 12 EA @ $31.74
+  4. [JAN-DSP-186] Disinfectant Spray (SYNTHETIC)
+     Qty: 24 CS @ $62.75
+  5. [FST-HCS-38-16-4] Hex Cap Screw 3/8-16 x 4 Grade 5 Zinc (SYNTHETIC)
+     Qty: 5 BX @ $44.25
+  6. [PPE-GLS-AMB-ANTI-FOG-1] Safety Glasses Amber Anti-Fog (SYNTHETIC)
+     Qty: 12 EA @ $4.92
+  7. [PKG-BBW-225] Bubble Wrap 12in (SYNTHETIC)
+     Qty: 12 RO @ $38.71
+  8. [PPE-GLS-SMO-ANTI-FOG] Safety Glasses Smoke Anti-Fog (SYNTHETIC)
+     Qty: 12 EA @ $3.05
+  9. [PPE-HAT-ORA] Hard Hat Orange ANSI Type I (SYNTHETIC)
+     Qty: 24 EA @ $8.73
+  10. [PPE-N95-007] N95 Respirator (SYNTHETIC)
+     Qty: 3 BX @ $38.61
+  11. [JAN-LNR-4347-12-WH] Can Liner 43x47 1.2mil White Roll (SYNTHETIC)
+     Qty: 6 RO @ $23.54
+
+Delivery requested by: 2026-03-23
+
+Thank you,
+Delta Purchasing
+Delta Holdings (SYNTHETIC)
++1-555-9584
+--===============1800568258843872049==--

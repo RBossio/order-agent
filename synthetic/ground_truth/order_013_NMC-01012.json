@@ -1,0 +1,296 @@
+{
+  "schema_version": "1.0",
+  "order_id": "e9f72be6-0f2d-5f45-940d-e893abffed7d",
+  "tenant_id": "delta-industrial-supply",
+  "document_type": "ORIGINAL",
+  "status": "VALIDATED",
+  "source": {
+    "channel": "FOLDER",
+    "message_id": null,
+    "from_address": null,
+    "subject": null,
+    "received_at": "2026-01-15T10:30:00Z",
+    "documents": [
+      {
+        "document_id": "doc-3816726a",
+        "kind": "XLSX",
+        "filename": "NMC-01012.xlsx",
+        "mime_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        "sha256": "310e1d5169b0ced52c1f8eebd454cd65f388a4a25302aa0080159d9a2912e8bd",
+        "page_count": null
+      }
+    ]
+  },
+  "buyer": {
+    "name": "Atlas Group (SYNTHETIC)",
+    "code_on_document": "C-ATLAS",
+    "tax_id": "US21-9507186",
+    "gln": null,
+    "peppol_endpoint": null,
+    "address": {
+      "line1": "6399 Tech Center Blvd",
+      "city": "Grand Rapids",
+      "region": "MI",
+      "postal_code": "49503",
+      "country": "US"
+    },
+    "contact": {
+      "name": "Atlas Purchasing",
+      "email": "purchasing@atlas.example",
+      "phone": "+1-555-2013"
+    },
+    "resolved": {
+      "erp_partner_id": 60,
+      "erp_partner_ref": "C-ATLAS",
+      "method": "CODE",
+      "score": 0.99
+    }
+  },
+  "seller": {
+    "name": "Delta Industrial Supply LLC (SYNTHETIC)",
+    "code_on_document": null,
+    "tax_id": null,
+    "address": {
+      "line1": "55 Commerce Dr",
+      "city": "Dayton",
+      "region": "OH",
+      "postal_code": "45402",
+      "country": "US"
+    },
+    "resolved": null
+  },
+  "header": {
+    "po_number": "NMC-01012",
+    "po_revision": 0,
+    "po_date": "2026-04-25",
+    "requested_delivery_date": "2026-05-03",
+    "currency": "USD",
+    "buyer_reference": "Dept 834",
+    "payment_terms_text": "Net 45",
+    "incoterms": null,
+    "ship_via": "Best Way",
+    "notes": "Confirm availability",
+    "language": "en"
+  },
+  "lines": [
+    {
+      "line_no": 1,
+      "buyer_item_code": "ATLAS-JAN-1538",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Can Liner 38x58 1.5mil Clear (SYNTHETIC)",
+      "quantity": 10,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "100/CS",
+        "inner_count": 100,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 40.06,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 400.6,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "JAN-LNR-3858-15-CL",
+        "erp_product_id": 1127,
+        "erp_uom": "CS",
+        "erp_uom_id": 48,
+        "erp_quantity": 10,
+        "conversion_factor": 1,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 40.06
+      }
+    },
+    {
+      "line_no": 2,
+      "buyer_item_code": null,
+      "seller_item_code": "FST-LWS-14-20",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Lock Washer 1/4-20 Zinc (SYNTHETIC)",
+      "quantity": 6,
+      "uom_raw": "BX",
+      "uom": "BX",
+      "pack": {
+        "raw": "BX/100",
+        "inner_count": 100,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 15.27,
+      "price_uom": "BX",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 91.62,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "FST-LWS-14-20",
+        "erp_product_id": 1018,
+        "erp_uom": "BX",
+        "erp_uom_id": 16,
+        "erp_quantity": 6,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 15.27
+      }
+    },
+    {
+      "line_no": 3,
+      "buyer_item_code": null,
+      "seller_item_code": "LUB-MPG-125",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Multi-Purpose Grease (SYNTHETIC)",
+      "quantity": 3,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "10/CS",
+        "inner_count": 10,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 104.78,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 314.34,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "LUB-MPG-125",
+        "erp_product_id": 1125,
+        "erp_uom": "CS",
+        "erp_uom_id": 21,
+        "erp_quantity": 3,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 104.78
+      }
+    },
+    {
+      "line_no": 4,
+      "buyer_item_code": null,
+      "seller_item_code": "FST-HCS-M10-112",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Hex Cap Screw M10 x 1-1/2 Grade 5 Zinc (SYNTHETIC)",
+      "quantity": 1,
+      "uom_raw": "BX",
+      "uom": "BX",
+      "pack": {
+        "raw": "BX/50",
+        "inner_count": 50,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 26.78,
+      "price_uom": "BX",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 26.78,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "FST-HCS-M10-112",
+        "erp_product_id": 1029,
+        "erp_uom": "BX",
+        "erp_uom_id": 48,
+        "erp_quantity": 1,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 26.78
+      }
+    },
+    {
+      "line_no": 5,
+      "buyer_item_code": null,
+      "seller_item_code": "PKG-BBW-147",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Bubble Wrap 12in (SYNTHETIC)",
+      "quantity": 5,
+      "uom_raw": "RO",
+      "uom": "RO",
+      "pack": null,
+      "unit_price": 41.67,
+      "price_uom": "RO",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 208.35,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "PKG-BBW-147",
+        "erp_product_id": 1147,
+        "erp_uom": "RO",
+        "erp_uom_id": 27,
+        "erp_quantity": 5,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 41.67
+      }
+    }
+  ],
+  "charges": [],
+  "totals": {
+    "lines_amount_declared": 1041.69,
+    "tax_amount_declared": null,
+    "total_amount_declared": 1041.69,
+    "lines_amount_computed": 1041.69
+  },
+  "decision": {
+    "score": 0.98,
+    "route": "AUTO_POST",
+    "reasons": []
+  },
+  "processing": {
+    "extractor": "synthetic/generator.py",
+    "prompt_version": null,
+    "created_at": "2026-01-15T10:30:00Z",
+    "updated_at": null
+  },
+  "ship_to": {
+    "name": "Atlas Shipping Location 1",
+    "code_on_document": "SHIP-01",
+    "address": {
+      "line1": "772 Tech Center Blvd",
+      "city": "Fort Wayne",
+      "region": "IN",
+      "postal_code": "46802",
+      "country": "US"
+    },
+    "resolved": {
+      "erp_partner_id": 61,
+      "erp_partner_ref": "SHIP-01",
+      "method": "CODE",
+      "score": 1.0
+    }
+  },
+  "_synthetic_metadata": {
+    "hard_case_types": [],
+    "is_hard_case": false
+  }
+}

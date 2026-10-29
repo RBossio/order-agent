@@ -1,0 +1,41 @@
+Content-Type: multipart/mixed; boundary="===============6824636320892094614=="
+MIME-Version: 1.0
+From: purchasing@nova.example
+To: orders@delta-industrial.example
+Subject: PO SW-01136 - Order from Nova Company (SYNTHETIC)
+Message-ID: <po-SW-01136@nova.example>
+Date: Thu, 15 Jan 2026 10:30:00 +0000
+
+--===============6824636320892094614==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+Hello,
+
+Please process the following order:
+
+PO Number: SW-01136
+Date: 03-07-2026
+Ship To: Nova Shipping Location 1
+
+Items:
+------
+  1. [NOVA-ADH-9503] Super Glue Gel (SYNTHETIC)
+     Qty: 2 PK @ $25.28
+  2. [FST-LWS-M6-2] Lock Washer M6 Zinc (SYNTHETIC)
+     Qty: 10 BX @ $9.97
+  3. [JAN-FST-214] Floor Stripper Heavy Duty (SYNTHETIC)
+     Qty: 1 CS @ $66.70
+  4. [TLS-UTB-197] Utility Blade Standard (SYNTHETIC)
+     Qty: 3 PK @ $7.32
+  5. [NOVA-JAN-1381] Floor Cleaner Neutral Concentrate (SYNTHETIC)
+     Qty: 5 CS @ $54.45
+
+Delivery requested by: 2026-03-24
+
+Thank you,
+Nova Purchasing
+Nova Company (SYNTHETIC)
++1-555-9586
+--===============6824636320892094614==--

@@ -1,0 +1,39 @@
+Content-Type: multipart/mixed; boundary="===============6360944028480094894=="
+MIME-Version: 1.0
+From: purchasing@summit.example
+To: orders@delta-industrial.example
+Subject: PO APE-01058 - Order from Summit Group (SYNTHETIC)
+Message-ID: <po-APE-01058@summit.example>
+Date: Thu, 15 Jan 2026 10:30:00 +0000
+
+--===============6360944028480094894==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+Hello,
+
+Please process the following order:
+
+PO Number: APE-01058
+Date: 2026/01/25
+Ship To: Summit Shipping Location 1
+
+Items:
+------
+  1. [ABR-FLD-412IN-1] Flap Disc 4-1/2in 180 (SYNTHETIC)
+     Qty: 2 BX @ $88.42
+  2. [JAN-LNR-4046-07-BL] Can Liner 40x46 0.7mil Black Roll (SYNTHETIC)
+     Qty: 1 RO @ $20.77
+  3. [FST-HCS-38-16-112] Hex Cap Screw 3/8-16 x 1-1/2 Grade 5 Zinc (SYNTHETIC)
+     Qty: 5 BX @ $27.99
+  4. [TLS-AWR-6IN-1] Adjustable Wrench 6in (SYNTHETIC)
+     Qty: 4 EA @ $41.26
+
+Delivery requested by: 2026-02-06
+
+Thank you,
+Summit Purchasing
+Summit Group (SYNTHETIC)
++1-555-5961
+--===============6360944028480094894==--

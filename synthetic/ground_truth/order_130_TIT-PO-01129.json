@@ -1,0 +1,212 @@
+{
+  "schema_version": "1.0",
+  "order_id": "407e126a-9da7-553e-aba3-ef713145ee62",
+  "tenant_id": "delta-industrial-supply",
+  "document_type": "ORIGINAL",
+  "status": "VALIDATED",
+  "source": {
+    "channel": "FOLDER",
+    "message_id": null,
+    "from_address": null,
+    "subject": null,
+    "received_at": "2026-01-15T10:30:00Z",
+    "documents": [
+      {
+        "document_id": "doc-be99312c",
+        "kind": "XLSX",
+        "filename": "TIT-PO-01129.xlsx",
+        "mime_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        "sha256": "a6369d3cef8ad3df3b73055580232e7bfd420083503adda3f6ee95eb1c1ffaea",
+        "page_count": null
+      }
+    ]
+  },
+  "buyer": {
+    "name": "Omega Manufacturing Inc. (SYNTHETIC)",
+    "code_on_document": "C-OMEGA",
+    "tax_id": "US60-6205543",
+    "gln": null,
+    "peppol_endpoint": null,
+    "address": {
+      "line1": "5662 Manufacturing Way",
+      "city": "Cleveland",
+      "region": "OH",
+      "postal_code": "44101",
+      "country": "US"
+    },
+    "contact": {
+      "name": "Omega Purchasing",
+      "email": "purchasing@omega.example",
+      "phone": "+1-555-6724"
+    },
+    "resolved": {
+      "erp_partner_id": 48,
+      "erp_partner_ref": "C-OMEGA",
+      "method": "CODE",
+      "score": 0.99
+    }
+  },
+  "seller": {
+    "name": "Delta Industrial Supply LLC (SYNTHETIC)",
+    "code_on_document": null,
+    "tax_id": null,
+    "address": {
+      "line1": "55 Commerce Dr",
+      "city": "Dayton",
+      "region": "OH",
+      "postal_code": "45402",
+      "country": "US"
+    },
+    "resolved": null
+  },
+  "header": {
+    "po_number": "TIT-PO-01129",
+    "po_revision": 0,
+    "po_date": "31-Mar-2026",
+    "requested_delivery_date": "2026-04-17",
+    "currency": "USD",
+    "buyer_reference": "Dept 405",
+    "payment_terms_text": "Net 30",
+    "incoterms": null,
+    "ship_via": "UPS Ground",
+    "notes": "Rush order",
+    "language": "en"
+  },
+  "lines": [
+    {
+      "line_no": 1,
+      "buyer_item_code": null,
+      "seller_item_code": "TLS-TPM-16FT",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Tape Measure 16ft (SYNTHETIC)",
+      "quantity": 24,
+      "uom_raw": "EA",
+      "uom": "EA",
+      "pack": null,
+      "unit_price": 12.71,
+      "price_uom": "EA",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 305.04,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "TLS-TPM-16FT",
+        "erp_product_id": 1172,
+        "erp_uom": "EA",
+        "erp_uom_id": 27,
+        "erp_quantity": 24,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 12.71
+      }
+    },
+    {
+      "line_no": 2,
+      "buyer_item_code": null,
+      "seller_item_code": "PKG-BBW-205",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Bubble Wrap 12in (SYNTHETIC)",
+      "quantity": 1,
+      "uom_raw": "RO",
+      "uom": "RO",
+      "pack": null,
+      "unit_price": 42.15,
+      "price_uom": "RO",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 42.15,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "PKG-BBW-205",
+        "erp_product_id": 1205,
+        "erp_uom": "RO",
+        "erp_uom_id": 18,
+        "erp_quantity": 1,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 42.15
+      }
+    },
+    {
+      "line_no": 3,
+      "buyer_item_code": "OMEGA-TOO-4009",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Utility Knife Retractable (SYNTHETIC)",
+      "quantity": 12,
+      "uom_raw": "EA",
+      "uom": "EA",
+      "pack": null,
+      "unit_price": 3.88,
+      "price_uom": "EA",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 46.56,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "TLS-UTK-267",
+        "erp_product_id": 1267,
+        "erp_uom": "EA",
+        "erp_uom_id": 24,
+        "erp_quantity": 12,
+        "conversion_factor": 1,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 3.88
+      }
+    }
+  ],
+  "charges": [],
+  "totals": {
+    "lines_amount_declared": 393.75,
+    "tax_amount_declared": null,
+    "total_amount_declared": 393.75,
+    "lines_amount_computed": 393.75
+  },
+  "decision": {
+    "score": 0.98,
+    "route": "AUTO_POST",
+    "reasons": []
+  },
+  "processing": {
+    "extractor": "synthetic/generator.py",
+    "prompt_version": null,
+    "created_at": "2026-01-15T10:30:00Z",
+    "updated_at": null
+  },
+  "ship_to": {
+    "name": "Omega Shipping Location 1",
+    "code_on_document": "SHIP-01",
+    "address": {
+      "line1": "1351 Commerce Dr",
+      "city": "Cleveland",
+      "region": "OH",
+      "postal_code": "44101",
+      "country": "US"
+    },
+    "resolved": {
+      "erp_partner_id": 49,
+      "erp_partner_ref": "SHIP-01",
+      "method": "CODE",
+      "score": 1.0
+    }
+  },
+  "_synthetic_metadata": {
+    "hard_case_types": [],
+    "is_hard_case": false
+  }
+}
