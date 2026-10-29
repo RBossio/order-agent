@@ -1,6 +1,7 @@
 # VentureOrder - Makefile per ambiente di sviluppo Odoo
 #
 # Target principali:
+#   make conf      - Genera config/odoo.conf dal template
 #   make init      - Inizializza il database (una sola volta)
 #   make up        - Avvia Odoo e PostgreSQL
 #   make seed      - Popola il database con dati sintetici
@@ -12,15 +13,21 @@
 # Per VM con problemi di rete Docker:
 #   make up VM=1   - Usa network_mode: host
 
-.PHONY: help up down logs seed smoke reset clean datagen env-check wait-odoo init test lint
+.PHONY: help conf up down logs seed smoke reset clean datagen env-check wait-odoo init test lint
+
+# Carica variabili da .env
+-include .env
+export
 
 PYTHON := python3
 
 # Compose command - usa VM=1 per network_mode: host
 ifeq ($(VM),1)
 COMPOSE := docker compose -f docker-compose.yml -f docker-compose.vm.yml
+DB_HOST := localhost
 else
 COMPOSE := docker compose
+DB_HOST := db
 endif
 
 # Colori per output
@@ -51,30 +58,40 @@ env-check: ## Verifica che Docker sia disponibile e .env esista
 		echo "Esegui: cp .env.example .env && nano .env"; \
 		exit 1; \
 	fi
+	@if [ -z "$(POSTGRES_PASSWORD)" ]; then \
+		echo "$(RED)Errore: POSTGRES_PASSWORD non definita in .env$(NC)"; \
+		exit 1; \
+	fi
+	@if [ -z "$(ODOO_ADMIN_PASSWORD)" ]; then \
+		echo "$(RED)Errore: ODOO_ADMIN_PASSWORD non definita in .env$(NC)"; \
+		exit 1; \
+	fi
 	@echo "$(GREEN)Ambiente OK$(NC)"
 
-init: env-check ## Inizializza il database con i moduli (una sola volta)
+conf: env-check ## Genera config/odoo.conf dal template
+	@echo "$(GREEN)Generazione config/odoo.conf...$(NC)"
+	@DB_HOST=$(DB_HOST) ./scripts/generate_odoo_conf.sh
+
+init: conf ## Inizializza il database con i moduli (una sola volta)
 	@echo "$(GREEN)Inizializzazione database...$(NC)"
 	$(COMPOSE) up -d db
 	@echo "$(YELLOW)Attendo che PostgreSQL sia pronto...$(NC)"
 	@for i in $$(seq 1 30); do \
-		if $(COMPOSE) exec -T db pg_isready -U $${POSTGRES_USER:-odoo} -d $${POSTGRES_DB:-vo_demo} >/dev/null 2>&1; then \
+		if $(COMPOSE) exec -T db pg_isready -U $(POSTGRES_USER) -d $(POSTGRES_DB) -h localhost >/dev/null 2>&1; then \
 			break; \
 		fi; \
 		sleep 1; \
 	done
 	@echo "$(GREEN)Inizializzazione moduli Odoo...$(NC)"
 	$(COMPOSE) run --rm odoo \
-		--database=$${POSTGRES_DB:-vo_demo} \
-		--db_host=db \
-		--db_user=$${POSTGRES_USER:-odoo} \
-		--db_password=$${POSTGRES_PASSWORD} \
+		--config=/etc/odoo/odoo.conf \
+		--db_host=$(DB_HOST) \
 		--init=sale_management,stock,contacts,product \
 		--without-demo=all \
 		--stop-after-init
 	@echo "$(GREEN)Inizializzazione completata!$(NC)"
 
-up: env-check ## Avvia Odoo e PostgreSQL
+up: conf ## Avvia Odoo e PostgreSQL
 	@echo "$(GREEN)Avvio container...$(NC)"
 	$(COMPOSE) up -d
 	@echo ""
@@ -129,8 +146,8 @@ reset: down ## Azzera il database e ripopola
 	@echo "$(YELLOW)Rimozione volumi...$(NC)"
 	$(COMPOSE) down -v
 	@echo "$(GREEN)Riavvio con database pulito...$(NC)"
-	@$(MAKE) init
-	@$(MAKE) up
+	@$(MAKE) init VM=$(VM)
+	@$(MAKE) up VM=$(VM)
 	@$(MAKE) wait-odoo
 	@$(MAKE) seed
 	@$(MAKE) smoke
@@ -138,6 +155,7 @@ reset: down ## Azzera il database e ripopola
 clean: down ## Rimuove tutto (container, volumi, immagini)
 	@echo "$(RED)Rimozione completa...$(NC)"
 	$(COMPOSE) down -v --rmi local
+	@rm -f config/odoo.conf
 	@echo "$(GREEN)Pulizia completata$(NC)"
 
 status: ## Mostra lo stato dei container
@@ -147,7 +165,7 @@ shell-odoo: ## Apre una shell nel container Odoo
 	$(COMPOSE) exec odoo bash
 
 shell-db: ## Apre una shell psql nel database
-	$(COMPOSE) exec db psql -U $${POSTGRES_USER:-odoo} -d $${POSTGRES_DB:-vo_demo}
+	$(COMPOSE) exec db psql -U $(POSTGRES_USER) -d $(POSTGRES_DB)
 
 # Target di sviluppo
 test-connection: ## Testa la connessione XML-RPC a Odoo
@@ -156,8 +174,8 @@ test-connection: ## Testa la connessione XML-RPC a Odoo
 		print('Odoo version:', c.version()['server_version'])"
 
 # Test e linting
-lint: ## Esegue ruff sui file di questa PR
-	ruff check datagen/ scripts/
+lint: ## Esegue ruff su tutto il repo
+	ruff check .
 
 test: ## Esegue i test unitari
-	pytest tests/ -q
+	pytest tests -q

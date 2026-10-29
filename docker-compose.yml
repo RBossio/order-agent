@@ -2,6 +2,7 @@
 #
 # Uso:
 #   cp .env.example .env  # OBBLIGATORIO: modifica le password!
+#   make conf             # genera config/odoo.conf dal template
 #   make init             # inizializza il database (una sola volta)
 #   make up               # avvia i servizi
 #   make seed             # popola con dati sintetici
@@ -32,21 +33,14 @@ services:
     depends_on:
       db:
         condition: service_healthy
-    environment:
-      HOST: db
-      USER: ${POSTGRES_USER:-odoo}
-      PASSWORD: ${POSTGRES_PASSWORD:?POSTGRES_PASSWORD is required}
     ports:
       - "127.0.0.1:${ODOO_PORT:-8069}:8069"
     volumes:
       - vo_odoo_data:/var/lib/odoo
       - vo_odoo_addons:/mnt/extra-addons
+      - ./config/odoo.conf:/etc/odoo/odoo.conf:ro
     command: >
-      --database=${POSTGRES_DB:-vo_demo}
-      --db_host=db
-      --db_user=${POSTGRES_USER:-odoo}
-      --db_password=${POSTGRES_PASSWORD}
-      --no-database-list
+      --config=/etc/odoo/odoo.conf
       --without-demo=all
 
 volumes:
