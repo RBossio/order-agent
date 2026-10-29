@@ -317,14 +317,6 @@ class TestHardCases:
             types = gt.get("_synthetic_metadata", {}).get("hard_case_types", [])
             all_types.update(types)
         
-        expected_types = {
-            "UOM_CONVERSION", "CUSTOMER_CODES", "AMBIGUOUS_DESC",
-            "TYPO_DESC", "TOTAL_MIXED", "MULTIPAGE_PDF", "DATE_FORMAT",
-            "QTY_WORDS", "EMAIL_CONTRADICTORY", "MISSING_PO_NUMBER",
-            "MISSING_QTY", "MISSING_DATE"
-        }
-        
-        missing = expected_types - all_types
         assert len(all_types) >= 8, \
             f"Troppo pochi tipi di casi difficili ({len(all_types)}), attesi almeno 8"
     

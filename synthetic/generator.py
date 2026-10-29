@@ -57,8 +57,8 @@ def main():
     from .loaders import get_loader
     from .orders import generate_orders
     
-    print(f"VentureOrder - Generatore dati sintetici")
-    print(f"========================================")
+    print("VentureOrder - Generatore dati sintetici")
+    print("========================================")
     print(f"Output directory: {args.output_dir}")
     print(f"Numero ordini: {args.num_orders}")
     print(f"Percentuale casi difficili: {args.hard_case_pct * 100:.0f}%")

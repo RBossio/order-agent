@@ -74,7 +74,7 @@ def generate_catalog(output_path: Path | None = None) -> list[dict[str, Any]]:
     
     while len(catalog) < 60:
         ftype, fname, fmat = random.choice(fastener_types[5:])
-        tsize, tdisp = random.choice(thread_sizes)
+        tsize, _ = random.choice(thread_sizes)
         pack = random.choice(pack_sizes_fastener)
         sku = f"FST-{ftype}-{tsize.replace('/', '').replace('-', '')}-{'ZN' if 'Zinc' in fmat else 'SS'}-B{pack}"
         if any(c["sku"] == sku for c in catalog):

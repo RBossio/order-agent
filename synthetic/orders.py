@@ -11,7 +11,6 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from io import BytesIO
 from pathlib import Path
-from typing import Any
 
 from . import SEED
 
@@ -102,7 +101,13 @@ def generate_pdf_order(
     from reportlab.lib.pagesizes import letter
     from reportlab.lib.styles import ParagraphStyle, getSampleStyleSheet
     from reportlab.lib.units import inch
-    from reportlab.platypus import Paragraph, SimpleDocTemplate, Spacer, Table, TableStyle
+    from reportlab.platypus import (
+        Paragraph,
+        SimpleDocTemplate,
+        Spacer,
+        Table,
+        TableStyle,
+    )
     
     buffer = BytesIO()
     doc = SimpleDocTemplate(buffer, pagesize=letter, topMargin=0.5*inch, bottomMargin=0.5*inch)
@@ -112,7 +117,7 @@ def generate_pdf_order(
     title_style = ParagraphStyle("Title", parent=styles["Heading1"], fontSize=16, spaceAfter=12)
     normal_style = styles["Normal"]
     
-    story.append(Paragraph(f"<b>PURCHASE ORDER</b>", title_style))
+    story.append(Paragraph("<b>PURCHASE ORDER</b>", title_style))
     story.append(Spacer(1, 0.2*inch))
     
     buyer = order_data["buyer"]
@@ -373,16 +378,16 @@ def generate_eml_order(
     po_display = header["po_number"] if "MISSING_PO_NUMBER" not in hard_cases else "[see attached]"
     
     body_lines = [
-        f"Hello,",
-        f"",
-        f"Please process the following order:",
-        f"",
+        "Hello,",
+        "",
+        "Please process the following order:",
+        "",
         f"PO Number: {po_display}",
         f"Date: {date_display}",
         f"Ship To: {order_data.get('ship_to', {}).get('name', '')}",
-        f"",
-        f"Items:",
-        f"------",
+        "",
+        "Items:",
+        "------",
     ]
     
     lines = order_data["lines"]
@@ -572,7 +577,7 @@ def _create_ground_truth(
             "message_id": f"<po-{header['po_number']}@{buyer.get('email_domain', 'example.com')}>" if channel.startswith("EMAIL") else None,
             "from_address": buyer.get("contact", {}).get("email") if channel.startswith("EMAIL") else None,
             "subject": f"PO {header['po_number']} - Order from {buyer['name']}" if channel.startswith("EMAIL") else None,
-            "received_at": datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ"),
+            "received_at": datetime.now(tz=None).strftime("%Y-%m-%dT%H:%M:%SZ"),
             "documents": documents
         },
         "buyer": {
@@ -615,7 +620,7 @@ def _create_ground_truth(
         "processing": {
             "extractor": "synthetic/generator.py",
             "prompt_version": None,
-            "created_at": datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ"),
+            "created_at": datetime.now(tz=None).strftime("%Y-%m-%dT%H:%M:%SZ"),
             "updated_at": None
         }
     }
@@ -895,7 +900,7 @@ def generate_orders(
         })
     
     manifest = {
-        "generated_at": datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ"),
+        "generated_at": datetime.now(tz=None).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "seed": SEED,
         "total_orders": num_orders,
         "hard_cases": num_hard,
