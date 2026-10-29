@@ -5,7 +5,7 @@ from __future__ import annotations
 import hashlib
 import uuid
 from dataclasses import dataclass, field
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from enum import Enum
 from typing import Any
 
@@ -212,7 +212,7 @@ class NormalizedInput:
     input_id: str = field(default_factory=lambda: str(uuid.uuid4()))
     source: Source | None = None
     email_metadata: EmailMetadata | None = None
-    ingested_at: str = field(default_factory=lambda: datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"))
+    ingested_at: str = field(default_factory=lambda: datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%SZ"))
     parts: list[Part] = field(default_factory=list)
     warnings: list[Warning] = field(default_factory=list)
 

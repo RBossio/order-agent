@@ -86,7 +86,7 @@ def main() -> int:
     
     if args.batch or input_path.is_dir():
         if not input_path.is_dir():
-            print(f"Errore: modalità batch richiede una directory.", file=sys.stderr)
+            print("Errore: modalità batch richiede una directory.", file=sys.stderr)
             return 1
         
         if output_path is None:
@@ -186,7 +186,7 @@ def _validate_output(result) -> tuple[bool, list[str]]:
         return True, []
     except ImportError:
         return True, []
-    except Exception as e:
+    except Exception:
         return True, []
 
 

@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import hashlib
-import uuid
 from io import BytesIO
 from pathlib import Path
 from typing import Any
@@ -88,7 +87,7 @@ class PdfParser:
         except Exception as e:
             result.warnings.append(Warning(
                 code="PDF-02",
-                message=f"Errore nel parsing del PDF: {str(e)}",
+                message=f"Errore nel parsing del PDF: {e!s}",
                 details={"error": str(e)},
             ))
         

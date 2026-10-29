@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import hashlib
-import uuid
 from io import BytesIO
 from pathlib import Path
 from typing import Any
@@ -82,7 +81,6 @@ class ExcelParser:
     def _parse_xlsx(self, content: bytes, result: NormalizedInput) -> None:
         """Parsa file .xlsx usando openpyxl."""
         from openpyxl import load_workbook
-        from openpyxl.cell import MergedCell
         
         buffer = BytesIO(content)
         
@@ -97,7 +95,7 @@ class ExcelParser:
         except Exception as e:
             result.warnings.append(Warning(
                 code="XLS-01",
-                message=f"Errore nel parsing del file Excel: {str(e)}",
+                message=f"Errore nel parsing del file Excel: {e!s}",
                 details={"error": str(e)},
             ))
 
@@ -216,7 +214,7 @@ class ExcelParser:
         except Exception as e:
             result.warnings.append(Warning(
                 code="XLS-03",
-                message=f"Errore nel parsing del file .xls: {str(e)}",
+                message=f"Errore nel parsing del file .xls: {e!s}",
                 details={"error": str(e)},
             ))
 

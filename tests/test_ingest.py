@@ -10,7 +10,6 @@ import pytest
 
 from ingest import Ingestor, NormalizedInput
 
-
 SYNTHETIC_DIR = Path(__file__).parent.parent / "synthetic"
 DOCUMENTS_DIR = SYNTHETIC_DIR / "documents"
 GROUND_TRUTH_DIR = SYNTHETIC_DIR / "ground_truth"

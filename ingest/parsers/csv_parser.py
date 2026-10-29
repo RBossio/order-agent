@@ -4,10 +4,8 @@ from __future__ import annotations
 
 import csv
 import hashlib
-import uuid
-from io import BytesIO, StringIO
+from io import StringIO
 from pathlib import Path
-from typing import Any
 
 from ..models import (
     Cell,
@@ -111,7 +109,7 @@ class CsvParser:
         except Exception as e:
             result.warnings.append(Warning(
                 code="CSV-01",
-                message=f"Errore nel parsing del file CSV: {str(e)}",
+                message=f"Errore nel parsing del file CSV: {e!s}",
                 details={"error": str(e)},
             ))
         

@@ -6,13 +6,9 @@ import email
 import email.utils
 import hashlib
 import re
-import uuid
-from datetime import datetime
 from email.message import Message
 from html.parser import HTMLParser
-from io import BytesIO
 from pathlib import Path
-from typing import BinaryIO
 
 from ..models import (
     EmailAddress,

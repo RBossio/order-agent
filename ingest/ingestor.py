@@ -4,9 +4,8 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
-from typing import Any
 
-from .models import FileType, NormalizedInput, Warning
+from .models import FileType, NormalizedInput
 from .parsers.csv_parser import CsvParser
 from .parsers.eml_parser import EmlParser
 from .parsers.excel_parser import ExcelParser

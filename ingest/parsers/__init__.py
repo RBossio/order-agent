@@ -1,8 +1,8 @@
 """Parser per i vari formati di file."""
 
-from .eml_parser import EmlParser
-from .pdf_parser import PdfParser
-from .excel_parser import ExcelParser
 from .csv_parser import CsvParser
+from .eml_parser import EmlParser
+from .excel_parser import ExcelParser
+from .pdf_parser import PdfParser
 
-__all__ = ["EmlParser", "PdfParser", "ExcelParser", "CsvParser"]
+__all__ = ["CsvParser", "EmlParser", "ExcelParser", "PdfParser"]

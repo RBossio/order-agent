@@ -7,14 +7,14 @@ un input normalizzato (NormalizedInput) per la fase successiva di estrazione IA.
 
 __version__ = "1.0.0"
 
-from .models import NormalizedInput, Part, Table, Cell, Warning
 from .ingestor import Ingestor
+from .models import Cell, NormalizedInput, Part, Table, Warning
 
 __all__ = [
-    "NormalizedInput",
-    "Part", 
-    "Table",
     "Cell",
-    "Warning",
     "Ingestor",
+    "NormalizedInput",
+    "Part",
+    "Table",
+    "Warning",
 ]
