@@ -307,7 +307,7 @@
         "code": {
           "type": "string",
           "pattern": "^[A-Z]{2,4}-[0-9]{2}$",
-          "description": "Codice avviso (es. PDF-01, ATT-01)."
+          "description": "Codice avviso (es. PDF-01, ATT-01, SIZ-01)."
         },
         "message": {
           "type": "string",
@@ -321,6 +321,11 @@
           "type": ["object", "null"],
           "additionalProperties": true,
           "description": "Dettagli aggiuntivi."
+        },
+        "severity": {
+          "enum": ["INFO", "WARNING", "ERROR"],
+          "default": "WARNING",
+          "description": "Livello di gravità: INFO (informativo), WARNING (avviso), ERROR (errore critico, file rifiutato)."
         }
       }
     }

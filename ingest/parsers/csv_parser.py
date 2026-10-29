@@ -49,7 +49,7 @@ def _detect_delimiter(sample: str) -> str:
         sniffer = csv.Sniffer()
         dialect = sniffer.sniff(sample, delimiters=",;\t|")
         return dialect.delimiter
-    except Exception:
+    except Exception:  # noqa: BLE001
         comma_count = sample.count(",")
         semicolon_count = sample.count(";")
         tab_count = sample.count("\t")
@@ -97,7 +97,7 @@ class CsvParser:
         encoding = _detect_encoding(content)
         try:
             text_content = content.decode(encoding)
-        except Exception:
+        except Exception:  # noqa: BLE001
             text_content = content.decode("utf-8", errors="replace")
         
         sample = text_content[:8192]
@@ -106,7 +106,7 @@ class CsvParser:
         try:
             part = self._process_csv(text_content, delimiter, result)
             result.parts.append(part)
-        except Exception as e:
+        except Exception as e:  # noqa: BLE001
             result.warnings.append(Warning(
                 code="CSV-01",
                 message=f"Errore nel parsing del file CSV: {e!s}",

@@ -84,7 +84,7 @@ class PdfParser:
                             }
                         ))
                         
-        except Exception as e:
+        except Exception as e:  # noqa: BLE001
             result.warnings.append(Warning(
                 code="PDF-02",
                 message=f"Errore nel parsing del PDF: {e!s}",
@@ -109,7 +109,7 @@ class PdfParser:
         try:
             text = page.extract_text() or ""
             part.text = text
-        except Exception:
+        except Exception:  # noqa: BLE001
             part.text = ""
         
         try:
@@ -119,7 +119,7 @@ class PdfParser:
                 y_density=3,
             ) or ""
             part.text_layout = text_layout
-        except Exception:
+        except Exception:  # noqa: BLE001
             part.text_layout = part.text
         
         content_for_hash = part.text or ""
@@ -181,7 +181,7 @@ class PdfParser:
                     table.header_row_index = header_idx
                     tables.append(table)
                     
-        except Exception as e:
+        except Exception as e:  # noqa: BLE001
             result.warnings.append(Warning(
                 code="PDF-03",
                 message=f"Errore nell'estrazione delle tabelle dalla pagina {page_num}",
