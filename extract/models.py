@@ -83,7 +83,7 @@ class ExtractedParty:
             d["tax_id"] = self.tax_id
         if self.gln:
             d["gln"] = self.gln
-        
+
         address = {}
         if self.address_line1:
             address["line1"] = self.address_line1
@@ -99,7 +99,7 @@ class ExtractedParty:
             address["country"] = self.address_country
         if address:
             d["address"] = address
-        
+
         contact = {}
         if self.contact_name:
             contact["name"] = self.contact_name
@@ -109,7 +109,7 @@ class ExtractedParty:
             contact["phone"] = self.contact_phone
         if contact:
             d["contact"] = contact
-        
+
         return d
 
 
@@ -273,7 +273,7 @@ class ExtractedOrder:
     lines: list[ExtractedLine] = field(default_factory=list)
     totals: ExtractedTotals | None = None
     overall_confidence: float = 0.0
-    
+
     source_channel: str = "EMAIL_IMAP"
     source_message_id: str | None = None
     source_from_address: str | None = None
@@ -283,7 +283,7 @@ class ExtractedOrder:
 
     def to_dict(self) -> dict:
         now = datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%SZ")
-        
+
         d: dict[str, Any] = {
             "schema_version": "1.0",
             "order_id": self.order_id,
@@ -305,7 +305,7 @@ class ExtractedOrder:
                 "created_at": now,
             },
         }
-        
+
         if self.buyer:
             d["buyer"] = self.buyer.to_dict()
         if self.seller:
@@ -316,7 +316,7 @@ class ExtractedOrder:
             d["bill_to"] = self.bill_to.to_dict()
         if self.totals:
             d["totals"] = self.totals.to_dict()
-        
+
         return d
 
 
@@ -333,7 +333,7 @@ class ExtractionResult:
 
     def to_dict(self) -> dict:
         order_dict = self.order.to_dict()
-        
+
         evidence = {}
         for fc in self.field_confidences:
             evidence[fc.path] = {"confidence": fc.confidence}
@@ -343,10 +343,10 @@ class ExtractionResult:
                 evidence[fc.path]["snippet"] = fc.snippet
         if evidence:
             order_dict["evidence"] = evidence
-        
+
         if self.warnings:
             order_dict["validation"] = {
                 "issues": [w.to_dict() for w in self.warnings]
             }
-        
+
         return order_dict

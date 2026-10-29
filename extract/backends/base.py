@@ -25,7 +25,7 @@ class LLMResponse:
 class LLMBackend(ABC):
     """
     Interfaccia astratta per backend LLM.
-    
+
     Implementazioni:
     - OllamaBackend: Ollama locale via HTTP
     - MockBackend: Backend deterministico per test
@@ -42,14 +42,14 @@ class LLMBackend(ABC):
     ) -> LLMResponse:
         """
         Genera una risposta dal modello.
-        
+
         Args:
             prompt: Prompt utente.
             system_prompt: Prompt di sistema opzionale.
             json_schema: Schema JSON per output vincolato (se supportato).
             temperature: Temperatura di campionamento (0 = deterministico).
             max_tokens: Massimo numero di token in output.
-            
+
         Returns:
             LLMResponse con il contenuto generato.
         """
