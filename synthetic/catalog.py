@@ -16,14 +16,14 @@ from . import SEED
 
 def generate_catalog(output_path: Path | None = None) -> list[dict[str, Any]]:
     """Genera un catalogo minimo per test di fallback.
-    
+
     DEPRECATO: Usare DatagenLoader.load_catalog() invece.
     Questo metodo genera solo un piccolo set di articoli per test
     quando datagen/master/ non è disponibile.
-    
+
     Args:
         output_path: Percorso opzionale per salvare il JSON.
-        
+
     Returns:
         Lista di articoli con sku, description, uom, pack, price, erp_product_id.
     """
@@ -32,14 +32,14 @@ def generate_catalog(output_path: Path | None = None) -> list[dict[str, Any]]:
         DeprecationWarning,
         stacklevel=2
     )
-    
+
     import json
     import random
-    
+
     random.seed(SEED)
-    
+
     catalog: list[dict[str, Any]] = []
-    
+
     categories = [
         ("FASTENERS", "FST", "Fastener"),
         ("PPE", "PPE", "Safety Equipment"),
@@ -48,15 +48,15 @@ def generate_catalog(output_path: Path | None = None) -> list[dict[str, Any]]:
         ("ABRASIVES", "ABR", "Abrasive"),
         ("TAPES", "TAP", "Tape"),
     ]
-    
+
     erp_id = 1000
     for idx in range(300):
         cat_name, cat_prefix, cat_desc = categories[idx % len(categories)]
         item_num = idx // len(categories) + 1
-        
+
         sku = f"{cat_prefix}-TEST-{item_num:03d}"
         pack_count = random.choice([6, 10, 12, 24, 50, 100])
-        
+
         catalog.append({
             "sku": sku,
             "description": f"{cat_desc} Test Item {item_num} (SYNTHETIC)",
@@ -72,12 +72,12 @@ def generate_catalog(output_path: Path | None = None) -> list[dict[str, Any]]:
             "category": cat_name
         })
         erp_id += 1
-    
+
     if output_path:
         output_path.parent.mkdir(parents=True, exist_ok=True)
         with open(output_path, "w", encoding="utf-8") as f:
             json.dump(catalog, f, indent=2, ensure_ascii=False)
-    
+
     return catalog
 
 

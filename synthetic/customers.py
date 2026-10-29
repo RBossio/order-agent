@@ -19,15 +19,15 @@ def generate_customers(
     output_path: Path | None = None
 ) -> list[dict[str, Any]]:
     """Genera clienti minimi per test di fallback.
-    
+
     DEPRECATO: Usare DatagenLoader.load_customers() invece.
     Questo metodo genera solo un piccolo set di clienti per test
     quando datagen/master/ non è disponibile.
-    
+
     Args:
         catalog: Lista articoli del catalogo.
         output_path: Percorso opzionale per salvare il JSON.
-        
+
     Returns:
         Lista di clienti con anagrafica, stile ordine e cross-reference.
     """
@@ -36,23 +36,23 @@ def generate_customers(
         DeprecationWarning,
         stacklevel=2
     )
-    
+
     import json
     import random
-    
+
     random.seed(SEED + 1)
-    
+
     customer_refs = [
         "C-TEST01", "C-TEST02", "C-TEST03", "C-TEST04", "C-TEST05",
         "C-TEST06", "C-TEST07", "C-TEST08", "C-TEST09", "C-TEST10"
     ]
-    
+
     customers: list[dict[str, Any]] = []
-    
+
     for idx, ref in enumerate(customer_refs):
         uses_codes = idx % 2 == 0
         xref_coverage = 0.7 if uses_codes else 0.0
-        
+
         xref = []
         if uses_codes and catalog:
             n_items = int(len(catalog) * xref_coverage)
@@ -64,7 +64,7 @@ def generate_customers(
                     "erp_product_id": item["erp_product_id"],
                     "status": "TRUSTED"
                 })
-        
+
         customers.append({
             "customer_id": ref,
             "name": f"Test Customer {idx + 1} Inc. (SYNTHETIC)",
@@ -110,18 +110,18 @@ def generate_customers(
             "xref_coverage": xref_coverage,
             "xref": xref
         })
-    
+
     if output_path:
         output_path.parent.mkdir(parents=True, exist_ok=True)
         with open(output_path, "w", encoding="utf-8") as f:
             json.dump(customers, f, indent=2, ensure_ascii=False)
-    
+
     return customers
 
 
 if __name__ == "__main__":
     from .catalog import generate_catalog
-    
+
     catalog = generate_catalog()
     customers = generate_customers(catalog, Path(__file__).parent / "data" / "customers.json")
     print(f"Generated {len(customers)} customers (DEPRECATED - use DatagenLoader)")

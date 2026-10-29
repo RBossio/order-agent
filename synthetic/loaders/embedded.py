@@ -16,14 +16,14 @@ from ..customers import generate_customers
 
 class EmbeddedLoader:
     """Loader di fallback che genera dati minimi inline.
-    
+
     DEPRECATO: Usare DatagenLoader con datagen/master/ per dati completi.
-    
+
     Questo loader genera dati master minimi usando le funzioni in catalog.py
     e customers.py. È il fallback quando datagen/master/ non è disponibile,
     ma produce dati semplificati non adatti per test realistici.
     """
-    
+
     def __init__(self) -> None:
         """Inizializza con warning di deprecazione."""
         warnings.warn(
@@ -31,14 +31,14 @@ class EmbeddedLoader:
             DeprecationWarning,
             stacklevel=2
         )
-    
+
     def load_catalog(self, output_path: Path | None = None) -> list[dict[str, Any]]:
         """Genera il catalogo articoli inline (dati semplificati)."""
         return generate_catalog(output_path)
-    
+
     def load_customers(
-        self, 
-        catalog: list[dict[str, Any]], 
+        self,
+        catalog: list[dict[str, Any]],
         output_path: Path | None = None
     ) -> list[dict[str, Any]]:
         """Genera i clienti con xref inline (dati semplificati)."""
