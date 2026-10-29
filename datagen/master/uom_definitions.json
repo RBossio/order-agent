@@ -1,0 +1,120 @@
+{
+  "category_unit": {
+    "name": "Unit",
+    "uoms": [
+      {
+        "code": "EA",
+        "name": "Units",
+        "factor": 1.0,
+        "rec20": "EA",
+        "x12": "EA"
+      },
+      {
+        "code": "DZN",
+        "name": "Dozens",
+        "factor": 12.0,
+        "rec20": "DZN",
+        "x12": "DZ"
+      },
+      {
+        "code": "PR",
+        "name": "Pair",
+        "factor": 2.0,
+        "rec20": "PR",
+        "x12": "PR"
+      }
+    ]
+  },
+  "category_packaging": {
+    "name": "Packaging",
+    "uoms": [
+      {
+        "code": "BX",
+        "name": "Box",
+        "factor": 1.0,
+        "rec20": "BX",
+        "x12": "BX"
+      },
+      {
+        "code": "CS",
+        "name": "Case",
+        "factor": 1.0,
+        "rec20": "CS",
+        "x12": "CA"
+      },
+      {
+        "code": "PK",
+        "name": "Pack",
+        "factor": 1.0,
+        "rec20": "PK",
+        "x12": "PK"
+      },
+      {
+        "code": "CT",
+        "name": "Carton",
+        "factor": 1.0,
+        "rec20": "CT",
+        "x12": "CT"
+      },
+      {
+        "code": "BG",
+        "name": "Bag",
+        "factor": 1.0,
+        "rec20": "BG",
+        "x12": "BG"
+      },
+      {
+        "code": "DR",
+        "name": "Drum",
+        "factor": 1.0,
+        "rec20": "DR",
+        "x12": "DR"
+      },
+      {
+        "code": "RO",
+        "name": "Roll",
+        "factor": 1.0,
+        "rec20": "RO",
+        "x12": "RL"
+      }
+    ]
+  },
+  "category_volume": {
+    "name": "Volume",
+    "uoms": [
+      {
+        "code": "GLL",
+        "name": "gal (US)",
+        "factor": 1.0,
+        "rec20": "GLL",
+        "x12": "GA"
+      },
+      {
+        "code": "LTR",
+        "name": "L",
+        "factor": 0.264172,
+        "rec20": "LTR",
+        "x12": "LT"
+      }
+    ]
+  },
+  "category_weight": {
+    "name": "Weight",
+    "uoms": [
+      {
+        "code": "KGM",
+        "name": "kg",
+        "factor": 1.0,
+        "rec20": "KGM",
+        "x12": "KG"
+      },
+      {
+        "code": "LBR",
+        "name": "lb",
+        "factor": 0.453592,
+        "rec20": "LBR",
+        "x12": "LB"
+      }
+    ]
+  }
+}

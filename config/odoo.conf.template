@@ -1,0 +1,22 @@
+[options]
+; Database configuration
+db_host = ${DB_HOST:-db}
+db_port = ${DB_PORT:-5432}
+db_user = ${POSTGRES_USER:-odoo}
+db_password = ${POSTGRES_PASSWORD}
+db_name = ${POSTGRES_DB:-vo_demo}
+
+; Security
+admin_passwd = ${ODOO_ADMIN_PASSWORD}
+list_db = False
+
+; Paths
+addons_path = /usr/lib/python3/dist-packages/odoo/addons,/mnt/extra-addons
+data_dir = /var/lib/odoo
+
+; Server
+http_interface = 0.0.0.0
+http_port = 8069
+
+; Logging
+log_level = info

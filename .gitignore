@@ -164,3 +164,6 @@ Thumbs.db
 
 # Output generati
 *.generated.*
+
+# Odoo config (generated from template)
+config/odoo.conf
