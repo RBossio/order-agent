@@ -1,0 +1,41 @@
+Content-Type: multipart/mixed; boundary="===============4395134521030053735=="
+MIME-Version: 1.0
+From: buyer@autoparts-exp.example
+To: orders@delta-industrial.example
+Subject: PO APE-01110 - Order from AutoParts Express LLC (SYNTHETIC)
+Message-ID: <po-APE-01110@autoparts-exp.example>
+Date: Thu, 29 Oct 2026 20:23:08 +0000
+
+--===============4395134521030053735==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+Hello,
+
+Please process the following order:
+
+PO Number: APE-01110
+Date: 2026/06/07
+Ship To: Dearborn Main
+
+Items:
+------
+  1. [AP-ABR-1304] Grinding Wheel 4.5x1/4x7/8 100 grit
+     Qty: 10 BX @ $40.52
+  2. [AP-MIS-8901] Storage Tote 27 gallon with lid
+     Qty: 2 EA @ $14.69
+  3. [SIGN-EXIT] Exit Sign LED red
+     Qty: 3 EA @ $35.69
+  4. [AP-TAP-1544] Packing Tape Clear 2 inch x 110 yd
+     Qty: 4 CS @ $68.72
+  5. [LUB-HYD-OIL] Hydraulic Oil AW32 5 gal pail
+     Qty: 2 EA @ $67.26
+
+Delivery requested by: 2026-06-26
+
+Thank you,
+Michael Torres (fictitious)
+AutoParts Express LLC (SYNTHETIC)
++1-555-0500
+--===============4395134521030053735==--

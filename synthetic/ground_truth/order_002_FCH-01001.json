@@ -1,0 +1,328 @@
+{
+  "schema_version": "1.0",
+  "order_id": "6104cb5e-fe48-47a0-ae59-fc270de40e30",
+  "tenant_id": "delta-industrial-supply",
+  "document_type": "ORIGINAL",
+  "status": "VALIDATED",
+  "source": {
+    "channel": "FOLDER",
+    "message_id": null,
+    "from_address": null,
+    "subject": null,
+    "received_at": "2026-10-29T20:23:08Z",
+    "documents": [
+      {
+        "document_id": "doc-15cbc813",
+        "kind": "PDF_TEXT",
+        "filename": "FCH-01001.pdf",
+        "mime_type": "application/pdf",
+        "sha256": "a2b3cbc1f56065d4544c16056a343cb070b98fc9e7fb4195a44824bf6cccd894",
+        "page_count": 1
+      }
+    ]
+  },
+  "buyer": {
+    "name": "FreshClean Hospitality Group (SYNTHETIC)",
+    "code_on_document": "C-FCH",
+    "tax_id": "US22-8888888",
+    "gln": null,
+    "peppol_endpoint": null,
+    "address": {
+      "line1": "1500 Hospitality Blvd",
+      "city": "Cincinnati",
+      "region": "OH",
+      "postal_code": "45202",
+      "country": "US"
+    },
+    "contact": {
+      "name": "Lisa Anderson (fictitious)",
+      "email": "supply@freshclean-hosp.example",
+      "phone": "+1-555-0600"
+    },
+    "resolved": {
+      "erp_partner_id": 57,
+      "erp_partner_ref": "C-FCH",
+      "method": "CODE",
+      "score": 0.99
+    }
+  },
+  "seller": {
+    "name": "Delta Industrial Supply LLC (SYNTHETIC)",
+    "code_on_document": null,
+    "tax_id": null,
+    "address": {
+      "line1": "55 Commerce Dr",
+      "city": "Dayton",
+      "region": "OH",
+      "postal_code": "45402",
+      "country": "US"
+    },
+    "resolved": null
+  },
+  "header": {
+    "po_number": "FCH-01001",
+    "po_revision": 0,
+    "po_date": "01/07/2026",
+    "requested_delivery_date": "2026-07-15",
+    "currency": "USD",
+    "buyer_reference": "Dept 369",
+    "payment_terms_text": "Net 45",
+    "incoterms": null,
+    "ship_via": "UPS Ground",
+    "notes": "Rush order",
+    "language": "en"
+  },
+  "lines": [
+    {
+      "line_no": 1,
+      "buyer_item_code": null,
+      "seller_item_code": "FST-HCS-1420-112-SS-B50",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Hex Cap Screw 1/4-20 x 1-1/2\" Stainless 18-8",
+      "quantity": 2,
+      "uom_raw": "BX",
+      "uom": "BX",
+      "pack": {
+        "raw": "50/BX",
+        "inner_count": 50,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 12.03,
+      "price_uom": "BX",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 24.06,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "FST-HCS-1420-112-SS-B50",
+        "erp_product_id": 1017,
+        "erp_uom": "BX",
+        "erp_uom_id": 12,
+        "erp_quantity": 2,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 12.03
+      }
+    },
+    {
+      "line_no": 2,
+      "buyer_item_code": null,
+      "seller_item_code": "PPE-MISC-1105",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Safety equipment item 1105",
+      "quantity": 24,
+      "uom_raw": "EA",
+      "uom": "EA",
+      "pack": null,
+      "unit_price": 37.55,
+      "price_uom": "EA",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 901.2,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "PPE-MISC-1105",
+        "erp_product_id": 1105,
+        "erp_uom": "EA",
+        "erp_uom_id": 8,
+        "erp_quantity": 24,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 37.55
+      }
+    },
+    {
+      "line_no": 3,
+      "buyer_item_code": null,
+      "seller_item_code": "FST-CS-51618-ZN-B100",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Carriage Bolt 5/16-18 Grade 5 Zinc",
+      "quantity": 3,
+      "uom_raw": "BX",
+      "uom": "BX",
+      "pack": {
+        "raw": "100/BX",
+        "inner_count": 100,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 24.07,
+      "price_uom": "BX",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 72.21,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "FST-CS-51618-ZN-B100",
+        "erp_product_id": 1059,
+        "erp_uom": "BX",
+        "erp_uom_id": 28,
+        "erp_quantity": 3,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 24.07
+      }
+    },
+    {
+      "line_no": 4,
+      "buyer_item_code": null,
+      "seller_item_code": "PPE-VEST-HV-OR",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Hi-Vis Safety Vest Class 2 orange",
+      "quantity": 5,
+      "uom_raw": "EA",
+      "uom": "EA",
+      "pack": null,
+      "unit_price": 8.5,
+      "price_uom": "EA",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 42.5,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "PPE-VEST-HV-OR",
+        "erp_product_id": 1099,
+        "erp_uom": "EA",
+        "erp_uom_id": 25,
+        "erp_quantity": 5,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 8.5
+      }
+    },
+    {
+      "line_no": 5,
+      "buyer_item_code": null,
+      "seller_item_code": "FST-HCS-1420-1-G8-B100",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Hex Cap Screw 1/4-20 x 1\" Grade 8 Yellow Zinc",
+      "quantity": 6,
+      "uom_raw": "BX",
+      "uom": "BX",
+      "pack": {
+        "raw": "100/BX",
+        "inner_count": 100,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 15.76,
+      "price_uom": "BX",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 94.56,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "FST-HCS-1420-1-G8-B100",
+        "erp_product_id": 1008,
+        "erp_uom": "BX",
+        "erp_uom_id": 16,
+        "erp_quantity": 6,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 15.76
+      }
+    },
+    {
+      "line_no": 6,
+      "buyer_item_code": null,
+      "seller_item_code": "PPE-GLV-LTHW-XL-TAN",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Leather Work Gloves premium grain Tan size XL",
+      "quantity": 5,
+      "uom_raw": "DZN",
+      "uom": "DZN",
+      "pack": {
+        "raw": "12/DZ",
+        "inner_count": 12,
+        "inner_size": 1,
+        "inner_uom": "PR"
+      },
+      "unit_price": 44.83,
+      "price_uom": "DZN",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 224.15,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "PPE-GLV-LTHW-XL-TAN",
+        "erp_product_id": 1084,
+        "erp_uom": "DZN",
+        "erp_uom_id": 10,
+        "erp_quantity": 5,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 44.83
+      }
+    }
+  ],
+  "charges": [],
+  "totals": {
+    "lines_amount_declared": 1358.68,
+    "tax_amount_declared": null,
+    "total_amount_declared": 1358.68,
+    "lines_amount_computed": 1358.68
+  },
+  "decision": {
+    "score": 0.98,
+    "route": "AUTO_POST",
+    "reasons": []
+  },
+  "processing": {
+    "extractor": "synthetic/generator.py",
+    "prompt_version": null,
+    "created_at": "2026-10-29T20:23:08Z",
+    "updated_at": null
+  },
+  "ship_to": {
+    "name": "Airport Hotel",
+    "code_on_document": "HOTEL-2",
+    "address": {
+      "line1": "2800 Terminal Dr",
+      "city": "Hebron",
+      "region": "KY",
+      "postal_code": "41048",
+      "country": "US"
+    },
+    "resolved": {
+      "erp_partner_id": 58,
+      "erp_partner_ref": "HOTEL-2",
+      "method": "CODE",
+      "score": 1.0
+    }
+  },
+  "_synthetic_metadata": {
+    "hard_case_types": [],
+    "is_hard_case": false
+  }
+}

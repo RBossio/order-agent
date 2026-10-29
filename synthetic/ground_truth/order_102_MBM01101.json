@@ -1,0 +1,452 @@
+{
+  "schema_version": "1.0",
+  "order_id": "a164425a-0d5d-4ff0-be78-723456753ef3",
+  "tenant_id": "delta-industrial-supply",
+  "document_type": "ORIGINAL",
+  "status": "VALIDATED",
+  "source": {
+    "channel": "EMAIL_IMAP",
+    "message_id": "<po-MBM01101@mbm-services.example>",
+    "from_address": "po@mbm-services.example",
+    "subject": "PO MBM01101 - Order from Midwest Building Maintenance (SYNTHETIC)",
+    "received_at": "2026-10-29T20:23:08Z",
+    "documents": [
+      {
+        "document_id": "doc-33923a0d",
+        "kind": "EMAIL_BODY",
+        "filename": null,
+        "mime_type": "text/plain",
+        "sha256": "41b64d9bcac971841747c51e9d82b87091d29941f127026c7394e4f753d65f40",
+        "page_count": null
+      },
+      {
+        "document_id": "doc-9a531878",
+        "kind": "XLSX",
+        "filename": "MBM01101.xlsx",
+        "mime_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        "sha256": "b72acb91b0c0921c0485ec1579db53142bc6c0e40e8a8aba9edcf0b860795afc",
+        "page_count": null
+      }
+    ]
+  },
+  "buyer": {
+    "name": "Midwest Building Maintenance (SYNTHETIC)",
+    "code_on_document": "C-MBM",
+    "tax_id": "US44-9876543",
+    "gln": null,
+    "peppol_endpoint": null,
+    "address": {
+      "line1": "3200 Service Lane",
+      "city": "Columbus",
+      "region": "OH",
+      "postal_code": "43215",
+      "country": "US"
+    },
+    "contact": {
+      "name": "Patricia Johnson (fictitious)",
+      "email": "po@mbm-services.example",
+      "phone": "+1-555-0400"
+    },
+    "resolved": {
+      "erp_partner_id": 51,
+      "erp_partner_ref": "C-MBM",
+      "method": "EMAIL_DOMAIN",
+      "score": 0.99
+    }
+  },
+  "seller": {
+    "name": "Delta Industrial Supply LLC (SYNTHETIC)",
+    "code_on_document": null,
+    "tax_id": null,
+    "address": {
+      "line1": "55 Commerce Dr",
+      "city": "Dayton",
+      "region": "OH",
+      "postal_code": "45402",
+      "country": "US"
+    },
+    "resolved": null
+  },
+  "header": {
+    "po_number": "MBM01101",
+    "po_revision": 0,
+    "po_date": "3/23/26",
+    "requested_delivery_date": "2026-04-08",
+    "currency": "USD",
+    "buyer_reference": "Dept 924",
+    "payment_terms_text": "Net 45",
+    "incoterms": null,
+    "ship_via": "Best Way",
+    "notes": "Rush order",
+    "language": "en"
+  },
+  "lines": [
+    {
+      "line_no": 1,
+      "buyer_item_code": null,
+      "seller_item_code": "FAID-KIT-25",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "First Aid Kit 25 person",
+      "quantity": 2,
+      "uom_raw": "EA",
+      "uom": "EA",
+      "pack": null,
+      "unit_price": 45.7,
+      "price_uom": "EA",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 91.4,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "FAID-KIT-25",
+        "erp_product_id": 1298,
+        "erp_uom": "EA",
+        "erp_uom_id": 29,
+        "erp_quantity": 2,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 45.7
+      }
+    },
+    {
+      "line_no": 2,
+      "buyer_item_code": null,
+      "seller_item_code": "JAN-TWL-RL",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Roll Paper Towels White 2-ply",
+      "quantity": 5,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "12/85/CS",
+        "inner_count": 12,
+        "inner_size": 85,
+        "inner_uom": "EA"
+      },
+      "unit_price": 36.19,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 180.95,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "JAN-TWL-RL",
+        "erp_product_id": 1180,
+        "erp_uom": "CS",
+        "erp_uom_id": 17,
+        "erp_quantity": 5,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 36.19
+      }
+    },
+    {
+      "line_no": 3,
+      "buyer_item_code": null,
+      "seller_item_code": "FST-LW-1213-ZN-B25",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Lock Washer 1/2-13 Zinc",
+      "quantity": 6,
+      "uom_raw": "BX",
+      "uom": "BX",
+      "pack": {
+        "raw": "25/BX",
+        "inner_count": 25,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 10.3,
+      "price_uom": "BX",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 61.8,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "FST-LW-1213-ZN-B25",
+        "erp_product_id": 1044,
+        "erp_uom": "BX",
+        "erp_uom_id": 11,
+        "erp_quantity": 6,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 10.3
+      }
+    },
+    {
+      "line_no": 4,
+      "buyer_item_code": null,
+      "seller_item_code": "ABR-CUT-WHL-4-150",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Cut-off Wheel 4.5x.045x7/8 150 grit",
+      "quantity": 2,
+      "uom_raw": "BX",
+      "uom": "BX",
+      "pack": {
+        "raw": "25/BX",
+        "inner_count": 25,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 15.57,
+      "price_uom": "BX",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 31.14,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "ABR-CUT-WHL-4-150",
+        "erp_product_id": 1214,
+        "erp_uom": "BX",
+        "erp_uom_id": 27,
+        "erp_quantity": 2,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 15.57
+      }
+    },
+    {
+      "line_no": 5,
+      "buyer_item_code": "MB-PPE-4779",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Latex Exam Gloves 5 mil powder-free Natural size XL",
+      "quantity": 2,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "100/BX 10BX/CS",
+        "inner_count": 1000,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 107.08,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 214.16,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "PPE-GLV-LAT5-XL-NAT",
+        "erp_product_id": 1071,
+        "erp_uom": "CS",
+        "erp_uom_id": 3,
+        "erp_quantity": 2,
+        "conversion_factor": 1,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 107.08
+      }
+    },
+    {
+      "line_no": 6,
+      "buyer_item_code": "MB-JS-3676",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Can Liner 30x37 0.5mil Clear 500/CS",
+      "quantity": 1,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "500/CS",
+        "inner_count": 500,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 28.92,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 28.92,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "JAN-LNR-3037-05-CL",
+        "erp_product_id": 1122,
+        "erp_uom": "CS",
+        "erp_uom_id": 30,
+        "erp_quantity": 1,
+        "conversion_factor": 1,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 28.92
+      }
+    },
+    {
+      "line_no": 7,
+      "buyer_item_code": null,
+      "seller_item_code": "JAN-TWL-CF",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Centerfeed Paper Towels White",
+      "quantity": 2,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "6/600/CS",
+        "inner_count": 6,
+        "inner_size": 600,
+        "inner_uom": "EA"
+      },
+      "unit_price": 46.15,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 92.3,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "JAN-TWL-CF",
+        "erp_product_id": 1178,
+        "erp_uom": "CS",
+        "erp_uom_id": 37,
+        "erp_quantity": 2,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 46.15
+      }
+    },
+    {
+      "line_no": 8,
+      "buyer_item_code": null,
+      "seller_item_code": "TAP-PT-2-TAN",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Packing Tape Tan 2 inch x 110 yd",
+      "quantity": 1,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "36/CS",
+        "inner_count": 36,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 62.07,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 62.07,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "TAP-PT-2-TAN",
+        "erp_product_id": 1235,
+        "erp_uom": "CS",
+        "erp_uom_id": 44,
+        "erp_quantity": 1,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 62.07
+      }
+    },
+    {
+      "line_no": 9,
+      "buyer_item_code": "MB-HW-3134",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Hex Cap Screw 5/16-18 x 1-1/2\" Grade 5 Zinc",
+      "quantity": 24,
+      "uom_raw": "BX",
+      "uom": "BX",
+      "pack": {
+        "raw": "25/BX",
+        "inner_count": 25,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 33.2,
+      "price_uom": "BX",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 796.8,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "FST-HCS-51618-112-G5Z-B25",
+        "erp_product_id": 1003,
+        "erp_uom": "BX",
+        "erp_uom_id": 22,
+        "erp_quantity": 24,
+        "conversion_factor": 1,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 33.2
+      }
+    }
+  ],
+  "charges": [],
+  "totals": {
+    "lines_amount_declared": 1559.54,
+    "tax_amount_declared": null,
+    "total_amount_declared": 1559.54,
+    "lines_amount_computed": 1559.54
+  },
+  "decision": {
+    "score": 0.98,
+    "route": "AUTO_POST",
+    "reasons": []
+  },
+  "processing": {
+    "extractor": "synthetic/generator.py",
+    "prompt_version": null,
+    "created_at": "2026-10-29T20:23:08Z",
+    "updated_at": null
+  },
+  "ship_to": {
+    "name": "Columbus Warehouse",
+    "code_on_document": "COL-WH",
+    "address": {
+      "line1": "3200 Service Lane",
+      "city": "Columbus",
+      "region": "OH",
+      "postal_code": "43215",
+      "country": "US"
+    },
+    "resolved": {
+      "erp_partner_id": 52,
+      "erp_partner_ref": "COL-WH",
+      "method": "CODE",
+      "score": 1.0
+    }
+  },
+  "_synthetic_metadata": {
+    "hard_case_types": [],
+    "is_hard_case": false
+  }
+}

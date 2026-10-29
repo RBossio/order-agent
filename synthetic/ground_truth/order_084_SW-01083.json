@@ -1,0 +1,407 @@
+{
+  "schema_version": "1.0",
+  "order_id": "0bdbcd03-7fe3-498d-a776-cfdf95a7c2e6",
+  "tenant_id": "delta-industrial-supply",
+  "document_type": "ORIGINAL",
+  "status": "VALIDATED",
+  "source": {
+    "channel": "FOLDER",
+    "message_id": null,
+    "from_address": null,
+    "subject": null,
+    "received_at": "2026-10-29T20:23:08Z",
+    "documents": [
+      {
+        "document_id": "doc-bdac15aa",
+        "kind": "XLSX",
+        "filename": "SW-01083.xlsx",
+        "mime_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        "sha256": "56142fd1edf380edcdd3eb33f6940343b3b6d494b5efa3d3bb641ea1cd293f62",
+        "page_count": null
+      }
+    ]
+  },
+  "buyer": {
+    "name": "SafeWork Solutions Inc. (SYNTHETIC)",
+    "code_on_document": "C-SWS",
+    "tax_id": "US66-3333333",
+    "gln": null,
+    "peppol_endpoint": null,
+    "address": {
+      "line1": "800 Safety Lane",
+      "city": "Indianapolis",
+      "region": "IN",
+      "postal_code": "46204",
+      "country": "US"
+    },
+    "contact": {
+      "name": "Jennifer Kim (fictitious)",
+      "email": "orders@safework-sol.example",
+      "phone": "+1-555-0800"
+    },
+    "resolved": {
+      "erp_partner_id": 63,
+      "erp_partner_ref": "C-SWS",
+      "method": "CODE",
+      "score": 0.99
+    }
+  },
+  "seller": {
+    "name": "Delta Industrial Supply LLC (SYNTHETIC)",
+    "code_on_document": null,
+    "tax_id": null,
+    "address": {
+      "line1": "55 Commerce Dr",
+      "city": "Dayton",
+      "region": "OH",
+      "postal_code": "45402",
+      "country": "US"
+    },
+    "resolved": null
+  },
+  "header": {
+    "po_number": "SW-01083",
+    "po_revision": 0,
+    "po_date": "06-23-2026",
+    "requested_delivery_date": "2026-07-01",
+    "currency": "USD",
+    "buyer_reference": "Dept 370",
+    "payment_terms_text": "Net 30",
+    "incoterms": null,
+    "ship_via": "FedEx",
+    "notes": "Call before delivery",
+    "language": "en"
+  },
+  "lines": [
+    {
+      "line_no": 1,
+      "buyer_item_code": "SWS-PPE-1804",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Face Shield clear 8x15.5 inch",
+      "quantity": 5,
+      "uom_raw": "EA",
+      "uom": "EA",
+      "pack": null,
+      "unit_price": 4.5,
+      "price_uom": "EA",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 22.5,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "PPE-FSH-CLR",
+        "erp_product_id": 1090,
+        "erp_uom": "EA",
+        "erp_uom_id": 26,
+        "erp_quantity": 5,
+        "conversion_factor": 1,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 4.5
+      }
+    },
+    {
+      "line_no": 2,
+      "buyer_item_code": "SWS-JS-4927",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Roll Paper Towels Brown 1-ply",
+      "quantity": 10,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "12/350/CS",
+        "inner_count": 12,
+        "inner_size": 350,
+        "inner_uom": "EA"
+      },
+      "unit_price": 31.27,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 312.7,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "JAN-TWL-RL-BR",
+        "erp_product_id": 1181,
+        "erp_uom": "CS",
+        "erp_uom_id": 16,
+        "erp_quantity": 10,
+        "conversion_factor": 1,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 31.27
+      }
+    },
+    {
+      "line_no": 3,
+      "buyer_item_code": null,
+      "seller_item_code": "FST-HCS-51618-1-G5Z-B25",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Hex Cap Screw 5/16-18 x 1\" Grade 5 Zinc",
+      "quantity": 5,
+      "uom_raw": "BX",
+      "uom": "BX",
+      "pack": {
+        "raw": "25/BX",
+        "inner_count": 25,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 13.59,
+      "price_uom": "BX",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 67.95,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "FST-HCS-51618-1-G5Z-B25",
+        "erp_product_id": 1002,
+        "erp_uom": "BX",
+        "erp_uom_id": 8,
+        "erp_quantity": 5,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 13.59
+      }
+    },
+    {
+      "line_no": 4,
+      "buyer_item_code": null,
+      "seller_item_code": "FST-HCS-3816-112-G5Z-B50",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Hex Cap Screw 3/8-16 x 1-1/2\" Grade 5 Zinc",
+      "quantity": 24,
+      "uom_raw": "BX",
+      "uom": "BX",
+      "pack": {
+        "raw": "50/BX",
+        "inner_count": 50,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 9.66,
+      "price_uom": "BX",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 231.84,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "FST-HCS-3816-112-G5Z-B50",
+        "erp_product_id": 1005,
+        "erp_uom": "BX",
+        "erp_uom_id": 9,
+        "erp_quantity": 24,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 9.66
+      }
+    },
+    {
+      "line_no": 5,
+      "buyer_item_code": "SWS-ABR-6633",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Sanding Disc 5 inch hook & loop 80 grit",
+      "quantity": 24,
+      "uom_raw": "PK",
+      "uom": "PK",
+      "pack": {
+        "raw": "50/PK",
+        "inner_count": 50,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 31.22,
+      "price_uom": "PK",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 749.28,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "ABR-SAND-DSC-5-80",
+        "erp_product_id": 1200,
+        "erp_uom": "PK",
+        "erp_uom_id": 1,
+        "erp_quantity": 24,
+        "conversion_factor": 1,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 31.22
+      }
+    },
+    {
+      "line_no": 6,
+      "buyer_item_code": null,
+      "seller_item_code": "TAP-PT-2-CLR",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Packing Tape Clear 2 inch x 110 yd",
+      "quantity": 10,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "36/CS",
+        "inner_count": 36,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 68.72,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 687.2,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "TAP-PT-2-CLR",
+        "erp_product_id": 1234,
+        "erp_uom": "CS",
+        "erp_uom_id": 17,
+        "erp_quantity": 10,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 68.72
+      }
+    },
+    {
+      "line_no": 7,
+      "buyer_item_code": "SWS-JS-4985",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Can Liner 43x47 0.5mil Clear 500/CS",
+      "quantity": 5,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "500/CS",
+        "inner_count": 500,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 47.61,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 238.05,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "JAN-LNR-4347-05-CL",
+        "erp_product_id": 1146,
+        "erp_uom": "CS",
+        "erp_uom_id": 14,
+        "erp_quantity": 5,
+        "conversion_factor": 1,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 47.61
+      }
+    },
+    {
+      "line_no": 8,
+      "buyer_item_code": "SWS-JS-5167",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Toilet Paper 2-ply standard roll",
+      "quantity": 6,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "48/CS",
+        "inner_count": 48,
+        "inner_size": 1,
+        "inner_uom": "RO"
+      },
+      "unit_price": 34.46,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 206.76,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "JAN-TP-2P-48",
+        "erp_product_id": 1185,
+        "erp_uom": "CS",
+        "erp_uom_id": 21,
+        "erp_quantity": 6,
+        "conversion_factor": 1,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 34.46
+      }
+    }
+  ],
+  "charges": [],
+  "totals": {
+    "lines_amount_declared": 2516.28,
+    "tax_amount_declared": null,
+    "total_amount_declared": 2516.28,
+    "lines_amount_computed": 2516.28
+  },
+  "decision": {
+    "score": 0.98,
+    "route": "AUTO_POST",
+    "reasons": []
+  },
+  "processing": {
+    "extractor": "synthetic/generator.py",
+    "prompt_version": null,
+    "created_at": "2026-10-29T20:23:08Z",
+    "updated_at": null
+  },
+  "ship_to": {
+    "name": "Indianapolis Warehouse",
+    "code_on_document": "IND-WH",
+    "address": {
+      "line1": "800 Safety Lane",
+      "city": "Indianapolis",
+      "region": "IN",
+      "postal_code": "46204",
+      "country": "US"
+    },
+    "resolved": {
+      "erp_partner_id": 64,
+      "erp_partner_ref": "IND-WH",
+      "method": "CODE",
+      "score": 1.0
+    }
+  },
+  "_synthetic_metadata": {
+    "hard_case_types": [],
+    "is_hard_case": false
+  }
+}

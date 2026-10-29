@@ -1,0 +1,222 @@
+{
+  "schema_version": "1.0",
+  "order_id": "c04f7dff-2b31-4b84-9c8d-f549ac7e8980",
+  "tenant_id": "delta-industrial-supply",
+  "document_type": "ORIGINAL",
+  "status": "VALIDATED",
+  "source": {
+    "channel": "FOLDER",
+    "message_id": null,
+    "from_address": null,
+    "subject": null,
+    "received_at": "2026-10-29T20:23:09Z",
+    "documents": [
+      {
+        "document_id": "doc-ef307b7a",
+        "kind": "XLSX",
+        "filename": "TIT-PO-01135.xlsx",
+        "mime_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        "sha256": "8786427e43ade0201026f31977879a6015ad2c99ba83f045498072c71d487e71",
+        "page_count": null
+      }
+    ]
+  },
+  "buyer": {
+    "name": "Titan Industrial Supply Co. (SYNTHETIC)",
+    "code_on_document": "C-TITAN",
+    "tax_id": "US55-1234567",
+    "gln": null,
+    "peppol_endpoint": null,
+    "address": {
+      "line1": "7800 Commerce Blvd",
+      "city": "Cleveland",
+      "region": "OH",
+      "postal_code": "44114",
+      "country": "US"
+    },
+    "contact": {
+      "name": "Robert Chen (fictitious)",
+      "email": "purchasing@titan-ind.example",
+      "phone": "+1-555-0300"
+    },
+    "resolved": {
+      "erp_partner_id": 48,
+      "erp_partner_ref": "C-TITAN",
+      "method": "CODE",
+      "score": 0.99
+    }
+  },
+  "seller": {
+    "name": "Delta Industrial Supply LLC (SYNTHETIC)",
+    "code_on_document": null,
+    "tax_id": null,
+    "address": {
+      "line1": "55 Commerce Dr",
+      "city": "Dayton",
+      "region": "OH",
+      "postal_code": "45402",
+      "country": "US"
+    },
+    "resolved": null
+  },
+  "header": {
+    "po_number": "TIT-PO-01135",
+    "po_revision": 0,
+    "po_date": "07-Jul-2026",
+    "requested_delivery_date": "2026-07-15",
+    "currency": "USD",
+    "buyer_reference": "Dept 469",
+    "payment_terms_text": "Net 30",
+    "incoterms": null,
+    "ship_via": null,
+    "notes": null,
+    "language": "en"
+  },
+  "lines": [
+    {
+      "line_no": 1,
+      "buyer_item_code": "TIS-MIS-5618",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Hard Hat Required Sign 10x14",
+      "quantity": 1,
+      "uom_raw": "EA",
+      "uom": "EA",
+      "pack": null,
+      "unit_price": 8.28,
+      "price_uom": "EA",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 8.28,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "SIGN-HRD-HAT",
+        "erp_product_id": 1297,
+        "erp_uom": "EA",
+        "erp_uom_id": 4,
+        "erp_quantity": 1,
+        "conversion_factor": 1,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 8.28
+      }
+    },
+    {
+      "line_no": 2,
+      "buyer_item_code": null,
+      "seller_item_code": "JAN-ODOR-CTL",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Odor Control concentrate 4/1 GAL",
+      "quantity": 6,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "4/1 GAL",
+        "inner_count": 4,
+        "inner_size": 1,
+        "inner_uom": "GLL"
+      },
+      "unit_price": 46.71,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 280.26,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "JAN-ODOR-CTL",
+        "erp_product_id": 1171,
+        "erp_uom": "CS",
+        "erp_uom_id": 24,
+        "erp_quantity": 6,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 46.71
+      }
+    },
+    {
+      "line_no": 3,
+      "buyer_item_code": null,
+      "seller_item_code": "TAP-STRP-TP",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Strapping Tape 3/4 inch x 60 yd",
+      "quantity": 6,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "48/CS",
+        "inner_count": 48,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 85.65,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 513.9,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "TAP-STRP-TP",
+        "erp_product_id": 1237,
+        "erp_uom": "CS",
+        "erp_uom_id": 31,
+        "erp_quantity": 6,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 85.65
+      }
+    }
+  ],
+  "charges": [],
+  "totals": {
+    "lines_amount_declared": 802.44,
+    "tax_amount_declared": null,
+    "total_amount_declared": 802.44,
+    "lines_amount_computed": 802.44
+  },
+  "decision": {
+    "score": 0.98,
+    "route": "AUTO_POST",
+    "reasons": []
+  },
+  "processing": {
+    "extractor": "synthetic/generator.py",
+    "prompt_version": null,
+    "created_at": "2026-10-29T20:23:09Z",
+    "updated_at": null
+  },
+  "ship_to": {
+    "name": "Titan East Branch",
+    "code_on_document": "EAST",
+    "address": {
+      "line1": "2200 Euclid Ave",
+      "city": "Cleveland",
+      "region": "OH",
+      "postal_code": "44115",
+      "country": "US"
+    },
+    "resolved": {
+      "erp_partner_id": 49,
+      "erp_partner_ref": "EAST",
+      "method": "CODE",
+      "score": 1.0
+    }
+  },
+  "_synthetic_metadata": {
+    "hard_case_types": [],
+    "is_hard_case": false
+  }
+}

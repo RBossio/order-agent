@@ -1,0 +1,47 @@
+Content-Type: multipart/mixed; boundary="===============6010137108350171491=="
+MIME-Version: 1.0
+From: buyer@autoparts-exp.example
+To: orders@delta-industrial.example
+Subject: PO APE-01133 - Order from AutoParts Express LLC (SYNTHETIC)
+Message-ID: <po-APE-01133@autoparts-exp.example>
+Date: Thu, 29 Oct 2026 20:23:08 +0000
+
+--===============6010137108350171491==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+Hello,
+
+Please process the following order:
+
+PO Number: APE-01133
+Date: 2026/03/12
+Ship To: Dearborn Main
+
+Items:
+------
+  1. [PPE-GLV-VIN8-L-CLE] Vinyl Exam Gloves 8 mil powder-free Clear size L
+     Qty: 4 CS @ $80.45
+  2. [JAN-TWL-MF] Multifold Paper Towels White
+     Qty: 1 CS @ $43.84
+  3. [AP-JS-3382] Soap Dispenser manual chrome
+     Qty: 5 EA @ $18.25
+  4. [LUB-MOLY-GRS] Moly Grease EP 14 oz cartridge
+     Qty: 24 CS @ $58.95
+  5. [STOR-BIN-MD] Parts Bin Medium 6x9x5
+     Qty: 24 PK @ $26.80
+  6. [FST-FHCS-3816-112-SS-B50] Flat Head Cap Screw 3/8-16 x 1-1/2" Stainless 18-8
+     Qty: 3 BX @ $22.35
+  7. [FST-BHCS-M101.5-SS-B100] Button Head Cap Screw M10-1.5 Stainless 18-8
+     Qty: 24 BX @ $7.29
+  8. [JAN-LNR-2432-05-CL] Can Liner 24x32 0.5mil Clear 200/CS
+     Qty: 12 CS @ $57.02
+
+Delivery requested by: 2026-04-02
+
+Thank you,
+Michael Torres (fictitious)
+AutoParts Express LLC (SYNTHETIC)
++1-555-0500
+--===============6010137108350171491==--

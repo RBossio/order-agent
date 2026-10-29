@@ -1,0 +1,298 @@
+{
+  "schema_version": "1.0",
+  "order_id": "e1de2748-55b8-4c14-97a9-2d3510cc972f",
+  "tenant_id": "delta-industrial-supply",
+  "document_type": "ORIGINAL",
+  "status": "VALIDATED",
+  "source": {
+    "channel": "FOLDER",
+    "message_id": null,
+    "from_address": null,
+    "subject": null,
+    "received_at": "2026-10-29T20:23:08Z",
+    "documents": [
+      {
+        "document_id": "doc-613a10d6",
+        "kind": "XLSX",
+        "filename": "SW-01041.xlsx",
+        "mime_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        "sha256": "19f9b0ff58056a623d95bc1f693dcdb55d767b98b185de20b6fa63e2fbee5b54",
+        "page_count": null
+      }
+    ]
+  },
+  "buyer": {
+    "name": "SafeWork Solutions Inc. (SYNTHETIC)",
+    "code_on_document": "C-SWS",
+    "tax_id": "US66-3333333",
+    "gln": null,
+    "peppol_endpoint": null,
+    "address": {
+      "line1": "800 Safety Lane",
+      "city": "Indianapolis",
+      "region": "IN",
+      "postal_code": "46204",
+      "country": "US"
+    },
+    "contact": {
+      "name": "Jennifer Kim (fictitious)",
+      "email": "orders@safework-sol.example",
+      "phone": "+1-555-0800"
+    },
+    "resolved": {
+      "erp_partner_id": 63,
+      "erp_partner_ref": "C-SWS",
+      "method": "CODE",
+      "score": 0.99
+    }
+  },
+  "seller": {
+    "name": "Delta Industrial Supply LLC (SYNTHETIC)",
+    "code_on_document": null,
+    "tax_id": null,
+    "address": {
+      "line1": "55 Commerce Dr",
+      "city": "Dayton",
+      "region": "OH",
+      "postal_code": "45402",
+      "country": "US"
+    },
+    "resolved": null
+  },
+  "header": {
+    "po_number": "SW-01041",
+    "po_revision": 0,
+    "po_date": "06-20-2026",
+    "requested_delivery_date": "2026-07-09",
+    "currency": "USD",
+    "buyer_reference": "Dept 351",
+    "payment_terms_text": "Net 45",
+    "incoterms": null,
+    "ship_via": "FedEx",
+    "notes": "Rush order",
+    "language": "en"
+  },
+  "lines": [
+    {
+      "line_no": 1,
+      "buyer_item_code": null,
+      "seller_item_code": "PPE-GLV-NIT4-S-BLU",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Nitrile Exam Gloves 4 mil powder-free Blue size S",
+      "quantity": 4,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "100/BX 10BX/CS",
+        "inner_count": 1000,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 101.95,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 407.8,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "PPE-GLV-NIT4-S-BLU",
+        "erp_product_id": 1060,
+        "erp_uom": "CS",
+        "erp_uom_id": 30,
+        "erp_quantity": 4,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 101.95
+      }
+    },
+    {
+      "line_no": 2,
+      "buyer_item_code": "SWS-JS-5968",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Can Liner 33x40 0.5mil Clear 150/CS",
+      "quantity": 6,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "150/CS",
+        "inner_count": 150,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 40.16,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 240.96,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "JAN-LNR-3340-05-CL",
+        "erp_product_id": 1128,
+        "erp_uom": "CS",
+        "erp_uom_id": 16,
+        "erp_quantity": 6,
+        "conversion_factor": 1,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 40.16
+      }
+    },
+    {
+      "line_no": 3,
+      "buyer_item_code": "SWS-MIS-2670",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Level 24 inch magnetic",
+      "quantity": 3,
+      "uom_raw": "EA",
+      "uom": "EA",
+      "pack": null,
+      "unit_price": 21.94,
+      "price_uom": "EA",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 65.82,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "TOOL-LVL-24",
+        "erp_product_id": 1274,
+        "erp_uom": "EA",
+        "erp_uom_id": 40,
+        "erp_quantity": 3,
+        "conversion_factor": 1,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 21.94
+      }
+    },
+    {
+      "line_no": 4,
+      "buyer_item_code": "SWS-JS-3226",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Can Liner 43x47 0.7mil Black 200/CS",
+      "quantity": 6,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "200/CS",
+        "inner_count": 200,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 34.55,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 207.3,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "JAN-LNR-4347-07-BL",
+        "erp_product_id": 1149,
+        "erp_uom": "CS",
+        "erp_uom_id": 34,
+        "erp_quantity": 6,
+        "conversion_factor": 1,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 34.55
+      }
+    },
+    {
+      "line_no": 5,
+      "buyer_item_code": "SWS-HW-5066",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Flat Head Cap Screw 1/4-20 x 1\" Stainless 18-8",
+      "quantity": 6,
+      "uom_raw": "BX",
+      "uom": "BX",
+      "pack": {
+        "raw": "25/BX",
+        "inner_count": 25,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 32.96,
+      "price_uom": "BX",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 197.76,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "FST-FHCS-1420-1-SS-B25",
+        "erp_product_id": 1032,
+        "erp_uom": "BX",
+        "erp_uom_id": 14,
+        "erp_quantity": 6,
+        "conversion_factor": 1,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 32.96
+      }
+    }
+  ],
+  "charges": [],
+  "totals": {
+    "lines_amount_declared": 1119.64,
+    "tax_amount_declared": null,
+    "total_amount_declared": 1119.64,
+    "lines_amount_computed": 1119.64
+  },
+  "decision": {
+    "score": 0.98,
+    "route": "AUTO_POST",
+    "reasons": []
+  },
+  "processing": {
+    "extractor": "synthetic/generator.py",
+    "prompt_version": null,
+    "created_at": "2026-10-29T20:23:08Z",
+    "updated_at": null
+  },
+  "ship_to": {
+    "name": "Indianapolis Warehouse",
+    "code_on_document": "IND-WH",
+    "address": {
+      "line1": "800 Safety Lane",
+      "city": "Indianapolis",
+      "region": "IN",
+      "postal_code": "46204",
+      "country": "US"
+    },
+    "resolved": {
+      "erp_partner_id": 64,
+      "erp_partner_ref": "IND-WH",
+      "method": "CODE",
+      "score": 1.0
+    }
+  },
+  "_synthetic_metadata": {
+    "hard_case_types": [
+      "TYPO_DESC"
+    ],
+    "is_hard_case": true
+  }
+}

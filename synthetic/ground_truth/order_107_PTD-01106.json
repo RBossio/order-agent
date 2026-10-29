@@ -1,0 +1,227 @@
+{
+  "schema_version": "1.0",
+  "order_id": "97a7fe79-915b-4d27-8fc2-3dd116f7b730",
+  "tenant_id": "delta-industrial-supply",
+  "document_type": "ORIGINAL",
+  "status": "VALIDATED",
+  "source": {
+    "channel": "FOLDER",
+    "message_id": null,
+    "from_address": null,
+    "subject": null,
+    "received_at": "2026-10-29T20:23:08Z",
+    "documents": [
+      {
+        "document_id": "doc-90f87eb1",
+        "kind": "PDF_TEXT",
+        "filename": "PTD-01106.pdf",
+        "mime_type": "application/pdf",
+        "sha256": "9e3d9bba8c6eea7d2a72041e8828fa3e6f538a5916157ba7f48460fc0dc48416",
+        "page_count": 1
+      }
+    ]
+  },
+  "buyer": {
+    "name": "Premier Tool & Die (SYNTHETIC)",
+    "code_on_document": "C-PTD",
+    "tax_id": "US88-4444444",
+    "gln": null,
+    "peppol_endpoint": null,
+    "address": {
+      "line1": "1000 Precision Dr",
+      "city": "Fort Wayne",
+      "region": "IN",
+      "postal_code": "46802",
+      "country": "US"
+    },
+    "contact": {
+      "name": "William Brown (fictitious)",
+      "email": "purchasing@premier-td.example",
+      "phone": "+1-555-0900"
+    },
+    "resolved": {
+      "erp_partner_id": 66,
+      "erp_partner_ref": "C-PTD",
+      "method": "CODE",
+      "score": 0.99
+    }
+  },
+  "seller": {
+    "name": "Delta Industrial Supply LLC (SYNTHETIC)",
+    "code_on_document": null,
+    "tax_id": null,
+    "address": {
+      "line1": "55 Commerce Dr",
+      "city": "Dayton",
+      "region": "OH",
+      "postal_code": "45402",
+      "country": "US"
+    },
+    "resolved": null
+  },
+  "header": {
+    "po_number": "PTD-01106",
+    "po_revision": 0,
+    "po_date": "26.05.2026",
+    "requested_delivery_date": "2026-06-10",
+    "currency": "USD",
+    "buyer_reference": "Dept 351",
+    "payment_terms_text": "2% 10 Net 30",
+    "incoterms": null,
+    "ship_via": null,
+    "notes": "Confirm availability",
+    "language": "en"
+  },
+  "lines": [
+    {
+      "line_no": 1,
+      "buyer_item_code": null,
+      "seller_item_code": "PPE-GLV-VIN6-M-CLE",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Vinyl Exam Gloves 6 mil powder-free Clear size M",
+      "quantity": 3,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "100/BX 10BX/CS",
+        "inner_count": 1000,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 94.71,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 284.13,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "PPE-GLV-VIN6-M-CLE",
+        "erp_product_id": 1073,
+        "erp_uom": "CS",
+        "erp_uom_id": 44,
+        "erp_quantity": 3,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 94.71
+      }
+    },
+    {
+      "line_no": 2,
+      "buyer_item_code": null,
+      "seller_item_code": "LUB-SIL-SPR",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Silicone Spray 11 oz aerosol",
+      "quantity": 3,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "12/CS",
+        "inner_count": 12,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 51.29,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 153.87,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "LUB-SIL-SPR",
+        "erp_product_id": 1246,
+        "erp_uom": "CS",
+        "erp_uom_id": 37,
+        "erp_quantity": 3,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 51.29
+      }
+    },
+    {
+      "line_no": 3,
+      "buyer_item_code": null,
+      "seller_item_code": "FST-HCS-51618-112-SS-B25",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Hex Cap Screw 5/16-18 x 1-1/2\" Stainless 18-8",
+      "quantity": 4,
+      "uom_raw": "BX",
+      "uom": "BX",
+      "pack": {
+        "raw": "25/BX",
+        "inner_count": 25,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 35.14,
+      "price_uom": "BX",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 140.56,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "FST-HCS-51618-112-SS-B25",
+        "erp_product_id": 1019,
+        "erp_uom": "BX",
+        "erp_uom_id": 19,
+        "erp_quantity": 4,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 35.14
+      }
+    }
+  ],
+  "charges": [],
+  "totals": {
+    "lines_amount_declared": 578.56,
+    "tax_amount_declared": null,
+    "total_amount_declared": 578.56,
+    "lines_amount_computed": 578.56
+  },
+  "decision": {
+    "score": 0.98,
+    "route": "AUTO_POST",
+    "reasons": []
+  },
+  "processing": {
+    "extractor": "synthetic/generator.py",
+    "prompt_version": null,
+    "created_at": "2026-10-29T20:23:08Z",
+    "updated_at": null
+  },
+  "ship_to": {
+    "name": "Fort Wayne Main",
+    "code_on_document": "FW-MAIN",
+    "address": {
+      "line1": "1000 Precision Dr",
+      "city": "Fort Wayne",
+      "region": "IN",
+      "postal_code": "46802",
+      "country": "US"
+    },
+    "resolved": {
+      "erp_partner_id": 67,
+      "erp_partner_ref": "FW-MAIN",
+      "method": "CODE",
+      "score": 1.0
+    }
+  },
+  "_synthetic_metadata": {
+    "hard_case_types": [],
+    "is_hard_case": false
+  }
+}

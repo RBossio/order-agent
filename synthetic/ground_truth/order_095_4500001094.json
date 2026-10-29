@@ -1,0 +1,223 @@
+{
+  "schema_version": "1.0",
+  "order_id": "e524545e-ed2c-4815-bbe5-c2a90df2ef8a",
+  "tenant_id": "delta-industrial-supply",
+  "document_type": "ORIGINAL",
+  "status": "VALIDATED",
+  "source": {
+    "channel": "FOLDER",
+    "message_id": null,
+    "from_address": null,
+    "subject": null,
+    "received_at": "2026-10-29T20:23:08Z",
+    "documents": [
+      {
+        "document_id": "doc-dc85d0ca",
+        "kind": "XLSX",
+        "filename": "4500001094.xlsx",
+        "mime_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        "sha256": "e1925584e1d1878db0db293b961c307b142da6915771b480b2c19808c36e0d13",
+        "page_count": null
+      }
+    ]
+  },
+  "buyer": {
+    "name": "Acme Manufacturing Inc. (SYNTHETIC)",
+    "code_on_document": "C-ACME",
+    "tax_id": "US12-3456789",
+    "gln": null,
+    "peppol_endpoint": null,
+    "address": {
+      "line1": "1200 Industrial Pkwy",
+      "city": "Toledo",
+      "region": "OH",
+      "postal_code": "43601",
+      "country": "US"
+    },
+    "contact": {
+      "name": "Jordan Lee (fictitious)",
+      "email": "purchasing@acme-mfg.example",
+      "phone": "+1-555-0100"
+    },
+    "resolved": {
+      "erp_partner_id": 42,
+      "erp_partner_ref": "C-ACME",
+      "method": "CODE",
+      "score": 0.99
+    }
+  },
+  "seller": {
+    "name": "Delta Industrial Supply LLC (SYNTHETIC)",
+    "code_on_document": null,
+    "tax_id": null,
+    "address": {
+      "line1": "55 Commerce Dr",
+      "city": "Dayton",
+      "region": "OH",
+      "postal_code": "45402",
+      "country": "US"
+    },
+    "resolved": null
+  },
+  "header": {
+    "po_number": "4500001094",
+    "po_revision": 0,
+    "po_date": "2026-01-16",
+    "requested_delivery_date": "2026-01-23",
+    "currency": "USD",
+    "buyer_reference": "Dept 646",
+    "payment_terms_text": "Net 30",
+    "incoterms": null,
+    "ship_via": null,
+    "notes": "Confirm availability",
+    "language": "en"
+  },
+  "lines": [
+    {
+      "line_no": 1,
+      "buyer_item_code": "ACM-HW-2736",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Hex Cap Screw 5/16-18 x 1\" Grade 8 Yellow Zinc",
+      "quantity": 6,
+      "uom_raw": "BX",
+      "uom": "BX",
+      "pack": {
+        "raw": "50/BX",
+        "inner_count": 50,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 16.55,
+      "price_uom": "BX",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 99.3,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "FST-HCS-51618-1-G8-B50",
+        "erp_product_id": 1010,
+        "erp_uom": "BX",
+        "erp_uom_id": 25,
+        "erp_quantity": 6,
+        "conversion_factor": 1,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 16.55
+      }
+    },
+    {
+      "line_no": 2,
+      "buyer_item_code": "ACM-PPE-8963",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Hard Hat Type I Class E blue",
+      "quantity": 10,
+      "uom_raw": "EA",
+      "uom": "EA",
+      "pack": null,
+      "unit_price": 12.5,
+      "price_uom": "EA",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 125.0,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "PPE-HH-BLU",
+        "erp_product_id": 1093,
+        "erp_uom": "EA",
+        "erp_uom_id": 46,
+        "erp_quantity": 10,
+        "conversion_factor": 1,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 12.5
+      }
+    },
+    {
+      "line_no": 3,
+      "buyer_item_code": "ACM-PPE-5937",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Nitrile Work Gloves industrial Black size XL",
+      "quantity": 4,
+      "uom_raw": "DZN",
+      "uom": "DZN",
+      "pack": {
+        "raw": "12/DZ",
+        "inner_count": 12,
+        "inner_size": 1,
+        "inner_uom": "PR"
+      },
+      "unit_price": 28.53,
+      "price_uom": "DZN",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 114.12,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "PPE-GLV-NITW-XL-BLA",
+        "erp_product_id": 1081,
+        "erp_uom": "DZN",
+        "erp_uom_id": 11,
+        "erp_quantity": 4,
+        "conversion_factor": 1,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 28.53
+      }
+    }
+  ],
+  "charges": [],
+  "totals": {
+    "lines_amount_declared": 338.42,
+    "tax_amount_declared": null,
+    "total_amount_declared": 338.42,
+    "lines_amount_computed": 338.42
+  },
+  "decision": {
+    "score": 0.98,
+    "route": "AUTO_POST",
+    "reasons": []
+  },
+  "processing": {
+    "extractor": "synthetic/generator.py",
+    "prompt_version": null,
+    "created_at": "2026-10-29T20:23:08Z",
+    "updated_at": null
+  },
+  "ship_to": {
+    "name": "Acme Plant 2 - Receiving Dock B",
+    "code_on_document": "PLANT-02",
+    "address": {
+      "line1": "4400 Maumee Ave",
+      "line2": "Dock B",
+      "city": "Toledo",
+      "region": "OH",
+      "postal_code": "43609",
+      "country": "US"
+    },
+    "resolved": {
+      "erp_partner_id": 43,
+      "erp_partner_ref": "PLANT-02",
+      "method": "CODE",
+      "score": 1.0
+    }
+  },
+  "_synthetic_metadata": {
+    "hard_case_types": [],
+    "is_hard_case": false
+  }
+}

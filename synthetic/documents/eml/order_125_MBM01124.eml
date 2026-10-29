@@ -1,0 +1,55 @@
+Content-Type: multipart/mixed; boundary="===============6757787803074449652=="
+MIME-Version: 1.0
+From: po@mbm-services.example
+To: orders@delta-industrial.example
+Subject: PO MBM01124 - Order from Midwest Building Maintenance (SYNTHETIC)
+Message-ID: <po-MBM01124@mbm-services.example>
+Date: Thu, 29 Oct 2026 20:23:08 +0000
+
+--===============6757787803074449652==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+Hello,
+
+Please process the following order:
+
+PO Number: MBM01124
+Date: 5/13/26
+Ship To: Columbus Warehouse
+
+Items:
+------
+  1. [MB-PPE-7846] Latex Exam Gloves 8 mil powder-free Natural size S
+     Qty: 10 CS @ $117.61
+  2. [MB-PPE-9116] Face Shield clear 8x15.5 inch
+     Qty: 2 EA @ $4.50
+  3. [MB-MIS-1356] Extension Cord 25 ft 12/3 SJTW
+     Qty: 6 EA @ $30.48
+  4. [ELEC-BATT-9V] Batteries 9V Alkaline
+     Qty: 4 PK @ $22.55
+  5. [MB-JS-9098] Can Liner 43x47 0.7mil Black 200/CS
+     Qty: 2 CS @ $34.55
+  6. [MB-HW-3427] Socket Head Cap Screw 5/16-18 x 1" Alloy Steel Black Oxide
+     Qty: 24 BX @ $16.82
+  7. [ELEC-EXT-50] Extension Cord 50 ft 12/3 SJTW
+     Qty: 10 EA @ $46.78
+  8. [MB-HW-7781] Hex Cap Screw 3/8-16 x 1-1/2" Stainless 18-8
+     Qty: 2 BX @ $11.38
+  9. [JAN-LNR-2424-05-BL] Can Liner 24x24 0.5mil Black 100/CS
+     Qty: 1 CS @ $51.36
+  10. [MB-PPE-9109] Nitrile Exam Gloves 4 mil powder-free Blue size S
+     Qty: 10 CS @ $101.95
+  11. [ABR-SAND-SHT-60] Sandpaper Sheet 9x11 60 grit
+     Qty: 4 PK @ $26.11
+  12. [TOOL-PLIER-NED] Needle Nose Pliers 6 inch
+     Qty: 5 EA @ $11.17
+
+Delivery requested by: 2026-05-28
+
+Thank you,
+Patricia Johnson (fictitious)
+Midwest Building Maintenance (SYNTHETIC)
++1-555-0400
+--===============6757787803074449652==--

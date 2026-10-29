@@ -1,0 +1,185 @@
+{
+  "schema_version": "1.0",
+  "order_id": "7799767b-8a1b-4b39-a63a-f0041f4312a7",
+  "tenant_id": "delta-industrial-supply",
+  "document_type": "ORIGINAL",
+  "status": "VALIDATED",
+  "source": {
+    "channel": "FOLDER",
+    "message_id": null,
+    "from_address": null,
+    "subject": null,
+    "received_at": "2026-10-29T20:23:08Z",
+    "documents": [
+      {
+        "document_id": "doc-ba14f7bb",
+        "kind": "PDF_TEXT",
+        "filename": "PTD-01017.pdf",
+        "mime_type": "application/pdf",
+        "sha256": "405c1aaec1fa9728fde244c028450a1c4b467b1df706afa03cda64eb408b42df",
+        "page_count": 1
+      }
+    ]
+  },
+  "buyer": {
+    "name": "Premier Tool & Die (SYNTHETIC)",
+    "code_on_document": "C-PTD",
+    "tax_id": "US88-4444444",
+    "gln": null,
+    "peppol_endpoint": null,
+    "address": {
+      "line1": "1000 Precision Dr",
+      "city": "Fort Wayne",
+      "region": "IN",
+      "postal_code": "46802",
+      "country": "US"
+    },
+    "contact": {
+      "name": "William Brown (fictitious)",
+      "email": "purchasing@premier-td.example",
+      "phone": "+1-555-0900"
+    },
+    "resolved": {
+      "erp_partner_id": 66,
+      "erp_partner_ref": "C-PTD",
+      "method": "CODE",
+      "score": 0.99
+    }
+  },
+  "seller": {
+    "name": "Delta Industrial Supply LLC (SYNTHETIC)",
+    "code_on_document": null,
+    "tax_id": null,
+    "address": {
+      "line1": "55 Commerce Dr",
+      "city": "Dayton",
+      "region": "OH",
+      "postal_code": "45402",
+      "country": "US"
+    },
+    "resolved": null
+  },
+  "header": {
+    "po_number": "PTD-01017",
+    "po_revision": 0,
+    "po_date": "02.03.2026",
+    "requested_delivery_date": "2026-03-17",
+    "currency": "USD",
+    "buyer_reference": "Dept 723",
+    "payment_terms_text": "Net 45",
+    "incoterms": null,
+    "ship_via": "FedEx",
+    "notes": "Rush order",
+    "language": "en"
+  },
+  "lines": [
+    {
+      "line_no": 1,
+      "buyer_item_code": null,
+      "seller_item_code": "ELEC-PWR-STRP",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Power Strip 6 outlet surge",
+      "quantity": 1,
+      "uom_raw": "EA",
+      "uom": "EA",
+      "pack": null,
+      "unit_price": 14.96,
+      "price_uom": "EA",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 14.96,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "ELEC-PWR-STRP",
+        "erp_product_id": 1289,
+        "erp_uom": "EA",
+        "erp_uom_id": 13,
+        "erp_quantity": 1,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 14.96
+      }
+    },
+    {
+      "line_no": 2,
+      "buyer_item_code": null,
+      "seller_item_code": "FST-HCS-3816-112-SS-B50",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Hex Cap Screw 3/8-16 x 1-1/2\" Stainless 18-8",
+      "quantity": 12,
+      "uom_raw": "BX",
+      "uom": "BX",
+      "pack": {
+        "raw": "50/BX",
+        "inner_count": 50,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 11.38,
+      "price_uom": "BX",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 136.56,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "FST-HCS-3816-112-SS-B50",
+        "erp_product_id": 1021,
+        "erp_uom": "BX",
+        "erp_uom_id": 36,
+        "erp_quantity": 12,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 11.38
+      }
+    }
+  ],
+  "charges": [],
+  "totals": {
+    "lines_amount_declared": 151.52,
+    "tax_amount_declared": null,
+    "total_amount_declared": 151.52,
+    "lines_amount_computed": 151.52
+  },
+  "decision": {
+    "score": 0.98,
+    "route": "AUTO_POST",
+    "reasons": []
+  },
+  "processing": {
+    "extractor": "synthetic/generator.py",
+    "prompt_version": null,
+    "created_at": "2026-10-29T20:23:08Z",
+    "updated_at": null
+  },
+  "ship_to": {
+    "name": "Fort Wayne Main",
+    "code_on_document": "FW-MAIN",
+    "address": {
+      "line1": "1000 Precision Dr",
+      "city": "Fort Wayne",
+      "region": "IN",
+      "postal_code": "46802",
+      "country": "US"
+    },
+    "resolved": {
+      "erp_partner_id": 67,
+      "erp_partner_ref": "FW-MAIN",
+      "method": "CODE",
+      "score": 1.0
+    }
+  },
+  "_synthetic_metadata": {
+    "hard_case_types": [],
+    "is_hard_case": false
+  }
+}

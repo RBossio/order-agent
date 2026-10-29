@@ -1,0 +1,439 @@
+{
+  "schema_version": "1.0",
+  "order_id": "027520d6-82b7-46f5-9f7a-2a73c682aab5",
+  "tenant_id": "delta-industrial-supply",
+  "document_type": "ORIGINAL",
+  "status": "VALIDATED",
+  "source": {
+    "channel": "EMAIL_IMAP",
+    "message_id": "<po-SW-01081@safework-sol.example>",
+    "from_address": "orders@safework-sol.example",
+    "subject": "PO SW-01081 - Order from SafeWork Solutions Inc. (SYNTHETIC)",
+    "received_at": "2026-10-29T20:23:08Z",
+    "documents": [
+      {
+        "document_id": "doc-9cb563e3",
+        "kind": "EMAIL_BODY",
+        "filename": null,
+        "mime_type": "text/plain",
+        "sha256": "1dc0c030c163ed7f14f507625ae5b25df90c86a2ef7d9813f07c01e6e009b607",
+        "page_count": null
+      }
+    ]
+  },
+  "buyer": {
+    "name": "SafeWork Solutions Inc. (SYNTHETIC)",
+    "code_on_document": "C-SWS",
+    "tax_id": "US66-3333333",
+    "gln": null,
+    "peppol_endpoint": null,
+    "address": {
+      "line1": "800 Safety Lane",
+      "city": "Indianapolis",
+      "region": "IN",
+      "postal_code": "46204",
+      "country": "US"
+    },
+    "contact": {
+      "name": "Jennifer Kim (fictitious)",
+      "email": "orders@safework-sol.example",
+      "phone": "+1-555-0800"
+    },
+    "resolved": {
+      "erp_partner_id": 63,
+      "erp_partner_ref": "C-SWS",
+      "method": "EMAIL_DOMAIN",
+      "score": 0.99
+    }
+  },
+  "seller": {
+    "name": "Delta Industrial Supply LLC (SYNTHETIC)",
+    "code_on_document": null,
+    "tax_id": null,
+    "address": {
+      "line1": "55 Commerce Dr",
+      "city": "Dayton",
+      "region": "OH",
+      "postal_code": "45402",
+      "country": "US"
+    },
+    "resolved": null
+  },
+  "header": {
+    "po_number": "SW-01081",
+    "po_revision": 0,
+    "po_date": "01-24-2026",
+    "requested_delivery_date": "2026-02-06",
+    "currency": "USD",
+    "buyer_reference": "Dept 278",
+    "payment_terms_text": "Net 45",
+    "incoterms": null,
+    "ship_via": "Best Way",
+    "notes": "Call before delivery",
+    "language": "en"
+  },
+  "lines": [
+    {
+      "line_no": 1,
+      "buyer_item_code": null,
+      "seller_item_code": "JAN-HND-SOAP",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Hand Soap Liquid bulk 4/1 GAL",
+      "quantity": 4,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "4/1 GAL",
+        "inner_count": 4,
+        "inner_size": 1,
+        "inner_uom": "GLL"
+      },
+      "unit_price": 33.8,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 135.2,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "JAN-HND-SOAP",
+        "erp_product_id": 1166,
+        "erp_uom": "CS",
+        "erp_uom_id": 42,
+        "erp_quantity": 4,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 33.8
+      }
+    },
+    {
+      "line_no": 2,
+      "buyer_item_code": "SWS-JS-2036",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Toilet Paper Dispenser Jumbo chrome",
+      "quantity": 5,
+      "uom_raw": "EA",
+      "uom": "EA",
+      "pack": null,
+      "unit_price": 32.87,
+      "price_uom": "EA",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 164.35,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "JAN-DISP-TP-JR",
+        "erp_product_id": 1194,
+        "erp_uom": "EA",
+        "erp_uom_id": 19,
+        "erp_quantity": 5,
+        "conversion_factor": 1,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 32.87
+      }
+    },
+    {
+      "line_no": 3,
+      "buyer_item_code": "SWS-HW-2722",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Carriage Bolt 5/16-18 Grade 5 Zinc",
+      "quantity": 3,
+      "uom_raw": "BX",
+      "uom": "BX",
+      "pack": {
+        "raw": "100/BX",
+        "inner_count": 100,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 24.07,
+      "price_uom": "BX",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 72.21,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "FST-CS-51618-ZN-B100",
+        "erp_product_id": 1059,
+        "erp_uom": "BX",
+        "erp_uom_id": 16,
+        "erp_quantity": 3,
+        "conversion_factor": 1,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 24.07
+      }
+    },
+    {
+      "line_no": 4,
+      "buyer_item_code": null,
+      "seller_item_code": "FST-FHCS-3816-112-SS-B50",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Flat Head Cap Screw 3/8-16 x 1-1/2\" Stainless 18-8",
+      "quantity": 1,
+      "uom_raw": "BX",
+      "uom": "BX",
+      "pack": {
+        "raw": "50/BX",
+        "inner_count": 50,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 22.35,
+      "price_uom": "BX",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 22.35,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "FST-FHCS-3816-112-SS-B50",
+        "erp_product_id": 1037,
+        "erp_uom": "BX",
+        "erp_uom_id": 16,
+        "erp_quantity": 1,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 22.35
+      }
+    },
+    {
+      "line_no": 5,
+      "buyer_item_code": "SWS-PPE-1091",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Hard Hat Type I Class E blue",
+      "quantity": 10,
+      "uom_raw": "EA",
+      "uom": "EA",
+      "pack": null,
+      "unit_price": 12.5,
+      "price_uom": "EA",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 125.0,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "PPE-HH-BLU",
+        "erp_product_id": 1093,
+        "erp_uom": "EA",
+        "erp_uom_id": 34,
+        "erp_quantity": 10,
+        "conversion_factor": 1,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 12.5
+      }
+    },
+    {
+      "line_no": 6,
+      "buyer_item_code": "SWS-JS-8469",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Can Liner 24x24 1.0mil Clear 100/CS",
+      "quantity": 12,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "100/CS",
+        "inner_count": 100,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 51.93,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 623.16,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "JAN-LNR-2424-10-CL",
+        "erp_product_id": 1114,
+        "erp_uom": "CS",
+        "erp_uom_id": 2,
+        "erp_quantity": 12,
+        "conversion_factor": 1,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 51.93
+      }
+    },
+    {
+      "line_no": 7,
+      "buyer_item_code": null,
+      "seller_item_code": "FST-SHCS-3816-112-SS-B50",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Socket Head Cap Screw 3/8-16 x 1-1/2\" Alloy Steel Black Oxide",
+      "quantity": 5,
+      "uom_raw": "BX",
+      "uom": "BX",
+      "pack": {
+        "raw": "50/BX",
+        "inner_count": 50,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 18.65,
+      "price_uom": "BX",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 93.25,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "FST-SHCS-3816-112-SS-B50",
+        "erp_product_id": 1029,
+        "erp_uom": "BX",
+        "erp_uom_id": 45,
+        "erp_quantity": 5,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 18.65
+      }
+    },
+    {
+      "line_no": 8,
+      "buyer_item_code": "SWS-HW-7759",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Socket Head Cap Screw 1/2-13 x 1-1/2\" Alloy Steel Black Oxide",
+      "quantity": 4,
+      "uom_raw": "BX",
+      "uom": "BX",
+      "pack": {
+        "raw": "25/BX",
+        "inner_count": 25,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 22.01,
+      "price_uom": "BX",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 88.04,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "FST-SHCS-1213-112-SS-B25",
+        "erp_product_id": 1031,
+        "erp_uom": "BX",
+        "erp_uom_id": 28,
+        "erp_quantity": 4,
+        "conversion_factor": 1,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 22.01
+      }
+    },
+    {
+      "line_no": 9,
+      "buyer_item_code": null,
+      "seller_item_code": "FST-SHCS-1213-1-SS-B100",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Socket Head Cap Screw 1/2-13 x 1\" Alloy Steel Black Oxide",
+      "quantity": 6,
+      "uom_raw": "BX",
+      "uom": "BX",
+      "pack": {
+        "raw": "100/BX",
+        "inner_count": 100,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 38.95,
+      "price_uom": "BX",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 233.7,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "FST-SHCS-1213-1-SS-B100",
+        "erp_product_id": 1030,
+        "erp_uom": "BX",
+        "erp_uom_id": 4,
+        "erp_quantity": 6,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 38.95
+      }
+    }
+  ],
+  "charges": [],
+  "totals": {
+    "lines_amount_declared": 1557.26,
+    "tax_amount_declared": null,
+    "total_amount_declared": 1557.26,
+    "lines_amount_computed": 1557.26
+  },
+  "decision": {
+    "score": 0.98,
+    "route": "AUTO_POST",
+    "reasons": []
+  },
+  "processing": {
+    "extractor": "synthetic/generator.py",
+    "prompt_version": null,
+    "created_at": "2026-10-29T20:23:08Z",
+    "updated_at": null
+  },
+  "ship_to": {
+    "name": "Indianapolis Warehouse",
+    "code_on_document": "IND-WH",
+    "address": {
+      "line1": "800 Safety Lane",
+      "city": "Indianapolis",
+      "region": "IN",
+      "postal_code": "46204",
+      "country": "US"
+    },
+    "resolved": {
+      "erp_partner_id": 64,
+      "erp_partner_ref": "IND-WH",
+      "method": "CODE",
+      "score": 1.0
+    }
+  },
+  "_synthetic_metadata": {
+    "hard_case_types": [],
+    "is_hard_case": false
+  }
+}

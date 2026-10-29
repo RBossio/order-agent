@@ -1,0 +1,333 @@
+{
+  "schema_version": "1.0",
+  "order_id": "e4eae408-0373-49b8-994c-cdfd8f4bc32d",
+  "tenant_id": "delta-industrial-supply",
+  "document_type": "ORIGINAL",
+  "status": "VALIDATED",
+  "source": {
+    "channel": "FOLDER",
+    "message_id": null,
+    "from_address": null,
+    "subject": null,
+    "received_at": "2026-10-29T20:23:09Z",
+    "documents": [
+      {
+        "document_id": "doc-e0afe1fe",
+        "kind": "XLSX",
+        "filename": "TIT-PO-01143.xlsx",
+        "mime_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        "sha256": "15722ad0da7a4140a5123a188d3acc75e9013fe906a0ba2cc8f3ed29b710b3f6",
+        "page_count": null
+      }
+    ]
+  },
+  "buyer": {
+    "name": "Titan Industrial Supply Co. (SYNTHETIC)",
+    "code_on_document": "C-TITAN",
+    "tax_id": "US55-1234567",
+    "gln": null,
+    "peppol_endpoint": null,
+    "address": {
+      "line1": "7800 Commerce Blvd",
+      "city": "Cleveland",
+      "region": "OH",
+      "postal_code": "44114",
+      "country": "US"
+    },
+    "contact": {
+      "name": "Robert Chen (fictitious)",
+      "email": "purchasing@titan-ind.example",
+      "phone": "+1-555-0300"
+    },
+    "resolved": {
+      "erp_partner_id": 48,
+      "erp_partner_ref": "C-TITAN",
+      "method": "CODE",
+      "score": 0.99
+    }
+  },
+  "seller": {
+    "name": "Delta Industrial Supply LLC (SYNTHETIC)",
+    "code_on_document": null,
+    "tax_id": null,
+    "address": {
+      "line1": "55 Commerce Dr",
+      "city": "Dayton",
+      "region": "OH",
+      "postal_code": "45402",
+      "country": "US"
+    },
+    "resolved": null
+  },
+  "header": {
+    "po_number": "TIT-PO-01143",
+    "po_revision": 0,
+    "po_date": "30-Mar-2026",
+    "requested_delivery_date": "2026-04-13",
+    "currency": "USD",
+    "buyer_reference": "Dept 502",
+    "payment_terms_text": "2% 10 Net 30",
+    "incoterms": null,
+    "ship_via": "Best Way",
+    "notes": null,
+    "language": "en"
+  },
+  "lines": [
+    {
+      "line_no": 1,
+      "buyer_item_code": "TIS-JS-7287",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "General Purpose Cleaner concentrate 4/1 GAL",
+      "quantity": 4,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "4/1 GAL",
+        "inner_count": 4,
+        "inner_size": 1,
+        "inner_uom": "GLL"
+      },
+      "unit_price": 41.16,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 164.64,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "JAN-GPC",
+        "erp_product_id": 1152,
+        "erp_uom": "CS",
+        "erp_uom_id": 36,
+        "erp_quantity": 4,
+        "conversion_factor": 1,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 41.16
+      }
+    },
+    {
+      "line_no": 2,
+      "buyer_item_code": null,
+      "seller_item_code": "JAN-TWL-RL",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Roll Paper Towels White 2-ply",
+      "quantity": 24,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "12/85/CS",
+        "inner_count": 12,
+        "inner_size": 85,
+        "inner_uom": "EA"
+      },
+      "unit_price": 36.19,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 868.56,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "JAN-TWL-RL",
+        "erp_product_id": 1180,
+        "erp_uom": "CS",
+        "erp_uom_id": 30,
+        "erp_quantity": 24,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 36.19
+      }
+    },
+    {
+      "line_no": 3,
+      "buyer_item_code": "TIS-ABR-1523",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Sanding Disc 6 inch hook & loop 40 grit",
+      "quantity": 24,
+      "uom_raw": "PK",
+      "uom": "PK",
+      "pack": {
+        "raw": "50/PK",
+        "inner_count": 50,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 34.01,
+      "price_uom": "PK",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 816.24,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "ABR-SAND-DSC-6-40",
+        "erp_product_id": 1204,
+        "erp_uom": "PK",
+        "erp_uom_id": 48,
+        "erp_quantity": 24,
+        "conversion_factor": 1,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 34.01
+      }
+    },
+    {
+      "line_no": 4,
+      "buyer_item_code": "TIS-HW-6885",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Socket Head Cap Screw 5/16-18 x 1-1/2\" Alloy Steel Black Oxide",
+      "quantity": 3,
+      "uom_raw": "BX",
+      "uom": "BX",
+      "pack": {
+        "raw": "50/BX",
+        "inner_count": 50,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 44.46,
+      "price_uom": "BX",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 133.38,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "FST-SHCS-51618-112-SS-B50",
+        "erp_product_id": 1027,
+        "erp_uom": "BX",
+        "erp_uom_id": 41,
+        "erp_quantity": 3,
+        "conversion_factor": 1,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 44.46
+      }
+    },
+    {
+      "line_no": 5,
+      "buyer_item_code": null,
+      "seller_item_code": "PPE-VEST-HV-LM",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Hi-Vis Safety Vest Class 2 lime",
+      "quantity": 5,
+      "uom_raw": "EA",
+      "uom": "EA",
+      "pack": null,
+      "unit_price": 8.5,
+      "price_uom": "EA",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 42.5,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "PPE-VEST-HV-LM",
+        "erp_product_id": 1100,
+        "erp_uom": "EA",
+        "erp_uom_id": 30,
+        "erp_quantity": 5,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 8.5
+      }
+    },
+    {
+      "line_no": 6,
+      "buyer_item_code": null,
+      "seller_item_code": "FST-HCS-1420-1-G5Z-B100",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Hex Cap Screw 1/4-20 x 1\" Grade 5 Zinc",
+      "quantity": 2,
+      "uom_raw": "BX",
+      "uom": "BX",
+      "pack": {
+        "raw": "100/BX",
+        "inner_count": 100,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 12.56,
+      "price_uom": "BX",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 25.12,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "FST-HCS-1420-1-G5Z-B100",
+        "erp_product_id": 1000,
+        "erp_uom": "BX",
+        "erp_uom_id": 50,
+        "erp_quantity": 2,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 12.56
+      }
+    }
+  ],
+  "charges": [],
+  "totals": {
+    "lines_amount_declared": 2050.44,
+    "tax_amount_declared": null,
+    "total_amount_declared": 2050.44,
+    "lines_amount_computed": 2050.44
+  },
+  "decision": {
+    "score": 0.98,
+    "route": "AUTO_POST",
+    "reasons": []
+  },
+  "processing": {
+    "extractor": "synthetic/generator.py",
+    "prompt_version": null,
+    "created_at": "2026-10-29T20:23:09Z",
+    "updated_at": null
+  },
+  "ship_to": {
+    "name": "Titan Main Facility",
+    "code_on_document": "MAIN",
+    "address": {
+      "line1": "7800 Commerce Blvd",
+      "city": "Cleveland",
+      "region": "OH",
+      "postal_code": "44114",
+      "country": "US"
+    },
+    "resolved": {
+      "erp_partner_id": 49,
+      "erp_partner_ref": "MAIN",
+      "method": "CODE",
+      "score": 1.0
+    }
+  },
+  "_synthetic_metadata": {
+    "hard_case_types": [],
+    "is_hard_case": false
+  }
+}

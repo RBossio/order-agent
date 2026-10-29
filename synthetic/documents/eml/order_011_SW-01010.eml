@@ -1,0 +1,47 @@
+Content-Type: multipart/mixed; boundary="===============0799084020133913632=="
+MIME-Version: 1.0
+From: orders@safework-sol.example
+To: orders@delta-industrial.example
+Subject: PO SW-01010 - Order from SafeWork Solutions Inc. (SYNTHETIC)
+Message-ID: <po-SW-01010@safework-sol.example>
+Date: Thu, 29 Oct 2026 20:23:08 +0000
+
+--===============0799084020133913632==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+Hello,
+
+Please process the following order:
+
+PO Number: SW-01010
+Date: 01-27-2026
+Ship To: Indianapolis Warehouse
+
+Items:
+------
+  1. [SWS-JS-9302] Can Liner 40x46 1.0mil Clear 500/CS
+     Qty: 12 CS @ $31.30
+  2. [SWS-JS-3452] Toilet Paper Jumbo Roll 2-ply 9 inch
+     Qty: 3 CS @ $25.97
+  3. [ABR-CUT-WHL-4-180] Cut-off Wheel 4.5x.045x7/8 180 grit
+     Qty: 5 BX @ $20.80
+  4. [SWS-JS-2189] Roll Paper Towels White 2-ply
+     Qty: 2 CS @ $36.19
+  5. [ABR-WIRE-WHL-80] Wire Wheel 4 inch crimped 80 grit
+     Qty: 1 EA @ $17.89
+  6. [SWS-MIS-8219] Batteries AA Alkaline
+     Qty: 10 PK @ $14.26
+  7. [JAN-LNR-4347-05-BL] Can Liner 43x47 0.5mil Black 200/CS
+     Qty: 10 CS @ $62.39
+  8. [FST-HCS-3816-1-G8-B25] Hex Cap Screw 3/8-16 x 1" Grade 8 Yellow Zinc
+     Qty: 3 BX @ $36.20
+
+Delivery requested by: 2026-02-13
+
+Thank you,
+Jennifer Kim (fictitious)
+SafeWork Solutions Inc. (SYNTHETIC)
++1-555-0800
+--===============0799084020133913632==--
