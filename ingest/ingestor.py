@@ -14,9 +14,6 @@ from .parsers.pdf_parser import PdfParser
 from .security import (
     DetectedFileType,
     detect_file_type,
-    is_dangerous_file_type,
-    is_extension_type_mismatch,
-    sanitize_filename,
     validate_file_for_ingest,
 )
 
@@ -31,7 +28,7 @@ class Ingestor:
         config: Configurazione personalizzata (opzionale)
     """
 
-    EXTENSION_MAP = {
+    EXTENSION_MAP = {  # noqa: RUF012
         ".eml": FileType.EML,
         ".pdf": FileType.PDF,
         ".xlsx": FileType.XLSX,
@@ -40,7 +37,7 @@ class Ingestor:
     }
     
     # Mappa da DetectedFileType a FileType
-    DETECTED_TO_FILE_TYPE = {
+    DETECTED_TO_FILE_TYPE = {  # noqa: RUF012
         DetectedFileType.PDF: FileType.PDF,
         DetectedFileType.XLSX: FileType.XLSX,
         DetectedFileType.XLS: FileType.XLS,
@@ -154,6 +151,7 @@ class Ingestor:
     ) -> NormalizedInput:
         """Crea un NormalizedInput con solo errori (file rifiutato)."""
         import hashlib
+
         from .models import Source
         
         # Rileva tipo per il source
@@ -315,7 +313,7 @@ class Ingestor:
             try:
                 result = self.ingest(file_path)
                 results.append((file_path, result, None))
-            except Exception as e:
+            except Exception as e:  # noqa: BLE001
                 results.append((file_path, None, e))
         
         return results

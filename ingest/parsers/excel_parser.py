@@ -114,7 +114,7 @@ class ExcelParser:
                 part = self._process_xlsx_sheet(ws, sheet_name, sheet_idx, result)
                 result.parts.append(part)
                 
-        except Exception as e:
+        except Exception as e:  # noqa: BLE001
             result.warnings.append(Warning(
                 code=WarningCodes.XLS_PARSE_ERROR,
                 message=f"Errore nel parsing del file Excel: {e!s}",
@@ -231,7 +231,7 @@ class ExcelParser:
                 part = self._process_xls_sheet(ws, sheet_idx, result)
                 result.parts.append(part)
                 
-        except Exception as e:
+        except Exception as e:  # noqa: BLE001
             result.warnings.append(Warning(
                 code=WarningCodes.XLS_XLS_ERROR,
                 message=f"Errore nel parsing del file .xls: {e!s}",

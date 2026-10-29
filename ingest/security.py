@@ -95,7 +95,7 @@ def detect_file_type(content: bytes | BinaryIO, read_size: int = 8192) -> FileTy
     if header.startswith(MAGIC_PE):
         if len(header) > 64:
             pe_offset = struct.unpack_from("<I", header, 60)[0] if len(header) > 63 else 0
-            if pe_offset > 0 and pe_offset < len(header) - 4:
+            if pe_offset > 0 and pe_offset < len(header) - 4:  # noqa: SIM102
                 if header[pe_offset:pe_offset + 4] == b"PE\x00\x00":
                     return FileTypeResult(
                         DetectedFileType.EXECUTABLE_PE, "high", MAGIC_PE, 
@@ -282,7 +282,7 @@ def check_zip_bomb(content: bytes, max_decompressed_size: int) -> tuple[bool, in
             
     except zipfile.BadZipFile as e:
         return (False, 0, f"File ZIP corrotto: {e}")
-    except Exception as e:
+    except Exception as e:  # noqa: BLE001
         return (False, 0, f"Errore verifica ZIP: {e}")
 
 
@@ -332,7 +332,7 @@ def sanitize_filename(
             if decoded_name != result:
                 warnings.append(f"Decodificato RFC 2047: '{filename}' -> '{decoded_name}'")
                 result = decoded_name
-        except Exception:
+        except Exception:  # noqa: BLE001, S110
             pass
     
     # Normalizzazione Unicode (NFC)
@@ -349,7 +349,7 @@ def sanitize_filename(
             if path.name and path.name != result:
                 warnings.append(f"Rimosso percorso assoluto: '{result}' -> '{path.name}'")
                 result = path.name
-        except Exception:
+        except Exception:  # noqa: BLE001, S110
             pass
     
     # Gestisci percorsi POSIX assoluti (/etc/passwd)
@@ -359,7 +359,7 @@ def sanitize_filename(
             if path.name:
                 warnings.append(f"Rimosso percorso assoluto: '{result}' -> '{path.name}'")
                 result = path.name
-        except Exception:
+        except Exception:  # noqa: BLE001, S110
             pass
     
     # Gestisci path traversal relativo (../../../etc/passwd)
@@ -372,7 +372,7 @@ def sanitize_filename(
                     warnings.append(f"Rimosso path traversal: '{result}' -> '{path.name}'")
                     result = path.name
                     break
-            except Exception:
+            except Exception:  # noqa: BLE001, S110
                 pass
     
     # Rimuovi esplicitamente qualsiasi .. rimasto
@@ -383,10 +383,10 @@ def sanitize_filename(
     
     # POI: Rimuovi caratteri di controllo (U+0000-U+001F, U+007F-U+009F)
     # e caratteri bidirezionali pericolosi (U+202A-U+202E, U+2066-U+2069)
-    bidi_control_chars = set([
+    bidi_control_chars = {
         0x202A, 0x202B, 0x202C, 0x202D, 0x202E,  # LRE, RLE, PDF, LRO, RLO
         0x2066, 0x2067, 0x2068, 0x2069,  # LRI, RLI, FSI, PDI
-    ])
+    }
     cleaned = ""
     for char in result:
         code = ord(char)
@@ -471,7 +471,7 @@ def is_extension_type_mismatch(
         "txt": {DetectedFileType.TEXT, DetectedFileType.CSV, DetectedFileType.EML},
     }
     
-    if ext in expected_types:
+    if ext in expected_types:  # noqa: SIM102
         if detected_type not in expected_types[ext]:
             return (
                 True,
@@ -572,9 +572,9 @@ def validate_file_for_ingest(
             warnings.append(mismatch_msg)
     
     # Verifica zip bomb per file XLSX
-    if detected_type in (DetectedFileType.XLSX, DetectedFileType.XLSM, DetectedFileType.ZIP):
+    if detected_type in (DetectedFileType.XLSX, DetectedFileType.XLSM, DetectedFileType.ZIP):  # noqa: SIM102
         if content.startswith(MAGIC_ZIP):
-            is_safe, decompressed_size, bomb_msg = check_zip_bomb(content, max_xlsx_decompressed_size)
+            is_safe, _decompressed_size, bomb_msg = check_zip_bomb(content, max_xlsx_decompressed_size)
             if not is_safe:
                 errors.append(f"Possibile zip bomb: {bomb_msg}")
     

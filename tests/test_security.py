@@ -14,7 +14,6 @@ from ingest import (
     DetectedFileType,
     IngestConfig,
     Ingestor,
-    NormalizedInput,
     WarningCodes,
     WarningSeverity,
     detect_file_type,
@@ -22,7 +21,6 @@ from ingest import (
     validate_file_for_ingest,
 )
 from ingest.security import (
-    FileTypeResult,
     check_zip_bomb,
     is_dangerous_file_type,
     is_extension_type_mismatch,
@@ -187,7 +185,7 @@ class TestExtensionMismatch:
 
     def test_pdf_extension_matches_pdf_content(self):
         """Estensione .pdf corrisponde a contenuto PDF."""
-        is_mismatch, msg = is_extension_type_mismatch("document.pdf", DetectedFileType.PDF)
+        is_mismatch, _msg = is_extension_type_mismatch("document.pdf", DetectedFileType.PDF)
         assert not is_mismatch
 
     def test_pdf_extension_with_exe_content(self):
@@ -198,12 +196,12 @@ class TestExtensionMismatch:
 
     def test_xlsx_extension_with_xlsm_content(self):
         """Estensione .xlsx con contenuto macro (xlsm)."""
-        is_mismatch, msg = is_extension_type_mismatch("spreadsheet.xlsx", DetectedFileType.XLSM)
+        is_mismatch, _msg = is_extension_type_mismatch("spreadsheet.xlsx", DetectedFileType.XLSM)
         assert is_mismatch
 
     def test_csv_extension_with_text_content(self):
         """Estensione .csv con testo generico (accettabile)."""
-        is_mismatch, msg = is_extension_type_mismatch("data.csv", DetectedFileType.TEXT)
+        is_mismatch, _msg = is_extension_type_mismatch("data.csv", DetectedFileType.TEXT)
         assert not is_mismatch
 
 
@@ -218,17 +216,17 @@ class TestDangerousFileTypes:
 
     def test_elf_is_dangerous(self):
         """Eseguibile ELF è pericoloso."""
-        is_dangerous, reason = is_dangerous_file_type(DetectedFileType.EXECUTABLE_ELF)
+        is_dangerous, _reason = is_dangerous_file_type(DetectedFileType.EXECUTABLE_ELF)
         assert is_dangerous
 
     def test_macho_is_dangerous(self):
         """Eseguibile Mach-O è pericoloso."""
-        is_dangerous, reason = is_dangerous_file_type(DetectedFileType.EXECUTABLE_MACHO)
+        is_dangerous, _reason = is_dangerous_file_type(DetectedFileType.EXECUTABLE_MACHO)
         assert is_dangerous
 
     def test_script_is_dangerous(self):
         """Script eseguibile è pericoloso."""
-        is_dangerous, reason = is_dangerous_file_type(DetectedFileType.EXECUTABLE_SCRIPT)
+        is_dangerous, _reason = is_dangerous_file_type(DetectedFileType.EXECUTABLE_SCRIPT)
         assert is_dangerous
 
     def test_xlsm_is_dangerous(self):
@@ -239,12 +237,12 @@ class TestDangerousFileTypes:
 
     def test_pdf_is_not_dangerous(self):
         """PDF non è pericoloso."""
-        is_dangerous, reason = is_dangerous_file_type(DetectedFileType.PDF)
+        is_dangerous, _reason = is_dangerous_file_type(DetectedFileType.PDF)
         assert not is_dangerous
 
     def test_xlsx_is_not_dangerous(self):
         """XLSX senza macro non è pericoloso."""
-        is_dangerous, reason = is_dangerous_file_type(DetectedFileType.XLSX)
+        is_dangerous, _reason = is_dangerous_file_type(DetectedFileType.XLSX)
         assert not is_dangerous
 
 
@@ -292,10 +290,10 @@ class TestFilenameSanitization:
 
     def test_windows_reserved_names_case_insensitive(self):
         """Nomi riservati Windows riconosciuti case-insensitive."""
-        safe, warnings = sanitize_filename("con.txt")
+        safe, _warnings = sanitize_filename("con.txt")
         assert not safe.lower().startswith("con.")
         
-        safe, warnings = sanitize_filename("CoN.txt")
+        safe, _warnings = sanitize_filename("CoN.txt")
         assert not safe.upper().startswith("CON.")
 
     def test_invalid_characters_replaced(self):
@@ -336,15 +334,15 @@ class TestFilenameSanitization:
     def test_rfc2047_encoded_filename(self):
         """Decodifica RFC 2047 (MIME encoded-word)."""
         encoded = "=?utf-8?B?ZG9jdW1lbnRvLnBkZg==?="  # "documento.pdf" in base64
-        safe, warnings = sanitize_filename(encoded)
+        safe, _warnings = sanitize_filename(encoded)
         assert safe == "documento.pdf"
 
     def test_trailing_spaces_dots_removed(self):
         """Spazi e punti finali rimossi."""
-        safe, warnings = sanitize_filename("file.pdf   ")
+        safe, _warnings = sanitize_filename("file.pdf   ")
         assert safe == "file.pdf"
         
-        safe, warnings = sanitize_filename("file...")
+        safe, _warnings = sanitize_filename("file...")
         assert not safe.endswith(".")
 
 
@@ -354,21 +352,21 @@ class TestZipBombProtection:
     def test_normal_zip_is_safe(self):
         """ZIP normale passa la verifica."""
         zip_content = self._create_normal_zip()
-        is_safe, size, msg = check_zip_bomb(zip_content, 100 * 1024 * 1024)
+        is_safe, _size, msg = check_zip_bomb(zip_content, 100 * 1024 * 1024)
         assert is_safe
         assert "OK" in msg
 
     def test_zip_bomb_detected(self):
         """Zip bomb rilevata per dimensione decompressa."""
         zip_content = self._create_zip_with_large_uncompressed()
-        is_safe, size, msg = check_zip_bomb(zip_content, 1024)  # Limite 1KB
+        is_safe, _size, msg = check_zip_bomb(zip_content, 1024)  # Limite 1KB
         assert not is_safe
         assert "dimensione" in msg.lower() or "supera" in msg.lower()
 
     def test_suspicious_compression_ratio(self):
         """Ratio compressione sospetto rilevato."""
         zip_content = self._create_highly_compressed_zip()
-        is_safe, size, msg = check_zip_bomb(zip_content, 100 * 1024 * 1024)
+        is_safe, _size, _msg = check_zip_bomb(zip_content, 100 * 1024 * 1024)
         # Se il ratio è > 100:1, dovrebbe essere segnalato
         # Nota: questo dipende da quanto comprimiamo
         assert isinstance(is_safe, bool)
@@ -376,7 +374,7 @@ class TestZipBombProtection:
     def test_corrupted_zip_handled(self):
         """ZIP corrotto gestito gracefully."""
         corrupted = b"PK\x03\x04" + b"\x00" * 100
-        is_safe, size, msg = check_zip_bomb(corrupted, 100 * 1024 * 1024)
+        is_safe, _size, msg = check_zip_bomb(corrupted, 100 * 1024 * 1024)
         assert not is_safe
         assert "corrotto" in msg.lower() or "errore" in msg.lower()
 
@@ -531,7 +529,7 @@ class TestEmailSecurityIntegration:
         result = ingestor.ingest(eml_file)
         
         # Verifica che ci siano warning di sanificazione
-        name_warnings = [w for w in result.warnings 
+        [w for w in result.warnings 
                         if w.code == WarningCodes.NAME_SANITIZED or "path" in w.message.lower()]
         # Potrebbe non esserci warning se il nome originale era già sicuro
         # ma il test verifica che il parsing funzioni
@@ -618,14 +616,14 @@ class TestMaliciousFileSynthetic:
         # Slash in forma compatibile: U+2215 (DIVISION SLASH)
         # U+2044 (FRACTION SLASH)
         tricky_name = "file\u2215test.pdf"
-        safe, warnings = sanitize_filename(tricky_name)
+        _safe, _warnings = sanitize_filename(tricky_name)
         # Questi caratteri potrebbero essere lasciati (non sono path separator)
         # ma il path traversal classico (..) dovrebbe essere bloccato
 
     def test_double_extension_handling(self):
         """Gestione doppia estensione."""
         double_ext = "document.pdf.exe"
-        safe, warnings = sanitize_filename(double_ext)
+        safe, _warnings = sanitize_filename(double_ext)
         # Il nome dovrebbe essere preservato ma il tipo file è determinato dal contenuto
         assert safe == "document.pdf.exe"
 
@@ -633,7 +631,7 @@ class TestMaliciousFileSynthetic:
         """Nome file molto lungo con caratteri UTF-8."""
         # Caratteri emoji usano 4 bytes ciascuno
         emoji_name = "📄" * 100 + ".pdf"
-        safe, warnings = sanitize_filename(emoji_name, max_length=255)
+        safe, _warnings = sanitize_filename(emoji_name, max_length=255)
         assert len(safe.encode("utf-8")) <= 255
         assert safe.endswith(".pdf")
 
@@ -641,7 +639,7 @@ class TestMaliciousFileSynthetic:
         """Attacco Right-to-Left Override."""
         # U+202E è Right-to-Left Override
         rtlo_name = "invoice\u202Efdp.exe"
-        safe, warnings = sanitize_filename(rtlo_name)
+        safe, _warnings = sanitize_filename(rtlo_name)
         # Il carattere di controllo dovrebbe essere rimosso
         assert "\u202e" not in safe
 
@@ -654,11 +652,11 @@ class TestMaliciousFileSynthetic:
             # Tentativo di path traversal nell'archivio
             try:
                 zf.writestr("../../../etc/passwd", "fake")
-            except Exception:
+            except Exception:  # noqa: BLE001, S110
                 pass  # Alcuni sistemi bloccano questo
             zf.writestr("normal.txt", "content")
         
-        is_safe, _, _ = check_zip_bomb(buffer.getvalue(), 100 * 1024 * 1024)
+        _is_safe, _, _ = check_zip_bomb(buffer.getvalue(), 100 * 1024 * 1024)
         # Il file è valido come ZIP ma l'estrazione deve essere sicura
         # (questo è responsabilità del codice che estrae, non di check_zip_bomb)
 

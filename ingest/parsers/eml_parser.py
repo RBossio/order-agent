@@ -28,7 +28,6 @@ from ..security import (
     is_dangerous_file_type,
     is_extension_type_mismatch,
     sanitize_filename,
-    validate_file_for_ingest,
 )
 
 
@@ -70,7 +69,7 @@ def _extract_html_text(html: str) -> str:
     try:
         parser.feed(html)
         return parser.get_text()
-    except Exception:
+    except Exception:  # noqa: BLE001
         text = re.sub(r"<[^>]+>", " ", html)
         text = re.sub(r"\s+", " ", text)
         return text.strip()
@@ -98,7 +97,7 @@ def _parse_date(date_str: str | None) -> str | None:
     try:
         parsed = email.utils.parsedate_to_datetime(date_str)
         return parsed.strftime("%Y-%m-%dT%H:%M:%SZ")
-    except Exception:
+    except Exception:  # noqa: BLE001
         return None
 
 
@@ -188,7 +187,7 @@ def _separate_signature_and_quotes(text: str) -> tuple[str, str | None, str | No
 class EmlParser:
     """Parser per file .eml."""
 
-    SUPPORTED_ATTACHMENT_TYPES = {
+    SUPPORTED_ATTACHMENT_TYPES = {  # noqa: RUF012
         "application/pdf": FileType.PDF,
         "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": FileType.XLSX,
         "application/vnd.ms-excel": FileType.XLS,
@@ -328,7 +327,7 @@ class EmlParser:
                         charset = part.get_content_charset() or "utf-8"
                         try:
                             text_body = payload.decode(charset, errors="replace")
-                        except Exception:
+                        except Exception:  # noqa: BLE001
                             text_body = payload.decode("utf-8", errors="replace")
                 elif content_type == "text/html" and html_body is None:
                     payload = part.get_payload(decode=True)
@@ -336,7 +335,7 @@ class EmlParser:
                         charset = part.get_content_charset() or "utf-8"
                         try:
                             html_body = payload.decode(charset, errors="replace")
-                        except Exception:
+                        except Exception:  # noqa: BLE001
                             html_body = payload.decode("utf-8", errors="replace")
         else:
             content_type = msg.get_content_type()
@@ -345,7 +344,7 @@ class EmlParser:
                 charset = msg.get_content_charset() or "utf-8"
                 try:
                     decoded = payload.decode(charset, errors="replace")
-                except Exception:
+                except Exception:  # noqa: BLE001
                     decoded = payload.decode("utf-8", errors="replace")
                 
                 if content_type == "text/plain":
@@ -471,7 +470,7 @@ class EmlParser:
                         sub_part.source_filename = safe_filename
                         attachments.append(sub_part)
                     result.warnings.extend(sub_result.warnings)
-                except Exception as e:
+                except Exception as e:  # noqa: BLE001
                     warn = Warning(
                         code=WarningCodes.ATT_PARSE_ERROR,
                         message=f"Errore nel parsing dell'allegato: {safe_filename}",

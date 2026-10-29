@@ -357,7 +357,7 @@ class TestBatchProcessing:
         results = ingestor.ingest_batch(DOCUMENTS_DIR, recursive=True)
         
         success = [r for r in results if r[2] is None]
-        errors = [r for r in results if r[2] is not None]
+        [r for r in results if r[2] is not None]
         
         assert len(results) >= 150, f"Trovati solo {len(results)} documenti"
         
