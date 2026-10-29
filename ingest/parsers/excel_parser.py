@@ -7,6 +7,7 @@ from io import BytesIO
 from pathlib import Path
 from typing import Any
 
+from ..config import DEFAULT_CONFIG, IngestConfig
 from ..models import (
     Cell,
     FileType,
@@ -16,7 +17,10 @@ from ..models import (
     Source,
     Table,
     Warning,
+    WarningCodes,
+    WarningSeverity,
 )
+from ..security import check_zip_bomb
 
 
 def _get_cell_ref(row: int, col: int) -> str:
@@ -32,8 +36,8 @@ def _get_cell_ref(row: int, col: int) -> str:
 class ExcelParser:
     """Parser per file Excel (.xlsx, .xls)."""
 
-    def __init__(self):
-        pass
+    def __init__(self, config: IngestConfig | None = None):
+        self.config = config or DEFAULT_CONFIG
 
     def parse(self, file_path: Path | str) -> NormalizedInput:
         """Parsa un file Excel."""
@@ -82,6 +86,24 @@ class ExcelParser:
         """Parsa file .xlsx usando openpyxl."""
         from openpyxl import load_workbook
         
+        # Verifica zip bomb prima di aprire
+        is_safe, decompressed_size, bomb_msg = check_zip_bomb(
+            content, 
+            self.config.max_xlsx_decompressed_size_bytes
+        )
+        
+        if not is_safe:
+            result.warnings.append(Warning(
+                code=WarningCodes.SIZE_ZIP_BOMB,
+                message=f"File XLSX potenzialmente pericoloso: {bomb_msg}",
+                details={
+                    "decompressed_size": decompressed_size,
+                    "limit": self.config.max_xlsx_decompressed_size_bytes,
+                },
+                severity=WarningSeverity.ERROR,
+            ))
+            return
+        
         buffer = BytesIO(content)
         
         try:
@@ -94,7 +116,7 @@ class ExcelParser:
                 
         except Exception as e:
             result.warnings.append(Warning(
-                code="XLS-01",
+                code=WarningCodes.XLS_PARSE_ERROR,
                 message=f"Errore nel parsing del file Excel: {e!s}",
                 details={"error": str(e)},
             ))
@@ -195,13 +217,11 @@ class ExcelParser:
             import xlrd
         except ImportError:
             result.warnings.append(Warning(
-                code="XLS-02",
+                code=WarningCodes.XLS_XLRD_MISSING,
                 message="Libreria xlrd non disponibile per file .xls",
                 details={"suggestion": "Installa xlrd con: pip install xlrd"},
             ))
             return
-        
-        buffer = BytesIO(content)
         
         try:
             wb = xlrd.open_workbook(file_contents=content)
@@ -213,7 +233,7 @@ class ExcelParser:
                 
         except Exception as e:
             result.warnings.append(Warning(
-                code="XLS-03",
+                code=WarningCodes.XLS_XLS_ERROR,
                 message=f"Errore nel parsing del file .xls: {e!s}",
                 details={"error": str(e)},
             ))

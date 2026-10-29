@@ -373,13 +373,33 @@ class TestEdgeCases:
         with pytest.raises(FileNotFoundError):
             ingestor.ingest(Path("/nonexistent/file.pdf"))
 
-    def test_unsupported_extension(self, ingestor: Ingestor, tmp_path: Path):
-        """Verifica errore per estensione non supportata."""
-        unsupported_file = tmp_path / "file.xyz"
-        unsupported_file.write_text("test content")
+    def test_unsupported_extension_processed_by_content(self, ingestor: Ingestor, tmp_path: Path):
+        """Verifica che file con estensione non supportata vengano processati in base al contenuto.
         
+        Dal v1.1.0, il tipo file viene rilevato dal contenuto (magic number), non dall'estensione.
+        Questo comportamento è più sicuro e permette di processare file rinominati.
+        """
+        # File di testo con estensione sconosciuta -> processato come CSV/TEXT
+        text_file = tmp_path / "file.xyz"
+        text_file.write_text("name,age\nAlice,30\n")
+        
+        result = ingestor.ingest(text_file)
+        
+        # Deve essere stato processato (non sollevare eccezione)
+        assert result is not None
+        assert len(result.parts) > 0
+        # Il tipo rilevato dovrebbe essere CSV o TEXT
+        assert result.source.file_type.value in ("CSV", "PDF", "XLSX", "XLS", "EML")
+    
+    def test_truly_unsupported_binary_file(self, ingestor: Ingestor, tmp_path: Path):
+        """Verifica gestione di file binari sconosciuti."""
+        # File binario sconosciuto
+        binary_file = tmp_path / "file.bin"
+        binary_file.write_bytes(b"\x00\x01\x02\x03" * 100)
+        
+        # Dovrebbe sollevare ValueError perché il tipo non può essere determinato
         with pytest.raises(ValueError) as exc_info:
-            ingestor.ingest(unsupported_file)
+            ingestor.ingest(binary_file)
         
         assert "non supportato" in str(exc_info.value).lower()
 

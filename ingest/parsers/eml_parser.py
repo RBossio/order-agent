@@ -10,6 +10,7 @@ from email.message import Message
 from html.parser import HTMLParser
 from pathlib import Path
 
+from ..config import DEFAULT_CONFIG, IngestConfig
 from ..models import (
     EmailAddress,
     EmailMetadata,
@@ -19,6 +20,15 @@ from ..models import (
     PartType,
     Source,
     Warning,
+    WarningCodes,
+    WarningSeverity,
+)
+from ..security import (
+    detect_file_type,
+    is_dangerous_file_type,
+    is_extension_type_mismatch,
+    sanitize_filename,
+    validate_file_for_ingest,
 )
 
 
@@ -186,8 +196,9 @@ class EmlParser:
         "application/octet-stream": None,
     }
 
-    def __init__(self):
+    def __init__(self, config: IngestConfig | None = None):
         self._attachment_parsers: dict = {}
+        self.config = config or DEFAULT_CONFIG
 
     def set_attachment_parsers(self, parsers: dict) -> None:
         """Imposta i parser per gli allegati."""
@@ -236,6 +247,15 @@ class EmlParser:
             source=source,
             email_metadata=email_meta,
         )
+        
+        # Verifica dimensione totale email
+        if len(content) > self.config.max_email_total_size_bytes:
+            result.warnings.append(Warning(
+                code=WarningCodes.SIZE_EMAIL_TOO_LARGE,
+                message=f"Email troppo grande: {len(content):,} bytes (limite: {self.config.max_email_total_size_bytes:,} bytes)",
+                details={"size": len(content), "limit": self.config.max_email_total_size_bytes},
+                severity=WarningSeverity.ERROR,
+            ))
         
         text_body, html_body = self._extract_body(msg)
         
@@ -336,11 +356,14 @@ class EmlParser:
         return text_body, html_body
 
     def _extract_attachments(self, msg: Message, result: NormalizedInput) -> list[Part]:
-        """Estrae e processa gli allegati."""
+        """Estrae e processa gli allegati con validazioni di sicurezza."""
         attachments = []
         
         if not msg.is_multipart():
             return attachments
+        
+        attachment_count = 0
+        total_attachment_size = 0
         
         for part in msg.walk():
             content_disposition = part.get("Content-Disposition", "")
@@ -351,14 +374,87 @@ class EmlParser:
             if not filename:
                 continue
             
+            # Sanifica il nome file (supporta RFC 2047/2231)
+            safe_filename, name_warnings = sanitize_filename(
+                filename,
+                max_length=self.config.max_filename_length,
+                decode_rfc2231=True,
+                decode_rfc2047=True,
+            )
+            
+            # Aggiungi warning per sanificazione nome
+            for warn_msg in name_warnings:
+                result.warnings.append(Warning(
+                    code=WarningCodes.NAME_SANITIZED,
+                    message=f"Allegato '{filename}': {warn_msg}",
+                    details={"original_filename": filename, "sanitized_filename": safe_filename},
+                ))
+            
             payload = part.get_payload(decode=True)
             if not payload:
                 continue
             
+            # Verifica limite numero allegati
+            attachment_count += 1
+            if attachment_count > self.config.max_attachments:
+                result.warnings.append(Warning(
+                    code=WarningCodes.SIZE_TOO_MANY_ATTACHMENTS,
+                    message=f"Numero massimo allegati ({self.config.max_attachments}) superato, allegato '{safe_filename}' ignorato",
+                    details={"filename": safe_filename, "attachment_number": attachment_count},
+                    severity=WarningSeverity.ERROR,
+                ))
+                continue
+            
+            # Verifica dimensione allegato
+            attachment_size = len(payload)
+            if attachment_size > self.config.max_file_size_bytes:
+                result.warnings.append(Warning(
+                    code=WarningCodes.SIZE_FILE_TOO_LARGE,
+                    message=f"Allegato '{safe_filename}' troppo grande ({attachment_size:,} bytes, limite: {self.config.max_file_size_bytes:,} bytes)",
+                    details={"filename": safe_filename, "size": attachment_size, "limit": self.config.max_file_size_bytes},
+                    severity=WarningSeverity.ERROR,
+                ))
+                continue
+            
+            total_attachment_size += attachment_size
+            
             content_type = part.get_content_type()
             sha256 = hashlib.sha256(payload).hexdigest()
             
-            file_ext = Path(filename).suffix.lower()
+            # Rileva tipo reale del file
+            detected = detect_file_type(payload)
+            
+            # Verifica tipi pericolosi
+            is_dangerous, danger_reason = is_dangerous_file_type(detected.detected_type)
+            if is_dangerous:
+                if self.config.reject_executables and "eseguibile" in danger_reason.lower():
+                    result.warnings.append(Warning(
+                        code=WarningCodes.TYPE_EXECUTABLE,
+                        message=f"Allegato '{safe_filename}' rifiutato: {danger_reason}",
+                        details={"filename": safe_filename, "detected_type": detected.detected_type.value},
+                        severity=WarningSeverity.ERROR,
+                    ))
+                    continue
+                if self.config.reject_macros and "macro" in danger_reason.lower():
+                    result.warnings.append(Warning(
+                        code=WarningCodes.TYPE_MACRO,
+                        message=f"Allegato '{safe_filename}' rifiutato: {danger_reason}",
+                        details={"filename": safe_filename, "detected_type": detected.detected_type.value},
+                        severity=WarningSeverity.ERROR,
+                    ))
+                    continue
+            
+            # Verifica corrispondenza estensione/tipo
+            if self.config.warn_extension_mismatch:
+                is_mismatch, mismatch_msg = is_extension_type_mismatch(safe_filename, detected.detected_type)
+                if is_mismatch:
+                    result.warnings.append(Warning(
+                        code=WarningCodes.TYPE_MISMATCH,
+                        message=f"Allegato '{safe_filename}': {mismatch_msg}",
+                        details={"filename": safe_filename, "detected_type": detected.detected_type.value},
+                    ))
+            
+            file_ext = Path(safe_filename).suffix.lower()
             
             parser = None
             if file_ext == ".pdf" and "PdfParser" in self._attachment_parsers:
@@ -370,37 +466,37 @@ class EmlParser:
             
             if parser:
                 try:
-                    sub_result = parser.parse_bytes(payload, filename=filename)
+                    sub_result = parser.parse_bytes(payload, filename=safe_filename)
                     for sub_part in sub_result.parts:
-                        sub_part.source_filename = filename
+                        sub_part.source_filename = safe_filename
                         attachments.append(sub_part)
                     result.warnings.extend(sub_result.warnings)
                 except Exception as e:
                     warn = Warning(
-                        code="ATT-02",
-                        message=f"Errore nel parsing dell'allegato: {filename}",
-                        details={"error": str(e), "filename": filename},
+                        code=WarningCodes.ATT_PARSE_ERROR,
+                        message=f"Errore nel parsing dell'allegato: {safe_filename}",
+                        details={"error": str(e), "filename": safe_filename},
                     )
                     result.warnings.append(warn)
                     
                     att_part = Part(
                         part_type=PartType.ATTACHMENT,
-                        source_filename=filename,
+                        source_filename=safe_filename,
                         mime_type=content_type,
                     )
                     att_part.sha256 = sha256
                     attachments.append(att_part)
             else:
                 warn = Warning(
-                    code="ATT-01",
-                    message=f"Tipo di allegato non supportato: {filename}",
-                    details={"mime_type": content_type, "filename": filename},
+                    code=WarningCodes.ATT_UNSUPPORTED,
+                    message=f"Tipo di allegato non supportato: {safe_filename}",
+                    details={"mime_type": content_type, "filename": safe_filename, "detected_type": detected.detected_type.value},
                 )
                 result.warnings.append(warn)
                 
                 att_part = Part(
                     part_type=PartType.ATTACHMENT,
-                    source_filename=filename,
+                    source_filename=safe_filename,
                     mime_type=content_type,
                 )
                 att_part.sha256 = sha256

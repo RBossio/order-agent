@@ -80,6 +80,13 @@ class Table:
         return d
 
 
+class WarningSeverity(str, Enum):
+    """Livello di gravità di un avviso."""
+    INFO = "INFO"
+    WARNING = "WARNING"
+    ERROR = "ERROR"
+
+
 @dataclass
 class Warning:
     """Avviso non bloccante."""
@@ -87,6 +94,7 @@ class Warning:
     message: str
     part_id: str | None = None
     details: dict[str, Any] | None = None
+    severity: WarningSeverity = WarningSeverity.WARNING
 
     def to_dict(self) -> dict:
         d = {"code": self.code, "message": self.message}
@@ -94,7 +102,50 @@ class Warning:
             d["part_id"] = self.part_id
         if self.details is not None:
             d["details"] = self.details
+        if self.severity != WarningSeverity.WARNING:
+            d["severity"] = self.severity.value
         return d
+
+
+# Codici di errore/warning standardizzati
+class WarningCodes:
+    """Codici di warning/errore standardizzati."""
+    # Limiti dimensione
+    SIZE_FILE_TOO_LARGE = "SIZ-01"
+    SIZE_EMAIL_TOO_LARGE = "SIZ-02"
+    SIZE_TOO_MANY_ATTACHMENTS = "SIZ-03"
+    SIZE_ZIP_BOMB = "SIZ-04"
+    
+    # Tipo file
+    TYPE_MISMATCH = "TYP-01"
+    TYPE_UNSUPPORTED = "TYP-02"
+    TYPE_EXECUTABLE = "TYP-03"
+    TYPE_MACRO = "TYP-04"
+    TYPE_UNKNOWN = "TYP-05"
+    
+    # Nome file
+    NAME_SANITIZED = "NAM-01"
+    NAME_PATH_TRAVERSAL = "NAM-02"
+    NAME_RESERVED = "NAM-03"
+    NAME_TRUNCATED = "NAM-04"
+    
+    # Allegati (esistenti)
+    ATT_UNSUPPORTED = "ATT-01"
+    ATT_PARSE_ERROR = "ATT-02"
+    ATT_SKIPPED = "ATT-03"
+    
+    # PDF (esistenti)
+    PDF_NEEDS_OCR = "PDF-01"
+    PDF_PARSE_ERROR = "PDF-02"
+    PDF_TABLE_ERROR = "PDF-03"
+    
+    # Excel (esistenti)
+    XLS_PARSE_ERROR = "XLS-01"
+    XLS_XLRD_MISSING = "XLS-02"
+    XLS_XLS_ERROR = "XLS-03"
+    
+    # CSV (esistenti)
+    CSV_PARSE_ERROR = "CSV-01"
 
 
 @dataclass
