@@ -11,24 +11,23 @@ import json
 import re
 import time
 from pathlib import Path
-from typing import Any
 
 import jsonschema
 
 from .backends import LLMBackend, MockBackend
 from .models import (
-    ExtractionResult,
-    ExtractionWarning,
     ExtractedHeader,
     ExtractedLine,
     ExtractedOrder,
     ExtractedPack,
     ExtractedParty,
     ExtractedTotals,
+    ExtractionResult,
+    ExtractionWarning,
     FieldConfidence,
     WarningSeverity,
 )
-from .preprocessor import Preprocessor, PreprocessedData, PreprocessedLine
+from .preprocessor import PreprocessedData, PreprocessedLine, Preprocessor
 from .prompts import (
     EXTRACTION_JSON_SCHEMA,
     EXTRACTION_SYSTEM_PROMPT,
@@ -170,8 +169,7 @@ class OrderExtractor:
         
         if self.validate_output:
             validation_errors = self._validate_order(order)
-            for err in validation_errors:
-                warnings.append(err)
+            warnings.extend(validation_errors)
         
         extraction_time = int((time.time() - start_time) * 1000)
         
@@ -533,7 +531,7 @@ class OrderExtractor:
                     message=error.message[:200],
                     path=path or None,
                 ))
-        except Exception:
+        except (jsonschema.exceptions.SchemaError, KeyError, TypeError):
             pass
         
         return warnings

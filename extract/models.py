@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import uuid
 from dataclasses import dataclass, field
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from enum import Enum
 from typing import Any
 
@@ -282,7 +282,7 @@ class ExtractedOrder:
     source_documents: list[dict] = field(default_factory=list)
 
     def to_dict(self) -> dict:
-        now = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+        now = datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%SZ")
         
         d: dict[str, Any] = {
             "schema_version": "1.0",

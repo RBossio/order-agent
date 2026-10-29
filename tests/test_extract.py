@@ -1,19 +1,19 @@
 """Test per il modulo extract."""
 
 import json
-import pytest
-from pathlib import Path
 
-from extract.backends import MockBackend, LLMBackend
+import pytest
+
+from extract.backends import LLMBackend, MockBackend
 from extract.backends.base import LLMResponse
 from extract.extractor import OrderExtractor
 from extract.models import (
-    ExtractionResult,
-    ExtractedOrder,
     ExtractedLine,
+    ExtractedOrder,
+    ExtractionResult,
     WarningSeverity,
 )
-from extract.preprocessor import Preprocessor, PreprocessedData
+from extract.preprocessor import PreprocessedData, Preprocessor
 
 
 class TestMockBackend:
@@ -312,7 +312,7 @@ class TestExtractedModels:
 
     def test_extraction_result_to_dict(self):
         """Serializzazione risultato completo."""
-        from extract.models import ExtractedHeader, FieldConfidence, ExtractionWarning
+        from extract.models import ExtractedHeader, ExtractionWarning, FieldConfidence
         
         order = ExtractedOrder()
         order.header = ExtractedHeader(
@@ -436,7 +436,7 @@ class TestEvaluation:
 
     def test_compare_values_strings(self):
         """Confronto stringhe con fuzzy matching."""
-        from extract.eval import compare_values, normalize_string
+        from extract.eval import compare_values
         
         assert compare_values("ABC-123", "ABC-123") is True
         assert compare_values("abc-123", "ABC-123", fuzzy=True) is True

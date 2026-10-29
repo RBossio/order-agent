@@ -5,24 +5,24 @@ Questo modulo converte documenti normalizzati (NormalizedInput) in ordini
 strutturati secondo lo schema venture-order.v1, usando un LLM locale.
 """
 
+from .backends import LLMBackend, MockBackend, OllamaBackend
 from .extractor import OrderExtractor
 from .models import (
-    ExtractionResult,
-    ExtractedOrder,
     ExtractedLine,
-    FieldConfidence,
+    ExtractedOrder,
+    ExtractionResult,
     ExtractionWarning,
+    FieldConfidence,
 )
-from .backends import LLMBackend, OllamaBackend, MockBackend
 
 __all__ = [
-    "OrderExtractor",
-    "ExtractionResult",
-    "ExtractedOrder",
     "ExtractedLine",
-    "FieldConfidence",
+    "ExtractedOrder",
+    "ExtractionResult",
     "ExtractionWarning",
+    "FieldConfidence",
     "LLMBackend",
-    "OllamaBackend",
     "MockBackend",
+    "OllamaBackend",
+    "OrderExtractor",
 ]

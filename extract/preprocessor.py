@@ -172,7 +172,6 @@ class Preprocessor:
                     header.po_number = match.group(1)
                     break
         
-        from_addr = email_meta.get("from_address", "")
         from_name = email_meta.get("from_name", "")
         if from_name:
             header.buyer_name = from_name

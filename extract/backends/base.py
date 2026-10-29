@@ -53,15 +53,12 @@ class LLMBackend(ABC):
         Returns:
             LLMResponse con il contenuto generato.
         """
-        pass
 
     @abstractmethod
     def is_available(self) -> bool:
         """Verifica se il backend è disponibile."""
-        pass
 
     @property
     @abstractmethod
     def model_name(self) -> str:
         """Nome del modello in uso."""
-        pass

@@ -4,8 +4,8 @@ from __future__ import annotations
 
 import json
 import os
-import urllib.request
 import urllib.error
+import urllib.request
 from typing import Any
 
 from .base import LLMBackend, LLMResponse
@@ -46,7 +46,7 @@ class OllamaBackend(LLMBackend):
             )
             with urllib.request.urlopen(req, timeout=5) as resp:
                 return resp.status == 200
-        except Exception:
+        except (urllib.error.URLError, OSError):
             return False
 
     def list_models(self) -> list[str]:
@@ -59,7 +59,7 @@ class OllamaBackend(LLMBackend):
             with urllib.request.urlopen(req, timeout=10) as resp:
                 data = json.loads(resp.read().decode("utf-8"))
                 return [m["name"] for m in data.get("models", [])]
-        except Exception:
+        except (urllib.error.URLError, OSError, json.JSONDecodeError):
             return []
 
     def generate(

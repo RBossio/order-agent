@@ -288,7 +288,7 @@ def generate_report(results: EvalResults, output_path: Path | None = None) -> st
     
     lines.append("## Riepilogo")
     lines.append("")
-    lines.append(f"| Metrica | Valore |")
+    lines.append("| Metrica | Valore |")
     lines.append("|---------|--------|")
     lines.append(f"| Ordini totali | {results.total_orders} |")
     lines.append(f"| Casi difficili | {results.hard_cases} ({100*results.hard_cases/results.total_orders:.1f}%) |")
@@ -304,7 +304,7 @@ def generate_report(results: EvalResults, output_path: Path | None = None) -> st
     normal_h, normal_l = results.normal_case_accuracy()
     hard_h, hard_l = results.hard_case_accuracy()
     
-    lines.append(f"| Tipo | Ordini | Testata | Righe |")
+    lines.append("| Tipo | Ordini | Testata | Righe |")
     lines.append("|------|--------|---------|-------|")
     lines.append(f"| Normali | {results.total_orders - results.hard_cases} | {100*normal_h:.1f}% | {100*normal_l:.1f}% |")
     lines.append(f"| Difficili | {results.hard_cases} | {100*hard_h:.1f}% | {100*hard_l:.1f}% |")
@@ -312,7 +312,7 @@ def generate_report(results: EvalResults, output_path: Path | None = None) -> st
     
     lines.append("## Accuratezza Campi Testata")
     lines.append("")
-    lines.append(f"| Campo | Corretti | Totali | Accuratezza |")
+    lines.append("| Campo | Corretti | Totali | Accuratezza |")
     lines.append("|-------|----------|--------|-------------|")
     for field_name, fs in results.header_scores.items():
         lines.append(f"| {field_name} | {fs.correct} | {fs.total} | {100*fs.accuracy:.1f}% |")
@@ -322,7 +322,7 @@ def generate_report(results: EvalResults, output_path: Path | None = None) -> st
     if hard_orders:
         lines.append("## Dettaglio Casi Difficili")
         lines.append("")
-        lines.append(f"| Ordine | Tipo | Testata | Righe GT | Righe Match |")
+        lines.append("| Ordine | Tipo | Testata | Righe GT | Righe Match |")
         lines.append("|--------|------|---------|----------|-------------|")
         for order in hard_orders[:20]:
             types_str = ", ".join(order.hard_case_types[:3]) or "N/A"
@@ -367,9 +367,10 @@ def run_evaluation(
     Se documents_dir è fornito, estrae prima i documenti.
     Se extracted_dir è fornito, usa ordini già estratti.
     """
+    from ingest import Ingestor
+
     from .backends import MockBackend, OllamaBackend
     from .extractor import OrderExtractor
-    from ingest import Ingestor
     
     if ground_truth_dir is None:
         ground_truth_dir = Path("synthetic/ground_truth")
@@ -422,7 +423,7 @@ def run_evaluation(
                     status = "OK" if order_score.header_accuracy() > 0.5 else "WARN"
                     print(f"[{status}] {order_name}: H={100*order_score.header_accuracy():.0f}% L={order_score.lines_matched}/{order_score.lines_expected}")
                 
-            except Exception as e:
+            except Exception as e:  # noqa: BLE001
                 if not quiet:
                     print(f"[ERR] {order_name}: {e}", file=sys.stderr)
     

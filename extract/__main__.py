@@ -150,7 +150,7 @@ def _run_single(
     """Esegue estrazione su singolo file."""
     try:
         result = extractor.extract_from_file(input_path)
-    except Exception as e:
+    except Exception as e:  # noqa: BLE001
         print(f"Errore nell'estrazione: {e}", file=sys.stderr)
         return 1
     
@@ -181,7 +181,7 @@ def _run_batch(
 ) -> int:
     """Esegue estrazione batch su directory."""
     if not input_dir.is_dir():
-        print(f"Errore: modalità batch richiede una directory.", file=sys.stderr)
+        print("Errore: modalità batch richiede una directory.", file=sys.stderr)
         return 1
     
     if output_dir is None:
@@ -222,7 +222,7 @@ def _run_batch(
                 status = "OK" if result.order.status == "EXTRACTED" else "REVIEW"
                 print(f"[{status}] {file_path.name} -> {output_file.name}")
             
-        except Exception as e:
+        except Exception as e:  # noqa: BLE001
             error_count += 1
             if not args.quiet:
                 print(f"[ERRORE] {file_path.name}: {e}", file=sys.stderr)

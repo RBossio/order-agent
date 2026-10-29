@@ -47,7 +47,6 @@ class MockBackend(LLMBackend):
         content = self._extract_from_prompt(prompt)
         
         prompt_hash = hashlib.md5(prompt.encode()).hexdigest()[:8]
-        tokens_estimate = len(prompt.split()) + len(content.split())
         
         return LLMResponse(
             content=content,
