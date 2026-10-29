@@ -70,7 +70,7 @@ env-check: ## Verifica che Docker sia disponibile e .env esista
 
 conf: env-check ## Genera config/odoo.conf dal template
 	@echo "$(GREEN)Generazione config/odoo.conf...$(NC)"
-	@DB_HOST=$(DB_HOST) ./scripts/generate_odoo_conf.sh
+	@DB_HOST=$(DB_HOST) $(PYTHON) scripts/generate_odoo_conf.py
 
 init: conf ## Inizializza il database con i moduli (una sola volta)
 	@echo "$(GREEN)Inizializzazione database...$(NC)"
