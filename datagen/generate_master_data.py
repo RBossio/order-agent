@@ -5,29 +5,22 @@ Generatore di dati master sintetici per VentureOrder.
 Produce file deterministici (seed fisso) con:
 - 300 articoli MRO/JanSan
 - 10 clienti fittizi
-- Cross-reference cliente->SKU
+- Cross-reference cliente->SKU (senza duplicati per cliente)
 - Mappatura UoM
 
+Le conversioni UoM sono derivate da pack_description, non generate casualmente.
 Tutti i dati sono SINTETICI (nomi fittizi, GTIN calcolati con check digit valido).
 """
 
 import json
 import random
-from dataclasses import dataclass, asdict
+import re
+from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Optional
 
 SEED = 42
 MASTER_DIR = Path(__file__).parent / "master"
-
-
-def gtin14_check_digit(digits_13: str) -> str:
-    """Calcola il check digit GS1 per un GTIN-14."""
-    total = sum(
-        int(d) * (3 if i % 2 else 1) for i, d in enumerate(reversed(digits_13))
-    )
-    check = (10 - (total % 10)) % 10
-    return digits_13 + str(check)
 
 
 def gtin13_check_digit(digits_12: str) -> str:
@@ -42,6 +35,7 @@ def gtin13_check_digit(digits_12: str) -> str:
 @dataclass
 class UomConversion:
     """Conversione UoM per un prodotto."""
+
     from_uom: str
     to_uom: str
     factor: float
@@ -50,6 +44,7 @@ class UomConversion:
 @dataclass
 class Product:
     """Prodotto MRO/JanSan sintetico."""
+
     default_code: str
     name: str
     category: str
@@ -59,16 +54,13 @@ class Product:
     manufacturer_code: str
     manufacturer_name: str
     pack_description: Optional[str] = None
-    conversions: list[UomConversion] = None
-
-    def __post_init__(self):
-        if self.conversions is None:
-            self.conversions = []
+    conversions: list[UomConversion] = field(default_factory=list)
 
 
 @dataclass
 class Address:
     """Indirizzo fittizio."""
+
     line1: str
     city: str
     region: str
@@ -79,6 +71,7 @@ class Address:
 @dataclass
 class Customer:
     """Cliente fittizio."""
+
     ref: str
     name: str
     tax_id: str
@@ -92,6 +85,7 @@ class Customer:
 @dataclass
 class CustomerXref:
     """Cross-reference codice cliente -> SKU distributore."""
+
     customer_ref: str
     customer_item_code: str
     product_sku: str
@@ -99,30 +93,75 @@ class CustomerXref:
     customer_description: Optional[str] = None
 
 
-MRO_CATEGORIES = [
-    "Fasteners",
-    "Safety/PPE",
-    "Janitorial",
-    "Electrical",
-    "Plumbing",
-    "Tools",
-    "Abrasives",
-    "Lubricants",
-    "Adhesives",
-    "Packaging",
-]
+def parse_pack_description(pack_desc: Optional[str], sale_uom: str) -> list[UomConversion]:
+    """
+    Parsa pack_description e restituisce le conversioni UoM corrette.
 
-JANSAN_SUBCATEGORIES = {
-    "Janitorial": [
-        "Floor Care",
-        "Can Liners",
-        "Paper Products",
-        "Skin Care",
-        "Cleaning Chemicals",
-        "Restroom Supplies",
-        "Mops & Brooms",
-    ]
-}
+    Formati supportati:
+    - "4/1GAL" → 4 galloni per case (CS→GLL=4)
+    - "100/BX 10BX/CS" → 100 EA per BX, 10 BX per CS (CS→BX=10, BX→EA=100, CS→EA=1000)
+    - "BX/50" → 50 EA per BX (BX→EA=50)
+    - "50/PK" → 50 EA per PK (PK→EA=50)
+    - "12RL/CS" → 12 rotoli per CS (CS→RO=12)
+    - "100/CS" → 100 EA per CS (CS→EA=100)
+    - "5/CS" → 5 EA per CS (CS→EA=5)
+    - "200PR/BX" → 200 paia per BX (BX→PR=200)
+    - "20/BX" → 20 EA per BX (BX→EA=20)
+    """
+    conversions = []
+
+    if not pack_desc:
+        return conversions
+
+    pack_desc = pack_desc.upper().strip()
+
+    # Pattern: "4/1GAL" - quantità/dimensione UoM (es. 4 galloni da 1 litro per case)
+    m = re.match(r"^(\d+)/(\d+)?(GAL|LTR|OZ)$", pack_desc)
+    if m:
+        qty = int(m.group(1))
+        inner_uom = {"GAL": "GLL", "LTR": "LTR", "OZ": "OZA"}.get(m.group(3), "EA")
+        conversions.append(UomConversion(sale_uom, inner_uom, float(qty)))
+        return conversions
+
+    # Pattern: "100/BX 10BX/CS" - multi-level pack
+    parts = pack_desc.split()
+    for part in parts:
+        # Pattern: "100/BX" o "10BX/CS" o "12RL/CS"
+        m = re.match(r"^(\d+)([A-Z]{2})?/([A-Z]{2})$", part)
+        if m:
+            qty = int(m.group(1))
+            inner_uom = m.group(2) if m.group(2) else "EA"
+            outer_uom = m.group(3)
+            conversions.append(UomConversion(outer_uom, inner_uom, float(qty)))
+            continue
+
+        # Pattern: "BX/50" - UoM/qty
+        m = re.match(r"^([A-Z]{2})/(\d+)$", part)
+        if m:
+            outer_uom = m.group(1)
+            qty = int(m.group(2))
+            conversions.append(UomConversion(outer_uom, "EA", float(qty)))
+            continue
+
+        # Pattern: "200PR/BX" - qtyUoM/outer
+        m = re.match(r"^(\d+)([A-Z]{2,3})/([A-Z]{2})$", part)
+        if m:
+            qty = int(m.group(1))
+            inner_uom = m.group(2)
+            outer_uom = m.group(3)
+            conversions.append(UomConversion(outer_uom, inner_uom, float(qty)))
+
+    # Calcola conversioni composte (es. CS→EA se abbiamo CS→BX e BX→EA)
+    conv_map = {(c.from_uom, c.to_uom): c.factor for c in conversions}
+
+    # Se abbiamo CS→BX e BX→EA, aggiungi CS→EA
+    if (sale_uom, "BX") in conv_map and ("BX", "EA") in conv_map:
+        cs_to_ea = conv_map[(sale_uom, "BX")] * conv_map[("BX", "EA")]
+        if (sale_uom, "EA") not in conv_map:
+            conversions.append(UomConversion(sale_uom, "EA", cs_to_ea))
+
+    return conversions
+
 
 MANUFACTURERS = [
     ("ACME Industrial", "ACME"),
@@ -136,21 +175,6 @@ MANUFACTURERS = [
     ("TechFast Systems", "TFS"),
     ("GreenClean Co", "GCC"),
 ]
-
-UOM_MAP = {
-    "EA": {"name": "Units", "odoo_uom_id": 1},
-    "BX": {"name": "Box", "odoo_uom_id": None},
-    "CS": {"name": "Case", "odoo_uom_id": None},
-    "PK": {"name": "Pack", "odoo_uom_id": None},
-    "CT": {"name": "Carton", "odoo_uom_id": None},
-    "DZN": {"name": "Dozens", "odoo_uom_id": None},
-    "GLL": {"name": "gal (US)", "odoo_uom_id": None},
-    "LTR": {"name": "L", "odoo_uom_id": None},
-    "RO": {"name": "Roll", "odoo_uom_id": None},
-    "PR": {"name": "Pair", "odoo_uom_id": None},
-    "BG": {"name": "Bag", "odoo_uom_id": None},
-    "DR": {"name": "Drum", "odoo_uom_id": None},
-}
 
 PRODUCT_TEMPLATES = [
     # Fasteners
@@ -209,7 +233,7 @@ PRODUCT_TEMPLATES = [
     # Packaging
     {"cat": "Packaging", "name": "Packing Tape Clear 2in", "sku_prefix": "PKG-PTC", "uom": "CS", "price_range": (35, 65), "pack": "36RL/CS"},
     {"cat": "Packaging", "name": "Stretch Wrap 18in", "sku_prefix": "PKG-STW", "uom": "CS", "price_range": (85, 145), "pack": "4RL/CS"},
-    {"cat": "Packaging", "name": "Bubble Wrap 12in", "sku_prefix": "PKG-BBW", "uom": "RO", "price_range": (25, 55), "pack": "250ft/RL"},
+    {"cat": "Packaging", "name": "Bubble Wrap 12in", "sku_prefix": "PKG-BBW", "uom": "RO", "price_range": (25, 55), "pack": None},
 ]
 
 SIZES_FASTENERS = ["1/4-20", "5/16-18", "3/8-16", "1/2-13", "5/8-11", "3/4-10", "M6", "M8", "M10", "M12"]
@@ -249,7 +273,6 @@ def generate_products(rng: random.Random) -> list[Product]:
         cat = template["cat"]
         mfr_name, mfr_code = rng.choice(MANUFACTURERS)
 
-        # Generate variant-specific attributes
         name = template["name"]
         sku_suffix = ""
 
@@ -350,7 +373,6 @@ def generate_products(rng: random.Random) -> list[Product]:
 
         default_code = f"{template['sku_prefix']}{sku_suffix}"
 
-        # Ensure unique SKU
         existing_codes = {p.default_code for p in products}
         counter = 1
         original_code = default_code
@@ -358,38 +380,16 @@ def generate_products(rng: random.Random) -> list[Product]:
             default_code = f"{original_code}-{counter}"
             counter += 1
 
-        # Generate GTIN with valid check digit
         gtin_raw = str(gtin_base + idx)
         gtin = gtin13_check_digit(gtin_raw)
 
-        # Generate price
         price_min, price_max = template["price_range"]
         list_price = round(rng.uniform(price_min, price_max), 2)
 
-        # Generate UoM conversions
+        # Conversioni UoM derivate da pack_description
         sale_uom = template["uom"]
-        conversions = []
-
-        if sale_uom == "CS":
-            # Case contains boxes, boxes contain pieces
-            bx_per_cs = rng.choice([6, 10, 12])
-            ea_per_bx = rng.choice([50, 100, 200])
-            conversions = [
-                UomConversion("CS", "BX", bx_per_cs),
-                UomConversion("BX", "EA", ea_per_bx),
-                UomConversion("CS", "EA", bx_per_cs * ea_per_bx),
-            ]
-        elif sale_uom == "BX":
-            ea_per_bx = rng.choice([25, 50, 100, 200])
-            conversions = [UomConversion("BX", "EA", ea_per_bx)]
-        elif sale_uom == "DZN":
-            conversions = [UomConversion("DZN", "EA", 12)]
-        elif sale_uom == "PK":
-            ea_per_pk = rng.choice([6, 12, 25, 50, 100])
-            conversions = [UomConversion("PK", "EA", ea_per_pk)]
-        elif sale_uom == "RO":
-            # Rolls - might be feet or sheets
-            pass
+        pack_desc = template["pack"]
+        conversions = parse_pack_description(pack_desc, sale_uom)
 
         product = Product(
             default_code=default_code,
@@ -400,7 +400,7 @@ def generate_products(rng: random.Random) -> list[Product]:
             gtin=gtin,
             manufacturer_code=f"{mfr_code}-{rng.randint(10000, 99999)}",
             manufacturer_name=f"{mfr_name} (fictitious)",
-            pack_description=template["pack"],
+            pack_description=pack_desc,
             conversions=conversions,
         )
         products.append(product)
@@ -447,8 +447,16 @@ def generate_customers(rng: random.Random) -> list[Customer]:
     customers = []
 
     company_prefixes = [
-        "Acme", "Delta", "Omega", "Apex", "Summit",
-        "Prime", "Atlas", "Nova", "Titan", "Global",
+        "Acme",
+        "Delta",
+        "Omega",
+        "Apex",
+        "Summit",
+        "Prime",
+        "Atlas",
+        "Nova",
+        "Titan",
+        "Global",
     ]
 
     for idx in range(10):
@@ -457,7 +465,6 @@ def generate_customers(rng: random.Random) -> list[Customer]:
         name = f"{prefix} {company_type} (SYNTHETIC)"
         ref = f"C-{prefix.upper()}"
 
-        # Generate fake EIN (format: XX-XXXXXXX)
         tax_id = f"{rng.randint(10, 99)}-{rng.randint(1000000, 9999999)}"
 
         city, state, zipcode = US_CITIES[idx]
@@ -471,18 +478,19 @@ def generate_customers(rng: random.Random) -> list[Customer]:
             postal_code=zipcode,
         )
 
-        # Each customer has 1-3 shipping addresses
         shipping_addresses = []
         for ship_idx in range(rng.randint(1, 3)):
             ship_city, ship_state, ship_zip = rng.choice(US_CITIES)
             ship_street_num = rng.randint(100, 9999)
             ship_street = rng.choice(STREET_NAMES)
-            shipping_addresses.append(Address(
-                line1=f"{ship_street_num} {ship_street}",
-                city=ship_city,
-                region=ship_state,
-                postal_code=ship_zip,
-            ))
+            shipping_addresses.append(
+                Address(
+                    line1=f"{ship_street_num} {ship_street}",
+                    city=ship_city,
+                    region=ship_state,
+                    postal_code=ship_zip,
+                )
+            )
 
         customer = Customer(
             ref=ref,
@@ -504,26 +512,43 @@ def generate_xref(
     products: list[Product],
     customers: list[Customer],
 ) -> list[CustomerXref]:
-    """Genera cross-reference cliente->SKU (70% delle righe)."""
+    """
+    Genera cross-reference cliente->SKU.
+
+    Ogni coppia (customer_ref, customer_item_code) è univoca.
+    """
     xrefs = []
+    used_codes: dict[str, set[str]] = {c.ref: set() for c in customers}
 
     for customer in customers:
-        # Each customer has xrefs for 50-80% of products
         num_xrefs = int(len(products) * rng.uniform(0.50, 0.80))
         selected_products = rng.sample(products, num_xrefs)
 
         for product in selected_products:
-            # Customer item code format varies by customer
             customer_prefix = customer.ref.replace("C-", "")
             cat_abbr = product.category[:3].upper()
-            item_num = rng.randint(100, 9999)
-            customer_item_code = f"{customer_prefix}-{cat_abbr}-{item_num:04d}"
 
-            # Customer might use different UoM
+            # Genera codice cliente univoco per questo cliente
+            attempts = 0
+            while attempts < 100:
+                item_num = rng.randint(100, 9999)
+                customer_item_code = f"{customer_prefix}-{cat_abbr}-{item_num:04d}"
+                if customer_item_code not in used_codes[customer.ref]:
+                    used_codes[customer.ref].add(customer_item_code)
+                    break
+                attempts += 1
+            else:
+                # Se non riusciamo a generare un codice univoco, usiamo lo SKU
+                customer_item_code = f"{customer_prefix}-{product.default_code}"
+                used_codes[customer.ref].add(customer_item_code)
+
             customer_uom = product.sale_uom
-            if rng.random() < 0.3:  # 30% chance of different UoM
+            if rng.random() < 0.3:
                 if product.sale_uom == "CS" and product.conversions:
-                    customer_uom = "BX"  # Customer orders by box
+                    for conv in product.conversions:
+                        if conv.from_uom == "CS" and conv.to_uom == "BX":
+                            customer_uom = "BX"
+                            break
                 elif product.sale_uom == "EA":
                     customer_uom = rng.choice(["DZN", "EA"])
 
@@ -541,14 +566,14 @@ def generate_xref(
 
 def generate_uom_definitions() -> dict:
     """Genera definizioni UoM per Odoo con mappatura Rec20/X12."""
-    uoms = {
+    return {
         "category_unit": {
             "name": "Unit",
             "uoms": [
                 {"code": "EA", "name": "Units", "factor": 1.0, "rec20": "EA", "x12": "EA"},
                 {"code": "DZN", "name": "Dozens", "factor": 12.0, "rec20": "DZN", "x12": "DZ"},
                 {"code": "PR", "name": "Pair", "factor": 2.0, "rec20": "PR", "x12": "PR"},
-            ]
+            ],
         },
         "category_packaging": {
             "name": "Packaging",
@@ -560,24 +585,33 @@ def generate_uom_definitions() -> dict:
                 {"code": "BG", "name": "Bag", "factor": 1.0, "rec20": "BG", "x12": "BG"},
                 {"code": "DR", "name": "Drum", "factor": 1.0, "rec20": "DR", "x12": "DR"},
                 {"code": "RO", "name": "Roll", "factor": 1.0, "rec20": "RO", "x12": "RL"},
-            ]
+            ],
         },
         "category_volume": {
             "name": "Volume",
             "uoms": [
                 {"code": "GLL", "name": "gal (US)", "factor": 1.0, "rec20": "GLL", "x12": "GA"},
                 {"code": "LTR", "name": "L", "factor": 0.264172, "rec20": "LTR", "x12": "LT"},
-            ]
+            ],
         },
         "category_weight": {
             "name": "Weight",
             "uoms": [
                 {"code": "KGM", "name": "kg", "factor": 1.0, "rec20": "KGM", "x12": "KG"},
                 {"code": "LBR", "name": "lb", "factor": 0.453592, "rec20": "LBR", "x12": "LB"},
-            ]
+            ],
         },
     }
-    return uoms
+
+
+def to_dict(obj):
+    """Converte dataclass o lista in dizionario serializzabile."""
+    if hasattr(obj, "__dict__"):
+        return {k: to_dict(v) for k, v in obj.__dict__.items()}
+    elif isinstance(obj, list):
+        return [to_dict(i) for i in obj]
+    else:
+        return obj
 
 
 def main():
@@ -600,20 +634,10 @@ def main():
     print("Generazione definizioni UoM...")
     uoms = generate_uom_definitions()
 
-    # Serialize to JSON
-    def to_dict(obj):
-        if hasattr(obj, "__dict__"):
-            return {k: to_dict(v) for k, v in obj.__dict__.items()}
-        elif isinstance(obj, list):
-            return [to_dict(i) for i in obj]
-        else:
-            return obj
-
     products_data = [to_dict(p) for p in products]
     customers_data = [to_dict(c) for c in customers]
     xrefs_data = [to_dict(x) for x in xrefs]
 
-    # Save JSON files
     with open(MASTER_DIR / "products.json", "w", encoding="utf-8") as f:
         json.dump(products_data, f, indent=2, ensure_ascii=False)
 
@@ -626,7 +650,6 @@ def main():
     with open(MASTER_DIR / "uom_definitions.json", "w", encoding="utf-8") as f:
         json.dump(uoms, f, indent=2, ensure_ascii=False)
 
-    # Create summary
     summary = {
         "seed": SEED,
         "generated_at": "2026-10-29",
@@ -646,11 +669,8 @@ def main():
         json.dump(summary, f, indent=2)
 
     print(f"\nFile salvati in {MASTER_DIR}/")
-    print("  - products.json")
-    print("  - customers.json")
-    print("  - customer_xref.json")
-    print("  - uom_definitions.json")
-    print("  - manifest.json")
+    for fname in summary["files"] + ["manifest.json"]:
+        print(f"  - {fname}")
 
 
 if __name__ == "__main__":

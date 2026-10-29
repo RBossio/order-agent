@@ -117,9 +117,6 @@ def main():
         partner_id = customers[0]["id"]
         product_id = products[0]["id"]
 
-        # Determina versione Odoo per campo UoM corretto
-        odoo_version = int(version.get("server_version", "19.0").split(".")[0])
-
         # Crea ordine di test
         order_values = {
             "partner_id": partner_id,
@@ -154,7 +151,7 @@ def main():
 
         # Cancella l'ordine
         execute("sale.order", "unlink", [order_id])
-        print(f"      Ordine cancellato")
+        print("      Ordine cancellato")
         print("      OK - Ciclo create/delete completato")
 
     except Exception as e:
@@ -164,7 +161,7 @@ def main():
         if order_id:
             try:
                 execute("sale.order", "unlink", [order_id])
-            except:
+            except Exception:
                 pass
 
     # Risultato finale

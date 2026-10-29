@@ -1,0 +1,24 @@
+# VentureOrder - Override per VM con network_mode: host
+#
+# Uso: make up VM=1
+#
+# Questa configurazione è necessaria in alcune VM dove Docker bridge
+# non funziona correttamente per la comunicazione tra container.
+
+services:
+  db:
+    network_mode: host
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-odoo} -d ${POSTGRES_DB:-vo_demo} -h localhost"]
+
+  odoo:
+    network_mode: host
+    ports: []
+    command: >
+      --database=${POSTGRES_DB:-vo_demo}
+      --db_host=localhost
+      --db_user=${POSTGRES_USER:-odoo}
+      --db_password=${POSTGRES_PASSWORD}
+      --admin_passwd=${ODOO_ADMIN_PASSWORD}
+      --no-database-list
+      --without-demo=all

@@ -4,7 +4,7 @@
   "counts": {
     "products": 300,
     "customers": 10,
-    "xrefs": 1825
+    "xrefs": 2001
   },
   "files": [
     "products.json",

@@ -352,16 +352,12 @@ def seed_products(
             "barcode": prod.get("gtin"),
         }
 
-        try:
-            prod_id = client.create("product.product", values)
-            product_map[default_code] = prod_id
-            created += 1
+        prod_id = client.create("product.product", values)
+        product_map[default_code] = prod_id
+        created += 1
 
-            if (idx + 1) % 50 == 0:
-                print(f"  Progresso: {idx + 1}/{len(products)} prodotti...")
-
-        except Exception as e:
-            print(f"  ERRORE creando {default_code}: {e}")
+        if (idx + 1) % 50 == 0:
+            print(f"  Progresso: {idx + 1}/{len(products)} prodotti...")
 
     print(f"  Prodotti creati: {created}, già esistenti: {existing}")
     return product_map
@@ -533,7 +529,6 @@ def setup_technical_user(client: OdooClient) -> None:
     """Crea l'utente tecnico ventureorder-bot."""
     print("\n=== Configurazione utente tecnico ===")
 
-    # Controlla se esiste già
     existing = client.search(
         "res.users",
         [("login", "=", "ventureorder-bot")],
@@ -544,14 +539,12 @@ def setup_technical_user(client: OdooClient) -> None:
         print("  Utente 'ventureorder-bot' già esistente")
         return
 
-    # Trova il gruppo Sales/User
     sales_user_group = client.search(
         "res.groups",
         [("full_name", "like", "Sales / User")],
         limit=1,
     )
 
-    # Crea l'utente
     user_values = {
         "name": "VentureOrder Bot (SYNTHETIC)",
         "login": "ventureorder-bot",
@@ -559,16 +552,13 @@ def setup_technical_user(client: OdooClient) -> None:
         "password": "changeme_in_production",
     }
 
+    # Odoo 19 usa group_ids, non groups_id
     if sales_user_group:
-        user_values["groups_id"] = [(4, sales_user_group[0])]
+        user_values["group_ids"] = [(4, sales_user_group[0])]
 
-    try:
-        user_id = client.create("res.users", user_values)
-        print(f"  Utente 'ventureorder-bot' creato (id={user_id})")
-        print("  NOTA: Creare una chiave API da Preferenze → Sicurezza account")
-    except Exception as e:
-        print(f"  NOTA: Errore creando utente: {e}")
-        print("  Creare manualmente l'utente ventureorder-bot")
+    user_id = client.create("res.users", user_values)
+    print(f"  Utente 'ventureorder-bot' creato (id={user_id})")
+    print("  NOTA: Creare una chiave API da Preferenze → Sicurezza account")
 
 
 def main():

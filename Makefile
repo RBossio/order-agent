@@ -1,18 +1,27 @@
 # VentureOrder - Makefile per ambiente di sviluppo Odoo
 #
 # Target principali:
+#   make init      - Inizializza il database (una sola volta)
 #   make up        - Avvia Odoo e PostgreSQL
 #   make seed      - Popola il database con dati sintetici
 #   make smoke     - Esegue il test di smoke
 #   make reset     - Azzera il database e ripopola
 #   make down      - Ferma i container
 #   make logs      - Mostra i log di Odoo
+#
+# Per VM con problemi di rete Docker:
+#   make up VM=1   - Usa network_mode: host
 
-.PHONY: help up down logs seed smoke reset clean datagen env-check wait-odoo
+.PHONY: help up down logs seed smoke reset clean datagen env-check wait-odoo init test lint
 
-# Configurazione
-COMPOSE := sudo docker compose
 PYTHON := python3
+
+# Compose command - usa VM=1 per network_mode: host
+ifeq ($(VM),1)
+COMPOSE := docker compose -f docker-compose.yml -f docker-compose.vm.yml
+else
+COMPOSE := docker compose
+endif
 
 # Colori per output
 GREEN := \033[0;32m
@@ -25,34 +34,58 @@ help: ## Mostra questo help
 	@echo ""
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | \
 		awk 'BEGIN {FS = ":.*?## "}; {printf "  $(GREEN)%-15s$(NC) %s\n", $$1, $$2}'
+	@echo ""
+	@echo "Per VM con problemi di rete Docker: make up VM=1"
 
-env-check: ## Verifica che Docker sia disponibile
+env-check: ## Verifica che Docker sia disponibile e .env esista
 	@command -v docker >/dev/null 2>&1 || { \
 		echo "$(RED)Errore: Docker non installato$(NC)"; \
 		exit 1; \
 	}
-	@$(COMPOSE) version >/dev/null 2>&1 || { \
+	@docker compose version >/dev/null 2>&1 || { \
 		echo "$(RED)Errore: Docker Compose non disponibile$(NC)"; \
 		exit 1; \
 	}
-	@echo "$(GREEN)Docker OK$(NC)"
-
-.env: ## Crea .env da .env.example se non esiste
 	@if [ ! -f .env ]; then \
-		cp .env.example .env; \
-		echo "$(YELLOW)Creato .env da .env.example$(NC)"; \
-		echo "$(YELLOW)ATTENZIONE: Modificare le password prima dell'uso!$(NC)"; \
+		echo "$(RED)Errore: File .env non trovato$(NC)"; \
+		echo "Esegui: cp .env.example .env && nano .env"; \
+		exit 1; \
 	fi
+	@echo "$(GREEN)Ambiente OK$(NC)"
 
-up: env-check .env ## Avvia Odoo e PostgreSQL
+init: env-check ## Inizializza il database con i moduli (una sola volta)
+	@echo "$(GREEN)Inizializzazione database...$(NC)"
+	$(COMPOSE) up -d db
+	@echo "$(YELLOW)Attendo che PostgreSQL sia pronto...$(NC)"
+	@for i in $$(seq 1 30); do \
+		if $(COMPOSE) exec -T db pg_isready -U $${POSTGRES_USER:-odoo} -d $${POSTGRES_DB:-vo_demo} >/dev/null 2>&1; then \
+			break; \
+		fi; \
+		sleep 1; \
+	done
+	@echo "$(GREEN)Inizializzazione moduli Odoo...$(NC)"
+	$(COMPOSE) run --rm odoo \
+		--database=$${POSTGRES_DB:-vo_demo} \
+		--db_host=db \
+		--db_user=$${POSTGRES_USER:-odoo} \
+		--db_password=$${POSTGRES_PASSWORD} \
+		--init=sale_management,stock,contacts,product \
+		--without-demo=all \
+		--stop-after-init
+	@echo "$(GREEN)Inizializzazione completata!$(NC)"
+
+up: env-check ## Avvia Odoo e PostgreSQL
 	@echo "$(GREEN)Avvio container...$(NC)"
 	$(COMPOSE) up -d
 	@echo ""
 	@echo "$(GREEN)Container avviati!$(NC)"
-	@echo "Odoo sarà disponibile su: http://localhost:8069"
+ifeq ($(VM),1)
+	@echo "Odoo disponibile su: http://localhost:8069"
+else
+	@echo "Odoo disponibile su: http://127.0.0.1:8069"
+endif
 	@echo ""
-	@echo "$(YELLOW)Attendere 30-60 secondi per l'inizializzazione del database.$(NC)"
-	@echo "Usare 'make logs' per monitorare il progresso."
+	@echo "$(YELLOW)Se è la prima esecuzione, esegui: make init$(NC)"
 
 wait-odoo: ## Attende che Odoo sia pronto
 	@echo "$(YELLOW)Attendo che Odoo sia pronto...$(NC)"
@@ -96,9 +129,9 @@ reset: down ## Azzera il database e ripopola
 	@echo "$(YELLOW)Rimozione volumi...$(NC)"
 	$(COMPOSE) down -v
 	@echo "$(GREEN)Riavvio con database pulito...$(NC)"
-	$(COMPOSE) up -d
-	@echo "$(YELLOW)Attendo inizializzazione database (60s)...$(NC)"
-	@sleep 60
+	@$(MAKE) init
+	@$(MAKE) up
+	@$(MAKE) wait-odoo
 	@$(MAKE) seed
 	@$(MAKE) smoke
 
@@ -114,7 +147,7 @@ shell-odoo: ## Apre una shell nel container Odoo
 	$(COMPOSE) exec odoo bash
 
 shell-db: ## Apre una shell psql nel database
-	$(COMPOSE) exec db psql -U odoo -d vo_demo
+	$(COMPOSE) exec db psql -U $${POSTGRES_USER:-odoo} -d $${POSTGRES_DB:-vo_demo}
 
 # Target di sviluppo
 test-connection: ## Testa la connessione XML-RPC a Odoo
@@ -122,9 +155,9 @@ test-connection: ## Testa la connessione XML-RPC a Odoo
 		c = xmlrpc.client.ServerProxy('http://localhost:8069/xmlrpc/2/common'); \
 		print('Odoo version:', c.version()['server_version'])"
 
-# Target per CI
-ci-test: up ## Test completo per CI (up, seed, smoke, down)
-	@sleep 60
-	@$(MAKE) seed
-	@$(MAKE) smoke
-	@$(MAKE) down
+# Test e linting
+lint: ## Esegue ruff sui file di questa PR
+	ruff check datagen/ scripts/
+
+test: ## Esegue i test unitari
+	pytest tests/ -q

@@ -1,23 +1,23 @@
 # VentureOrder - Ambiente di sviluppo Odoo 19 Community
 #
 # Uso:
-#   cp .env.example .env  # prima modifica le password!
+#   cp .env.example .env  # OBBLIGATORIO: modifica le password!
+#   make init             # inizializza il database (una sola volta)
 #   make up               # avvia i servizi
 #   make seed             # popola con dati sintetici
 #   make smoke            # verifica funzionamento
 #
-# NOTA: in alcune VM Docker potrebbe richiedere network_mode: host
-#       per la comunicazione tra container. Decommentare se necessario.
+# Per ambienti VM con problemi di rete Docker bridge:
+#   make up VM=1          # usa docker-compose.vm.yml con network_mode: host
 
 services:
   db:
-    image: postgres:16
+    image: postgres:16.4-alpine
     container_name: vo_postgres
-    # network_mode: host  # Decommentare se bridge non funziona
     environment:
       POSTGRES_DB: ${POSTGRES_DB:-vo_demo}
       POSTGRES_USER: ${POSTGRES_USER:-odoo}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-odoo}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?POSTGRES_PASSWORD is required}
     volumes:
       - vo_pgdata:/var/lib/postgresql/data
     healthcheck:
@@ -25,29 +25,30 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
-    ports:
-      - "5432:5432"
 
   odoo:
-    image: odoo:19.0
+    image: odoo:19.0-20261015
     container_name: vo_odoo
-    # network_mode: host  # Decommentare se bridge non funziona
     depends_on:
       db:
         condition: service_healthy
     environment:
-      HOST: db  # Usare "localhost" con network_mode: host
+      HOST: db
       USER: ${POSTGRES_USER:-odoo}
-      PASSWORD: ${POSTGRES_PASSWORD:-odoo}
+      PASSWORD: ${POSTGRES_PASSWORD:?POSTGRES_PASSWORD is required}
     ports:
-      - "${ODOO_PORT:-8069}:8069"
+      - "127.0.0.1:${ODOO_PORT:-8069}:8069"
     volumes:
       - vo_odoo_data:/var/lib/odoo
       - vo_odoo_addons:/mnt/extra-addons
     command: >
-      -- --database=${POSTGRES_DB:-vo_demo}
-         --init=sale_management,stock,contacts,product
-         --without-demo=all
+      --database=${POSTGRES_DB:-vo_demo}
+      --db_host=db
+      --db_user=${POSTGRES_USER:-odoo}
+      --db_password=${POSTGRES_PASSWORD}
+      --admin_passwd=${ODOO_ADMIN_PASSWORD:?ODOO_ADMIN_PASSWORD is required}
+      --no-database-list
+      --without-demo=all
 
 volumes:
   vo_pgdata:

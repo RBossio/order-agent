@@ -1,8 +1,12 @@
 # Dati Master Sintetici - VentureOrder
 
+> **SINGOLA FONTE DI VERITÀ**  
+> I file in `datagen/master/` sono l'**unica fonte autorevole** per i dati di base
+> (prodotti, clienti, cross-reference, UoM) del prototipo VentureOrder.
+> Qualsiasi altro generatore o script di seed deve derivare i propri dati
+> da questi file, non generarli autonomamente.
+
 Questa cartella contiene il generatore e i dati master sintetici per VentureOrder.
-I dati sono la **singola fonte di verità** per il prototipo e possono essere riusati
-dal generatore di ordini sintetici.
 
 ## Struttura
 
