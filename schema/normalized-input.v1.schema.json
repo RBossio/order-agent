@@ -1,0 +1,328 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ventureorder.example/schemas/normalized-input.v1.json",
+  "title": "NormalizedInput — Formato input normalizzato per estrazione IA v1",
+  "description": "Rappresentazione normalizzata di un documento sorgente (email, PDF, Excel/CSV) pronto per l'estrazione IA dei dati d'ordine.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "input_id",
+    "source",
+    "ingested_at",
+    "parts"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "input_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "ID univoco dell'input normalizzato."
+    },
+    "source": {
+      "type": "object",
+      "description": "Metadati del file sorgente.",
+      "additionalProperties": false,
+      "required": [
+        "filename",
+        "sha256",
+        "file_type"
+      ],
+      "properties": {
+        "filename": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Nome del file originale."
+        },
+        "file_path": {
+          "type": ["string", "null"],
+          "description": "Percorso completo del file sorgente."
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$",
+          "description": "Hash SHA256 del file sorgente."
+        },
+        "file_type": {
+          "enum": ["EML", "PDF", "XLSX", "XLS", "CSV"],
+          "description": "Tipo del file sorgente."
+        },
+        "file_size_bytes": {
+          "type": ["integer", "null"],
+          "minimum": 0,
+          "description": "Dimensione del file in byte."
+        }
+      }
+    },
+    "email_metadata": {
+      "type": ["object", "null"],
+      "description": "Metadati email (solo per file .eml).",
+      "additionalProperties": false,
+      "properties": {
+        "message_id": {
+          "type": ["string", "null"],
+          "description": "Header Message-ID."
+        },
+        "from_address": {
+          "type": ["string", "null"],
+          "description": "Indirizzo mittente."
+        },
+        "from_name": {
+          "type": ["string", "null"],
+          "description": "Nome mittente."
+        },
+        "to_addresses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "name": {"type": ["string", "null"]},
+              "address": {"type": ["string", "null"]}
+            }
+          },
+          "description": "Destinatari (To)."
+        },
+        "cc_addresses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "name": {"type": ["string", "null"]},
+              "address": {"type": ["string", "null"]}
+            }
+          },
+          "description": "Destinatari in copia (CC)."
+        },
+        "subject": {
+          "type": ["string", "null"],
+          "description": "Oggetto dell'email."
+        },
+        "date": {
+          "type": ["string", "null"],
+          "description": "Data dell'email (header Date, formato originale)."
+        },
+        "date_parsed": {
+          "type": ["string", "null"],
+          "format": "date-time",
+          "description": "Data dell'email parsata in ISO 8601."
+        }
+      }
+    },
+    "ingested_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp dell'ingestione."
+    },
+    "parts": {
+      "type": "array",
+      "minItems": 1,
+      "description": "Parti del documento (corpo email, pagine PDF, allegati, fogli Excel).",
+      "items": {
+        "$ref": "#/$defs/part"
+      }
+    },
+    "warnings": {
+      "type": "array",
+      "description": "Avvisi non bloccanti durante l'ingestione.",
+      "items": {
+        "$ref": "#/$defs/warning"
+      }
+    }
+  },
+  "$defs": {
+    "part": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "part_id",
+        "part_type",
+        "sha256"
+      ],
+      "properties": {
+        "part_id": {
+          "type": "string",
+          "description": "ID univoco della parte."
+        },
+        "part_type": {
+          "enum": [
+            "EMAIL_BODY",
+            "EMAIL_BODY_HTML",
+            "EMAIL_SIGNATURE",
+            "EMAIL_QUOTED",
+            "PDF_PAGE",
+            "EXCEL_SHEET",
+            "CSV_DATA",
+            "ATTACHMENT"
+          ],
+          "description": "Tipo della parte."
+        },
+        "source_filename": {
+          "type": ["string", "null"],
+          "description": "Nome file di origine (per allegati)."
+        },
+        "mime_type": {
+          "type": ["string", "null"],
+          "description": "MIME type della parte."
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$",
+          "description": "Hash SHA256 del contenuto della parte."
+        },
+        "text": {
+          "type": ["string", "null"],
+          "description": "Contenuto testuale estratto."
+        },
+        "text_layout": {
+          "type": ["string", "null"],
+          "description": "Testo con layout preservato (es. per tabelle PDF)."
+        },
+        "tables": {
+          "type": "array",
+          "description": "Tabelle rilevate nella parte.",
+          "items": {
+            "$ref": "#/$defs/table"
+          }
+        },
+        "page_number": {
+          "type": ["integer", "null"],
+          "minimum": 1,
+          "description": "Numero di pagina (per PDF)."
+        },
+        "sheet_name": {
+          "type": ["string", "null"],
+          "description": "Nome del foglio (per Excel)."
+        },
+        "sheet_index": {
+          "type": ["integer", "null"],
+          "minimum": 0,
+          "description": "Indice del foglio (per Excel)."
+        },
+        "needs_ocr": {
+          "type": "boolean",
+          "default": false,
+          "description": "Flag che indica se la parte richiede OCR (es. PDF scansionato)."
+        },
+        "metadata": {
+          "type": ["object", "null"],
+          "description": "Metadati aggiuntivi specifici della parte.",
+          "additionalProperties": true
+        }
+      }
+    },
+    "table": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "table_id",
+        "rows"
+      ],
+      "properties": {
+        "table_id": {
+          "type": "string",
+          "description": "ID univoco della tabella."
+        },
+        "header_row_index": {
+          "type": ["integer", "null"],
+          "minimum": 0,
+          "description": "Indice della riga di intestazione (0-based), null se non rilevata."
+        },
+        "rows": {
+          "type": "array",
+          "description": "Righe della tabella.",
+          "items": {
+            "type": "array",
+            "description": "Celle della riga.",
+            "items": {
+              "$ref": "#/$defs/cell"
+            }
+          }
+        },
+        "bbox": {
+          "type": ["array", "null"],
+          "items": {"type": "number"},
+          "minItems": 4,
+          "maxItems": 4,
+          "description": "Bounding box [x0, y0, x1, y1] in punti PDF."
+        },
+        "page_number": {
+          "type": ["integer", "null"],
+          "minimum": 1,
+          "description": "Numero di pagina dove si trova la tabella."
+        }
+      }
+    },
+    "cell": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": ["string", "number", "boolean", "null"],
+          "description": "Valore della cella."
+        },
+        "raw_value": {
+          "type": ["string", "null"],
+          "description": "Valore originale non processato."
+        },
+        "cell_ref": {
+          "type": ["string", "null"],
+          "description": "Riferimento cella Excel (es. A1, B2)."
+        },
+        "is_merged": {
+          "type": "boolean",
+          "default": false,
+          "description": "True se la cella è parte di una cella unita."
+        },
+        "merge_range": {
+          "type": ["string", "null"],
+          "description": "Range della cella unita (es. A1:C1)."
+        },
+        "row_span": {
+          "type": ["integer", "null"],
+          "minimum": 1,
+          "description": "Numero di righe occupate dalla cella."
+        },
+        "col_span": {
+          "type": ["integer", "null"],
+          "minimum": 1,
+          "description": "Numero di colonne occupate dalla cella."
+        }
+      }
+    },
+    "warning": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "code",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "pattern": "^[A-Z]{2,4}-[0-9]{2}$",
+          "description": "Codice avviso (es. PDF-01, ATT-01)."
+        },
+        "message": {
+          "type": "string",
+          "description": "Messaggio descrittivo."
+        },
+        "part_id": {
+          "type": ["string", "null"],
+          "description": "ID della parte associata all'avviso."
+        },
+        "details": {
+          "type": ["object", "null"],
+          "additionalProperties": true,
+          "description": "Dettagli aggiuntivi."
+        }
+      }
+    }
+  }
+}
