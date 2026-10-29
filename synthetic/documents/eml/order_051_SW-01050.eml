@@ -1,0 +1,47 @@
+Content-Type: multipart/mixed; boundary="===============6678085082511178294=="
+MIME-Version: 1.0
+From: orders@safework-sol.example
+To: orders@delta-industrial.example
+Subject: PO SW-01050 - Order from SafeWork Solutions Inc. (SYNTHETIC)
+Message-ID: <po-SW-01050@safework-sol.example>
+Date: Thu, 29 Oct 2026 20:23:08 +0000
+
+--===============6678085082511178294==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+Hello,
+
+Please process the following order:
+
+PO Number: SW-01050
+Date: 04-23-2026
+Ship To: Indianapolis Warehouse
+
+Items:
+------
+  1. [PPE-MISC-1108] Safety equipment item 1108
+     Qty: 6 EA @ $15.93
+  2. [JAN-CRPT-SPOT] Carpet Spot Remover ready to use 6/32 OZ
+     Qty: 24 CS @ $33.56
+  3. [JAN-HND-SOAP] Hand Soap Liquid bulk 4/1 GAL
+     Qty: 24 CS @ $33.80
+  4. [SWS-LUB-1037] Moly Grease EP 14 oz cartridge
+     Qty: 5 CS @ $58.95
+  5. [JAN-LNR-3340-10-CL] Can Liner 33x40 1.0mil Clear 250/CS
+     Qty: 4 CS @ $31.19
+  6. [PPE-VEST-HV-LM] Hi-Vis Safety Vest Class 2 lime
+     Qty: 6 EA @ $8.50
+  7. [SWS-JS-2717] Can Liner 24x24 0.5mil Clear 250/CS
+     Qty: 2 CS @ $32.62
+  8. [FST-HCS-1420-112-G8-B100] Hex Cap Screw 1/4-20 x 1-1/2" Grade 8 Yellow Zinc
+     Qty: 1 BX @ $34.10
+
+Delivery requested by: 2026-05-13
+
+Thank you,
+Jennifer Kim (fictitious)
+SafeWork Solutions Inc. (SYNTHETIC)
++1-555-0800
+--===============6678085082511178294==--

@@ -1,0 +1,439 @@
+{
+  "schema_version": "1.0",
+  "order_id": "6c8ebcbd-4c12-4e76-9ad1-49ae8969c646",
+  "tenant_id": "delta-industrial-supply",
+  "document_type": "ORIGINAL",
+  "status": "VALIDATED",
+  "source": {
+    "channel": "FOLDER",
+    "message_id": null,
+    "from_address": null,
+    "subject": null,
+    "received_at": "2026-10-29T20:23:08Z",
+    "documents": [
+      {
+        "document_id": "doc-2b6b170d",
+        "kind": "XLSX",
+        "filename": "SW-01005.xlsx",
+        "mime_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        "sha256": "657a7a46f9166215327156d3164c4759c4fb21cf36844340d6ad88248727ae79",
+        "page_count": null
+      }
+    ]
+  },
+  "buyer": {
+    "name": "SafeWork Solutions Inc. (SYNTHETIC)",
+    "code_on_document": "C-SWS",
+    "tax_id": "US66-3333333",
+    "gln": null,
+    "peppol_endpoint": null,
+    "address": {
+      "line1": "800 Safety Lane",
+      "city": "Indianapolis",
+      "region": "IN",
+      "postal_code": "46204",
+      "country": "US"
+    },
+    "contact": {
+      "name": "Jennifer Kim (fictitious)",
+      "email": "orders@safework-sol.example",
+      "phone": "+1-555-0800"
+    },
+    "resolved": {
+      "erp_partner_id": 63,
+      "erp_partner_ref": "C-SWS",
+      "method": "CODE",
+      "score": 0.99
+    }
+  },
+  "seller": {
+    "name": "Delta Industrial Supply LLC (SYNTHETIC)",
+    "code_on_document": null,
+    "tax_id": null,
+    "address": {
+      "line1": "55 Commerce Dr",
+      "city": "Dayton",
+      "region": "OH",
+      "postal_code": "45402",
+      "country": "US"
+    },
+    "resolved": null
+  },
+  "header": {
+    "po_number": "SW-01005",
+    "po_revision": 0,
+    "po_date": "06-17-2026",
+    "requested_delivery_date": "2026-06-25",
+    "currency": "USD",
+    "buyer_reference": "Dept 247",
+    "payment_terms_text": "Net 45",
+    "incoterms": null,
+    "ship_via": "FedEx",
+    "notes": "Call before delivery",
+    "language": "en"
+  },
+  "lines": [
+    {
+      "line_no": 1,
+      "buyer_item_code": "SWS-JS-3227",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Degreaser Heavy Duty concentrate 4/1 GAL",
+      "quantity": 4,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "4/1 GAL",
+        "inner_count": 4,
+        "inner_size": 1,
+        "inner_uom": "GLL"
+      },
+      "unit_price": 51.78,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 207.12,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "JAN-DEGS",
+        "erp_product_id": 1156,
+        "erp_uom": "CS",
+        "erp_uom_id": 16,
+        "erp_quantity": 4,
+        "conversion_factor": 1,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 51.78
+      }
+    },
+    {
+      "line_no": 2,
+      "buyer_item_code": null,
+      "seller_item_code": "JAN-LNR-3037-05-BL",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Can Liner 30x37 0.5mil Black 500/CS",
+      "quantity": 24,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "500/CS",
+        "inner_count": 500,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 58.44,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 1402.56,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "JAN-LNR-3037-05-BL",
+        "erp_product_id": 1123,
+        "erp_uom": "CS",
+        "erp_uom_id": 44,
+        "erp_quantity": 24,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 58.44
+      }
+    },
+    {
+      "line_no": 3,
+      "buyer_item_code": "SWS-JS-8628",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Can Liner 43x47 0.5mil Black 200/CS",
+      "quantity": 4,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "200/CS",
+        "inner_count": 200,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 62.39,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 249.56,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "JAN-LNR-4347-05-BL",
+        "erp_product_id": 1147,
+        "erp_uom": "CS",
+        "erp_uom_id": 18,
+        "erp_quantity": 4,
+        "conversion_factor": 1,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 62.39
+      }
+    },
+    {
+      "line_no": 4,
+      "buyer_item_code": null,
+      "seller_item_code": "STOR-BIN-SM",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Parts Bin Small 4x5x3",
+      "quantity": 1,
+      "uom_raw": "PK",
+      "uom": "PK",
+      "pack": {
+        "raw": "12/PK",
+        "inner_count": 12,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 24.84,
+      "price_uom": "PK",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 24.84,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "STOR-BIN-SM",
+        "erp_product_id": 1290,
+        "erp_uom": "PK",
+        "erp_uom_id": 2,
+        "erp_quantity": 1,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 24.84
+      }
+    },
+    {
+      "line_no": 5,
+      "buyer_item_code": "SWS-MIS-8734",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Diagonal Cutters 6 inch",
+      "quantity": 24,
+      "uom_raw": "EA",
+      "uom": "EA",
+      "pack": null,
+      "unit_price": 12.46,
+      "price_uom": "EA",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 299.04,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "TOOL-PLIER-CUT",
+        "erp_product_id": 1271,
+        "erp_uom": "EA",
+        "erp_uom_id": 31,
+        "erp_quantity": 24,
+        "conversion_factor": 1,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 12.46
+      }
+    },
+    {
+      "line_no": 6,
+      "buyer_item_code": null,
+      "seller_item_code": "PPE-MISC-1108",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Safety equipment item 1108",
+      "quantity": 24,
+      "uom_raw": "EA",
+      "uom": "EA",
+      "pack": null,
+      "unit_price": 15.93,
+      "price_uom": "EA",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 382.32,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "PPE-MISC-1108",
+        "erp_product_id": 1108,
+        "erp_uom": "EA",
+        "erp_uom_id": 50,
+        "erp_quantity": 24,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 15.93
+      }
+    },
+    {
+      "line_no": 7,
+      "buyer_item_code": "SWS-TAP-2864",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Masking Tape 1 inch x 60 yd",
+      "quantity": 4,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "36/CS",
+        "inner_count": 36,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 51.03,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 204.12,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "TAP-MT-1",
+        "erp_product_id": 1233,
+        "erp_uom": "CS",
+        "erp_uom_id": 15,
+        "erp_quantity": 4,
+        "conversion_factor": 1,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 51.03
+      }
+    },
+    {
+      "line_no": 8,
+      "buyer_item_code": null,
+      "seller_item_code": "FST-HCS-1213-1-G5Z-B25",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Hex Cap Screw 1/2-13 x 1\" Grade 5 Zinc",
+      "quantity": 24,
+      "uom_raw": "BX",
+      "uom": "BX",
+      "pack": {
+        "raw": "25/BX",
+        "inner_count": 25,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 16.48,
+      "price_uom": "BX",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 395.52,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "FST-HCS-1213-1-G5Z-B25",
+        "erp_product_id": 1006,
+        "erp_uom": "BX",
+        "erp_uom_id": 13,
+        "erp_quantity": 24,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 16.48
+      }
+    },
+    {
+      "line_no": 9,
+      "buyer_item_code": null,
+      "seller_item_code": "FST-HN-M81.25-ZN-B100",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Hex Nut M8-1.25 Grade 5 Zinc",
+      "quantity": 12,
+      "uom_raw": "BX",
+      "uom": "BX",
+      "pack": {
+        "raw": "100/BX",
+        "inner_count": 100,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 11.29,
+      "price_uom": "BX",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 135.48,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "FST-HN-M81.25-ZN-B100",
+        "erp_product_id": 1042,
+        "erp_uom": "BX",
+        "erp_uom_id": 20,
+        "erp_quantity": 12,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 11.29
+      }
+    }
+  ],
+  "charges": [],
+  "totals": {
+    "lines_amount_declared": 3300.56,
+    "tax_amount_declared": null,
+    "total_amount_declared": 3300.56,
+    "lines_amount_computed": 3300.56
+  },
+  "decision": {
+    "score": 0.98,
+    "route": "AUTO_POST",
+    "reasons": []
+  },
+  "processing": {
+    "extractor": "synthetic/generator.py",
+    "prompt_version": null,
+    "created_at": "2026-10-29T20:23:08Z",
+    "updated_at": null
+  },
+  "ship_to": {
+    "name": "Indianapolis Warehouse",
+    "code_on_document": "IND-WH",
+    "address": {
+      "line1": "800 Safety Lane",
+      "city": "Indianapolis",
+      "region": "IN",
+      "postal_code": "46204",
+      "country": "US"
+    },
+    "resolved": {
+      "erp_partner_id": 64,
+      "erp_partner_ref": "IND-WH",
+      "method": "CODE",
+      "score": 1.0
+    }
+  },
+  "_synthetic_metadata": {
+    "hard_case_types": [],
+    "is_hard_case": false
+  }
+}

@@ -1,0 +1,291 @@
+{
+  "schema_version": "1.0",
+  "order_id": "3afbf372-cef7-4434-997a-68a4b71f4dd2",
+  "tenant_id": "delta-industrial-supply",
+  "document_type": "ORIGINAL",
+  "status": "VALIDATED",
+  "source": {
+    "channel": "FOLDER",
+    "message_id": null,
+    "from_address": null,
+    "subject": null,
+    "received_at": "2026-10-29T20:23:08Z",
+    "documents": [
+      {
+        "document_id": "doc-8f555e79",
+        "kind": "PDF_TEXT",
+        "filename": "PTD-01100.pdf",
+        "mime_type": "application/pdf",
+        "sha256": "267a6cc37eebdb3babc8c4f9be77263144c0284dd0c05b2a00d33e7906cb391d",
+        "page_count": 1
+      }
+    ]
+  },
+  "buyer": {
+    "name": "Premier Tool & Die (SYNTHETIC)",
+    "code_on_document": "C-PTD",
+    "tax_id": "US88-4444444",
+    "gln": null,
+    "peppol_endpoint": null,
+    "address": {
+      "line1": "1000 Precision Dr",
+      "city": "Fort Wayne",
+      "region": "IN",
+      "postal_code": "46802",
+      "country": "US"
+    },
+    "contact": {
+      "name": "William Brown (fictitious)",
+      "email": "purchasing@premier-td.example",
+      "phone": "+1-555-0900"
+    },
+    "resolved": {
+      "erp_partner_id": 66,
+      "erp_partner_ref": "C-PTD",
+      "method": "CODE",
+      "score": 0.99
+    }
+  },
+  "seller": {
+    "name": "Delta Industrial Supply LLC (SYNTHETIC)",
+    "code_on_document": null,
+    "tax_id": null,
+    "address": {
+      "line1": "55 Commerce Dr",
+      "city": "Dayton",
+      "region": "OH",
+      "postal_code": "45402",
+      "country": "US"
+    },
+    "resolved": null
+  },
+  "header": {
+    "po_number": "PTD-01100",
+    "po_revision": 0,
+    "po_date": "06.02.2026",
+    "requested_delivery_date": "2026-02-18",
+    "currency": "USD",
+    "buyer_reference": "Dept 796",
+    "payment_terms_text": "Net 45",
+    "incoterms": null,
+    "ship_via": "FedEx",
+    "notes": "Call before delivery",
+    "language": "en"
+  },
+  "lines": [
+    {
+      "line_no": 1,
+      "buyer_item_code": null,
+      "seller_item_code": "TOOL-UTIL-KNF",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Utility Knife retractable",
+      "quantity": 24,
+      "uom_raw": "EA",
+      "uom": "EA",
+      "pack": null,
+      "unit_price": 5.66,
+      "price_uom": "EA",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 135.84,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "TOOL-UTIL-KNF",
+        "erp_product_id": 1276,
+        "erp_uom": "EA",
+        "erp_uom_id": 4,
+        "erp_quantity": 24,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 5.66
+      }
+    },
+    {
+      "line_no": 2,
+      "buyer_item_code": null,
+      "seller_item_code": "JAN-LNR-4347-07-BL",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Can Liner 43x47 0.7mil Black 200/CS",
+      "quantity": 10,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "200/CS",
+        "inner_count": 200,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 34.55,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 345.5,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "JAN-LNR-4347-07-BL",
+        "erp_product_id": 1149,
+        "erp_uom": "CS",
+        "erp_uom_id": 14,
+        "erp_quantity": 10,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 34.55
+      }
+    },
+    {
+      "line_no": 3,
+      "buyer_item_code": null,
+      "seller_item_code": "PPE-MISC-1107",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Safety equipment item 1107",
+      "quantity": 12,
+      "uom_raw": "EA",
+      "uom": "EA",
+      "pack": null,
+      "unit_price": 30.93,
+      "price_uom": "EA",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 371.16,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "PPE-MISC-1107",
+        "erp_product_id": 1107,
+        "erp_uom": "EA",
+        "erp_uom_id": 39,
+        "erp_quantity": 12,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 30.93
+      }
+    },
+    {
+      "line_no": 4,
+      "buyer_item_code": null,
+      "seller_item_code": "JAN-TP-JR-12",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Toilet Paper Jumbo Roll 2-ply 9 inch",
+      "quantity": 5,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "12/CS",
+        "inner_count": 12,
+        "inner_size": 1,
+        "inner_uom": "RO"
+      },
+      "unit_price": 46.87,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 234.35,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "JAN-TP-JR-12",
+        "erp_product_id": 1186,
+        "erp_uom": "CS",
+        "erp_uom_id": 14,
+        "erp_quantity": 5,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 46.87
+      }
+    },
+    {
+      "line_no": 5,
+      "buyer_item_code": null,
+      "seller_item_code": "FST-LW-1213-ZN-B25",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Lock Washer 1/2-13 Zinc",
+      "quantity": 24,
+      "uom_raw": "BX",
+      "uom": "BX",
+      "pack": {
+        "raw": "25/BX",
+        "inner_count": 25,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 10.3,
+      "price_uom": "BX",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 247.2,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "FST-LW-1213-ZN-B25",
+        "erp_product_id": 1044,
+        "erp_uom": "BX",
+        "erp_uom_id": 37,
+        "erp_quantity": 24,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 10.3
+      }
+    }
+  ],
+  "charges": [],
+  "totals": {
+    "lines_amount_declared": 1334.05,
+    "tax_amount_declared": null,
+    "total_amount_declared": 1334.05,
+    "lines_amount_computed": 1334.05
+  },
+  "decision": {
+    "score": 0.98,
+    "route": "AUTO_POST",
+    "reasons": []
+  },
+  "processing": {
+    "extractor": "synthetic/generator.py",
+    "prompt_version": null,
+    "created_at": "2026-10-29T20:23:08Z",
+    "updated_at": null
+  },
+  "ship_to": {
+    "name": "Fort Wayne Main",
+    "code_on_document": "FW-MAIN",
+    "address": {
+      "line1": "1000 Precision Dr",
+      "city": "Fort Wayne",
+      "region": "IN",
+      "postal_code": "46802",
+      "country": "US"
+    },
+    "resolved": {
+      "erp_partner_id": 67,
+      "erp_partner_ref": "FW-MAIN",
+      "method": "CODE",
+      "score": 1.0
+    }
+  },
+  "_synthetic_metadata": {
+    "hard_case_types": [],
+    "is_hard_case": false
+  }
+}

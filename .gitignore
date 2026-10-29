@@ -153,10 +153,9 @@ Thumbs.db
 # Docker
 .docker/
 
-# Local data
-data/
-*.eml
-inbox/
+# Local data (root only, non esclude synthetic/ e ingest/)
+/data/
+/inbox/
 
 # Secrets (non devono mai essere committati)
 .env.local

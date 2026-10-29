@@ -1,0 +1,43 @@
+Content-Type: multipart/mixed; boundary="===============3029666631404685155=="
+MIME-Version: 1.0
+From: buyer@autoparts-exp.example
+To: orders@delta-industrial.example
+Subject: PO APE-01137 - Order from AutoParts Express LLC (SYNTHETIC)
+Message-ID: <po-APE-01137@autoparts-exp.example>
+Date: Thu, 29 Oct 2026 20:23:09 +0000
+
+--===============3029666631404685155==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+Hello,
+
+Please process the following order:
+
+PO Number: APE-01137
+Date: 2026/04/10
+Ship To: Flint Branch
+
+Items:
+------
+  1. [AP-JS-5929] Can Liner 30x37 1.0mil Clear 250/CS
+     Qty: 4 CS @ $44.25
+  2. [JAN-GPC] General Purpose Cleaner concentrate 4/1 GAL
+     Qty: 12 CS @ $41.16
+  3. [AP-HW-9370] Flat Washer 3/8-16 Zinc
+     Qty: 6 BX @ $22.22
+  4. [AP-PPE-5087] Ear Plugs foam disposable NRR 32
+     Qty: 6 BX @ $18.75
+  5. [AP-PPE-8734] N95 Respirator NIOSH approved
+     Qty: 2 BX @ $28.50
+  6. [AP-JS-2107] Can Liner 30x37 1.0mil Black 250/CS
+     Qty: 10 CS @ $61.10
+
+Delivery requested by: 2026-04-22
+
+Thank you,
+Michael Torres (fictitious)
+AutoParts Express LLC (SYNTHETIC)
++1-555-0500
+--===============3029666631404685155==--

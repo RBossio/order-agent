@@ -1,0 +1,222 @@
+{
+  "schema_version": "1.0",
+  "order_id": "b1c84d4e-39a5-4799-8807-1c99eb5b76e8",
+  "tenant_id": "delta-industrial-supply",
+  "document_type": "ORIGINAL",
+  "status": "VALIDATED",
+  "source": {
+    "channel": "FOLDER",
+    "message_id": null,
+    "from_address": null,
+    "subject": null,
+    "received_at": "2026-10-29T20:23:08Z",
+    "documents": [
+      {
+        "document_id": "doc-ba734ace",
+        "kind": "PDF_TEXT",
+        "filename": "PTD-01019.pdf",
+        "mime_type": "application/pdf",
+        "sha256": "19a2ba4e770c84871c7eeea690c9a2f1ba678bfe977bac348d803cac32a31f12",
+        "page_count": 1
+      }
+    ]
+  },
+  "buyer": {
+    "name": "Premier Tool & Die (SYNTHETIC)",
+    "code_on_document": "C-PTD",
+    "tax_id": "US88-4444444",
+    "gln": null,
+    "peppol_endpoint": null,
+    "address": {
+      "line1": "1000 Precision Dr",
+      "city": "Fort Wayne",
+      "region": "IN",
+      "postal_code": "46802",
+      "country": "US"
+    },
+    "contact": {
+      "name": "William Brown (fictitious)",
+      "email": "purchasing@premier-td.example",
+      "phone": "+1-555-0900"
+    },
+    "resolved": {
+      "erp_partner_id": 66,
+      "erp_partner_ref": "C-PTD",
+      "method": "CODE",
+      "score": 0.99
+    }
+  },
+  "seller": {
+    "name": "Delta Industrial Supply LLC (SYNTHETIC)",
+    "code_on_document": null,
+    "tax_id": null,
+    "address": {
+      "line1": "55 Commerce Dr",
+      "city": "Dayton",
+      "region": "OH",
+      "postal_code": "45402",
+      "country": "US"
+    },
+    "resolved": null
+  },
+  "header": {
+    "po_number": "PTD-01019",
+    "po_revision": 0,
+    "po_date": "18.04.2026",
+    "requested_delivery_date": "2026-05-03",
+    "currency": "USD",
+    "buyer_reference": "Dept 505",
+    "payment_terms_text": "Net 45",
+    "incoterms": null,
+    "ship_via": "FedEx",
+    "notes": "Rush order",
+    "language": "en"
+  },
+  "lines": [
+    {
+      "line_no": 1,
+      "buyer_item_code": null,
+      "seller_item_code": "TAP-MT-1",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Masking Tape 1 inch x 60 yd",
+      "quantity": 24,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "36/CS",
+        "inner_count": 36,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 51.03,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 1224.72,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "TAP-MT-1",
+        "erp_product_id": 1233,
+        "erp_uom": "CS",
+        "erp_uom_id": 16,
+        "erp_quantity": 24,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 51.03
+      }
+    },
+    {
+      "line_no": 2,
+      "buyer_item_code": null,
+      "seller_item_code": "SIGN-WARN-SLP",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Caution Wet Floor Sign bilingual",
+      "quantity": 5,
+      "uom_raw": "EA",
+      "uom": "EA",
+      "pack": null,
+      "unit_price": 27.14,
+      "price_uom": "EA",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 135.7,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "SIGN-WARN-SLP",
+        "erp_product_id": 1294,
+        "erp_uom": "EA",
+        "erp_uom_id": 50,
+        "erp_quantity": 5,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 27.14
+      }
+    },
+    {
+      "line_no": 3,
+      "buyer_item_code": null,
+      "seller_item_code": "FST-CS-1420-ZN-B25",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Carriage Bolt 1/4-20 Grade 5 Zinc",
+      "quantity": 5,
+      "uom_raw": "BX",
+      "uom": "BX",
+      "pack": {
+        "raw": "25/BX",
+        "inner_count": 25,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 21.44,
+      "price_uom": "BX",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 107.2,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "FST-CS-1420-ZN-B25",
+        "erp_product_id": 1040,
+        "erp_uom": "BX",
+        "erp_uom_id": 32,
+        "erp_quantity": 5,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 21.44
+      }
+    }
+  ],
+  "charges": [],
+  "totals": {
+    "lines_amount_declared": 1467.62,
+    "tax_amount_declared": null,
+    "total_amount_declared": 1467.62,
+    "lines_amount_computed": 1467.62
+  },
+  "decision": {
+    "score": 0.98,
+    "route": "AUTO_POST",
+    "reasons": []
+  },
+  "processing": {
+    "extractor": "synthetic/generator.py",
+    "prompt_version": null,
+    "created_at": "2026-10-29T20:23:08Z",
+    "updated_at": null
+  },
+  "ship_to": {
+    "name": "Fort Wayne Main",
+    "code_on_document": "FW-MAIN",
+    "address": {
+      "line1": "1000 Precision Dr",
+      "city": "Fort Wayne",
+      "region": "IN",
+      "postal_code": "46802",
+      "country": "US"
+    },
+    "resolved": {
+      "erp_partner_id": 67,
+      "erp_partner_ref": "FW-MAIN",
+      "method": "CODE",
+      "score": 1.0
+    }
+  },
+  "_synthetic_metadata": {
+    "hard_case_types": [],
+    "is_hard_case": false
+  }
+}

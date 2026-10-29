@@ -1,0 +1,363 @@
+{
+  "schema_version": "1.0",
+  "order_id": "7ac68ee1-0665-418c-901e-67d467024b4d",
+  "tenant_id": "delta-industrial-supply",
+  "document_type": "ORIGINAL",
+  "status": "NEEDS_REVIEW",
+  "source": {
+    "channel": "EMAIL_IMAP",
+    "message_id": "<po-APE-01068@autoparts-exp.example>",
+    "from_address": "buyer@autoparts-exp.example",
+    "subject": "PO APE-01068 - Order from AutoParts Express LLC (SYNTHETIC)",
+    "received_at": "2026-10-29T20:23:08Z",
+    "documents": [
+      {
+        "document_id": "doc-8484df40",
+        "kind": "EMAIL_BODY",
+        "filename": null,
+        "mime_type": "text/plain",
+        "sha256": "031c10a5f793354f0b95ecdfdfda735b037d0179d6233f2dd3e1552594ec7893",
+        "page_count": null
+      },
+      {
+        "document_id": "doc-944babba",
+        "kind": "XLSX",
+        "filename": "APE-01068.xlsx",
+        "mime_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        "sha256": "9afb1380a4c2cc3020ddd957eb4c635748a3e18fb84dd8072339b16eb8897fee",
+        "page_count": null
+      }
+    ]
+  },
+  "buyer": {
+    "name": "AutoParts Express LLC (SYNTHETIC)",
+    "code_on_document": "C-APE",
+    "tax_id": "US33-5555555",
+    "gln": null,
+    "peppol_endpoint": null,
+    "address": {
+      "line1": "9100 Motor Way",
+      "city": "Dearborn",
+      "region": "MI",
+      "postal_code": "48126",
+      "country": "US"
+    },
+    "contact": {
+      "name": "Michael Torres (fictitious)",
+      "email": "buyer@autoparts-exp.example",
+      "phone": "+1-555-0500"
+    },
+    "resolved": {
+      "erp_partner_id": 54,
+      "erp_partner_ref": "C-APE",
+      "method": "EMAIL_DOMAIN",
+      "score": 0.99
+    }
+  },
+  "seller": {
+    "name": "Delta Industrial Supply LLC (SYNTHETIC)",
+    "code_on_document": null,
+    "tax_id": null,
+    "address": {
+      "line1": "55 Commerce Dr",
+      "city": "Dayton",
+      "region": "OH",
+      "postal_code": "45402",
+      "country": "US"
+    },
+    "resolved": null
+  },
+  "header": {
+    "po_number": "APE-01068",
+    "po_revision": 0,
+    "po_date": "2026/06/13",
+    "requested_delivery_date": "2026-06-30",
+    "currency": "USD",
+    "buyer_reference": "Dept 748",
+    "payment_terms_text": "Net 45",
+    "incoterms": null,
+    "ship_via": "UPS Ground",
+    "notes": "Confirm availability",
+    "language": "en"
+  },
+  "lines": [
+    {
+      "line_no": 1,
+      "buyer_item_code": null,
+      "seller_item_code": "TAP-ET-ASST",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Electrical Tape Assorted Colors",
+      "quantity": 24,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "10/PK",
+        "inner_count": 10,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 11.92,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 286.08,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "TAP-ET-ASST",
+        "erp_product_id": 1231,
+        "erp_uom": "CS",
+        "erp_uom_id": 32,
+        "erp_quantity": 24,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 11.92
+      }
+    },
+    {
+      "line_no": 2,
+      "buyer_item_code": "AP-LUB-1479",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Lock Lubricant 3 oz",
+      "quantity": 10,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "12/CS",
+        "inner_count": 12,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 37.59,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 375.9,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "LUB-LOCK-LUBE",
+        "erp_product_id": 1260,
+        "erp_uom": "CS",
+        "erp_uom_id": 7,
+        "erp_quantity": 10,
+        "conversion_factor": 1,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 37.59
+      }
+    },
+    {
+      "line_no": 3,
+      "buyer_item_code": null,
+      "seller_item_code": "PPE-GLV-NIT8-S-BLA",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Nitrile Exam Gloves 8 mil powder-free Black size S",
+      "quantity": 6,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "100/BX 10BX/CS",
+        "inner_count": 1000,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 75.88,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 455.28,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "PPE-GLV-NIT8-S-BLA",
+        "erp_product_id": 1061,
+        "erp_uom": "CS",
+        "erp_uom_id": 41,
+        "erp_quantity": 6,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 75.88
+      }
+    },
+    {
+      "line_no": 4,
+      "buyer_item_code": "AP-HW-9620",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Lock Washer M8-1.25 Zinc",
+      "quantity": 5,
+      "uom_raw": "BX",
+      "uom": "BX",
+      "pack": {
+        "raw": "50/BX",
+        "inner_count": 50,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 22.96,
+      "price_uom": "BX",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 114.8,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "FST-LW-M81.25-ZN-B50",
+        "erp_product_id": 1046,
+        "erp_uom": "BX",
+        "erp_uom_id": 40,
+        "erp_quantity": 5,
+        "conversion_factor": 1,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 22.96
+      }
+    },
+    {
+      "line_no": 5,
+      "buyer_item_code": "AP-MIS-7266",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Claw Hammer 16 oz fiberglass",
+      "quantity": 10,
+      "uom_raw": "EA",
+      "uom": "EA",
+      "pack": null,
+      "unit_price": 15.17,
+      "price_uom": "EA",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 151.7,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "TOOL-HMR-CLW",
+        "erp_product_id": 1263,
+        "erp_uom": "EA",
+        "erp_uom_id": 3,
+        "erp_quantity": 10,
+        "conversion_factor": 1,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 15.17
+      }
+    },
+    {
+      "line_no": 6,
+      "buyer_item_code": null,
+      "seller_item_code": "FST-HCS-1420-1-G8-B100",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Hex Cap Screw 1/4-20 x 1\" Grade 8 Yellow Zinc",
+      "quantity": 1,
+      "uom_raw": "BX",
+      "uom": "BX",
+      "pack": {
+        "raw": "100/BX",
+        "inner_count": 100,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 15.76,
+      "price_uom": "BX",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 15.76,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "FST-HCS-1420-1-G8-B100",
+        "erp_product_id": 1008,
+        "erp_uom": "BX",
+        "erp_uom_id": 48,
+        "erp_quantity": 1,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 15.76
+      }
+    }
+  ],
+  "charges": [],
+  "totals": {
+    "lines_amount_declared": 1399.52,
+    "tax_amount_declared": null,
+    "total_amount_declared": 1399.52,
+    "lines_amount_computed": 1399.52
+  },
+  "decision": {
+    "score": 0.75,
+    "route": "REVIEW",
+    "reasons": [
+      "HDR-02",
+      "ITM-04"
+    ]
+  },
+  "processing": {
+    "extractor": "synthetic/generator.py",
+    "prompt_version": null,
+    "created_at": "2026-10-29T20:23:08Z",
+    "updated_at": null
+  },
+  "ship_to": {
+    "name": "Dearborn Main",
+    "code_on_document": "DB-MAIN",
+    "address": {
+      "line1": "9100 Motor Way",
+      "city": "Dearborn",
+      "region": "MI",
+      "postal_code": "48126",
+      "country": "US"
+    },
+    "resolved": {
+      "erp_partner_id": 55,
+      "erp_partner_ref": "DB-MAIN",
+      "method": "CODE",
+      "score": 1.0
+    }
+  },
+  "validation": {
+    "issues": [
+      {
+        "code": "HDR-02",
+        "severity": "REVIEW",
+        "path": "/header/po_date",
+        "message": "Data ordine mancante o non plausibile"
+      },
+      {
+        "code": "ITM-04",
+        "severity": "REVIEW",
+        "path": "/lines",
+        "message": "Quantità nel corpo email diverse dall'allegato"
+      }
+    ]
+  },
+  "_synthetic_metadata": {
+    "hard_case_types": [
+      "EMAIL_CONTRADICTORY",
+      "MISSING_DATE"
+    ],
+    "is_hard_case": true
+  }
+}

@@ -1,0 +1,190 @@
+{
+  "schema_version": "1.0",
+  "order_id": "afa38472-6bdb-4ed1-9ce2-62adb2467bc8",
+  "tenant_id": "delta-industrial-supply",
+  "document_type": "ORIGINAL",
+  "status": "VALIDATED",
+  "source": {
+    "channel": "FOLDER",
+    "message_id": null,
+    "from_address": null,
+    "subject": null,
+    "received_at": "2026-10-29T20:23:08Z",
+    "documents": [
+      {
+        "document_id": "doc-feb15f6a",
+        "kind": "PDF_TEXT",
+        "filename": "PTD-01035.pdf",
+        "mime_type": "application/pdf",
+        "sha256": "3aa699d5c802b3db17735e8cbfe06289ea648d1b4019c631fdce217a9aa97ff4",
+        "page_count": 1
+      }
+    ]
+  },
+  "buyer": {
+    "name": "Premier Tool & Die (SYNTHETIC)",
+    "code_on_document": "C-PTD",
+    "tax_id": "US88-4444444",
+    "gln": null,
+    "peppol_endpoint": null,
+    "address": {
+      "line1": "1000 Precision Dr",
+      "city": "Fort Wayne",
+      "region": "IN",
+      "postal_code": "46802",
+      "country": "US"
+    },
+    "contact": {
+      "name": "William Brown (fictitious)",
+      "email": "purchasing@premier-td.example",
+      "phone": "+1-555-0900"
+    },
+    "resolved": {
+      "erp_partner_id": 66,
+      "erp_partner_ref": "C-PTD",
+      "method": "CODE",
+      "score": 0.99
+    }
+  },
+  "seller": {
+    "name": "Delta Industrial Supply LLC (SYNTHETIC)",
+    "code_on_document": null,
+    "tax_id": null,
+    "address": {
+      "line1": "55 Commerce Dr",
+      "city": "Dayton",
+      "region": "OH",
+      "postal_code": "45402",
+      "country": "US"
+    },
+    "resolved": null
+  },
+  "header": {
+    "po_number": "PTD-01035",
+    "po_revision": 0,
+    "po_date": "19.05.2026",
+    "requested_delivery_date": "2026-05-27",
+    "currency": "USD",
+    "buyer_reference": "Dept 296",
+    "payment_terms_text": "2% 10 Net 30",
+    "incoterms": null,
+    "ship_via": "UPS Ground",
+    "notes": "Rush order",
+    "language": "en"
+  },
+  "lines": [
+    {
+      "line_no": 1,
+      "buyer_item_code": null,
+      "seller_item_code": "TAP-MT-1",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Masking Tape 1 inch x 60 yd",
+      "quantity": 12,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "36/CS",
+        "inner_count": 36,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 51.03,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 612.36,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "TAP-MT-1",
+        "erp_product_id": 1233,
+        "erp_uom": "CS",
+        "erp_uom_id": 43,
+        "erp_quantity": 12,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 51.03
+      }
+    },
+    {
+      "line_no": 2,
+      "buyer_item_code": null,
+      "seller_item_code": "ABR-SAND-DSC-5-80",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Sanding Disc 5 inch hook & loop 80 grit",
+      "quantity": 2,
+      "uom_raw": "PK",
+      "uom": "PK",
+      "pack": {
+        "raw": "50/PK",
+        "inner_count": 50,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 31.22,
+      "price_uom": "PK",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 62.44,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "ABR-SAND-DSC-5-80",
+        "erp_product_id": 1200,
+        "erp_uom": "PK",
+        "erp_uom_id": 9,
+        "erp_quantity": 2,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 31.22
+      }
+    }
+  ],
+  "charges": [],
+  "totals": {
+    "lines_amount_declared": 674.8,
+    "tax_amount_declared": null,
+    "total_amount_declared": 674.8,
+    "lines_amount_computed": 674.8
+  },
+  "decision": {
+    "score": 0.98,
+    "route": "AUTO_POST",
+    "reasons": []
+  },
+  "processing": {
+    "extractor": "synthetic/generator.py",
+    "prompt_version": null,
+    "created_at": "2026-10-29T20:23:08Z",
+    "updated_at": null
+  },
+  "ship_to": {
+    "name": "Fort Wayne Main",
+    "code_on_document": "FW-MAIN",
+    "address": {
+      "line1": "1000 Precision Dr",
+      "city": "Fort Wayne",
+      "region": "IN",
+      "postal_code": "46802",
+      "country": "US"
+    },
+    "resolved": {
+      "erp_partner_id": 67,
+      "erp_partner_ref": "FW-MAIN",
+      "method": "CODE",
+      "score": 1.0
+    }
+  },
+  "_synthetic_metadata": {
+    "hard_case_types": [],
+    "is_hard_case": false
+  }
+}

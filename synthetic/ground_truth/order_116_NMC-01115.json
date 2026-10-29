@@ -1,0 +1,370 @@
+{
+  "schema_version": "1.0",
+  "order_id": "ae052d55-b713-4f8b-8625-3df95a1217db",
+  "tenant_id": "delta-industrial-supply",
+  "document_type": "ORIGINAL",
+  "status": "VALIDATED",
+  "source": {
+    "channel": "FOLDER",
+    "message_id": null,
+    "from_address": null,
+    "subject": null,
+    "received_at": "2026-10-29T20:23:08Z",
+    "documents": [
+      {
+        "document_id": "doc-054d4a88",
+        "kind": "PDF_TEXT",
+        "filename": "NMC-01115.pdf",
+        "mime_type": "application/pdf",
+        "sha256": "fc5d8e61f18b71b3c14c833f528afac7308cf58eace60e73f2769f9d1b6f1947",
+        "page_count": 1
+      }
+    ]
+  },
+  "buyer": {
+    "name": "Northern Manufacturing Corp. (SYNTHETIC)",
+    "code_on_document": "C-NMC",
+    "tax_id": "US77-2222222",
+    "gln": null,
+    "peppol_endpoint": null,
+    "address": {
+      "line1": "5500 Factory Rd",
+      "city": "Grand Rapids",
+      "region": "MI",
+      "postal_code": "49503",
+      "country": "US"
+    },
+    "contact": {
+      "name": "David Wilson (fictitious)",
+      "email": "purchasing@northmfg.example",
+      "phone": "+1-555-0700"
+    },
+    "resolved": {
+      "erp_partner_id": 60,
+      "erp_partner_ref": "C-NMC",
+      "method": "CODE",
+      "score": 0.99
+    }
+  },
+  "seller": {
+    "name": "Delta Industrial Supply LLC (SYNTHETIC)",
+    "code_on_document": null,
+    "tax_id": null,
+    "address": {
+      "line1": "55 Commerce Dr",
+      "city": "Dayton",
+      "region": "OH",
+      "postal_code": "45402",
+      "country": "US"
+    },
+    "resolved": null
+  },
+  "header": {
+    "po_number": "NMC-01115",
+    "po_revision": 0,
+    "po_date": "2026-06-18",
+    "requested_delivery_date": "2026-07-06",
+    "currency": "USD",
+    "buyer_reference": "Dept 994",
+    "payment_terms_text": "Net 30",
+    "incoterms": null,
+    "ship_via": "UPS Ground",
+    "notes": null,
+    "language": "en"
+  },
+  "lines": [
+    {
+      "line_no": 1,
+      "buyer_item_code": null,
+      "seller_item_code": "FAID-KIT-50",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "First Aid Kit 50 person",
+      "quantity": 1,
+      "uom_raw": "EA",
+      "uom": "EA",
+      "pack": null,
+      "unit_price": 71.29,
+      "price_uom": "EA",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 71.29,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "FAID-KIT-50",
+        "erp_product_id": 1299,
+        "erp_uom": "EA",
+        "erp_uom_id": 46,
+        "erp_quantity": 1,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 71.29
+      }
+    },
+    {
+      "line_no": 2,
+      "buyer_item_code": null,
+      "seller_item_code": "JAN-TP-2P-48",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Toilet Paper 2-ply standard roll",
+      "quantity": 3,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "48/CS",
+        "inner_count": 48,
+        "inner_size": 1,
+        "inner_uom": "RO"
+      },
+      "unit_price": 34.46,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 103.38,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "JAN-TP-2P-48",
+        "erp_product_id": 1185,
+        "erp_uom": "CS",
+        "erp_uom_id": 29,
+        "erp_quantity": 3,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 34.46
+      }
+    },
+    {
+      "line_no": 3,
+      "buyer_item_code": null,
+      "seller_item_code": "JAN-FLR-STRP",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Floor Stripper concentrate 4/1 GAL",
+      "quantity": 2,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "4/1 GAL",
+        "inner_count": 4,
+        "inner_size": 1,
+        "inner_uom": "GLL"
+      },
+      "unit_price": 58.95,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 117.9,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "JAN-FLR-STRP",
+        "erp_product_id": 1175,
+        "erp_uom": "CS",
+        "erp_uom_id": 43,
+        "erp_quantity": 2,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 58.95
+      }
+    },
+    {
+      "line_no": 4,
+      "buyer_item_code": null,
+      "seller_item_code": "JAN-LNR-4048-05-BL",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Can Liner 40x48 0.5mil Black 100/CS",
+      "quantity": 4,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "100/CS",
+        "inner_count": 100,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 52.01,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 208.04,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "JAN-LNR-4048-05-BL",
+        "erp_product_id": 1141,
+        "erp_uom": "CS",
+        "erp_uom_id": 29,
+        "erp_quantity": 4,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 52.01
+      }
+    },
+    {
+      "line_no": 5,
+      "buyer_item_code": null,
+      "seller_item_code": "JAN-LNR-2424-10-BL",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Can Liner 24x24 1.0mil Black 100/CS",
+      "quantity": 10,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "100/CS",
+        "inner_count": 100,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 27.42,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 274.2,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "JAN-LNR-2424-10-BL",
+        "erp_product_id": 1115,
+        "erp_uom": "CS",
+        "erp_uom_id": 13,
+        "erp_quantity": 10,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 27.42
+      }
+    },
+    {
+      "line_no": 6,
+      "buyer_item_code": null,
+      "seller_item_code": "JAN-FS-2P-FLAT",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Facial Tissue 2-ply flat box",
+      "quantity": 2,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "30/100/CS",
+        "inner_count": 30,
+        "inner_size": 100,
+        "inner_uom": "EA"
+      },
+      "unit_price": 39.32,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 78.64,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "JAN-FS-2P-FLAT",
+        "erp_product_id": 1189,
+        "erp_uom": "CS",
+        "erp_uom_id": 47,
+        "erp_quantity": 2,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 39.32
+      }
+    },
+    {
+      "line_no": 7,
+      "buyer_item_code": null,
+      "seller_item_code": "JAN-LNR-2432-07-BL",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Can Liner 24x32 0.7mil Black 150/CS",
+      "quantity": 4,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "150/CS",
+        "inner_count": 150,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 41.88,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 167.52,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "JAN-LNR-2432-07-BL",
+        "erp_product_id": 1119,
+        "erp_uom": "CS",
+        "erp_uom_id": 19,
+        "erp_quantity": 4,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 41.88
+      }
+    }
+  ],
+  "charges": [],
+  "totals": {
+    "lines_amount_declared": 1020.97,
+    "tax_amount_declared": null,
+    "total_amount_declared": 1020.97,
+    "lines_amount_computed": 1020.97
+  },
+  "decision": {
+    "score": 0.98,
+    "route": "AUTO_POST",
+    "reasons": []
+  },
+  "processing": {
+    "extractor": "synthetic/generator.py",
+    "prompt_version": null,
+    "created_at": "2026-10-29T20:23:08Z",
+    "updated_at": null
+  },
+  "ship_to": {
+    "name": "Grand Rapids Factory",
+    "code_on_document": "GR-FAC",
+    "address": {
+      "line1": "5500 Factory Rd",
+      "city": "Grand Rapids",
+      "region": "MI",
+      "postal_code": "49503",
+      "country": "US"
+    },
+    "resolved": {
+      "erp_partner_id": 61,
+      "erp_partner_ref": "GR-FAC",
+      "method": "CODE",
+      "score": 1.0
+    }
+  },
+  "_synthetic_metadata": {
+    "hard_case_types": [],
+    "is_hard_case": false
+  }
+}

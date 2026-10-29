@@ -1,0 +1,51 @@
+Content-Type: multipart/mixed; boundary="===============8336819912007211913=="
+MIME-Version: 1.0
+From: buyer@autoparts-exp.example
+To: orders@delta-industrial.example
+Subject: PO APE-01146 - Order from AutoParts Express LLC (SYNTHETIC)
+Message-ID: <po-APE-01146@autoparts-exp.example>
+Date: Thu, 29 Oct 2026 20:23:09 +0000
+
+--===============8336819912007211913==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+Hello,
+
+Please process the following order:
+
+PO Number: APE-01146
+Date: 2026/06/04
+Ship To: Dearborn Main
+
+Items:
+------
+  1. [TAP-DBL-SIDE] Double-Sided Tape 1 inch x 36 yd
+     Qty: 10 CS @ $70.23
+  2. [PPE-GLV-NITW-XL-BLA] Nitrile Work Gloves industrial Black size XL
+     Qty: 4 DZN @ $28.53
+  3. [AP-JS-6802] Stainless Steel Cleaner ready to use 6/32 OZ
+     Qty: 1 CS @ $37.11
+  4. [FST-HCS-51618-1-SS-B50] Hex Cap Screw 5/16-18 x 1" Stainless 18-8
+     Qty: 5 BX @ $30.54
+  5. [AP-JS-8411] Air Freshener aerosol 12/10 OZ
+     Qty: 24 CS @ $37.75
+  6. [AP-PPE-9599] Safety Glasses amber lens anti-fog ANSI Z87.1
+     Qty: 6 EA @ $3.45
+  7. [PPE-GLV-LTHW-L-TAN] Leather Work Gloves premium grain Tan size L
+     Qty: 12 DZN @ $26.88
+  8. [JAN-LNR-2424-07-BL] Can Liner 24x24 0.7mil Black 250/CS
+     Qty: 24 CS @ $59.55
+  9. [ABR-SAND-DSC-6-40] Sanding Disc 6 inch hook & loop 40 grit
+     Qty: 4 PK @ $34.01
+  10. [AP-ABR-8369] Sandpaper Sheet 9x11 120 grit
+     Qty: 10 PK @ $30.21
+
+Delivery requested by: 2026-06-10
+
+Thank you,
+Michael Torres (fictitious)
+AutoParts Express LLC (SYNTHETIC)
++1-555-0500
+--===============8336819912007211913==--

@@ -1,0 +1,291 @@
+{
+  "schema_version": "1.0",
+  "order_id": "09d8e572-0965-4c2a-87a1-76c6956fea28",
+  "tenant_id": "delta-industrial-supply",
+  "document_type": "ORIGINAL",
+  "status": "VALIDATED",
+  "source": {
+    "channel": "FOLDER",
+    "message_id": null,
+    "from_address": null,
+    "subject": null,
+    "received_at": "2026-10-29T20:23:09Z",
+    "documents": [
+      {
+        "document_id": "doc-2876a3f7",
+        "kind": "XLSX",
+        "filename": "4500001147.xlsx",
+        "mime_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        "sha256": "0133ba94da5a8cec2334354ad1a9cddf2fe7a830ee733494908bcf1ed5967abd",
+        "page_count": null
+      }
+    ]
+  },
+  "buyer": {
+    "name": "Acme Manufacturing Inc. (SYNTHETIC)",
+    "code_on_document": "C-ACME",
+    "tax_id": "US12-3456789",
+    "gln": null,
+    "peppol_endpoint": null,
+    "address": {
+      "line1": "1200 Industrial Pkwy",
+      "city": "Toledo",
+      "region": "OH",
+      "postal_code": "43601",
+      "country": "US"
+    },
+    "contact": {
+      "name": "Jordan Lee (fictitious)",
+      "email": "purchasing@acme-mfg.example",
+      "phone": "+1-555-0100"
+    },
+    "resolved": {
+      "erp_partner_id": 42,
+      "erp_partner_ref": "C-ACME",
+      "method": "CODE",
+      "score": 0.99
+    }
+  },
+  "seller": {
+    "name": "Delta Industrial Supply LLC (SYNTHETIC)",
+    "code_on_document": null,
+    "tax_id": null,
+    "address": {
+      "line1": "55 Commerce Dr",
+      "city": "Dayton",
+      "region": "OH",
+      "postal_code": "45402",
+      "country": "US"
+    },
+    "resolved": null
+  },
+  "header": {
+    "po_number": "4500001147",
+    "po_revision": 0,
+    "po_date": "2026-02-11",
+    "requested_delivery_date": "2026-02-24",
+    "currency": "USD",
+    "buyer_reference": "Dept 494",
+    "payment_terms_text": "Net 30",
+    "incoterms": null,
+    "ship_via": "Best Way",
+    "notes": "Call before delivery",
+    "language": "en"
+  },
+  "lines": [
+    {
+      "line_no": 1,
+      "buyer_item_code": "ACM-HW-7867",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Flat Head Cap Screw 1/4-20 x 1\" Stainless 18-8",
+      "quantity": 6,
+      "uom_raw": "BX",
+      "uom": "BX",
+      "pack": {
+        "raw": "25/BX",
+        "inner_count": 25,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 32.96,
+      "price_uom": "BX",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 197.76,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "FST-FHCS-1420-1-SS-B25",
+        "erp_product_id": 1032,
+        "erp_uom": "BX",
+        "erp_uom_id": 44,
+        "erp_quantity": 6,
+        "conversion_factor": 1,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 32.96
+      }
+    },
+    {
+      "line_no": 2,
+      "buyer_item_code": "ACM-JS-7790",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Floor Stripper concentrate 4/1 GAL",
+      "quantity": 24,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "4/1 GAL",
+        "inner_count": 4,
+        "inner_size": 1,
+        "inner_uom": "GLL"
+      },
+      "unit_price": 58.95,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 1414.8,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "JAN-FLR-STRP",
+        "erp_product_id": 1175,
+        "erp_uom": "CS",
+        "erp_uom_id": 33,
+        "erp_quantity": 24,
+        "conversion_factor": 1,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 58.95
+      }
+    },
+    {
+      "line_no": 3,
+      "buyer_item_code": null,
+      "seller_item_code": "TAP-WARN-TP-RW",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Danger Tape Red/White 3 inch x 1000 ft",
+      "quantity": 4,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "12/CS",
+        "inner_count": 12,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 65.25,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 261.0,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "TAP-WARN-TP-RW",
+        "erp_product_id": 1242,
+        "erp_uom": "CS",
+        "erp_uom_id": 10,
+        "erp_quantity": 4,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 65.25
+      }
+    },
+    {
+      "line_no": 4,
+      "buyer_item_code": null,
+      "seller_item_code": "TOOL-SCDR-PHIL",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Screwdriver Set Phillips 5pc",
+      "quantity": 4,
+      "uom_raw": "EA",
+      "uom": "EA",
+      "pack": null,
+      "unit_price": 12.06,
+      "price_uom": "EA",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 48.24,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "TOOL-SCDR-PHIL",
+        "erp_product_id": 1265,
+        "erp_uom": "EA",
+        "erp_uom_id": 3,
+        "erp_quantity": 4,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 12.06
+      }
+    },
+    {
+      "line_no": 5,
+      "buyer_item_code": null,
+      "seller_item_code": "JAN-TC-DISP",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Toilet Seat Cover Dispenser chrome",
+      "quantity": 6,
+      "uom_raw": "EA",
+      "uom": "EA",
+      "pack": null,
+      "unit_price": 12.4,
+      "price_uom": "EA",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 74.4,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "JAN-TC-DISP",
+        "erp_product_id": 1191,
+        "erp_uom": "EA",
+        "erp_uom_id": 30,
+        "erp_quantity": 6,
+        "conversion_factor": 1,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 12.4
+      }
+    }
+  ],
+  "charges": [],
+  "totals": {
+    "lines_amount_declared": 1996.2,
+    "tax_amount_declared": null,
+    "total_amount_declared": 1996.2,
+    "lines_amount_computed": 1996.2
+  },
+  "decision": {
+    "score": 0.98,
+    "route": "AUTO_POST",
+    "reasons": []
+  },
+  "processing": {
+    "extractor": "synthetic/generator.py",
+    "prompt_version": null,
+    "created_at": "2026-10-29T20:23:09Z",
+    "updated_at": null
+  },
+  "ship_to": {
+    "name": "Acme Plant 1 - Main",
+    "code_on_document": "PLANT-01",
+    "address": {
+      "line1": "1200 Industrial Pkwy",
+      "city": "Toledo",
+      "region": "OH",
+      "postal_code": "43601",
+      "country": "US"
+    },
+    "resolved": {
+      "erp_partner_id": 43,
+      "erp_partner_ref": "PLANT-01",
+      "method": "CODE",
+      "score": 1.0
+    }
+  },
+  "_synthetic_metadata": {
+    "hard_case_types": [],
+    "is_hard_case": false
+  }
+}
