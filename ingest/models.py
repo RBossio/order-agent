@@ -6,11 +6,11 @@ import hashlib
 import uuid
 from dataclasses import dataclass, field
 from datetime import UTC, datetime
-from enum import Enum
+from enum import StrEnum
 from typing import Any
 
 
-class FileType(str, Enum):
+class FileType(StrEnum):
     EML = "EML"
     PDF = "PDF"
     XLSX = "XLSX"
@@ -18,7 +18,7 @@ class FileType(str, Enum):
     CSV = "CSV"
 
 
-class PartType(str, Enum):
+class PartType(StrEnum):
     EMAIL_BODY = "EMAIL_BODY"
     EMAIL_BODY_HTML = "EMAIL_BODY_HTML"
     EMAIL_SIGNATURE = "EMAIL_SIGNATURE"
@@ -80,7 +80,7 @@ class Table:
         return d
 
 
-class WarningSeverity(str, Enum):
+class WarningSeverity(StrEnum):
     """Livello di gravità di un avviso."""
     INFO = "INFO"
     WARNING = "WARNING"

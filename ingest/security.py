@@ -8,13 +8,13 @@ import struct
 import unicodedata
 import zipfile
 from dataclasses import dataclass
-from enum import Enum
+from enum import StrEnum
 from io import BytesIO
 from pathlib import PurePosixPath, PureWindowsPath
 from typing import BinaryIO
 
 
-class DetectedFileType(str, Enum):
+class DetectedFileType(StrEnum):
     """Tipi di file rilevati dai magic number."""
     PDF = "PDF"
     XLSX = "XLSX"
