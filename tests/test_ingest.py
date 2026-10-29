@@ -38,12 +38,12 @@ def validator(schema: dict) -> jsonschema.Draft202012Validator:
 def get_all_document_paths() -> list[Path]:
     """Ritorna tutti i percorsi dei documenti sintetici."""
     paths = []
-    
+
     for subdir in ["pdf", "xlsx", "eml"]:
         dir_path = DOCUMENTS_DIR / subdir
         if dir_path.exists():
             paths.extend(sorted(dir_path.glob("*")))
-    
+
     return paths
 
 
@@ -51,7 +51,7 @@ def get_ground_truth(doc_path: Path) -> dict | None:
     """Carica il ground truth per un documento."""
     stem = doc_path.stem
     gt_path = GROUND_TRUTH_DIR / f"{stem}.json"
-    
+
     if gt_path.exists():
         with open(gt_path) as f:
             return json.load(f)
@@ -125,10 +125,10 @@ class TestAllSyntheticDocuments:
         """Verifica che l'output validi contro lo schema."""
         result = ingestor.ingest(doc_path)
         output_dict = result.to_dict()
-        
+
         errors = list(validator.iter_errors(output_dict))
         error_messages = [f"{e.json_path}: {e.message}" for e in errors]
-        
+
         assert len(errors) == 0, f"Schema validation errors: {error_messages}"
 
     @pytest.mark.parametrize("doc_path", ALL_DOCUMENTS, ids=lambda p: p.name)
@@ -149,7 +149,7 @@ class TestAllSyntheticDocuments:
     ):
         """Verifica che ogni parte abbia un hash SHA256."""
         result = ingestor.ingest(doc_path)
-        
+
         for part in result.parts:
             assert part.sha256, f"Parte senza SHA256 in {doc_path}"
             assert len(part.sha256) == 64, f"SHA256 invalido in {doc_path}"
@@ -173,24 +173,24 @@ class TestPdfDocuments:
         """Verifica che i PDF abbiano testo estratto."""
         for pdf_path in pdf_paths[:5]:
             result = ingestor.ingest(pdf_path)
-            
+
             has_text = any(part.text for part in result.parts)
             has_layout = any(part.text_layout for part in result.parts)
             needs_ocr = any(part.needs_ocr for part in result.parts)
-            
+
             assert has_text or has_layout or needs_ocr, \
                 f"PDF senza testo né flag OCR: {pdf_path}"
 
     def test_pdf_detects_tables(self, pdf_paths: list[Path], ingestor: Ingestor):
         """Verifica che i PDF con ordini abbiano tabelle."""
         tables_found = 0
-        
+
         for pdf_path in pdf_paths:
             result = ingestor.ingest(pdf_path)
             for part in result.parts:
                 if part.tables:
                     tables_found += len(part.tables)
-        
+
         assert tables_found > 0, "Nessuna tabella trovata nei PDF"
 
 
@@ -212,7 +212,7 @@ class TestExcelDocuments:
         """Verifica che gli Excel abbiano fogli estratti."""
         for xlsx_path in xlsx_paths[:5]:
             result = ingestor.ingest(xlsx_path)
-            
+
             sheet_parts = [p for p in result.parts if p.sheet_name is not None]
             assert len(sheet_parts) > 0, f"Nessun foglio estratto da {xlsx_path}"
 
@@ -220,7 +220,7 @@ class TestExcelDocuments:
         """Verifica che gli Excel abbiano dati tabellari."""
         for xlsx_path in xlsx_paths[:5]:
             result = ingestor.ingest(xlsx_path)
-            
+
             for part in result.parts:
                 if part.tables:
                     for table in part.tables:
@@ -245,7 +245,7 @@ class TestEmlDocuments:
         """Verifica che le email abbiano metadati estratti."""
         for eml_path in eml_paths[:5]:
             result = ingestor.ingest(eml_path)
-            
+
             assert result.email_metadata is not None, f"Metadati mancanti: {eml_path}"
             assert result.email_metadata.subject, f"Oggetto mancante: {eml_path}"
 
@@ -253,24 +253,24 @@ class TestEmlDocuments:
         """Verifica che le email abbiano corpo estratto."""
         for eml_path in eml_paths[:5]:
             result = ingestor.ingest(eml_path)
-            
+
             body_parts = [p for p in result.parts if "EMAIL_BODY" in p.part_type.value]
             assert len(body_parts) > 0, f"Corpo email mancante: {eml_path}"
 
     def test_eml_with_attachments(self, eml_paths: list[Path], ingestor: Ingestor):
         """Verifica il parsing degli allegati email."""
         emails_with_attachments = 0
-        
+
         for eml_path in eml_paths:
             result = ingestor.ingest(eml_path)
-            
+
             attachment_parts = [p for p in result.parts if p.source_filename is not None]
             if attachment_parts:
                 emails_with_attachments += 1
-                
+
                 for part in attachment_parts:
                     assert part.sha256, f"Allegato senza SHA256: {eml_path}"
-        
+
         assert emails_with_attachments > 0, "Nessuna email con allegati trovata"
 
 
@@ -285,25 +285,25 @@ class TestGroundTruthComparison:
         xlsx_dir = DOCUMENTS_DIR / "xlsx"
         if not xlsx_dir.exists():
             pytest.skip("Directory xlsx non trovata")
-        
+
         xlsx_paths = sorted(xlsx_dir.glob("*.xlsx"))[:10]
-        
+
         for xlsx_path in xlsx_paths:
             result = ingestor.ingest(xlsx_path)
             gt = get_ground_truth(xlsx_path)
-            
+
             if gt is None:
                 continue
-            
+
             gt_lines = len(gt.get("lines", []))
-            
+
             for part in result.parts:
                 if part.tables:
                     for table in part.tables:
                         data_rows = len(table.rows)
                         if table.header_row_index is not None:
                             data_rows -= (table.header_row_index + 1)
-                        
+
                         assert abs(data_rows - gt_lines) <= 5, \
                             f"Righe tabella ({data_rows}) vs GT ({gt_lines}) in {xlsx_path}"
 
@@ -312,24 +312,24 @@ class TestGroundTruthComparison:
         pdf_dir = DOCUMENTS_DIR / "pdf"
         if not pdf_dir.exists():
             pytest.skip("Directory pdf non trovata")
-        
+
         pdf_paths = sorted(pdf_dir.glob("*.pdf"))[:10]
-        
+
         for pdf_path in pdf_paths:
             result = ingestor.ingest(pdf_path)
             gt = get_ground_truth(pdf_path)
-            
+
             if gt is None:
                 continue
-            
+
             gt_lines = len(gt.get("lines", []))
-            
+
             total_table_rows = 0
             for part in result.parts:
                 if part.tables:
                     for table in part.tables:
                         total_table_rows += len(table.rows)
-            
+
             if total_table_rows > 0:
                 assert total_table_rows >= gt_lines, \
                     f"Troppe poche righe tabella ({total_table_rows}) vs GT ({gt_lines}) in {pdf_path}"
@@ -343,23 +343,23 @@ class TestBatchProcessing:
         pdf_dir = DOCUMENTS_DIR / "pdf"
         if not pdf_dir.exists():
             pytest.skip("Directory pdf non trovata")
-        
+
         results = ingestor.ingest_batch(pdf_dir, extensions=[".pdf"])
-        
+
         success = [r for r in results if r[2] is None]
         errors = [r for r in results if r[2] is not None]
-        
+
         assert len(success) > 0, "Nessun PDF processato con successo"
         assert len(errors) == 0, f"Errori nel batch: {[str(e[2]) for e in errors]}"
 
     def test_batch_all_folders(self, ingestor: Ingestor):
         """Testa l'elaborazione batch di tutte le cartelle."""
         results = ingestor.ingest_batch(DOCUMENTS_DIR, recursive=True)
-        
+
         success = [r for r in results if r[2] is None]
-        
+
         assert len(results) >= 150, f"Trovati solo {len(results)} documenti"
-        
+
         success_rate = len(success) / len(results) if results else 0
         assert success_rate >= 0.95, f"Tasso di successo troppo basso: {success_rate:.1%}"
 
@@ -374,32 +374,32 @@ class TestEdgeCases:
 
     def test_unsupported_extension_processed_by_content(self, ingestor: Ingestor, tmp_path: Path):
         """Verifica che file con estensione non supportata vengano processati in base al contenuto.
-        
+
         Dal v1.1.0, il tipo file viene rilevato dal contenuto (magic number), non dall'estensione.
         Questo comportamento è più sicuro e permette di processare file rinominati.
         """
         # File di testo con estensione sconosciuta -> processato come CSV/TEXT
         text_file = tmp_path / "file.xyz"
         text_file.write_text("name,age\nAlice,30\n")
-        
+
         result = ingestor.ingest(text_file)
-        
+
         # Deve essere stato processato (non sollevare eccezione)
         assert result is not None
         assert len(result.parts) > 0
         # Il tipo rilevato dovrebbe essere CSV o TEXT
         assert result.source.file_type.value in ("CSV", "PDF", "XLSX", "XLS", "EML")
-    
+
     def test_truly_unsupported_binary_file(self, ingestor: Ingestor, tmp_path: Path):
         """Verifica gestione di file binari sconosciuti."""
         # File binario sconosciuto
         binary_file = tmp_path / "file.bin"
         binary_file.write_bytes(b"\x00\x01\x02\x03" * 100)
-        
+
         # Dovrebbe sollevare ValueError perché il tipo non può essere determinato
         with pytest.raises(ValueError) as exc_info:
             ingestor.ingest(binary_file)
-        
+
         assert "non supportato" in str(exc_info.value).lower()
 
 
@@ -411,14 +411,14 @@ class TestOutputFormat:
         pdf_dir = DOCUMENTS_DIR / "pdf"
         if not pdf_dir.exists():
             pytest.skip("Directory pdf non trovata")
-        
+
         pdf_path = next(pdf_dir.glob("*.pdf"), None)
         if pdf_path is None:
             pytest.skip("Nessun PDF trovato")
-        
+
         result = ingestor.ingest(pdf_path)
         output = result.to_dict()
-        
+
         assert "schema_version" in output
         assert output["schema_version"] == "1.0"
         assert "input_id" in output
@@ -431,16 +431,16 @@ class TestOutputFormat:
         pdf_dir = DOCUMENTS_DIR / "pdf"
         if not pdf_dir.exists():
             pytest.skip("Directory pdf non trovata")
-        
+
         pdf_path = next(pdf_dir.glob("*.pdf"), None)
         if pdf_path is None:
             pytest.skip("Nessun PDF trovato")
-        
+
         result = ingestor.ingest(pdf_path)
         json_str = Ingestor.to_json(result)
-        
+
         assert json_str is not None
         assert len(json_str) > 0
-        
+
         parsed = json.loads(json_str)
         assert parsed["schema_version"] == "1.0"

@@ -1,0 +1,28 @@
+ISA*00*          *00*          *ZZ*ACMEMFG        *ZZ*DELTAIND       *261103*1422*U*00401*000000101*0*T*>~
+GS*PO*ACMEMFG*DELTAIND*20261103*1422*101*X*004010~
+ST*850*0001~
+BEG*00*SA*4500012345**20261103~
+CUR*BY*USD~
+REF*DP*Maint. Dept / WO-7781~
+PER*BD*Jordan Lee (fictitious)*EM*purchasing@acme-mfg.example~
+DTM*002*20261110~
+N1*BT*Acme Manufacturing Inc. - Accounts Payable~
+N3*PO Box 900~
+N4*Toledo*OH*43601*US~
+N1*ST*Acme Plant 2 - Receiving Dock B*92*PLANT-02~
+N3*4400 Maumee Ave*Dock B~
+N4*Toledo*OH*43609*US~
+PO1*1*4*BX*18.75**BP*ACM-HW-00412*VP*FST-HCS-12-13X2-G5Z-B50~
+PID*F****HEX CAP SCREW 1/2-13 X 2 GR5 ZINC~
+PO1*2*30*BX*8.95**BP*ACM-PPE-1033*VP*PPE-GLV-NIT6-L-BLU*UK*00012345678905~
+PID*F****Nitrile exam gloves 6 mil, powder-free, blue, size L, 100/bx, 10 bx/cs~
+PO1*3*6*CA*41.2**BP*JS-0457*VP*JAN-LNR-4046-15-BK~
+PID*F****Can liner 40x46 1.5 mil black 100/cs~
+PO1*4*2*CA*52**BP*JS-0112*VP*JAN-NFC-4X1G~
+PID*F****Neutral floor cleaner concentrate 4/1 GAL~
+PO1*5*24*EA*3.1**BP*ACM-PPE-2210*VP*PPE-GLS-AF-CLR*MG*SV-AF200~
+PID*F****Safety glasses clear lens anti-fog ANSI Z87.1~
+CTT*5~
+SE*24*0001~
+GE*1*101~
+IEA*1*000000101~

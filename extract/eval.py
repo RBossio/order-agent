@@ -155,7 +155,7 @@ def compare_values(extracted: Any, expected: Any, fuzzy: bool = False) -> bool:
     if extracted is None or expected is None:
         return False
 
-    if isinstance(expected, (int, float)) and isinstance(extracted, (int, float)):
+    if isinstance(expected, int | float) and isinstance(extracted, int | float):
         if expected == 0:
             return extracted == 0
         return abs(extracted - expected) / abs(expected) < 0.01

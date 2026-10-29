@@ -115,35 +115,35 @@ class WarningCodes:
     SIZE_EMAIL_TOO_LARGE = "SIZ-02"
     SIZE_TOO_MANY_ATTACHMENTS = "SIZ-03"
     SIZE_ZIP_BOMB = "SIZ-04"
-    
+
     # Tipo file
     TYPE_MISMATCH = "TYP-01"
     TYPE_UNSUPPORTED = "TYP-02"
     TYPE_EXECUTABLE = "TYP-03"
     TYPE_MACRO = "TYP-04"
     TYPE_UNKNOWN = "TYP-05"
-    
+
     # Nome file
     NAME_SANITIZED = "NAM-01"
     NAME_PATH_TRAVERSAL = "NAM-02"
     NAME_RESERVED = "NAM-03"
     NAME_TRUNCATED = "NAM-04"
-    
+
     # Allegati (esistenti)
     ATT_UNSUPPORTED = "ATT-01"
     ATT_PARSE_ERROR = "ATT-02"
     ATT_SKIPPED = "ATT-03"
-    
+
     # PDF (esistenti)
     PDF_NEEDS_OCR = "PDF-01"
     PDF_PARSE_ERROR = "PDF-02"
     PDF_TABLE_ERROR = "PDF-03"
-    
+
     # Excel (esistenti)
     XLS_PARSE_ERROR = "XLS-01"
     XLS_XLRD_MISSING = "XLS-02"
     XLS_XLS_ERROR = "XLS-03"
-    
+
     # CSV (esistenti)
     CSV_PARSE_ERROR = "CSV-01"
 

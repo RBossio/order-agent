@@ -329,7 +329,7 @@ class Preprocessor:
             val = cells[idx]
             if val is None:
                 return None
-            if isinstance(val, (int, float)):
+            if isinstance(val, int | float):
                 return float(val)
             s = str(val).replace(",", "").replace("$", "").replace("€", "").strip()
             try:

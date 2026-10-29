@@ -6,7 +6,7 @@ Genera un dataset completo di ordini MRO/JanSan sintetici per il prototipo Ventu
 
 Uso:
     python -m synthetic.generator [--output-dir DIR] [--num-orders N] [--hard-case-pct PCT]
-    
+
 Esempio:
     python -m synthetic.generator --output-dir ./synthetic --num-orders 150 --hard-case-pct 0.15
 """
@@ -51,54 +51,54 @@ def main():
         action="store_true",
         help="Usa sempre i dati embedded, anche se datagen/master/ esiste"
     )
-    
+
     args = parser.parse_args()
-    
+
     from .loaders import get_loader
     from .orders import generate_orders
-    
+
     print("VentureOrder - Generatore dati sintetici")
     print("========================================")
     print(f"Output directory: {args.output_dir}")
     print(f"Numero ordini: {args.num_orders}")
     print(f"Percentuale casi difficili: {args.hard_case_pct * 100:.0f}%")
     print()
-    
+
     loader = get_loader(prefer_datagen=not args.use_embedded)
     loader_name = type(loader).__name__
     print(f"Fonte dati master: {loader_name}")
     print()
-    
+
     print("1. Caricamento catalogo articoli...")
     catalog = loader.load_catalog(args.output_dir / "data" / "catalog.json")
     print(f"   ✓ {len(catalog)} articoli caricati")
-    
+
     categories = {}
     for item in catalog:
         cat = item.get("category", "UNKNOWN")
         categories[cat] = categories.get(cat, 0) + 1
-    
+
     if args.verbose:
         print("   Distribuzione per categoria:")
         for cat, count in sorted(categories.items()):
             print(f"     - {cat}: {count}")
     print()
-    
+
     print("2. Caricamento clienti...")
     customers = loader.load_customers(catalog, args.output_dir / "data" / "customers.json")
     print(f"   ✓ {len(customers)} clienti caricati")
-    
+
     if args.verbose:
         print("   Clienti:")
         for c in customers:
             xref_count = len(c.get("xref", []))
             print(f"     - {c['customer_id']}: {c['name'][:40]}... ({xref_count} xref)")
     print()
-    
+
     print("3. Generazione ordini...")
     ground_truths, manifest = generate_orders(
-        catalog, 
-        customers, 
+        catalog,
+        customers,
         args.output_dir,
         num_orders=args.num_orders,
         hard_case_pct=args.hard_case_pct
@@ -107,7 +107,7 @@ def main():
     print(f"   ✓ {manifest['hard_cases']} casi difficili ({manifest['hard_case_percentage']}%)")
     print(f"   ✓ Distribuzione formati: {manifest['format_distribution']}")
     print()
-    
+
     print("4. Riepilogo file generati:")
     print(f"   - {args.output_dir / 'data' / 'catalog.json'}")
     print(f"   - {args.output_dir / 'data' / 'customers.json'}")
@@ -118,7 +118,7 @@ def main():
     print(f"   - {args.output_dir / 'documents' / 'eml' / '*.eml'} ({manifest['format_distribution']['EML']} file)")
     print(f"   - {args.output_dir / 'ground_truth' / '*.json'} ({len(ground_truths)} file)")
     print()
-    
+
     print("Generazione completata con successo!")
     return 0
 

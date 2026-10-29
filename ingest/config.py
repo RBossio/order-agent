@@ -9,7 +9,7 @@ from dataclasses import dataclass, field
 class IngestConfig:
     """
     Configurazione dei limiti e parametri per l'ingestione.
-    
+
     Attributes:
         max_file_size_bytes: Dimensione massima per singolo file (default 25 MB)
         max_email_total_size_bytes: Dimensione massima totale per email + allegati (default 50 MB)
@@ -22,7 +22,7 @@ class IngestConfig:
         warn_extension_mismatch: Se True, emette warning se estensione non corrisponde al tipo reale (default True)
         strict_mode: Se True, fallisce invece di emettere warning per problemi non critici (default False)
     """
-    
+
     max_file_size_bytes: int = 25 * 1024 * 1024  # 25 MB
     max_email_total_size_bytes: int = 50 * 1024 * 1024  # 50 MB
     max_attachments: int = 20
@@ -33,7 +33,7 @@ class IngestConfig:
     reject_macros: bool = True
     warn_extension_mismatch: bool = True
     strict_mode: bool = False
-    
+
     def __post_init__(self):
         if not self.allowed_extensions:
             self.allowed_extensions = {".eml", ".pdf", ".xlsx", ".xls", ".csv"}

@@ -21,9 +21,9 @@ from .security import (
 class Ingestor:
     """
     Classe principale per l'ingestione di documenti.
-    
+
     Supporta file .eml, PDF, Excel (.xlsx, .xls) e CSV.
-    
+
     Args:
         config: Configurazione personalizzata (opzionale)
     """
@@ -35,7 +35,7 @@ class Ingestor:
         ".xls": FileType.XLS,
         ".csv": FileType.CSV,
     }
-    
+
     # Mappa da DetectedFileType a FileType
     DETECTED_TO_FILE_TYPE = {  # noqa: RUF012
         DetectedFileType.PDF: FileType.PDF,
@@ -48,12 +48,12 @@ class Ingestor:
 
     def __init__(self, config: IngestConfig | None = None):
         self.config = config or DEFAULT_CONFIG
-        
+
         self.eml_parser = EmlParser(config=self.config)
         self.pdf_parser = PdfParser()
         self.excel_parser = ExcelParser(config=self.config)
         self.csv_parser = CsvParser()
-        
+
         self.eml_parser.set_attachment_parsers({
             "PdfParser": self.pdf_parser,
             "ExcelParser": self.excel_parser,
@@ -63,26 +63,26 @@ class Ingestor:
     def ingest(self, file_path: Path | str) -> NormalizedInput:
         """
         Ingesta un singolo file e ritorna un NormalizedInput.
-        
+
         Args:
             file_path: Percorso al file da ingestare.
-            
+
         Returns:
             NormalizedInput contenente i dati estratti.
-            
+
         Raises:
             ValueError: Se il tipo di file non è supportato.
             FileNotFoundError: Se il file non esiste.
         """
         file_path = Path(file_path)
-        
+
         if not file_path.exists():
             raise FileNotFoundError(f"File non trovato: {file_path}")
-        
+
         # Leggi il contenuto per validazione
         with open(file_path, "rb") as f:
             content = f.read()
-        
+
         # Validazione di sicurezza
         validation = validate_file_for_ingest(
             content=content,
@@ -94,7 +94,7 @@ class Ingestor:
             reject_macros=self.config.reject_macros,
             warn_extension_mismatch=self.config.warn_extension_mismatch,
         )
-        
+
         # Se ci sono errori critici, restituisci NormalizedInput con solo errori
         if not validation.is_valid:
             return self._create_error_result(
@@ -104,21 +104,21 @@ class Ingestor:
                 validation.warnings,
                 str(file_path),
             )
-        
+
         # Determina il tipo di file
         # Prima prova dal tipo rilevato, poi fallback all'estensione
         ext = file_path.suffix.lower()
         file_type = None
-        
+
         if validation.detected_type and validation.detected_type in self.DETECTED_TO_FILE_TYPE:
             file_type = self.DETECTED_TO_FILE_TYPE[validation.detected_type]
-        
+
         if file_type is None:
             file_type = self.EXTENSION_MAP.get(ext)
-        
+
         if file_type is None:
             raise ValueError(f"Tipo di file non supportato: {ext}")
-        
+
         # Parsing
         if file_type == FileType.EML:
             result = self.eml_parser.parse_bytes(content, filename=file_path.name, file_path=str(file_path))
@@ -130,7 +130,7 @@ class Ingestor:
             result = self.csv_parser.parse_bytes(content, filename=file_path.name, file_path=str(file_path))
         else:
             raise ValueError(f"Parser non disponibile per: {file_type}")
-        
+
         # Aggiungi warning dalla validazione
         for warn_msg in validation.warnings:
             result.warnings.append(Warning(
@@ -138,9 +138,9 @@ class Ingestor:
                 message=warn_msg,
                 severity=WarningSeverity.WARNING,
             ))
-        
+
         return result
-    
+
     def _create_error_result(
         self,
         filename: str,
@@ -153,11 +153,11 @@ class Ingestor:
         import hashlib
 
         from .models import Source
-        
+
         # Rileva tipo per il source
         detected = detect_file_type(content)
         file_type = self.DETECTED_TO_FILE_TYPE.get(detected.detected_type, FileType.PDF)
-        
+
         sha256 = hashlib.sha256(content).hexdigest()
         source = Source(
             filename=filename,
@@ -166,9 +166,9 @@ class Ingestor:
             file_path=file_path,
             file_size_bytes=len(content),
         )
-        
+
         result = NormalizedInput(source=source)
-        
+
         # Aggiungi errori come warning con severity ERROR
         for error_msg in errors:
             # Determina il codice appropriato
@@ -181,13 +181,13 @@ class Ingestor:
                 code = WarningCodes.TYPE_EXECUTABLE
             elif "macro" in error_msg.lower():
                 code = WarningCodes.TYPE_MACRO
-            
+
             result.warnings.append(Warning(
                 code=code,
                 message=error_msg,
                 severity=WarningSeverity.ERROR,
             ))
-        
+
         # Aggiungi warning
         for warn_msg in warnings:
             result.warnings.append(Warning(
@@ -195,7 +195,7 @@ class Ingestor:
                 message=warn_msg,
                 severity=WarningSeverity.WARNING,
             ))
-        
+
         return result
 
     def ingest_bytes(
@@ -206,12 +206,12 @@ class Ingestor:
     ) -> NormalizedInput:
         """
         Ingesta contenuto da bytes.
-        
+
         Args:
             content: Contenuto del file in bytes.
             filename: Nome del file (usato per determinare il tipo).
             file_type: Tipo di file (opzionale, altrimenti dedotto da filename).
-            
+
         Returns:
             NormalizedInput contenente i dati estratti.
         """
@@ -226,7 +226,7 @@ class Ingestor:
             reject_macros=self.config.reject_macros,
             warn_extension_mismatch=self.config.warn_extension_mismatch,
         )
-        
+
         # Se ci sono errori critici, restituisci NormalizedInput con solo errori
         if not validation.is_valid:
             return self._create_error_result(
@@ -235,7 +235,7 @@ class Ingestor:
                 validation.errors,
                 validation.warnings,
             )
-        
+
         # Determina il tipo di file
         if file_type is None:
             # Prima prova dal tipo rilevato
@@ -244,13 +244,13 @@ class Ingestor:
             else:
                 ext = Path(filename).suffix.lower()
                 file_type = self.EXTENSION_MAP.get(ext)
-        
+
         if file_type is None:
             raise ValueError(f"Tipo di file non supportato: {filename}")
-        
+
         # Usa il nome file sanificato
         safe_filename = validation.sanitized_filename or filename
-        
+
         if file_type == FileType.EML:
             result = self.eml_parser.parse_bytes(content, filename=safe_filename)
         elif file_type == FileType.PDF:
@@ -261,7 +261,7 @@ class Ingestor:
             result = self.csv_parser.parse_bytes(content, filename=safe_filename)
         else:
             raise ValueError(f"Parser non disponibile per: {file_type}")
-        
+
         # Aggiungi warning dalla validazione
         for warn_msg in validation.warnings:
             result.warnings.append(Warning(
@@ -269,7 +269,7 @@ class Ingestor:
                 message=warn_msg,
                 severity=WarningSeverity.WARNING,
             ))
-        
+
         return result
 
     def ingest_batch(
@@ -280,42 +280,42 @@ class Ingestor:
     ) -> list[tuple[Path, NormalizedInput | None, Exception | None]]:
         """
         Ingesta tutti i file supportati da una cartella.
-        
+
         Args:
             folder_path: Percorso alla cartella.
             recursive: Se True, cerca anche nelle sottocartelle.
             extensions: Lista di estensioni da processare (default: tutte supportate).
-            
+
         Returns:
             Lista di tuple (path, result, error) per ogni file processato.
         """
         folder_path = Path(folder_path)
-        
+
         if not folder_path.is_dir():
             raise NotADirectoryError(f"Non è una directory: {folder_path}")
-        
+
         if extensions is None:
             extensions = list(self.EXTENSION_MAP.keys())
         else:
             extensions = [e.lower() if e.startswith(".") else f".{e.lower()}" for e in extensions]
-        
+
         results: list[tuple[Path, NormalizedInput | None, Exception | None]] = []
-        
+
         if recursive:
             files = [f for f in folder_path.rglob("*") if f.is_file()]
         else:
             files = [f for f in folder_path.iterdir() if f.is_file()]
-        
+
         for file_path in sorted(files):
             if file_path.suffix.lower() not in extensions:
                 continue
-            
+
             try:
                 result = self.ingest(file_path)
                 results.append((file_path, result, None))
             except Exception as e:  # noqa: BLE001
                 results.append((file_path, None, e))
-        
+
         return results
 
     @staticmethod
@@ -328,6 +328,6 @@ class Ingestor:
         """Salva un NormalizedInput come file JSON."""
         output_path = Path(output_path)
         output_path.parent.mkdir(parents=True, exist_ok=True)
-        
+
         with open(output_path, "w", encoding="utf-8") as f:
             json.dump(result.to_dict(), f, indent=indent, ensure_ascii=False)

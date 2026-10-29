@@ -133,7 +133,7 @@ This is a test email body.
             content_types = """<?xml version="1.0" encoding="UTF-8"?>
 <Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">
     <Default Extension="xml" ContentType="application/xml"/>
-    <Override PartName="/xl/workbook.xml" 
+    <Override PartName="/xl/workbook.xml"
         ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/>
 </Types>"""
             zf.writestr("[Content_Types].xml", content_types)
@@ -148,7 +148,7 @@ This is a test email body.
             content_types = """<?xml version="1.0" encoding="UTF-8"?>
 <Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">
     <Default Extension="bin" ContentType="application/vnd.ms-office.vbaProject"/>
-    <Override PartName="/xl/workbook.xml" 
+    <Override PartName="/xl/workbook.xml"
         ContentType="application/vnd.ms-excel.sheet.macroEnabled.main+xml"/>
 </Types>"""
             zf.writestr("[Content_Types].xml", content_types)
@@ -292,7 +292,7 @@ class TestFilenameSanitization:
         """Nomi riservati Windows riconosciuti case-insensitive."""
         safe, _warnings = sanitize_filename("con.txt")
         assert not safe.lower().startswith("con.")
-        
+
         safe, _warnings = sanitize_filename("CoN.txt")
         assert not safe.upper().startswith("CON.")
 
@@ -341,7 +341,7 @@ class TestFilenameSanitization:
         """Spazi e punti finali rimossi."""
         safe, _warnings = sanitize_filename("file.pdf   ")
         assert safe == "file.pdf"
-        
+
         safe, _warnings = sanitize_filename("file...")
         assert not safe.endswith(".")
 
@@ -463,10 +463,10 @@ class TestIngestorSecurityIntegration:
         # Crea file CSV troppo grande
         large_file = tmp_path / "large.csv"
         large_file.write_bytes(b"x," * 600000)  # > 1MB
-        
+
         ingestor = Ingestor(config=strict_config)
         result = ingestor.ingest(large_file)
-        
+
         # Deve avere warning con severity ERROR
         error_warnings = [w for w in result.warnings if w.severity == WarningSeverity.ERROR]
         assert len(error_warnings) > 0
@@ -477,10 +477,10 @@ class TestIngestorSecurityIntegration:
         # Crea file che sembra PDF ma è un PE
         fake_pdf = tmp_path / "document.pdf"
         fake_pdf.write_bytes(TestFileTypeDetection._create_fake_pe())
-        
+
         ingestor = Ingestor(config=strict_config)
         result = ingestor.ingest(fake_pdf)
-        
+
         error_warnings = [w for w in result.warnings if w.severity == WarningSeverity.ERROR]
         assert len(error_warnings) > 0
         assert any(w.code == WarningCodes.TYPE_EXECUTABLE for w in error_warnings)
@@ -490,11 +490,11 @@ class TestIngestorSecurityIntegration:
         # Crea file CSV con estensione .txt
         csv_as_txt = tmp_path / "data.txt"
         csv_as_txt.write_bytes(b"a,b,c\n1,2,3\n")
-        
+
         # Con configurazione default che avverte ma non rifiuta
         config = IngestConfig(warn_extension_mismatch=True)
         ingestor = Ingestor(config=config)
-        
+
         # Dato che .txt non è supportato, userà il tipo rilevato
         # Questo test verifica il comportamento con file supportati
         csv_file = tmp_path / "data.csv"
@@ -524,12 +524,12 @@ class TestEmailSecurityIntegration:
         eml_content = self._create_eml_with_dangerous_attachment_name()
         eml_file = tmp_path / "test.eml"
         eml_file.write_bytes(eml_content)
-        
+
         ingestor = Ingestor(config=eml_config)
         result = ingestor.ingest(eml_file)
-        
+
         # Verifica che ci siano warning di sanificazione
-        [w for w in result.warnings 
+        [w for w in result.warnings
                         if w.code == WarningCodes.NAME_SANITIZED or "path" in w.message.lower()]
         # Potrebbe non esserci warning se il nome originale era già sicuro
         # ma il test verifica che il parsing funzioni
@@ -539,12 +539,12 @@ class TestEmailSecurityIntegration:
         eml_content = self._create_eml_with_many_attachments(5)
         eml_file = tmp_path / "test.eml"
         eml_file.write_bytes(eml_content)
-        
+
         ingestor = Ingestor(config=eml_config)
         result = ingestor.ingest(eml_file)
-        
+
         # Dovrebbe avere warning per allegati ignorati (limite è 3)
-        too_many_warnings = [w for w in result.warnings 
+        too_many_warnings = [w for w in result.warnings
                            if w.code == WarningCodes.SIZE_TOO_MANY_ATTACHMENTS]
         assert len(too_many_warnings) >= 2  # almeno 2 allegati ignorati (4° e 5°)
 
@@ -585,7 +585,7 @@ Content-Type: text/plain
 
 Email body.
 """]
-        
+
         for i in range(count):
             parts.append(f"""
 --{boundary}
@@ -594,7 +594,7 @@ Content-Disposition: attachment; filename="file{i}.txt"
 
 Content of file {i}
 """)
-        
+
         parts.append(f"\n--{boundary}--\n")
         return "".join(parts).encode()
 
@@ -655,7 +655,7 @@ class TestMaliciousFileSynthetic:
             except Exception:  # noqa: BLE001, S110
                 pass  # Alcuni sistemi bloccano questo
             zf.writestr("normal.txt", "content")
-        
+
         _is_safe, _, _ = check_zip_bomb(buffer.getvalue(), 100 * 1024 * 1024)
         # Il file è valido come ZIP ma l'estrazione deve essere sicura
         # (questo è responsabilità del codice che estrae, non di check_zip_bomb)
