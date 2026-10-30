@@ -113,18 +113,20 @@ class ItemMatcher:
         return ItemMatch(product=None, score=0.0, method="UNRESOLVED")
 
     def _apply_method_conflict(self, hits: list[ItemMatch]) -> ItemMatch:
-        """Primo metodo forte; se un altro indica uno SKU diverso, −0,20 (§6.2)."""
+        """Primo metodo forte; se un altro indica uno SKU diverso, min(score) − 0,20 (§6.2)."""
         chosen = hits[0]
         if chosen.ambiguous or chosen.product is None:
             return chosen
         penalty = float(self.thresholds.get("item_conflict_penalty", 0.20))
         chosen_sku = chosen.product.sku
+        conflicting = [chosen.score]
         for other in hits[1:]:
             if other.ambiguous or other.product is None:
                 continue
             if other.product.sku != chosen_sku:
-                chosen.score = max(0.0, chosen.score - penalty)
-                break
+                conflicting.append(other.score)
+        if len(conflicting) > 1:
+            chosen.score = max(0.0, min(conflicting) - penalty)
         return chosen
 
     def _decorate(

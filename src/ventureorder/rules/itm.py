@@ -30,10 +30,11 @@ def itm_01_unresolved(ctx: RuleContext) -> list[Issue]:
         sku = resolution.get("sku")
         product_id = resolution.get("erp_product_id")
         score_min = float(threshold(ctx, "item_unresolved_min", ITM01_SCORE_MIN))
+        fuzzy_candidates = method in FUZZY_METHODS and bool(resolution.get("candidates"))
         unresolved = (
             not resolution
             or method in UNRESOLVED_METHODS
-            or (sku is None and product_id is None)
+            or (sku is None and product_id is None and not fuzzy_candidates)
             or (score_f is not None and score_f < score_min)
         )
         if unresolved:

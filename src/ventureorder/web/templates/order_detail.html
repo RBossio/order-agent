@@ -62,6 +62,9 @@
         <td class="mono">
           {{ line.sku }}
           {% if not line.recognized %}<span class="hint">non riconosciuto</span>{% endif %}
+          {% if line.candidates %}
+          <span class="hint">candidati: {{ line.candidates | join(", ") }}</span>
+          {% endif %}
         </td>
         <td>{{ line.description }}</td>
         <td class="num">{% if line.quantity is not none %}{{ line.quantity }}{% else %}n/d{% endif %}</td>

@@ -871,6 +871,15 @@ class OrderExtractor:
         ).to_dict()
         as_of = _as_of_for_order(order)
         try:
+            if self.catalog.provider is not None:
+                from ventureorder.match.pipeline import apply_matches
+
+                apply_matches(
+                    vof,
+                    self.catalog.provider,
+                    overwrite=False,
+                    thresholds=self._engine.thresholds,
+                )
             result = self._engine.validate(
                 vof,
                 document_text=document_text or preprocessed.unstructured_text or None,

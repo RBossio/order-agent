@@ -437,6 +437,16 @@ class TestCus:
         }
         assert_hit(engine.validate(order), "CUS-02", Severity.REVIEW)
 
+    def test_cus_02_code_high_score_is_clean(self, engine: ValidationEngine) -> None:
+        order = make_vof()
+        order["buyer"]["resolved"] = {
+            "erp_partner_id": 42,
+            "erp_partner_ref": "C-ACME",
+            "method": "CODE",
+            "score": 0.98,
+        }
+        assert_clean(engine.validate(order), "CUS-02")
+
     def test_cus_03_pass(self, engine: ValidationEngine) -> None:
         assert_clean(engine.validate(make_vof()), "CUS-03")
 
@@ -541,7 +551,9 @@ class TestItm:
         order = make_vof()
         order["lines"][0]["resolution"]["method"] = "FUZZY"
         order["lines"][0]["resolution"]["score"] = 0.88
-        assert_hit(engine.validate(order), "ITM-03", Severity.REVIEW)
+        result = engine.validate(order)
+        assert_hit(result, "ITM-03", Severity.REVIEW)
+        assert result.decision == DecisionRoute.REVIEW
 
     def test_itm_04_pass(self, engine: ValidationEngine) -> None:
         order = make_vof()

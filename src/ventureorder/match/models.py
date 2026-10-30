@@ -97,7 +97,11 @@ class ItemMatch:
     erp_list_price: float | None = None
 
     def to_vof(self) -> dict[str, Any]:
-        """Serializza in ``line.resolution``."""
+        """Serializza in ``line.resolution``.
+
+        Un esito ambiguo non precompila lo SKU: restano solo i candidati
+        (FUZZY incluso). I metodi forti ambigui restano ``UNRESOLVED``.
+        """
         top = [c.to_vof() for c in self.candidates[:3]] if self.ambiguous else []
         strong_ambiguous = self.ambiguous and self.method in {
             "XREF",
@@ -105,28 +109,36 @@ class ItemMatch:
             "GTIN",
             "MPN",
         }
-        if self.product is None or strong_ambiguous or self.method == "UNRESOLVED":
+        if self.method == "UNRESOLVED" or self.product is None or strong_ambiguous:
+            method = "UNRESOLVED"
+        elif self.ambiguous:
+            method = self.method
+        else:
+            product = self.product
+            assert product is not None
             return {
-                "sku": None,
-                "erp_product_id": None,
-                "erp_uom": self.erp_uom,
+                "sku": product.sku,
+                "erp_product_id": product.erp_product_id,
+                "erp_uom": self.erp_uom or product.sale_uom,
                 "erp_quantity": self.erp_quantity,
                 "conversion_factor": self.conversion_factor,
-                "method": "UNRESOLVED",
+                "method": self.method,
                 "score": round(float(self.score), 4),
                 "candidates": top,
-                "erp_list_price": self.erp_list_price,
+                "erp_list_price": (
+                    self.erp_list_price
+                    if self.erp_list_price is not None
+                    else product.list_price
+                ),
             }
         return {
-            "sku": self.product.sku,
-            "erp_product_id": self.product.erp_product_id,
-            "erp_uom": self.erp_uom or self.product.sale_uom,
+            "sku": None,
+            "erp_product_id": None,
+            "erp_uom": self.erp_uom,
             "erp_quantity": self.erp_quantity,
             "conversion_factor": self.conversion_factor,
-            "method": self.method,
+            "method": method,
             "score": round(float(self.score), 4),
             "candidates": top,
-            "erp_list_price": (
-                self.erp_list_price if self.erp_list_price is not None else self.product.list_price
-            ),
+            "erp_list_price": self.erp_list_price,
         }

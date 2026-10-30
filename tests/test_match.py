@@ -630,6 +630,24 @@ class TestItemFuzzy:
         # UoM + misura: conferme indipendenti, può superare il cap 0,85.
         # Resta sotto 0,9 (e quindi sotto AUTO_POST 0,97): ITM-03 manda in REVIEW.
         assert match.score > 0.85
+        assert match.score <= 0.89 + 1e-9
+        assert match.score < 0.9
+
+    def test_fuzzy_confirmed_is_capped_at_high(self, items: ItemMatcher) -> None:
+        match = items.resolve(
+            _line(
+                buyer_item_code=None,
+                seller_item_code=None,
+                gtin=None,
+                description="Adjustable Wrench 10 inch",
+                uom="EA",
+                unit_price=18.82,
+            ),
+            None,
+        )
+        assert match.method == "FUZZY"
+        assert not match.ambiguous
+        assert match.score <= 0.89 + 1e-9
         assert match.score < 0.9
 
     def test_fuzzy_without_confirmation_is_capped(self, items: ItemMatcher) -> None:
@@ -693,8 +711,11 @@ class TestItemEdge:
         assert "ABR-COW-6IN-B" in skus
         payload = match.to_vof()
         assert payload["method"] == "FUZZY"
+        assert payload["sku"] is None
+        assert payload["erp_product_id"] is None
         assert payload["score"] < 0.9
         assert len(payload["candidates"]) <= 3
+        assert {c["sku"] for c in payload["candidates"]} >= {"ABR-COW-6IN-A", "ABR-COW-6IN-B"}
 
     def test_unknown_item(self, items: ItemMatcher) -> None:
         match = items.resolve(
@@ -860,6 +881,7 @@ class TestMatchRulesIntegration:
         assert vof["lines"][0]["resolution"]["method"] == "FUZZY"
         codes = {item.rule_id for item in result.issues}
         assert "ITM-03" in codes
+        assert result.decision == DecisionRoute.REVIEW
         line_score = float(vof["lines"][0]["resolution"]["score"])
         assert result.score <= line_score + 1e-9
 
@@ -955,7 +977,7 @@ class TestMatchRulesIntegration:
         assert match.product is not None
         assert match.product.sku == "FST-HCS-12-13X2-G5Z-B50"
         assert match.method == "XREF"
-        assert match.score == pytest.approx(0.80)
+        assert match.score == pytest.approx(0.78)
 
     def test_storico_reaches_fuzzy_high(self, provider: MockReferenceDataProvider) -> None:
         provider.add_order(

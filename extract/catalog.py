@@ -159,8 +159,16 @@ class CatalogMatcher:
         if item_customer_ref:
             customer = self.provider.get_customer_by_ref(item_customer_ref)
             if customer is not None:
-                # Solo xref articolo, senza ragione sociale: REVIEW, non 0,98.
-                score = 0.98 if _norm_name(name) else 0.70
+                # 0,98 solo se la ragione sociale coincide col cliente xref.
+                # Senza nome, o con nome diverso: 0,70 → CUS-02 REVIEW.
+                needle = _norm_name(name)
+                catalog = _norm_name(customer.name)
+                name_matches = bool(
+                    needle
+                    and catalog
+                    and (needle == catalog or needle in catalog or catalog in needle)
+                )
+                score = 0.98 if name_matches else 0.70
                 return _buyer_resolved(customer, "CODE", score)
 
         needle = _norm_name(name)

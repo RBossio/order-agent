@@ -1,7 +1,6 @@
-"""Pipeline demo: ingest → estrazione deterministica → (match se c'è) → regole.
+"""Pipeline demo: ingest → estrazione deterministica → match §6 → regole.
 
 Non usa il ground truth, non inventa confidenze, allowlist o clienti.
-``ventureorder.match`` su main è ancora vuoto: buyer/righe restano non riconosciuti.
 """
 
 from __future__ import annotations
@@ -93,10 +92,7 @@ def ingest_and_extract(path: Path) -> dict[str, Any] | None:
 def apply_match_if_available(
     vof: dict[str, Any], provider: DatagenReferenceDataProvider
 ) -> dict[str, Any]:
-    """Applica ``ventureorder.match`` solo se il modulo esiste ed espone un resolver.
-
-    Su main il pacchetto è vuoto: il VOF resta senza ``buyer.resolved`` / ``resolution``.
-    """
+    """Applica ``ventureorder.match`` (resolve_order / match_order / apply)."""
     import importlib
     import importlib.util
 
@@ -107,7 +103,7 @@ def apply_match_if_available(
         module = importlib.import_module("ventureorder.match")
     except Exception:  # noqa: BLE001
         return vof
-    for name in ("resolve_order", "match_order", "apply"):
+    for name in ("resolve_order", "match_order", "apply", "apply_matches"):
         func = getattr(module, name, None)
         if callable(func):
             matched = func(vof, provider)

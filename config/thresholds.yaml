@@ -49,8 +49,9 @@ x12_imd_max_length: 35
 # Matching clienti (cascata TAX_ID 1,00 → EMAIL_DOMAIN 0,99 → FUZZY_NAME → ADDRESS).
 # Non sono nel §6.6 (quello è sugli articoli). Scelte conservative per AUTO_POST 0,97:
 # - 0,85: minimo fuzzy nome, allineato al cap articoli senza conferme
-# - 0,95: nome esatto / soglia REVIEW (CUS-02). Sotto 0,97 così il solo nome
-#   non abilita AUTO_POST; CUS-02 scatta su ogni FUZZY_NAME
+# - 0,95: nome esatto / soglia REVIEW. Sotto 0,97 così il solo FUZZY_NAME
+#   non abilita AUTO_POST; CUS-02 scatta su ogni FUZZY_NAME. CODE a 0,98
+#   (catalogo, nome presente) non scatta, come su main.
 # - 0,08: margine di ambiguità, uguale a item_fuzzy_margin (§6.6)
 # - 0,90: match indirizzo (stesso ordine di grandezza di confidence_min / EXT-01)
 customer_fuzzy_name_min: 0.85
