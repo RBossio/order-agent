@@ -46,7 +46,8 @@ make ui
 ```
 
 Apre FastAPI+Jinja2 su http://127.0.0.1:8000/orders (dati sintetici, FakeOdooClient).
-Oppure: `python -m ventureorder.web`.
+Oppure: `python -m ventureorder.web`. La console mostra l'estrazione reale:
+senza `ventureorder.match` su main i clienti e gli articoli restano non riconosciuti.
 
 ## Variabili d'ambiente Odoo
 

@@ -174,4 +174,4 @@ test: ## Esegue i test unitari
 	pytest tests -q
 
 ui: ## Avvia la console di revisione (FastAPI + Jinja2)
-	uvicorn ventureorder.web.app:create_app --factory --host 0.0.0.0 --port 8000
+	uvicorn ventureorder.web.app:create_app --factory --host 127.0.0.1 --port 8000

@@ -20,10 +20,10 @@ from ventureorder.rules import (
 )
 from ventureorder.web.pipeline import (
     DEMO_STEMS,
+    apply_match_if_available,
     build_engine,
     build_reference_provider,
     clone_vof,
-    enrich_vof,
     historical_from_vof,
     load_extracted_vof,
 )
@@ -48,17 +48,25 @@ class InboxOrder:
     @property
     def customer_name(self) -> str:
         buyer = self.vof.get("buyer") or {}
-        return str(buyer.get("name") or "—")
+        name = buyer.get("name")
+        return str(name) if name else "n/d"
+
+    @property
+    def customer_resolved(self) -> bool:
+        resolved = (self.vof.get("buyer") or {}).get("resolved") or {}
+        return bool(resolved.get("erp_partner_id") or resolved.get("erp_partner_ref"))
 
     @property
     def po_number(self) -> str:
         header = self.vof.get("header") or {}
-        return str(header.get("po_number") or "—")
+        value = header.get("po_number")
+        return str(value) if value else "n/d"
 
     @property
     def po_date(self) -> str:
         header = self.vof.get("header") or {}
-        return str(header.get("po_date") or "—")
+        value = header.get("po_date")
+        return str(value) if value else "n/d"
 
     @property
     def line_count(self) -> int:
@@ -66,20 +74,24 @@ class InboxOrder:
         return len(lines) if isinstance(lines, list) else 0
 
     @property
-    def total(self) -> float:
+    def total(self) -> float | None:
         totals = self.vof.get("totals") or {}
         declared = totals.get("total_amount_declared")
         if declared is not None:
             return float(declared)
         amount = 0.0
+        has_amount = False
         for line in self.vof.get("lines") or []:
             value = line.get("line_amount")
             if value is None:
-                qty = float(line.get("quantity") or 0)
-                price = float(line.get("unit_price") or 0)
-                value = qty * price
+                qty = line.get("quantity")
+                price = line.get("unit_price")
+                if qty is None or price is None:
+                    continue
+                value = float(qty) * float(price)
             amount += float(value or 0)
-        return round(amount, 2)
+            has_amount = True
+        return round(amount, 2) if has_amount else None
 
 
 @dataclass
@@ -102,7 +114,7 @@ class OrderInbox:
 
     @classmethod
     def for_demo(cls) -> OrderInbox:
-        """Carica ~10 ordini sintetici: puliti, uno in REVIEW, un duplicato."""
+        """Carica ~10 ordini sintetici via ingest+extract; uno è duplicato."""
         provider = build_reference_provider()
         engine = build_engine(provider)
 
@@ -112,33 +124,23 @@ class OrderInbox:
 
         loaded: list[dict[str, Any]] = []
         for stem in DEMO_STEMS:
-            raw = load_extracted_vof(stem)
-            loaded.append(enrich_vof(raw, provider, mode="clean"))
+            vof = load_extracted_vof(stem, provider)
+            if vof is not None:
+                loaded.append(vof)
 
         for vof in loaded:
             inbox._add_validated(vof, engine)
 
-        review_src = loaded[1] if len(loaded) > 1 else loaded[0]
-        review = clone_vof(
-            review_src,
-            order_id=str(uuid.uuid5(uuid.NAMESPACE_URL, "vo-demo-review")),
-            po_number="REVIEW-2026-04",
-        )
-        review = enrich_vof(review, provider, mode="review")
-        inbox._add_validated(review, engine)
-
-        original = loaded[0]
-        customer_ref = (original.get("buyer") or {}).get("resolved", {}).get("erp_partner_ref")
-        if customer_ref:
-            provider.add_order(historical_from_vof(original, str(customer_ref)))
-        duplicate = clone_vof(
-            original,
-            order_id=str(uuid.uuid5(uuid.NAMESPACE_URL, "vo-demo-duplicate")),
-        )
-        dup_order = inbox._add_validated(duplicate, engine)
-        dup_order.is_duplicate = True
-        if dup_order.result.decision == DecisionRoute.REJECT:
-            dup_order.ui_status = DecisionRoute.REJECT.value
+        if loaded:
+            original = loaded[0]
+            provider.add_order(historical_from_vof(original))
+            duplicate = clone_vof(
+                original,
+                order_id=str(uuid.uuid5(uuid.NAMESPACE_URL, "vo-demo-duplicate")),
+            )
+            duplicate = apply_match_if_available(duplicate, provider)
+            dup_order = inbox._add_validated(duplicate, engine)
+            dup_order.is_duplicate = True
         return inbox
 
     def _add_validated(self, vof: dict[str, Any], engine: ValidationEngine) -> InboxOrder:
@@ -208,7 +210,7 @@ class OrderInbox:
 
 def seed_fake_odoo(client: FakeOdooClient, provider: DatagenReferenceDataProvider) -> None:
     """Popola partner e prodotti del client finto dall'anagrafica datagen."""
-    for customer in provider._customers_by_ref.values():
+    for customer in provider.iter_customers():
         client.seed_partner(
             id=customer.erp_partner_id,
             name=customer.name,
@@ -222,7 +224,7 @@ def seed_fake_odoo(client: FakeOdooClient, provider: DatagenReferenceDataProvide
                 parent_id=customer.erp_partner_id,
                 commercial_partner_id=customer.erp_partner_id,
             )
-    for product in provider._products_by_sku.values():
+    for product in provider.iter_products():
         client.seed_product(
             id=product.erp_product_id,
             name=product.name,
