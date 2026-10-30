@@ -48,7 +48,7 @@ def _line_confidence(order: InboxOrder, index: int, line: dict[str, Any]) -> flo
 def _csrf_token(request: Request) -> str:
     existing = request.cookies.get(CSRF_COOKIE)
     if existing:
-        return existing
+        return str(existing)
     return secrets.token_urlsafe(32)
 
 
