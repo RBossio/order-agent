@@ -123,33 +123,44 @@ class OrderExtractor:
             preprocessed_header=preprocessed_header_dict,
         )
 
-        llm_response = self.backend.generate(
-            prompt=prompt,
-            system_prompt=EXTRACTION_SYSTEM_PROMPT,
-            json_schema=EXTRACTION_JSON_SCHEMA,
-            temperature=0.0,
-        )
-        llm_calls += 1
-        total_tokens += llm_response.total_tokens
+        extracted_json: dict = {"header": {}, "lines": []}
+        parse_error: str | None = None
 
-        extracted_json, parse_error = self._parse_json_response(llm_response.content)
-
-        if parse_error and self.max_retries > 0:
-            retry_prompt = build_retry_prompt(
-                error_message=parse_error,
-                document_summary=document_content[:2000],
-            )
-
-            retry_response = self.backend.generate(
-                prompt=retry_prompt,
+        try:
+            llm_response = self.backend.generate(
+                prompt=prompt,
                 system_prompt=EXTRACTION_SYSTEM_PROMPT,
                 json_schema=EXTRACTION_JSON_SCHEMA,
                 temperature=0.0,
+                max_tokens=2048,
             )
             llm_calls += 1
-            total_tokens += retry_response.total_tokens
+            total_tokens += llm_response.total_tokens
+            extracted_json, parse_error = self._parse_json_response(llm_response.content)
 
-            extracted_json, parse_error = self._parse_json_response(retry_response.content)
+            if parse_error and self.max_retries > 0:
+                retry_prompt = build_retry_prompt(
+                    error_message=parse_error,
+                    document_summary=document_content[:2000],
+                )
+                retry_response = self.backend.generate(
+                    prompt=retry_prompt,
+                    system_prompt=EXTRACTION_SYSTEM_PROMPT,
+                    json_schema=EXTRACTION_JSON_SCHEMA,
+                    temperature=0.0,
+                    max_tokens=2048,
+                )
+                llm_calls += 1
+                total_tokens += retry_response.total_tokens
+                extracted_json, parse_error = self._parse_json_response(retry_response.content)
+        except Exception as exc:
+            parse_error = str(exc)
+            warnings.append(ExtractionWarning(
+                code="EXT-02",
+                severity=WarningSeverity.BLOCK,
+                message=f"Errore LLM: {exc}",
+            ))
+            extracted_json = {"header": {}, "lines": []}
 
         if parse_error:
             warnings.append(ExtractionWarning(
@@ -157,7 +168,8 @@ class OrderExtractor:
                 severity=WarningSeverity.BLOCK,
                 message=f"Errore parsing JSON: {parse_error}",
             ))
-            extracted_json = {"header": {}, "lines": []}
+            if not extracted_json:
+                extracted_json = {"header": {}, "lines": []}
 
         order = self._build_order(
             extracted_json,
@@ -317,15 +329,21 @@ class OrderExtractor:
             "sha256": source.get("sha256", "0" * 64),
         }]
 
-        header_data = extracted_json.get("header", {})
+        header_data = extracted_json.get("header", {}) if extracted_json else {}
 
-        po_number = header_data.get("po_number")
-        if not po_number and preprocessed.header:
+        po_number = None
+        po_date = None
+        currency = None
+        delivery_date = None
+        if preprocessed.header:
             po_number = preprocessed.header.po_number
-
-        po_date = header_data.get("po_date")
-        if not po_date and preprocessed.header:
             po_date = preprocessed.header.po_date
+            currency = preprocessed.header.currency
+            delivery_date = preprocessed.header.delivery_date
+        po_number = po_number or header_data.get("po_number")
+        po_date = po_date or header_data.get("po_date")
+        currency = currency or header_data.get("currency") or "USD"
+        delivery_date = header_data.get("requested_delivery_date") or delivery_date
 
         if not po_number:
             warnings.append(ExtractionWarning(
@@ -348,8 +366,8 @@ class OrderExtractor:
         order.header = ExtractedHeader(
             po_number=po_number,
             po_date=po_date,
-            currency=header_data.get("currency") or preprocessed.header.currency if preprocessed.header else "USD",
-            requested_delivery_date=header_data.get("requested_delivery_date"),
+            currency=currency,
+            requested_delivery_date=delivery_date,
             buyer_reference=header_data.get("buyer_reference"),
             payment_terms_text=header_data.get("payment_terms"),
             ship_via=header_data.get("ship_via"),
@@ -420,26 +438,30 @@ class OrderExtractor:
         """Costruisce le righe ordine combinando preprocessed e LLM."""
         final_lines: list[ExtractedLine] = []
 
-        if preprocessed_lines and not llm_lines:
-            for idx, pl in enumerate(preprocessed_lines, start=1):
-                if pl.description and pl.quantity is not None:
-                    line = ExtractedLine(
-                        line_no=idx,
-                        description=pl.description,
-                        quantity=pl.quantity,
-                        uom_raw=pl.uom_raw or "EA",
-                        seller_item_code=pl.seller_item_code,
-                        buyer_item_code=pl.buyer_item_code,
-                        unit_price=pl.unit_price,
-                        line_amount=pl.line_amount,
-                        confidence=pl.confidence,
-                    )
-                    final_lines.append(line)
-                    field_confidences.append(FieldConfidence(
-                        path=f"/lines/{idx-1}",
-                        confidence=pl.confidence,
-                        source="preprocessor",
-                    ))
+        usable_preprocessed = [
+            pl for pl in preprocessed_lines
+            if pl.description and pl.quantity is not None
+        ]
+
+        if usable_preprocessed:
+            for idx, pl in enumerate(usable_preprocessed, start=1):
+                line = ExtractedLine(
+                    line_no=idx,
+                    description=pl.description,
+                    quantity=pl.quantity,
+                    uom_raw=pl.uom_raw or "EA",
+                    seller_item_code=pl.seller_item_code,
+                    buyer_item_code=pl.buyer_item_code,
+                    unit_price=pl.unit_price,
+                    line_amount=pl.line_amount,
+                    confidence=pl.confidence,
+                )
+                final_lines.append(line)
+                field_confidences.append(FieldConfidence(
+                    path=f"/lines/{idx-1}",
+                    confidence=pl.confidence,
+                    source="preprocessor",
+                ))
 
         elif llm_lines:
             for idx, ll in enumerate(llm_lines, start=1):

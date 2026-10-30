@@ -57,8 +57,8 @@ class PreprocessedData:
 
 COMMON_HEADER_PATTERNS = {
     "po_number": [
-        r"(?:PO|P\.O\.|Purchase\s*Order|Order)\s*(?:#|No\.?|Number)?[\s:]*([A-Z0-9]+-?[A-Z0-9-]+)",
-        r"(?:Ordine|N\.?\s*Ordine)[\s:]*([A-Z0-9]+-?[A-Z0-9-]+)",
+        r"(?:PO|P\.O\.|Purchase\s*Order)(?:\s+(?:#|No\.?|Number))?[\s:]+([A-Z0-9][A-Z0-9-]{3,})",
+        r"(?:Ordine|N\.?\s*Ordine)[\s:]+([A-Z0-9][A-Z0-9-]{3,})",
     ],
     "po_date": [
         r"(?:Date|Order\s*Date|PO\s*Date)[\s:]*(\d{1,2}[-/]\d{1,2}[-/]\d{2,4})",
@@ -69,10 +69,21 @@ COMMON_HEADER_PATTERNS = {
         r"\b(USD|EUR|GBP|CAD|CHF)\b",
     ],
     "delivery_date": [
+        r"(?:Delivery requested by|Need by)[\s:]*(\d{4}[-/]\d{1,2}[-/]\d{1,2})",
         r"(?:Delivery|Ship|Required)\s*(?:Date|By)[\s:]*(\d{1,2}[-/]\d{1,2}[-/]\d{2,4})",
+        r"(?:Delivery|Ship|Required)\s*(?:Date|By)[\s:]*(\d{4}[-/]\d{1,2}[-/]\d{1,2})",
         r"(?:Consegna|Data\s*Consegna)[\s:]*(\d{1,2}[-/]\d{1,2}[-/]\d{2,4})",
     ],
 }
+
+EMAIL_ITEM_RE = re.compile(
+    r"^\s*(\d+)\.\s*\[([^\]]+)\]\s*(.+?)\s*$",
+    re.MULTILINE,
+)
+EMAIL_QTY_RE = re.compile(
+    r"Qty:\s*(\d+(?:\.\d+)?)\s+([A-Za-z]+)\s*(?:@\s*\$?\s*([\d.,]+))?",
+    re.IGNORECASE,
+)
 
 COLUMN_MAPPINGS = {
     "item_code": ["item", "code", "sku", "part", "articolo", "codice", "product", "item no", "item #"],
@@ -148,17 +159,103 @@ class Preprocessor:
                 text = part.get("text", "")
                 if text:
                     text_parts.append(text)
-                    if not result.header:
-                        result.header = self._extract_header_from_text(text)
+                    text_header = self._extract_header_from_text(text)
+                    if result.header is None:
+                        result.header = text_header
+                    else:
+                        self._overlay_header(result.header, text_header)
+                    if not result.lines:
+                        result.lines.extend(self._extract_lines_from_email_text(text))
 
         result.unstructured_text = "\n\n".join(text_parts)
 
-        if result.unstructured_text and not result.header:
-            result.header = self._extract_header_from_text(result.unstructured_text)
+        if result.unstructured_text:
+            text_header = self._extract_header_from_text(result.unstructured_text)
+            if result.header is None:
+                result.header = text_header
+            else:
+                self._overlay_header(result.header, text_header)
+            if not result.lines:
+                result.lines.extend(self._extract_lines_from_email_text(result.unstructured_text))
 
         result.lines = self._renumber_lines(result.lines)
 
         return result
+
+    @staticmethod
+    def _looks_like_po(value: str | None) -> bool:
+        if not value:
+            return False
+        token = value.strip()
+        if token.upper() in {"PO", "FROM", "ORDER", "NUMBER", "THE"}:
+            return False
+        return any(ch.isdigit() for ch in token) and len(token) >= 4
+
+    def _overlay_header(self, target: PreprocessedHeader, source: PreprocessedHeader) -> None:
+        """Sovrascrive i campi testata con quelli trovati nel testo del documento."""
+        if self._looks_like_po(source.po_number) and (
+            not self._looks_like_po(target.po_number)
+            or len(source.po_number or "") >= len(target.po_number or "")
+        ):
+            target.po_number = source.po_number
+        if source.po_date:
+            target.po_date = source.po_date
+        if source.currency:
+            target.currency = source.currency
+        if source.delivery_date:
+            target.delivery_date = source.delivery_date
+        if source.buyer_name and not target.buyer_name:
+            target.buyer_name = source.buyer_name
+        if source.ship_to_name:
+            target.ship_to_name = source.ship_to_name
+
+    def _extract_lines_from_email_text(self, text: str) -> list[PreprocessedLine]:
+        """Estrae righe da liste d'ordine in testo email (pattern '1. [SKU] desc')."""
+        lines: list[PreprocessedLine] = []
+        items = list(EMAIL_ITEM_RE.finditer(text))
+        for idx, match in enumerate(items):
+            start = match.end()
+            end = items[idx + 1].start() if idx + 1 < len(items) else len(text)
+            block = text[start:end]
+            qty_match = EMAIL_QTY_RE.search(block)
+
+            code = match.group(2).strip()
+            description = match.group(3).strip()
+            quantity = None
+            uom_raw = "EA"
+            unit_price = None
+            needs_llm = False
+
+            if qty_match:
+                try:
+                    quantity = float(qty_match.group(1))
+                except ValueError:
+                    needs_llm = True
+                uom_raw = qty_match.group(2).upper()
+                if qty_match.group(3):
+                    try:
+                        unit_price = float(qty_match.group(3).replace(",", ""))
+                    except ValueError:
+                        unit_price = None
+            else:
+                needs_llm = True
+
+            if not description:
+                continue
+
+            lines.append(PreprocessedLine(
+                row_index=idx + 1,
+                raw_cells=[code, description],
+                seller_item_code=code,
+                description=description,
+                quantity=quantity,
+                uom_raw=uom_raw,
+                unit_price=unit_price,
+                confidence=0.9 if not needs_llm else 0.5,
+                source="email_text",
+                needs_llm=needs_llm,
+            ))
+        return lines
 
     def _extract_header_from_email(self, email_meta: dict) -> PreprocessedHeader:
         """Estrae testata da metadati email."""
@@ -190,7 +287,10 @@ class Preprocessor:
             for pattern in patterns:
                 match = re.search(pattern, text, re.IGNORECASE)
                 if match:
-                    setattr(header, field_name, match.group(1))
+                    value = match.group(1)
+                    if field_name == "po_number" and not self._looks_like_po(value):
+                        continue
+                    setattr(header, field_name, value)
                     break
 
         return header

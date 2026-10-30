@@ -475,3 +475,51 @@ class TestEvaluation:
         assert score.header_accuracy() > 0.9
         assert score.lines_matched == 1
         assert score.lines_expected == 1
+
+    def test_compare_dates_formats(self):
+        """Date US e ISO sono equivalenti."""
+        from extract.eval import compare_dates
+
+        assert compare_dates("2026-04-23", "04-23-2026") is True
+        assert compare_dates("2026-04-23", "04/23/2026") is True
+        assert compare_dates("2026-02-24", "24-Feb-2026") is True
+        assert compare_dates("2026-04-23", "2026-04-24") is False
+
+    def test_silent_error_high_confidence(self):
+        """Campo sbagliato con confidenza alta senza avviso è errore silenzioso."""
+        from extract.eval import evaluate_order
+
+        extracted = {
+            "header": {"po_number": "WRONG", "po_date": "2026-01-15", "currency": "USD"},
+            "lines": [],
+            "evidence": {"/header/po_number": {"confidence": 0.95}},
+        }
+        ground_truth = {
+            "order_id": "gt-silent",
+            "header": {"po_number": "RIGHT", "po_date": "2026-01-15", "currency": "USD"},
+            "lines": [],
+            "_synthetic_metadata": {"is_hard_case": False},
+        }
+        score = evaluate_order(extracted, ground_truth)
+        assert any(e.field_path == "/header/po_number" for e in score.silent_errors)
+
+    def test_email_body_line_extraction(self):
+        """Estrae righe dal corpo email strutturato."""
+        preprocessor = Preprocessor()
+        result = preprocessor.preprocess({
+            "parts": [{
+                "part_type": "EMAIL_BODY",
+                "text": (
+                    "PO Number: SW-01136\nDate: 03-07-2026\n"
+                    "  1. [FST-LWS-M6-2] Lock Washer M6 Zinc\n"
+                    "     Qty: 10 BX @ $9.97\n"
+                    "Delivery requested by: 2026-03-24\n"
+                ),
+            }],
+        })
+        assert result.header is not None
+        assert result.header.po_number == "SW-01136"
+        assert result.header.po_date == "03-07-2026"
+        assert len(result.lines) == 1
+        assert result.lines[0].seller_item_code == "FST-LWS-M6-2"
+        assert result.lines[0].quantity == 10

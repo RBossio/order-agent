@@ -1,0 +1,144 @@
+{
+  "model": "ollama/qwen2.5:3b-instruct",
+  "hardware": "Intel Xeon 4 cores, 15GB RAM, CPU-only (no GPU)",
+  "sample_size": 50,
+  "sample": [
+    "order_007_NMC-01006",
+    "order_016_BW-01015",
+    "order_019_MBM01018",
+    "order_028_SW-01027",
+    "order_033_PTD-01032",
+    "order_042_PTD-01041",
+    "order_053_QS-01052",
+    "order_058_NMC-01057",
+    "order_064_FCH-01063",
+    "order_065_PTD-01064",
+    "order_068_QS-01067",
+    "order_069_QS-01068",
+    "order_071_NMC-01070",
+    "order_078_FCH-01077",
+    "order_081_PTD-01080",
+    "order_089_QS-01088",
+    "order_097_NMC-01096",
+    "order_098_QS-01097",
+    "order_123_NMC-01122",
+    "order_133_QS-01132",
+    "order_135_MBM01134",
+    "order_139_SW-01138",
+    "order_034_SW-01033",
+    "order_004_SW-01003",
+    "order_113_APE-01112",
+    "order_041_BW-01040",
+    "order_037_4500001036",
+    "order_150_MBM01149",
+    "order_021_4500001020",
+    "order_148_BW-01147",
+    "order_015_NMC-01014",
+    "order_105_APE-01104",
+    "order_143_MBM01142",
+    "order_136_QS-01135",
+    "order_085_MBM01084",
+    "order_013_NMC-01012",
+    "order_092_NMC-01091",
+    "order_063_FCH-01062",
+    "order_005_SW-01004",
+    "order_149_SW-01148",
+    "order_138_TIT-PO-01137",
+    "order_032_BW-01031",
+    "order_035_SW-01034",
+    "order_079_FCH-01078",
+    "order_094_APE-01093",
+    "order_130_TIT-PO-01129",
+    "order_087_FCH-01086",
+    "order_030_FCH-01029",
+    "order_110_APE-01109",
+    "order_102_PTD-01101"
+  ],
+  "total_time_seconds": 2811.3292224407196,
+  "errors": [
+    [
+      "order_019_MBM01018",
+      "Errore LLM: timed out"
+    ],
+    [
+      "order_028_SW-01027",
+      "Errore LLM: timed out"
+    ],
+    [
+      "order_053_QS-01052",
+      "Errore LLM: timed out"
+    ],
+    [
+      "order_064_FCH-01063",
+      "Errore LLM: timed out"
+    ],
+    [
+      "order_069_QS-01068",
+      "Errore LLM: timed out"
+    ],
+    [
+      "order_078_FCH-01077",
+      "Errore LLM: timed out"
+    ],
+    [
+      "order_098_QS-01097",
+      "Errore LLM: timed out"
+    ],
+    [
+      "order_135_MBM01134",
+      "Errore LLM: timed out"
+    ],
+    [
+      "order_139_SW-01138",
+      "Errore LLM: timed out"
+    ],
+    [
+      "order_149_SW-01148",
+      "Errore LLM: timed out"
+    ],
+    [
+      "order_035_SW-01034",
+      "Errore LLM: timed out"
+    ],
+    [
+      "order_079_FCH-01078",
+      "Errore LLM: timed out"
+    ],
+    [
+      "order_110_APE-01109",
+      "Errore LLM: timed out"
+    ]
+  ],
+  "metrics": {
+    "header_accuracy": 0.56,
+    "lines_accuracy": 0.36923076923076925,
+    "silent_errors_count": 149,
+    "silent_error_rate": 0.13423423423423422,
+    "total_orders": 50,
+    "hard_cases": 22,
+    "extraction_failures": 13
+  },
+  "format_scores": {
+    "PDF": {
+      "count": 18,
+      "header_correct": 48,
+      "header_total": 72,
+      "lines_expected": 126,
+      "lines_matched": 56
+    },
+    "EML": {
+      "count": 19,
+      "header_correct": 33,
+      "header_total": 76,
+      "lines_expected": 242,
+      "lines_matched": 26
+    },
+    "XLSX": {
+      "count": 13,
+      "header_correct": 31,
+      "header_total": 52,
+      "lines_expected": 87,
+      "lines_matched": 86
+    }
+  }
+}

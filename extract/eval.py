@@ -56,23 +56,37 @@ class LineScore:
 
 
 @dataclass
+class SilentError:
+    """Campo sbagliato con confidenza alta e senza avviso."""
+    order_id: str
+    field_path: str
+    expected: Any
+    extracted: Any
+    confidence: float
+
+
+@dataclass
 class OrderScore:
     """Punteggio per un singolo ordine."""
     order_id: str
     document_path: str
+    document_format: str = "UNKNOWN"
     is_hard_case: bool = False
     hard_case_types: list[str] = field(default_factory=list)
-
+    
     header_fields: dict[str, FieldScore] = field(default_factory=dict)
     line_scores: list[LineScore] = field(default_factory=list)
-
+    
     lines_expected: int = 0
     lines_extracted: int = 0
     lines_matched: int = 0
-
+    
     extraction_time_ms: int = 0
     llm_calls: int = 0
     warnings_count: int = 0
+    silent_errors: list[SilentError] = field(default_factory=list)
+    extraction_failed: bool = False
+    failure_reason: str | None = None
 
     def header_accuracy(self) -> float:
         if not self.header_fields:
@@ -98,11 +112,16 @@ class EvalResults:
     total_lines_expected: int = 0
     total_lines_extracted: int = 0
     total_lines_matched: int = 0
-
+    
     order_scores: list[OrderScore] = field(default_factory=list)
-
+    
     total_time_ms: int = 0
     total_llm_calls: int = 0
+    all_silent_errors: list[SilentError] = field(default_factory=list)
+    format_scores: dict[str, dict] = field(default_factory=dict)
+    extraction_failures: int = 0
+    total_header_fields: int = 0
+    total_line_key_fields: int = 0
 
     def overall_header_accuracy(self) -> float:
         total_correct = sum(f.correct for f in self.header_scores.values())
@@ -148,6 +167,72 @@ def normalize_string(s: str | None) -> str:
     return str(s).strip().lower().replace("-", "").replace(" ", "")
 
 
+_MONTHS = {
+    "jan": 1, "january": 1, "feb": 2, "february": 2, "mar": 3, "march": 3,
+    "apr": 4, "april": 4, "may": 5, "jun": 6, "june": 6, "jul": 7, "july": 7,
+    "aug": 8, "august": 8, "sep": 9, "sept": 9, "september": 9,
+    "oct": 10, "october": 10, "nov": 11, "november": 11, "dec": 12, "december": 12,
+}
+
+
+def parse_date(value: Any) -> tuple[int, int, int] | None:
+    """Parsa una data in (year, month, day) da formati ISO, US, EU o testuali."""
+    if value is None:
+        return None
+    s = str(value).strip()
+    if not s:
+        return None
+    import re as _re
+    named = _re.match(
+        r"(\d{1,2})[-/\s]+([A-Za-z]{3,9})[-/\s,]+(\d{2,4})",
+        s,
+    )
+    if named:
+        day = int(named.group(1))
+        month = _MONTHS.get(named.group(2).lower())
+        year = int(named.group(3))
+        if year < 100:
+            year += 2000
+        if month:
+            return (year, month, day)
+    named2 = _re.match(
+        r"([A-Za-z]{3,9})\s+(\d{1,2}),?\s+(\d{4})",
+        s,
+    )
+    if named2:
+        month = _MONTHS.get(named2.group(1).lower())
+        day = int(named2.group(2))
+        year = int(named2.group(3))
+        if month:
+            return (year, month, day)
+    token = s[:10]
+    for sep in ("-", "/", "."):
+        if sep not in token:
+            continue
+        parts = token.split(sep)
+        if len(parts) != 3:
+            continue
+        try:
+            a, b, c = (int(p) for p in parts)
+        except ValueError:
+            continue
+        if a >= 1000:
+            return (a, b, c)
+        if c >= 1000:
+            if a > 12:
+                return (c, b, a)
+            return (c, a, b)
+    return None
+
+
+def compare_dates(extracted: Any, expected: Any) -> bool:
+    """Confronta date ignorando il formato di rappresentazione."""
+    pe, px = parse_date(expected), parse_date(extracted)
+    if pe and px:
+        return pe == px
+    return compare_values(extracted, expected, fuzzy=True)
+
+
 def compare_values(extracted: Any, expected: Any, fuzzy: bool = False) -> bool:
     """Confronta due valori con tolleranza opzionale."""
     if extracted is None and expected is None:
@@ -160,10 +245,34 @@ def compare_values(extracted: Any, expected: Any, fuzzy: bool = False) -> bool:
             return extracted == 0
         return abs(extracted - expected) / abs(expected) < 0.01
 
+    if isinstance(extracted, str) and isinstance(expected, int | float):
+        try:
+            extracted = float(extracted.replace(",", "").replace("$", ""))
+            return compare_values(extracted, expected, fuzzy)
+        except ValueError:
+            pass
+
     if fuzzy:
         return normalize_string(str(extracted)) == normalize_string(str(expected))
 
     return str(extracted).strip() == str(expected).strip()
+
+
+def detect_format(document_path: str) -> str:
+    """Rileva il formato del documento dal path."""
+    path_lower = document_path.lower()
+    if ".pdf" in path_lower or "/pdf/" in path_lower:
+        return "PDF"
+    if ".xlsx" in path_lower or ".xls" in path_lower or "/xlsx/" in path_lower:
+        return "XLSX"
+    if ".eml" in path_lower or "/eml/" in path_lower:
+        return "EML"
+    if ".csv" in path_lower:
+        return "CSV"
+    return "UNKNOWN"
+
+
+HIGH_CONFIDENCE_THRESHOLD = 0.8
 
 
 def evaluate_order(
@@ -177,24 +286,49 @@ def evaluate_order(
     score = OrderScore(
         order_id=ground_truth.get("order_id", "unknown"),
         document_path=document_path,
+        document_format=detect_format(document_path),
         is_hard_case=meta.get("is_hard_case", False),
         hard_case_types=meta.get("hard_case_types", []),
     )
+
+    evidence = extracted.get("evidence", {})
+    warned_paths = {
+        issue.get("path")
+        for issue in extracted.get("validation", {}).get("issues", [])
+        if issue.get("path")
+    }
 
     ext_header = extracted.get("header", {})
     gt_header = ground_truth.get("header", {})
 
     header_fields = ["po_number", "po_date", "currency", "requested_delivery_date"]
+    date_fields = {"po_date", "requested_delivery_date"}
     for field_name in header_fields:
         fs = FieldScore(total=1)
         ext_val = ext_header.get(field_name)
         gt_val = gt_header.get(field_name)
+        field_path = f"/header/{field_name}"
+        is_correct = False
 
         if gt_val is not None:
-            if compare_values(ext_val, gt_val, fuzzy=(field_name == "po_date")):
+            matcher = compare_dates if field_name in date_fields else compare_values
+            if matcher(ext_val, gt_val):
                 fs.correct = 1
+                is_correct = True
         elif ext_val is None:
             fs.correct = 1
+            is_correct = True
+
+        if not is_correct and gt_val is not None:
+            confidence = evidence.get(field_path, {}).get("confidence", 0)
+            if confidence >= HIGH_CONFIDENCE_THRESHOLD and field_path not in warned_paths:
+                score.silent_errors.append(SilentError(
+                    order_id=score.order_id,
+                    field_path=field_path,
+                    expected=gt_val,
+                    extracted=ext_val,
+                    confidence=confidence,
+                ))
 
         score.header_fields[field_name] = fs
 
@@ -273,31 +407,77 @@ def evaluate_order(
             if key_fields_ok:
                 score.lines_matched += 1
 
+            line_idx = gt_line.get("line_no", 1) - 1
+            for check_field, is_match, gt_field in [
+                ("quantity", line_score.quantity_match, "quantity"),
+                ("seller_item_code", line_score.seller_code_match, "seller_item_code"),
+            ]:
+                if not is_match and gt_line.get(gt_field) is not None:
+                    line_path = f"/lines/{line_idx}/{check_field}"
+                    confidence = evidence.get(line_path, {}).get(
+                        "confidence",
+                        evidence.get(f"/lines/{line_idx}", {}).get("confidence", 0),
+                    )
+                    if confidence >= HIGH_CONFIDENCE_THRESHOLD and line_path not in warned_paths:
+                        score.silent_errors.append(SilentError(
+                            order_id=score.order_id,
+                            field_path=line_path,
+                            expected=gt_line.get(gt_field),
+                            extracted=matched_ext.get(check_field),
+                            confidence=confidence,
+                        ))
+
         score.line_scores.append(line_score)
 
     return score
 
 
-def generate_report(results: EvalResults, output_path: Path | None = None) -> str:
+def generate_report(
+    results: EvalResults,
+    output_path: Path | None = None,
+    model_name: str = "",
+    hardware_info: str = "",
+) -> str:
     """Genera report Markdown dai risultati."""
     lines = []
     lines.append("# Report Valutazione Estrazione Ordini")
     lines.append("")
     lines.append(f"**Data:** {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+    if model_name:
+        lines.append(f"**Modello:** {model_name}")
+    if hardware_info:
+        lines.append(f"**Hardware:** {hardware_info}")
     lines.append("")
 
-    lines.append("## Riepilogo")
+    header_acc = results.overall_header_accuracy()
+    lines_acc = results.overall_lines_accuracy()
+    field_denom = max(results.total_header_fields + results.total_line_key_fields, 1)
+    silent_pct = 100 * len(results.all_silent_errors) / field_denom
+    n = max(results.total_orders, 1)
+
+    lines.append("## Riepilogo vs target")
     lines.append("")
-    lines.append("| Metrica | Valore |")
-    lines.append("|---------|--------|")
-    lines.append(f"| Ordini totali | {results.total_orders} |")
-    lines.append(f"| Casi difficili | {results.hard_cases} ({100*results.hard_cases/results.total_orders:.1f}%) |")
-    lines.append(f"| Accuratezza testata | **{100*results.overall_header_accuracy():.1f}%** |")
-    lines.append(f"| Accuratezza righe | **{100*results.overall_lines_accuracy():.1f}%** |")
-    lines.append(f"| Righe totali GT | {results.total_lines_expected} |")
-    lines.append(f"| Righe estratte | {results.total_lines_extracted} |")
-    lines.append(f"| Righe matchate | {results.total_lines_matched} |")
+    lines.append("| Metrica | Valore | Target |")
+    lines.append("|---------|--------|--------|")
+    lines.append(f"| Accuratezza testata | **{100*header_acc:.1f}%** | ≥98% {'✅' if header_acc >= 0.98 else '❌'} |")
+    lines.append(f"| Accuratezza righe | **{100*lines_acc:.1f}%** | ≥90% {'✅' if lines_acc >= 0.90 else '❌'} |")
+    lines.append(f"| Errori silenziosi | **{len(results.all_silent_errors)}** ({silent_pct:.2f}%) | ≤1% {'✅' if silent_pct <= 1.0 else '❌'} |")
+    lines.append(f"| Ordini valutati | {results.total_orders} | - |")
+    lines.append(f"| Fallimenti estrazione | {results.extraction_failures} | - |")
+    lines.append(f"| Casi difficili | {results.hard_cases} ({100*results.hard_cases/n:.1f}%) | - |")
     lines.append("")
+
+    if results.format_scores:
+        lines.append("## Accuratezza per Formato")
+        lines.append("")
+        lines.append("| Formato | Ordini | Testata | Righe |")
+        lines.append("|---------|--------|---------|-------|")
+        for fmt, data in sorted(results.format_scores.items()):
+            if data.get("count", 0) > 0:
+                h_acc = 100 * data.get("header_correct", 0) / max(data.get("header_total", 1), 1)
+                l_acc = 100 * data.get("lines_matched", 0) / max(data.get("lines_expected", 1), 1)
+                lines.append(f"| {fmt} | {data['count']} | {h_acc:.1f}% | {l_acc:.1f}% |")
+        lines.append("")
 
     lines.append("## Accuratezza per Tipo di Caso")
     lines.append("")
@@ -317,6 +497,24 @@ def generate_report(results: EvalResults, output_path: Path | None = None) -> st
     for field_name, fs in results.header_scores.items():
         lines.append(f"| {field_name} | {fs.correct} | {fs.total} | {100*fs.accuracy:.1f}% |")
     lines.append("")
+
+    if results.all_silent_errors:
+        lines.append("## Errori silenziosi")
+        lines.append("")
+        lines.append("Campi errati con confidenza ≥80% e senza avviso di validazione.")
+        lines.append("")
+        lines.append("| Ordine | Campo | Atteso | Estratto | Confidenza |")
+        lines.append("|--------|-------|--------|----------|------------|")
+        for err in results.all_silent_errors[:25]:
+            exp_str = str(err.expected)[:24] if err.expected is not None else "-"
+            ext_str = str(err.extracted)[:24] if err.extracted is not None else "-"
+            lines.append(
+                f"| {err.order_id[:8]}... | {err.field_path} | {exp_str} | {ext_str} | "
+                f"{100*err.confidence:.0f}% |"
+            )
+        if len(results.all_silent_errors) > 25:
+            lines.append(f"| ... | ({len(results.all_silent_errors) - 25} altri) | | | |")
+        lines.append("")
 
     hard_orders = [o for o in results.order_scores if o.is_hard_case]
     if hard_orders:
@@ -474,6 +672,8 @@ def _update_results(results: EvalResults, order_score: OrderScore, ground_truth:
     results.total_orders += 1
     if order_score.is_hard_case:
         results.hard_cases += 1
+    if order_score.extraction_failed:
+        results.extraction_failures += 1
 
     results.total_lines_expected += order_score.lines_expected
     results.total_lines_extracted += order_score.lines_extracted
@@ -484,9 +684,31 @@ def _update_results(results: EvalResults, order_score: OrderScore, ground_truth:
             results.header_scores[field_name] = FieldScore()
         results.header_scores[field_name].correct += fs.correct
         results.header_scores[field_name].total += fs.total
+        results.total_header_fields += fs.total
 
+    results.total_line_key_fields += order_score.lines_expected * 2
     results.total_time_ms += order_score.extraction_time_ms
     results.total_llm_calls += order_score.llm_calls
+    results.all_silent_errors.extend(order_score.silent_errors)
+
+    fmt = order_score.document_format
+    if fmt not in results.format_scores:
+        results.format_scores[fmt] = {
+            "count": 0,
+            "header_correct": 0,
+            "header_total": 0,
+            "lines_expected": 0,
+            "lines_matched": 0,
+        }
+    results.format_scores[fmt]["count"] += 1
+    results.format_scores[fmt]["header_correct"] += sum(
+        f.correct for f in order_score.header_fields.values()
+    )
+    results.format_scores[fmt]["header_total"] += sum(
+        f.total for f in order_score.header_fields.values()
+    )
+    results.format_scores[fmt]["lines_expected"] += order_score.lines_expected
+    results.format_scores[fmt]["lines_matched"] += order_score.lines_matched
 
     results.order_scores.append(order_score)
 

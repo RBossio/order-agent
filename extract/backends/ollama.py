@@ -27,7 +27,7 @@ class OllamaBackend(LLMBackend):
         self,
         host: str | None = None,
         model: str | None = None,
-        timeout: float = 120.0,
+        timeout: float = 90.0,
     ):
         self.host = host or os.environ.get("OLLAMA_HOST", self.DEFAULT_HOST)
         self._model = model or os.environ.get("OLLAMA_MODEL", self.DEFAULT_MODEL)
@@ -68,12 +68,13 @@ class OllamaBackend(LLMBackend):
         system_prompt: str | None = None,
         json_schema: dict[str, Any] | None = None,
         temperature: float = 0.0,
-        max_tokens: int = 4096,
+        max_tokens: int = 2048,
     ) -> LLMResponse:
         """
         Genera una risposta usando Ollama.
 
         Usa format="json" se json_schema è fornito.
+        Parametri anti-ripetizione: temperature=0, repeat_penalty=1.1, num_predict limitato.
         """
         messages = []
         if system_prompt:
@@ -84,14 +85,15 @@ class OllamaBackend(LLMBackend):
             "model": self._model,
             "messages": messages,
             "stream": False,
+            "format": "json",
             "options": {
-                "temperature": temperature,
+                "temperature": 0.0 if temperature is None else temperature,
                 "num_predict": max_tokens,
+                "repeat_penalty": 1.1,
+                "repeat_last_n": 64,
+                "num_ctx": 4096,
             },
         }
-
-        if json_schema is not None:
-            payload["format"] = "json"
 
         data = json.dumps(payload).encode("utf-8")
         req = urllib.request.Request(
