@@ -16,6 +16,11 @@ class Severity(StrEnum):
     WARN = "WARN"
     INFO = "INFO"
 
+    def at_least(self, minimum: Severity) -> Severity:
+        """Restituisce la più alta tra questa severità e ``minimum``."""
+        rank = {Severity.INFO: 0, Severity.WARN: 1, Severity.REVIEW: 2, Severity.BLOCK: 3}
+        return self if rank[self] >= rank[minimum] else minimum
+
 
 class DecisionRoute(StrEnum):
     """Esito di routing dell'ordine."""
@@ -35,6 +40,7 @@ class Issue:
     json_pointer: str
     suggestion: str | None = None
     details: dict[str, Any] | None = None
+    from_exception: bool = False
 
     def to_schema(self) -> dict[str, Any]:
         """Serializza nel formato dello schema VOF (``code`` / ``path``)."""
@@ -135,7 +141,7 @@ class ValidationResult:
     """Esito dell'esecuzione di tutte le regole su un VOF."""
 
     issues: list[Issue] = field(default_factory=list)
-    decision: DecisionRoute = DecisionRoute.AUTO_POST
+    decision: DecisionRoute = DecisionRoute.REVIEW
     score: float = 1.0
     reasons: list[str] = field(default_factory=list)
     summary: dict[str, int] = field(default_factory=dict)

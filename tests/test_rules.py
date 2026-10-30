@@ -19,60 +19,65 @@ from ventureorder.rules import (
     Severity,
     SyntheticReferenceDataProvider,
     ValidationEngine,
+    ValidationResult,
     XrefRecord,
     get_all_rules,
 )
+from ventureorder.rules import registry as rules_registry
 
 REPO = Path(__file__).resolve().parent.parent
 AS_OF = date(2026, 11, 3)
 CONFIG = REPO / "config"
 
-CATALOG_RULES = [
-    "HDR-01",
-    "HDR-02",
-    "HDR-03",
-    "HDR-04",
-    "HDR-05",
-    "HDR-06",
-    "CUS-01",
-    "CUS-02",
-    "CUS-03",
-    "CUS-04",
-    "CUS-05",
-    "ITM-01",
-    "ITM-02",
-    "ITM-03",
-    "ITM-04",
-    "ITM-05",
-    "ITM-06",
-    "ITM-07",
-    "UOM-01",
-    "UOM-02",
-    "UOM-03",
-    "UOM-04",
-    "UOM-05",
-    "QTY-01",
-    "QTY-02",
-    "QTY-03",
-    "PRC-01",
-    "PRC-02",
-    "PRC-03",
-    "PRC-04",
-    "TOT-01",
-    "TOT-02",
-    "TOT-03",
-    "DUP-01",
-    "DUP-02",
-    "DUP-03",
-    "EXT-01",
-    "EXT-02",
-    "EXT-03",
-    "SEC-01",
-    "SEC-02",
-    "EXP-01",
-    "EXP-02",
-    "EXP-03",
-]
+# Tabella §7.2 di docs/architettura-v0.2.md: codice → severità predefinita.
+ARCHITECTURE_SEVERITIES: dict[str, Severity] = {
+    "HDR-01": Severity.BLOCK,
+    "HDR-02": Severity.REVIEW,
+    "HDR-03": Severity.REVIEW,
+    "HDR-04": Severity.REVIEW,
+    "HDR-05": Severity.REVIEW,
+    "HDR-06": Severity.WARN,
+    "CUS-01": Severity.BLOCK,
+    "CUS-02": Severity.REVIEW,
+    "CUS-03": Severity.REVIEW,
+    "CUS-04": Severity.REVIEW,
+    "CUS-05": Severity.REVIEW,
+    "ITM-01": Severity.BLOCK,
+    "ITM-02": Severity.BLOCK,
+    "ITM-03": Severity.REVIEW,
+    "ITM-04": Severity.REVIEW,
+    "ITM-05": Severity.WARN,
+    "ITM-06": Severity.WARN,
+    "ITM-07": Severity.REVIEW,
+    "UOM-01": Severity.REVIEW,
+    "UOM-02": Severity.BLOCK,
+    "UOM-03": Severity.INFO,
+    "UOM-04": Severity.REVIEW,
+    "UOM-05": Severity.REVIEW,
+    "QTY-01": Severity.BLOCK,
+    "QTY-02": Severity.REVIEW,
+    "QTY-03": Severity.WARN,
+    "PRC-01": Severity.REVIEW,
+    "PRC-02": Severity.INFO,
+    "PRC-03": Severity.REVIEW,
+    "PRC-04": Severity.REVIEW,
+    "TOT-01": Severity.REVIEW,
+    "TOT-02": Severity.BLOCK,
+    "TOT-03": Severity.WARN,
+    "DUP-01": Severity.BLOCK,
+    "DUP-02": Severity.BLOCK,
+    "DUP-03": Severity.REVIEW,
+    "EXT-01": Severity.REVIEW,
+    "EXT-02": Severity.REVIEW,
+    "EXT-03": Severity.REVIEW,
+    "SEC-01": Severity.BLOCK,
+    "SEC-02": Severity.REVIEW,
+    "EXP-01": Severity.BLOCK,
+    "EXP-02": Severity.WARN,
+    "EXP-03": Severity.BLOCK,
+}
+
+CATALOG_RULES = list(ARCHITECTURE_SEVERITIES)
 
 SHIP_ADDRESS = {
     "line1": "4400 Maumee Ave",
@@ -299,6 +304,16 @@ class TestCatalog:
     def test_all_architecture_rules_registered(self) -> None:
         registered = set(get_all_rules())
         assert registered == set(CATALOG_RULES)
+
+    def test_registered_severities_match_section_7_2(self) -> None:
+        registered = get_all_rules()
+        assert set(registered) == set(ARCHITECTURE_SEVERITIES)
+        mismatches = {
+            code: (registered[code][1], expected)
+            for code, expected in ARCHITECTURE_SEVERITIES.items()
+            if registered[code][1] != expected
+        }
+        assert mismatches == {}, f"Severità diverse dal §7.2: {mismatches}"
 
     def test_each_rule_has_positive_and_negative_test(self) -> None:
         """Meta-check: questo file definisce test_xx_pass e test_xx_fail per ogni regola."""
@@ -819,6 +834,116 @@ class TestEngineAndDatagen:
         assert result.decision == DecisionRoute.REVIEW
         assert "HDR-02" in result.reasons
 
+    def test_block_routes_to_review(self, engine: ValidationEngine) -> None:
+        order = make_vof(header={"po_number": "", "po_date": "2026-11-03", "currency": "USD"})
+        result = engine.validate(order)
+        assert result.decision == DecisionRoute.REVIEW
+        assert result.decision != DecisionRoute.REJECT
+        assert "HDR-01" in result.reasons
+
+    def test_rule_exception_forces_review(
+        self, engine: ValidationEngine, monkeypatch: pytest.MonkeyPatch
+    ) -> None:
+        def boom(_ctx: object) -> list:
+            raise RuntimeError("errore sintetico")
+
+        monkeypatch.setitem(rules_registry._RULES_REGISTRY, "PRC-02", (boom, Severity.INFO))
+        result = engine.validate(make_vof())
+        hits = assert_hit(result, "PRC-02", Severity.REVIEW)
+        assert hits[0].from_exception
+        assert result.decision == DecisionRoute.REVIEW
+        assert result.decision != DecisionRoute.AUTO_POST
+        assert result.decision != DecisionRoute.REJECT
+
+    def test_reject_rule_exception_does_not_reject(
+        self, engine: ValidationEngine, monkeypatch: pytest.MonkeyPatch
+    ) -> None:
+        def boom(_ctx: object) -> list:
+            raise RuntimeError("errore sintetico")
+
+        monkeypatch.setitem(rules_registry._RULES_REGISTRY, "SEC-01", (boom, Severity.BLOCK))
+        result = engine.validate(make_vof())
+        hits = assert_hit(result, "SEC-01", Severity.BLOCK)
+        assert hits[0].from_exception
+        assert result.decision == DecisionRoute.REVIEW
+        assert result.decision != DecisionRoute.REJECT
+        assert result.decision != DecisionRoute.AUTO_POST
+
+    def test_auto_post_denied_without_allowlist(self, ref: MockReferenceDataProvider) -> None:
+        customer = ref.get_customer_by_ref("C-ACME")
+        assert customer is not None
+        customer.allowlisted = False
+        engine = ValidationEngine(config_dir=CONFIG, reference_data=ref, as_of=AS_OF)
+        result = engine.validate(make_vof())
+        assert result.decision == DecisionRoute.REVIEW
+        assert "ALLOWLIST" in result.reasons
+        assert result.decision != DecisionRoute.AUTO_POST
+
+    def test_auto_post_denied_with_short_history(self, ref: MockReferenceDataProvider) -> None:
+        customer = ref.get_customer_by_ref("C-ACME")
+        assert customer is not None
+        customer.approved_orders_without_corrections = 3
+        engine = ValidationEngine(config_dir=CONFIG, reference_data=ref, as_of=AS_OF)
+        result = engine.validate(make_vof())
+        assert result.decision == DecisionRoute.REVIEW
+        assert "HISTORY" in result.reasons
+        assert result.decision != DecisionRoute.AUTO_POST
+
+    def test_each_warn_reduces_score_by_penalty(self, engine: ValidationEngine) -> None:
+        clean = engine.validate(make_vof())
+        one_order = make_vof()
+        one_order["header"]["payment_terms_text"] = "CIA"
+        one = engine.validate(one_order)
+        one_warns = sum(1 for item in one.issues if item.severity == Severity.WARN)
+        assert one_warns == 1
+        assert one.score == pytest.approx(clean.score - 0.05)
+
+        two_order = make_vof(
+            charges=[{"type": "FREIGHT", "amount": 12.0}],
+            totals={
+                "lines_amount_declared": 75.0,
+                "total_amount_declared": 87.0,
+                "lines_amount_computed": 75.0,
+            },
+        )
+        two_order["header"]["payment_terms_text"] = "CIA"
+        two = engine.validate(two_order)
+        two_warns = sum(1 for item in two.issues if item.severity == Severity.WARN)
+        assert two_warns == 2
+        assert two.score == pytest.approx(clean.score - 0.05 * two_warns)
+
+    def test_tenant_override_does_not_lift_dup_or_sec_reject(
+        self, ref: MockReferenceDataProvider
+    ) -> None:
+        ref.add_order(
+            HistoricalOrder(
+                order_id="ORD-OLD",
+                customer_ref="C-ACME",
+                po_number="4500012345",
+                po_revision=0,
+                status="POSTED",
+            )
+        )
+        engine = ValidationEngine(config_dir=CONFIG, reference_data=ref, as_of=AS_OF)
+        engine.rules_config["severity_overrides"] = {"DUP-01": "WARN", "SEC-01": "INFO"}
+        dup_result = engine.validate(make_vof())
+        assert_hit(dup_result, "DUP-01", Severity.WARN)
+        assert dup_result.decision == DecisionRoute.REJECT
+
+        sec_engine = ValidationEngine(config_dir=CONFIG, reference_data=seed_ref(), as_of=AS_OF)
+        sec_engine.rules_config["severity_overrides"] = {"DUP-01": "WARN", "SEC-01": "INFO"}
+        sec_result = sec_engine.validate(
+            make_vof(),
+            security=SecurityHints(filename="payload.exe"),
+        )
+        assert_hit(sec_result, "SEC-01", Severity.INFO)
+        assert sec_result.decision == DecisionRoute.REJECT
+
+    def test_validation_result_defaults_to_review(self) -> None:
+        result = ValidationResult()
+        assert result.decision == DecisionRoute.REVIEW
+        assert result.decision != DecisionRoute.AUTO_POST
+
     def test_severity_override(self, ref: MockReferenceDataProvider) -> None:
         engine = ValidationEngine(config_dir=CONFIG, reference_data=ref, as_of=AS_OF)
         engine.rules_config["severity_overrides"] = {"HDR-06": "BLOCK"}
@@ -850,5 +975,9 @@ class TestEngineAndDatagen:
         example = json.loads((REPO / "schema" / "example-mro.json").read_text(encoding="utf-8"))
         engine = ValidationEngine(config_dir=CONFIG, reference_data=ref, as_of=AS_OF)
         result = engine.validate(example)
-        assert result is not None
-        assert result.decision in {DecisionRoute.REVIEW, DecisionRoute.REJECT, DecisionRoute.AUTO_POST}
+        codes = {item.rule_id for item in result.issues}
+        assert result.decision == DecisionRoute.REVIEW
+        assert "ITM-03" in codes
+        assert "PRC-01" in codes
+        assert "ITM-03" in result.reasons
+        assert "PRC-01" in result.reasons

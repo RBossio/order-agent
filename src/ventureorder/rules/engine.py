@@ -117,18 +117,20 @@ class ValidationEngine:
             try:
                 issues = func(context)
             except Exception as exc:  # noqa: BLE001 — una regola non deve far cadere il motore
-                issues = [
+                result.add_issue(
                     Issue(
                         rule_id=code,
-                        severity=Severity.WARN,
+                        severity=effective.at_least(Severity.REVIEW),
                         message=(
                             f"Errore durante l'esecuzione della regola {code}: "
                             f"{type(exc).__name__}"
                         ),
                         json_pointer="/",
                         suggestion="Verificare i dati dell'ordine",
+                        from_exception=True,
                     )
-                ]
+                )
+                continue
             for item in issues:
                 item.severity = effective
                 result.add_issue(item)
@@ -168,7 +170,9 @@ class ValidationEngine:
     ) -> tuple[DecisionRoute, list[str]]:
         """Applica §7.1: REJECT (SEC/DUP), REVIEW, AUTO_POST simulato."""
         reject_codes = [
-            issue.rule_id for issue in result.issues if issue.rule_id in REJECT_RULES
+            issue.rule_id
+            for issue in result.issues
+            if issue.rule_id in REJECT_RULES and not issue.from_exception
         ]
         if reject_codes:
             return DecisionRoute.REJECT, sorted(set(reject_codes))
