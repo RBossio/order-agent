@@ -12,6 +12,7 @@ import pytest
 from ventureorder.rules import (
     NON_DISABLEABLE_RULES,
     CustomerRecord,
+    DatagenReferenceDataProvider,
     DecisionRoute,
     HistoricalOrder,
     MockReferenceDataProvider,
@@ -1056,6 +1057,7 @@ class TestEngineAndDatagen:
 
     def test_synthetic_provider_from_datagen(self) -> None:
         provider = SyntheticReferenceDataProvider.from_datagen()
+        assert isinstance(provider, DatagenReferenceDataProvider)
         customer = provider.get_customer_by_ref("C-ACME")
         assert customer is not None
         assert "SYNTHETIC" in customer.name
@@ -1064,6 +1066,11 @@ class TestEngineAndDatagen:
         assert product.gtin
         assert provider.is_valid_uom("EA")
         assert provider.is_valid_uom("CS")
+
+    def test_for_synthetic_uses_datagen_provider(self) -> None:
+        engine = ValidationEngine.for_synthetic(config_dir=CONFIG, as_of=AS_OF)
+        assert isinstance(engine.reference_data, DatagenReferenceDataProvider)
+        assert engine.reference_data.get_customer_by_ref("C-ACME") is not None
 
     def test_example_mro_runs(self, ref: MockReferenceDataProvider) -> None:
         example = json.loads((REPO / "schema" / "example-mro.json").read_text(encoding="utf-8"))

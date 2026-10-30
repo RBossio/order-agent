@@ -82,10 +82,7 @@ class DatagenLoader:
         return self._order_styles
 
     def _parse_pack(
-        self,
-        pack_description: str | None,
-        sale_uom: str,
-        conversions: list[dict]
+        self, pack_description: str | None, sale_uom: str, conversions: list[dict]
     ) -> dict[str, Any] | None:
         """Converte pack_description e conversions nel formato pack del generatore.
 
@@ -123,7 +120,7 @@ class DatagenLoader:
             "raw": pack_description,
             "inner_count": inner_count,
             "inner_size": inner_size,
-            "inner_uom": inner_uom
+            "inner_uom": inner_uom,
         }
 
     def load_catalog(self, output_path: Path | None = None) -> list[dict[str, Any]]:
@@ -154,9 +151,7 @@ class DatagenLoader:
         catalog = []
         for idx, prod in enumerate(products):
             pack = self._parse_pack(
-                prod.get("pack_description"),
-                prod["sale_uom"],
-                prod.get("conversions", [])
+                prod.get("pack_description"), prod["sale_uom"], prod.get("conversions", [])
             )
 
             item = {
@@ -170,6 +165,15 @@ class DatagenLoader:
                 "gtin": prod.get("gtin"),
                 "manufacturer_part_number": prod.get("manufacturer_code"),
                 "manufacturer_name": prod.get("manufacturer_name"),
+                "conversions": [
+                    {
+                        "from_uom": conv["from_uom"],
+                        "to_uom": conv["to_uom"],
+                        "factor": conv["factor"],
+                    }
+                    for conv in prod.get("conversions", [])
+                    if conv.get("from_uom") and conv.get("to_uom") and conv.get("factor")
+                ],
             }
             catalog.append(item)
 
@@ -187,9 +191,7 @@ class DatagenLoader:
         return "example.com"
 
     def load_customers(
-        self,
-        catalog: list[dict[str, Any]],
-        output_path: Path | None = None
+        self, catalog: list[dict[str, Any]], output_path: Path | None = None
     ) -> list[dict[str, Any]]:
         """Carica i clienti da datagen/master/ e li adatta con xref.
 
@@ -247,30 +249,31 @@ class DatagenLoader:
             for ship_idx, ship_addr in enumerate(cust.get("shipping_addresses", []), 1):
                 ship_code = f"SHIP-{ship_idx:02d}"
                 ship_name = f"{cust['name'].split()[0]} Shipping Location {ship_idx}"
-                ship_to_list.append({
-                    "code": ship_code,
-                    "name": ship_name,
-                    "address": ship_addr
-                })
+                ship_to_list.append({"code": ship_code, "name": ship_name, "address": ship_addr})
 
             if not ship_to_list:
-                ship_to_list = [{
-                    "code": "SHIP-01",
-                    "name": f"{cust['name'].split()[0]} Main",
-                    "address": cust.get("billing_address", {})
-                }]
+                ship_to_list = [
+                    {
+                        "code": "SHIP-01",
+                        "name": f"{cust['name'].split()[0]} Main",
+                        "address": cust.get("billing_address", {}),
+                    }
+                ]
 
             style_data = order_styles.get(ref, {})
-            order_style = style_data.get("order_style", {
-                "format_preference": ["PDF", "XLSX"],
-                "po_prefix": ref.replace("C-", "") + "-",
-                "date_format": "YYYY-MM-DD",
-                "uses_own_codes": True,
-                "code_prefix": ref.replace("C-", "") + "-",
-                "typical_lines": [3, 8],
-                "currency": "USD",
-                "language": "en"
-            })
+            order_style = style_data.get(
+                "order_style",
+                {
+                    "format_preference": ["PDF", "XLSX"],
+                    "po_prefix": ref.replace("C-", "") + "-",
+                    "date_format": "YYYY-MM-DD",
+                    "uses_own_codes": True,
+                    "code_prefix": ref.replace("C-", "") + "-",
+                    "typical_lines": [3, 8],
+                    "currency": "USD",
+                    "language": "en",
+                },
+            )
             xref_coverage = style_data.get("xref_coverage", 0.7)
 
             cust_xrefs = xref_by_customer.get(ref, [])
@@ -278,13 +281,15 @@ class DatagenLoader:
             for xref in cust_xrefs:
                 sku = xref["product_sku"]
                 if sku in sku_set:
-                    validated_xrefs.append({
-                        "customer_code": xref["customer_item_code"],
-                        "sku": sku,
-                        "erp_product_id": sku_to_item[sku]["erp_product_id"],
-                        "uom": xref.get("customer_uom"),
-                        "status": "TRUSTED"
-                    })
+                    validated_xrefs.append(
+                        {
+                            "customer_code": xref["customer_item_code"],
+                            "sku": sku,
+                            "erp_product_id": sku_to_item[sku]["erp_product_id"],
+                            "uom": xref.get("customer_uom"),
+                            "status": "TRUSTED",
+                        }
+                    )
 
             tax_id = cust.get("tax_id", "")
             if tax_id and not tax_id.startswith("US"):
@@ -300,13 +305,13 @@ class DatagenLoader:
                 "contact": {
                     "name": contact_name,
                     "email": email,
-                    "phone": cust.get("phone", "+1-555-0000")
+                    "phone": cust.get("phone", "+1-555-0000"),
                 },
                 "address": cust.get("billing_address", {}),
                 "ship_to": ship_to_list,
                 "order_style": order_style,
                 "xref_coverage": xref_coverage,
-                "xref": validated_xrefs
+                "xref": validated_xrefs,
             }
             customers.append(customer)
 

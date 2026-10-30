@@ -30,6 +30,7 @@ from ventureorder.rules.models import (
 )
 from ventureorder.rules.reference import (
     CustomerRecord,
+    DatagenReferenceDataProvider,
     HistoricalOrder,
     MockReferenceDataProvider,
     ProductRecord,
@@ -43,6 +44,7 @@ RULE_MODULES = (hdr, cus, itm, uom, qty, prc, tot, dup, ext, sec, exp)
 
 __all__ = [
     "CustomerRecord",
+    "DatagenReferenceDataProvider",
     "DecisionRoute",
     "HistoricalOrder",
     "Issue",
