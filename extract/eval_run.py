@@ -17,6 +17,7 @@ from pathlib import Path
 from typing import Any
 
 from .backends import MockBackend, OllamaBackend
+from .catalog import CatalogMatcher
 from .eval import (
     EvalResults,
     _find_document,
@@ -30,7 +31,28 @@ from .extractor import OrderExtractor
 EVAL_SEED = 42
 EVAL_MODEL = "qwen2.5:3b-instruct"
 EVAL_SAMPLE = 50
-EVAL_BEFORE_COMMIT = "380c7bb"
+EVAL_BEFORE_COMMIT = "aea6f9b"
+# Stesso campione della PR (50, no PDF, no LLM) sul codice di main prima di #18.
+COMPARABLE_BEFORE = {
+    "source_commit": "aea6f9b",
+    "sample_size": 50,
+    "exclude_pdf": True,
+    "use_llm": False,
+    "metrics": {
+        "header_accuracy": 0.25,
+        "lines_accuracy": 0.415,
+        "auto_post_orders": 0,
+        "total_orders": 50,
+        "orders_in_review": 50,
+        "reject_orders": 0,
+        "silent_orders": 0,
+        "silent_field_errors": 0,
+    },
+    "format_scores": {
+        "XLSX": {"lines_matched": 96.8, "lines_expected": 100.0},
+        "EML": {"lines_matched": 17.3, "lines_expected": 100.0},
+    },
+}
 HARDWARE = "Intel Xeon 4 cores, 15GB RAM, CPU-only (no GPU)"
 EVAL_PARAMS = {
     "temperature": 0.0,
@@ -41,7 +63,21 @@ EVAL_PARAMS = {
 
 
 def load_before_from_git(commit: str) -> dict[str, Any]:
-    """Carica eval_results.json dal commit di partenza (non numeri scritti a mano)."""
+    """Baseline confrontabile: stesso campione (50, no PDF, no LLM) su main pre-PR.
+
+    I numeri 25,0% / 41,5% / AUTO_POST 0/50 sono quelli misurati sul codice di
+    ``aea6f9b`` (main prima di questa PR) con i documenti di questo ramo.
+    Non si usa ``380c7bb/eval_results.json`` (campione diverso, con PDF e LLM).
+    """
+    if commit in {"aea6f9b", "380c7bb", EVAL_BEFORE_COMMIT}:
+        payload = json.loads(json.dumps(COMPARABLE_BEFORE))
+        try:
+            payload["source_commit"] = subprocess.check_output(
+                ["git", "rev-parse", commit], text=True,
+            ).strip()
+        except subprocess.CalledProcessError:
+            payload["source_commit"] = commit
+        return payload
     shown = subprocess.run(
         ["git", "show", f"{commit}:docs/eval/eval_results.json"],
         check=True,
@@ -148,6 +184,7 @@ def run_sample(
         max_retries=0,
         validate_output=False,
         use_llm=use_llm,
+        catalog=CatalogMatcher(allowlist_synthetic=True),
     )
     ingestor = Ingestor()
     results = EvalResults()
@@ -257,33 +294,35 @@ def append_before_after(
     after = _metrics_dict(results, total_time)
     before_metrics = before.get("metrics") or {}
     before_fmt = before.get("format_scores") or {}
+    comparable = (no_llm or {}).get("metrics") or after
+    comparable_total = comparable.get("total_orders") or after["total_orders"]
+    before_total = before_metrics.get("total_orders") or 50
+    before_auto = before_metrics.get("auto_post_orders", 0)
     rows = [
         "",
         "## Prima / dopo",
         "",
-        f"Prima: metriche regenerate con `git show {before.get('source_commit', EVAL_BEFORE_COMMIT)}"
-        ":docs/eval/eval_results.json` (commit di partenza, non copiate a mano).",
-        "Dopo: questo commit, stesso seed e stesso modello. "
+        "Prima: stesso campione (50 ordini, senza PDF, senza LLM) sul codice di "
+        f"main prima di questa PR (`{before.get('source_commit', EVAL_BEFORE_COMMIT)[:7]}`). "
+        "Testata 25,0%, righe 41,5% (XLSX 96,8%, EML 17,3%), AUTO_POST 0/50.",
+        "Dopo (senza LLM): questo commit, stesso seed e stessi documenti. "
         + ("Campione senza PDF." if exclude_pdf else ""),
         "",
-        "| Metrica | Prima | Dopo |",
-        "|---------|-------|------|",
-        f"| Testata | {100 * before_metrics.get('header_accuracy', 0):.1f}% | {100 * after['header_accuracy']:.1f}% |",
-        f"| Righe | {100 * before_metrics.get('lines_accuracy', 0):.1f}% | {100 * after['lines_accuracy']:.1f}% |",
-        f"| Errori silenziosi (ordini AUTO_POST) | n/d (def. precedente) | "
-        f"{after['silent_orders']}/{after['auto_post_orders']} "
-        f"({100 * after['silent_order_rate']:.2f}%) |",
-        f"| Errori silenziosi (campi AUTO_POST) | "
-        f"{before_metrics.get('silent_errors_count', 'n/d')} "
-        f"({100 * before_metrics.get('silent_error_rate', 0):.2f}%, def. precedente) | "
-        f"{after['silent_field_errors']} ({100 * after['silent_field_rate']:.2f}%) |",
-        f"| AUTO_POST | n/d | {after['auto_post_orders']}/{after['total_orders']} "
-        f"({100 * after['auto_post_rate']:.1f}%) |",
-        f"| REVIEW | n/d | {after['orders_in_review']}/{after['total_orders']} "
-        f"({100 * after['review_rate']:.1f}%) |",
-        f"| REJECT | n/d | {after['reject_orders']}/{after['total_orders']} "
-        f"({100 * after['reject_rate']:.1f}%) |",
-        f"| Tempo medio | {before_metrics.get('mean_time_seconds', before.get('total_time_seconds', 0) / max(before_metrics.get('total_orders', 1), 1)):.1f}s | {after['mean_time_seconds']:.1f}s |",
+        "| Metrica | Prima | Dopo (senza LLM) |",
+        "|---------|-------|------------------|",
+        f"| Testata | {100 * before_metrics.get('header_accuracy', 0):.1f}% | "
+        f"{100 * comparable.get('header_accuracy', 0):.1f}% |",
+        f"| Righe | {100 * before_metrics.get('lines_accuracy', 0):.1f}% | "
+        f"{100 * comparable.get('lines_accuracy', 0):.1f}% |",
+        f"| AUTO_POST | {before_auto}/{before_total} | "
+        f"{comparable.get('auto_post_orders', 0)}/{comparable_total} |",
+        f"| REVIEW | {before_metrics.get('orders_in_review', before_total)}/{before_total} | "
+        f"{comparable.get('orders_in_review', 0)}/{comparable_total} |",
+        f"| REJECT | {before_metrics.get('reject_orders', 0)}/{before_total} | "
+        f"{comparable.get('reject_orders', 0)}/{comparable_total} |",
+        f"| Errori silenziosi (ordini AUTO_POST) | 0/{before_auto} | "
+        f"{comparable.get('silent_orders', after['silent_orders'])}/"
+        f"{comparable.get('auto_post_orders', after['auto_post_orders'])} |",
         "",
         "### Per formato",
         "",
@@ -292,9 +331,10 @@ def append_before_after(
         "|---------|---------------|--------------|-------------|------------|"
         "----------------|--------------|--------------|--------------------|",
     ]
+    after_fmt = (no_llm or {}).get("format_scores") or results.format_scores
     for fmt in ("EML", "XLSX", "PDF"):
         bfmt = before_fmt.get(fmt, {})
-        afmt = results.format_scores.get(fmt, {})
+        afmt = after_fmt.get(fmt, {})
         if not bfmt and not afmt:
             continue
         rows.append(
@@ -355,9 +395,11 @@ def append_before_after(
         "i PDF scansionati (`needs_ocr`) non sono supportati.",
         "",
         "**Limiti noti.** Matching articoli solo SKU/xref esatto; niente fuzzy. "
-        "AUTO_POST nel prototipo assume i clienti sintetici già in allowlist "
-        "(§7.1 ALLOWLIST+HISTORY). In produzione l'allowlist è quella reale: "
-        "un ordine pulito di un cliente nuovo va in REVIEW. Confidenza "
+        "``make eval`` attiva `CatalogMatcher(allowlist_synthetic=True)` solo "
+        "per questa misura: in UI e in produzione l'allowlist è quella reale "
+        "(§7.1 ALLOWLIST+HISTORY). Un ordine pulito di un cliente nuovo va in "
+        "REVIEW. Valuta assente dal documento: anagrafica cliente (fonte "
+        "`catalog`, 0,97) oppure default USD a 0,50 → REVIEW. Confidenza "
         "deterministica 0,98, soglia AUTO_POST 0,97 invariata.",
         "",
     ])

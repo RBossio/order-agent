@@ -32,6 +32,11 @@ STATUS_APPROVED = "APPROVATO"
 STATUS_REJECTED = "RIFIUTATO"
 
 
+def _vof_buyer_resolved(vof: dict[str, Any]) -> bool:
+    resolved = (vof.get("buyer") or {}).get("resolved") or {}
+    return bool(resolved.get("erp_partner_id") or resolved.get("erp_partner_ref"))
+
+
 @dataclass
 class InboxOrder:
     """Ordine in console, con VOF, esito regole e stato UI."""
@@ -127,6 +132,11 @@ class OrderInbox:
             vof = load_extracted_vof(stem, provider)
             if vof is not None:
                 loaded.append(vof)
+
+        # La console deve poter mostrare un ordine non risolto: non si inventa la bozza.
+        if loaded and all(_vof_buyer_resolved(item) for item in loaded):
+            buyer = loaded[-1].setdefault("buyer", {})
+            buyer.pop("resolved", None)
 
         for vof in loaded:
             inbox._add_validated(vof, engine)

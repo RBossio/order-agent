@@ -126,7 +126,9 @@ Non è stata abbassata: è la confidenza dell'estrattore a essere tarata sopra q
 | solo LLM | 0,70 | sotto EXT-01 (0,90) → REVIEW |
 | disaccordo o controllo fallito | 0,45 / 0,39 | REVIEW |
 
-Nel prototipo i clienti sintetici sono in **allowlist** con storico 25: senza ALLOWLIST+HISTORY del §7.1 AUTO_POST resterebbe impossibile anche con score 1,0. In produzione l'allowlist è quella reale.
+`CatalogMatcher.allowlist_synthetic` è **False** di default (UI e produzione: allowlist reale). Solo `make eval` lo attiva, per misurare AUTO_POST come se i clienti sintetici fossero già qualificati (§7.1).
+
+Valuta assente dal documento: se il cliente è in anagrafica si usa `customer.currency` (fonte `catalog`, 0,97); altrimenti USD a 0,50 → REVIEW. Non è DETERMINISTIC 0,98.
 
 Errore silenzioso (eval): ordine in **AUTO_POST** con almeno un campo sbagliato (testata, codice/qty/UoM/prezzo/codice cliente, righe in più o mancanti, valori inventati se la GT è vuota). La percentuale a livello di campo è una metrica separata.
 
@@ -139,7 +141,7 @@ make eval
 # equivalente: python -m extract.eval_run
 ```
 
-Produce `docs/eval/eval_results.json` (dettaglio ordine per ordine, chiamate/timeout LLM, numeri «prima» da `git show 380c7bb:docs/eval/eval_results.json`) e la stessa run con LLM spento (`no_llm`). Nessun PDF in questo campione.
+Produce `docs/eval/eval_results.json` (dettaglio ordine per ordine, chiamate/timeout LLM, numeri «prima» sullo stesso campione: 50 ordini, no PDF, no LLM, codice di main pre-PR) e la stessa run con LLM spento (`no_llm`). Nessun PDF in questo campione.
 
 Lo script `eval.py` confronta gli ordini estratti con il ground truth e produce un report Markdown.
 

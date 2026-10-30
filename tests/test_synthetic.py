@@ -506,6 +506,33 @@ class TestGroundTruthFixes:
             })
             assert result.lines == [], template
 
+    def test_total_mixed_keeps_expected_total_line(self):
+        from synthetic.orders import render_email_body
+
+        order = {
+            "buyer": {
+                "name": "Acme Company (SYNTHETIC)",
+                "contact": {"name": "Pat", "email": "p@acme.example"},
+            },
+            "ship_to": {"name": "Acme Shipping Location 1"},
+            "header": {
+                "po_number": "4500010002",
+                "po_date": "2026-03-07",
+                "requested_delivery_date": "2026-03-20",
+            },
+            "lines": [{
+                "line_no": 1,
+                "seller_item_code": "JAN-DSP-200",
+                "description": "Disinfectant Spray",
+                "quantity": 10,
+                "uom_raw": "CS",
+                "unit_price": 45.69,
+            }],
+            "totals": {"total_amount_declared": 456.90, "lines_amount_declared": 456.90},
+        }
+        body, _subtype = render_email_body("classic", order, ["TOTAL_MIXED"], [])
+        assert "Expected Total: $456.90" in body
+
 
 class TestDatagenIntegration:
     """Test per l'integrazione con datagen/master/."""

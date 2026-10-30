@@ -14,6 +14,9 @@ po_date_past_days: 90
 # QTY-02: moltiplicatore sul 99° percentile storico (architettura: 3×).
 qty_anomaly_multiple: 3.0
 
+# QTY-02: quantità ×100 rispetto a storico, confezione, o senza baseline.
+qty_extreme_multiple: 100.0
+
 # QTY-02: massimo assoluto di quantità per riga.
 max_line_qty: 10000
 

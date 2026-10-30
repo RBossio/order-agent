@@ -13,6 +13,7 @@ import re
 import time
 from datetime import date
 from pathlib import Path
+from typing import Any
 
 import jsonschema
 
@@ -429,12 +430,11 @@ class OrderExtractor:
             po_date = "1970-01-01"
 
         delivery_date = to_iso_date(delivery_raw) or delivery_raw
-        currency = currency or "USD"
 
         order.header = ExtractedHeader(
             po_number=po_number,
             po_date=po_date,
-            currency=currency,
+            currency=currency or "",
             requested_delivery_date=delivery_date,
             buyer_reference=llm_header.get("buyer_reference"),
             payment_terms_text=(
@@ -455,11 +455,6 @@ class OrderExtractor:
         )
         if po_date_raw and not _is_iso_date(po_date_raw):
             _cap_confidence(field_confidences, "/header/po_date", LLM_ONLY)
-        _add_conf(
-            field_confidences, "/header/currency", cur_src, cur_agreed,
-            present=bool(currency),
-            snippet=currency if currency_from_doc else None,
-        )
         _add_conf(
             field_confidences, "/header/requested_delivery_date", del_src, del_agreed,
             present=bool(delivery_date), snippet=str(delivery_raw) if delivery_raw else None,
@@ -530,12 +525,19 @@ class OrderExtractor:
         )
         if resolved and order.buyer:
             order.buyer.resolved = resolved
+            code_only = (
+                resolved.get("method") == "CODE"
+                and not buyer_name
+                and not order.buyer.address_line1
+            )
             _add_conf(
-                field_confidences, "/buyer", "preprocessor", None,
+                field_confidences, "/buyer",
+                "llm" if code_only else "preprocessor", None,
                 present=True, snippet=buyer_name,
             )
             _add_conf(
-                field_confidences, "/buyer/resolved", "preprocessor", None,
+                field_confidences, "/buyer/resolved",
+                "llm" if code_only else "preprocessor", None,
                 present=True,
             )
         elif order.buyer:
@@ -543,6 +545,17 @@ class OrderExtractor:
                 field_confidences, "/buyer", "llm" if llm_buyer else "preprocessor", None,
                 present=bool(buyer_name), snippet=buyer_name,
             )
+
+        currency, cur_src = self._resolve_currency(
+            currency, currency_from_doc, cur_src, resolved,
+        )
+        if order.header:
+            order.header.currency = currency
+        _add_conf(
+            field_confidences, "/header/currency", cur_src, cur_agreed,
+            present=bool(currency),
+            snippet=currency if currency_from_doc else None,
+        )
 
         if order.ship_to:
             customer_ref = (resolved or {}).get("erp_partner_ref")
@@ -571,6 +584,27 @@ class OrderExtractor:
                     drop_below_review(field_confidences, fc.path)
 
         return order
+
+    def _resolve_currency(
+        self,
+        currency: str | None,
+        from_doc: bool,
+        source: str,
+        resolved: dict[str, Any] | None,
+    ) -> tuple[str, str]:
+        """Valuta dal documento, altrimenti anagrafica (motivata), altrimenti default basso."""
+        if from_doc and currency:
+            return currency, source
+        customer_currency = None
+        if resolved and self.catalog.provider is not None:
+            ref = resolved.get("erp_partner_ref")
+            if ref:
+                customer = self.catalog.provider.get_customer_by_ref(str(ref))
+                if customer is not None and customer.currency:
+                    customer_currency = customer.currency
+        if customer_currency:
+            return customer_currency, "catalog"
+        return "USD", "default"
 
     def _build_lines(
         self,
@@ -1037,7 +1071,10 @@ def _is_timeout(exc: BaseException) -> bool:
 
 
 def _is_critical_path(path: str) -> bool:
-    if path in {"/header/po_number", "/buyer", "/buyer/name", "/buyer/resolved"}:
+    if path in {
+        "/header/po_number", "/header/currency",
+        "/buyer", "/buyer/name", "/buyer/resolved",
+    }:
         return True
     return any(
         path.endswith(suffix)

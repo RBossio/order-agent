@@ -47,7 +47,7 @@ class CatalogMatcher:
         self,
         provider: ReferenceDataProvider | None = None,
         *,
-        allowlist_synthetic: bool = True,
+        allowlist_synthetic: bool = False,
     ) -> None:
         self.provider: ReferenceDataProvider | None = provider
         if self.provider is None:
@@ -55,9 +55,9 @@ class CatalogMatcher:
                 self.provider = DatagenReferenceDataProvider.from_datagen()
             except (FileNotFoundError, ImportError, OSError):
                 self.provider = None
-        # Prototipo: senza allowlist + storico ≥20 AUTO_POST è irraggiungibile
-        # (§7.1). In eval misuriamo la route come se i clienti sintetici fossero
-        # già qualificati; in produzione l'allowlist è quella reale.
+        # Default False: in UI e in produzione l'allowlist è quella reale (§7.1).
+        # Solo ``make eval`` passa ``allowlist_synthetic=True`` per misurare
+        # AUTO_POST come se i clienti sintetici fossero già qualificati.
         if allowlist_synthetic:
             self._allowlist_all()
 
@@ -159,7 +159,9 @@ class CatalogMatcher:
         if item_customer_ref:
             customer = self.provider.get_customer_by_ref(item_customer_ref)
             if customer is not None:
-                return _buyer_resolved(customer, "CODE", 0.98)
+                # Solo xref articolo, senza ragione sociale: REVIEW, non 0,98.
+                score = 0.98 if _norm_name(name) else 0.70
+                return _buyer_resolved(customer, "CODE", score)
 
         needle = _norm_name(name)
         if needle:
@@ -196,7 +198,7 @@ class CatalogMatcher:
                 if not isinstance(entry, dict):
                     continue
                 entry_name = _norm_name(str(entry.get("name") or ""))
-                if entry_name and (needle == entry_name or needle in entry_name or entry_name in needle):
+                if entry_name and needle == entry_name:
                     partner_id = None
                     if index < len(customer.delivery_partner_ids):
                         partner_id = customer.delivery_partner_ids[index]

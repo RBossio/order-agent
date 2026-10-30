@@ -579,7 +579,7 @@ def addresses_match(ship: dict[str, Any], customer: CustomerRecord) -> bool:
             if not isinstance(entry, dict):
                 continue
             entry_name = normalize_party_name(str(entry.get("name") or ""))
-            if entry_name and (name == entry_name or name in entry_name or entry_name in name):
+            if entry_name and name == entry_name:
                 return True
     return False
 

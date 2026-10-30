@@ -72,27 +72,24 @@ Errore silenzioso = ordine in **AUTO_POST** con almeno un campo sbagliato (testa
 
 ## Prima / dopo
 
-Prima: metriche regenerate con `git show 380c7bbe674192113b8460a93a7bc2d706bff716:docs/eval/eval_results.json` (commit di partenza, non copiate a mano).
-Dopo: questo commit, stesso seed e stesso modello. Campione senza PDF.
+Prima: stesso campione (50 ordini, senza PDF, senza LLM) sul codice di main prima di questa PR (`aea6f9b`). Testata 25,0%, righe 41,5% (XLSX 96,8%, EML 17,3%), AUTO_POST 0/50.
+Dopo (senza LLM): questo commit, stesso seed e stessi documenti. Campione senza PDF.
 
-| Metrica | Prima | Dopo |
-|---------|-------|------|
-| Testata | 56.0% | 85.0% |
-| Righe | 36.9% | 47.3% |
-| Errori silenziosi (ordini AUTO_POST) | n/d (def. precedente) | 0/28 (0.00%) |
-| Errori silenziosi (campi AUTO_POST) | 149 (13.42%, def. precedente) | 0 (0.00%) |
-| AUTO_POST | n/d | 28/50 (56.0%) |
-| REVIEW | n/d | 22/50 (44.0%) |
-| REJECT | n/d | 0/50 (0.0%) |
-| Tempo medio | 56.2s | 43.0s |
+| Metrica | Prima | Dopo (senza LLM) |
+|---------|-------|------------------|
+| Testata | 25.0% | 83.0% |
+| Righe | 41.5% | 44.4% |
+| AUTO_POST | 0/50 | 29/50 |
+| REVIEW | 50/50 | 21/50 |
+| REJECT | 0/50 | 0/50 |
+| Errori silenziosi (ordini AUTO_POST) | 0/0 | 0/29 |
 
 ### Per formato
 
 | Formato | Testata prima | Testata dopo | Righe prima | Righe dopo | AUTO_POST dopo | REVIEW dopo | REJECT dopo | Silent ordini dopo |
 |---------|---------------|--------------|-------------|------------|----------------|--------------|--------------|--------------------|
-| EML | 43.4% | 70.0% | 10.7% | 24.8% | 3/25 | 22/25 | 0/25 | 0 |
-| XLSX | 59.6% | 100.0% | 98.9% | 98.7% | 25/25 | 0/25 | 0/25 | 0 |
-| PDF | 66.7% | — | 44.4% | — | — | — | — | 0 |
+| EML | — | 66.0% | 17.3% | 20.6% | 4/25 | 21/25 | 0/25 | 0 |
+| XLSX | — | 100.0% | 96.8% | 98.7% | 25/25 | 0/25 | 0/25 | 0 |
 
 ## Contributo LLM
 
@@ -117,4 +114,4 @@ I numeri sopra sono su **PO sintetici**: Excel con colonne etichettate, email ge
 
 **PDF.** Esclusi da questo run. Il preprocessor legge tabelle pdfplumber; i PDF scansionati (`needs_ocr`) non sono supportati.
 
-**Limiti noti.** Matching articoli solo SKU/xref esatto; niente fuzzy. AUTO_POST nel prototipo assume i clienti sintetici già in allowlist (§7.1 ALLOWLIST+HISTORY). In produzione l'allowlist è quella reale: un ordine pulito di un cliente nuovo va in REVIEW. Confidenza deterministica 0,98, soglia AUTO_POST 0,97 invariata.
+**Limiti noti.** Matching articoli solo SKU/xref esatto; niente fuzzy. `make eval` attiva `CatalogMatcher(allowlist_synthetic=True)` solo per questa misura: in UI e in produzione l'allowlist è quella reale (§7.1 ALLOWLIST+HISTORY). Un ordine pulito di un cliente nuovo va in REVIEW. Valuta assente dal documento: anagrafica cliente (fonte `catalog`, 0,97) oppure default USD a 0,50 → REVIEW. Confidenza deterministica 0,98, soglia AUTO_POST 0,97 invariata.

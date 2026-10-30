@@ -14,6 +14,10 @@ AGREED = 0.99
 DISAGREE = 0.45
 CHECK_FAIL = 0.39
 MISSING = 0.0
+# Valuta (o altro default) presa dall'anagrafica cliente, metodo dichiarato.
+CUSTOMER_MASTER = 0.97
+# Valuta di default assente dal documento e senza anagrafica → REVIEW.
+DEFAULT_FALLBACK = 0.50
 REVIEW_THRESHOLD = 0.90
 SILENT_THRESHOLD = 0.80
 
@@ -45,6 +49,10 @@ def calibrate(
         return LLM_ONLY
     if source == "agreed":
         return AGREED
+    if source == "catalog":
+        return CUSTOMER_MASTER
+    if source == "default":
+        return DEFAULT_FALLBACK
     return DETERMINISTIC
 
 

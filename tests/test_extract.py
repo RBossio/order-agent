@@ -921,7 +921,13 @@ class TestCalibratedConfidenceAndReview:
 
         assert DETERMINISTIC >= 0.98
         backend = MockBackend()
-        extractor = OrderExtractor(backend=backend, validate_output=False)
+        from extract.catalog import CatalogMatcher
+
+        extractor = OrderExtractor(
+            backend=backend,
+            validate_output=False,
+            catalog=CatalogMatcher(allowlist_synthetic=True),
+        )
         normalized = {
             "input_id": "auto-post",
             "source": {"filename": "po.xlsx", "sha256": "a" * 64, "file_type": "XLSX"},
@@ -1045,3 +1051,113 @@ class TestCalibratedConfidenceAndReview:
         assert snippet_in_document("24.0", "qty 24 cs")
         assert snippet_in_document("USD", "total $12.00")
         assert not snippet_in_document("EUR", "total $12.00")
+
+    def test_ext02_rejects_numeric_and_currency_substrings(self):
+        from ventureorder.rules.ext import snippet_in_document
+
+        assert not snippet_in_document("24", "qty 124 cs")
+        assert not snippet_in_document("24", "qty 240 units")
+        assert not snippet_in_document("100", "total 1000")
+        assert not snippet_in_document("2.4", "qty 24 cs")
+        assert not snippet_in_document("USD", "USDA certified packing")
+        assert not snippet_in_document("EUR", "europe warehouse")
+
+    def test_catalog_matcher_does_not_allowlist_by_default(self):
+        from extract.catalog import CatalogMatcher
+
+        matcher = CatalogMatcher()
+        customers = matcher._iter_customers()
+        assert customers
+        assert all(not customer.allowlisted for customer in customers)
+        assert all(customer.approved_orders_without_corrections < 20 for customer in customers)
+
+    def test_missing_currency_from_customer_master_not_deterministic(self):
+        from extract.catalog import CatalogMatcher
+        from extract.confidence import CUSTOMER_MASTER, DETERMINISTIC
+
+        extractor = OrderExtractor(
+            backend=MockBackend(),
+            validate_output=False,
+            catalog=CatalogMatcher(allowlist_synthetic=True),
+        )
+        normalized = {
+            "input_id": "no-currency",
+            "source": {"filename": "po.xlsx", "sha256": "a" * 64, "file_type": "XLSX"},
+            "ingested_at": "2026-02-01T00:00:00Z",
+            "parts": [{
+                "part_id": "p1",
+                "part_type": "EXCEL_SHEET",
+                "sha256": "b" * 64,
+                "text": (
+                    "Company: Acme Company (SYNTHETIC)\n"
+                    "PO Number: 4500010999\n"
+                    "Date: 2026-02-01\n"
+                    "Ship To: Acme Shipping Location 1\n"
+                    "Delivery Date: 2026-02-15\n"
+                ),
+                "tables": [{
+                    "header_row_index": 0,
+                    "rows": [
+                        [
+                            {"value": "Item Code"}, {"value": "Description"},
+                            {"value": "Quantity"}, {"value": "UoM"},
+                            {"value": "Unit Price"}, {"value": "Amount"},
+                        ],
+                        [
+                            {"value": "JAN-DSP-200"}, {"value": "Disinfectant Spray"},
+                            {"value": 2}, {"value": "CS"}, {"value": 45.69}, {"value": 91.38},
+                        ],
+                    ],
+                }],
+            }],
+        }
+        result = extractor.extract(normalized)
+        currency = next(fc for fc in result.field_confidences if fc.path == "/header/currency")
+        assert currency.source == "catalog"
+        assert currency.confidence == CUSTOMER_MASTER
+        assert currency.confidence < DETERMINISTIC
+        assert currency.snippet is None
+        assert result.order.header.currency == "USD"
+
+    def test_code_only_buyer_is_not_deterministic(self):
+        from extract.catalog import CatalogMatcher
+        from extract.confidence import DETERMINISTIC, LLM_ONLY
+
+        extractor = OrderExtractor(
+            backend=MockBackend(),
+            validate_output=False,
+            catalog=CatalogMatcher(allowlist_synthetic=True),
+        )
+        normalized = {
+            "input_id": "code-only",
+            "source": {"filename": "po.xlsx", "sha256": "a" * 64, "file_type": "XLSX"},
+            "ingested_at": "2026-02-01T00:00:00Z",
+            "parts": [{
+                "part_id": "p1",
+                "part_type": "EXCEL_SHEET",
+                "sha256": "b" * 64,
+                "text": "PO Number: 4500010888\nDate: 2026-02-01\n",
+                "tables": [{
+                    "header_row_index": 0,
+                    "rows": [
+                        [
+                            {"value": "Item Code"}, {"value": "Description"},
+                            {"value": "Quantity"}, {"value": "UoM"},
+                            {"value": "Unit Price"},
+                        ],
+                        [
+                            {"value": "ACME-ABR-3086"}, {"value": "Cut-Off Wheel 6in"},
+                            {"value": 2}, {"value": "BX"}, {"value": 18.75},
+                        ],
+                    ],
+                }],
+            }],
+        }
+        result = extractor.extract(normalized)
+        resolved = (result.order.buyer.resolved or {}) if result.order.buyer else {}
+        assert resolved.get("method") == "CODE"
+        assert float(resolved.get("score") or 0) < DETERMINISTIC
+        buyer_conf = next(fc for fc in result.field_confidences if fc.path == "/buyer")
+        assert buyer_conf.confidence <= LLM_ONLY
+        assert result.decision is not None
+        assert result.decision["route"] != "AUTO_POST"

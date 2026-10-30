@@ -10,6 +10,7 @@ from ventureorder.rules.registry import rule
 
 CRITICAL_HEADER = {
     "/header/po_number": "numero PO",
+    "/header/currency": "valuta",
     "/buyer": "cliente",
     "/buyer/name": "cliente",
     "/buyer/resolved": "cliente",
@@ -51,21 +52,40 @@ def _numeric_variants(token: str) -> list[str]:
     return [item for item in variants if item]
 
 
+def _token_in_haystack(token: str, haystack: str, *, numeric: bool) -> bool:
+    """Match di token: numeri con confine di cifra, testo con confine di parola."""
+    if not token:
+        return False
+    if numeric:
+        pattern = rf"(?<!\d){re.escape(token)}(?!\d)"
+    else:
+        pattern = rf"(?<![a-z0-9]){re.escape(token)}(?![a-z0-9])"
+    return re.search(pattern, haystack) is not None
+
+
 def snippet_in_document(snippet: str, haystack: str) -> bool:
     """True se lo snippet compare nel testo, con tolleranza su numeri e valuta."""
     needle = _normalize_text(snippet)
     if not needle:
         return True
-    if needle in haystack:
+    numeric_variants = _numeric_variants(needle)
+    if numeric_variants:
+        for variant in numeric_variants:
+            if _token_in_haystack(variant, haystack, numeric=True):
+                return True
+            if f"${variant}" in haystack:
+                return True
+        return False
+    if _token_in_haystack(needle, haystack, numeric=False):
         return True
     aliases = _CURRENCY_ALIASES.get(needle)
-    if aliases and any(alias in haystack for alias in aliases):
-        return True
-    for variant in _numeric_variants(needle):
-        if variant in haystack:
-            return True
-        if f"${variant}" in haystack:
-            return True
+    if aliases:
+        for alias in aliases:
+            if alias == "$":
+                if "$" in haystack:
+                    return True
+            elif _token_in_haystack(alias, haystack, numeric=False):
+                return True
     return False
 
 

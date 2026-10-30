@@ -18,15 +18,15 @@ from ventureorder.rules import DatagenReferenceDataProvider, HistoricalOrder, Va
 DEMO_AS_OF = date(2026, 4, 2)
 
 DEMO_STEMS = (
-    "order_008_TIT-PO-01007",
-    "order_009_NMC-01008",
-    "order_013_NMC-01012",
-    "order_014_TIT-PO-01013",
-    "order_015_NMC-01014",
-    "order_017_QS-01016",
-    "order_003_SW-01002",
+    "order_001_TIT-PO-01000",
+    "order_002_QS-01001",
+    "order_003_MBM01002",
+    "order_004_TIT-PO-01003",
+    "order_005_MBM01004",
+    "order_006_BW-01005",
+    "order_012_QS-01011",
+    "order_027_NMC-01026",
     "order_028_SW-01027",
-    "order_004_SW-01003",
 )
 
 
@@ -78,9 +78,11 @@ def ingest_and_extract(path: Path) -> dict[str, Any] | None:
     backends_mod = importlib.import_module("extract.backends")
     try:
         normalized = ingest_mod.Ingestor().ingest(path)
+        catalog_mod = importlib.import_module("extract.catalog")
         result = extract_mod.OrderExtractor(
             backend=backends_mod.MockBackend(),
             validate_output=False,
+            catalog=catalog_mod.CatalogMatcher(allowlist_synthetic=False),
         ).extract(normalized.to_dict())
     except Exception:  # noqa: BLE001 — un documento non deve far cadere la demo
         return None

@@ -62,7 +62,7 @@
     "order_083_QS-01082"
   ],
   "exclude_pdf": true,
-  "before_commit": "380c7bbe674192113b8460a93a7bc2d706bff716",
+  "before_commit": "aea6f9bd7cb2b8442f297dc81f1ac81d2d450f0c",
   "total_time_seconds": 2151.6854841709137,
   "errors": [
     [
@@ -3234,40 +3234,30 @@
     }
   ],
   "before": {
-    "source_commit": "380c7bbe674192113b8460a93a7bc2d706bff716",
+    "source_commit": "aea6f9b",
+    "sample_size": 50,
+    "exclude_pdf": true,
+    "use_llm": false,
     "metrics": {
-      "header_accuracy": 0.56,
-      "lines_accuracy": 0.36923076923076925,
-      "silent_errors_count": 149,
-      "silent_error_rate": 0.13423423423423422,
+      "header_accuracy": 0.25,
+      "lines_accuracy": 0.415,
+      "auto_post_orders": 0,
       "total_orders": 50,
-      "hard_cases": 22,
-      "extraction_failures": 13
+      "orders_in_review": 50,
+      "reject_orders": 0,
+      "silent_orders": 0,
+      "silent_field_errors": 0
     },
     "format_scores": {
-      "PDF": {
-        "count": 18,
-        "header_correct": 48,
-        "header_total": 72,
-        "lines_expected": 126,
-        "lines_matched": 56
+      "XLSX": {
+        "lines_matched": 96.8,
+        "lines_expected": 100.0
       },
       "EML": {
-        "count": 19,
-        "header_correct": 33,
-        "header_total": 76,
-        "lines_expected": 242,
-        "lines_matched": 26
-      },
-      "XLSX": {
-        "count": 13,
-        "header_correct": 31,
-        "header_total": 52,
-        "lines_expected": 87,
-        "lines_matched": 86
+        "lines_matched": 17.3,
+        "lines_expected": 100.0
       }
-    },
-    "sample_size": 50
+    }
   },
   "no_llm": {
     "metrics": {
@@ -3286,7 +3276,7 @@
       "review_rate": 0.42,
       "reject_orders": 0,
       "reject_rate": 0.0,
-      "mean_time_seconds": 0.006081295013427734,
+      "mean_time_seconds": 0.0073231315612792966,
       "llm_calls": 0,
       "llm_timeouts": 0
     },
@@ -3303,7 +3293,7 @@
         "auto_post": 25,
         "review": 0,
         "reject": 0,
-        "time_ms": 47
+        "time_ms": 54
       },
       "EML": {
         "count": 25,
@@ -3317,7 +3307,7 @@
         "auto_post": 4,
         "review": 21,
         "reject": 0,
-        "time_ms": 36
+        "time_ms": 41
       }
     },
     "orders": [
@@ -3343,7 +3333,7 @@
         "llm_calls": 0,
         "llm_timeouts": 0,
         "llm_failed": false,
-        "extraction_time_ms": 11,
+        "extraction_time_ms": 12,
         "overall_confidence": 0.7,
         "decision": {
           "score": 0.98,
@@ -3565,7 +3555,7 @@
         "llm_calls": 0,
         "llm_timeouts": 0,
         "llm_failed": false,
-        "extraction_time_ms": 6,
+        "extraction_time_ms": 3,
         "overall_confidence": 0.7,
         "decision": {
           "score": 0.98,
@@ -3595,7 +3585,7 @@
         "llm_calls": 0,
         "llm_timeouts": 0,
         "llm_failed": false,
-        "extraction_time_ms": 8,
+        "extraction_time_ms": 7,
         "overall_confidence": 0.7,
         "decision": {
           "score": 0.98,
@@ -3625,8 +3615,8 @@
         "llm_calls": 0,
         "llm_timeouts": 0,
         "llm_failed": false,
-        "extraction_time_ms": 1,
-        "overall_confidence": 0.98,
+        "extraction_time_ms": 2,
+        "overall_confidence": 0.97,
         "decision": {
           "score": 0.98,
           "route": "AUTO_POST",
@@ -3655,7 +3645,7 @@
         "llm_calls": 0,
         "llm_timeouts": 0,
         "llm_failed": false,
-        "extraction_time_ms": 5,
+        "extraction_time_ms": 1,
         "overall_confidence": 0.7,
         "decision": {
           "score": 0.98,
@@ -3685,7 +3675,7 @@
         "llm_calls": 0,
         "llm_timeouts": 0,
         "llm_failed": false,
-        "extraction_time_ms": 2,
+        "extraction_time_ms": 6,
         "overall_confidence": 0.39,
         "decision": {
           "score": 0.39,
@@ -3717,7 +3707,7 @@
         "llm_calls": 0,
         "llm_timeouts": 0,
         "llm_failed": false,
-        "extraction_time_ms": 2,
+        "extraction_time_ms": 4,
         "overall_confidence": 0.39,
         "decision": {
           "score": 0.98,
@@ -3749,8 +3739,8 @@
         "llm_calls": 0,
         "llm_timeouts": 0,
         "llm_failed": false,
-        "extraction_time_ms": 0,
-        "overall_confidence": 0.98,
+        "extraction_time_ms": 1,
+        "overall_confidence": 0.97,
         "decision": {
           "score": 0.98,
           "route": "AUTO_POST",
@@ -3779,7 +3769,7 @@
         "llm_calls": 0,
         "llm_timeouts": 0,
         "llm_failed": false,
-        "extraction_time_ms": 0,
+        "extraction_time_ms": 1,
         "overall_confidence": 0.7,
         "decision": {
           "score": 0.98,
@@ -3900,8 +3890,8 @@
         "llm_calls": 0,
         "llm_timeouts": 0,
         "llm_failed": false,
-        "extraction_time_ms": 1,
-        "overall_confidence": 0.98,
+        "extraction_time_ms": 2,
+        "overall_confidence": 0.97,
         "decision": {
           "score": 0.98,
           "route": "AUTO_POST",
@@ -4034,7 +4024,7 @@
         "llm_calls": 0,
         "llm_timeouts": 0,
         "llm_failed": false,
-        "extraction_time_ms": 0,
+        "extraction_time_ms": 1,
         "overall_confidence": 0.7,
         "decision": {
           "score": 0.98,
@@ -4062,8 +4052,8 @@
         "llm_calls": 0,
         "llm_timeouts": 0,
         "llm_failed": false,
-        "extraction_time_ms": 0,
-        "overall_confidence": 0.98,
+        "extraction_time_ms": 1,
+        "overall_confidence": 0.97,
         "decision": {
           "score": 0.98,
           "route": "AUTO_POST",
@@ -4226,7 +4216,7 @@
         "llm_calls": 0,
         "llm_timeouts": 0,
         "llm_failed": false,
-        "extraction_time_ms": 2,
+        "extraction_time_ms": 5,
         "overall_confidence": 0.7,
         "decision": {
           "score": 0.98,
@@ -4380,8 +4370,8 @@
         "llm_calls": 0,
         "llm_timeouts": 0,
         "llm_failed": false,
-        "extraction_time_ms": 0,
-        "overall_confidence": 0.98,
+        "extraction_time_ms": 1,
+        "overall_confidence": 0.97,
         "decision": {
           "score": 0.98,
           "route": "AUTO_POST",
@@ -4409,7 +4399,7 @@
         "llm_timeouts": 0,
         "llm_failed": false,
         "extraction_time_ms": 1,
-        "overall_confidence": 0.98,
+        "overall_confidence": 0.97,
         "decision": {
           "score": 0.98,
           "route": "AUTO_POST",
@@ -4436,8 +4426,8 @@
         "llm_calls": 0,
         "llm_timeouts": 0,
         "llm_failed": false,
-        "extraction_time_ms": 1,
-        "overall_confidence": 0.98,
+        "extraction_time_ms": 2,
+        "overall_confidence": 0.97,
         "decision": {
           "score": 0.98,
           "route": "AUTO_POST",
@@ -4599,7 +4589,7 @@
         "llm_calls": 0,
         "llm_timeouts": 0,
         "llm_failed": false,
-        "extraction_time_ms": 4,
+        "extraction_time_ms": 8,
         "overall_confidence": 0.7,
         "decision": {
           "score": 0.98,
@@ -4708,8 +4698,8 @@
         "llm_calls": 0,
         "llm_timeouts": 0,
         "llm_failed": false,
-        "extraction_time_ms": 1,
-        "overall_confidence": 0.98,
+        "extraction_time_ms": 2,
+        "overall_confidence": 0.97,
         "decision": {
           "score": 0.98,
           "route": "AUTO_POST",
@@ -4736,8 +4726,8 @@
         "llm_calls": 0,
         "llm_timeouts": 0,
         "llm_failed": false,
-        "extraction_time_ms": 1,
-        "overall_confidence": 0.98,
+        "extraction_time_ms": 2,
+        "overall_confidence": 0.97,
         "decision": {
           "score": 0.98,
           "route": "AUTO_POST",
@@ -4901,7 +4891,7 @@
         "llm_timeouts": 0,
         "llm_failed": false,
         "extraction_time_ms": 1,
-        "overall_confidence": 0.98,
+        "overall_confidence": 0.97,
         "decision": {
           "score": 0.98,
           "route": "AUTO_POST",
@@ -4928,7 +4918,7 @@
         "llm_calls": 0,
         "llm_timeouts": 0,
         "llm_failed": false,
-        "extraction_time_ms": 2,
+        "extraction_time_ms": 3,
         "overall_confidence": 0.7,
         "decision": {
           "score": 0.98,
@@ -5399,7 +5389,7 @@
         "llm_calls": 0,
         "llm_timeouts": 0,
         "llm_failed": false,
-        "extraction_time_ms": 0,
+        "extraction_time_ms": 1,
         "overall_confidence": 0.0,
         "decision": {
           "score": 0.98,
@@ -5430,7 +5420,7 @@
         "llm_timeouts": 0,
         "llm_failed": false,
         "extraction_time_ms": 1,
-        "overall_confidence": 0.98,
+        "overall_confidence": 0.97,
         "decision": {
           "score": 0.98,
           "route": "AUTO_POST",
@@ -5810,7 +5800,7 @@
         "llm_calls": 0,
         "llm_timeouts": 0,
         "llm_failed": false,
-        "extraction_time_ms": 1,
+        "extraction_time_ms": 2,
         "overall_confidence": 0.7,
         "decision": {
           "score": 0.98,
@@ -5934,7 +5924,7 @@
         "llm_calls": 0,
         "llm_timeouts": 0,
         "llm_failed": false,
-        "extraction_time_ms": 0,
+        "extraction_time_ms": 1,
         "overall_confidence": 0.0,
         "decision": {
           "score": 0.98,
@@ -5964,8 +5954,8 @@
         "llm_calls": 0,
         "llm_timeouts": 0,
         "llm_failed": false,
-        "extraction_time_ms": 1,
-        "overall_confidence": 0.98,
+        "extraction_time_ms": 2,
+        "overall_confidence": 0.97,
         "decision": {
           "score": 0.98,
           "route": "AUTO_POST",
@@ -5992,7 +5982,7 @@
         "llm_calls": 0,
         "llm_timeouts": 0,
         "llm_failed": false,
-        "extraction_time_ms": 9,
+        "extraction_time_ms": 8,
         "overall_confidence": 0.7,
         "decision": {
           "score": 0.98,
@@ -6020,7 +6010,7 @@
         "llm_calls": 0,
         "llm_timeouts": 0,
         "llm_failed": false,
-        "extraction_time_ms": 4,
+        "extraction_time_ms": 0,
         "overall_confidence": 0.7,
         "decision": {
           "score": 0.98,
@@ -6049,7 +6039,7 @@
         "llm_timeouts": 0,
         "llm_failed": false,
         "extraction_time_ms": 1,
-        "overall_confidence": 0.98,
+        "overall_confidence": 0.97,
         "decision": {
           "score": 0.98,
           "route": "AUTO_POST",
@@ -6229,7 +6219,7 @@
         "llm_calls": 0,
         "llm_timeouts": 0,
         "llm_failed": false,
-        "extraction_time_ms": 4,
+        "extraction_time_ms": 0,
         "overall_confidence": 0.0,
         "decision": {
           "score": 0.98,
@@ -6407,6 +6397,6 @@
       }
     ],
     "errors": [],
-    "total_time_seconds": 0.3040647506713867
+    "total_time_seconds": 0.36615657806396484
   }
 }

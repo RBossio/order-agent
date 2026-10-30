@@ -206,6 +206,14 @@ def _qty_word(qty: object) -> str:
     return NUM_IN_WORDS.get(number, str(number))
 
 
+def _expected_total_lines(hard_cases: list[str], order_data: dict) -> list[str]:
+    """Riga 'Expected Total' per il caso difficile TOTAL_MIXED."""
+    if "TOTAL_MIXED" not in hard_cases:
+        return []
+    total = (order_data.get("totals") or {}).get("total_amount_declared") or 0
+    return ["", f"Expected Total: ${float(total):.2f}"]
+
+
 def render_email_body(
     template: str,
     order_data: dict,
@@ -267,6 +275,9 @@ def render_email_body(
         chunks.extend([
             "",
             f"Delivery requested by: {delivery}",
+        ])
+        chunks.extend(_expected_total_lines(hard_cases, order_data))
+        chunks.extend([
             "",
             "Thank you,",
             buyer.get("contact", {}).get("name") or "Purchasing Dept",
@@ -291,7 +302,11 @@ def render_email_body(
             "<th>Unit</th><th>Price</th></tr>"
             + "".join(rows)
             + "</table>"
-            "<p>Thanks</p></body></html>"
+            + (
+                f"<p>Expected Total: ${float((order_data.get('totals') or {}).get('total_amount_declared') or 0):.2f}</p>"
+                if "TOTAL_MIXED" in hard_cases else ""
+            )
+            + "<p>Thanks</p></body></html>"
         )
         return body, "html"
 
@@ -309,6 +324,7 @@ def render_email_body(
             )
         chunks.append("")
         chunks.append("Thanks in advance.")
+        chunks.extend(_expected_total_lines(hard_cases, order_data))
         return "\n".join(chunks), "plain"
 
     if template == "signature_list":
@@ -326,6 +342,7 @@ def render_email_body(
             price_bit = f" / {price}" if price else ""
             chunks.append(f"{code}  |  {desc}  |  {qty} {uom}{price_bit}")
         chunks.append(f"PO {po} · {date_display} · deliver {ship_name} by {delivery}")
+        chunks.extend(_expected_total_lines(hard_cases, order_data))
         return "\n".join(chunks), "plain"
 
     if template == "qty_words":
@@ -343,6 +360,7 @@ def render_email_body(
             )
         chunks.append("")
         chunks.append("Appreciate the help.")
+        chunks.extend(_expected_total_lines(hard_cases, order_data))
         return "\n".join(chunks), "plain"
 
     # forwarded_reply
@@ -365,6 +383,7 @@ def render_email_body(
         f"Deliver to {ship_name} by {delivery}.",
         "Line items:",
         *original_lines,
+        *_expected_total_lines(hard_cases, order_data),
     ])
     return body, "plain"
 
@@ -660,7 +679,10 @@ def generate_xlsx_order(
     if "TOTAL_MIXED" in hard_cases:
         note_row = start_row + len(lines) + 1
         ws.cell(row=note_row, column=3, value="Note: Confirm stock before shipping")
-        total_row = note_row + 1
+        expected_row = note_row + 1
+        ws.cell(row=expected_row, column=6, value="Expected Total:")
+        ws.cell(row=expected_row, column=7, value=order_data.get("totals", {}).get("total_amount_declared"))
+        total_row = expected_row + 1
         ws.cell(row=total_row, column=6, value="TOTAL:")
         ws.cell(row=total_row, column=7, value=order_data.get("totals", {}).get("lines_amount_declared"))
 
