@@ -566,8 +566,24 @@ def setup_technical_user(client: OdooClient, bot_password: str) -> None:
     print("  NOTA: Creare una chiave API da Preferenze → Sicurezza account")
 
 
+def _load_project_dotenv() -> None:
+    """Carica `.env` del repo senza passare da Make (`$` e `#` restano intatti)."""
+    scripts_dir = Path(__file__).resolve().parent
+    if str(scripts_dir) not in sys.path:
+        sys.path.insert(0, str(scripts_dir))
+    from generate_odoo_conf import DotenvError, env_file_path, load_dotenv
+
+    try:
+        load_dotenv(env_file_path(scripts_dir.parent))
+    except DotenvError as exc:
+        print(f"ERRORE: {exc}", file=sys.stderr)
+        sys.exit(1)
+
+
 def main():
     """Entry point principale."""
+    _load_project_dotenv()
+
     # Verifica variabile obbligatoria per il bot
     bot_password = os.getenv("ODOO_BOT_PASSWORD")
     if not bot_password:
@@ -575,11 +591,28 @@ def main():
         print("Impostare la variabile d'ambiente con la password per l'utente bot.", file=sys.stderr)
         sys.exit(1)
 
+    login_password = os.getenv("ODOO_ADMIN_LOGIN_PASSWORD")
+    if not login_password:
+        print("ERRORE: ODOO_ADMIN_LOGIN_PASSWORD non definita.", file=sys.stderr)
+        print(
+            "Impostare la password di accesso dell'utente admin "
+            "(non usare la master password ODOO_ADMIN_PASSWORD).",
+            file=sys.stderr,
+        )
+        sys.exit(1)
+    master_password = os.getenv("ODOO_ADMIN_PASSWORD")
+    if master_password and login_password == master_password:
+        print(
+            "ERRORE: ODOO_ADMIN_LOGIN_PASSWORD deve essere distinta da ODOO_ADMIN_PASSWORD.",
+            file=sys.stderr,
+        )
+        sys.exit(1)
+
     # Configurazione da environment o default
     url = os.getenv("ODOO_URL", "http://localhost:8069")
     db = os.getenv("ODOO_DB", "vo_demo")
     username = os.getenv("ODOO_USER", "admin")
-    password = os.getenv("ODOO_PASSWORD", os.getenv("ODOO_ADMIN_PASSWORD", "admin"))
+    password = login_password
 
     print("=" * 60)
     print("VentureOrder - Seed Odoo con dati sintetici MRO/JanSan")
