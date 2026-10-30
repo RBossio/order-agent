@@ -1,6 +1,7 @@
 """Pipeline demo: ingest → estrazione deterministica → match §6 → regole.
 
-Non usa il ground truth, non inventa confidenze, allowlist o clienti.
+Non usa il ground truth e non inventa confidenze. L'allowlist demo
+(C-ATLAS) è solo del provider della console, distinta da produzione.
 """
 
 from __future__ import annotations
@@ -16,16 +17,19 @@ from ventureorder.rules import DatagenReferenceDataProvider, HistoricalOrder, Va
 
 DEMO_AS_OF = date(2026, 4, 2)
 
+# Allowlist solo della console demo: non tocca CatalogMatcher né make eval.
+DEMO_ALLOWLISTED_REFS = frozenset({"C-ATLAS"})
+
 DEMO_STEMS = (
     "order_001_TIT-PO-01000",
     "order_002_QS-01001",
     "order_003_MBM01002",
     "order_004_TIT-PO-01003",
-    "order_005_MBM01004",
-    "order_006_BW-01005",
     "order_012_QS-01011",
     "order_027_NMC-01026",
-    "order_028_SW-01027",
+    "order_036_TIT-PO-01035",
+    "order_demo_CW-00998",
+    "order_demo_ZU-00999",
 )
 
 
@@ -58,8 +62,14 @@ def find_document(stem: str) -> Path | None:
 
 
 def build_reference_provider() -> DatagenReferenceDataProvider:
-    """Anagrafica datagen così com'è (nessuna allowlist artificiale)."""
-    return DatagenReferenceDataProvider.from_datagen()
+    """Anagrafica datagen con allowlist solo demo (C-ATLAS, storico ≥ 20).
+
+    ``CatalogMatcher(allowlist_synthetic=False)`` resta il default di
+    produzione e di ``make eval`` (quest'ultimo lo accende esplicitamente).
+    """
+    return DatagenReferenceDataProvider.from_datagen(
+        allowlisted_refs=set(DEMO_ALLOWLISTED_REFS),
+    )
 
 
 def build_engine(provider: DatagenReferenceDataProvider) -> ValidationEngine:

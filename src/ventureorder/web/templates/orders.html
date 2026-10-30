@@ -38,6 +38,9 @@
           {% if row.draft_name %}
           <span class="draft">{{ row.draft_name }}</span>
           {% endif %}
+          {% if row.review_gate_reason %}
+          <span class="hint">{{ row.review_gate_reason }}</span>
+          {% endif %}
         </td>
       </tr>
       {% endfor %}

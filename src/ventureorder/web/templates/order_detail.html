@@ -38,6 +38,10 @@
         <dd>{% if order.total is not none %}${{ "%.2f"|format(order.total) }}{% else %}n/d{% endif %}</dd>
         <dt>Route regole</dt>
         <dd>{{ order.result.decision.value }} (score {{ "%.2f"|format(order.result.score) }})</dd>
+        {% if decision_explanation %}
+        <dt>Motivo</dt>
+        <dd class="decision-reason">{{ decision_explanation }}</dd>
+        {% endif %}
       </dl>
     </article>
   </div>

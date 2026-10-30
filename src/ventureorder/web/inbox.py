@@ -15,6 +15,7 @@ from ventureorder.connectors.odoo import (
 from ventureorder.rules import (
     DatagenReferenceDataProvider,
     DecisionRoute,
+    Severity,
     ValidationEngine,
     ValidationResult,
 )
@@ -30,11 +31,6 @@ from ventureorder.web.pipeline import (
 
 STATUS_APPROVED = "APPROVATO"
 STATUS_REJECTED = "RIFIUTATO"
-
-
-def _vof_buyer_resolved(vof: dict[str, Any]) -> bool:
-    resolved = (vof.get("buyer") or {}).get("resolved") or {}
-    return bool(resolved.get("erp_partner_id") or resolved.get("erp_partner_ref"))
 
 
 @dataclass
@@ -77,6 +73,19 @@ class InboxOrder:
     def line_count(self) -> int:
         lines = self.vof.get("lines") or []
         return len(lines) if isinstance(lines, list) else 0
+
+    @property
+    def review_gate_reason(self) -> str | None:
+        """Motivo REVIEW senza violazioni BLOCK/REVIEW, dal motore di regole."""
+        if self.result.decision != DecisionRoute.REVIEW:
+            return None
+        if any(
+            issue.severity in {Severity.BLOCK, Severity.REVIEW}
+            for issue in self.result.issues
+        ):
+            return None
+        text = (self.result.explanation or "").strip()
+        return text or None
 
     @property
     def total(self) -> float | None:
@@ -132,11 +141,6 @@ class OrderInbox:
             vof = load_extracted_vof(stem, provider)
             if vof is not None:
                 loaded.append(vof)
-
-        # La console deve poter mostrare un ordine non risolto: non si inventa la bozza.
-        if loaded and all(_vof_buyer_resolved(item) for item in loaded):
-            buyer = loaded[-1].setdefault("buyer", {})
-            buyer.pop("resolved", None)
 
         for vof in loaded:
             inbox._add_validated(vof, engine)

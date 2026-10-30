@@ -196,6 +196,7 @@ class ValidationEngine:
 
         result.score = self._compute_score(context, result)
         result.decision, result.reasons = self._route(context, result)
+        result.explanation = self.get_decision_explanation(result, context)
         return result
 
     def match_and_validate(
@@ -281,19 +282,54 @@ class ValidationEngine:
             return DecisionRoute.REVIEW, reasons
         return DecisionRoute.AUTO_POST, []
 
-    def get_decision_explanation(self, result: ValidationResult) -> str:
+    def get_decision_explanation(
+        self,
+        result: ValidationResult,
+        ctx: RuleContext | None = None,
+    ) -> str:
         """Spiega in italiano la route calcolata."""
+        if ctx is None and result.explanation:
+            return result.explanation
         if result.decision == DecisionRoute.REJECT:
             return (
                 "Ordine scartato: quarantena di sicurezza o duplicato esatto "
                 f"({', '.join(result.reasons) or 'SEC/DUP'})."
             )
         if result.decision == DecisionRoute.REVIEW:
+            phrases = self._review_reason_phrases(result, ctx)
             return (
                 "Ordine in revisione: "
-                f"{', '.join(result.reasons) or 'issue BLOCK/REVIEW o AUTO_POST non ammissibile'}."
+                f"{', '.join(phrases) or 'issue BLOCK/REVIEW o AUTO_POST non ammissibile'}."
             )
         return "Ordine ammissibile per AUTO_POST (simulato nel prototipo)."
+
+    def _review_reason_phrases(
+        self, result: ValidationResult, ctx: RuleContext | None
+    ) -> list[str]:
+        """Etichette italiane per i motivi di REVIEW (codici regola o gate AUTO_POST)."""
+        min_approved = 20
+        min_score = 0.97
+        history_n = 0
+        if ctx is not None:
+            min_approved = int(threshold(ctx, "auto_post_min_approved_orders", 20))
+            min_score = float(threshold(ctx, "auto_post_min_score", 0.97))
+            customer = customer_of(ctx.reference_data, ctx.vof)
+            history_n = (
+                0 if customer is None else customer.approved_orders_without_corrections
+            )
+        phrases: list[str] = []
+        for reason in result.reasons:
+            if reason == "ALLOWLIST":
+                phrases.append("cliente non in allowlist")
+            elif reason == "HISTORY":
+                phrases.append(f"storico insufficiente ({history_n}/{min_approved})")
+            elif reason == "SCORE":
+                phrases.append(
+                    f"score sotto soglia ({result.score:.2f} < {min_score:.2f})"
+                )
+            else:
+                phrases.append(reason)
+        return phrases
 
 
 def validate_rules_config(config: dict[str, Any]) -> None:

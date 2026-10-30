@@ -145,6 +145,7 @@ class ValidationResult:
     score: float = 1.0
     reasons: list[str] = field(default_factory=list)
     summary: dict[str, int] = field(default_factory=dict)
+    explanation: str = ""
 
     def add_issue(self, issue: Issue) -> None:
         """Aggiunge una issue e aggiorna il riepilogo per severità."""
@@ -160,5 +161,6 @@ class ValidationResult:
                 "score": round(self.score, 4),
                 "route": self.decision.value,
                 "reasons": list(self.reasons),
+                "explanation": self.explanation,
             },
         }
