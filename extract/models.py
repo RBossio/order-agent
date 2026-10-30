@@ -51,8 +51,6 @@ class ExtractionWarning:
         }
         if self.path:
             d["path"] = self.path
-        if self.details:
-            d["details"] = self.details
         return d
 
 
@@ -72,6 +70,7 @@ class ExtractedParty:
     contact_name: str | None = None
     contact_email: str | None = None
     contact_phone: str | None = None
+    resolved: dict[str, Any] | None = None
 
     def to_dict(self) -> dict:
         d: dict[str, Any] = {}
@@ -109,6 +108,8 @@ class ExtractedParty:
             contact["phone"] = self.contact_phone
         if contact:
             d["contact"] = contact
+        if self.resolved:
+            d["resolved"] = self.resolved
 
         return d
 
@@ -158,6 +159,7 @@ class ExtractedLine:
     requested_delivery_date: str | None = None
     notes: str | None = None
     confidence: float = 0.0
+    resolution: dict[str, Any] | None = None
 
     def to_dict(self) -> dict:
         d: dict[str, Any] = {
@@ -195,6 +197,8 @@ class ExtractedLine:
             d["requested_delivery_date"] = self.requested_delivery_date
         if self.notes:
             d["notes"] = self.notes
+        if self.resolution:
+            d["resolution"] = self.resolution
         return d
 
 
@@ -299,6 +303,7 @@ class ExtractedOrder:
                 "documents": self.source_documents or [],
             },
             "header": self.header.to_dict() if self.header else {},
+            "buyer": self.buyer.to_dict() if self.buyer else {},
             "lines": [line.to_dict() for line in self.lines],
             "processing": {
                 "extractor": "extract/ollama",
@@ -306,8 +311,6 @@ class ExtractedOrder:
             },
         }
 
-        if self.buyer:
-            d["buyer"] = self.buyer.to_dict()
         if self.seller:
             d["seller"] = self.seller.to_dict()
         if self.ship_to:
@@ -330,6 +333,7 @@ class ExtractionResult:
     llm_tokens_used: int = 0
     extraction_time_ms: int = 0
     preprocessed_fields: list[str] = field(default_factory=list)
+    decision: dict[str, Any] | None = None
 
     def to_dict(self) -> dict:
         order_dict = self.order.to_dict()
@@ -344,9 +348,10 @@ class ExtractionResult:
         if evidence:
             order_dict["evidence"] = evidence
 
-        if self.warnings:
-            order_dict["validation"] = {
-                "issues": [w.to_dict() for w in self.warnings]
-            }
+        issues = [w.to_dict() for w in self.warnings]
+        if issues:
+            order_dict["validation"] = {"issues": issues}
+        if self.decision:
+            order_dict["decision"] = self.decision
 
         return order_dict

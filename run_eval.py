@@ -113,10 +113,12 @@ def main() -> int:
     output_dir.mkdir(parents=True, exist_ok=True)
     report = generate_report(
         results,
-        output_path=output_dir / "eval_report_qwen25_3b.md",
+        output_path=None,
         model_name=f"ollama/{MODEL}",
         hardware_info=HARDWARE,
     )
+    report = _append_before_after(report, results, total_time)
+    (output_dir / "eval_report_qwen25_3b.md").write_text(report, encoding="utf-8")
     print(report)
     (output_dir / "eval_results.json").write_text(json.dumps({
         "model": f"ollama/{MODEL}",
@@ -136,10 +138,89 @@ def main() -> int:
             "total_orders": results.total_orders,
             "hard_cases": results.hard_cases,
             "extraction_failures": results.extraction_failures,
+            "orders_in_review": results.orders_in_review,
+            "review_rate": results.orders_in_review / max(results.total_orders, 1),
+            "mean_time_seconds": total_time / max(results.total_orders, 1),
         },
         "format_scores": results.format_scores,
     }, indent=2, ensure_ascii=False))
     return 0
+
+
+# Misura precedente (stesso campione seed 42, qwen2.5:3b-instruct, stessi parametri).
+BEFORE = {
+    "header_accuracy": 0.56,
+    "lines_accuracy": 0.36923076923076925,
+    "silent_errors_count": 149,
+    "silent_error_rate": 0.13423423423423422,
+    "mean_time_seconds": 56.2,
+    "review_rate": None,
+    "format_scores": {
+        "EML": {"count": 19, "header_correct": 33, "header_total": 76,
+                "lines_expected": 242, "lines_matched": 26, "silent_errors": None},
+        "PDF": {"count": 18, "header_correct": 48, "header_total": 72,
+                "lines_expected": 126, "lines_matched": 56, "silent_errors": None},
+        "XLSX": {"count": 13, "header_correct": 31, "header_total": 52,
+                 "lines_expected": 87, "lines_matched": 86, "silent_errors": None},
+    },
+}
+
+
+def _pct(correct: float, total: float) -> str:
+    if not total:
+        return "—"
+    return f"{100 * correct / total:.1f}%"
+
+
+def _append_before_after(report: str, results, total_time: float) -> str:
+    """Aggiunge la tabella prima/dopo richiesta dalla valutazione."""
+    n = max(results.total_orders, 1)
+    field_denom = max(results.total_header_fields + results.total_line_key_fields, 1)
+    after = {
+        "header": results.overall_header_accuracy(),
+        "lines": results.overall_lines_accuracy(),
+        "silent_n": len(results.all_silent_errors),
+        "silent": len(results.all_silent_errors) / field_denom,
+        "review": results.orders_in_review / n,
+        "time": total_time / n,
+    }
+    rows = [
+        "",
+        "## Prima / dopo (stesso campione, stesso modello)",
+        "",
+        "Campione: 50 ordini, seed 42, `qwen2.5:3b-instruct`, temperature=0, "
+        "repeat_penalty=1.1, num_predict=2048, format=json.",
+        "",
+        "| Metrica | Prima | Dopo |",
+        "|---------|-------|------|",
+        f"| Testata | {100*BEFORE['header_accuracy']:.1f}% | {100*after['header']:.1f}% |",
+        f"| Righe | {100*BEFORE['lines_accuracy']:.1f}% | {100*after['lines']:.1f}% |",
+        f"| Errori silenziosi | {BEFORE['silent_errors_count']} "
+        f"({100*BEFORE['silent_error_rate']:.2f}%) | "
+        f"{after['silent_n']} ({100*after['silent']:.2f}%) |",
+        f"| Ordini in revisione | n/d | {results.orders_in_review}/{results.total_orders} "
+        f"({100*after['review']:.1f}%) |",
+        f"| Tempo medio | {BEFORE['mean_time_seconds']:.1f}s | {after['time']:.1f}s |",
+        "",
+        "### Per formato",
+        "",
+        "| Formato | Testata prima | Testata dopo | Righe prima | Righe dopo | "
+        "Errori silenziosi dopo |",
+        "|---------|---------------|--------------|-------------|------------|------------------------|",
+    ]
+    for fmt in ("EML", "PDF", "XLSX"):
+        before_fmt = BEFORE["format_scores"].get(fmt, {})
+        after_fmt = results.format_scores.get(fmt, {})
+        rows.append(
+            f"| {fmt} | "
+            f"{_pct(before_fmt.get('header_correct', 0), before_fmt.get('header_total', 0))} | "
+            f"{_pct(after_fmt.get('header_correct', 0), after_fmt.get('header_total', 0))} | "
+            f"{_pct(before_fmt.get('lines_matched', 0), before_fmt.get('lines_expected', 0))} | "
+            f"{_pct(after_fmt.get('lines_matched', 0), after_fmt.get('lines_expected', 0))} | "
+            f"{after_fmt.get('silent_errors', 0)} |"
+        )
+    rows.append("")
+    return report.rstrip() + "\n" + "\n".join(rows)
 
 
 if __name__ == "__main__":

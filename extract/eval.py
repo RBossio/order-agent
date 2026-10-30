@@ -20,6 +20,8 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any
 
+from .dates import parse_date_tuple
+
 
 @dataclass
 class FieldScore:
@@ -73,20 +75,21 @@ class OrderScore:
     document_format: str = "UNKNOWN"
     is_hard_case: bool = False
     hard_case_types: list[str] = field(default_factory=list)
-    
+
     header_fields: dict[str, FieldScore] = field(default_factory=dict)
     line_scores: list[LineScore] = field(default_factory=list)
-    
+
     lines_expected: int = 0
     lines_extracted: int = 0
     lines_matched: int = 0
-    
+
     extraction_time_ms: int = 0
     llm_calls: int = 0
     warnings_count: int = 0
     silent_errors: list[SilentError] = field(default_factory=list)
     extraction_failed: bool = False
     failure_reason: str | None = None
+    in_review: bool = False
 
     def header_accuracy(self) -> float:
         if not self.header_fields:
@@ -112,9 +115,9 @@ class EvalResults:
     total_lines_expected: int = 0
     total_lines_extracted: int = 0
     total_lines_matched: int = 0
-    
+
     order_scores: list[OrderScore] = field(default_factory=list)
-    
+
     total_time_ms: int = 0
     total_llm_calls: int = 0
     all_silent_errors: list[SilentError] = field(default_factory=list)
@@ -122,6 +125,7 @@ class EvalResults:
     extraction_failures: int = 0
     total_header_fields: int = 0
     total_line_key_fields: int = 0
+    orders_in_review: int = 0
 
     def overall_header_accuracy(self) -> float:
         total_correct = sum(f.correct for f in self.header_scores.values())
@@ -167,62 +171,9 @@ def normalize_string(s: str | None) -> str:
     return str(s).strip().lower().replace("-", "").replace(" ", "")
 
 
-_MONTHS = {
-    "jan": 1, "january": 1, "feb": 2, "february": 2, "mar": 3, "march": 3,
-    "apr": 4, "april": 4, "may": 5, "jun": 6, "june": 6, "jul": 7, "july": 7,
-    "aug": 8, "august": 8, "sep": 9, "sept": 9, "september": 9,
-    "oct": 10, "october": 10, "nov": 11, "november": 11, "dec": 12, "december": 12,
-}
-
-
 def parse_date(value: Any) -> tuple[int, int, int] | None:
     """Parsa una data in (year, month, day) da formati ISO, US, EU o testuali."""
-    if value is None:
-        return None
-    s = str(value).strip()
-    if not s:
-        return None
-    import re as _re
-    named = _re.match(
-        r"(\d{1,2})[-/\s]+([A-Za-z]{3,9})[-/\s,]+(\d{2,4})",
-        s,
-    )
-    if named:
-        day = int(named.group(1))
-        month = _MONTHS.get(named.group(2).lower())
-        year = int(named.group(3))
-        if year < 100:
-            year += 2000
-        if month:
-            return (year, month, day)
-    named2 = _re.match(
-        r"([A-Za-z]{3,9})\s+(\d{1,2}),?\s+(\d{4})",
-        s,
-    )
-    if named2:
-        month = _MONTHS.get(named2.group(1).lower())
-        day = int(named2.group(2))
-        year = int(named2.group(3))
-        if month:
-            return (year, month, day)
-    token = s[:10]
-    for sep in ("-", "/", "."):
-        if sep not in token:
-            continue
-        parts = token.split(sep)
-        if len(parts) != 3:
-            continue
-        try:
-            a, b, c = (int(p) for p in parts)
-        except ValueError:
-            continue
-        if a >= 1000:
-            return (a, b, c)
-        if c >= 1000:
-            if a > 12:
-                return (c, b, a)
-            return (c, a, b)
-    return None
+    return parse_date_tuple(value)
 
 
 def compare_dates(extracted: Any, expected: Any) -> bool:
@@ -292,11 +243,14 @@ def evaluate_order(
     )
 
     evidence = extracted.get("evidence", {})
-    warned_paths = {
-        issue.get("path")
-        for issue in extracted.get("validation", {}).get("issues", [])
-        if issue.get("path")
-    }
+    issues = extracted.get("validation", {}).get("issues", [])
+    warned_paths = {issue.get("path") for issue in issues if issue.get("path")}
+    route = (extracted.get("decision") or {}).get("route")
+    score.in_review = (
+        extracted.get("status") in {"NEEDS_REVIEW", "REJECTED"}
+        or route in {"REVIEW", "REJECT"}
+        or any(issue.get("severity") in {"BLOCK", "REVIEW"} for issue in issues)
+    )
 
     ext_header = extracted.get("header", {})
     gt_header = ground_truth.get("header", {})
@@ -454,6 +408,8 @@ def generate_report(
     field_denom = max(results.total_header_fields + results.total_line_key_fields, 1)
     silent_pct = 100 * len(results.all_silent_errors) / field_denom
     n = max(results.total_orders, 1)
+    review_pct = 100 * results.orders_in_review / n
+    avg_time_s = (results.total_time_ms / n / 1000) if results.total_time_ms else 0
 
     lines.append("## Riepilogo vs target")
     lines.append("")
@@ -462,6 +418,8 @@ def generate_report(
     lines.append(f"| Accuratezza testata | **{100*header_acc:.1f}%** | ≥98% {'✅' if header_acc >= 0.98 else '❌'} |")
     lines.append(f"| Accuratezza righe | **{100*lines_acc:.1f}%** | ≥90% {'✅' if lines_acc >= 0.90 else '❌'} |")
     lines.append(f"| Errori silenziosi | **{len(results.all_silent_errors)}** ({silent_pct:.2f}%) | ≤1% {'✅' if silent_pct <= 1.0 else '❌'} |")
+    lines.append(f"| Ordini in revisione | **{results.orders_in_review}/{results.total_orders}** ({review_pct:.1f}%) | - |")
+    lines.append(f"| Tempo medio/ordine | **{avg_time_s:.1f}s** | - |")
     lines.append(f"| Ordini valutati | {results.total_orders} | - |")
     lines.append(f"| Fallimenti estrazione | {results.extraction_failures} | - |")
     lines.append(f"| Casi difficili | {results.hard_cases} ({100*results.hard_cases/n:.1f}%) | - |")
@@ -470,13 +428,19 @@ def generate_report(
     if results.format_scores:
         lines.append("## Accuratezza per Formato")
         lines.append("")
-        lines.append("| Formato | Ordini | Testata | Righe |")
-        lines.append("|---------|--------|---------|-------|")
+        lines.append("| Formato | Ordini | Testata | Righe | Errori silenziosi | Revisione | Tempo medio |")
+        lines.append("|---------|--------|---------|-------|-------------------|-----------|-------------|")
         for fmt, data in sorted(results.format_scores.items()):
             if data.get("count", 0) > 0:
                 h_acc = 100 * data.get("header_correct", 0) / max(data.get("header_total", 1), 1)
                 l_acc = 100 * data.get("lines_matched", 0) / max(data.get("lines_expected", 1), 1)
-                lines.append(f"| {fmt} | {data['count']} | {h_acc:.1f}% | {l_acc:.1f}% |")
+                silent_n = data.get("silent_errors", 0)
+                review_n = data.get("review", 0)
+                avg = data.get("time_ms", 0) / max(data.get("count", 1), 1) / 1000
+                lines.append(
+                    f"| {fmt} | {data['count']} | {h_acc:.1f}% | {l_acc:.1f}% | "
+                    f"{silent_n} | {review_n}/{data['count']} | {avg:.1f}s |"
+                )
         lines.append("")
 
     lines.append("## Accuratezza per Tipo di Caso")
@@ -674,6 +638,8 @@ def _update_results(results: EvalResults, order_score: OrderScore, ground_truth:
         results.hard_cases += 1
     if order_score.extraction_failed:
         results.extraction_failures += 1
+    if order_score.in_review:
+        results.orders_in_review += 1
 
     results.total_lines_expected += order_score.lines_expected
     results.total_lines_extracted += order_score.lines_extracted
@@ -699,8 +665,14 @@ def _update_results(results: EvalResults, order_score: OrderScore, ground_truth:
             "header_total": 0,
             "lines_expected": 0,
             "lines_matched": 0,
+            "silent_errors": 0,
+            "review": 0,
+            "time_ms": 0,
         }
     results.format_scores[fmt]["count"] += 1
+    results.format_scores[fmt]["silent_errors"] += len(order_score.silent_errors)
+    results.format_scores[fmt]["review"] += 1 if order_score.in_review else 0
+    results.format_scores[fmt]["time_ms"] += order_score.extraction_time_ms
     results.format_scores[fmt]["header_correct"] += sum(
         f.correct for f in order_score.header_fields.values()
     )

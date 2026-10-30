@@ -155,7 +155,11 @@ extract/
 │   ├── base.py           # Interfaccia LLMBackend
 │   ├── ollama.py         # Implementazione Ollama HTTP
 │   └── mock.py           # Backend deterministico per test
-├── preprocessor.py       # Pre-elaborazione tabelle strutturate
+├── preprocessor.py       # Pre-elaborazione tabelle Excel/PDF/email
+├── catalog.py            # Matching SKU / xref / UoM / cliente
+├── checks.py             # Controlli qty×prezzo, totali, date, anagrafica
+├── confidence.py         # Confidenza tarata (non auto-score LLM)
+├── dates.py              # Parsing date ISO/US/EU/testuali
 ├── extractor.py          # Estrattore principale
 ├── prompts.py            # Prompt e schema JSON
 ├── eval.py               # Script di valutazione
@@ -164,21 +168,19 @@ extract/
 
 ## Pipeline di estrazione
 
-1. **Pre-elaborazione** (`preprocessor.py`):
-   - Estrae metadati email (PO number, mittente)
-   - Mappa colonne tabelle Excel/CSV
-   - Estrae righe strutturate senza LLM
-   - Identifica righe ambigue che richiedono LLM
+1. **Pre-elaborazione deterministica** (`preprocessor.py`):
+   - Excel/PDF: testata (PO, data) da righe chiave-valore e colonne (codice, qty, UoM, prezzo)
+   - Email: metadati + liste `1. [SKU]` anche nella signature; quantità in lettere
+   - L'LLM **non** viene chiamato se Excel/PDF ha già PO e almeno una riga con quantità
 
 2. **Estrazione LLM** (`extractor.py`):
-   - Costruisce prompt con contesto pre-elaborato
-   - Chiama il backend LLM
-   - Parsa risposta JSON
-   - Retry se validazione fallisce
+   - Solo come ripiego (tabella incompleta) e per le email
+   - Se preprocessor e LLM discordano: si tiene il valore deterministico, confidenza bassa, REVIEW
 
-3. **Validazione**:
-   - Validazione output contro `venture-order.v1.schema.json`
-   - Genera avvisi per campi mancanti o non validi
+3. **Controlli e regole**:
+   - qty × prezzo = importo riga; somma righe = totale; articolo/UoM in anagrafica; date plausibili
+   - Confidenza calcolata da fonte, accordo tra metodi e controlli (mai dall'auto-score LLM)
+   - Controllo fallito → confidenza < 0,90 → EXT-01 e motore regole in REVIEW
 
 ## Test
 
@@ -200,8 +202,7 @@ python -m pytest tests/test_extract.py -v -k "Mock or Preprocessor"
 
 ## Limitazioni attuali
 
-- **Risoluzione codici**: I codici articolo (seller_item_code, buyer_item_code) NON vengono risolti verso il catalogo. Questa funzionalità sarà implementata nella fase successiva.
-- **Matching clienti**: I clienti NON vengono matchati con l'anagrafica ERP.
+- **Matching articoli**: solo SKU esatto e xref (`DatagenReferenceDataProvider`); niente fuzzy/semantico.
 - **OCR**: PDF scansionati con `needs_ocr=True` non sono supportati.
 
 ## Esempio output
