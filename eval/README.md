@@ -17,11 +17,26 @@ Script per misurare i KPI del prototipo:
 
 ## Riconoscimento clienti e articoli
 
-Valutazione offline sul dataset sintetico (nessuna rete, nessun LLM):
+Valutazione offline sul dataset sintetico (nessuna rete, nessun LLM).
+Il matcher **non** legge gli ID attesi (`buyer.resolved`, `code_on_document`,
+`line.resolution` / `sku`): solo i campi del documento, elencati in
+`src/ventureorder/match/fields.py`.
 
 ```bash
-python eval/match_eval.py
+python eval/match_eval.py              # set pulito + set rumoroso
+python eval/match_eval.py --set clean
+python eval/match_eval.py --set noisy
 python eval/match_eval.py --json
 ```
 
-Riporta la **precisione** (percentuale di clienti/articoli risolti correttamente) e la copertura. I test in `tests/test_match_eval.py` rieseguono lo stesso calcolo.
+Per ciascun set riporta:
+
+- **precisione** tra i risolti univoci
+- **copertura** (risolti univoci / totale)
+- **percentuale di ambigui**
+- **errori con confidenza ≥ 0,9** (scelte sbagliate ad alta confidenza)
+
+Il set rumoroso (seed 42) usa i casi difficili e varianti: niente P.IVA,
+email su dominio generico, nome con refusi/abbreviazioni, codici cliente
+sconosciuti, codici con spazi/trattini, descrizioni parafrasate, UoM diverse.
+I test in `tests/test_match_eval.py` rieseguono lo stesso calcolo.

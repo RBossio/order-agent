@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from typing import Any
 
+from ventureorder.match.fields import strip_forbidden_from_buyer
 from ventureorder.match.models import CustomerCandidate, CustomerMatch
 from ventureorder.match.normalize import (
     normalize_address,
@@ -41,7 +42,6 @@ class CustomerMatcher:
         self._by_domain: dict[str, list[CustomerRecord]] = {}
         self._by_name: dict[str, list[CustomerRecord]] = {}
         self._by_address: dict[str, list[CustomerRecord]] = {}
-        self._by_ref: dict[str, CustomerRecord] = {}
         for customer in self._customers:
             tax = normalize_tax_id(customer.tax_id)
             if tax:
@@ -53,7 +53,6 @@ class CustomerMatcher:
             if name:
                 self._by_name.setdefault(name, []).append(customer)
             self._index_addresses(customer)
-            self._by_ref[customer.erp_partner_ref.upper()] = customer
 
     def _index_addresses(self, customer: CustomerRecord) -> None:
         keys: list[str] = []
@@ -71,9 +70,14 @@ class CustomerMatcher:
                 bucket.append(customer)
 
     def resolve(self, vof: dict[str, Any]) -> CustomerMatch:
-        """Riconosce il buyer del VOF. Cascata §6 / richiesta: P.IVA, email, nome, indirizzo."""
-        buyer = vof.get("buyer") if isinstance(vof.get("buyer"), dict) else {}
-        tax_hits = self._lookup_tax(buyer.get("tax_id") if isinstance(buyer, dict) else None)
+        """Riconosce il buyer del VOF. Cascata: P.IVA, email, nome, indirizzo.
+
+        Non legge ``buyer.resolved``, ``code_on_document`` né altri ID anagrafici
+        (vedi ``match.fields``).
+        """
+        raw_buyer = vof.get("buyer") if isinstance(vof.get("buyer"), dict) else {}
+        buyer = strip_forbidden_from_buyer(raw_buyer if isinstance(raw_buyer, dict) else {})
+        tax_hits = self._lookup_tax(buyer.get("tax_id"))
         if tax_hits:
             return self._finish(tax_hits, "TAX_ID", 1.0)
 
@@ -82,11 +86,11 @@ class CustomerMatcher:
         if domain_hits:
             return self._finish(domain_hits, "EMAIL_DOMAIN", 0.99)
 
-        name_match = self._lookup_name(buyer.get("name") if isinstance(buyer, dict) else None)
+        name_match = self._lookup_name(buyer.get("name"))
         if name_match is not None:
             return name_match
 
-        address = buyer.get("address") if isinstance(buyer, dict) else None
+        address = buyer.get("address")
         if not isinstance(address, dict):
             bill_to = vof.get("bill_to") if isinstance(vof.get("bill_to"), dict) else {}
             address = bill_to.get("address") if isinstance(bill_to, dict) else None

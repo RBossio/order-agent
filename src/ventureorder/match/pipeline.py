@@ -5,6 +5,7 @@ from __future__ import annotations
 from typing import Any
 
 from ventureorder.match.customer import CustomerMatcher
+from ventureorder.match.fields import sanitize_extracted_order
 from ventureorder.match.items import ItemMatcher
 from ventureorder.rules.access import resolved
 from ventureorder.rules.reference import ReferenceDataProvider
@@ -25,6 +26,8 @@ def apply_matches(
     """
     customer_matcher = CustomerMatcher(provider, thresholds)
     item_matcher = ItemMatcher(provider, thresholds)
+    # Il matcher vede solo i campi di input; i risultati si scrivono sul VOF originale.
+    view = sanitize_extracted_order(vof)
 
     buyer = vof.setdefault("buyer", {})
     if not isinstance(buyer, dict):
@@ -32,7 +35,7 @@ def apply_matches(
         vof["buyer"] = buyer
     existing = resolved(buyer)
     if overwrite or not _has_partner(existing):
-        match = customer_matcher.resolve(vof)
+        match = customer_matcher.resolve(view)
         buyer["resolved"] = match.to_vof()
 
     customer_ref = None
@@ -43,13 +46,17 @@ def apply_matches(
     lines = vof.get("lines")
     if not isinstance(lines, list):
         return vof
+    view_lines = {
+        line.get("line_no"): line for line in (view.get("lines") or []) if isinstance(line, dict)
+    }
     for line in lines:
         if not isinstance(line, dict):
             continue
         resolution = line.get("resolution")
         if not overwrite and _has_sku(resolution if isinstance(resolution, dict) else None):
             continue
-        item_match = item_matcher.resolve(line, customer_ref)
+        sanitized = view_lines.get(line.get("line_no")) or {}
+        item_match = item_matcher.resolve(sanitized, customer_ref)
         line["resolution"] = item_match.to_vof()
     return vof
 

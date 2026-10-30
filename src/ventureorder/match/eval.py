@@ -2,43 +2,56 @@
 
 from __future__ import annotations
 
-import copy
 import json
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
 
-from ventureorder.match.pipeline import apply_matches
-from ventureorder.rules.reference import DatagenReferenceDataProvider
+from ventureorder.match.customer import CustomerMatcher
+from ventureorder.match.fields import sanitize_extracted_order
+from ventureorder.match.items import ItemMatcher
+from ventureorder.match.models import CustomerMatch, ItemMatch
+from ventureorder.match.noise import (
+    NOISY_EVAL_SEED,
+    apply_variants,
+    is_hard_case,
+    select_kinds_for_order,
+    variant_rng,
+)
+from ventureorder.rules.reference import DatagenReferenceDataProvider, ReferenceDataProvider
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
+HIGH_CONFIDENCE = 0.9
 
 
 @dataclass
 class MatchEvalReport:
-    """Precisione e copertura del riconoscimento clienti/articoli."""
+    """Precisione, copertura, ambiguità ed errori ad alta confidenza."""
 
+    name: str = "clean"
     customer_total: int = 0
     customer_resolved: int = 0
     customer_correct: int = 0
     customer_incorrect: int = 0
+    customer_ambiguous: int = 0
+    customer_high_conf_errors: int = 0
     item_total: int = 0
     item_resolved: int = 0
     item_correct: int = 0
     item_incorrect: int = 0
+    item_ambiguous: int = 0
+    item_high_conf_errors: int = 0
     orders: int = 0
     methods_customer: dict[str, int] = field(default_factory=dict)
     methods_item: dict[str, int] = field(default_factory=dict)
 
     @property
     def customer_precision(self) -> float:
-        """Precisione clienti: corretti / (corretti + errati) tra i risolti."""
         denom = self.customer_correct + self.customer_incorrect
         return self.customer_correct / denom if denom else 0.0
 
     @property
     def item_precision(self) -> float:
-        """Precisione articoli: SKU corretti / (corretti + errati) tra i risolti."""
         denom = self.item_correct + self.item_incorrect
         return self.item_correct / denom if denom else 0.0
 
@@ -50,6 +63,22 @@ class MatchEvalReport:
     def item_coverage(self) -> float:
         return self.item_resolved / self.item_total if self.item_total else 0.0
 
+    @property
+    def customer_ambiguous_rate(self) -> float:
+        return self.customer_ambiguous / self.customer_total if self.customer_total else 0.0
+
+    @property
+    def item_ambiguous_rate(self) -> float:
+        return self.item_ambiguous / self.item_total if self.item_total else 0.0
+
+    @property
+    def customer_high_conf_error_rate(self) -> float:
+        return self.customer_high_conf_errors / self.customer_total if self.customer_total else 0.0
+
+    @property
+    def item_high_conf_error_rate(self) -> float:
+        return self.item_high_conf_errors / self.item_total if self.item_total else 0.0
+
     def as_percentages(self) -> dict[str, float]:
         """Percentuali arrotondate da riportare in CLI e test."""
         return {
@@ -57,32 +86,25 @@ class MatchEvalReport:
             "item_precision_pct": round(self.item_precision * 100.0, 2),
             "customer_coverage_pct": round(self.customer_coverage * 100.0, 2),
             "item_coverage_pct": round(self.item_coverage * 100.0, 2),
+            "customer_ambiguous_pct": round(self.customer_ambiguous_rate * 100.0, 2),
+            "item_ambiguous_pct": round(self.item_ambiguous_rate * 100.0, 2),
+            "customer_high_conf_error_pct": round(self.customer_high_conf_error_rate * 100.0, 2),
+            "item_high_conf_error_pct": round(self.item_high_conf_error_rate * 100.0, 2),
         }
 
     def summary_text(self) -> str:
         pct = self.as_percentages()
         return (
-            "Riconoscimento sintetico: "
-            f"clienti {pct['customer_precision_pct']:.2f}% "
-            f"(copertura {pct['customer_coverage_pct']:.2f}%, "
-            f"{self.customer_correct}/{self.customer_resolved} risolti), "
-            f"articoli {pct['item_precision_pct']:.2f}% "
-            f"(copertura {pct['item_coverage_pct']:.2f}%, "
-            f"{self.item_correct}/{self.item_resolved} risolti) "
-            f"su {self.orders} ordini."
+            f"[{self.name}] clienti prec {pct['customer_precision_pct']:.2f}% "
+            f"cop {pct['customer_coverage_pct']:.2f}% "
+            f"amb {pct['customer_ambiguous_pct']:.2f}% "
+            f"err≥0.9 {pct['customer_high_conf_error_pct']:.2f}% "
+            f"| articoli prec {pct['item_precision_pct']:.2f}% "
+            f"cop {pct['item_coverage_pct']:.2f}% "
+            f"amb {pct['item_ambiguous_pct']:.2f}% "
+            f"err≥0.9 {pct['item_high_conf_error_pct']:.2f}% "
+            f"| {self.orders} ordini"
         )
-
-
-def strip_resolutions(vof: dict[str, Any]) -> dict[str, Any]:
-    """Toglie ``buyer.resolved`` e ``line.resolution`` (ordine come estratto)."""
-    payload = copy.deepcopy(vof)
-    buyer = payload.get("buyer")
-    if isinstance(buyer, dict):
-        buyer["resolved"] = None
-    for line in payload.get("lines") or []:
-        if isinstance(line, dict):
-            line["resolution"] = None
-    return payload
 
 
 def evaluate_synthetic_dataset(
@@ -91,67 +113,157 @@ def evaluate_synthetic_dataset(
     *,
     limit: int | None = None,
 ) -> MatchEvalReport:
-    """Misura la precisione su ``synthetic/ground_truth`` senza rete né LLM."""
-    gt_dir = Path(ground_truth_dir) if ground_truth_dir else _default_gt_dir()
-    master = Path(datagen_path) if datagen_path else None
-    provider = DatagenReferenceDataProvider.from_datagen(datagen_path=master)
-    report = MatchEvalReport()
-    files = sorted(gt_dir.glob("*.json"))
+    """Set pulito: campi estratti sanitizzati, senza ID attesi."""
+    truths, provider = _load(ground_truth_dir, datagen_path, limit)
+    return _evaluate_truths(truths, provider, name="clean")
+
+
+def evaluate_noisy_dataset(
+    ground_truth_dir: Path | str | None = None,
+    datagen_path: Path | str | None = None,
+    *,
+    seed: int = NOISY_EVAL_SEED,
+    limit: int | None = None,
+) -> MatchEvalReport:
+    """Set rumoroso: casi difficili + varianti a seed fisso."""
+    truths, provider = _load(ground_truth_dir, datagen_path, limit=None)
+    customer_matcher = CustomerMatcher(provider)
+    item_matcher = ItemMatcher(provider)
+    report = MatchEvalReport(name="noisy")
+    cases = list(_iter_noisy_cases(truths, seed=seed))
     if limit is not None:
-        files = files[:limit]
-    for path in files:
-        with path.open(encoding="utf-8") as handle:
-            truth = json.load(handle)
-        extracted = strip_resolutions(truth)
-        apply_matches(extracted, provider, overwrite=True)
-        report.orders += 1
-        _score_customer(report, truth, extracted)
-        _score_items(report, truth, extracted)
+        cases = cases[:limit]
+    for truth, extracted, _kinds in cases:
+        _evaluate_one(report, truth, extracted, customer_matcher, item_matcher)
     return report
 
 
-def _score_customer(
-    report: MatchEvalReport, truth: dict[str, Any], predicted: dict[str, Any]
+def _load(
+    ground_truth_dir: Path | str | None,
+    datagen_path: Path | str | None,
+    limit: int | None,
+) -> tuple[list[dict[str, Any]], ReferenceDataProvider]:
+    gt_dir = Path(ground_truth_dir) if ground_truth_dir else _default_gt_dir()
+    master = Path(datagen_path) if datagen_path else None
+    provider = DatagenReferenceDataProvider.from_datagen(datagen_path=master)
+    files = sorted(gt_dir.glob("*.json"))
+    if limit is not None:
+        files = files[:limit]
+    truths: list[dict[str, Any]] = []
+    for path in files:
+        with path.open(encoding="utf-8") as handle:
+            truths.append(json.load(handle))
+    return truths, provider
+
+
+def _evaluate_truths(
+    truths: list[dict[str, Any]],
+    provider: ReferenceDataProvider,
+    *,
+    name: str,
+) -> MatchEvalReport:
+    customer_matcher = CustomerMatcher(provider)
+    item_matcher = ItemMatcher(provider)
+    report = MatchEvalReport(name=name)
+    for truth in truths:
+        extracted = sanitize_extracted_order(truth)
+        _evaluate_one(report, truth, extracted, customer_matcher, item_matcher)
+    return report
+
+
+def _iter_noisy_cases(
+    truths: list[dict[str, Any]],
+    *,
+    seed: int,
+) -> list[tuple[dict[str, Any], dict[str, Any], list[str]]]:
+    cases: list[tuple[dict[str, Any], dict[str, Any], list[str]]] = []
+    for index, truth in enumerate(truths):
+        order_id = str(truth.get("order_id") or index)
+        hard = is_hard_case(truth)
+        rng = variant_rng(seed, order_id, "variant")
+        kinds = select_kinds_for_order(index, hard=False, rng=rng)
+        extracted = apply_variants(sanitize_extracted_order(truth), kinds, rng)
+        cases.append((truth, extracted, kinds))
+        if hard:
+            rng_h = variant_rng(seed, order_id, "hard")
+            hard_kinds = select_kinds_for_order(index, hard=True, rng=rng_h)
+            noisy = apply_variants(sanitize_extracted_order(truth), hard_kinds, rng_h)
+            cases.append((truth, noisy, hard_kinds))
+    return cases
+
+
+def _evaluate_one(
+    report: MatchEvalReport,
+    truth: dict[str, Any],
+    extracted: dict[str, Any],
+    customer_matcher: CustomerMatcher,
+    item_matcher: ItemMatcher,
 ) -> None:
-    expected = ((truth.get("buyer") or {}).get("resolved") or {}).get("erp_partner_ref")
-    got_info = (predicted.get("buyer") or {}).get("resolved") or {}
-    got = got_info.get("erp_partner_ref")
-    method = str(got_info.get("method") or "UNRESOLVED")
-    report.customer_total += 1
-    if got:
-        report.customer_resolved += 1
-        report.methods_customer[method] = report.methods_customer.get(method, 0) + 1
-        if expected and str(got) == str(expected):
-            report.customer_correct += 1
-        else:
-            report.customer_incorrect += 1
-    else:
-        if expected:
-            report.methods_customer["UNRESOLVED"] = report.methods_customer.get("UNRESOLVED", 0) + 1
-
-
-def _score_items(report: MatchEvalReport, truth: dict[str, Any], predicted: dict[str, Any]) -> None:
+    report.orders += 1
+    customer_match = customer_matcher.resolve(extracted)
+    expected_ref = ((truth.get("buyer") or {}).get("resolved") or {}).get("erp_partner_ref")
+    _score_customer(report, expected_ref, customer_match)
+    customer_ref = (
+        customer_match.customer.erp_partner_ref
+        if customer_match.resolved and customer_match.customer
+        else None
+    )
+    pred_lines = extracted.get("lines") or []
     truth_lines = truth.get("lines") or []
-    pred_lines = predicted.get("lines") or []
     by_no = {line.get("line_no"): line for line in pred_lines if isinstance(line, dict)}
     for truth_line in truth_lines:
         if not isinstance(truth_line, dict):
             continue
-        expected = (truth_line.get("resolution") or {}).get("sku")
-        report.item_total += 1
+        expected_sku = (truth_line.get("resolution") or {}).get("sku")
         pred_line = by_no.get(truth_line.get("line_no")) or {}
-        resolution = pred_line.get("resolution") or {}
-        got = resolution.get("sku")
-        method = str(resolution.get("method") or "UNRESOLVED")
-        if got and method != "UNRESOLVED":
-            report.item_resolved += 1
-            report.methods_item[method] = report.methods_item.get(method, 0) + 1
-            if expected and str(got) == str(expected):
-                report.item_correct += 1
-            else:
-                report.item_incorrect += 1
-        else:
-            report.methods_item["UNRESOLVED"] = report.methods_item.get("UNRESOLVED", 0) + 1
+        item_match = item_matcher.resolve(
+            pred_line if isinstance(pred_line, dict) else {},
+            customer_ref,
+        )
+        _score_item(report, expected_sku, item_match)
+
+
+def _score_customer(report: MatchEvalReport, expected_ref: Any, match: CustomerMatch) -> None:
+    report.customer_total += 1
+    if match.ambiguous:
+        report.customer_ambiguous += 1
+        report.methods_customer["AMBIGUOUS"] = report.methods_customer.get("AMBIGUOUS", 0) + 1
+        return
+    if not match.resolved or match.customer is None:
+        report.methods_customer["UNRESOLVED"] = report.methods_customer.get("UNRESOLVED", 0) + 1
+        return
+    report.customer_resolved += 1
+    report.methods_customer[match.method] = report.methods_customer.get(match.method, 0) + 1
+    got = match.customer.erp_partner_ref
+    if expected_ref and str(got) == str(expected_ref):
+        report.customer_correct += 1
+    else:
+        report.customer_incorrect += 1
+        if match.score >= HIGH_CONFIDENCE:
+            report.customer_high_conf_errors += 1
+
+
+def _score_item(report: MatchEvalReport, expected_sku: Any, match: ItemMatch) -> None:
+    report.item_total += 1
+    predicted = match.product.sku if match.product is not None else None
+    wrong = bool(predicted and expected_sku and str(predicted) != str(expected_sku))
+    if match.ambiguous:
+        report.item_ambiguous += 1
+        report.methods_item["AMBIGUOUS"] = report.methods_item.get("AMBIGUOUS", 0) + 1
+        if wrong and match.score >= HIGH_CONFIDENCE:
+            report.item_high_conf_errors += 1
+        return
+    if match.method == "UNRESOLVED" or predicted is None:
+        report.methods_item["UNRESOLVED"] = report.methods_item.get("UNRESOLVED", 0) + 1
+        return
+    report.item_resolved += 1
+    report.methods_item[match.method] = report.methods_item.get(match.method, 0) + 1
+    if expected_sku and str(predicted) == str(expected_sku):
+        report.item_correct += 1
+    else:
+        report.item_incorrect += 1
+        if match.score >= HIGH_CONFIDENCE:
+            report.item_high_conf_errors += 1
 
 
 def _default_gt_dir() -> Path:

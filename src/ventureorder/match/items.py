@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from typing import Any
 
+from ventureorder.match.fields import strip_forbidden_from_line
 from ventureorder.match.lexicon import attribute_score, expand_abbreviations, extract_attributes
 from ventureorder.match.models import ItemCandidate, ItemMatch
 from ventureorder.match.normalize import (
@@ -64,7 +65,13 @@ class ItemMatcher:
                 self._xref_norm.setdefault((xref.customer_ref, norm), []).append(xref)
 
     def resolve(self, line: dict[str, Any], customer_ref: str | None) -> ItemMatch:
-        """Riconosce il prodotto di una riga VOF."""
+        """Riconosce il prodotto di una riga VOF.
+
+        Non legge ``resolution``, ``sku`` né ``erp_product_id`` già risolti
+        (vedi ``match.fields``). ``customer_ref`` arriva dal matcher cliente,
+        non dal ground truth.
+        """
+        line = strip_forbidden_from_line(line)
         xref_match = self._match_xref(line, customer_ref)
         if xref_match is not None:
             return xref_match

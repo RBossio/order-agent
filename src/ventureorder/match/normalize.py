@@ -68,10 +68,10 @@ def normalize_item_code(value: str | None) -> str:
 
 
 def normalize_sku(value: str | None) -> str:
-    """SKU interno: trim e maiuscole."""
+    """SKU interno: maiuscole, senza spazi interni (i trattini restano)."""
     if not value:
         return ""
-    return str(value).strip().upper()
+    return re.sub(r"\s+", "", str(value).strip().upper())
 
 
 def normalize_gtin(value: str | None) -> str | None:

@@ -7,8 +7,28 @@ from pathlib import Path
 
 import pytest
 
-from ventureorder.match import CustomerMatcher, ItemMatcher, apply_matches
-from ventureorder.match.normalize import normalize_gtin, normalize_item_code, normalize_tax_id
+from ventureorder.match import (
+    CUSTOMER_INPUT_FIELDS,
+    FORBIDDEN_ID_FIELDS,
+    ITEM_INPUT_FIELDS,
+    CustomerMatcher,
+    ItemMatcher,
+    apply_matches,
+    sanitize_extracted_order,
+)
+from ventureorder.match.noise import (
+    GENERIC_EMAIL_DOMAINS,
+    NOISY_EVAL_SEED,
+    apply_variants,
+    select_kinds_for_order,
+    variant_rng,
+)
+from ventureorder.match.normalize import (
+    normalize_gtin,
+    normalize_item_code,
+    normalize_sku,
+    normalize_tax_id,
+)
 from ventureorder.rules import (
     CustomerRecord,
     DecisionRoute,
@@ -718,3 +738,235 @@ class TestMatchRulesIntegration:
         assert vof["lines"][0]["resolution"]["score"] == pytest.approx(0.95)
         codes = {item.rule_id for item in result.issues}
         assert "ITM-07" in codes
+
+
+# ---------------------------------------------------------------------------
+# Nessuna lettura degli ID attesi (customer_id / product_id)
+# ---------------------------------------------------------------------------
+
+
+class TestNoIdLeakage:
+    def test_input_fields_are_documented(self) -> None:
+        assert "buyer.tax_id" in CUSTOMER_INPUT_FIELDS
+        assert "buyer.name" in CUSTOMER_INPUT_FIELDS
+        assert "source.from_address" in CUSTOMER_INPUT_FIELDS
+        assert "lines[].buyer_item_code" in ITEM_INPUT_FIELDS
+        assert "lines[].description" in ITEM_INPUT_FIELDS
+        assert "buyer.resolved" in FORBIDDEN_ID_FIELDS
+        assert "buyer.code_on_document" in FORBIDDEN_ID_FIELDS
+        assert "lines[].resolution" in FORBIDDEN_ID_FIELDS
+        assert "lines[].sku" in FORBIDDEN_ID_FIELDS
+
+    def test_sanitize_drops_expected_ids(self) -> None:
+        vof = {
+            "buyer": {
+                "name": "Acme Company (SYNTHETIC)",
+                "code_on_document": "C-ACME",
+                "customer_id": "C-ACME",
+                "erp_partner_ref": "C-ACME",
+                "tax_id": "12-8713396",
+                "resolved": {"erp_partner_ref": "C-ACME", "erp_partner_id": 42},
+            },
+            "source": {"from_address": "purchasing@acme.example"},
+            "lines": [
+                {
+                    "line_no": 1,
+                    "description": "Wrench",
+                    "sku": "TOOL-WRN-10IN",
+                    "erp_product_id": 1200,
+                    "resolution": {"sku": "TOOL-WRN-10IN", "score": 1.0},
+                    "buyer_item_code": "ACME-HW-00412",
+                }
+            ],
+            "_synthetic_metadata": {"is_hard_case": True},
+        }
+        clean = sanitize_extracted_order(vof)
+        assert "code_on_document" not in clean["buyer"]
+        assert "resolved" not in clean["buyer"]
+        assert "customer_id" not in clean["buyer"]
+        assert "erp_partner_ref" not in clean["buyer"]
+        assert "_synthetic_metadata" not in clean
+        assert "resolution" not in clean["lines"][0]
+        assert "sku" not in clean["lines"][0]
+        assert "erp_product_id" not in clean["lines"][0]
+        assert clean["lines"][0]["buyer_item_code"] == "ACME-HW-00412"
+        assert clean["buyer"]["tax_id"] == "12-8713396"
+
+    def test_ignores_code_on_document_customer_id(self, customers: CustomerMatcher) -> None:
+        match = customers.resolve(
+            {
+                "source": {},
+                "buyer": {
+                    "code_on_document": "C-ACME",
+                    "customer_id": "C-ACME",
+                    "erp_partner_ref": "C-ACME",
+                    "resolved": {
+                        "erp_partner_id": 42,
+                        "erp_partner_ref": "C-ACME",
+                        "method": "MANUAL",
+                        "score": 1.0,
+                    },
+                    "name": "Zeta Unknown GmbH",
+                    "tax_id": None,
+                },
+            }
+        )
+        assert not match.resolved
+        assert match.method == "UNRESOLVED"
+
+    def test_ignores_resolution_and_line_sku(self, items: ItemMatcher) -> None:
+        match = items.resolve(
+            {
+                "line_no": 1,
+                "description": "Quantum Flux Capacitor Mk.IX",
+                "buyer_item_code": None,
+                "seller_item_code": None,
+                "gtin": None,
+                "sku": "TOOL-WRN-10IN",
+                "product_id": 1200,
+                "erp_product_id": 1200,
+                "resolution": {
+                    "sku": "TOOL-WRN-10IN",
+                    "erp_product_id": 1200,
+                    "method": "MANUAL",
+                    "score": 1.0,
+                },
+            },
+            "C-ACME",
+        )
+        assert match.method == "UNRESOLVED"
+        assert match.product is None
+
+    def test_apply_matches_ignores_expected_ids(self, provider: MockReferenceDataProvider) -> None:
+        vof = {
+            "source": {},
+            "buyer": {
+                "name": "Zeta Unknown GmbH",
+                "tax_id": None,
+                "code_on_document": "C-ACME",
+                "customer_id": "C-ACME",
+                "resolved": {
+                    "erp_partner_id": 42,
+                    "erp_partner_ref": "C-ACME",
+                    "score": 1.0,
+                },
+            },
+            "lines": [
+                {
+                    "line_no": 1,
+                    "description": "Quantum Flux Capacitor Mk.IX",
+                    "sku": "TOOL-WRN-10IN",
+                    "product_id": 1200,
+                    "resolution": {"sku": "TOOL-WRN-10IN", "score": 1.0},
+                }
+            ],
+        }
+        apply_matches(vof, provider, overwrite=True)
+        buyer_res = vof["buyer"].get("resolved") or {}
+        assert not buyer_res.get("erp_partner_ref")
+        line_res = vof["lines"][0].get("resolution") or {}
+        assert line_res.get("sku") is None
+
+
+# ---------------------------------------------------------------------------
+# Varianti rumorose (seed fisso)
+# ---------------------------------------------------------------------------
+
+
+def _sample_extracted() -> dict:
+    return {
+        "source": {"from_address": "purchasing@acme.example"},
+        "buyer": {
+            "name": "Acme Company (SYNTHETIC)",
+            "tax_id": "12-8713396",
+            "address": dict(ACME_ADDRESS),
+            "contact": {"email": "purchasing@acme.example"},
+        },
+        "lines": [
+            {
+                "line_no": 1,
+                "buyer_item_code": "ACME-HW-00412",
+                "seller_item_code": "TOOL-WRN-10IN",
+                "gtin": "9999900000009",
+                "description": "Hex Cap Screw 1/2-13 x 2 Grade 5 Zinc",
+                "uom": "BX",
+                "uom_raw": "BX",
+                "pack": {"inner_uom": "EA", "inner_qty": 100},
+            }
+        ],
+    }
+
+
+class TestNoisyVariants:
+    def test_seed_is_fixed(self) -> None:
+        assert NOISY_EVAL_SEED == 42
+
+    def test_no_tax_id(self) -> None:
+        out = apply_variants(_sample_extracted(), ["no_tax_id"], variant_rng(42, "t"))
+        assert out["buyer"]["tax_id"] is None
+
+    def test_generic_email(self) -> None:
+        out = apply_variants(_sample_extracted(), ["generic_email"], variant_rng(42, "e"))
+        domain = out["source"]["from_address"].split("@", 1)[-1]
+        assert domain in GENERIC_EMAIL_DOMAINS
+        assert domain != "acme.example"
+
+    def test_name_typo_or_abbrev(self) -> None:
+        out = apply_variants(_sample_extracted(), ["name_noise"], variant_rng(42, "n"))
+        assert out["buyer"]["name"] != "Acme Company (SYNTHETIC)"
+
+    def test_unknown_customer_codes(self) -> None:
+        out = apply_variants(_sample_extracted(), ["unknown_codes"], variant_rng(42, "u"))
+        assert str(out["lines"][0]["buyer_item_code"]).startswith("ZZ-UNK-")
+        assert out["lines"][0]["seller_item_code"] is None
+        assert out["lines"][0]["gtin"] is None
+
+    def test_spaced_codes_keep_identity(self) -> None:
+        out = apply_variants(_sample_extracted(), ["spaced_codes"], variant_rng(42, "s"))
+        spaced = out["lines"][0]["buyer_item_code"]
+        assert " " in spaced
+        assert normalize_item_code(spaced) == normalize_item_code("ACME-HW-00412")
+        assert normalize_sku(out["lines"][0]["seller_item_code"]) == normalize_sku("TOOL-WRN-10IN")
+
+    def test_paraphrased_description_drops_codes(self) -> None:
+        out = apply_variants(_sample_extracted(), ["paraphrase"], variant_rng(42, "p"))
+        assert out["lines"][0]["description"] != "Hex Cap Screw 1/2-13 x 2 Grade 5 Zinc"
+        assert out["lines"][0]["buyer_item_code"] is None
+        assert out["lines"][0]["seller_item_code"] is None
+
+    def test_alt_uom(self) -> None:
+        out = apply_variants(_sample_extracted(), ["alt_uom"], variant_rng(42, "a"))
+        assert out["lines"][0]["uom"] in {"EA", "BOX", "CASE", "PCS"}
+        assert out["lines"][0]["uom"] != "BX" or out["lines"][0]["uom_raw"] != "BX"
+
+    def test_hard_case_stacks_customer_noise_and_drops_address(self) -> None:
+        rng = variant_rng(42, "hard")
+        kinds = select_kinds_for_order(0, hard=True, rng=rng)
+        assert "no_tax_id" in kinds
+        assert "generic_email" in kinds
+        assert "name_noise" in kinds
+        assert "drop_address" in kinds
+        out = apply_variants(_sample_extracted(), kinds, rng)
+        assert out["buyer"]["tax_id"] is None
+        assert out["buyer"]["address"] is None
+
+    def test_variants_are_deterministic(self) -> None:
+        a = apply_variants(_sample_extracted(), ["name_noise", "paraphrase"], variant_rng(42, "d"))
+        b = apply_variants(_sample_extracted(), ["name_noise", "paraphrase"], variant_rng(42, "d"))
+        assert a["buyer"]["name"] == b["buyer"]["name"]
+        assert a["lines"][0]["description"] == b["lines"][0]["description"]
+
+    def test_spaced_codes_still_match(self, items: ItemMatcher) -> None:
+        out = apply_variants(_sample_extracted(), ["spaced_codes"], variant_rng(42, "s"))
+        match = items.resolve(out["lines"][0], "C-ACME")
+        assert match.product is not None
+        assert match.product.sku == "FST-HCS-12-13X2-G5Z-B50"
+
+    def test_unknown_codes_do_not_use_expected_sku(self, items: ItemMatcher) -> None:
+        extracted = _sample_extracted()
+        extracted["lines"][0]["description"] = "Quantum Flux Capacitor Mk.IX"
+        extracted["lines"][0]["sku"] = "TOOL-WRN-10IN"
+        extracted["lines"][0]["resolution"] = {"sku": "TOOL-WRN-10IN"}
+        out = apply_variants(extracted, ["unknown_codes"], variant_rng(42, "u"))
+        match = items.resolve(out["lines"][0], "C-ACME")
+        assert match.product is None
