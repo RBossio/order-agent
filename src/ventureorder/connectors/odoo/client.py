@@ -83,7 +83,7 @@ def create_client(
     if name == "xmlrpc":
         from ventureorder.connectors.odoo.rpc import XmlRpcOdooClient
 
-        return XmlRpcOdooClient(url, db, username, password)
+        return XmlRpcOdooClient(url, db, username, password, timeout=timeout)
     if name == "json2":
         from ventureorder.connectors.odoo.rpc import Json2OdooClient
 

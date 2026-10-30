@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import xmlrpc.client
 from pathlib import Path
 from typing import Any
 from unittest.mock import patch
@@ -11,6 +12,7 @@ import pytest
 
 from ventureorder.connectors.odoo import (
     CustomerNotFoundError,
+    DuplicatePurchaseOrderError,
     FakeOdooClient,
     Json2OdooClient,
     JsonRpcOdooClient,
@@ -19,6 +21,7 @@ from ventureorder.connectors.odoo import (
     OdooSaleOrderConnector,
     OdooTransientError,
     ProductNotFoundError,
+    XmlRpcOdooClient,
     create_client,
 )
 from ventureorder.connectors.odoo.mapping import (
@@ -229,11 +232,42 @@ class TestPostDraft:
         connector = _connector(client)
         first = connector.post_draft(_minimal_vof())
         other = _minimal_vof(order_id="22222222-2222-2222-2222-222222222222")
-        second = connector.post_draft(other)
 
-        assert second.odoo_id == first.odoo_id
-        assert second.reused is True
+        with pytest.raises(DuplicatePurchaseOrderError) as exc_info:
+            connector.post_draft(other)
+
+        err = exc_info.value
+        assert err.odoo_id == first.odoo_id
+        assert err.origin == first.origin
+        assert err.client_order_ref == "4500012345"
+        assert "DUP-01" in str(err)
         assert len(client.created_orders()) == 1
+        create_calls = [c for c in client.calls if c[1] == "create"]
+        assert len(create_calls) == 1
+
+    def test_duplicate_po_different_origin_is_rejected(self) -> None:
+        client = _seeded_client()
+        client.records["sale.order"][77] = {
+            "id": 77,
+            "name": "S00077",
+            "state": "sale",
+            "origin": "VO:aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+            "client_order_ref": "4500012345",
+            "partner_id": 42,
+            "amount_untaxed": 10.0,
+            "order_line": [],
+        }
+
+        with pytest.raises(DuplicatePurchaseOrderError) as exc_info:
+            _connector(client).post_draft(_minimal_vof())
+
+        err = exc_info.value
+        assert err.odoo_id == 77
+        assert err.name == "S00077"
+        assert err.origin == "VO:aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        assert err.client_order_ref == "4500012345"
+        assert [rec["id"] for rec in client.created_orders()] == [77]
+        assert [c for c in client.calls if c[1] == "create"] == []
 
     def test_crash_after_create_does_not_duplicate(self) -> None:
         client = _seeded_client()
@@ -243,6 +277,18 @@ class TestPostDraft:
         posted = connector.post_draft(_minimal_vof())
 
         assert posted.reused is True
+        assert len(client.created_orders()) == 1
+        create_calls = [c for c in client.calls if c[1] == "create"]
+        assert len(create_calls) == 1
+
+    def test_reconcile_search_transient_error_is_retried(self) -> None:
+        client = _seeded_client()
+        client.fail_after_create = OdooTransientError("crash dopo create")
+        client.search_read_transient_after_create = 1
+        posted = _connector(client).post_draft(_minimal_vof())
+
+        assert posted.reused is True
+        assert posted.origin == "VO:11111111-1111-1111-1111-111111111111"
         assert len(client.created_orders()) == 1
         create_calls = [c for c in client.calls if c[1] == "create"]
         assert len(create_calls) == 1
@@ -445,6 +491,30 @@ class TestJsonRpcTransport:
         assert isinstance(rpc, JsonRpcOdooClient)
         fake = create_client("http://x", "db", "u", "p", transport="fake")
         assert isinstance(fake, FakeOdooClient)
+
+    def test_factory_xmlrpc_passes_timeout(self) -> None:
+        client = create_client(
+            "http://localhost:8069",
+            "vo_demo",
+            "a",
+            "b",
+            transport="xmlrpc",
+            timeout=12.5,
+        )
+        assert isinstance(client, XmlRpcOdooClient)
+        assert client.timeout == 12.5
+        common_transport = client.common._ServerProxy__transport
+        models_transport = client.models._ServerProxy__transport
+        assert common_transport.timeout == 12.5
+        assert models_transport.timeout == 12.5
+        assert isinstance(common_transport, xmlrpc.client.Transport)
+        assert not isinstance(common_transport, xmlrpc.client.SafeTransport)
+
+    def test_xmlrpc_https_uses_safe_transport_with_timeout(self) -> None:
+        client = XmlRpcOdooClient("https://odoo.example", "vo_demo", "a", "b", timeout=7.0)
+        transport = client.common._ServerProxy__transport
+        assert transport.timeout == 7.0
+        assert isinstance(transport, xmlrpc.client.SafeTransport)
 
     def test_factory_unknown_transport(self) -> None:
         with pytest.raises(ValueError, match="sconosciuto"):

@@ -8,7 +8,7 @@ import urllib.error
 import urllib.request
 import xmlrpc.client
 from typing import Any, NoReturn
-from urllib.parse import urljoin
+from urllib.parse import urljoin, urlparse
 
 from ventureorder.connectors.odoo.client import OdooClient
 from ventureorder.connectors.odoo.exceptions import (
@@ -210,6 +210,38 @@ class JsonRpcOdooClient(OdooClient):
         return data.get("result")
 
 
+class _TimeoutTransport(xmlrpc.client.Transport):
+    """Transport HTTP XML-RPC con timeout esplicito."""
+
+    def __init__(self, timeout: float) -> None:
+        super().__init__()
+        self.timeout = timeout
+
+    def make_connection(self, host: Any) -> Any:
+        connection = super().make_connection(host)
+        connection.timeout = self.timeout
+        return connection
+
+
+class _TimeoutSafeTransport(xmlrpc.client.SafeTransport):
+    """Transport HTTPS XML-RPC con timeout esplicito."""
+
+    def __init__(self, timeout: float) -> None:
+        super().__init__()
+        self.timeout = timeout
+
+    def make_connection(self, host: Any) -> Any:
+        connection = super().make_connection(host)
+        connection.timeout = self.timeout
+        return connection
+
+
+def _xmlrpc_transport(url: str, timeout: float) -> xmlrpc.client.Transport:
+    if urlparse(url).scheme == "https":
+        return _TimeoutSafeTransport(timeout)
+    return _TimeoutTransport(timeout)
+
+
 class XmlRpcOdooClient(OdooClient):
     """Client XML-RPC (``/xmlrpc/2/common`` e ``/xmlrpc/2/object``)."""
 
@@ -219,15 +251,27 @@ class XmlRpcOdooClient(OdooClient):
         db: str,
         username: str,
         password: str,
+        *,
+        timeout: float = 30.0,
     ) -> None:
         self.url = url.rstrip("/")
         self.db = db
         self.username = username
         self.password = password
+        self.timeout = timeout
         self._uid: int | None = None
         self._version_info: dict[str, Any] | None = None
-        self.common = xmlrpc.client.ServerProxy(f"{self.url}/xmlrpc/2/common", allow_none=True)
-        self.models = xmlrpc.client.ServerProxy(f"{self.url}/xmlrpc/2/object", allow_none=True)
+        transport = _xmlrpc_transport(self.url, timeout)
+        self.common = xmlrpc.client.ServerProxy(
+            f"{self.url}/xmlrpc/2/common",
+            allow_none=True,
+            transport=transport,
+        )
+        self.models = xmlrpc.client.ServerProxy(
+            f"{self.url}/xmlrpc/2/object",
+            allow_none=True,
+            transport=_xmlrpc_transport(self.url, timeout),
+        )
 
     @property
     def major_version(self) -> int:

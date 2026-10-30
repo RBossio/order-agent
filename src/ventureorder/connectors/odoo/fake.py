@@ -14,6 +14,7 @@ class FakeOdooClient(OdooClient):
     Permette di simulare:
     - creazione atomica di ``sale.order`` + righe;
     - fallimento transitorio prima o dopo la ``create`` (crash test);
+    - fallimento transitorio della ``search_read`` di riconciliazione;
     - assenza di un server Odoo.
     """
 
@@ -31,6 +32,8 @@ class FakeOdooClient(OdooClient):
         self.transient_failures_before_success = 0
         self.fail_after_create: Exception | None = None
         self.create_error: Exception | None = None
+        self.search_read_transient_after_create = 0
+        self._create_called = False
 
     @property
     def major_version(self) -> int:
@@ -72,6 +75,13 @@ class FakeOdooClient(OdooClient):
         order: str | None = None,
     ) -> list[dict[str, Any]]:
         self.calls.append((model, "search_read", domain))
+        if (
+            model == "sale.order"
+            and self._create_called
+            and self.search_read_transient_after_create > 0
+        ):
+            self.search_read_transient_after_create -= 1
+            raise OdooTransientError("errore transitorio simulato in search_read")
         matched = [dict(rec) for rec in self.records.get(model, {}).values() if self._match(rec, domain)]
         if order:
             field = order.split()[0]
@@ -92,6 +102,7 @@ class FakeOdooClient(OdooClient):
 
     def create(self, model: str, values: dict[str, Any]) -> int:
         self.calls.append((model, "create", values))
+        self._create_called = True
         if self.transient_failures_before_success > 0:
             self.transient_failures_before_success -= 1
             raise OdooTransientError("errore transitorio simulato prima della create")

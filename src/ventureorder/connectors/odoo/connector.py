@@ -12,6 +12,7 @@ from typing import Any
 from ventureorder.connectors.odoo.client import OdooClient
 from ventureorder.connectors.odoo.exceptions import (
     CustomerNotFoundError,
+    DuplicatePurchaseOrderError,
     OdooAuthError,
     OdooDataError,
     OdooTransientError,
@@ -66,9 +67,12 @@ class PostedSaleOrder:
 class OdooSaleOrderConnector:
     """Crea una bozza ``sale.order`` da un ordine canonico (VOF).
 
-    Idempotenza:
-    1. cerca ``origin = VO:<order_id>`` e, se presente, restituisce l'esistente;
-    2. cerca ``client_order_ref`` + cliente (non cancellati) come controllo DUP-01;
+    Idempotenza e duplicati:
+    1. cerca ``origin = VO:<order_id>`` e, se presente, restituisce l'esistente
+       (unica riconciliazione: ``reused=True``);
+    2. cerca ``client_order_ref`` + cliente (non cancellati) come controllo
+       DUP-01: se trovato con origin diverso solleva
+       :class:`DuplicatePurchaseOrderError` (non è un riuso);
     3. in caso di timeout dopo la create, riconcilia di nuovo il passo 1
        prima di ritentare (nessun duplicato se Odoo ha già committato).
 
@@ -103,9 +107,9 @@ class OdooSaleOrderConnector:
         existing = self._find_by_origin(origin)
         if existing:
             return self._to_posted(existing, reused=True)
-        existing = self._find_by_po(partner, po_ref)
-        if existing:
-            return self._to_posted(existing, reused=True)
+        duplicate = self._find_by_po(partner, po_ref)
+        if duplicate:
+            self._raise_duplicate_po(duplicate, po_ref)
 
         vals = build_order_vals(
             order,
@@ -233,10 +237,28 @@ class OdooSaleOrderConnector:
             _ORDER_READ_FIELDS,
         )
 
+    def _raise_duplicate_po(self, existing: Mapping[str, Any], po_ref: str) -> None:
+        odoo_id = int(existing["id"])
+        name = str(existing.get("name") or "")
+        existing_origin = str(existing.get("origin") or "")
+        raise DuplicatePurchaseOrderError(
+            f"DUP-01: esiste già sale.order {name or odoo_id} "
+            f"(id={odoo_id}, origin={existing_origin!r}) "
+            f"con lo stesso PO {po_ref!r} e cliente",
+            odoo_id=odoo_id,
+            name=name,
+            origin=existing_origin,
+            client_order_ref=po_ref,
+        )
+
     def _create_with_retry(self, vals: dict[str, Any], origin: str) -> PostedSaleOrder:
         last_error: Exception | None = None
         for attempt in range(self.max_attempts):
             try:
+                if attempt > 0:
+                    reconciled = self._find_by_origin(origin)
+                    if reconciled:
+                        return self._to_posted(reconciled, reused=True)
                 new_id = self.client.create("sale.order", vals)
                 record = self._read_created(new_id, origin)
                 return self._to_posted(record, reused=False)
@@ -246,7 +268,11 @@ class OdooSaleOrderConnector:
                 raise
             except OdooTransientError as exc:
                 last_error = exc
-                reconciled = self._find_by_origin(origin)
+                try:
+                    reconciled = self._find_by_origin(origin)
+                except OdooTransientError as reconcile_exc:
+                    last_error = reconcile_exc
+                    reconciled = None
                 if reconciled:
                     return self._to_posted(reconciled, reused=True)
                 if attempt >= self.max_attempts - 1:

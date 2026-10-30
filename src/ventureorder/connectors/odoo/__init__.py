@@ -8,6 +8,7 @@ from ventureorder.connectors.odoo.client import OdooClient, client_from_env, cre
 from ventureorder.connectors.odoo.connector import OdooSaleOrderConnector, PostedSaleOrder
 from ventureorder.connectors.odoo.exceptions import (
     CustomerNotFoundError,
+    DuplicatePurchaseOrderError,
     OdooAuthError,
     OdooConnectorError,
     OdooDataError,
@@ -24,6 +25,7 @@ from ventureorder.connectors.odoo.rpc import (
 
 __all__ = [
     "CustomerNotFoundError",
+    "DuplicatePurchaseOrderError",
     "FakeOdooClient",
     "Json2OdooClient",
     "JsonRpcOdooClient",
