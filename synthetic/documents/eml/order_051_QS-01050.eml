@@ -1,0 +1,37 @@
+Content-Type: multipart/mixed; boundary="===============3859579342208507320=="
+MIME-Version: 1.0
+From: purchasing@global.example
+To: orders@delta-industrial.example
+Subject: PO QS-01050 - Order from Global Corp. (SYNTHETIC)
+Message-ID: <po-QS-01050@global.example>
+Date: Thu, 15 Jan 2026 10:30:00 +0000
+
+--===============3859579342208507320==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+Hi team, could you please raise this under our purchase order QS-01050 dated Jun 04, 2026? Deliver to Global Shipping Location 1; we need the goods by 2026-06-16.
+
+We need 2 PK of Epoxy 2-Part Quick Set (SYNTHETIC) (catalog ADH-EPX-000) at 18.68 each.
+We need 5 RO of Bubble Wrap 12in (SYNTHETIC) (catalog PKG-BBW-205) at 42.15 each.
+We need 3 BX of Flap Disc 5in 180 (SYNTHETIC) (catalog GLOBAL-ABR-1892) at 74.23 each.
+We need 4 PK of Epoxy 2-Part Quick Set (SYNTHETIC) (catalog ADH-EPX-231) at 34.76 each.
+We need 1 CS of Stretch Wrap 18in (SYNTHETIC) (catalog PKG-STW-138) at 133.33 each.
+We need 1 RO of Can Liner 43x47 1.0mil Black Roll (SYNTHETIC) (catalog JAN-LNR-4347-10-BL) at 18.35 each.
+We need 5 RO of Bubble Wrap 12in (SYNTHETIC) (catalog PKG-BBW-284) at 52.65 each.
+We need 10 CS of Penetrating Oil Spray (SYNTHETIC) (catalog GLOBAL-LUB-1915) at 67.65 each.
+We need 12 BX of Socket Head Cap Screw 3/4-10 x 1 (SYNTHETIC) (catalog FST-SHC-34-10-1) at 48.53 each.
+We need 1 CS of Toilet Tissue 2P Standard (SYNTHETIC) (catalog JAN-TTI-223) at 61.32 each.
+We need 5 BX of Flat Washer 5/16-18 Zinc (SYNTHETIC) (catalog GLOBAL-FAS-5007) at 5.62 each.
+We need 4 CS of Floor Cleaner Neutral Concentrate (SYNTHETIC) (catalog GLOBAL-JAN-4589) at 65.94 each.
+We need 3 BX of Wire Nut 3/4-10 {color} (SYNTHETIC) (catalog GLOBAL-ELE-1578) at 20.66 each.
+We need 2 BX of Hex Cap Screw 3/8-16 x 1-1/2 Grade 5 Zinc (SYNTHETIC) (catalog GLOBAL-FAS-6768) at 27.99 each.
+We need 6 CS of Toilet Tissue 2P Standard (SYNTHETIC) (catalog JAN-TTI-114) at 65.87 each.
+We need 3 CS of Floor Pad 17in Black (SYNTHETIC) (catalog JAN-FPD-17-BLA) at 20.93 each.
+We need 2 PK of Super Glue Gel (SYNTHETIC) (catalog GLOBAL-ADH-1024) at 22.47 each.
+We need 4 CS of Stretch Wrap 18in (SYNTHETIC) (catalog PKG-STW-291) at 101.33 each.
+We need 5 CS of Hand Sanitizer Gel 70% (SYNTHETIC) (catalog JAN-HSG-118) at 83.00 each.
+
+Thanks in advance.
+--===============3859579342208507320==--

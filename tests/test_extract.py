@@ -187,8 +187,10 @@ class TestOrderExtractor:
 
         assert isinstance(result, ExtractionResult)
         assert isinstance(result.order, ExtractedOrder)
-        assert result.llm_calls >= 1
+        assert result.llm_calls == 0
         assert len(result.order.lines) > 0
+        assert result.order.header is not None
+        assert result.order.header.po_number == "TEST-001"
 
     def test_extract_preserves_source_info(self):
         """Preserva informazioni sorgente."""
@@ -475,3 +477,687 @@ class TestEvaluation:
         assert score.header_accuracy() > 0.9
         assert score.lines_matched == 1
         assert score.lines_expected == 1
+
+    def test_compare_dates_formats(self):
+        """Date US e ISO sono equivalenti."""
+        from extract.eval import compare_dates
+
+        assert compare_dates("2026-04-23", "04-23-2026") is True
+        assert compare_dates("2026-04-23", "04/23/2026") is True
+        assert compare_dates("2026-02-24", "24-Feb-2026") is True
+        assert compare_dates("2026-03-02", "03.02.2026") is True
+        assert compare_dates("2026-04-23", "2026-04-24") is False
+
+    def test_silent_error_high_confidence(self):
+        """Campo sbagliato con confidenza alta senza avviso è errore silenzioso."""
+        from extract.eval import evaluate_order
+
+        extracted = {
+            "header": {"po_number": "WRONG", "po_date": "2026-01-15", "currency": "USD"},
+            "lines": [],
+            "evidence": {"/header/po_number": {"confidence": 0.95}},
+        }
+        ground_truth = {
+            "order_id": "gt-silent",
+            "header": {"po_number": "RIGHT", "po_date": "2026-01-15", "currency": "USD"},
+            "lines": [],
+            "_synthetic_metadata": {"is_hard_case": False},
+        }
+        extracted["decision"] = {"route": "AUTO_POST", "score": 0.99}
+        score = evaluate_order(extracted, ground_truth)
+        assert score.silent_order is True
+        assert any(e.field_path == "/header/po_number" for e in score.silent_errors)
+
+    def test_review_wrong_field_is_not_silent(self):
+        from extract.eval import evaluate_order
+
+        extracted = {
+            "header": {"po_number": "WRONG", "po_date": "2026-01-15", "currency": "USD"},
+            "lines": [],
+            "decision": {"route": "REVIEW"},
+            "evidence": {"/header/po_number": {"confidence": 0.99}},
+        }
+        ground_truth = {
+            "order_id": "gt-review",
+            "header": {"po_number": "RIGHT", "po_date": "2026-01-15", "currency": "USD"},
+            "lines": [],
+        }
+        score = evaluate_order(extracted, ground_truth)
+        assert score.silent_order is False
+        assert score.silent_errors == []
+        assert any(e.field_path == "/header/po_number" for e in score.field_mismatches)
+
+    def test_auto_post_extra_line_is_silent(self):
+        from extract.eval import evaluate_order
+
+        extracted = {
+            "header": {"po_number": "PO-1", "po_date": "2026-01-15", "currency": "USD"},
+            "lines": [
+                {"seller_item_code": "SKU-001", "description": "A", "quantity": 1, "uom_raw": "EA"},
+                {"seller_item_code": "SKU-999", "description": "Hallucinated", "quantity": 1, "uom_raw": "EA"},
+            ],
+            "decision": {"route": "AUTO_POST"},
+        }
+        ground_truth = {
+            "order_id": "gt-extra",
+            "header": {"po_number": "PO-1", "po_date": "2026-01-15", "currency": "USD"},
+            "lines": [
+                {"seller_item_code": "SKU-001", "description": "A", "quantity": 1, "uom_raw": "EA"},
+            ],
+        }
+        score = evaluate_order(extracted, ground_truth)
+        assert score.silent_order is True
+        assert score.extra_lines == 1
+
+    def test_hallucinated_empty_gt_field_is_silent_on_auto_post(self):
+        from extract.eval import evaluate_order
+
+        extracted = {
+            "header": {
+                "po_number": "PO-1",
+                "po_date": "2026-01-15",
+                "currency": "USD",
+                "requested_delivery_date": "2026-02-01",
+            },
+            "lines": [],
+            "decision": {"route": "AUTO_POST"},
+        }
+        ground_truth = {
+            "order_id": "gt-halluc",
+            "header": {
+                "po_number": "PO-1",
+                "po_date": "2026-01-15",
+                "currency": "USD",
+                "requested_delivery_date": None,
+            },
+            "lines": [],
+        }
+        score = evaluate_order(extracted, ground_truth)
+        assert score.silent_order is True
+        assert any(e.field_path == "/header/requested_delivery_date" for e in score.silent_errors)
+
+    def test_email_body_line_extraction(self):
+        """Estrae righe dal corpo email strutturato."""
+        preprocessor = Preprocessor()
+        result = preprocessor.preprocess({
+            "parts": [{
+                "part_type": "EMAIL_BODY",
+                "text": (
+                    "PO Number: SW-01136\nDate: 03-07-2026\n"
+                    "  1. [FST-LWS-M6-2] Lock Washer M6 Zinc\n"
+                    "     Qty: 10 BX @ $9.97\n"
+                    "Delivery requested by: 2026-03-24\n"
+                ),
+            }],
+        })
+        assert result.header is not None
+        assert result.header.po_number == "SW-01136"
+        assert result.header.po_date == "03-07-2026"
+        assert len(result.lines) == 1
+        assert result.lines[0].seller_item_code == "FST-LWS-M6-2"
+        assert result.lines[0].quantity == 10
+
+
+class TestDeterministicHeaderAndColumns:
+    """Estrazione deterministica di testata e colonne senza LLM."""
+
+    def test_excel_kv_header_and_unit_price_not_uom(self):
+        preprocessor = Preprocessor()
+        result = preprocessor.preprocess({
+            "parts": [{
+                "part_type": "EXCEL_SHEET",
+                "text": "PO Number:\tTIT-PO-01007\nDate:\t24-Feb-2026\n",
+                "tables": [{
+                    "header_row_index": 3,
+                    "rows": [
+                        [{"value": "PO Number:"}, {"value": "TIT-PO-01007"}],
+                        [{"value": "Date:"}, {"value": "24-Feb-2026"}],
+                        [{"value": None}, {"value": None}],
+                        [
+                            {"value": "Item Code"}, {"value": "Description"},
+                            {"value": "Quantity"}, {"value": "UoM"},
+                            {"value": "Unit Price"}, {"value": "Amount"},
+                        ],
+                        [
+                            {"value": "SKU-001"}, {"value": "Widget"},
+                            {"value": 2}, {"value": "CS"},
+                            {"value": 10.5}, {"value": 21.0},
+                        ],
+                    ],
+                }],
+            }],
+        })
+        assert result.header is not None
+        assert result.header.po_number == "TIT-PO-01007"
+        assert result.header.po_date == "24-Feb-2026"
+        assert len(result.lines) == 1
+        assert result.lines[0].uom_raw == "CS"
+        assert result.lines[0].unit_price == 10.5
+        assert result.lines[0].quantity == 2
+
+    def test_pdf_date_with_dots(self):
+        preprocessor = Preprocessor()
+        result = preprocessor.preprocess({
+            "parts": [{
+                "part_type": "PDF_PAGE",
+                "text": "PO Number: PTD-01000\nDate: 03.02.2026\nDelivery Date: 2026-02-11\n",
+                "tables": [{
+                    "header_row_index": 0,
+                    "rows": [
+                        [
+                            {"value": "Line"}, {"value": "Item Code"},
+                            {"value": "Description"}, {"value": "Qty"},
+                            {"value": "UoM"}, {"value": "Price"}, {"value": "Amount"},
+                        ],
+                        [
+                            {"value": "1"}, {"value": "JAN-DSP-200"},
+                            {"value": "Disinfectant Spray"}, {"value": "24"},
+                            {"value": "CS"}, {"value": "$45.69"}, {"value": "$1096.56"},
+                        ],
+                    ],
+                }],
+            }],
+        })
+        assert result.header is not None
+        assert result.header.po_number == "PTD-01000"
+        assert result.header.po_date == "03.02.2026"
+        assert result.header.delivery_date == "2026-02-11"
+        assert result.lines[0].unit_price == 45.69
+        assert result.lines[0].quantity == 24
+
+    def test_email_signature_and_qty_words(self):
+        preprocessor = Preprocessor()
+        result = preprocessor.preprocess({
+            "parts": [
+                {
+                    "part_type": "EMAIL_BODY",
+                    "text": "PO Number: BW-01015\nDate: 03/03/2026\nItems:\n",
+                },
+                {
+                    "part_type": "EMAIL_SIGNATURE",
+                    "text": (
+                        "  1. [JAN-LNR-4046-07-WH] Can Liner\n"
+                        "     Qty: twenty-four RO @ $33.18\n"
+                    ),
+                },
+            ],
+        })
+        assert result.header is not None
+        assert result.header.po_number == "BW-01015"
+        assert len(result.lines) == 1
+        assert result.lines[0].quantity == 24
+        assert result.lines[0].uom_raw == "RO"
+
+    def test_email_does_not_use_message_date_as_po_date(self):
+        preprocessor = Preprocessor()
+        result = preprocessor.preprocess({
+            "email_metadata": {
+                "subject": "Hello",
+                "date_parsed": "2026-01-15T10:30:00Z",
+            },
+            "parts": [{
+                "part_type": "EMAIL_BODY",
+                "text": "PO Number: SW-01136\nDate: 03-07-2026\n",
+            }],
+        })
+        assert result.header is not None
+        assert result.header.po_date == "03-07-2026"
+        assert result.header.po_date != "2026-01-15"
+
+    def test_attachment_disagreement_keeps_email_lines(self):
+        preprocessor = Preprocessor()
+        result = preprocessor.preprocess({
+            "email_metadata": {"subject": "PO FCH-01063"},
+            "parts": [
+                {
+                    "part_type": "EMAIL_BODY",
+                    "text": "PO Number: FCH-01063\nDate: 29/06/2026\n",
+                },
+                {
+                    "part_type": "EMAIL_SIGNATURE",
+                    "text": (
+                        "  1. [TLS-AWR-10IN-1] Wrench\n"
+                        "     Qty: 1 EA @ $14.21\n"
+                    ),
+                },
+                {
+                    "part_type": "EXCEL_SHEET",
+                    "tables": [{
+                        "header_row_index": 0,
+                        "rows": [
+                            [
+                                {"value": "Item Code"}, {"value": "Description"},
+                                {"value": "Quantity"}, {"value": "UoM"},
+                            ],
+                            [
+                                {"value": "TLS-AWR-10IN-1"}, {"value": "Wrench"},
+                                {"value": 2}, {"value": "EA"},
+                            ],
+                        ],
+                    }],
+                },
+            ],
+        })
+        assert result.source_disagreement is True
+        assert len(result.lines) == 1
+        assert result.lines[0].quantity == 1
+
+
+class TestCalibratedConfidenceAndReview:
+    """Confidenza tarata e routing REVIEW del motore regole."""
+
+    def test_structured_excel_skips_llm(self):
+        backend = MockBackend()
+        extractor = OrderExtractor(backend=backend, validate_output=False)
+        normalized = {
+            "input_id": "skip-llm",
+            "source": {"filename": "po.xlsx", "sha256": "a" * 64, "file_type": "XLSX"},
+            "ingested_at": "2026-02-01T00:00:00Z",
+            "parts": [{
+                "part_id": "p1",
+                "part_type": "EXCEL_SHEET",
+                "sha256": "b" * 64,
+                "text": "PO Number: TIT-PO-01007\nDate: 24-Feb-2026\n",
+                "tables": [{
+                    "header_row_index": 0,
+                    "rows": [
+                        [
+                            {"value": "Item Code"}, {"value": "Description"},
+                            {"value": "Quantity"}, {"value": "UoM"},
+                            {"value": "Unit Price"}, {"value": "Amount"},
+                        ],
+                        [
+                            {"value": "JAN-DSP-200"}, {"value": "Disinfectant Spray"},
+                            {"value": 2}, {"value": "CS"}, {"value": 45.69}, {"value": 91.38},
+                        ],
+                    ],
+                }],
+            }],
+        }
+        result = extractor.extract(normalized)
+        assert result.llm_calls == 0
+        assert result.order.header.po_number == "TIT-PO-01007"
+        po_conf = next(fc for fc in result.field_confidences if fc.path == "/header/po_number")
+        assert po_conf.source == "preprocessor"
+        assert po_conf.confidence >= 0.9
+
+    def test_incomplete_document_still_calls_llm(self):
+        backend = MockBackend()
+        extractor = OrderExtractor(backend=backend, validate_output=False)
+        normalized = {
+            "input_id": "need-llm",
+            "source": {"filename": "note.csv", "sha256": "a" * 64, "file_type": "CSV"},
+            "ingested_at": "2026-01-01T00:00:00Z",
+            "parts": [{
+                "part_id": "p1",
+                "part_type": "CSV_DATA",
+                "sha256": "b" * 64,
+                "text": "Please send supplies next week",
+            }],
+        }
+        result = extractor.extract(normalized)
+        assert result.llm_calls >= 1
+
+    def test_llm_only_confidence_below_review_threshold(self):
+        from extract.confidence import LLM_ONLY, REVIEW_THRESHOLD
+
+        class HeaderOnlyBackend(LLMBackend):
+            @property
+            def model_name(self):
+                return "test/header"
+
+            def is_available(self):
+                return True
+
+            def generate(self, prompt, **kwargs):
+                return LLMResponse(
+                    content=(
+                        '{"header": {"po_number": "LLM-9999", "po_date": "2026-03-01"},'
+                        ' "lines": [{"description": "X", "quantity": 1, "uom_raw": "EA",'
+                        ' "seller_item_code": "NO-SUCH-SKU"}]}'
+                    ),
+                    model=self.model_name,
+                )
+
+        extractor = OrderExtractor(
+            backend=HeaderOnlyBackend(),
+            validate_output=False,
+            max_retries=0,
+        )
+        normalized = {
+            "input_id": "llm-only",
+            "source": {"filename": "a.csv", "sha256": "a" * 64, "file_type": "CSV"},
+            "ingested_at": "2026-03-01T00:00:00Z",
+            "parts": [{
+                "part_id": "p1",
+                "part_type": "CSV_DATA",
+                "sha256": "b" * 64,
+                "text": "random prose without tables",
+            }],
+        }
+        result = extractor.extract(normalized)
+        qty = next(fc for fc in result.field_confidences if fc.path == "/lines/0/quantity")
+        assert qty.source == "llm"
+        assert qty.confidence <= LLM_ONLY
+        assert qty.confidence < REVIEW_THRESHOLD
+        assert result.order.status == "NEEDS_REVIEW"
+        assert any(w.severity == WarningSeverity.REVIEW for w in result.warnings)
+
+    def test_failed_amount_check_drops_confidence(self):
+        from extract.confidence import CHECK_FAIL, SILENT_THRESHOLD
+
+        backend = MockBackend()
+        extractor = OrderExtractor(backend=backend, validate_output=False)
+        normalized = {
+            "input_id": "bad-amount",
+            "source": {"filename": "po.xlsx", "sha256": "a" * 64, "file_type": "XLSX"},
+            "ingested_at": "2026-02-01T00:00:00Z",
+            "parts": [{
+                "part_id": "p1",
+                "part_type": "EXCEL_SHEET",
+                "sha256": "b" * 64,
+                "text": "PO Number: SW-01050\nDate: 2026-02-01\n",
+                "tables": [{
+                    "header_row_index": 0,
+                    "rows": [
+                        [
+                            {"value": "Item Code"}, {"value": "Description"},
+                            {"value": "Quantity"}, {"value": "UoM"},
+                            {"value": "Unit Price"}, {"value": "Amount"},
+                        ],
+                        [
+                            {"value": "JAN-DSP-200"}, {"value": "Disinfectant Spray"},
+                            {"value": 2}, {"value": "CS"}, {"value": 10.0}, {"value": 999.0},
+                        ],
+                    ],
+                }],
+            }],
+        }
+        result = extractor.extract(normalized)
+        qty = next(fc for fc in result.field_confidences if fc.path == "/lines/0/quantity")
+        assert qty.confidence <= CHECK_FAIL
+        assert qty.confidence < SILENT_THRESHOLD
+        assert any(w.code == "PRC-03" and w.path == "/lines/0/line_amount" for w in result.warnings)
+        assert result.order.status == "NEEDS_REVIEW"
+
+    def test_decision_route_review(self):
+        backend = MockBackend()
+        extractor = OrderExtractor(backend=backend, validate_output=False)
+        normalized = {
+            "input_id": "route",
+            "source": {"filename": "po.xlsx", "sha256": "a" * 64, "file_type": "XLSX"},
+            "ingested_at": "2026-02-01T00:00:00Z",
+            "parts": [{
+                "part_id": "p1",
+                "part_type": "EXCEL_SHEET",
+                "sha256": "b" * 64,
+                "text": "PO Number: SW-01050\nDate: 2026-02-01\n",
+                "tables": [{
+                    "header_row_index": 0,
+                    "rows": [
+                        [
+                            {"value": "Item Code"}, {"value": "Description"},
+                            {"value": "Quantity"}, {"value": "UoM"},
+                            {"value": "Unit Price"},
+                        ],
+                        [
+                            {"value": "JAN-DSP-200"}, {"value": "Disinfectant Spray"},
+                            {"value": 2}, {"value": "CS"}, {"value": 45.69},
+                        ],
+                    ],
+                }],
+            }],
+        }
+        result = extractor.extract(normalized)
+        assert result.decision is not None
+        assert result.decision["route"] in {"REVIEW", "REJECT", "AUTO_POST"}
+        payload = result.to_dict()
+        assert "decision" in payload
+        assert "evidence" in payload
+
+    def test_clean_order_auto_posts(self):
+        """Ordine pulito deterministico con controlli ok arriva ad AUTO_POST."""
+        from extract.confidence import DETERMINISTIC
+
+        assert DETERMINISTIC >= 0.98
+        backend = MockBackend()
+        from extract.catalog import CatalogMatcher
+
+        extractor = OrderExtractor(
+            backend=backend,
+            validate_output=False,
+            catalog=CatalogMatcher(allowlist_synthetic=True),
+        )
+        normalized = {
+            "input_id": "auto-post",
+            "source": {"filename": "po.xlsx", "sha256": "a" * 64, "file_type": "XLSX"},
+            "ingested_at": "2026-02-01T00:00:00Z",
+            "parts": [{
+                "part_id": "p1",
+                "part_type": "EXCEL_SHEET",
+                "sha256": "b" * 64,
+                "text": (
+                    "Company: Acme Company (SYNTHETIC)\n"
+                    "PO Number: 4500010999\n"
+                    "Date: 2026-02-01\n"
+                    "Ship To: Acme Shipping Location 1\n"
+                    "Delivery Date: 2026-02-15\n"
+                    "Currency: USD\n"
+                ),
+                "tables": [{
+                    "header_row_index": 0,
+                    "rows": [
+                        [
+                            {"value": "Item Code"}, {"value": "Description"},
+                            {"value": "Quantity"}, {"value": "UoM"},
+                            {"value": "Unit Price"}, {"value": "Amount"},
+                        ],
+                        [
+                            {"value": "JAN-DSP-200"}, {"value": "Disinfectant Spray"},
+                            {"value": 2}, {"value": "CS"}, {"value": 45.69}, {"value": 91.38},
+                        ],
+                    ],
+                }],
+            }],
+        }
+        result = extractor.extract(normalized)
+        assert result.llm_calls == 0
+        assert result.decision is not None
+        assert result.decision["route"] == "AUTO_POST", result.decision
+        assert result.decision["score"] >= 0.97
+        buyer_code = next(
+            (fc for fc in result.field_confidences if fc.path == "/lines/0/buyer_item_code"),
+            None,
+        )
+        assert buyer_code is None
+
+    def test_ship_to_name_only_skips_cus03(self):
+        backend = MockBackend()
+        extractor = OrderExtractor(backend=backend, validate_output=False)
+        normalized = {
+            "input_id": "ship-name",
+            "source": {"filename": "po.xlsx", "sha256": "a" * 64, "file_type": "XLSX"},
+            "ingested_at": "2026-02-01T00:00:00Z",
+            "parts": [{
+                "part_id": "p1",
+                "part_type": "EXCEL_SHEET",
+                "sha256": "b" * 64,
+                "text": (
+                    "Company: Acme Company (SYNTHETIC)\n"
+                    "PO Number: 4500010888\n"
+                    "Date: 2026-02-01\n"
+                    "Ship To: Magazzino Nord\n"
+                    "Currency: USD\n"
+                ),
+                "tables": [{
+                    "header_row_index": 0,
+                    "rows": [
+                        [
+                            {"value": "Item Code"}, {"value": "Description"},
+                            {"value": "Quantity"}, {"value": "UoM"},
+                            {"value": "Unit Price"}, {"value": "Amount"},
+                        ],
+                        [
+                            {"value": "JAN-DSP-200"}, {"value": "Disinfectant Spray"},
+                            {"value": 2}, {"value": "CS"}, {"value": 45.69}, {"value": 91.38},
+                        ],
+                    ],
+                }],
+            }],
+        }
+        result = extractor.extract(normalized)
+        assert not any(w.code == "CUS-03" for w in result.warnings)
+
+    def test_missing_buyer_item_code_has_no_zero_confidence(self):
+        backend = MockBackend()
+        extractor = OrderExtractor(backend=backend, validate_output=False, run_rules=False)
+        normalized = {
+            "input_id": "no-buyer-code",
+            "source": {"filename": "po.xlsx", "sha256": "a" * 64, "file_type": "XLSX"},
+            "ingested_at": "2026-02-01T00:00:00Z",
+            "parts": [{
+                "part_id": "p1",
+                "part_type": "EXCEL_SHEET",
+                "sha256": "b" * 64,
+                "text": "PO Number: SW-01050\nDate: 2026-02-01\n",
+                "tables": [{
+                    "header_row_index": 0,
+                    "rows": [
+                        [
+                            {"value": "Item Code"}, {"value": "Description"},
+                            {"value": "Quantity"}, {"value": "UoM"},
+                            {"value": "Unit Price"},
+                        ],
+                        [
+                            {"value": "JAN-DSP-200"}, {"value": "Disinfectant Spray"},
+                            {"value": 2}, {"value": "CS"}, {"value": 45.69},
+                        ],
+                    ],
+                }],
+            }],
+        }
+        result = extractor.extract(normalized)
+        paths = {fc.path: fc.confidence for fc in result.field_confidences}
+        assert "/lines/0/buyer_item_code" not in paths
+        assert paths["/lines/0/seller_item_code"] > 0
+        assert not any(
+            w.code == "EXT-01" and w.path == "/lines/0/buyer_item_code"
+            for w in result.warnings
+        )
+
+    def test_ext02_tolerant_of_float_and_dollar_currency(self):
+        from ventureorder.rules.ext import snippet_in_document
+
+        assert snippet_in_document("24.0", "qty 24 cs")
+        assert snippet_in_document("USD", "total $12.00")
+        assert not snippet_in_document("EUR", "total $12.00")
+
+    def test_ext02_rejects_numeric_and_currency_substrings(self):
+        from ventureorder.rules.ext import snippet_in_document
+
+        assert not snippet_in_document("24", "qty 124 cs")
+        assert not snippet_in_document("24", "qty 240 units")
+        assert not snippet_in_document("100", "total 1000")
+        assert not snippet_in_document("2.4", "qty 24 cs")
+        assert not snippet_in_document("USD", "USDA certified packing")
+        assert not snippet_in_document("EUR", "europe warehouse")
+
+    def test_catalog_matcher_does_not_allowlist_by_default(self):
+        from extract.catalog import CatalogMatcher
+
+        matcher = CatalogMatcher()
+        customers = matcher._iter_customers()
+        assert customers
+        assert all(not customer.allowlisted for customer in customers)
+        assert all(customer.approved_orders_without_corrections < 20 for customer in customers)
+
+    def test_missing_currency_from_customer_master_not_deterministic(self):
+        from extract.catalog import CatalogMatcher
+        from extract.confidence import CUSTOMER_MASTER, DETERMINISTIC
+
+        extractor = OrderExtractor(
+            backend=MockBackend(),
+            validate_output=False,
+            catalog=CatalogMatcher(allowlist_synthetic=True),
+        )
+        normalized = {
+            "input_id": "no-currency",
+            "source": {"filename": "po.xlsx", "sha256": "a" * 64, "file_type": "XLSX"},
+            "ingested_at": "2026-02-01T00:00:00Z",
+            "parts": [{
+                "part_id": "p1",
+                "part_type": "EXCEL_SHEET",
+                "sha256": "b" * 64,
+                "text": (
+                    "Company: Acme Company (SYNTHETIC)\n"
+                    "PO Number: 4500010999\n"
+                    "Date: 2026-02-01\n"
+                    "Ship To: Acme Shipping Location 1\n"
+                    "Delivery Date: 2026-02-15\n"
+                ),
+                "tables": [{
+                    "header_row_index": 0,
+                    "rows": [
+                        [
+                            {"value": "Item Code"}, {"value": "Description"},
+                            {"value": "Quantity"}, {"value": "UoM"},
+                            {"value": "Unit Price"}, {"value": "Amount"},
+                        ],
+                        [
+                            {"value": "JAN-DSP-200"}, {"value": "Disinfectant Spray"},
+                            {"value": 2}, {"value": "CS"}, {"value": 45.69}, {"value": 91.38},
+                        ],
+                    ],
+                }],
+            }],
+        }
+        result = extractor.extract(normalized)
+        currency = next(fc for fc in result.field_confidences if fc.path == "/header/currency")
+        assert currency.source == "catalog"
+        assert currency.confidence == CUSTOMER_MASTER
+        assert currency.confidence < DETERMINISTIC
+        assert currency.snippet is None
+        assert result.order.header.currency == "USD"
+
+    def test_code_only_buyer_is_not_deterministic(self):
+        from extract.catalog import CatalogMatcher
+        from extract.confidence import DETERMINISTIC, LLM_ONLY
+
+        extractor = OrderExtractor(
+            backend=MockBackend(),
+            validate_output=False,
+            catalog=CatalogMatcher(allowlist_synthetic=True),
+        )
+        normalized = {
+            "input_id": "code-only",
+            "source": {"filename": "po.xlsx", "sha256": "a" * 64, "file_type": "XLSX"},
+            "ingested_at": "2026-02-01T00:00:00Z",
+            "parts": [{
+                "part_id": "p1",
+                "part_type": "EXCEL_SHEET",
+                "sha256": "b" * 64,
+                "text": "PO Number: 4500010888\nDate: 2026-02-01\n",
+                "tables": [{
+                    "header_row_index": 0,
+                    "rows": [
+                        [
+                            {"value": "Item Code"}, {"value": "Description"},
+                            {"value": "Quantity"}, {"value": "UoM"},
+                            {"value": "Unit Price"},
+                        ],
+                        [
+                            {"value": "ACME-ABR-3086"}, {"value": "Cut-Off Wheel 6in"},
+                            {"value": 2}, {"value": "BX"}, {"value": 18.75},
+                        ],
+                    ],
+                }],
+            }],
+        }
+        result = extractor.extract(normalized)
+        resolved = (result.order.buyer.resolved or {}) if result.order.buyer else {}
+        assert resolved.get("method") == "CODE"
+        assert float(resolved.get("score") or 0) < DETERMINISTIC
+        buyer_conf = next(fc for fc in result.field_confidences if fc.path == "/buyer")
+        assert buyer_conf.confidence <= LLM_ONLY
+        assert result.decision is not None
+        assert result.decision["route"] != "AUTO_POST"

@@ -1,0 +1,481 @@
+{
+  "schema_version": "1.0",
+  "order_id": "360f5da4-fa15-5c88-a678-239e3de57309",
+  "tenant_id": "delta-industrial-supply",
+  "document_type": "ORIGINAL",
+  "status": "VALIDATED",
+  "source": {
+    "channel": "FOLDER",
+    "message_id": null,
+    "from_address": null,
+    "subject": null,
+    "received_at": "2026-01-15T10:30:00Z",
+    "documents": [
+      {
+        "document_id": "doc-5fb06fb5",
+        "kind": "PDF_TEXT",
+        "filename": "APE-01131.pdf",
+        "mime_type": "application/pdf",
+        "sha256": "1a76f89b25dadd2051938c34d3665a4dcdf9f1f4e870f276e8e66e9e1e828e3f",
+        "page_count": 1
+      }
+    ]
+  },
+  "buyer": {
+    "name": "Summit Group (SYNTHETIC)",
+    "code_on_document": "C-SUMMIT",
+    "tax_id": "US19-3972018",
+    "gln": null,
+    "peppol_endpoint": null,
+    "address": {
+      "line1": "8195 Tech Center Blvd",
+      "city": "Cincinnati",
+      "region": "OH",
+      "postal_code": "45202",
+      "country": "US"
+    },
+    "contact": {
+      "name": "Summit Purchasing",
+      "email": "purchasing@summit.example",
+      "phone": "+1-555-5961"
+    },
+    "resolved": {
+      "erp_partner_id": 54,
+      "erp_partner_ref": "C-SUMMIT",
+      "method": "CODE",
+      "score": 0.99
+    }
+  },
+  "seller": {
+    "name": "Delta Industrial Supply LLC (SYNTHETIC)",
+    "code_on_document": null,
+    "tax_id": null,
+    "address": {
+      "line1": "55 Commerce Dr",
+      "city": "Dayton",
+      "region": "OH",
+      "postal_code": "45402",
+      "country": "US"
+    },
+    "resolved": null
+  },
+  "header": {
+    "po_number": "APE-01131",
+    "po_revision": 0,
+    "po_date": "2026/02/13",
+    "requested_delivery_date": "2026-03-05",
+    "currency": "USD",
+    "buyer_reference": "Dept 385",
+    "payment_terms_text": "Net 30",
+    "incoterms": null,
+    "ship_via": "Best Way",
+    "notes": "Call before delivery",
+    "language": "en"
+  },
+  "lines": [
+    {
+      "line_no": 1,
+      "buyer_item_code": "SUMMIT-JAN-9194",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Toilet Tissue 2P Standard (SYNTHETIC)",
+      "quantity": 5,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "96RL/CS",
+        "inner_count": 96,
+        "inner_size": 1,
+        "inner_uom": "RL"
+      },
+      "unit_price": 87.17,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 435.85,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "JAN-TTI-238",
+        "erp_product_id": 1238,
+        "erp_uom": "CS",
+        "erp_uom_id": 4,
+        "erp_quantity": 5,
+        "conversion_factor": 1.0,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 87.17
+      }
+    },
+    {
+      "line_no": 2,
+      "buyer_item_code": null,
+      "seller_item_code": "JAN-DSP-185",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Disinfectant Spray (SYNTHETIC)",
+      "quantity": 2,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "12/CS",
+        "inner_count": 12,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 61.81,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 123.62,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "JAN-DSP-185",
+        "erp_product_id": 1185,
+        "erp_uom": "CS",
+        "erp_uom_id": 2,
+        "erp_quantity": 2,
+        "conversion_factor": 1.0,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 61.81
+      }
+    },
+    {
+      "line_no": 3,
+      "buyer_item_code": null,
+      "seller_item_code": "ADH-SGG-191",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Super Glue Gel (SYNTHETIC)",
+      "quantity": 6,
+      "uom_raw": "PK",
+      "uom": "PK",
+      "pack": {
+        "raw": "12/PK",
+        "inner_count": 12,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 26.38,
+      "price_uom": "PK",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 158.28,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "ADH-SGG-191",
+        "erp_product_id": 1191,
+        "erp_uom": "PK",
+        "erp_uom_id": 10,
+        "erp_quantity": 6,
+        "conversion_factor": 1.0,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 26.38
+      }
+    },
+    {
+      "line_no": 4,
+      "buyer_item_code": null,
+      "seller_item_code": "JAN-FST-281",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Floor Stripper Heavy Duty (SYNTHETIC)",
+      "quantity": 1,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "4/1GAL",
+        "inner_count": 4,
+        "inner_size": 1,
+        "inner_uom": "GLL"
+      },
+      "unit_price": 87.26,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 87.26,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "JAN-FST-281",
+        "erp_product_id": 1281,
+        "erp_uom": "CS",
+        "erp_uom_id": 34,
+        "erp_quantity": 1,
+        "conversion_factor": 1.0,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 87.26
+      }
+    },
+    {
+      "line_no": 5,
+      "buyer_item_code": "SUMMIT-SAF-8585",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Ear Plugs Foam Disposable (SYNTHETIC)",
+      "quantity": 2,
+      "uom_raw": "BX",
+      "uom": "BX",
+      "pack": {
+        "raw": "200PR/BX",
+        "inner_count": 200,
+        "inner_size": 1,
+        "inner_uom": "PR"
+      },
+      "unit_price": 38.37,
+      "price_uom": "BX",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 76.74,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "PPE-EAR-290",
+        "erp_product_id": 1290,
+        "erp_uom": "BX",
+        "erp_uom_id": 25,
+        "erp_quantity": 2,
+        "conversion_factor": 1.0,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 38.37
+      }
+    },
+    {
+      "line_no": 6,
+      "buyer_item_code": "SUMMIT-FAS-0504",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Lock Washer 1/4-20 Zinc (SYNTHETIC)",
+      "quantity": 10,
+      "uom_raw": "BX",
+      "uom": "BX",
+      "pack": {
+        "raw": "BX/100",
+        "inner_count": 100,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 9.64,
+      "price_uom": "BX",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 96.4,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "FST-LWS-14-20-1",
+        "erp_product_id": 1045,
+        "erp_uom": "BX",
+        "erp_uom_id": 21,
+        "erp_quantity": 10,
+        "conversion_factor": 1.0,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 9.64
+      }
+    },
+    {
+      "line_no": 7,
+      "buyer_item_code": "SUMMIT-SAF-0208",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "N95 Respirator (SYNTHETIC)",
+      "quantity": 24,
+      "uom_raw": "BX",
+      "uom": "BX",
+      "pack": {
+        "raw": "20/BX",
+        "inner_count": 20,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 31.95,
+      "price_uom": "BX",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 766.8,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "PPE-N95-170",
+        "erp_product_id": 1170,
+        "erp_uom": "BX",
+        "erp_uom_id": 19,
+        "erp_quantity": 24,
+        "conversion_factor": 1.0,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 31.95
+      }
+    },
+    {
+      "line_no": 8,
+      "buyer_item_code": null,
+      "seller_item_code": "JAN-DSP-200",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Disinfectant Spray (SYNTHETIC)",
+      "quantity": 1,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "12/CS",
+        "inner_count": 12,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 45.69,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 45.69,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "JAN-DSP-200",
+        "erp_product_id": 1200,
+        "erp_uom": "CS",
+        "erp_uom_id": 35,
+        "erp_quantity": 1,
+        "conversion_factor": 1.0,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 45.69
+      }
+    },
+    {
+      "line_no": 9,
+      "buyer_item_code": "SUMMIT-SAF-7491",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Latex Gloves XXL PF (SYNTHETIC)",
+      "quantity": 4,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "100/BX 10BX/CS",
+        "inner_count": 10,
+        "inner_size": 1,
+        "inner_uom": "BX"
+      },
+      "unit_price": 92.03,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 368.12,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "PPE-GLV-LAT-5-XXL-BLA",
+        "erp_product_id": 1077,
+        "erp_uom": "CS",
+        "erp_uom_id": 40,
+        "erp_quantity": 4,
+        "conversion_factor": 1.0,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 92.03
+      }
+    },
+    {
+      "line_no": 10,
+      "buyer_item_code": "SUMMIT-SAF-9105",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Safety Glasses Amber Anti-Fog (SYNTHETIC)",
+      "quantity": 3,
+      "uom_raw": "EA",
+      "uom": "EA",
+      "pack": null,
+      "unit_price": 10.02,
+      "price_uom": "EA",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 30.06,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "PPE-GLS-AMB-ANTI-FOG",
+        "erp_product_id": 1024,
+        "erp_uom": "EA",
+        "erp_uom_id": 18,
+        "erp_quantity": 3,
+        "conversion_factor": 1.0,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 10.02
+      }
+    }
+  ],
+  "charges": [],
+  "totals": {
+    "lines_amount_declared": 2188.82,
+    "tax_amount_declared": null,
+    "total_amount_declared": 2188.82,
+    "lines_amount_computed": 2188.82
+  },
+  "decision": {
+    "score": 0.98,
+    "route": "AUTO_POST",
+    "reasons": []
+  },
+  "processing": {
+    "extractor": "synthetic/generator.py",
+    "prompt_version": null,
+    "created_at": "2026-01-15T10:30:00Z",
+    "updated_at": null
+  },
+  "ship_to": {
+    "name": "Summit Shipping Location 1",
+    "code_on_document": "SHIP-01",
+    "address": {
+      "line1": "7454 Business Park Rd",
+      "city": "Chicago",
+      "region": "IL",
+      "postal_code": "60601",
+      "country": "US"
+    },
+    "resolved": {
+      "erp_partner_id": 55,
+      "erp_partner_ref": "SHIP-01",
+      "method": "CODE",
+      "score": 1.0
+    }
+  },
+  "_synthetic_metadata": {
+    "hard_case_types": [],
+    "is_hard_case": false
+  }
+}

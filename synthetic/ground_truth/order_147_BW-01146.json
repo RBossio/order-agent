@@ -1,0 +1,489 @@
+{
+  "schema_version": "1.0",
+  "order_id": "4682ab0e-d6a0-5745-b6d2-8af30d04be4d",
+  "tenant_id": "delta-industrial-supply",
+  "document_type": "ORIGINAL",
+  "status": "VALIDATED",
+  "source": {
+    "channel": "EMAIL_IMAP",
+    "message_id": "<po-BW-01146@delta.example>",
+    "from_address": "purchasing@delta.example",
+    "subject": "PO BW-01146 - Order from Delta Holdings (SYNTHETIC)",
+    "received_at": "2026-01-15T10:30:00Z",
+    "documents": [
+      {
+        "document_id": "doc-6d3bd61a",
+        "kind": "EMAIL_BODY",
+        "filename": null,
+        "mime_type": "text/plain",
+        "sha256": "a76f529cd0e4b99017a2332adbdb5b00a91df9baaed51653f0da95cd13003c3a",
+        "page_count": null
+      },
+      {
+        "document_id": "doc-abb17ddc",
+        "kind": "XLSX",
+        "filename": "BW-01146.xlsx",
+        "mime_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        "sha256": "c554c8f2aeea755fa0729c9edf64e27f5f366689062c88875f669e042484d692",
+        "page_count": null
+      }
+    ]
+  },
+  "buyer": {
+    "name": "Delta Holdings (SYNTHETIC)",
+    "code_on_document": "C-DELTA",
+    "tax_id": "US68-7070880",
+    "gln": null,
+    "peppol_endpoint": null,
+    "address": {
+      "line1": "1543 Corporate Dr",
+      "city": "Dayton",
+      "region": "OH",
+      "postal_code": "45402",
+      "country": "US"
+    },
+    "contact": {
+      "name": "Delta Purchasing",
+      "email": "purchasing@delta.example",
+      "phone": "+1-555-9584"
+    },
+    "resolved": {
+      "erp_partner_id": 45,
+      "erp_partner_ref": "C-DELTA",
+      "method": "EMAIL_DOMAIN",
+      "score": 0.99
+    }
+  },
+  "seller": {
+    "name": "Delta Industrial Supply LLC (SYNTHETIC)",
+    "code_on_document": null,
+    "tax_id": null,
+    "address": {
+      "line1": "55 Commerce Dr",
+      "city": "Dayton",
+      "region": "OH",
+      "postal_code": "45402",
+      "country": "US"
+    },
+    "resolved": null
+  },
+  "header": {
+    "po_number": "BW-01146",
+    "po_revision": 0,
+    "po_date": "05/22/2026",
+    "requested_delivery_date": "2026-06-03",
+    "currency": "USD",
+    "buyer_reference": "Dept 364",
+    "payment_terms_text": "Net 45",
+    "incoterms": null,
+    "ship_via": "UPS Ground",
+    "notes": "Confirm availability",
+    "language": "en"
+  },
+  "lines": [
+    {
+      "line_no": 1,
+      "buyer_item_code": null,
+      "seller_item_code": "PPE-HAT-WHI",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Hard Hat White ANSI Type I (SYNTHETIC)",
+      "quantity": 3,
+      "uom_raw": "EA",
+      "uom": "EA",
+      "pack": null,
+      "unit_price": 23.83,
+      "price_uom": "EA",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 71.49,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "PPE-HAT-WHI",
+        "erp_product_id": 1276,
+        "erp_uom": "EA",
+        "erp_uom_id": 26,
+        "erp_quantity": 3,
+        "conversion_factor": 1.0,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 23.83
+      }
+    },
+    {
+      "line_no": 2,
+      "buyer_item_code": null,
+      "seller_item_code": "ADH-SGG-011",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Super Glue Gel (SYNTHETIC)",
+      "quantity": 10,
+      "uom_raw": "PK",
+      "uom": "PK",
+      "pack": {
+        "raw": "12/PK",
+        "inner_count": 12,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 25.28,
+      "price_uom": "PK",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 252.8,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "ADH-SGG-011",
+        "erp_product_id": 1011,
+        "erp_uom": "PK",
+        "erp_uom_id": 9,
+        "erp_quantity": 10,
+        "conversion_factor": 1.0,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 25.28
+      }
+    },
+    {
+      "line_no": 3,
+      "buyer_item_code": null,
+      "seller_item_code": "LUB-POS-227",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Penetrating Oil Spray (SYNTHETIC)",
+      "quantity": 5,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "12/CS",
+        "inner_count": 12,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 94.71,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 473.55,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "LUB-POS-227",
+        "erp_product_id": 1227,
+        "erp_uom": "CS",
+        "erp_uom_id": 1,
+        "erp_quantity": 5,
+        "conversion_factor": 1.0,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 94.71
+      }
+    },
+    {
+      "line_no": 4,
+      "buyer_item_code": null,
+      "seller_item_code": "LUB-MOL-025",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Machine Oil Light (SYNTHETIC)",
+      "quantity": 24,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "12/CS",
+        "inner_count": 12,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 62.24,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 1493.76,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "LUB-MOL-025",
+        "erp_product_id": 1025,
+        "erp_uom": "CS",
+        "erp_uom_id": 13,
+        "erp_quantity": 24,
+        "conversion_factor": 1.0,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 62.24
+      }
+    },
+    {
+      "line_no": 5,
+      "buyer_item_code": null,
+      "seller_item_code": "JAN-NFC-287",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Floor Cleaner Neutral Concentrate (SYNTHETIC)",
+      "quantity": 1,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "4/1GAL",
+        "inner_count": 4,
+        "inner_size": 1,
+        "inner_uom": "GLL"
+      },
+      "unit_price": 53.53,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 53.53,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "JAN-NFC-287",
+        "erp_product_id": 1287,
+        "erp_uom": "CS",
+        "erp_uom_id": 34,
+        "erp_quantity": 1,
+        "conversion_factor": 1.0,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 53.53
+      }
+    },
+    {
+      "line_no": 6,
+      "buyer_item_code": null,
+      "seller_item_code": "PKG-PTC-202",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Packing Tape Clear 2in (SYNTHETIC)",
+      "quantity": 3,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "36RL/CS",
+        "inner_count": 36,
+        "inner_size": 1,
+        "inner_uom": "RL"
+      },
+      "unit_price": 60.96,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 182.88,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "PKG-PTC-202",
+        "erp_product_id": 1202,
+        "erp_uom": "CS",
+        "erp_uom_id": 28,
+        "erp_quantity": 3,
+        "conversion_factor": 1.0,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 60.96
+      }
+    },
+    {
+      "line_no": 7,
+      "buyer_item_code": null,
+      "seller_item_code": "PPE-GLV-LAT-4-XXL-BLU",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Latex Gloves XXL PF (SYNTHETIC)",
+      "quantity": 5,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "100/BX 10BX/CS",
+        "inner_count": 10,
+        "inner_size": 1,
+        "inner_uom": "BX"
+      },
+      "unit_price": 92.05,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 460.25,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "PPE-GLV-LAT-4-XXL-BLU",
+        "erp_product_id": 1048,
+        "erp_uom": "CS",
+        "erp_uom_id": 49,
+        "erp_quantity": 5,
+        "conversion_factor": 1.0,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 92.05
+      }
+    },
+    {
+      "line_no": 8,
+      "buyer_item_code": null,
+      "seller_item_code": "FST-HCS-38-16-3",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Hex Cap Screw 3/8-16 x 3 Grade 5 Zinc (SYNTHETIC)",
+      "quantity": 6,
+      "uom_raw": "BX",
+      "uom": "BX",
+      "pack": {
+        "raw": "BX/50",
+        "inner_count": 50,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 32.32,
+      "price_uom": "BX",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 193.92,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "FST-HCS-38-16-3",
+        "erp_product_id": 1285,
+        "erp_uom": "BX",
+        "erp_uom_id": 8,
+        "erp_quantity": 6,
+        "conversion_factor": 1.0,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 32.32
+      }
+    },
+    {
+      "line_no": 9,
+      "buyer_item_code": null,
+      "seller_item_code": "PPE-GLV-NIT-6-XXL-BLA",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Nitrile Gloves XXL Black 6mil PF (SYNTHETIC)",
+      "quantity": 6,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "100/BX 10BX/CS",
+        "inner_count": 10,
+        "inner_size": 1,
+        "inner_uom": "BX"
+      },
+      "unit_price": 99.47,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 596.82,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "PPE-GLV-NIT-6-XXL-BLA",
+        "erp_product_id": 1212,
+        "erp_uom": "CS",
+        "erp_uom_id": 39,
+        "erp_quantity": 6,
+        "conversion_factor": 1.0,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 99.47
+      }
+    },
+    {
+      "line_no": 10,
+      "buyer_item_code": null,
+      "seller_item_code": "FST-HCS-38-16-2",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Hex Cap Screw 3/8-16 x 2 Grade 5 Zinc (SYNTHETIC)",
+      "quantity": 12,
+      "uom_raw": "BX",
+      "uom": "BX",
+      "pack": {
+        "raw": "BX/50",
+        "inner_count": 50,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 9.68,
+      "price_uom": "BX",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 116.16,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "FST-HCS-38-16-2",
+        "erp_product_id": 1159,
+        "erp_uom": "BX",
+        "erp_uom_id": 13,
+        "erp_quantity": 12,
+        "conversion_factor": 1.0,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 9.68
+      }
+    }
+  ],
+  "charges": [],
+  "totals": {
+    "lines_amount_declared": 3895.16,
+    "tax_amount_declared": null,
+    "total_amount_declared": 3895.16,
+    "lines_amount_computed": 3895.16
+  },
+  "decision": {
+    "score": 0.98,
+    "route": "AUTO_POST",
+    "reasons": []
+  },
+  "processing": {
+    "extractor": "synthetic/generator.py",
+    "prompt_version": null,
+    "created_at": "2026-01-15T10:30:00Z",
+    "updated_at": null
+  },
+  "ship_to": {
+    "name": "Delta Shipping Location 1",
+    "code_on_document": "SHIP-01",
+    "address": {
+      "line1": "7238 Corporate Dr",
+      "city": "Columbus",
+      "region": "OH",
+      "postal_code": "43215",
+      "country": "US"
+    },
+    "resolved": {
+      "erp_partner_id": 46,
+      "erp_partner_ref": "SHIP-01",
+      "method": "CODE",
+      "score": 1.0
+    }
+  },
+  "_synthetic_metadata": {
+    "hard_case_types": [],
+    "is_hard_case": false
+  }
+}

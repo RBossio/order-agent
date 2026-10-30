@@ -221,7 +221,11 @@ def seed_ref() -> MockReferenceDataProvider:
             currency="USD",
             payment_terms="Net 30",
             sale_warn="no-message",
-            ship_to=[{"code": "PLANT-02", "address": copy.deepcopy(SHIP_ADDRESS)}],
+            ship_to=[{
+                "code": "PLANT-02",
+                "name": "Acme Plant 2",
+                "address": copy.deepcopy(SHIP_ADDRESS),
+            }],
             delivery_partner_ids=[44],
             allowlisted=True,
             approved_orders_without_corrections=25,
@@ -416,6 +420,17 @@ class TestCus:
         }
         assert_hit(engine.validate(order), "CUS-02", Severity.REVIEW)
 
+    def test_cus_02_code_only_without_name(self, engine: ValidationEngine) -> None:
+        order = make_vof()
+        order["buyer"]["name"] = None
+        order["buyer"]["resolved"] = {
+            "erp_partner_id": 42,
+            "erp_partner_ref": "C-ACME",
+            "method": "CODE",
+            "score": 0.70,
+        }
+        assert_hit(engine.validate(order), "CUS-02", Severity.REVIEW)
+
     def test_cus_03_pass(self, engine: ValidationEngine) -> None:
         assert_clean(engine.validate(make_vof()), "CUS-03")
 
@@ -432,6 +447,41 @@ class TestCus:
             "resolved": {"erp_partner_id": 99, "method": "ADDRESS", "score": 0.7},
         }
         assert_hit(engine.validate(order), "CUS-03", Severity.REVIEW)
+
+    def test_cus_03_name_only_not_error(self, engine: ValidationEngine) -> None:
+        order = make_vof()
+        order["ship_to"] = {"name": "Sede non in anagrafica"}
+        assert_clean(engine.validate(order), "CUS-03")
+
+    def test_cus_03_name_matches_anagrafica(self, engine: ValidationEngine) -> None:
+        order = make_vof()
+        order["ship_to"] = {"name": "Acme Plant 2"}
+        assert_clean(engine.validate(order), "CUS-03")
+
+    def test_cus_03_name_substring_does_not_excuse_wrong_address(
+        self, engine: ValidationEngine
+    ) -> None:
+        order = make_vof()
+        order["ship_to"] = {
+            "name": "Acme",
+            "address": {
+                "line1": "1 Unknown Rd",
+                "city": "Detroit",
+                "postal_code": "48201",
+                "country": "US",
+            },
+            "resolved": {},
+        }
+        assert_hit(engine.validate(order), "CUS-03", Severity.REVIEW)
+
+    def test_addresses_match_requires_exact_name(self) -> None:
+        from ventureorder.rules.reference import addresses_match
+
+        customer = seed_ref().get_customer_by_ref("C-ACME")
+        assert customer is not None
+        assert addresses_match({"name": "Acme Plant 2"}, customer)
+        assert not addresses_match({"name": "Acme"}, customer)
+        assert not addresses_match({"name": "Plant"}, customer)
 
     def test_cus_04_pass(self, engine: ValidationEngine) -> None:
         assert_clean(engine.validate(make_vof()), "CUS-04")
@@ -607,6 +657,20 @@ class TestQtyPrcTot:
         engine = ValidationEngine(config_dir=CONFIG, reference_data=ref, as_of=AS_OF)
         assert_hit(engine.validate(make_vof()), "QTY-02", Severity.REVIEW)
 
+    def test_qty_02_hundred_times_pack(self, engine: ValidationEngine) -> None:
+        order = make_vof()
+        order["lines"][0]["quantity"] = 5000
+        order["lines"][0]["line_amount"] = 5000 * 18.75
+        order["totals"] = {"total_amount_declared": 5000 * 18.75}
+        assert_hit(engine.validate(order), "QTY-02", Severity.REVIEW)
+
+    def test_qty_02_hundred_without_history(self, engine: ValidationEngine) -> None:
+        order = make_vof()
+        order["lines"][0]["quantity"] = 400
+        order["lines"][0]["line_amount"] = 400 * 18.75
+        order["totals"] = {"total_amount_declared": 400 * 18.75}
+        assert_hit(engine.validate(order), "QTY-02", Severity.REVIEW)
+
     def test_qty_03_pass(self, engine: ValidationEngine) -> None:
         assert_clean(engine.validate(make_vof()), "QTY-03")
 
@@ -752,6 +816,42 @@ class TestDupExtSecExp:
 
     def test_ext_02_fail(self, engine: ValidationEngine) -> None:
         result = engine.validate(make_vof(), document_text="nessuno snippet qui")
+        assert_hit(result, "EXT-02", Severity.REVIEW)
+
+    def test_ext_02_numeric_alias(self, engine: ValidationEngine) -> None:
+        order = make_vof()
+        order["evidence"]["/lines/0/quantity"] = {"confidence": 0.99, "snippet": "24.0"}
+        result = engine.validate(
+            order,
+            document_text="PO Number: 4500012345 HEX CAP SCREW Qty 24 CS",
+        )
+        assert_clean(result, "EXT-02")
+
+    def test_ext_02_currency_from_dollar(self, engine: ValidationEngine) -> None:
+        order = make_vof()
+        order["evidence"]["/header/currency"] = {"confidence": 0.99, "snippet": "USD"}
+        result = engine.validate(
+            order,
+            document_text="PO Number: 4500012345 total $75.00 HEX CAP SCREW",
+        )
+        assert_clean(result, "EXT-02")
+
+    def test_ext_02_numeric_substring_is_not_enough(self, engine: ValidationEngine) -> None:
+        order = make_vof()
+        order["evidence"]["/lines/0/quantity"] = {"confidence": 0.99, "snippet": "24"}
+        result = engine.validate(
+            order,
+            document_text="PO Number: 4500012345 HEX CAP SCREW Qty 124 CS",
+        )
+        assert_hit(result, "EXT-02", Severity.REVIEW)
+
+    def test_ext_02_currency_substring_is_not_enough(self, engine: ValidationEngine) -> None:
+        order = make_vof()
+        order["evidence"]["/header/currency"] = {"confidence": 0.99, "snippet": "USD"}
+        result = engine.validate(
+            order,
+            document_text="PO Number: 4500012345 USDA certified packing HEX CAP SCREW",
+        )
         assert_hit(result, "EXT-02", Severity.REVIEW)
 
     def test_ext_03_pass(self, engine: ValidationEngine) -> None:

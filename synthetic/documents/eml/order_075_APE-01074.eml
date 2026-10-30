@@ -7,35 +7,22 @@ Message-ID: <po-APE-01074@summit.example>
 Date: Thu, 15 Jan 2026 10:30:00 +0000
 
 --===============4830478012883670584==
-Content-Type: text/plain; charset="us-ascii"
+Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: base64
 
-Hello,
+T24gTW9uLCAxMiBKYW4gMjAyNiBhdCAwOToxNCwgV2FyZWhvdXNlIDxvcHNAZXhhbXBsZS5jb20+
+IHdyb3RlOgo+IHN1cmUsIHBsZWFzZSBwcm9jZWVkIHdpdGggdGhlIHJlcGxlbmlzaG1lbnQKCi0t
+LS0tLS0tLS0gRm9yd2FyZGVkIG1lc3NhZ2UgLS0tLS0tLS0tCkZyb206IFN1bW1pdCBQdXJjaGFz
+aW5nIDxwdXJjaGFzaW5nQHN1bW1pdC5leGFtcGxlPgpEYXRlOiBNb24sIDEyIEphbiAyMDI2IDA4
+OjAyOjExICswMDAwClN1YmplY3Q6IFJlOiBBUEUtMDEwNzQKCkNvdWxkIHlvdSBmdWxmaWxsIEFQ
+RS0wMTA3NCBkYXRlZCAyMDI2LzAzLzE0PwpEZWxpdmVyIHRvIFN1bW1pdCBTaGlwcGluZyBMb2Nh
+dGlvbiAzIGJ5IDIwMjYtMDMtMjkuCkxpbmUgaXRlbXM6ClNVTU1JVC1UT08tOTY5MCB4IDIgRUEg
+QCA5LjQ0IOKAlCBTY3Jld2RyaXZlciB7dHlwZX0gTTggeCAyLTEvMiAoU1lOVEhFVElDKQpQUEUt
+R0xTLUNMRS1BTlRJLUZPRyB4IDYgRUEgQCA1LjcxIOKAlCBTYWZldHkgR2xhc3NlcyBDbGVhciBB
+bnRpLUZvZyAoU1lOVEhFVElDKQpBQlItU1BTLTEyMEctMSB4IDQgUEsgQCAxOC45NCDigJQgU2Fu
+ZHBhcGVyIFNoZWV0IDEyMCBHcml0IChTWU5USEVUSUMpCkpBTi1GUEQtMTctV0hJIHggMTAgQ1Mg
+QCAzNi44MSDigJQgRmxvb3IgUGFkIDE3aW4gV2hpdGUgKFNZTlRIRVRJQykKU1VNTUlULUZBUy04
+OTUxIHggMTIgQlggQCAxNS42NiDigJQgTG9jayBXYXNoZXIgTTggWmluYyAoU1lOVEhFVElDKQ==
 
-Please process the following order:
-
-PO Number: APE-01074
-Date: 2026/03/14
-Ship To: Summit Shipping Location 3
-
-Items:
-------
-  1. [SUMMIT-TOO-9690] Screwdriver {type} M8 x 2-1/2 (SYNTHETIC)
-     Qty: 2 EA @ $9.44
-  2. [PPE-GLS-CLE-ANTI-FOG] Safety Glasses Clear Anti-Fog (SYNTHETIC)
-     Qty: 6 EA @ $5.71
-  3. [ABR-SPS-120G-1] Sandpaper Sheet 120 Grit (SYNTHETIC)
-     Qty: 4 PK @ $18.94
-  4. [JAN-FPD-17-WHI] Floor Pad 17in White (SYNTHETIC)
-     Qty: 10 CS @ $36.81
-  5. [SUMMIT-FAS-8951] Lock Washer M8 Zinc (SYNTHETIC)
-     Qty: 12 BX @ $15.66
-
-Delivery requested by: 2026-03-29
-
-Thank you,
-Summit Purchasing
-Summit Group (SYNTHETIC)
-+1-555-5961
 --===============4830478012883670584==--

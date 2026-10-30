@@ -13,7 +13,12 @@
 # Per VM con problemi di rete Docker:
 #   make up VM=1   - Usa network_mode: host
 
-.PHONY: help conf up down logs seed smoke reset clean datagen env-check wait-odoo init test lint ui
+.PHONY: help conf up down logs seed smoke reset clean datagen env-check wait-odoo init test lint ui eval
+
+EVAL_SEED ?= 42
+EVAL_MODEL ?= qwen2.5:3b-instruct
+EVAL_SAMPLE ?= 50
+EVAL_BEFORE_COMMIT ?= aea6f9b
 
 # Non usare `-include .env` + `export`: Make interpreta `$` e `#` e corrompe le password.
 # scripts/generate_odoo_conf.py (e seed/smoke) leggono `.env` da sé.
@@ -175,3 +180,13 @@ test: ## Esegue i test unitari
 
 ui: ## Avvia la console di revisione (FastAPI + Jinja2)
 	uvicorn ventureorder.web.app:create_app --factory --host 127.0.0.1 --port 8000
+
+eval: ## Valutazione extract riproducibile (Ollama, seed/modello/parametri fissi)
+	PYTHONPATH=. $(PYTHON) -m extract.eval_run \
+		--seed $(EVAL_SEED) \
+		--model $(EVAL_MODEL) \
+		--sample $(EVAL_SAMPLE) \
+		--before-commit $(EVAL_BEFORE_COMMIT) \
+		--exclude-pdf \
+		--also-no-llm \
+		--output-dir docs/eval

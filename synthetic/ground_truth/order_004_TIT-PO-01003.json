@@ -1,0 +1,264 @@
+{
+  "schema_version": "1.0",
+  "order_id": "9976abcb-fde9-5dd9-96ea-4e3a98a8d957",
+  "tenant_id": "delta-industrial-supply",
+  "document_type": "ORIGINAL",
+  "status": "VALIDATED",
+  "source": {
+    "channel": "FOLDER",
+    "message_id": null,
+    "from_address": null,
+    "subject": null,
+    "received_at": "2026-01-15T10:30:00Z",
+    "documents": [
+      {
+        "document_id": "doc-8ac0bd06",
+        "kind": "XLSX",
+        "filename": "TIT-PO-01003.xlsx",
+        "mime_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        "sha256": "13e6967039eed86cfc2afdaa5e1b472f7c87b5ab29f1bb8482bd0444dedd1940",
+        "page_count": null
+      }
+    ]
+  },
+  "buyer": {
+    "name": "Omega Manufacturing Inc. (SYNTHETIC)",
+    "code_on_document": "C-OMEGA",
+    "tax_id": "US60-6205543",
+    "gln": null,
+    "peppol_endpoint": null,
+    "address": {
+      "line1": "5662 Manufacturing Way",
+      "city": "Cleveland",
+      "region": "OH",
+      "postal_code": "44101",
+      "country": "US"
+    },
+    "contact": {
+      "name": "Omega Purchasing",
+      "email": "purchasing@omega.example",
+      "phone": "+1-555-6724"
+    },
+    "resolved": {
+      "erp_partner_id": 48,
+      "erp_partner_ref": "C-OMEGA",
+      "method": "CODE",
+      "score": 0.99
+    }
+  },
+  "seller": {
+    "name": "Delta Industrial Supply LLC (SYNTHETIC)",
+    "code_on_document": null,
+    "tax_id": null,
+    "address": {
+      "line1": "55 Commerce Dr",
+      "city": "Dayton",
+      "region": "OH",
+      "postal_code": "45402",
+      "country": "US"
+    },
+    "resolved": null
+  },
+  "header": {
+    "po_number": "TIT-PO-01003",
+    "po_revision": 0,
+    "po_date": "08-Feb-2026",
+    "requested_delivery_date": "2026-02-21",
+    "currency": "USD",
+    "buyer_reference": "Dept 509",
+    "payment_terms_text": "Net 30",
+    "incoterms": null,
+    "ship_via": "Best Way",
+    "notes": "Call before delivery",
+    "language": "en"
+  },
+  "lines": [
+    {
+      "line_no": 1,
+      "buyer_item_code": null,
+      "seller_item_code": "JAN-LNR-3858-20-WH",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Can Liner 38x58 2.0mil White (SYNTHETIC)",
+      "quantity": 2,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "100/CS",
+        "inner_count": 100,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 72.15,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 144.3,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "JAN-LNR-3858-20-WH",
+        "erp_product_id": 1142,
+        "erp_uom": "CS",
+        "erp_uom_id": 40,
+        "erp_quantity": 2,
+        "conversion_factor": 1.0,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 72.15
+      }
+    },
+    {
+      "line_no": 2,
+      "buyer_item_code": null,
+      "seller_item_code": "JAN-HSG-118",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Hand Sanitizer Gel 70% (SYNTHETIC)",
+      "quantity": 24,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "12/CS",
+        "inner_count": 12,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 83.0,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 1992.0,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "JAN-HSG-118",
+        "erp_product_id": 1118,
+        "erp_uom": "CS",
+        "erp_uom_id": 25,
+        "erp_quantity": 24,
+        "conversion_factor": 1.0,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 83.0
+      }
+    },
+    {
+      "line_no": 3,
+      "buyer_item_code": "OMEGA-JAN-2241",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Hand Soap Foam (SYNTHETIC)",
+      "quantity": 24,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "6/CS",
+        "inner_count": 6,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 82.47,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 1979.28,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "JAN-HSF-274",
+        "erp_product_id": 1274,
+        "erp_uom": "CS",
+        "erp_uom_id": 13,
+        "erp_quantity": 24,
+        "conversion_factor": 1.0,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 82.47
+      }
+    },
+    {
+      "line_no": 4,
+      "buyer_item_code": null,
+      "seller_item_code": "JAN-FST-175",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Floor Stripper Heavy Duty (SYNTHETIC)",
+      "quantity": 10,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "4/1GAL",
+        "inner_count": 4,
+        "inner_size": 1,
+        "inner_uom": "GLL"
+      },
+      "unit_price": 90.42,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 904.2,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "JAN-FST-175",
+        "erp_product_id": 1175,
+        "erp_uom": "CS",
+        "erp_uom_id": 1,
+        "erp_quantity": 10,
+        "conversion_factor": 1.0,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 90.42
+      }
+    }
+  ],
+  "charges": [],
+  "totals": {
+    "lines_amount_declared": 5019.78,
+    "tax_amount_declared": null,
+    "total_amount_declared": 5019.78,
+    "lines_amount_computed": 5019.78
+  },
+  "decision": {
+    "score": 0.98,
+    "route": "AUTO_POST",
+    "reasons": []
+  },
+  "processing": {
+    "extractor": "synthetic/generator.py",
+    "prompt_version": null,
+    "created_at": "2026-01-15T10:30:00Z",
+    "updated_at": null
+  },
+  "ship_to": {
+    "name": "Omega Shipping Location 2",
+    "code_on_document": "SHIP-02",
+    "address": {
+      "line1": "8455 Manufacturing Way",
+      "city": "Fort Wayne",
+      "region": "IN",
+      "postal_code": "46802",
+      "country": "US"
+    },
+    "resolved": {
+      "erp_partner_id": 49,
+      "erp_partner_ref": "SHIP-02",
+      "method": "CODE",
+      "score": 1.0
+    }
+  },
+  "_synthetic_metadata": {
+    "hard_case_types": [],
+    "is_hard_case": false
+  }
+}

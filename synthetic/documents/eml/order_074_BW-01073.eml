@@ -1,0 +1,28 @@
+Content-Type: multipart/mixed; boundary="===============2238268600873923748=="
+MIME-Version: 1.0
+From: purchasing@delta.example
+To: orders@delta-industrial.example
+Subject: PO BW-01073 - Order from Delta Holdings (SYNTHETIC)
+Message-ID: <po-BW-01073@delta.example>
+Date: Thu, 15 Jan 2026 10:30:00 +0000
+
+--===============2238268600873923748==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+Kindly arrange shipment against purchase order BW-01073 (04/12/2026).
+Ship the following to Delta Shipping Location 1, needed by 2026-04-25:
+
+- six EA of Safety Glasses Amber Anti-Fog (SYNTHETIC), catalog PPE-GLS-AMB-ANTI-FOG-1, unit price 4.92.
+- one BX of Ear Plugs Foam Disposable (SYNTHETIC), catalog PPE-EAR-101, unit price 19.25.
+- three CS of Penetrating Oil Spray (SYNTHETIC), catalog LUB-POS-289, unit price 58.40.
+- four CS of Facial Tissue Flat Box (SYNTHETIC), catalog JAN-FTI-151, unit price 46.07.
+- two CS of Can Liner 33x39 1.2mil Clear (SYNTHETIC), catalog JAN-LNR-3339-12-CL, unit price 47.40.
+- five BX of Flat Washer 3/4-10 Zinc (SYNTHETIC), catalog FST-FWS-34-10-1, unit price 11.79.
+- three BX of Lock Washer 1/2-13 Zinc (SYNTHETIC), catalog FST-LWS-12-13, unit price 8.22.
+- one BX of Cut-Off Wheel 6in (SYNTHETIC), catalog ABR-COW-6IN-1, unit price 56.38.
+- two CS of Glass Cleaner RTU (SYNTHETIC), catalog JAN-GCL-244, unit price 27.09.
+
+Appreciate the help.
+--===============2238268600873923748==--

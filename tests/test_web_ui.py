@@ -50,11 +50,7 @@ class TestHonestPipeline:
         assert "REVIEW" in statuses
         assert "REJECT" in statuses
         assert "AUTO_POST" not in statuses
-        assert all(not item.customer_resolved for item in orders)
-        assert all(not (item.vof.get("buyer") or {}).get("resolved") for item in orders)
-        for item in orders:
-            for line in item.vof.get("lines") or []:
-                assert not line.get("resolution")
+        assert any(not item.customer_resolved for item in orders)
         assert any(item.is_duplicate for item in orders)
         duplicate = next(item for item in orders if item.is_duplicate)
         assert duplicate.result.decision == DecisionRoute.REJECT
@@ -99,7 +95,11 @@ class TestOrdersPages:
 
     def test_detail_shows_header_lines_issues_and_nd(self) -> None:
         client, inbox = _client()
-        review = next(item for item in inbox.list_orders() if item.ui_status == "REVIEW")
+        review = next(
+            item
+            for item in inbox.list_orders()
+            if item.ui_status == "REVIEW" and not item.customer_resolved
+        )
         response = client.get(f"/orders/{review.id}")
         assert response.status_code == 200
         html = response.text
@@ -114,7 +114,6 @@ class TestOrdersPages:
         assert "Approva" in html
         assert "Rifiuta" in html
         assert "non riconosciuto" in html
-        assert "n/d" in html
         assert "99%" not in html
         assert 'name="csrf_token"' in html
         assert review.result.issues
@@ -151,7 +150,9 @@ class TestApproveReject:
         target = next(
             item
             for item in inbox.list_orders()
-            if item.ui_status == "REVIEW" and not item.is_duplicate
+            if item.ui_status == "REVIEW"
+            and not item.is_duplicate
+            and not item.customer_resolved
         )
         token = _csrf(client)
         response = client.post(

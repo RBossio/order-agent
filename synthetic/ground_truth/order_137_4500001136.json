@@ -1,0 +1,227 @@
+{
+  "schema_version": "1.0",
+  "order_id": "f2cd6d00-25a3-5760-a12f-4eabf0d425d7",
+  "tenant_id": "delta-industrial-supply",
+  "document_type": "ORIGINAL",
+  "status": "VALIDATED",
+  "source": {
+    "channel": "FOLDER",
+    "message_id": null,
+    "from_address": null,
+    "subject": null,
+    "received_at": "2026-01-15T10:30:00Z",
+    "documents": [
+      {
+        "document_id": "doc-6bf69690",
+        "kind": "XLSX",
+        "filename": "4500001136.xlsx",
+        "mime_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        "sha256": "36baca4bfcb44cf024c12814bbbac0102bc8b4519c9ec222ecdca187f8a0e5a1",
+        "page_count": null
+      }
+    ]
+  },
+  "buyer": {
+    "name": "Acme Company (SYNTHETIC)",
+    "code_on_document": "C-ACME",
+    "tax_id": "US12-8713396",
+    "gln": null,
+    "peppol_endpoint": null,
+    "address": {
+      "line1": "1375 Business Park Rd",
+      "city": "Toledo",
+      "region": "OH",
+      "postal_code": "43601",
+      "country": "US"
+    },
+    "contact": {
+      "name": "Acme Purchasing",
+      "email": "purchasing@acme.example",
+      "phone": "+1-555-3815"
+    },
+    "resolved": {
+      "erp_partner_id": 42,
+      "erp_partner_ref": "C-ACME",
+      "method": "CODE",
+      "score": 0.99
+    }
+  },
+  "seller": {
+    "name": "Delta Industrial Supply LLC (SYNTHETIC)",
+    "code_on_document": null,
+    "tax_id": null,
+    "address": {
+      "line1": "55 Commerce Dr",
+      "city": "Dayton",
+      "region": "OH",
+      "postal_code": "45402",
+      "country": "US"
+    },
+    "resolved": null
+  },
+  "header": {
+    "po_number": "4500001136",
+    "po_revision": 0,
+    "po_date": "2026-06-05",
+    "requested_delivery_date": "2026-06-21",
+    "currency": "USD",
+    "buyer_reference": "Dept 158",
+    "payment_terms_text": "Net 30",
+    "incoterms": null,
+    "ship_via": "UPS Ground",
+    "notes": "Call before delivery",
+    "language": "en"
+  },
+  "lines": [
+    {
+      "line_no": 1,
+      "buyer_item_code": null,
+      "seller_item_code": "JAN-LNR-3858-12-BL-1",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Can Liner 38x58 1.2mil Black Roll (SYNTHETIC)",
+      "quantity": 2,
+      "uom_raw": "RO",
+      "uom": "RO",
+      "pack": {
+        "raw": "50/RL",
+        "inner_count": 1,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 34.24,
+      "price_uom": "RO",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 68.48,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "JAN-LNR-3858-12-BL-1",
+        "erp_product_id": 1082,
+        "erp_uom": "RO",
+        "erp_uom_id": 45,
+        "erp_quantity": 2,
+        "conversion_factor": 1.0,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 34.24
+      }
+    },
+    {
+      "line_no": 2,
+      "buyer_item_code": null,
+      "seller_item_code": "LUB-MOL-025",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Machine Oil Light (SYNTHETIC)",
+      "quantity": 1,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "12/CS",
+        "inner_count": 12,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 62.24,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 62.24,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "LUB-MOL-025",
+        "erp_product_id": 1025,
+        "erp_uom": "CS",
+        "erp_uom_id": 42,
+        "erp_quantity": 1,
+        "conversion_factor": 1.0,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 62.24
+      }
+    },
+    {
+      "line_no": 3,
+      "buyer_item_code": null,
+      "seller_item_code": "LUB-POS-103",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Penetrating Oil Spray (SYNTHETIC)",
+      "quantity": 5,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "12/CS",
+        "inner_count": 12,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 83.73,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 418.65,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "LUB-POS-103",
+        "erp_product_id": 1103,
+        "erp_uom": "CS",
+        "erp_uom_id": 10,
+        "erp_quantity": 5,
+        "conversion_factor": 1.0,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 83.73
+      }
+    }
+  ],
+  "charges": [],
+  "totals": {
+    "lines_amount_declared": 549.37,
+    "tax_amount_declared": null,
+    "total_amount_declared": 549.37,
+    "lines_amount_computed": 549.37
+  },
+  "decision": {
+    "score": 0.98,
+    "route": "AUTO_POST",
+    "reasons": []
+  },
+  "processing": {
+    "extractor": "synthetic/generator.py",
+    "prompt_version": null,
+    "created_at": "2026-01-15T10:30:00Z",
+    "updated_at": null
+  },
+  "ship_to": {
+    "name": "Acme Shipping Location 3",
+    "code_on_document": "SHIP-03",
+    "address": {
+      "line1": "441 Business Park Rd",
+      "city": "Grand Rapids",
+      "region": "MI",
+      "postal_code": "49503",
+      "country": "US"
+    },
+    "resolved": {
+      "erp_partner_id": 43,
+      "erp_partner_ref": "SHIP-03",
+      "method": "CODE",
+      "score": 1.0
+    }
+  },
+  "_synthetic_metadata": {
+    "hard_case_types": [],
+    "is_hard_case": false
+  }
+}

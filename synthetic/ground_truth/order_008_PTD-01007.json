@@ -1,0 +1,227 @@
+{
+  "schema_version": "1.0",
+  "order_id": "7ce6b7f9-b554-5fd4-8f6b-675fe6782fa2",
+  "tenant_id": "delta-industrial-supply",
+  "document_type": "ORIGINAL",
+  "status": "VALIDATED",
+  "source": {
+    "channel": "FOLDER",
+    "message_id": null,
+    "from_address": null,
+    "subject": null,
+    "received_at": "2026-01-15T10:30:00Z",
+    "documents": [
+      {
+        "document_id": "doc-088d025f",
+        "kind": "PDF_TEXT",
+        "filename": "PTD-01007.pdf",
+        "mime_type": "application/pdf",
+        "sha256": "7cfe6b5a5045e3ef69b0cb25afab18453cacea8034b626feda8552ba8f901a9d",
+        "page_count": 1
+      }
+    ]
+  },
+  "buyer": {
+    "name": "Titan Holdings (SYNTHETIC)",
+    "code_on_document": "C-TITAN",
+    "tax_id": "US88-3663319",
+    "gln": null,
+    "peppol_endpoint": null,
+    "address": {
+      "line1": "6062 Business Park Rd",
+      "city": "Fort Wayne",
+      "region": "IN",
+      "postal_code": "46802",
+      "country": "US"
+    },
+    "contact": {
+      "name": "Titan Purchasing",
+      "email": "purchasing@titan.example",
+      "phone": "+1-555-2079"
+    },
+    "resolved": {
+      "erp_partner_id": 66,
+      "erp_partner_ref": "C-TITAN",
+      "method": "CODE",
+      "score": 0.99
+    }
+  },
+  "seller": {
+    "name": "Delta Industrial Supply LLC (SYNTHETIC)",
+    "code_on_document": null,
+    "tax_id": null,
+    "address": {
+      "line1": "55 Commerce Dr",
+      "city": "Dayton",
+      "region": "OH",
+      "postal_code": "45402",
+      "country": "US"
+    },
+    "resolved": null
+  },
+  "header": {
+    "po_number": "PTD-01007",
+    "po_revision": 0,
+    "po_date": "21.01.2026",
+    "requested_delivery_date": "2026-02-09",
+    "currency": "USD",
+    "buyer_reference": "Dept 669",
+    "payment_terms_text": "2% 10 Net 30",
+    "incoterms": null,
+    "ship_via": "Best Way",
+    "notes": "Call before delivery",
+    "language": "en"
+  },
+  "lines": [
+    {
+      "line_no": 1,
+      "buyer_item_code": null,
+      "seller_item_code": "PKG-PTC-187",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Packing Tape Clear 2in (SYNTHETIC)",
+      "quantity": 3,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "36RL/CS",
+        "inner_count": 36,
+        "inner_size": 1,
+        "inner_uom": "RL"
+      },
+      "unit_price": 59.41,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 178.23,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "PKG-PTC-187",
+        "erp_product_id": 1187,
+        "erp_uom": "CS",
+        "erp_uom_id": 22,
+        "erp_quantity": 3,
+        "conversion_factor": 1.0,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 59.41
+      }
+    },
+    {
+      "line_no": 2,
+      "buyer_item_code": null,
+      "seller_item_code": "JAN-GCL-086",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Glass Cleaner RTU (SYNTHETIC)",
+      "quantity": 5,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "12/CS",
+        "inner_count": 12,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 35.94,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 179.7,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "JAN-GCL-086",
+        "erp_product_id": 1086,
+        "erp_uom": "CS",
+        "erp_uom_id": 47,
+        "erp_quantity": 5,
+        "conversion_factor": 1.0,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 35.94
+      }
+    },
+    {
+      "line_no": 3,
+      "buyer_item_code": null,
+      "seller_item_code": "ABR-FLD-412IN-1",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Flap Disc 4-1/2in 180 (SYNTHETIC)",
+      "quantity": 1,
+      "uom_raw": "BX",
+      "uom": "BX",
+      "pack": {
+        "raw": "10/BX",
+        "inner_count": 10,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 88.42,
+      "price_uom": "BX",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 88.42,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "ABR-FLD-412IN-1",
+        "erp_product_id": 1160,
+        "erp_uom": "BX",
+        "erp_uom_id": 14,
+        "erp_quantity": 1,
+        "conversion_factor": 1.0,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 88.42
+      }
+    }
+  ],
+  "charges": [],
+  "totals": {
+    "lines_amount_declared": 446.35,
+    "tax_amount_declared": null,
+    "total_amount_declared": 446.35,
+    "lines_amount_computed": 446.35
+  },
+  "decision": {
+    "score": 0.98,
+    "route": "AUTO_POST",
+    "reasons": []
+  },
+  "processing": {
+    "extractor": "synthetic/generator.py",
+    "prompt_version": null,
+    "created_at": "2026-01-15T10:30:00Z",
+    "updated_at": null
+  },
+  "ship_to": {
+    "name": "Titan Shipping Location 1",
+    "code_on_document": "SHIP-01",
+    "address": {
+      "line1": "6797 Business Park Rd",
+      "city": "Grand Rapids",
+      "region": "MI",
+      "postal_code": "49503",
+      "country": "US"
+    },
+    "resolved": {
+      "erp_partner_id": 67,
+      "erp_partner_ref": "SHIP-01",
+      "method": "CODE",
+      "score": 1.0
+    }
+  },
+  "_synthetic_metadata": {
+    "hard_case_types": [],
+    "is_hard_case": false
+  }
+}

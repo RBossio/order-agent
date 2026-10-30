@@ -40,9 +40,10 @@ def qty_01_invalid(ctx: RuleContext) -> list[Issue]:
 
 @rule("QTY-02", Severity.REVIEW)
 def qty_02_anomalous(ctx: RuleContext) -> list[Issue]:
-    """Quantità anomala: > 3× p99 storico o oltre il massimo di riga."""
+    """Quantità anomala: > 3× p99 storico, ×100 vs storico/confezione, o oltre il max."""
     issues: list[Issue] = []
     multiple = float(threshold(ctx, "qty_anomaly_multiple", 3.0))
+    extreme = float(threshold(ctx, "qty_extreme_multiple", 100.0))
     max_qty = float(threshold(ctx, "max_line_qty", 10000))
     customer = customer_of(ctx.reference_data, ctx.vof)
     for index, line in enumerate(ctx.lines):
@@ -64,9 +65,13 @@ def qty_02_anomalous(ctx: RuleContext) -> list[Issue]:
             )
             continue
         sku = str(line_resolution(line).get("sku") or "")
-        if not sku or customer is None or ctx.reference_data is None:
-            continue
-        p99 = ctx.reference_data.get_qty_p99(customer.erp_partner_ref, sku)
+        product = product_of(ctx.reference_data, line)
+        pack_count = None
+        if product and isinstance(product.pack, dict) and product.pack.get("inner_count"):
+            pack_count = as_float(product.pack.get("inner_count"))
+        p99 = None
+        if sku and customer is not None and ctx.reference_data is not None:
+            p99 = ctx.reference_data.get_qty_p99(customer.erp_partner_ref, sku)
         if p99 and qty > multiple * p99:
             issues.append(
                 issue(
@@ -80,6 +85,37 @@ def qty_02_anomalous(ctx: RuleContext) -> list[Issue]:
                     suggestion="Verificare la quantità con il cliente",
                     p99=p99,
                     multiple=multiple,
+                )
+            )
+            continue
+        if pack_count and pack_count > 0 and qty >= extreme * pack_count:
+            issues.append(
+                issue(
+                    "QTY-02",
+                    Severity.REVIEW,
+                    (
+                        f"Riga {line.get('line_no', index + 1)}: quantità {qty} "
+                        f"≥ {extreme:g}× la confezione ({pack_count:g})"
+                    ),
+                    line_pointer(index, "quantity"),
+                    suggestion="Possibile zero in più: verificare la quantità con il cliente",
+                    pack_count=pack_count,
+                    multiple=extreme,
+                )
+            )
+            continue
+        if not p99 and qty >= extreme:
+            issues.append(
+                issue(
+                    "QTY-02",
+                    Severity.REVIEW,
+                    (
+                        f"Riga {line.get('line_no', index + 1)}: quantità {qty} "
+                        f"≥ {extreme:g}× senza storico che la giustifichi"
+                    ),
+                    line_pointer(index, "quantity"),
+                    suggestion="Verificare la quantità con il cliente",
+                    multiple=extreme,
                 )
             )
     return issues

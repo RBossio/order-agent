@@ -114,7 +114,34 @@ export OLLAMA_MODEL="llama3.1:8b"
 python -m extract input.json -o output.json --backend ollama
 ```
 
+## Confidenza e AUTO_POST
+
+La soglia `auto_post_min_score` resta **0,97** come da §7.1 (`config/thresholds.yaml`).
+Non è stata abbassata: è la confidenza dell'estrattore a essere tarata sopra quella soglia.
+
+| Fonte | Valore | Perché |
+|-------|--------|--------|
+| preprocessor solo, controlli ok | 0,98 | un ordine Excel/PDF pulito può AUTO_POST |
+| preprocessor e LLM d'accordo | 0,99 | doppia fonte coincidente |
+| solo LLM | 0,70 | sotto EXT-01 (0,90) → REVIEW |
+| disaccordo o controllo fallito | 0,45 / 0,39 | REVIEW |
+
+`CatalogMatcher.allowlist_synthetic` è **False** di default (UI e produzione: allowlist reale). Solo `make eval` lo attiva, per misurare AUTO_POST come se i clienti sintetici fossero già qualificati (§7.1).
+
+Valuta assente dal documento: se il cliente è in anagrafica si usa `customer.currency` (fonte `catalog`, 0,97); altrimenti USD a 0,50 → REVIEW. Non è DETERMINISTIC 0,98.
+
+Errore silenzioso (eval): ordine in **AUTO_POST** con almeno un campo sbagliato (testata, codice/qty/UoM/prezzo/codice cliente, righe in più o mancanti, valori inventati se la GT è vuota). La percentuale a livello di campo è una metrica separata.
+
 ## Valutazione
+
+Comando unico, seed/modello/parametri fissi:
+
+```bash
+make eval
+# equivalente: python -m extract.eval_run
+```
+
+Produce `docs/eval/eval_results.json` (dettaglio ordine per ordine, chiamate/timeout LLM, numeri «prima» sullo stesso campione: 50 ordini, no PDF, no LLM, codice di main pre-PR) e la stessa run con LLM spento (`no_llm`). Nessun PDF in questo campione.
 
 Lo script `eval.py` confronta gli ordini estratti con il ground truth e produce un report Markdown.
 
@@ -155,7 +182,11 @@ extract/
 │   ├── base.py           # Interfaccia LLMBackend
 │   ├── ollama.py         # Implementazione Ollama HTTP
 │   └── mock.py           # Backend deterministico per test
-├── preprocessor.py       # Pre-elaborazione tabelle strutturate
+├── preprocessor.py       # Pre-elaborazione tabelle Excel/PDF/email
+├── catalog.py            # Matching SKU / xref / UoM / cliente
+├── checks.py             # Controlli qty×prezzo, totali, date, anagrafica
+├── confidence.py         # Confidenza tarata (non auto-score LLM)
+├── dates.py              # Parsing date ISO/US/EU/testuali
 ├── extractor.py          # Estrattore principale
 ├── prompts.py            # Prompt e schema JSON
 ├── eval.py               # Script di valutazione
@@ -164,21 +195,19 @@ extract/
 
 ## Pipeline di estrazione
 
-1. **Pre-elaborazione** (`preprocessor.py`):
-   - Estrae metadati email (PO number, mittente)
-   - Mappa colonne tabelle Excel/CSV
-   - Estrae righe strutturate senza LLM
-   - Identifica righe ambigue che richiedono LLM
+1. **Pre-elaborazione deterministica** (`preprocessor.py`):
+   - Excel/PDF: testata (PO, data) da righe chiave-valore e colonne (codice, qty, UoM, prezzo)
+   - Email: metadati + liste `1. [SKU]` anche nella signature; quantità in lettere
+   - L'LLM **non** viene chiamato se Excel/PDF ha già PO e almeno una riga con quantità
 
 2. **Estrazione LLM** (`extractor.py`):
-   - Costruisce prompt con contesto pre-elaborato
-   - Chiama il backend LLM
-   - Parsa risposta JSON
-   - Retry se validazione fallisce
+   - Solo come ripiego (tabella incompleta) e per le email
+   - Se preprocessor e LLM discordano: si tiene il valore deterministico, confidenza bassa, REVIEW
 
-3. **Validazione**:
-   - Validazione output contro `venture-order.v1.schema.json`
-   - Genera avvisi per campi mancanti o non validi
+3. **Controlli e regole**:
+   - qty × prezzo = importo riga; somma righe = totale; articolo/UoM in anagrafica; date plausibili
+   - Confidenza calcolata da fonte, accordo tra metodi e controlli (mai dall'auto-score LLM)
+   - Controllo fallito → confidenza < 0,90 → EXT-01 e motore regole in REVIEW
 
 ## Test
 
@@ -200,8 +229,7 @@ python -m pytest tests/test_extract.py -v -k "Mock or Preprocessor"
 
 ## Limitazioni attuali
 
-- **Risoluzione codici**: I codici articolo (seller_item_code, buyer_item_code) NON vengono risolti verso il catalogo. Questa funzionalità sarà implementata nella fase successiva.
-- **Matching clienti**: I clienti NON vengono matchati con l'anagrafica ERP.
+- **Matching articoli**: solo SKU esatto e xref (`DatagenReferenceDataProvider`); niente fuzzy/semantico.
 - **OCR**: PDF scansionati con `needs_ocr=True` non sono supportati.
 
 ## Esempio output

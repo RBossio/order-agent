@@ -1,0 +1,15 @@
+Content-Type: multipart/mixed; boundary="===============4004172362066604509=="
+MIME-Version: 1.0
+From: purchasing@delta.example
+To: orders@delta-industrial.example
+Subject: PO BW-01016 - Order from Delta Holdings (SYNTHETIC)
+Message-ID: <po-BW-01016@delta.example>
+Date: Thu, 15 Jan 2026 10:30:00 +0000
+
+--===============4004172362066604509==
+Content-Type: text/html; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Please process purchase order <b>BW-01016</b> dated 02/12/2026.</p><p>Deliver to Delta Shipping Location 1. Need by 2026-03-02.</p><table border='1' cellpadding='4'><tr><th>Item</th><th>Description</th><th>Quantity</th><th>Unit</th><th>Price</th></tr><tr><td>ADH-SGG-282</td><td>Super Glue Gel (SYNTHETIC)</td><td>4</td><td>PK</td><td>12.60</td></tr><tr><td>ADH-SGG-102</td><td>Super Glue Gel (SYNTHETIC)</td><td>12</td><td>PK</td><td>22.47</td></tr><tr><td>TLS-TPM-30FT</td><td>Tape Measure 30ft (SYNTHETIC)</td><td>4</td><td>EA</td><td>18.82</td></tr><tr><td>LUB-MOL-109</td><td>Machine Oil Light (SYNTHETIC)</td><td>4</td><td>CS</td><td>83.15</td></tr><tr><td>FST-HCS-M12-3</td><td>Hex Cap Screw M12 x 3 Grade 5 Zinc (SYNTHETIC)</td><td>12</td><td>BX</td><td>44.86</td></tr><tr><td>LUB-POS-256</td><td>Penetrating Oil Spray (SYNTHETIC)</td><td>5</td><td>CS</td><td>57.74</td></tr><tr><td>JAN-DSP-258</td><td>Disinfectant Spray (SYNTHETIC)</td><td>6</td><td>CS</td><td>66.55</td></tr><tr><td>TLS-UTK-298</td><td>Utility Knife Retractable (SYNTHETIC)</td><td>1</td><td>EA</td><td>5.11</td></tr><tr><td>LUB-POS-119</td><td>Penetrating Oil Spray (SYNTHETIC)</td><td>1</td><td>CS</td><td>74.08</td></tr><tr><td>ABR-COW-6IN-3</td><td>Cut-Off Wheel 6in (SYNTHETIC)</td><td>6</td><td>BX</td><td>48.92</td></tr><tr><td>FST-HCS-38-16-112</td><td>Hex Cap Screw 3/8-16 x 1-1/2 Grade 5 Zinc (SYNTHETIC)</td><td>24</td><td>BX</td><td>27.99</td></tr></table><p>Thanks</p></body></html>
+--===============4004172362066604509==--

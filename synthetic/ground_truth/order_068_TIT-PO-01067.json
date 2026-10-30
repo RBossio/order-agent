@@ -1,0 +1,254 @@
+{
+  "schema_version": "1.0",
+  "order_id": "47cfb927-3694-596e-af32-f8edf4483d79",
+  "tenant_id": "delta-industrial-supply",
+  "document_type": "ORIGINAL",
+  "status": "VALIDATED",
+  "source": {
+    "channel": "FOLDER",
+    "message_id": null,
+    "from_address": null,
+    "subject": null,
+    "received_at": "2026-01-15T10:30:00Z",
+    "documents": [
+      {
+        "document_id": "doc-06bacbe5",
+        "kind": "XLSX",
+        "filename": "TIT-PO-01067.xlsx",
+        "mime_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        "sha256": "fa936e2f25ade4cf5c970759d488eed10ddc40ffb969d5d9eb803b553e51f1f0",
+        "page_count": null
+      }
+    ]
+  },
+  "buyer": {
+    "name": "Omega Manufacturing Inc. (SYNTHETIC)",
+    "code_on_document": "C-OMEGA",
+    "tax_id": "US60-6205543",
+    "gln": null,
+    "peppol_endpoint": null,
+    "address": {
+      "line1": "5662 Manufacturing Way",
+      "city": "Cleveland",
+      "region": "OH",
+      "postal_code": "44101",
+      "country": "US"
+    },
+    "contact": {
+      "name": "Omega Purchasing",
+      "email": "purchasing@omega.example",
+      "phone": "+1-555-6724"
+    },
+    "resolved": {
+      "erp_partner_id": 48,
+      "erp_partner_ref": "C-OMEGA",
+      "method": "CODE",
+      "score": 0.99
+    }
+  },
+  "seller": {
+    "name": "Delta Industrial Supply LLC (SYNTHETIC)",
+    "code_on_document": null,
+    "tax_id": null,
+    "address": {
+      "line1": "55 Commerce Dr",
+      "city": "Dayton",
+      "region": "OH",
+      "postal_code": "45402",
+      "country": "US"
+    },
+    "resolved": null
+  },
+  "header": {
+    "po_number": "TIT-PO-01067",
+    "po_revision": 0,
+    "po_date": "14-Jun-2026",
+    "requested_delivery_date": "2026-06-28",
+    "currency": "USD",
+    "buyer_reference": "Dept 554",
+    "payment_terms_text": "Net 30",
+    "incoterms": null,
+    "ship_via": null,
+    "notes": null,
+    "language": "en"
+  },
+  "lines": [
+    {
+      "line_no": 1,
+      "buyer_item_code": null,
+      "seller_item_code": "PPE-N95-007",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "N95 Respirator (SYNTHETIC)",
+      "quantity": 1,
+      "uom_raw": "BX",
+      "uom": "BX",
+      "pack": {
+        "raw": "20/BX",
+        "inner_count": 20,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 38.61,
+      "price_uom": "BX",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 38.61,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "PPE-N95-007",
+        "erp_product_id": 1007,
+        "erp_uom": "BX",
+        "erp_uom_id": 46,
+        "erp_quantity": 1,
+        "conversion_factor": 1.0,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 38.61
+      }
+    },
+    {
+      "line_no": 2,
+      "buyer_item_code": null,
+      "seller_item_code": "PPE-GLS-SMO-ANTI-FOG-1",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Safety Glasses Smoke Anti-Fog (SYNTHETIC)",
+      "quantity": 12,
+      "uom_raw": "EA",
+      "uom": "EA",
+      "pack": null,
+      "unit_price": 8.0,
+      "price_uom": "EA",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 96.0,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "PPE-GLS-SMO-ANTI-FOG-1",
+        "erp_product_id": 1135,
+        "erp_uom": "EA",
+        "erp_uom_id": 39,
+        "erp_quantity": 12,
+        "conversion_factor": 1.0,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 8.0
+      }
+    },
+    {
+      "line_no": 3,
+      "buyer_item_code": "OMEGA-TOO-4009",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Utility Knife Retractable (SYNTHETIC)",
+      "quantity": 12,
+      "uom_raw": "EA",
+      "uom": "EA",
+      "pack": null,
+      "unit_price": 3.88,
+      "price_uom": "EA",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 46.56,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "TLS-UTK-267",
+        "erp_product_id": 1267,
+        "erp_uom": "EA",
+        "erp_uom_id": 16,
+        "erp_quantity": 12,
+        "conversion_factor": 1.0,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 3.88
+      }
+    },
+    {
+      "line_no": 4,
+      "buyer_item_code": null,
+      "seller_item_code": "JAN-LNR-4046-12-WH",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Can Liner 40x46 1.2mil White Roll (SYNTHETIC)",
+      "quantity": 1,
+      "uom_raw": "RO",
+      "uom": "RO",
+      "pack": {
+        "raw": "50/RL",
+        "inner_count": 1,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 25.56,
+      "price_uom": "RO",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 25.56,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "JAN-LNR-4046-12-WH",
+        "erp_product_id": 1156,
+        "erp_uom": "RO",
+        "erp_uom_id": 14,
+        "erp_quantity": 1,
+        "conversion_factor": 1.0,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 25.56
+      }
+    }
+  ],
+  "charges": [],
+  "totals": {
+    "lines_amount_declared": 206.73,
+    "tax_amount_declared": null,
+    "total_amount_declared": 206.73,
+    "lines_amount_computed": 206.73
+  },
+  "decision": {
+    "score": 0.98,
+    "route": "AUTO_POST",
+    "reasons": []
+  },
+  "processing": {
+    "extractor": "synthetic/generator.py",
+    "prompt_version": null,
+    "created_at": "2026-01-15T10:30:00Z",
+    "updated_at": null
+  },
+  "ship_to": {
+    "name": "Omega Shipping Location 1",
+    "code_on_document": "SHIP-01",
+    "address": {
+      "line1": "1351 Commerce Dr",
+      "city": "Cleveland",
+      "region": "OH",
+      "postal_code": "44101",
+      "country": "US"
+    },
+    "resolved": {
+      "erp_partner_id": 49,
+      "erp_partner_ref": "SHIP-01",
+      "method": "CODE",
+      "score": 1.0
+    }
+  },
+  "_synthetic_metadata": {
+    "hard_case_types": [],
+    "is_hard_case": false
+  }
+}

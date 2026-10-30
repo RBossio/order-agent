@@ -1,0 +1,6402 @@
+{
+  "model": "ollama/qwen2.5:3b-instruct",
+  "hardware": "Intel Xeon 4 cores, 15GB RAM, CPU-only (no GPU)",
+  "params": {
+    "temperature": 0.0,
+    "repeat_penalty": 1.1,
+    "num_predict": 2048,
+    "format": "json"
+  },
+  "seed": 42,
+  "sample_size": 50,
+  "sample": [
+    "order_002_QS-01001",
+    "order_005_MBM01004",
+    "order_009_APE-01008",
+    "order_019_SW-01018",
+    "order_025_MBM01024",
+    "order_027_NMC-01026",
+    "order_039_TIT-PO-01038",
+    "order_044_SW-01043",
+    "order_058_MBM01057",
+    "order_059_4500001058",
+    "order_073_TIT-PO-01072",
+    "order_126_MBM01125",
+    "order_026_NMC-01025",
+    "order_006_BW-01005",
+    "order_065_TIT-PO-01064",
+    "order_057_4500001056",
+    "order_051_QS-01050",
+    "order_030_SW-01029",
+    "order_024_MBM01023",
+    "order_137_4500001136",
+    "order_022_4500001021",
+    "order_092_NMC-01091",
+    "order_007_MBM01006",
+    "order_149_TIT-PO-01148",
+    "order_140_QS-01139",
+    "order_049_SW-01048",
+    "order_053_4500001052",
+    "order_117_NMC-01116",
+    "order_141_QS-01140",
+    "order_045_NMC-01044",
+    "order_077_SW-01076",
+    "order_072_QS-01071",
+    "order_076_MBM01075",
+    "order_064_SW-01063",
+    "order_046_MBM01045",
+    "order_150_QS-01149",
+    "order_146_4500001145",
+    "order_067_MBM01066",
+    "order_145_SW-01144",
+    "order_089_QS-01088",
+    "order_001_TIT-PO-01000",
+    "order_084_SW-01083",
+    "order_018_MBM01017",
+    "order_107_NMC-01106",
+    "order_131_QS-01130",
+    "order_036_TIT-PO-01035",
+    "order_139_4500001138",
+    "order_017_BW-01016",
+    "order_144_QS-01143",
+    "order_083_QS-01082"
+  ],
+  "exclude_pdf": true,
+  "before_commit": "aea6f9bd7cb2b8442f297dc81f1ac81d2d450f0c",
+  "total_time_seconds": 2151.6854841709137,
+  "errors": [
+    [
+      "order_005_MBM01004",
+      "Errore LLM: timed out"
+    ],
+    [
+      "order_025_MBM01024",
+      "Errore LLM: timed out"
+    ],
+    [
+      "order_044_SW-01043",
+      "Errore LLM: timed out"
+    ],
+    [
+      "order_058_MBM01057",
+      "Errore LLM: timed out"
+    ],
+    [
+      "order_126_MBM01125",
+      "Errore LLM: timed out"
+    ],
+    [
+      "order_006_BW-01005",
+      "Errore LLM: timed out"
+    ],
+    [
+      "order_051_QS-01050",
+      "Errore LLM: timed out"
+    ],
+    [
+      "order_030_SW-01029",
+      "Errore LLM: timed out"
+    ],
+    [
+      "order_024_MBM01023",
+      "Errore LLM: timed out"
+    ],
+    [
+      "order_141_QS-01140",
+      "Errore LLM: timed out"
+    ],
+    [
+      "order_072_QS-01071",
+      "Errore LLM: timed out"
+    ],
+    [
+      "order_076_MBM01075",
+      "Errore LLM: timed out"
+    ],
+    [
+      "order_046_MBM01045",
+      "Errore LLM: timed out"
+    ],
+    [
+      "order_150_QS-01149",
+      "Errore LLM: timed out"
+    ],
+    [
+      "order_067_MBM01066",
+      "Errore LLM: timed out"
+    ],
+    [
+      "order_089_QS-01088",
+      "Errore LLM: timed out"
+    ],
+    [
+      "order_018_MBM01017",
+      "Errore LLM: timed out"
+    ],
+    [
+      "order_131_QS-01130",
+      "Errore LLM: timed out"
+    ],
+    [
+      "order_017_BW-01016",
+      "Errore LLM: timed out"
+    ],
+    [
+      "order_144_QS-01143",
+      "Errore LLM: timed out"
+    ],
+    [
+      "order_083_QS-01082",
+      "Errore LLM: timed out"
+    ]
+  ],
+  "metrics": {
+    "header_accuracy": 0.85,
+    "lines_accuracy": 0.4728682170542636,
+    "silent_orders": 0,
+    "silent_order_rate": 0.0,
+    "silent_field_errors": 0,
+    "silent_field_rate": 0.0,
+    "total_orders": 50,
+    "hard_cases": 12,
+    "extraction_failures": 21,
+    "auto_post_orders": 28,
+    "auto_post_rate": 0.56,
+    "orders_in_review": 22,
+    "review_rate": 0.44,
+    "reject_orders": 0,
+    "reject_rate": 0.0,
+    "mean_time_seconds": 43.03370968341827,
+    "llm_calls": 4,
+    "llm_timeouts": 21
+  },
+  "format_scores": {
+    "XLSX": {
+      "count": 25,
+      "header_correct": 100,
+      "header_total": 100,
+      "lines_expected": 157,
+      "lines_matched": 155,
+      "silent_errors": 0,
+      "silent_orders": 0,
+      "silent_fields": 0,
+      "auto_post": 25,
+      "review": 0,
+      "reject": 0,
+      "time_ms": 63
+    },
+    "EML": {
+      "count": 25,
+      "header_correct": 70,
+      "header_total": 100,
+      "lines_expected": 359,
+      "lines_matched": 89,
+      "silent_errors": 0,
+      "silent_orders": 0,
+      "silent_fields": 0,
+      "auto_post": 3,
+      "review": 22,
+      "reject": 0,
+      "time_ms": 2151145
+    }
+  },
+  "orders": [
+    {
+      "order_id": "e735b08f-83e5-5503-ab2b-88e15ad00a6e",
+      "stem": "order_002_QS-01001",
+      "document_path": "synthetic/documents/xlsx/order_002_QS-01001.xlsx",
+      "format": "XLSX",
+      "route": "AUTO_POST",
+      "hard_case": true,
+      "hard_case_types": [
+        "QTY_WORDS"
+      ],
+      "header_accuracy": 1.0,
+      "lines_expected": 20,
+      "lines_matched": 20,
+      "lines_extracted": 20,
+      "extra_lines": 0,
+      "missing_lines": 0,
+      "silent_order": false,
+      "silent_fields": [],
+      "field_mismatches": [],
+      "llm_calls": 0,
+      "llm_timeouts": 0,
+      "llm_failed": false,
+      "extraction_time_ms": 7,
+      "overall_confidence": 0.7,
+      "decision": {
+        "score": 0.98,
+        "route": "AUTO_POST",
+        "reasons": []
+      }
+    },
+    {
+      "order_id": "55b7e9d3-84dc-5d6f-88ec-9dc209df9cfa",
+      "stem": "order_005_MBM01004",
+      "document_path": "synthetic/documents/eml/order_005_MBM01004.eml",
+      "format": "EML",
+      "route": "REVIEW",
+      "hard_case": true,
+      "hard_case_types": [
+        "MISSING_DATE",
+        "UNKNOWN_CUSTOMER_CODE"
+      ],
+      "header_accuracy": 0.5,
+      "lines_expected": 14,
+      "lines_matched": 0,
+      "lines_extracted": 0,
+      "extra_lines": 0,
+      "missing_lines": 14,
+      "silent_order": false,
+      "silent_fields": [],
+      "field_mismatches": [
+        {
+          "path": "/header/po_date",
+          "expected": "3/5/26",
+          "extracted": "1970-01-01"
+        },
+        {
+          "path": "/header/requested_delivery_date",
+          "expected": "2026-03-20",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/0",
+          "expected": "MB-UNKNOWN-0004",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/1",
+          "expected": "ADH-EPX-215",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/2",
+          "expected": "LUB-POS-168",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/3",
+          "expected": "ELE-TPE-BLU",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/4",
+          "expected": "JAN-DSP-200",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/5",
+          "expected": "JAN-FTI-167",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/6",
+          "expected": "APEX-FAS-9744",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/7",
+          "expected": "PKG-BBW-283",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/8",
+          "expected": "APEX-FAS-6212",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/9",
+          "expected": "PKG-PTC-133",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/10",
+          "expected": "PKG-PTC-187",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/11",
+          "expected": "APEX-JAN-7359",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/12",
+          "expected": "ABR-FLD-5IN",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/13",
+          "expected": "APEX-FAS-1562",
+          "extracted": null
+        }
+      ],
+      "llm_calls": 0,
+      "llm_timeouts": 1,
+      "llm_failed": true,
+      "extraction_time_ms": 90094,
+      "overall_confidence": 0.0,
+      "decision": {
+        "score": 0.98,
+        "route": "REVIEW",
+        "reasons": [
+          "HDR-02"
+        ]
+      }
+    },
+    {
+      "order_id": "d04956bd-9dd7-5c8b-b1ff-5f2d139ecf6d",
+      "stem": "order_009_APE-01008",
+      "document_path": "synthetic/documents/eml/order_009_APE-01008.eml",
+      "format": "EML",
+      "route": "REVIEW",
+      "hard_case": true,
+      "hard_case_types": [
+        "QTY_WORDS"
+      ],
+      "header_accuracy": 0.75,
+      "lines_expected": 7,
+      "lines_matched": 6,
+      "lines_extracted": 7,
+      "extra_lines": 0,
+      "missing_lines": 0,
+      "silent_order": false,
+      "silent_fields": [],
+      "field_mismatches": [
+        {
+          "path": "/header/po_date",
+          "expected": "2026/05/06",
+          "extracted": "1970-01-01"
+        },
+        {
+          "path": "/lines/1/buyer_item_code",
+          "expected": null,
+          "extracted": "SYNTHETIC-Paper-Towel-Roll-1P-White"
+        },
+        {
+          "path": "/lines/4/buyer_item_code",
+          "expected": null,
+          "extracted": "SYNTHETIC-Electrical-Tape-Blue-3/4in"
+        },
+        {
+          "path": "/lines/5/buyer_item_code",
+          "expected": null,
+          "extracted": "SYNTHETIC-Ear-Plugs-Foam-Disposable"
+        },
+        {
+          "path": "/lines/6/quantity",
+          "expected": 3,
+          "extracted": 6.0
+        }
+      ],
+      "llm_calls": 1,
+      "llm_timeouts": 0,
+      "llm_failed": false,
+      "extraction_time_ms": 80748,
+      "overall_confidence": 0.0,
+      "decision": {
+        "score": 0.39,
+        "route": "REVIEW",
+        "reasons": [
+          "EXT-01",
+          "EXT-02",
+          "HDR-02",
+          "HDR-04",
+          "PRC-03",
+          "TOT-01"
+        ]
+      }
+    },
+    {
+      "order_id": "06a6174f-3fd9-576d-9a48-a29cd851cf43",
+      "stem": "order_019_SW-01018",
+      "document_path": "synthetic/documents/xlsx/order_019_SW-01018.xlsx",
+      "format": "XLSX",
+      "route": "AUTO_POST",
+      "hard_case": true,
+      "hard_case_types": [
+        "CUSTOMER_CODES"
+      ],
+      "header_accuracy": 1.0,
+      "lines_expected": 9,
+      "lines_matched": 9,
+      "lines_extracted": 9,
+      "extra_lines": 0,
+      "missing_lines": 0,
+      "silent_order": false,
+      "silent_fields": [],
+      "field_mismatches": [],
+      "llm_calls": 0,
+      "llm_timeouts": 0,
+      "llm_failed": false,
+      "extraction_time_ms": 3,
+      "overall_confidence": 0.7,
+      "decision": {
+        "score": 0.98,
+        "route": "AUTO_POST",
+        "reasons": []
+      }
+    },
+    {
+      "order_id": "a3f01208-5699-5408-9426-5b89addb24cb",
+      "stem": "order_025_MBM01024",
+      "document_path": "synthetic/documents/eml/order_025_MBM01024.eml",
+      "format": "EML",
+      "route": "AUTO_POST",
+      "hard_case": true,
+      "hard_case_types": [
+        "MISSING_DATE"
+      ],
+      "header_accuracy": 1.0,
+      "lines_expected": 15,
+      "lines_matched": 15,
+      "lines_extracted": 15,
+      "extra_lines": 0,
+      "missing_lines": 0,
+      "silent_order": false,
+      "silent_fields": [],
+      "field_mismatches": [],
+      "llm_calls": 0,
+      "llm_timeouts": 1,
+      "llm_failed": true,
+      "extraction_time_ms": 90101,
+      "overall_confidence": 0.7,
+      "decision": {
+        "score": 0.98,
+        "route": "AUTO_POST",
+        "reasons": []
+      }
+    },
+    {
+      "order_id": "13c628cc-8969-563e-a919-55af64f2229e",
+      "stem": "order_027_NMC-01026",
+      "document_path": "synthetic/documents/xlsx/order_027_NMC-01026.xlsx",
+      "format": "XLSX",
+      "route": "AUTO_POST",
+      "hard_case": true,
+      "hard_case_types": [
+        "TOTAL_MIXED"
+      ],
+      "header_accuracy": 1.0,
+      "lines_expected": 5,
+      "lines_matched": 5,
+      "lines_extracted": 5,
+      "extra_lines": 0,
+      "missing_lines": 0,
+      "silent_order": false,
+      "silent_fields": [],
+      "field_mismatches": [],
+      "llm_calls": 0,
+      "llm_timeouts": 0,
+      "llm_failed": false,
+      "extraction_time_ms": 1,
+      "overall_confidence": 0.98,
+      "decision": {
+        "score": 0.98,
+        "route": "AUTO_POST",
+        "reasons": []
+      }
+    },
+    {
+      "order_id": "e5b2065c-fd05-5ccb-9b91-1c1d1d50d38f",
+      "stem": "order_039_TIT-PO-01038",
+      "document_path": "synthetic/documents/xlsx/order_039_TIT-PO-01038.xlsx",
+      "format": "XLSX",
+      "route": "AUTO_POST",
+      "hard_case": true,
+      "hard_case_types": [
+        "AMBIGUOUS_DESC"
+      ],
+      "header_accuracy": 1.0,
+      "lines_expected": 4,
+      "lines_matched": 3,
+      "lines_extracted": 4,
+      "extra_lines": 0,
+      "missing_lines": 0,
+      "silent_order": false,
+      "silent_fields": [],
+      "field_mismatches": [],
+      "llm_calls": 0,
+      "llm_timeouts": 0,
+      "llm_failed": false,
+      "extraction_time_ms": 1,
+      "overall_confidence": 0.7,
+      "decision": {
+        "score": 0.98,
+        "route": "AUTO_POST",
+        "reasons": []
+      }
+    },
+    {
+      "order_id": "b88bea77-2f7d-5fa1-a4c3-c1356cb3aece",
+      "stem": "order_044_SW-01043",
+      "document_path": "synthetic/documents/eml/order_044_SW-01043.eml",
+      "format": "EML",
+      "route": "REVIEW",
+      "hard_case": true,
+      "hard_case_types": [
+        "EMAIL_CONTRADICTORY"
+      ],
+      "header_accuracy": 1.0,
+      "lines_expected": 12,
+      "lines_matched": 12,
+      "lines_extracted": 12,
+      "extra_lines": 0,
+      "missing_lines": 0,
+      "silent_order": false,
+      "silent_fields": [],
+      "field_mismatches": [],
+      "llm_calls": 0,
+      "llm_timeouts": 1,
+      "llm_failed": true,
+      "extraction_time_ms": 90099,
+      "overall_confidence": 0.39,
+      "decision": {
+        "score": 0.39,
+        "route": "REVIEW",
+        "reasons": [
+          "EXT-01"
+        ]
+      }
+    },
+    {
+      "order_id": "367884f8-ad66-54cd-a4a3-404fca64507e",
+      "stem": "order_058_MBM01057",
+      "document_path": "synthetic/documents/eml/order_058_MBM01057.eml",
+      "format": "EML",
+      "route": "REVIEW",
+      "hard_case": true,
+      "hard_case_types": [
+        "PRICE_OUT_OF_TOLERANCE"
+      ],
+      "header_accuracy": 1.0,
+      "lines_expected": 13,
+      "lines_matched": 13,
+      "lines_extracted": 13,
+      "extra_lines": 0,
+      "missing_lines": 0,
+      "silent_order": false,
+      "silent_fields": [],
+      "field_mismatches": [],
+      "llm_calls": 0,
+      "llm_timeouts": 1,
+      "llm_failed": true,
+      "extraction_time_ms": 90097,
+      "overall_confidence": 0.39,
+      "decision": {
+        "score": 0.98,
+        "route": "REVIEW",
+        "reasons": [
+          "PRC-01"
+        ]
+      }
+    },
+    {
+      "order_id": "00c240fa-94ad-580e-808e-d7455b32212e",
+      "stem": "order_059_4500001058",
+      "document_path": "synthetic/documents/xlsx/order_059_4500001058.xlsx",
+      "format": "XLSX",
+      "route": "AUTO_POST",
+      "hard_case": true,
+      "hard_case_types": [
+        "AMBIGUOUS_DESC"
+      ],
+      "header_accuracy": 1.0,
+      "lines_expected": 3,
+      "lines_matched": 2,
+      "lines_extracted": 3,
+      "extra_lines": 0,
+      "missing_lines": 0,
+      "silent_order": false,
+      "silent_fields": [],
+      "field_mismatches": [],
+      "llm_calls": 0,
+      "llm_timeouts": 0,
+      "llm_failed": false,
+      "extraction_time_ms": 1,
+      "overall_confidence": 0.98,
+      "decision": {
+        "score": 0.98,
+        "route": "AUTO_POST",
+        "reasons": []
+      }
+    },
+    {
+      "order_id": "9c75d2a9-a50a-5f07-8ea9-e504613a285b",
+      "stem": "order_073_TIT-PO-01072",
+      "document_path": "synthetic/documents/xlsx/order_073_TIT-PO-01072.xlsx",
+      "format": "XLSX",
+      "route": "AUTO_POST",
+      "hard_case": true,
+      "hard_case_types": [
+        "TOTAL_MIXED"
+      ],
+      "header_accuracy": 1.0,
+      "lines_expected": 2,
+      "lines_matched": 2,
+      "lines_extracted": 2,
+      "extra_lines": 0,
+      "missing_lines": 0,
+      "silent_order": false,
+      "silent_fields": [],
+      "field_mismatches": [],
+      "llm_calls": 0,
+      "llm_timeouts": 0,
+      "llm_failed": false,
+      "extraction_time_ms": 0,
+      "overall_confidence": 0.7,
+      "decision": {
+        "score": 0.98,
+        "route": "AUTO_POST",
+        "reasons": []
+      }
+    },
+    {
+      "order_id": "ed19ba0b-b800-59ad-87d9-138f941869d6",
+      "stem": "order_126_MBM01125",
+      "document_path": "synthetic/documents/eml/order_126_MBM01125.eml",
+      "format": "EML",
+      "route": "REVIEW",
+      "hard_case": true,
+      "hard_case_types": [
+        "UOM_CONVERSION"
+      ],
+      "header_accuracy": 0.5,
+      "lines_expected": 10,
+      "lines_matched": 0,
+      "lines_extracted": 0,
+      "extra_lines": 0,
+      "missing_lines": 10,
+      "silent_order": false,
+      "silent_fields": [],
+      "field_mismatches": [
+        {
+          "path": "/header/po_date",
+          "expected": "4/7/26",
+          "extracted": "1970-01-01"
+        },
+        {
+          "path": "/header/requested_delivery_date",
+          "expected": "2026-04-12",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/0",
+          "expected": "APEX-JAN-6771",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/1",
+          "expected": "TLS-AWR-10IN",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/2",
+          "expected": "ABR-COW-4IN-3",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/3",
+          "expected": "APEX-TOO-8689",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/4",
+          "expected": "ADH-CON-246",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/5",
+          "expected": "JAN-TTI-238",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/6",
+          "expected": "APEX-ELE-0574",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/7",
+          "expected": "JAN-DSP-186",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/8",
+          "expected": "ADH-CON-126",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/9",
+          "expected": "APEX-JAN-7569",
+          "extracted": null
+        }
+      ],
+      "llm_calls": 0,
+      "llm_timeouts": 1,
+      "llm_failed": true,
+      "extraction_time_ms": 90094,
+      "overall_confidence": 0.0,
+      "decision": {
+        "score": 0.98,
+        "route": "REVIEW",
+        "reasons": [
+          "HDR-02"
+        ]
+      }
+    },
+    {
+      "order_id": "66cfcb93-66c1-548a-83de-445c35daf23c",
+      "stem": "order_026_NMC-01025",
+      "document_path": "synthetic/documents/xlsx/order_026_NMC-01025.xlsx",
+      "format": "XLSX",
+      "route": "AUTO_POST",
+      "hard_case": false,
+      "hard_case_types": [],
+      "header_accuracy": 1.0,
+      "lines_expected": 7,
+      "lines_matched": 7,
+      "lines_extracted": 7,
+      "extra_lines": 0,
+      "missing_lines": 0,
+      "silent_order": false,
+      "silent_fields": [],
+      "field_mismatches": [],
+      "llm_calls": 0,
+      "llm_timeouts": 0,
+      "llm_failed": false,
+      "extraction_time_ms": 2,
+      "overall_confidence": 0.98,
+      "decision": {
+        "score": 0.98,
+        "route": "AUTO_POST",
+        "reasons": []
+      }
+    },
+    {
+      "order_id": "4228eb1f-5342-5d24-a47c-4bb3fac40121",
+      "stem": "order_006_BW-01005",
+      "document_path": "synthetic/documents/eml/order_006_BW-01005.eml",
+      "format": "EML",
+      "route": "REVIEW",
+      "hard_case": false,
+      "hard_case_types": [],
+      "header_accuracy": 0.5,
+      "lines_expected": 13,
+      "lines_matched": 0,
+      "lines_extracted": 0,
+      "extra_lines": 0,
+      "missing_lines": 13,
+      "silent_order": false,
+      "silent_fields": [],
+      "field_mismatches": [
+        {
+          "path": "/header/po_date",
+          "expected": "02/05/2026",
+          "extracted": "1970-01-01"
+        },
+        {
+          "path": "/header/requested_delivery_date",
+          "expected": "2026-02-21",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/0",
+          "expected": "ADH-SGG-011",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/1",
+          "expected": "PKG-BBW-205",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/2",
+          "expected": "JAN-FST-281",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/3",
+          "expected": "FST-HNT-34-10-1",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/4",
+          "expected": "ABR-COW-6IN-3",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/5",
+          "expected": "JAN-LNR-3858-12-BL",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/6",
+          "expected": "PKG-BBW-005",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/7",
+          "expected": "ADH-SGG-132",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/8",
+          "expected": "JAN-NFC-251",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/9",
+          "expected": "ABR-COW-4IN-2",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/10",
+          "expected": "PKG-BBW-017",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/11",
+          "expected": "PPE-GLS-SMO-ANTI-FOG-1",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/12",
+          "expected": "PPE-GLV-LAT-5-XXL-BLU",
+          "extracted": null
+        }
+      ],
+      "llm_calls": 0,
+      "llm_timeouts": 1,
+      "llm_failed": true,
+      "extraction_time_ms": 90100,
+      "overall_confidence": 0.0,
+      "decision": {
+        "score": 0.98,
+        "route": "REVIEW",
+        "reasons": [
+          "HDR-02"
+        ]
+      }
+    },
+    {
+      "order_id": "36137ae4-4c2f-5c8c-904b-9d0f48fed6b7",
+      "stem": "order_065_TIT-PO-01064",
+      "document_path": "synthetic/documents/xlsx/order_065_TIT-PO-01064.xlsx",
+      "format": "XLSX",
+      "route": "AUTO_POST",
+      "hard_case": false,
+      "hard_case_types": [],
+      "header_accuracy": 1.0,
+      "lines_expected": 6,
+      "lines_matched": 6,
+      "lines_extracted": 6,
+      "extra_lines": 0,
+      "missing_lines": 0,
+      "silent_order": false,
+      "silent_fields": [],
+      "field_mismatches": [],
+      "llm_calls": 0,
+      "llm_timeouts": 0,
+      "llm_failed": false,
+      "extraction_time_ms": 1,
+      "overall_confidence": 0.7,
+      "decision": {
+        "score": 0.98,
+        "route": "AUTO_POST",
+        "reasons": []
+      }
+    },
+    {
+      "order_id": "c4e108ec-747f-5938-9e54-929c11983164",
+      "stem": "order_057_4500001056",
+      "document_path": "synthetic/documents/xlsx/order_057_4500001056.xlsx",
+      "format": "XLSX",
+      "route": "AUTO_POST",
+      "hard_case": false,
+      "hard_case_types": [],
+      "header_accuracy": 1.0,
+      "lines_expected": 3,
+      "lines_matched": 3,
+      "lines_extracted": 3,
+      "extra_lines": 0,
+      "missing_lines": 0,
+      "silent_order": false,
+      "silent_fields": [],
+      "field_mismatches": [],
+      "llm_calls": 0,
+      "llm_timeouts": 0,
+      "llm_failed": false,
+      "extraction_time_ms": 0,
+      "overall_confidence": 0.98,
+      "decision": {
+        "score": 0.98,
+        "route": "AUTO_POST",
+        "reasons": []
+      }
+    },
+    {
+      "order_id": "8d4bc1f1-3510-5697-965c-4195c06c8519",
+      "stem": "order_051_QS-01050",
+      "document_path": "synthetic/documents/eml/order_051_QS-01050.eml",
+      "format": "EML",
+      "route": "REVIEW",
+      "hard_case": false,
+      "hard_case_types": [],
+      "header_accuracy": 0.5,
+      "lines_expected": 19,
+      "lines_matched": 0,
+      "lines_extracted": 0,
+      "extra_lines": 0,
+      "missing_lines": 19,
+      "silent_order": false,
+      "silent_fields": [],
+      "field_mismatches": [
+        {
+          "path": "/header/po_date",
+          "expected": "Jun 04, 2026",
+          "extracted": "1970-01-01"
+        },
+        {
+          "path": "/header/requested_delivery_date",
+          "expected": "2026-06-16",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/0",
+          "expected": "ADH-EPX-000",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/1",
+          "expected": "PKG-BBW-205",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/2",
+          "expected": "GLOBAL-ABR-1892",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/3",
+          "expected": "ADH-EPX-231",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/4",
+          "expected": "PKG-STW-138",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/5",
+          "expected": "JAN-LNR-4347-10-BL",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/6",
+          "expected": "PKG-BBW-284",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/7",
+          "expected": "GLOBAL-LUB-1915",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/8",
+          "expected": "FST-SHC-34-10-1",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/9",
+          "expected": "JAN-TTI-223",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/10",
+          "expected": "GLOBAL-FAS-5007",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/11",
+          "expected": "GLOBAL-JAN-4589",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/12",
+          "expected": "GLOBAL-ELE-1578",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/13",
+          "expected": "GLOBAL-FAS-6768",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/14",
+          "expected": "JAN-TTI-114",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/15",
+          "expected": "JAN-FPD-17-BLA",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/16",
+          "expected": "GLOBAL-ADH-1024",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/17",
+          "expected": "PKG-STW-291",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/18",
+          "expected": "JAN-HSG-118",
+          "extracted": null
+        }
+      ],
+      "llm_calls": 0,
+      "llm_timeouts": 1,
+      "llm_failed": true,
+      "extraction_time_ms": 90097,
+      "overall_confidence": 0.0,
+      "decision": {
+        "score": 0.98,
+        "route": "REVIEW",
+        "reasons": [
+          "HDR-02"
+        ]
+      }
+    },
+    {
+      "order_id": "d7ea2846-ecb0-5b2f-8e72-6795119cbf59",
+      "stem": "order_030_SW-01029",
+      "document_path": "synthetic/documents/eml/order_030_SW-01029.eml",
+      "format": "EML",
+      "route": "AUTO_POST",
+      "hard_case": false,
+      "hard_case_types": [],
+      "header_accuracy": 1.0,
+      "lines_expected": 12,
+      "lines_matched": 12,
+      "lines_extracted": 12,
+      "extra_lines": 0,
+      "missing_lines": 0,
+      "silent_order": false,
+      "silent_fields": [],
+      "field_mismatches": [],
+      "llm_calls": 0,
+      "llm_timeouts": 1,
+      "llm_failed": true,
+      "extraction_time_ms": 90099,
+      "overall_confidence": 0.7,
+      "decision": {
+        "score": 0.98,
+        "route": "AUTO_POST",
+        "reasons": []
+      }
+    },
+    {
+      "order_id": "fd894e54-ff28-5627-9cd3-5a6737ae12a3",
+      "stem": "order_024_MBM01023",
+      "document_path": "synthetic/documents/eml/order_024_MBM01023.eml",
+      "format": "EML",
+      "route": "REVIEW",
+      "hard_case": false,
+      "hard_case_types": [],
+      "header_accuracy": 0.5,
+      "lines_expected": 17,
+      "lines_matched": 0,
+      "lines_extracted": 0,
+      "extra_lines": 0,
+      "missing_lines": 17,
+      "silent_order": false,
+      "silent_fields": [],
+      "field_mismatches": [
+        {
+          "path": "/header/po_date",
+          "expected": "4/1/26",
+          "extracted": "1970-01-01"
+        },
+        {
+          "path": "/header/requested_delivery_date",
+          "expected": "2026-04-16",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/0",
+          "expected": "PKG-PTC-202",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/1",
+          "expected": "APEX-ABR-4495",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/2",
+          "expected": "JAN-GCL-273",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/3",
+          "expected": "JAN-FTI-167",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/4",
+          "expected": "APEX-ADH-1197",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/5",
+          "expected": "ABR-FLD-412IN-1",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/6",
+          "expected": "APEX-JAN-9828",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/7",
+          "expected": "APEX-FAS-9421",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/8",
+          "expected": "LUB-POS-059",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/9",
+          "expected": "FST-LWS-38-16",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/10",
+          "expected": "APEX-TOO-3187",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/11",
+          "expected": "APEX-JAN-2522",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/12",
+          "expected": "PKG-PTC-187",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/13",
+          "expected": "FST-LWS-M6-1",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/14",
+          "expected": "PPE-EAR-101",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/15",
+          "expected": "APEX-JAN-5741",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/16",
+          "expected": "JAN-FPD-17-BLA",
+          "extracted": null
+        }
+      ],
+      "llm_calls": 0,
+      "llm_timeouts": 1,
+      "llm_failed": true,
+      "extraction_time_ms": 90093,
+      "overall_confidence": 0.0,
+      "decision": {
+        "score": 0.98,
+        "route": "REVIEW",
+        "reasons": [
+          "HDR-02"
+        ]
+      }
+    },
+    {
+      "order_id": "f2cd6d00-25a3-5760-a12f-4eabf0d425d7",
+      "stem": "order_137_4500001136",
+      "document_path": "synthetic/documents/xlsx/order_137_4500001136.xlsx",
+      "format": "XLSX",
+      "route": "AUTO_POST",
+      "hard_case": false,
+      "hard_case_types": [],
+      "header_accuracy": 1.0,
+      "lines_expected": 3,
+      "lines_matched": 3,
+      "lines_extracted": 3,
+      "extra_lines": 0,
+      "missing_lines": 0,
+      "silent_order": false,
+      "silent_fields": [],
+      "field_mismatches": [],
+      "llm_calls": 0,
+      "llm_timeouts": 0,
+      "llm_failed": false,
+      "extraction_time_ms": 0,
+      "overall_confidence": 0.98,
+      "decision": {
+        "score": 0.98,
+        "route": "AUTO_POST",
+        "reasons": []
+      }
+    },
+    {
+      "order_id": "4254de51-00ae-55c8-90b1-a8399b97d7bb",
+      "stem": "order_022_4500001021",
+      "document_path": "synthetic/documents/xlsx/order_022_4500001021.xlsx",
+      "format": "XLSX",
+      "route": "AUTO_POST",
+      "hard_case": false,
+      "hard_case_types": [],
+      "header_accuracy": 1.0,
+      "lines_expected": 5,
+      "lines_matched": 5,
+      "lines_extracted": 5,
+      "extra_lines": 0,
+      "missing_lines": 0,
+      "silent_order": false,
+      "silent_fields": [],
+      "field_mismatches": [],
+      "llm_calls": 0,
+      "llm_timeouts": 0,
+      "llm_failed": false,
+      "extraction_time_ms": 5,
+      "overall_confidence": 0.98,
+      "decision": {
+        "score": 0.98,
+        "route": "AUTO_POST",
+        "reasons": []
+      }
+    },
+    {
+      "order_id": "e5c5af27-0f26-539b-bc5f-1a1ee5dcd99e",
+      "stem": "order_092_NMC-01091",
+      "document_path": "synthetic/documents/xlsx/order_092_NMC-01091.xlsx",
+      "format": "XLSX",
+      "route": "AUTO_POST",
+      "hard_case": false,
+      "hard_case_types": [],
+      "header_accuracy": 1.0,
+      "lines_expected": 6,
+      "lines_matched": 6,
+      "lines_extracted": 6,
+      "extra_lines": 0,
+      "missing_lines": 0,
+      "silent_order": false,
+      "silent_fields": [],
+      "field_mismatches": [],
+      "llm_calls": 0,
+      "llm_timeouts": 0,
+      "llm_failed": false,
+      "extraction_time_ms": 2,
+      "overall_confidence": 0.98,
+      "decision": {
+        "score": 0.98,
+        "route": "AUTO_POST",
+        "reasons": []
+      }
+    },
+    {
+      "order_id": "42b2b9fb-69fe-5e9e-978a-2d6bfa920318",
+      "stem": "order_007_MBM01006",
+      "document_path": "synthetic/documents/eml/order_007_MBM01006.eml",
+      "format": "EML",
+      "route": "REVIEW",
+      "hard_case": false,
+      "hard_case_types": [],
+      "header_accuracy": 1.0,
+      "lines_expected": 14,
+      "lines_matched": 1,
+      "lines_extracted": 1,
+      "extra_lines": 0,
+      "missing_lines": 13,
+      "silent_order": false,
+      "silent_fields": [],
+      "field_mismatches": [
+        {
+          "path": "/lines/missing/1",
+          "expected": "PPE-N95-078",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/2",
+          "expected": "APEX-ABR-1329",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/3",
+          "expected": "APEX-TOO-5714",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/4",
+          "expected": "APEX-ADH-6353",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/5",
+          "expected": "APEX-TOO-4187",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/6",
+          "expected": "APEX-TOO-7746",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/7",
+          "expected": "APEX-JAN-5975",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/8",
+          "expected": "APEX-LUB-9429",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/9",
+          "expected": "APEX-JAN-6442",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/10",
+          "expected": "APEX-TOO-7596",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/11",
+          "expected": "APEX-JAN-4508",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/12",
+          "expected": "APEX-JAN-0245",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/13",
+          "expected": "APEX-JAN-2267",
+          "extracted": null
+        }
+      ],
+      "llm_calls": 1,
+      "llm_timeouts": 0,
+      "llm_failed": false,
+      "extraction_time_ms": 37694,
+      "overall_confidence": 0.39,
+      "decision": {
+        "score": 0.39,
+        "route": "REVIEW",
+        "reasons": [
+          "EXT-01",
+          "EXT-02",
+          "PRC-03"
+        ]
+      }
+    },
+    {
+      "order_id": "73257489-f084-515e-ae6a-91ff7084e7d9",
+      "stem": "order_149_TIT-PO-01148",
+      "document_path": "synthetic/documents/xlsx/order_149_TIT-PO-01148.xlsx",
+      "format": "XLSX",
+      "route": "AUTO_POST",
+      "hard_case": false,
+      "hard_case_types": [],
+      "header_accuracy": 1.0,
+      "lines_expected": 3,
+      "lines_matched": 3,
+      "lines_extracted": 3,
+      "extra_lines": 0,
+      "missing_lines": 0,
+      "silent_order": false,
+      "silent_fields": [],
+      "field_mismatches": [],
+      "llm_calls": 0,
+      "llm_timeouts": 0,
+      "llm_failed": false,
+      "extraction_time_ms": 1,
+      "overall_confidence": 0.7,
+      "decision": {
+        "score": 0.98,
+        "route": "AUTO_POST",
+        "reasons": []
+      }
+    },
+    {
+      "order_id": "91514156-c518-52b2-ba1e-5bfd1cd02a18",
+      "stem": "order_140_QS-01139",
+      "document_path": "synthetic/documents/xlsx/order_140_QS-01139.xlsx",
+      "format": "XLSX",
+      "route": "AUTO_POST",
+      "hard_case": false,
+      "hard_case_types": [],
+      "header_accuracy": 1.0,
+      "lines_expected": 23,
+      "lines_matched": 23,
+      "lines_extracted": 23,
+      "extra_lines": 0,
+      "missing_lines": 0,
+      "silent_order": false,
+      "silent_fields": [],
+      "field_mismatches": [],
+      "llm_calls": 0,
+      "llm_timeouts": 0,
+      "llm_failed": false,
+      "extraction_time_ms": 4,
+      "overall_confidence": 0.7,
+      "decision": {
+        "score": 0.98,
+        "route": "AUTO_POST",
+        "reasons": []
+      }
+    },
+    {
+      "order_id": "ce4403cf-1a7c-52d6-bd36-b51a66c2df74",
+      "stem": "order_049_SW-01048",
+      "document_path": "synthetic/documents/eml/order_049_SW-01048.eml",
+      "format": "EML",
+      "route": "REVIEW",
+      "hard_case": false,
+      "hard_case_types": [],
+      "header_accuracy": 1.0,
+      "lines_expected": 8,
+      "lines_matched": 8,
+      "lines_extracted": 8,
+      "extra_lines": 0,
+      "missing_lines": 0,
+      "silent_order": false,
+      "silent_fields": [],
+      "field_mismatches": [
+        {
+          "path": "/lines/3/buyer_item_code",
+          "expected": null,
+          "extracted": "SYNTHETIC"
+        },
+        {
+          "path": "/lines/4/buyer_item_code",
+          "expected": null,
+          "extracted": "SYNTHETIC"
+        },
+        {
+          "path": "/lines/7/buyer_item_code",
+          "expected": null,
+          "extracted": "SYNTHETIC"
+        }
+      ],
+      "llm_calls": 1,
+      "llm_timeouts": 0,
+      "llm_failed": false,
+      "extraction_time_ms": 80107,
+      "overall_confidence": 0.39,
+      "decision": {
+        "score": 0.39,
+        "route": "REVIEW",
+        "reasons": [
+          "EXT-01",
+          "EXT-02",
+          "TOT-01"
+        ]
+      }
+    },
+    {
+      "order_id": "55f0fd82-3409-50d8-af94-9e0c261bc2e5",
+      "stem": "order_053_4500001052",
+      "document_path": "synthetic/documents/xlsx/order_053_4500001052.xlsx",
+      "format": "XLSX",
+      "route": "AUTO_POST",
+      "hard_case": false,
+      "hard_case_types": [],
+      "header_accuracy": 1.0,
+      "lines_expected": 7,
+      "lines_matched": 7,
+      "lines_extracted": 7,
+      "extra_lines": 0,
+      "missing_lines": 0,
+      "silent_order": false,
+      "silent_fields": [],
+      "field_mismatches": [],
+      "llm_calls": 0,
+      "llm_timeouts": 0,
+      "llm_failed": false,
+      "extraction_time_ms": 1,
+      "overall_confidence": 0.98,
+      "decision": {
+        "score": 0.98,
+        "route": "AUTO_POST",
+        "reasons": []
+      }
+    },
+    {
+      "order_id": "71c6197d-e6d4-5cbc-956b-5d4bb5d42c7f",
+      "stem": "order_117_NMC-01116",
+      "document_path": "synthetic/documents/xlsx/order_117_NMC-01116.xlsx",
+      "format": "XLSX",
+      "route": "AUTO_POST",
+      "hard_case": false,
+      "hard_case_types": [],
+      "header_accuracy": 1.0,
+      "lines_expected": 5,
+      "lines_matched": 5,
+      "lines_extracted": 5,
+      "extra_lines": 0,
+      "missing_lines": 0,
+      "silent_order": false,
+      "silent_fields": [],
+      "field_mismatches": [],
+      "llm_calls": 0,
+      "llm_timeouts": 0,
+      "llm_failed": false,
+      "extraction_time_ms": 1,
+      "overall_confidence": 0.98,
+      "decision": {
+        "score": 0.98,
+        "route": "AUTO_POST",
+        "reasons": []
+      }
+    },
+    {
+      "order_id": "1225ddb0-2303-5da1-9e9d-07a1aa81b651",
+      "stem": "order_141_QS-01140",
+      "document_path": "synthetic/documents/eml/order_141_QS-01140.eml",
+      "format": "EML",
+      "route": "REVIEW",
+      "hard_case": false,
+      "hard_case_types": [],
+      "header_accuracy": 0.5,
+      "lines_expected": 19,
+      "lines_matched": 0,
+      "lines_extracted": 0,
+      "extra_lines": 0,
+      "missing_lines": 19,
+      "silent_order": false,
+      "silent_fields": [],
+      "field_mismatches": [
+        {
+          "path": "/header/po_date",
+          "expected": "Feb 13, 2026",
+          "extracted": "1970-01-01"
+        },
+        {
+          "path": "/header/requested_delivery_date",
+          "expected": "2026-02-20",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/0",
+          "expected": "GLOBAL-SAF-6125",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/1",
+          "expected": "PPE-GLS-SMO-ANTI-FOG",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/2",
+          "expected": "TLS-UTK-122",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/3",
+          "expected": "JAN-NFC-287",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/4",
+          "expected": "JAN-HSG-145",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/5",
+          "expected": "GLOBAL-FAS-7886",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/6",
+          "expected": "LUB-MOL-031",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/7",
+          "expected": "GLOBAL-JAN-8543",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/8",
+          "expected": "JAN-HSG-207",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/9",
+          "expected": "ABR-COW-6IN-5",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/10",
+          "expected": "ELE-TPE-BLU",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/11",
+          "expected": "GLOBAL-ABR-7897",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/12",
+          "expected": "PKG-STW-002",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/13",
+          "expected": "PKG-STW-123",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/14",
+          "expected": "ABR-FLD-412IN-1",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/15",
+          "expected": "GLOBAL-ADH-9673",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/16",
+          "expected": "GLOBAL-ABR-5213",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/17",
+          "expected": "PPE-HAT-WHI",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/18",
+          "expected": "FST-HNT-34-10-1",
+          "extracted": null
+        }
+      ],
+      "llm_calls": 0,
+      "llm_timeouts": 1,
+      "llm_failed": true,
+      "extraction_time_ms": 90094,
+      "overall_confidence": 0.0,
+      "decision": {
+        "score": 0.98,
+        "route": "REVIEW",
+        "reasons": [
+          "HDR-02"
+        ]
+      }
+    },
+    {
+      "order_id": "9a567281-f726-5a1c-8e65-fa2fa555075a",
+      "stem": "order_045_NMC-01044",
+      "document_path": "synthetic/documents/xlsx/order_045_NMC-01044.xlsx",
+      "format": "XLSX",
+      "route": "AUTO_POST",
+      "hard_case": false,
+      "hard_case_types": [],
+      "header_accuracy": 1.0,
+      "lines_expected": 4,
+      "lines_matched": 4,
+      "lines_extracted": 4,
+      "extra_lines": 0,
+      "missing_lines": 0,
+      "silent_order": false,
+      "silent_fields": [],
+      "field_mismatches": [],
+      "llm_calls": 0,
+      "llm_timeouts": 0,
+      "llm_failed": false,
+      "extraction_time_ms": 5,
+      "overall_confidence": 0.98,
+      "decision": {
+        "score": 0.98,
+        "route": "AUTO_POST",
+        "reasons": []
+      }
+    },
+    {
+      "order_id": "5a29a887-6def-5e8f-8635-23cb589a8986",
+      "stem": "order_077_SW-01076",
+      "document_path": "synthetic/documents/xlsx/order_077_SW-01076.xlsx",
+      "format": "XLSX",
+      "route": "AUTO_POST",
+      "hard_case": false,
+      "hard_case_types": [],
+      "header_accuracy": 1.0,
+      "lines_expected": 8,
+      "lines_matched": 8,
+      "lines_extracted": 8,
+      "extra_lines": 0,
+      "missing_lines": 0,
+      "silent_order": false,
+      "silent_fields": [],
+      "field_mismatches": [],
+      "llm_calls": 0,
+      "llm_timeouts": 0,
+      "llm_failed": false,
+      "extraction_time_ms": 2,
+      "overall_confidence": 0.7,
+      "decision": {
+        "score": 0.98,
+        "route": "AUTO_POST",
+        "reasons": []
+      }
+    },
+    {
+      "order_id": "61872868-05c8-57c0-b67c-6dc9c8106e34",
+      "stem": "order_072_QS-01071",
+      "document_path": "synthetic/documents/eml/order_072_QS-01071.eml",
+      "format": "EML",
+      "route": "REVIEW",
+      "hard_case": false,
+      "hard_case_types": [],
+      "header_accuracy": 0.75,
+      "lines_expected": 13,
+      "lines_matched": 0,
+      "lines_extracted": 0,
+      "extra_lines": 0,
+      "missing_lines": 13,
+      "silent_order": false,
+      "silent_fields": [],
+      "field_mismatches": [
+        {
+          "path": "/header/po_date",
+          "expected": "Apr 04, 2026",
+          "extracted": "1970-01-01"
+        },
+        {
+          "path": "/lines/missing/0",
+          "expected": "PPE-GLS-AMB-ANTI-FOG-2",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/1",
+          "expected": "FST-FWS-M10",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/2",
+          "expected": "ABR-FLD-4IN-2",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/3",
+          "expected": "GLOBAL-PAC-0791",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/4",
+          "expected": "JAN-TTI-238",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/5",
+          "expected": "GLOBAL-JAN-6793",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/6",
+          "expected": "JAN-DSP-153",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/7",
+          "expected": "FST-HCS-M10-4",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/8",
+          "expected": "ABR-FLD-412IN-1",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/9",
+          "expected": "GLOBAL-TOO-9073",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/10",
+          "expected": "GLOBAL-FAS-6888",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/11",
+          "expected": "GLOBAL-JAN-3847",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/12",
+          "expected": "GLOBAL-SAF-1744",
+          "extracted": null
+        }
+      ],
+      "llm_calls": 0,
+      "llm_timeouts": 1,
+      "llm_failed": true,
+      "extraction_time_ms": 90096,
+      "overall_confidence": 0.0,
+      "decision": {
+        "score": 0.98,
+        "route": "REVIEW",
+        "reasons": [
+          "HDR-02",
+          "HDR-04"
+        ]
+      }
+    },
+    {
+      "order_id": "4e476706-a621-50ec-b796-3be06131b447",
+      "stem": "order_076_MBM01075",
+      "document_path": "synthetic/documents/eml/order_076_MBM01075.eml",
+      "format": "EML",
+      "route": "REVIEW",
+      "hard_case": false,
+      "hard_case_types": [],
+      "header_accuracy": 0.5,
+      "lines_expected": 20,
+      "lines_matched": 0,
+      "lines_extracted": 0,
+      "extra_lines": 0,
+      "missing_lines": 20,
+      "silent_order": false,
+      "silent_fields": [],
+      "field_mismatches": [
+        {
+          "path": "/header/po_date",
+          "expected": "7/5/26",
+          "extracted": "1970-01-01"
+        },
+        {
+          "path": "/header/requested_delivery_date",
+          "expected": "2026-07-25",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/0",
+          "expected": "APEX-TOO-4985",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/1",
+          "expected": "APEX-FAS-2695",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/2",
+          "expected": "APEX-FAS-2350",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/3",
+          "expected": "APEX-JAN-1998",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/4",
+          "expected": "JAN-FST-166",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/5",
+          "expected": "JAN-FFN-194",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/6",
+          "expected": "APEX-LUB-6838",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/7",
+          "expected": "APEX-JAN-4427",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/8",
+          "expected": "PKG-PTC-093",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/9",
+          "expected": "JAN-TTI-114",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/10",
+          "expected": "FST-HCS-M10-112",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/11",
+          "expected": "LUB-MOL-031",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/12",
+          "expected": "APEX-ADH-2551",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/13",
+          "expected": "APEX-LUB-2893",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/14",
+          "expected": "APEX-TOO-4187",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/15",
+          "expected": "JAN-NFC-053",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/16",
+          "expected": "JAN-LNR-3339-15-CL",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/17",
+          "expected": "APEX-JAN-9472",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/18",
+          "expected": "APEX-SAF-7975",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/19",
+          "expected": "PKG-PTC-066",
+          "extracted": null
+        }
+      ],
+      "llm_calls": 0,
+      "llm_timeouts": 1,
+      "llm_failed": true,
+      "extraction_time_ms": 90093,
+      "overall_confidence": 0.0,
+      "decision": {
+        "score": 0.98,
+        "route": "REVIEW",
+        "reasons": [
+          "HDR-02"
+        ]
+      }
+    },
+    {
+      "order_id": "6530d57f-c9a6-5d49-9bfe-4b28226919a5",
+      "stem": "order_064_SW-01063",
+      "document_path": "synthetic/documents/eml/order_064_SW-01063.eml",
+      "format": "EML",
+      "route": "REVIEW",
+      "hard_case": false,
+      "hard_case_types": [],
+      "header_accuracy": 1.0,
+      "lines_expected": 5,
+      "lines_matched": 5,
+      "lines_extracted": 5,
+      "extra_lines": 0,
+      "missing_lines": 0,
+      "silent_order": false,
+      "silent_fields": [],
+      "field_mismatches": [],
+      "llm_calls": 1,
+      "llm_timeouts": 0,
+      "llm_failed": false,
+      "extraction_time_ms": 60586,
+      "overall_confidence": 0.39,
+      "decision": {
+        "score": 0.39,
+        "route": "REVIEW",
+        "reasons": [
+          "EXT-01",
+          "EXT-02",
+          "TOT-01"
+        ]
+      }
+    },
+    {
+      "order_id": "275e9991-e4fc-52e7-a792-02bbe211d67a",
+      "stem": "order_046_MBM01045",
+      "document_path": "synthetic/documents/eml/order_046_MBM01045.eml",
+      "format": "EML",
+      "route": "REVIEW",
+      "hard_case": false,
+      "hard_case_types": [],
+      "header_accuracy": 0.5,
+      "lines_expected": 10,
+      "lines_matched": 0,
+      "lines_extracted": 0,
+      "extra_lines": 0,
+      "missing_lines": 10,
+      "silent_order": false,
+      "silent_fields": [],
+      "field_mismatches": [
+        {
+          "path": "/header/po_date",
+          "expected": "4/5/26",
+          "extracted": "1970-01-01"
+        },
+        {
+          "path": "/header/requested_delivery_date",
+          "expected": "2026-04-17",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/0",
+          "expected": "APEX-JAN-0920",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/1",
+          "expected": "APEX-SAF-7457",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/2",
+          "expected": "FST-FWS-34-10",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/3",
+          "expected": "ADH-SGG-094",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/4",
+          "expected": "JAN-LNR-2424-15-CL",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/5",
+          "expected": "PPE-GLV-NIT-6-XXL-BLA",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/6",
+          "expected": "APEX-ADH-9693",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/7",
+          "expected": "APEX-SAF-6974",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/8",
+          "expected": "APEX-JAN-2711",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/9",
+          "expected": "LUB-POS-256",
+          "extracted": null
+        }
+      ],
+      "llm_calls": 0,
+      "llm_timeouts": 1,
+      "llm_failed": true,
+      "extraction_time_ms": 90092,
+      "overall_confidence": 0.0,
+      "decision": {
+        "score": 0.98,
+        "route": "REVIEW",
+        "reasons": [
+          "HDR-02"
+        ]
+      }
+    },
+    {
+      "order_id": "c05903f6-e6ea-59b0-8801-f8b73c6c92aa",
+      "stem": "order_150_QS-01149",
+      "document_path": "synthetic/documents/eml/order_150_QS-01149.eml",
+      "format": "EML",
+      "route": "REVIEW",
+      "hard_case": false,
+      "hard_case_types": [],
+      "header_accuracy": 0.5,
+      "lines_expected": 14,
+      "lines_matched": 0,
+      "lines_extracted": 0,
+      "extra_lines": 0,
+      "missing_lines": 14,
+      "silent_order": false,
+      "silent_fields": [],
+      "field_mismatches": [
+        {
+          "path": "/header/po_date",
+          "expected": "May 12, 2026",
+          "extracted": "1970-01-01"
+        },
+        {
+          "path": "/header/requested_delivery_date",
+          "expected": "2026-05-26",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/0",
+          "expected": "GLOBAL-JAN-4598",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/1",
+          "expected": "PPE-GLS-CLE-ANTI-FOG",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/2",
+          "expected": "JAN-TTI-201",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/3",
+          "expected": "GLOBAL-LUB-2474",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/4",
+          "expected": "JAN-GCL-155",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/5",
+          "expected": "JAN-DSP-153",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/6",
+          "expected": "GLOBAL-TOO-8937",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/7",
+          "expected": "ABR-COW-4IN-1",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/8",
+          "expected": "LUB-POS-227",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/9",
+          "expected": "GLOBAL-ELE-4982",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/10",
+          "expected": "GLOBAL-JAN-1081",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/11",
+          "expected": "GLOBAL-PAC-0995",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/12",
+          "expected": "PKG-BBW-147",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/13",
+          "expected": "ADH-SGG-132",
+          "extracted": null
+        }
+      ],
+      "llm_calls": 0,
+      "llm_timeouts": 1,
+      "llm_failed": true,
+      "extraction_time_ms": 90098,
+      "overall_confidence": 0.0,
+      "decision": {
+        "score": 0.98,
+        "route": "REVIEW",
+        "reasons": [
+          "HDR-02"
+        ]
+      }
+    },
+    {
+      "order_id": "6d78b7cd-5079-579e-925c-4aa630a6d6f7",
+      "stem": "order_146_4500001145",
+      "document_path": "synthetic/documents/xlsx/order_146_4500001145.xlsx",
+      "format": "XLSX",
+      "route": "AUTO_POST",
+      "hard_case": false,
+      "hard_case_types": [],
+      "header_accuracy": 1.0,
+      "lines_expected": 3,
+      "lines_matched": 3,
+      "lines_extracted": 3,
+      "extra_lines": 0,
+      "missing_lines": 0,
+      "silent_order": false,
+      "silent_fields": [],
+      "field_mismatches": [],
+      "llm_calls": 0,
+      "llm_timeouts": 0,
+      "llm_failed": false,
+      "extraction_time_ms": 1,
+      "overall_confidence": 0.98,
+      "decision": {
+        "score": 0.98,
+        "route": "AUTO_POST",
+        "reasons": []
+      }
+    },
+    {
+      "order_id": "3c4b0d94-7190-5e7c-a885-070a7c8bd33e",
+      "stem": "order_067_MBM01066",
+      "document_path": "synthetic/documents/eml/order_067_MBM01066.eml",
+      "format": "EML",
+      "route": "REVIEW",
+      "hard_case": false,
+      "hard_case_types": [],
+      "header_accuracy": 0.75,
+      "lines_expected": 19,
+      "lines_matched": 0,
+      "lines_extracted": 0,
+      "extra_lines": 0,
+      "missing_lines": 19,
+      "silent_order": false,
+      "silent_fields": [],
+      "field_mismatches": [
+        {
+          "path": "/header/po_date",
+          "expected": "6/15/26",
+          "extracted": "1970-01-01"
+        },
+        {
+          "path": "/lines/missing/0",
+          "expected": "APEX-ABR-3960",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/1",
+          "expected": "JAN-DGR-130",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/2",
+          "expected": "JAN-DSP-258",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/3",
+          "expected": "FST-HNT-58-11",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/4",
+          "expected": "APEX-JAN-8154",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/5",
+          "expected": "APEX-FAS-1030",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/6",
+          "expected": "LUB-MPG-006",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/7",
+          "expected": "APEX-JAN-1818",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/8",
+          "expected": "APEX-SAF-7935",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/9",
+          "expected": "APEX-JAN-6771",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/10",
+          "expected": "APEX-JAN-0920",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/11",
+          "expected": "APEX-SAF-6974",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/12",
+          "expected": "PKG-BBW-147",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/13",
+          "expected": "APEX-LUB-2704",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/14",
+          "expected": "TLS-TPM-30FT-1",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/15",
+          "expected": "LUB-POS-227",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/16",
+          "expected": "TLS-UTK-113",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/17",
+          "expected": "APEX-JAN-9319",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/18",
+          "expected": "PPE-EAR-221",
+          "extracted": null
+        }
+      ],
+      "llm_calls": 0,
+      "llm_timeouts": 1,
+      "llm_failed": true,
+      "extraction_time_ms": 90093,
+      "overall_confidence": 0.0,
+      "decision": {
+        "score": 0.98,
+        "route": "REVIEW",
+        "reasons": [
+          "HDR-02"
+        ]
+      }
+    },
+    {
+      "order_id": "8b3a985c-4897-56ac-b12b-40cf8fa7069e",
+      "stem": "order_145_SW-01144",
+      "document_path": "synthetic/documents/xlsx/order_145_SW-01144.xlsx",
+      "format": "XLSX",
+      "route": "AUTO_POST",
+      "hard_case": false,
+      "hard_case_types": [],
+      "header_accuracy": 1.0,
+      "lines_expected": 6,
+      "lines_matched": 6,
+      "lines_extracted": 6,
+      "extra_lines": 0,
+      "missing_lines": 0,
+      "silent_order": false,
+      "silent_fields": [],
+      "field_mismatches": [],
+      "llm_calls": 0,
+      "llm_timeouts": 0,
+      "llm_failed": false,
+      "extraction_time_ms": 6,
+      "overall_confidence": 0.7,
+      "decision": {
+        "score": 0.98,
+        "route": "AUTO_POST",
+        "reasons": []
+      }
+    },
+    {
+      "order_id": "5d391dd4-d775-5b67-89d8-220bbf256cad",
+      "stem": "order_089_QS-01088",
+      "document_path": "synthetic/documents/eml/order_089_QS-01088.eml",
+      "format": "EML",
+      "route": "REVIEW",
+      "hard_case": false,
+      "hard_case_types": [],
+      "header_accuracy": 0.5,
+      "lines_expected": 25,
+      "lines_matched": 0,
+      "lines_extracted": 0,
+      "extra_lines": 0,
+      "missing_lines": 25,
+      "silent_order": false,
+      "silent_fields": [],
+      "field_mismatches": [
+        {
+          "path": "/header/po_date",
+          "expected": "Jul 01, 2026",
+          "extracted": "1970-01-01"
+        },
+        {
+          "path": "/header/requested_delivery_date",
+          "expected": "2026-07-21",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/0",
+          "expected": "LUB-POS-256",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/1",
+          "expected": "PPE-HAT-RED",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/2",
+          "expected": "GLOBAL-TOO-1155",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/3",
+          "expected": "ABR-FLD-5IN",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/4",
+          "expected": "JAN-LNR-3339-12-CL",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/5",
+          "expected": "GLOBAL-JAN-8705",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/6",
+          "expected": "GLOBAL-PAC-1579",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/7",
+          "expected": "FST-HCS-38-16-3",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/8",
+          "expected": "GLOBAL-TOO-8937",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/9",
+          "expected": "GLOBAL-FAS-6768",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/10",
+          "expected": "JAN-DGR-076",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/11",
+          "expected": "GLOBAL-JAN-5253",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/12",
+          "expected": "GLOBAL-JAN-7533",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/13",
+          "expected": "TLS-AWR-12IN",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/14",
+          "expected": "GLOBAL-JAN-0706",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/15",
+          "expected": "ADH-SGG-102",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/16",
+          "expected": "TLS-TPM-30FT",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/17",
+          "expected": "ELE-CTI-8IN",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/18",
+          "expected": "GLOBAL-ADH-6474",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/19",
+          "expected": "LUB-MOL-004",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/20",
+          "expected": "FST-HCS-38-16-2",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/21",
+          "expected": "GLOBAL-PAC-5955",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/22",
+          "expected": "ADH-EPX-000",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/23",
+          "expected": "GLOBAL-PAC-2099",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/24",
+          "expected": "GLOBAL-PAC-4301",
+          "extracted": null
+        }
+      ],
+      "llm_calls": 0,
+      "llm_timeouts": 1,
+      "llm_failed": true,
+      "extraction_time_ms": 90091,
+      "overall_confidence": 0.0,
+      "decision": {
+        "score": 0.98,
+        "route": "REVIEW",
+        "reasons": [
+          "HDR-02"
+        ]
+      }
+    },
+    {
+      "order_id": "1fdcbe5b-4481-59ce-a7ff-769d9658e31f",
+      "stem": "order_001_TIT-PO-01000",
+      "document_path": "synthetic/documents/xlsx/order_001_TIT-PO-01000.xlsx",
+      "format": "XLSX",
+      "route": "AUTO_POST",
+      "hard_case": false,
+      "hard_case_types": [],
+      "header_accuracy": 1.0,
+      "lines_expected": 4,
+      "lines_matched": 4,
+      "lines_extracted": 4,
+      "extra_lines": 0,
+      "missing_lines": 0,
+      "silent_order": false,
+      "silent_fields": [],
+      "field_mismatches": [],
+      "llm_calls": 0,
+      "llm_timeouts": 0,
+      "llm_failed": false,
+      "extraction_time_ms": 5,
+      "overall_confidence": 0.7,
+      "decision": {
+        "score": 0.98,
+        "route": "AUTO_POST",
+        "reasons": []
+      }
+    },
+    {
+      "order_id": "f34cfb6b-6961-504f-8191-569d04f0b9fa",
+      "stem": "order_084_SW-01083",
+      "document_path": "synthetic/documents/xlsx/order_084_SW-01083.xlsx",
+      "format": "XLSX",
+      "route": "AUTO_POST",
+      "hard_case": false,
+      "hard_case_types": [],
+      "header_accuracy": 1.0,
+      "lines_expected": 8,
+      "lines_matched": 8,
+      "lines_extracted": 8,
+      "extra_lines": 0,
+      "missing_lines": 0,
+      "silent_order": false,
+      "silent_fields": [],
+      "field_mismatches": [],
+      "llm_calls": 0,
+      "llm_timeouts": 0,
+      "llm_failed": false,
+      "extraction_time_ms": 6,
+      "overall_confidence": 0.7,
+      "decision": {
+        "score": 0.98,
+        "route": "AUTO_POST",
+        "reasons": []
+      }
+    },
+    {
+      "order_id": "60c0dd76-8cdc-5324-99a0-fbf21ff4910d",
+      "stem": "order_018_MBM01017",
+      "document_path": "synthetic/documents/eml/order_018_MBM01017.eml",
+      "format": "EML",
+      "route": "REVIEW",
+      "hard_case": false,
+      "hard_case_types": [],
+      "header_accuracy": 0.5,
+      "lines_expected": 17,
+      "lines_matched": 0,
+      "lines_extracted": 0,
+      "extra_lines": 0,
+      "missing_lines": 17,
+      "silent_order": false,
+      "silent_fields": [],
+      "field_mismatches": [
+        {
+          "path": "/header/po_date",
+          "expected": "2/24/26",
+          "extracted": "1970-01-01"
+        },
+        {
+          "path": "/header/requested_delivery_date",
+          "expected": "2026-03-13",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/0",
+          "expected": "APEX-ABR-2885",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/1",
+          "expected": "ELE-TPE-WHI",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/2",
+          "expected": "FST-LWS-516-18",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/3",
+          "expected": "ELE-CTI-8IN",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/4",
+          "expected": "ELE-WNT-34-10",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/5",
+          "expected": "LUB-MPG-074",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/6",
+          "expected": "JAN-TTI-270",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/7",
+          "expected": "JAN-GCL-090",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/8",
+          "expected": "APEX-FAS-2695",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/9",
+          "expected": "ADH-SGG-094",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/10",
+          "expected": "APEX-ABR-4611",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/11",
+          "expected": "APEX-FAS-1580",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/12",
+          "expected": "APEX-JAN-6928",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/13",
+          "expected": "JAN-FTI-167",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/14",
+          "expected": "APEX-JAN-4378",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/15",
+          "expected": "JAN-LNR-4046-12-WH",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/16",
+          "expected": "APEX-JAN-3992",
+          "extracted": null
+        }
+      ],
+      "llm_calls": 0,
+      "llm_timeouts": 1,
+      "llm_failed": true,
+      "extraction_time_ms": 90091,
+      "overall_confidence": 0.0,
+      "decision": {
+        "score": 0.98,
+        "route": "REVIEW",
+        "reasons": [
+          "HDR-02"
+        ]
+      }
+    },
+    {
+      "order_id": "d3cfd918-d37b-52ab-8c6b-20eb515ce2a1",
+      "stem": "order_107_NMC-01106",
+      "document_path": "synthetic/documents/xlsx/order_107_NMC-01106.xlsx",
+      "format": "XLSX",
+      "route": "AUTO_POST",
+      "hard_case": false,
+      "hard_case_types": [],
+      "header_accuracy": 1.0,
+      "lines_expected": 5,
+      "lines_matched": 5,
+      "lines_extracted": 5,
+      "extra_lines": 0,
+      "missing_lines": 0,
+      "silent_order": false,
+      "silent_fields": [],
+      "field_mismatches": [],
+      "llm_calls": 0,
+      "llm_timeouts": 0,
+      "llm_failed": false,
+      "extraction_time_ms": 2,
+      "overall_confidence": 0.98,
+      "decision": {
+        "score": 0.98,
+        "route": "AUTO_POST",
+        "reasons": []
+      }
+    },
+    {
+      "order_id": "92b18029-27ca-580c-953b-6808015de0cb",
+      "stem": "order_131_QS-01130",
+      "document_path": "synthetic/documents/eml/order_131_QS-01130.eml",
+      "format": "EML",
+      "route": "AUTO_POST",
+      "hard_case": false,
+      "hard_case_types": [],
+      "header_accuracy": 1.0,
+      "lines_expected": 17,
+      "lines_matched": 17,
+      "lines_extracted": 17,
+      "extra_lines": 0,
+      "missing_lines": 0,
+      "silent_order": false,
+      "silent_fields": [],
+      "field_mismatches": [],
+      "llm_calls": 0,
+      "llm_timeouts": 1,
+      "llm_failed": true,
+      "extraction_time_ms": 90103,
+      "overall_confidence": 0.7,
+      "decision": {
+        "score": 0.98,
+        "route": "AUTO_POST",
+        "reasons": []
+      }
+    },
+    {
+      "order_id": "1ac6f235-7844-5818-8bfa-de8cf829da6d",
+      "stem": "order_036_TIT-PO-01035",
+      "document_path": "synthetic/documents/xlsx/order_036_TIT-PO-01035.xlsx",
+      "format": "XLSX",
+      "route": "AUTO_POST",
+      "hard_case": false,
+      "hard_case_types": [],
+      "header_accuracy": 1.0,
+      "lines_expected": 2,
+      "lines_matched": 2,
+      "lines_extracted": 2,
+      "extra_lines": 0,
+      "missing_lines": 0,
+      "silent_order": false,
+      "silent_fields": [],
+      "field_mismatches": [],
+      "llm_calls": 0,
+      "llm_timeouts": 0,
+      "llm_failed": false,
+      "extraction_time_ms": 5,
+      "overall_confidence": 0.7,
+      "decision": {
+        "score": 0.98,
+        "route": "AUTO_POST",
+        "reasons": []
+      }
+    },
+    {
+      "order_id": "0d906e13-cb79-5706-80ab-217df1256d3e",
+      "stem": "order_139_4500001138",
+      "document_path": "synthetic/documents/xlsx/order_139_4500001138.xlsx",
+      "format": "XLSX",
+      "route": "AUTO_POST",
+      "hard_case": false,
+      "hard_case_types": [],
+      "header_accuracy": 1.0,
+      "lines_expected": 6,
+      "lines_matched": 6,
+      "lines_extracted": 6,
+      "extra_lines": 0,
+      "missing_lines": 0,
+      "silent_order": false,
+      "silent_fields": [],
+      "field_mismatches": [],
+      "llm_calls": 0,
+      "llm_timeouts": 0,
+      "llm_failed": false,
+      "extraction_time_ms": 1,
+      "overall_confidence": 0.98,
+      "decision": {
+        "score": 0.98,
+        "route": "AUTO_POST",
+        "reasons": []
+      }
+    },
+    {
+      "order_id": "09c64ed5-f49a-5dd3-bb1a-a207f32af204",
+      "stem": "order_017_BW-01016",
+      "document_path": "synthetic/documents/eml/order_017_BW-01016.eml",
+      "format": "EML",
+      "route": "REVIEW",
+      "hard_case": false,
+      "hard_case_types": [],
+      "header_accuracy": 0.75,
+      "lines_expected": 11,
+      "lines_matched": 0,
+      "lines_extracted": 0,
+      "extra_lines": 0,
+      "missing_lines": 11,
+      "silent_order": false,
+      "silent_fields": [],
+      "field_mismatches": [
+        {
+          "path": "/header/po_date",
+          "expected": "02/12/2026",
+          "extracted": "1970-01-01"
+        },
+        {
+          "path": "/lines/missing/0",
+          "expected": "ADH-SGG-282",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/1",
+          "expected": "ADH-SGG-102",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/2",
+          "expected": "TLS-TPM-30FT",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/3",
+          "expected": "LUB-MOL-109",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/4",
+          "expected": "FST-HCS-M12-3",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/5",
+          "expected": "LUB-POS-256",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/6",
+          "expected": "JAN-DSP-258",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/7",
+          "expected": "TLS-UTK-298",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/8",
+          "expected": "LUB-POS-119",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/9",
+          "expected": "ABR-COW-6IN-3",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/10",
+          "expected": "FST-HCS-38-16-112",
+          "extracted": null
+        }
+      ],
+      "llm_calls": 0,
+      "llm_timeouts": 1,
+      "llm_failed": true,
+      "extraction_time_ms": 90096,
+      "overall_confidence": 0.0,
+      "decision": {
+        "score": 0.98,
+        "route": "REVIEW",
+        "reasons": [
+          "HDR-02",
+          "HDR-04"
+        ]
+      }
+    },
+    {
+      "order_id": "c21974cf-0f71-5710-9c1a-15fd777f3c32",
+      "stem": "order_144_QS-01143",
+      "document_path": "synthetic/documents/eml/order_144_QS-01143.eml",
+      "format": "EML",
+      "route": "REVIEW",
+      "hard_case": false,
+      "hard_case_types": [],
+      "header_accuracy": 0.5,
+      "lines_expected": 10,
+      "lines_matched": 0,
+      "lines_extracted": 0,
+      "extra_lines": 0,
+      "missing_lines": 10,
+      "silent_order": false,
+      "silent_fields": [],
+      "field_mismatches": [
+        {
+          "path": "/header/po_date",
+          "expected": "Apr 25, 2026",
+          "extracted": "1970-01-01"
+        },
+        {
+          "path": "/header/requested_delivery_date",
+          "expected": "2026-05-02",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/0",
+          "expected": "PKG-PTC-133",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/1",
+          "expected": "ELE-CTI-8IN",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/2",
+          "expected": "ABR-COW-4IN-2",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/3",
+          "expected": "GLOBAL-JAN-8946",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/4",
+          "expected": "GLOBAL-ELE-7350",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/5",
+          "expected": "GLOBAL-FAS-1606",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/6",
+          "expected": "TLS-UTK-298",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/7",
+          "expected": "JAN-DSP-186",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/8",
+          "expected": "GLOBAL-JAN-7735",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/9",
+          "expected": "GLOBAL-JAN-5551",
+          "extracted": null
+        }
+      ],
+      "llm_calls": 0,
+      "llm_timeouts": 1,
+      "llm_failed": true,
+      "extraction_time_ms": 90094,
+      "overall_confidence": 0.0,
+      "decision": {
+        "score": 0.98,
+        "route": "REVIEW",
+        "reasons": [
+          "HDR-02"
+        ]
+      }
+    },
+    {
+      "order_id": "41a34500-1e72-58c1-9f2a-f2be31455753",
+      "stem": "order_083_QS-01082",
+      "document_path": "synthetic/documents/eml/order_083_QS-01082.eml",
+      "format": "EML",
+      "route": "REVIEW",
+      "hard_case": false,
+      "hard_case_types": [],
+      "header_accuracy": 0.5,
+      "lines_expected": 25,
+      "lines_matched": 0,
+      "lines_extracted": 0,
+      "extra_lines": 0,
+      "missing_lines": 25,
+      "silent_order": false,
+      "silent_fields": [],
+      "field_mismatches": [
+        {
+          "path": "/header/po_date",
+          "expected": "Jan 18, 2026",
+          "extracted": "1970-01-01"
+        },
+        {
+          "path": "/header/requested_delivery_date",
+          "expected": "2026-01-30",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/0",
+          "expected": "FST-SHC-12-13-2",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/1",
+          "expected": "ELE-TPE-WHI",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/2",
+          "expected": "PPE-HAT-RED",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/3",
+          "expected": "GLOBAL-PAC-7756",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/4",
+          "expected": "FST-SHC-12-13-4",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/5",
+          "expected": "GLOBAL-FAS-5187",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/6",
+          "expected": "PPE-GLS-AMB-ANTI-FOG-2",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/7",
+          "expected": "GLOBAL-SAF-6125",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/8",
+          "expected": "FST-LWS-516-18",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/9",
+          "expected": "JAN-DGR-224",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/10",
+          "expected": "GLOBAL-JAN-8879",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/11",
+          "expected": "FST-HCS-M10-112",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/12",
+          "expected": "PPE-N95-219",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/13",
+          "expected": "JAN-DSP-200",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/14",
+          "expected": "JAN-GCL-273",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/15",
+          "expected": "FST-FWS-34-10",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/16",
+          "expected": "ABR-COW-412IN-1",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/17",
+          "expected": "JAN-PTR-1P-NAT",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/18",
+          "expected": "GLOBAL-JAN-2983",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/19",
+          "expected": "PPE-GLS-SMO-ANTI-FOG-1",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/20",
+          "expected": "JAN-DSP-128",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/21",
+          "expected": "GLOBAL-LUB-1739",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/22",
+          "expected": "JAN-HSG-145",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/23",
+          "expected": "GLOBAL-TOO-4444",
+          "extracted": null
+        },
+        {
+          "path": "/lines/missing/24",
+          "expected": "GLOBAL-JAN-0712",
+          "extracted": null
+        }
+      ],
+      "llm_calls": 0,
+      "llm_timeouts": 1,
+      "llm_failed": true,
+      "extraction_time_ms": 90095,
+      "overall_confidence": 0.0,
+      "decision": {
+        "score": 0.98,
+        "route": "REVIEW",
+        "reasons": [
+          "HDR-02"
+        ]
+      }
+    }
+  ],
+  "before": {
+    "source_commit": "aea6f9b",
+    "sample_size": 50,
+    "exclude_pdf": true,
+    "use_llm": false,
+    "metrics": {
+      "header_accuracy": 0.25,
+      "lines_accuracy": 0.415,
+      "auto_post_orders": 0,
+      "total_orders": 50,
+      "orders_in_review": 50,
+      "reject_orders": 0,
+      "silent_orders": 0,
+      "silent_field_errors": 0
+    },
+    "format_scores": {
+      "XLSX": {
+        "lines_matched": 96.8,
+        "lines_expected": 100.0
+      },
+      "EML": {
+        "lines_matched": 17.3,
+        "lines_expected": 100.0
+      }
+    }
+  },
+  "no_llm": {
+    "metrics": {
+      "header_accuracy": 0.83,
+      "lines_accuracy": 0.4437984496124031,
+      "silent_orders": 0,
+      "silent_order_rate": 0.0,
+      "silent_field_errors": 0,
+      "silent_field_rate": 0.0,
+      "total_orders": 50,
+      "hard_cases": 12,
+      "extraction_failures": 0,
+      "auto_post_orders": 29,
+      "auto_post_rate": 0.58,
+      "orders_in_review": 21,
+      "review_rate": 0.42,
+      "reject_orders": 0,
+      "reject_rate": 0.0,
+      "mean_time_seconds": 0.0073231315612792966,
+      "llm_calls": 0,
+      "llm_timeouts": 0
+    },
+    "format_scores": {
+      "XLSX": {
+        "count": 25,
+        "header_correct": 100,
+        "header_total": 100,
+        "lines_expected": 157,
+        "lines_matched": 155,
+        "silent_errors": 0,
+        "silent_orders": 0,
+        "silent_fields": 0,
+        "auto_post": 25,
+        "review": 0,
+        "reject": 0,
+        "time_ms": 54
+      },
+      "EML": {
+        "count": 25,
+        "header_correct": 66,
+        "header_total": 100,
+        "lines_expected": 359,
+        "lines_matched": 74,
+        "silent_errors": 0,
+        "silent_orders": 0,
+        "silent_fields": 0,
+        "auto_post": 4,
+        "review": 21,
+        "reject": 0,
+        "time_ms": 41
+      }
+    },
+    "orders": [
+      {
+        "order_id": "e735b08f-83e5-5503-ab2b-88e15ad00a6e",
+        "stem": "order_002_QS-01001",
+        "document_path": "synthetic/documents/xlsx/order_002_QS-01001.xlsx",
+        "format": "XLSX",
+        "route": "AUTO_POST",
+        "hard_case": true,
+        "hard_case_types": [
+          "QTY_WORDS"
+        ],
+        "header_accuracy": 1.0,
+        "lines_expected": 20,
+        "lines_matched": 20,
+        "lines_extracted": 20,
+        "extra_lines": 0,
+        "missing_lines": 0,
+        "silent_order": false,
+        "silent_fields": [],
+        "field_mismatches": [],
+        "llm_calls": 0,
+        "llm_timeouts": 0,
+        "llm_failed": false,
+        "extraction_time_ms": 12,
+        "overall_confidence": 0.7,
+        "decision": {
+          "score": 0.98,
+          "route": "AUTO_POST",
+          "reasons": []
+        }
+      },
+      {
+        "order_id": "55b7e9d3-84dc-5d6f-88ec-9dc209df9cfa",
+        "stem": "order_005_MBM01004",
+        "document_path": "synthetic/documents/eml/order_005_MBM01004.eml",
+        "format": "EML",
+        "route": "REVIEW",
+        "hard_case": true,
+        "hard_case_types": [
+          "MISSING_DATE",
+          "UNKNOWN_CUSTOMER_CODE"
+        ],
+        "header_accuracy": 0.5,
+        "lines_expected": 14,
+        "lines_matched": 0,
+        "lines_extracted": 0,
+        "extra_lines": 0,
+        "missing_lines": 14,
+        "silent_order": false,
+        "silent_fields": [],
+        "field_mismatches": [
+          {
+            "path": "/header/po_date",
+            "expected": "3/5/26",
+            "extracted": "1970-01-01"
+          },
+          {
+            "path": "/header/requested_delivery_date",
+            "expected": "2026-03-20",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/0",
+            "expected": "MB-UNKNOWN-0004",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/1",
+            "expected": "ADH-EPX-215",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/2",
+            "expected": "LUB-POS-168",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/3",
+            "expected": "ELE-TPE-BLU",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/4",
+            "expected": "JAN-DSP-200",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/5",
+            "expected": "JAN-FTI-167",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/6",
+            "expected": "APEX-FAS-9744",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/7",
+            "expected": "PKG-BBW-283",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/8",
+            "expected": "APEX-FAS-6212",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/9",
+            "expected": "PKG-PTC-133",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/10",
+            "expected": "PKG-PTC-187",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/11",
+            "expected": "APEX-JAN-7359",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/12",
+            "expected": "ABR-FLD-5IN",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/13",
+            "expected": "APEX-FAS-1562",
+            "extracted": null
+          }
+        ],
+        "llm_calls": 0,
+        "llm_timeouts": 0,
+        "llm_failed": false,
+        "extraction_time_ms": 1,
+        "overall_confidence": 0.0,
+        "decision": {
+          "score": 0.98,
+          "route": "REVIEW",
+          "reasons": [
+            "HDR-02"
+          ]
+        }
+      },
+      {
+        "order_id": "d04956bd-9dd7-5c8b-b1ff-5f2d139ecf6d",
+        "stem": "order_009_APE-01008",
+        "document_path": "synthetic/documents/eml/order_009_APE-01008.eml",
+        "format": "EML",
+        "route": "REVIEW",
+        "hard_case": true,
+        "hard_case_types": [
+          "QTY_WORDS"
+        ],
+        "header_accuracy": 0.5,
+        "lines_expected": 7,
+        "lines_matched": 0,
+        "lines_extracted": 0,
+        "extra_lines": 0,
+        "missing_lines": 7,
+        "silent_order": false,
+        "silent_fields": [],
+        "field_mismatches": [
+          {
+            "path": "/header/po_date",
+            "expected": "2026/05/06",
+            "extracted": "1970-01-01"
+          },
+          {
+            "path": "/header/requested_delivery_date",
+            "expected": "2026-05-12",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/0",
+            "expected": "SUMMIT-ABR-8409",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/1",
+            "expected": "JAN-PTR-1P-WHI",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/2",
+            "expected": "SUMMIT-LUB-1957",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/3",
+            "expected": "SUMMIT-ABR-3758",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/4",
+            "expected": "ELE-TPE-BLU-1",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/5",
+            "expected": "PPE-EAR-286",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/6",
+            "expected": "SUMMIT-JAN-6265",
+            "extracted": null
+          }
+        ],
+        "llm_calls": 0,
+        "llm_timeouts": 0,
+        "llm_failed": false,
+        "extraction_time_ms": 0,
+        "overall_confidence": 0.0,
+        "decision": {
+          "score": 0.98,
+          "route": "REVIEW",
+          "reasons": [
+            "HDR-02"
+          ]
+        }
+      },
+      {
+        "order_id": "06a6174f-3fd9-576d-9a48-a29cd851cf43",
+        "stem": "order_019_SW-01018",
+        "document_path": "synthetic/documents/xlsx/order_019_SW-01018.xlsx",
+        "format": "XLSX",
+        "route": "AUTO_POST",
+        "hard_case": true,
+        "hard_case_types": [
+          "CUSTOMER_CODES"
+        ],
+        "header_accuracy": 1.0,
+        "lines_expected": 9,
+        "lines_matched": 9,
+        "lines_extracted": 9,
+        "extra_lines": 0,
+        "missing_lines": 0,
+        "silent_order": false,
+        "silent_fields": [],
+        "field_mismatches": [],
+        "llm_calls": 0,
+        "llm_timeouts": 0,
+        "llm_failed": false,
+        "extraction_time_ms": 3,
+        "overall_confidence": 0.7,
+        "decision": {
+          "score": 0.98,
+          "route": "AUTO_POST",
+          "reasons": []
+        }
+      },
+      {
+        "order_id": "a3f01208-5699-5408-9426-5b89addb24cb",
+        "stem": "order_025_MBM01024",
+        "document_path": "synthetic/documents/eml/order_025_MBM01024.eml",
+        "format": "EML",
+        "route": "AUTO_POST",
+        "hard_case": true,
+        "hard_case_types": [
+          "MISSING_DATE"
+        ],
+        "header_accuracy": 1.0,
+        "lines_expected": 15,
+        "lines_matched": 15,
+        "lines_extracted": 15,
+        "extra_lines": 0,
+        "missing_lines": 0,
+        "silent_order": false,
+        "silent_fields": [],
+        "field_mismatches": [],
+        "llm_calls": 0,
+        "llm_timeouts": 0,
+        "llm_failed": false,
+        "extraction_time_ms": 7,
+        "overall_confidence": 0.7,
+        "decision": {
+          "score": 0.98,
+          "route": "AUTO_POST",
+          "reasons": []
+        }
+      },
+      {
+        "order_id": "13c628cc-8969-563e-a919-55af64f2229e",
+        "stem": "order_027_NMC-01026",
+        "document_path": "synthetic/documents/xlsx/order_027_NMC-01026.xlsx",
+        "format": "XLSX",
+        "route": "AUTO_POST",
+        "hard_case": true,
+        "hard_case_types": [
+          "TOTAL_MIXED"
+        ],
+        "header_accuracy": 1.0,
+        "lines_expected": 5,
+        "lines_matched": 5,
+        "lines_extracted": 5,
+        "extra_lines": 0,
+        "missing_lines": 0,
+        "silent_order": false,
+        "silent_fields": [],
+        "field_mismatches": [],
+        "llm_calls": 0,
+        "llm_timeouts": 0,
+        "llm_failed": false,
+        "extraction_time_ms": 2,
+        "overall_confidence": 0.97,
+        "decision": {
+          "score": 0.98,
+          "route": "AUTO_POST",
+          "reasons": []
+        }
+      },
+      {
+        "order_id": "e5b2065c-fd05-5ccb-9b91-1c1d1d50d38f",
+        "stem": "order_039_TIT-PO-01038",
+        "document_path": "synthetic/documents/xlsx/order_039_TIT-PO-01038.xlsx",
+        "format": "XLSX",
+        "route": "AUTO_POST",
+        "hard_case": true,
+        "hard_case_types": [
+          "AMBIGUOUS_DESC"
+        ],
+        "header_accuracy": 1.0,
+        "lines_expected": 4,
+        "lines_matched": 3,
+        "lines_extracted": 4,
+        "extra_lines": 0,
+        "missing_lines": 0,
+        "silent_order": false,
+        "silent_fields": [],
+        "field_mismatches": [],
+        "llm_calls": 0,
+        "llm_timeouts": 0,
+        "llm_failed": false,
+        "extraction_time_ms": 1,
+        "overall_confidence": 0.7,
+        "decision": {
+          "score": 0.98,
+          "route": "AUTO_POST",
+          "reasons": []
+        }
+      },
+      {
+        "order_id": "b88bea77-2f7d-5fa1-a4c3-c1356cb3aece",
+        "stem": "order_044_SW-01043",
+        "document_path": "synthetic/documents/eml/order_044_SW-01043.eml",
+        "format": "EML",
+        "route": "REVIEW",
+        "hard_case": true,
+        "hard_case_types": [
+          "EMAIL_CONTRADICTORY"
+        ],
+        "header_accuracy": 1.0,
+        "lines_expected": 12,
+        "lines_matched": 12,
+        "lines_extracted": 12,
+        "extra_lines": 0,
+        "missing_lines": 0,
+        "silent_order": false,
+        "silent_fields": [],
+        "field_mismatches": [],
+        "llm_calls": 0,
+        "llm_timeouts": 0,
+        "llm_failed": false,
+        "extraction_time_ms": 6,
+        "overall_confidence": 0.39,
+        "decision": {
+          "score": 0.39,
+          "route": "REVIEW",
+          "reasons": [
+            "EXT-01"
+          ]
+        }
+      },
+      {
+        "order_id": "367884f8-ad66-54cd-a4a3-404fca64507e",
+        "stem": "order_058_MBM01057",
+        "document_path": "synthetic/documents/eml/order_058_MBM01057.eml",
+        "format": "EML",
+        "route": "REVIEW",
+        "hard_case": true,
+        "hard_case_types": [
+          "PRICE_OUT_OF_TOLERANCE"
+        ],
+        "header_accuracy": 1.0,
+        "lines_expected": 13,
+        "lines_matched": 13,
+        "lines_extracted": 13,
+        "extra_lines": 0,
+        "missing_lines": 0,
+        "silent_order": false,
+        "silent_fields": [],
+        "field_mismatches": [],
+        "llm_calls": 0,
+        "llm_timeouts": 0,
+        "llm_failed": false,
+        "extraction_time_ms": 4,
+        "overall_confidence": 0.39,
+        "decision": {
+          "score": 0.98,
+          "route": "REVIEW",
+          "reasons": [
+            "PRC-01"
+          ]
+        }
+      },
+      {
+        "order_id": "00c240fa-94ad-580e-808e-d7455b32212e",
+        "stem": "order_059_4500001058",
+        "document_path": "synthetic/documents/xlsx/order_059_4500001058.xlsx",
+        "format": "XLSX",
+        "route": "AUTO_POST",
+        "hard_case": true,
+        "hard_case_types": [
+          "AMBIGUOUS_DESC"
+        ],
+        "header_accuracy": 1.0,
+        "lines_expected": 3,
+        "lines_matched": 2,
+        "lines_extracted": 3,
+        "extra_lines": 0,
+        "missing_lines": 0,
+        "silent_order": false,
+        "silent_fields": [],
+        "field_mismatches": [],
+        "llm_calls": 0,
+        "llm_timeouts": 0,
+        "llm_failed": false,
+        "extraction_time_ms": 1,
+        "overall_confidence": 0.97,
+        "decision": {
+          "score": 0.98,
+          "route": "AUTO_POST",
+          "reasons": []
+        }
+      },
+      {
+        "order_id": "9c75d2a9-a50a-5f07-8ea9-e504613a285b",
+        "stem": "order_073_TIT-PO-01072",
+        "document_path": "synthetic/documents/xlsx/order_073_TIT-PO-01072.xlsx",
+        "format": "XLSX",
+        "route": "AUTO_POST",
+        "hard_case": true,
+        "hard_case_types": [
+          "TOTAL_MIXED"
+        ],
+        "header_accuracy": 1.0,
+        "lines_expected": 2,
+        "lines_matched": 2,
+        "lines_extracted": 2,
+        "extra_lines": 0,
+        "missing_lines": 0,
+        "silent_order": false,
+        "silent_fields": [],
+        "field_mismatches": [],
+        "llm_calls": 0,
+        "llm_timeouts": 0,
+        "llm_failed": false,
+        "extraction_time_ms": 1,
+        "overall_confidence": 0.7,
+        "decision": {
+          "score": 0.98,
+          "route": "AUTO_POST",
+          "reasons": []
+        }
+      },
+      {
+        "order_id": "ed19ba0b-b800-59ad-87d9-138f941869d6",
+        "stem": "order_126_MBM01125",
+        "document_path": "synthetic/documents/eml/order_126_MBM01125.eml",
+        "format": "EML",
+        "route": "REVIEW",
+        "hard_case": true,
+        "hard_case_types": [
+          "UOM_CONVERSION"
+        ],
+        "header_accuracy": 0.5,
+        "lines_expected": 10,
+        "lines_matched": 0,
+        "lines_extracted": 0,
+        "extra_lines": 0,
+        "missing_lines": 10,
+        "silent_order": false,
+        "silent_fields": [],
+        "field_mismatches": [
+          {
+            "path": "/header/po_date",
+            "expected": "4/7/26",
+            "extracted": "1970-01-01"
+          },
+          {
+            "path": "/header/requested_delivery_date",
+            "expected": "2026-04-12",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/0",
+            "expected": "APEX-JAN-6771",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/1",
+            "expected": "TLS-AWR-10IN",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/2",
+            "expected": "ABR-COW-4IN-3",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/3",
+            "expected": "APEX-TOO-8689",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/4",
+            "expected": "ADH-CON-246",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/5",
+            "expected": "JAN-TTI-238",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/6",
+            "expected": "APEX-ELE-0574",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/7",
+            "expected": "JAN-DSP-186",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/8",
+            "expected": "ADH-CON-126",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/9",
+            "expected": "APEX-JAN-7569",
+            "extracted": null
+          }
+        ],
+        "llm_calls": 0,
+        "llm_timeouts": 0,
+        "llm_failed": false,
+        "extraction_time_ms": 0,
+        "overall_confidence": 0.0,
+        "decision": {
+          "score": 0.98,
+          "route": "REVIEW",
+          "reasons": [
+            "HDR-02"
+          ]
+        }
+      },
+      {
+        "order_id": "66cfcb93-66c1-548a-83de-445c35daf23c",
+        "stem": "order_026_NMC-01025",
+        "document_path": "synthetic/documents/xlsx/order_026_NMC-01025.xlsx",
+        "format": "XLSX",
+        "route": "AUTO_POST",
+        "hard_case": false,
+        "hard_case_types": [],
+        "header_accuracy": 1.0,
+        "lines_expected": 7,
+        "lines_matched": 7,
+        "lines_extracted": 7,
+        "extra_lines": 0,
+        "missing_lines": 0,
+        "silent_order": false,
+        "silent_fields": [],
+        "field_mismatches": [],
+        "llm_calls": 0,
+        "llm_timeouts": 0,
+        "llm_failed": false,
+        "extraction_time_ms": 2,
+        "overall_confidence": 0.97,
+        "decision": {
+          "score": 0.98,
+          "route": "AUTO_POST",
+          "reasons": []
+        }
+      },
+      {
+        "order_id": "4228eb1f-5342-5d24-a47c-4bb3fac40121",
+        "stem": "order_006_BW-01005",
+        "document_path": "synthetic/documents/eml/order_006_BW-01005.eml",
+        "format": "EML",
+        "route": "REVIEW",
+        "hard_case": false,
+        "hard_case_types": [],
+        "header_accuracy": 0.5,
+        "lines_expected": 13,
+        "lines_matched": 0,
+        "lines_extracted": 0,
+        "extra_lines": 0,
+        "missing_lines": 13,
+        "silent_order": false,
+        "silent_fields": [],
+        "field_mismatches": [
+          {
+            "path": "/header/po_date",
+            "expected": "02/05/2026",
+            "extracted": "1970-01-01"
+          },
+          {
+            "path": "/header/requested_delivery_date",
+            "expected": "2026-02-21",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/0",
+            "expected": "ADH-SGG-011",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/1",
+            "expected": "PKG-BBW-205",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/2",
+            "expected": "JAN-FST-281",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/3",
+            "expected": "FST-HNT-34-10-1",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/4",
+            "expected": "ABR-COW-6IN-3",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/5",
+            "expected": "JAN-LNR-3858-12-BL",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/6",
+            "expected": "PKG-BBW-005",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/7",
+            "expected": "ADH-SGG-132",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/8",
+            "expected": "JAN-NFC-251",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/9",
+            "expected": "ABR-COW-4IN-2",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/10",
+            "expected": "PKG-BBW-017",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/11",
+            "expected": "PPE-GLS-SMO-ANTI-FOG-1",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/12",
+            "expected": "PPE-GLV-LAT-5-XXL-BLU",
+            "extracted": null
+          }
+        ],
+        "llm_calls": 0,
+        "llm_timeouts": 0,
+        "llm_failed": false,
+        "extraction_time_ms": 0,
+        "overall_confidence": 0.0,
+        "decision": {
+          "score": 0.98,
+          "route": "REVIEW",
+          "reasons": [
+            "HDR-02"
+          ]
+        }
+      },
+      {
+        "order_id": "36137ae4-4c2f-5c8c-904b-9d0f48fed6b7",
+        "stem": "order_065_TIT-PO-01064",
+        "document_path": "synthetic/documents/xlsx/order_065_TIT-PO-01064.xlsx",
+        "format": "XLSX",
+        "route": "AUTO_POST",
+        "hard_case": false,
+        "hard_case_types": [],
+        "header_accuracy": 1.0,
+        "lines_expected": 6,
+        "lines_matched": 6,
+        "lines_extracted": 6,
+        "extra_lines": 0,
+        "missing_lines": 0,
+        "silent_order": false,
+        "silent_fields": [],
+        "field_mismatches": [],
+        "llm_calls": 0,
+        "llm_timeouts": 0,
+        "llm_failed": false,
+        "extraction_time_ms": 1,
+        "overall_confidence": 0.7,
+        "decision": {
+          "score": 0.98,
+          "route": "AUTO_POST",
+          "reasons": []
+        }
+      },
+      {
+        "order_id": "c4e108ec-747f-5938-9e54-929c11983164",
+        "stem": "order_057_4500001056",
+        "document_path": "synthetic/documents/xlsx/order_057_4500001056.xlsx",
+        "format": "XLSX",
+        "route": "AUTO_POST",
+        "hard_case": false,
+        "hard_case_types": [],
+        "header_accuracy": 1.0,
+        "lines_expected": 3,
+        "lines_matched": 3,
+        "lines_extracted": 3,
+        "extra_lines": 0,
+        "missing_lines": 0,
+        "silent_order": false,
+        "silent_fields": [],
+        "field_mismatches": [],
+        "llm_calls": 0,
+        "llm_timeouts": 0,
+        "llm_failed": false,
+        "extraction_time_ms": 1,
+        "overall_confidence": 0.97,
+        "decision": {
+          "score": 0.98,
+          "route": "AUTO_POST",
+          "reasons": []
+        }
+      },
+      {
+        "order_id": "8d4bc1f1-3510-5697-965c-4195c06c8519",
+        "stem": "order_051_QS-01050",
+        "document_path": "synthetic/documents/eml/order_051_QS-01050.eml",
+        "format": "EML",
+        "route": "REVIEW",
+        "hard_case": false,
+        "hard_case_types": [],
+        "header_accuracy": 0.5,
+        "lines_expected": 19,
+        "lines_matched": 0,
+        "lines_extracted": 0,
+        "extra_lines": 0,
+        "missing_lines": 19,
+        "silent_order": false,
+        "silent_fields": [],
+        "field_mismatches": [
+          {
+            "path": "/header/po_date",
+            "expected": "Jun 04, 2026",
+            "extracted": "1970-01-01"
+          },
+          {
+            "path": "/header/requested_delivery_date",
+            "expected": "2026-06-16",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/0",
+            "expected": "ADH-EPX-000",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/1",
+            "expected": "PKG-BBW-205",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/2",
+            "expected": "GLOBAL-ABR-1892",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/3",
+            "expected": "ADH-EPX-231",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/4",
+            "expected": "PKG-STW-138",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/5",
+            "expected": "JAN-LNR-4347-10-BL",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/6",
+            "expected": "PKG-BBW-284",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/7",
+            "expected": "GLOBAL-LUB-1915",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/8",
+            "expected": "FST-SHC-34-10-1",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/9",
+            "expected": "JAN-TTI-223",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/10",
+            "expected": "GLOBAL-FAS-5007",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/11",
+            "expected": "GLOBAL-JAN-4589",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/12",
+            "expected": "GLOBAL-ELE-1578",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/13",
+            "expected": "GLOBAL-FAS-6768",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/14",
+            "expected": "JAN-TTI-114",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/15",
+            "expected": "JAN-FPD-17-BLA",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/16",
+            "expected": "GLOBAL-ADH-1024",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/17",
+            "expected": "PKG-STW-291",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/18",
+            "expected": "JAN-HSG-118",
+            "extracted": null
+          }
+        ],
+        "llm_calls": 0,
+        "llm_timeouts": 0,
+        "llm_failed": false,
+        "extraction_time_ms": 1,
+        "overall_confidence": 0.0,
+        "decision": {
+          "score": 0.98,
+          "route": "REVIEW",
+          "reasons": [
+            "HDR-02"
+          ]
+        }
+      },
+      {
+        "order_id": "d7ea2846-ecb0-5b2f-8e72-6795119cbf59",
+        "stem": "order_030_SW-01029",
+        "document_path": "synthetic/documents/eml/order_030_SW-01029.eml",
+        "format": "EML",
+        "route": "AUTO_POST",
+        "hard_case": false,
+        "hard_case_types": [],
+        "header_accuracy": 1.0,
+        "lines_expected": 12,
+        "lines_matched": 12,
+        "lines_extracted": 12,
+        "extra_lines": 0,
+        "missing_lines": 0,
+        "silent_order": false,
+        "silent_fields": [],
+        "field_mismatches": [],
+        "llm_calls": 0,
+        "llm_timeouts": 0,
+        "llm_failed": false,
+        "extraction_time_ms": 5,
+        "overall_confidence": 0.7,
+        "decision": {
+          "score": 0.98,
+          "route": "AUTO_POST",
+          "reasons": []
+        }
+      },
+      {
+        "order_id": "fd894e54-ff28-5627-9cd3-5a6737ae12a3",
+        "stem": "order_024_MBM01023",
+        "document_path": "synthetic/documents/eml/order_024_MBM01023.eml",
+        "format": "EML",
+        "route": "REVIEW",
+        "hard_case": false,
+        "hard_case_types": [],
+        "header_accuracy": 0.5,
+        "lines_expected": 17,
+        "lines_matched": 0,
+        "lines_extracted": 0,
+        "extra_lines": 0,
+        "missing_lines": 17,
+        "silent_order": false,
+        "silent_fields": [],
+        "field_mismatches": [
+          {
+            "path": "/header/po_date",
+            "expected": "4/1/26",
+            "extracted": "1970-01-01"
+          },
+          {
+            "path": "/header/requested_delivery_date",
+            "expected": "2026-04-16",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/0",
+            "expected": "PKG-PTC-202",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/1",
+            "expected": "APEX-ABR-4495",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/2",
+            "expected": "JAN-GCL-273",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/3",
+            "expected": "JAN-FTI-167",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/4",
+            "expected": "APEX-ADH-1197",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/5",
+            "expected": "ABR-FLD-412IN-1",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/6",
+            "expected": "APEX-JAN-9828",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/7",
+            "expected": "APEX-FAS-9421",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/8",
+            "expected": "LUB-POS-059",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/9",
+            "expected": "FST-LWS-38-16",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/10",
+            "expected": "APEX-TOO-3187",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/11",
+            "expected": "APEX-JAN-2522",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/12",
+            "expected": "PKG-PTC-187",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/13",
+            "expected": "FST-LWS-M6-1",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/14",
+            "expected": "PPE-EAR-101",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/15",
+            "expected": "APEX-JAN-5741",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/16",
+            "expected": "JAN-FPD-17-BLA",
+            "extracted": null
+          }
+        ],
+        "llm_calls": 0,
+        "llm_timeouts": 0,
+        "llm_failed": false,
+        "extraction_time_ms": 1,
+        "overall_confidence": 0.0,
+        "decision": {
+          "score": 0.98,
+          "route": "REVIEW",
+          "reasons": [
+            "HDR-02"
+          ]
+        }
+      },
+      {
+        "order_id": "f2cd6d00-25a3-5760-a12f-4eabf0d425d7",
+        "stem": "order_137_4500001136",
+        "document_path": "synthetic/documents/xlsx/order_137_4500001136.xlsx",
+        "format": "XLSX",
+        "route": "AUTO_POST",
+        "hard_case": false,
+        "hard_case_types": [],
+        "header_accuracy": 1.0,
+        "lines_expected": 3,
+        "lines_matched": 3,
+        "lines_extracted": 3,
+        "extra_lines": 0,
+        "missing_lines": 0,
+        "silent_order": false,
+        "silent_fields": [],
+        "field_mismatches": [],
+        "llm_calls": 0,
+        "llm_timeouts": 0,
+        "llm_failed": false,
+        "extraction_time_ms": 1,
+        "overall_confidence": 0.97,
+        "decision": {
+          "score": 0.98,
+          "route": "AUTO_POST",
+          "reasons": []
+        }
+      },
+      {
+        "order_id": "4254de51-00ae-55c8-90b1-a8399b97d7bb",
+        "stem": "order_022_4500001021",
+        "document_path": "synthetic/documents/xlsx/order_022_4500001021.xlsx",
+        "format": "XLSX",
+        "route": "AUTO_POST",
+        "hard_case": false,
+        "hard_case_types": [],
+        "header_accuracy": 1.0,
+        "lines_expected": 5,
+        "lines_matched": 5,
+        "lines_extracted": 5,
+        "extra_lines": 0,
+        "missing_lines": 0,
+        "silent_order": false,
+        "silent_fields": [],
+        "field_mismatches": [],
+        "llm_calls": 0,
+        "llm_timeouts": 0,
+        "llm_failed": false,
+        "extraction_time_ms": 1,
+        "overall_confidence": 0.97,
+        "decision": {
+          "score": 0.98,
+          "route": "AUTO_POST",
+          "reasons": []
+        }
+      },
+      {
+        "order_id": "e5c5af27-0f26-539b-bc5f-1a1ee5dcd99e",
+        "stem": "order_092_NMC-01091",
+        "document_path": "synthetic/documents/xlsx/order_092_NMC-01091.xlsx",
+        "format": "XLSX",
+        "route": "AUTO_POST",
+        "hard_case": false,
+        "hard_case_types": [],
+        "header_accuracy": 1.0,
+        "lines_expected": 6,
+        "lines_matched": 6,
+        "lines_extracted": 6,
+        "extra_lines": 0,
+        "missing_lines": 0,
+        "silent_order": false,
+        "silent_fields": [],
+        "field_mismatches": [],
+        "llm_calls": 0,
+        "llm_timeouts": 0,
+        "llm_failed": false,
+        "extraction_time_ms": 2,
+        "overall_confidence": 0.97,
+        "decision": {
+          "score": 0.98,
+          "route": "AUTO_POST",
+          "reasons": []
+        }
+      },
+      {
+        "order_id": "42b2b9fb-69fe-5e9e-978a-2d6bfa920318",
+        "stem": "order_007_MBM01006",
+        "document_path": "synthetic/documents/eml/order_007_MBM01006.eml",
+        "format": "EML",
+        "route": "REVIEW",
+        "hard_case": false,
+        "hard_case_types": [],
+        "header_accuracy": 0.75,
+        "lines_expected": 14,
+        "lines_matched": 0,
+        "lines_extracted": 0,
+        "extra_lines": 0,
+        "missing_lines": 14,
+        "silent_order": false,
+        "silent_fields": [],
+        "field_mismatches": [
+          {
+            "path": "/header/po_date",
+            "expected": "4/6/26",
+            "extracted": "1970-01-01"
+          },
+          {
+            "path": "/lines/missing/0",
+            "expected": "ABR-COW-6IN",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/1",
+            "expected": "PPE-N95-078",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/2",
+            "expected": "APEX-ABR-1329",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/3",
+            "expected": "APEX-TOO-5714",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/4",
+            "expected": "APEX-ADH-6353",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/5",
+            "expected": "APEX-TOO-4187",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/6",
+            "expected": "APEX-TOO-7746",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/7",
+            "expected": "APEX-JAN-5975",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/8",
+            "expected": "APEX-LUB-9429",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/9",
+            "expected": "APEX-JAN-6442",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/10",
+            "expected": "APEX-TOO-7596",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/11",
+            "expected": "APEX-JAN-4508",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/12",
+            "expected": "APEX-JAN-0245",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/13",
+            "expected": "APEX-JAN-2267",
+            "extracted": null
+          }
+        ],
+        "llm_calls": 0,
+        "llm_timeouts": 0,
+        "llm_failed": false,
+        "extraction_time_ms": 0,
+        "overall_confidence": 0.0,
+        "decision": {
+          "score": 0.98,
+          "route": "REVIEW",
+          "reasons": [
+            "HDR-02",
+            "HDR-04"
+          ]
+        }
+      },
+      {
+        "order_id": "73257489-f084-515e-ae6a-91ff7084e7d9",
+        "stem": "order_149_TIT-PO-01148",
+        "document_path": "synthetic/documents/xlsx/order_149_TIT-PO-01148.xlsx",
+        "format": "XLSX",
+        "route": "AUTO_POST",
+        "hard_case": false,
+        "hard_case_types": [],
+        "header_accuracy": 1.0,
+        "lines_expected": 3,
+        "lines_matched": 3,
+        "lines_extracted": 3,
+        "extra_lines": 0,
+        "missing_lines": 0,
+        "silent_order": false,
+        "silent_fields": [],
+        "field_mismatches": [],
+        "llm_calls": 0,
+        "llm_timeouts": 0,
+        "llm_failed": false,
+        "extraction_time_ms": 1,
+        "overall_confidence": 0.7,
+        "decision": {
+          "score": 0.98,
+          "route": "AUTO_POST",
+          "reasons": []
+        }
+      },
+      {
+        "order_id": "91514156-c518-52b2-ba1e-5bfd1cd02a18",
+        "stem": "order_140_QS-01139",
+        "document_path": "synthetic/documents/xlsx/order_140_QS-01139.xlsx",
+        "format": "XLSX",
+        "route": "AUTO_POST",
+        "hard_case": false,
+        "hard_case_types": [],
+        "header_accuracy": 1.0,
+        "lines_expected": 23,
+        "lines_matched": 23,
+        "lines_extracted": 23,
+        "extra_lines": 0,
+        "missing_lines": 0,
+        "silent_order": false,
+        "silent_fields": [],
+        "field_mismatches": [],
+        "llm_calls": 0,
+        "llm_timeouts": 0,
+        "llm_failed": false,
+        "extraction_time_ms": 8,
+        "overall_confidence": 0.7,
+        "decision": {
+          "score": 0.98,
+          "route": "AUTO_POST",
+          "reasons": []
+        }
+      },
+      {
+        "order_id": "ce4403cf-1a7c-52d6-bd36-b51a66c2df74",
+        "stem": "order_049_SW-01048",
+        "document_path": "synthetic/documents/eml/order_049_SW-01048.eml",
+        "format": "EML",
+        "route": "REVIEW",
+        "hard_case": false,
+        "hard_case_types": [],
+        "header_accuracy": 0.5,
+        "lines_expected": 8,
+        "lines_matched": 0,
+        "lines_extracted": 0,
+        "extra_lines": 0,
+        "missing_lines": 8,
+        "silent_order": false,
+        "silent_fields": [],
+        "field_mismatches": [
+          {
+            "path": "/header/po_date",
+            "expected": "05-30-2026",
+            "extracted": "1970-01-01"
+          },
+          {
+            "path": "/header/requested_delivery_date",
+            "expected": "2026-06-08",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/0",
+            "expected": "NOVA-FAS-7702",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/1",
+            "expected": "NOVA-FAS-5512",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/2",
+            "expected": "NOVA-JAN-0113",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/3",
+            "expected": "JAN-DGR-224",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/4",
+            "expected": "PKG-BBW-284",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/5",
+            "expected": "NOVA-TOO-3469",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/6",
+            "expected": "NOVA-JAN-3387",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/7",
+            "expected": "FST-HCS-38-16-4",
+            "extracted": null
+          }
+        ],
+        "llm_calls": 0,
+        "llm_timeouts": 0,
+        "llm_failed": false,
+        "extraction_time_ms": 0,
+        "overall_confidence": 0.0,
+        "decision": {
+          "score": 0.98,
+          "route": "REVIEW",
+          "reasons": [
+            "HDR-02"
+          ]
+        }
+      },
+      {
+        "order_id": "55f0fd82-3409-50d8-af94-9e0c261bc2e5",
+        "stem": "order_053_4500001052",
+        "document_path": "synthetic/documents/xlsx/order_053_4500001052.xlsx",
+        "format": "XLSX",
+        "route": "AUTO_POST",
+        "hard_case": false,
+        "hard_case_types": [],
+        "header_accuracy": 1.0,
+        "lines_expected": 7,
+        "lines_matched": 7,
+        "lines_extracted": 7,
+        "extra_lines": 0,
+        "missing_lines": 0,
+        "silent_order": false,
+        "silent_fields": [],
+        "field_mismatches": [],
+        "llm_calls": 0,
+        "llm_timeouts": 0,
+        "llm_failed": false,
+        "extraction_time_ms": 2,
+        "overall_confidence": 0.97,
+        "decision": {
+          "score": 0.98,
+          "route": "AUTO_POST",
+          "reasons": []
+        }
+      },
+      {
+        "order_id": "71c6197d-e6d4-5cbc-956b-5d4bb5d42c7f",
+        "stem": "order_117_NMC-01116",
+        "document_path": "synthetic/documents/xlsx/order_117_NMC-01116.xlsx",
+        "format": "XLSX",
+        "route": "AUTO_POST",
+        "hard_case": false,
+        "hard_case_types": [],
+        "header_accuracy": 1.0,
+        "lines_expected": 5,
+        "lines_matched": 5,
+        "lines_extracted": 5,
+        "extra_lines": 0,
+        "missing_lines": 0,
+        "silent_order": false,
+        "silent_fields": [],
+        "field_mismatches": [],
+        "llm_calls": 0,
+        "llm_timeouts": 0,
+        "llm_failed": false,
+        "extraction_time_ms": 2,
+        "overall_confidence": 0.97,
+        "decision": {
+          "score": 0.98,
+          "route": "AUTO_POST",
+          "reasons": []
+        }
+      },
+      {
+        "order_id": "1225ddb0-2303-5da1-9e9d-07a1aa81b651",
+        "stem": "order_141_QS-01140",
+        "document_path": "synthetic/documents/eml/order_141_QS-01140.eml",
+        "format": "EML",
+        "route": "REVIEW",
+        "hard_case": false,
+        "hard_case_types": [],
+        "header_accuracy": 0.5,
+        "lines_expected": 19,
+        "lines_matched": 0,
+        "lines_extracted": 0,
+        "extra_lines": 0,
+        "missing_lines": 19,
+        "silent_order": false,
+        "silent_fields": [],
+        "field_mismatches": [
+          {
+            "path": "/header/po_date",
+            "expected": "Feb 13, 2026",
+            "extracted": "1970-01-01"
+          },
+          {
+            "path": "/header/requested_delivery_date",
+            "expected": "2026-02-20",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/0",
+            "expected": "GLOBAL-SAF-6125",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/1",
+            "expected": "PPE-GLS-SMO-ANTI-FOG",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/2",
+            "expected": "TLS-UTK-122",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/3",
+            "expected": "JAN-NFC-287",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/4",
+            "expected": "JAN-HSG-145",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/5",
+            "expected": "GLOBAL-FAS-7886",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/6",
+            "expected": "LUB-MOL-031",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/7",
+            "expected": "GLOBAL-JAN-8543",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/8",
+            "expected": "JAN-HSG-207",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/9",
+            "expected": "ABR-COW-6IN-5",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/10",
+            "expected": "ELE-TPE-BLU",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/11",
+            "expected": "GLOBAL-ABR-7897",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/12",
+            "expected": "PKG-STW-002",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/13",
+            "expected": "PKG-STW-123",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/14",
+            "expected": "ABR-FLD-412IN-1",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/15",
+            "expected": "GLOBAL-ADH-9673",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/16",
+            "expected": "GLOBAL-ABR-5213",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/17",
+            "expected": "PPE-HAT-WHI",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/18",
+            "expected": "FST-HNT-34-10-1",
+            "extracted": null
+          }
+        ],
+        "llm_calls": 0,
+        "llm_timeouts": 0,
+        "llm_failed": false,
+        "extraction_time_ms": 1,
+        "overall_confidence": 0.0,
+        "decision": {
+          "score": 0.98,
+          "route": "REVIEW",
+          "reasons": [
+            "HDR-02"
+          ]
+        }
+      },
+      {
+        "order_id": "9a567281-f726-5a1c-8e65-fa2fa555075a",
+        "stem": "order_045_NMC-01044",
+        "document_path": "synthetic/documents/xlsx/order_045_NMC-01044.xlsx",
+        "format": "XLSX",
+        "route": "AUTO_POST",
+        "hard_case": false,
+        "hard_case_types": [],
+        "header_accuracy": 1.0,
+        "lines_expected": 4,
+        "lines_matched": 4,
+        "lines_extracted": 4,
+        "extra_lines": 0,
+        "missing_lines": 0,
+        "silent_order": false,
+        "silent_fields": [],
+        "field_mismatches": [],
+        "llm_calls": 0,
+        "llm_timeouts": 0,
+        "llm_failed": false,
+        "extraction_time_ms": 1,
+        "overall_confidence": 0.97,
+        "decision": {
+          "score": 0.98,
+          "route": "AUTO_POST",
+          "reasons": []
+        }
+      },
+      {
+        "order_id": "5a29a887-6def-5e8f-8635-23cb589a8986",
+        "stem": "order_077_SW-01076",
+        "document_path": "synthetic/documents/xlsx/order_077_SW-01076.xlsx",
+        "format": "XLSX",
+        "route": "AUTO_POST",
+        "hard_case": false,
+        "hard_case_types": [],
+        "header_accuracy": 1.0,
+        "lines_expected": 8,
+        "lines_matched": 8,
+        "lines_extracted": 8,
+        "extra_lines": 0,
+        "missing_lines": 0,
+        "silent_order": false,
+        "silent_fields": [],
+        "field_mismatches": [],
+        "llm_calls": 0,
+        "llm_timeouts": 0,
+        "llm_failed": false,
+        "extraction_time_ms": 3,
+        "overall_confidence": 0.7,
+        "decision": {
+          "score": 0.98,
+          "route": "AUTO_POST",
+          "reasons": []
+        }
+      },
+      {
+        "order_id": "61872868-05c8-57c0-b67c-6dc9c8106e34",
+        "stem": "order_072_QS-01071",
+        "document_path": "synthetic/documents/eml/order_072_QS-01071.eml",
+        "format": "EML",
+        "route": "REVIEW",
+        "hard_case": false,
+        "hard_case_types": [],
+        "header_accuracy": 0.75,
+        "lines_expected": 13,
+        "lines_matched": 0,
+        "lines_extracted": 0,
+        "extra_lines": 0,
+        "missing_lines": 13,
+        "silent_order": false,
+        "silent_fields": [],
+        "field_mismatches": [
+          {
+            "path": "/header/po_date",
+            "expected": "Apr 04, 2026",
+            "extracted": "1970-01-01"
+          },
+          {
+            "path": "/lines/missing/0",
+            "expected": "PPE-GLS-AMB-ANTI-FOG-2",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/1",
+            "expected": "FST-FWS-M10",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/2",
+            "expected": "ABR-FLD-4IN-2",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/3",
+            "expected": "GLOBAL-PAC-0791",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/4",
+            "expected": "JAN-TTI-238",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/5",
+            "expected": "GLOBAL-JAN-6793",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/6",
+            "expected": "JAN-DSP-153",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/7",
+            "expected": "FST-HCS-M10-4",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/8",
+            "expected": "ABR-FLD-412IN-1",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/9",
+            "expected": "GLOBAL-TOO-9073",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/10",
+            "expected": "GLOBAL-FAS-6888",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/11",
+            "expected": "GLOBAL-JAN-3847",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/12",
+            "expected": "GLOBAL-SAF-1744",
+            "extracted": null
+          }
+        ],
+        "llm_calls": 0,
+        "llm_timeouts": 0,
+        "llm_failed": false,
+        "extraction_time_ms": 0,
+        "overall_confidence": 0.0,
+        "decision": {
+          "score": 0.98,
+          "route": "REVIEW",
+          "reasons": [
+            "HDR-02",
+            "HDR-04"
+          ]
+        }
+      },
+      {
+        "order_id": "4e476706-a621-50ec-b796-3be06131b447",
+        "stem": "order_076_MBM01075",
+        "document_path": "synthetic/documents/eml/order_076_MBM01075.eml",
+        "format": "EML",
+        "route": "REVIEW",
+        "hard_case": false,
+        "hard_case_types": [],
+        "header_accuracy": 0.5,
+        "lines_expected": 20,
+        "lines_matched": 0,
+        "lines_extracted": 0,
+        "extra_lines": 0,
+        "missing_lines": 20,
+        "silent_order": false,
+        "silent_fields": [],
+        "field_mismatches": [
+          {
+            "path": "/header/po_date",
+            "expected": "7/5/26",
+            "extracted": "1970-01-01"
+          },
+          {
+            "path": "/header/requested_delivery_date",
+            "expected": "2026-07-25",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/0",
+            "expected": "APEX-TOO-4985",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/1",
+            "expected": "APEX-FAS-2695",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/2",
+            "expected": "APEX-FAS-2350",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/3",
+            "expected": "APEX-JAN-1998",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/4",
+            "expected": "JAN-FST-166",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/5",
+            "expected": "JAN-FFN-194",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/6",
+            "expected": "APEX-LUB-6838",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/7",
+            "expected": "APEX-JAN-4427",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/8",
+            "expected": "PKG-PTC-093",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/9",
+            "expected": "JAN-TTI-114",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/10",
+            "expected": "FST-HCS-M10-112",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/11",
+            "expected": "LUB-MOL-031",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/12",
+            "expected": "APEX-ADH-2551",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/13",
+            "expected": "APEX-LUB-2893",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/14",
+            "expected": "APEX-TOO-4187",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/15",
+            "expected": "JAN-NFC-053",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/16",
+            "expected": "JAN-LNR-3339-15-CL",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/17",
+            "expected": "APEX-JAN-9472",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/18",
+            "expected": "APEX-SAF-7975",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/19",
+            "expected": "PKG-PTC-066",
+            "extracted": null
+          }
+        ],
+        "llm_calls": 0,
+        "llm_timeouts": 0,
+        "llm_failed": false,
+        "extraction_time_ms": 1,
+        "overall_confidence": 0.0,
+        "decision": {
+          "score": 0.98,
+          "route": "REVIEW",
+          "reasons": [
+            "HDR-02"
+          ]
+        }
+      },
+      {
+        "order_id": "6530d57f-c9a6-5d49-9bfe-4b28226919a5",
+        "stem": "order_064_SW-01063",
+        "document_path": "synthetic/documents/eml/order_064_SW-01063.eml",
+        "format": "EML",
+        "route": "AUTO_POST",
+        "hard_case": false,
+        "hard_case_types": [],
+        "header_accuracy": 1.0,
+        "lines_expected": 5,
+        "lines_matched": 5,
+        "lines_extracted": 5,
+        "extra_lines": 0,
+        "missing_lines": 0,
+        "silent_order": false,
+        "silent_fields": [],
+        "field_mismatches": [],
+        "llm_calls": 0,
+        "llm_timeouts": 0,
+        "llm_failed": false,
+        "extraction_time_ms": 2,
+        "overall_confidence": 0.7,
+        "decision": {
+          "score": 0.98,
+          "route": "AUTO_POST",
+          "reasons": []
+        }
+      },
+      {
+        "order_id": "275e9991-e4fc-52e7-a792-02bbe211d67a",
+        "stem": "order_046_MBM01045",
+        "document_path": "synthetic/documents/eml/order_046_MBM01045.eml",
+        "format": "EML",
+        "route": "REVIEW",
+        "hard_case": false,
+        "hard_case_types": [],
+        "header_accuracy": 0.5,
+        "lines_expected": 10,
+        "lines_matched": 0,
+        "lines_extracted": 0,
+        "extra_lines": 0,
+        "missing_lines": 10,
+        "silent_order": false,
+        "silent_fields": [],
+        "field_mismatches": [
+          {
+            "path": "/header/po_date",
+            "expected": "4/5/26",
+            "extracted": "1970-01-01"
+          },
+          {
+            "path": "/header/requested_delivery_date",
+            "expected": "2026-04-17",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/0",
+            "expected": "APEX-JAN-0920",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/1",
+            "expected": "APEX-SAF-7457",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/2",
+            "expected": "FST-FWS-34-10",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/3",
+            "expected": "ADH-SGG-094",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/4",
+            "expected": "JAN-LNR-2424-15-CL",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/5",
+            "expected": "PPE-GLV-NIT-6-XXL-BLA",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/6",
+            "expected": "APEX-ADH-9693",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/7",
+            "expected": "APEX-SAF-6974",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/8",
+            "expected": "APEX-JAN-2711",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/9",
+            "expected": "LUB-POS-256",
+            "extracted": null
+          }
+        ],
+        "llm_calls": 0,
+        "llm_timeouts": 0,
+        "llm_failed": false,
+        "extraction_time_ms": 0,
+        "overall_confidence": 0.0,
+        "decision": {
+          "score": 0.98,
+          "route": "REVIEW",
+          "reasons": [
+            "HDR-02"
+          ]
+        }
+      },
+      {
+        "order_id": "c05903f6-e6ea-59b0-8801-f8b73c6c92aa",
+        "stem": "order_150_QS-01149",
+        "document_path": "synthetic/documents/eml/order_150_QS-01149.eml",
+        "format": "EML",
+        "route": "REVIEW",
+        "hard_case": false,
+        "hard_case_types": [],
+        "header_accuracy": 0.5,
+        "lines_expected": 14,
+        "lines_matched": 0,
+        "lines_extracted": 0,
+        "extra_lines": 0,
+        "missing_lines": 14,
+        "silent_order": false,
+        "silent_fields": [],
+        "field_mismatches": [
+          {
+            "path": "/header/po_date",
+            "expected": "May 12, 2026",
+            "extracted": "1970-01-01"
+          },
+          {
+            "path": "/header/requested_delivery_date",
+            "expected": "2026-05-26",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/0",
+            "expected": "GLOBAL-JAN-4598",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/1",
+            "expected": "PPE-GLS-CLE-ANTI-FOG",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/2",
+            "expected": "JAN-TTI-201",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/3",
+            "expected": "GLOBAL-LUB-2474",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/4",
+            "expected": "JAN-GCL-155",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/5",
+            "expected": "JAN-DSP-153",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/6",
+            "expected": "GLOBAL-TOO-8937",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/7",
+            "expected": "ABR-COW-4IN-1",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/8",
+            "expected": "LUB-POS-227",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/9",
+            "expected": "GLOBAL-ELE-4982",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/10",
+            "expected": "GLOBAL-JAN-1081",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/11",
+            "expected": "GLOBAL-PAC-0995",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/12",
+            "expected": "PKG-BBW-147",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/13",
+            "expected": "ADH-SGG-132",
+            "extracted": null
+          }
+        ],
+        "llm_calls": 0,
+        "llm_timeouts": 0,
+        "llm_failed": false,
+        "extraction_time_ms": 1,
+        "overall_confidence": 0.0,
+        "decision": {
+          "score": 0.98,
+          "route": "REVIEW",
+          "reasons": [
+            "HDR-02"
+          ]
+        }
+      },
+      {
+        "order_id": "6d78b7cd-5079-579e-925c-4aa630a6d6f7",
+        "stem": "order_146_4500001145",
+        "document_path": "synthetic/documents/xlsx/order_146_4500001145.xlsx",
+        "format": "XLSX",
+        "route": "AUTO_POST",
+        "hard_case": false,
+        "hard_case_types": [],
+        "header_accuracy": 1.0,
+        "lines_expected": 3,
+        "lines_matched": 3,
+        "lines_extracted": 3,
+        "extra_lines": 0,
+        "missing_lines": 0,
+        "silent_order": false,
+        "silent_fields": [],
+        "field_mismatches": [],
+        "llm_calls": 0,
+        "llm_timeouts": 0,
+        "llm_failed": false,
+        "extraction_time_ms": 1,
+        "overall_confidence": 0.97,
+        "decision": {
+          "score": 0.98,
+          "route": "AUTO_POST",
+          "reasons": []
+        }
+      },
+      {
+        "order_id": "3c4b0d94-7190-5e7c-a885-070a7c8bd33e",
+        "stem": "order_067_MBM01066",
+        "document_path": "synthetic/documents/eml/order_067_MBM01066.eml",
+        "format": "EML",
+        "route": "REVIEW",
+        "hard_case": false,
+        "hard_case_types": [],
+        "header_accuracy": 0.75,
+        "lines_expected": 19,
+        "lines_matched": 0,
+        "lines_extracted": 0,
+        "extra_lines": 0,
+        "missing_lines": 19,
+        "silent_order": false,
+        "silent_fields": [],
+        "field_mismatches": [
+          {
+            "path": "/header/po_date",
+            "expected": "6/15/26",
+            "extracted": "1970-01-01"
+          },
+          {
+            "path": "/lines/missing/0",
+            "expected": "APEX-ABR-3960",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/1",
+            "expected": "JAN-DGR-130",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/2",
+            "expected": "JAN-DSP-258",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/3",
+            "expected": "FST-HNT-58-11",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/4",
+            "expected": "APEX-JAN-8154",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/5",
+            "expected": "APEX-FAS-1030",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/6",
+            "expected": "LUB-MPG-006",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/7",
+            "expected": "APEX-JAN-1818",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/8",
+            "expected": "APEX-SAF-7935",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/9",
+            "expected": "APEX-JAN-6771",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/10",
+            "expected": "APEX-JAN-0920",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/11",
+            "expected": "APEX-SAF-6974",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/12",
+            "expected": "PKG-BBW-147",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/13",
+            "expected": "APEX-LUB-2704",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/14",
+            "expected": "TLS-TPM-30FT-1",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/15",
+            "expected": "LUB-POS-227",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/16",
+            "expected": "TLS-UTK-113",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/17",
+            "expected": "APEX-JAN-9319",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/18",
+            "expected": "PPE-EAR-221",
+            "extracted": null
+          }
+        ],
+        "llm_calls": 0,
+        "llm_timeouts": 0,
+        "llm_failed": false,
+        "extraction_time_ms": 0,
+        "overall_confidence": 0.0,
+        "decision": {
+          "score": 0.98,
+          "route": "REVIEW",
+          "reasons": [
+            "HDR-02"
+          ]
+        }
+      },
+      {
+        "order_id": "8b3a985c-4897-56ac-b12b-40cf8fa7069e",
+        "stem": "order_145_SW-01144",
+        "document_path": "synthetic/documents/xlsx/order_145_SW-01144.xlsx",
+        "format": "XLSX",
+        "route": "AUTO_POST",
+        "hard_case": false,
+        "hard_case_types": [],
+        "header_accuracy": 1.0,
+        "lines_expected": 6,
+        "lines_matched": 6,
+        "lines_extracted": 6,
+        "extra_lines": 0,
+        "missing_lines": 0,
+        "silent_order": false,
+        "silent_fields": [],
+        "field_mismatches": [],
+        "llm_calls": 0,
+        "llm_timeouts": 0,
+        "llm_failed": false,
+        "extraction_time_ms": 2,
+        "overall_confidence": 0.7,
+        "decision": {
+          "score": 0.98,
+          "route": "AUTO_POST",
+          "reasons": []
+        }
+      },
+      {
+        "order_id": "5d391dd4-d775-5b67-89d8-220bbf256cad",
+        "stem": "order_089_QS-01088",
+        "document_path": "synthetic/documents/eml/order_089_QS-01088.eml",
+        "format": "EML",
+        "route": "REVIEW",
+        "hard_case": false,
+        "hard_case_types": [],
+        "header_accuracy": 0.5,
+        "lines_expected": 25,
+        "lines_matched": 0,
+        "lines_extracted": 0,
+        "extra_lines": 0,
+        "missing_lines": 25,
+        "silent_order": false,
+        "silent_fields": [],
+        "field_mismatches": [
+          {
+            "path": "/header/po_date",
+            "expected": "Jul 01, 2026",
+            "extracted": "1970-01-01"
+          },
+          {
+            "path": "/header/requested_delivery_date",
+            "expected": "2026-07-21",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/0",
+            "expected": "LUB-POS-256",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/1",
+            "expected": "PPE-HAT-RED",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/2",
+            "expected": "GLOBAL-TOO-1155",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/3",
+            "expected": "ABR-FLD-5IN",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/4",
+            "expected": "JAN-LNR-3339-12-CL",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/5",
+            "expected": "GLOBAL-JAN-8705",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/6",
+            "expected": "GLOBAL-PAC-1579",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/7",
+            "expected": "FST-HCS-38-16-3",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/8",
+            "expected": "GLOBAL-TOO-8937",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/9",
+            "expected": "GLOBAL-FAS-6768",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/10",
+            "expected": "JAN-DGR-076",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/11",
+            "expected": "GLOBAL-JAN-5253",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/12",
+            "expected": "GLOBAL-JAN-7533",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/13",
+            "expected": "TLS-AWR-12IN",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/14",
+            "expected": "GLOBAL-JAN-0706",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/15",
+            "expected": "ADH-SGG-102",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/16",
+            "expected": "TLS-TPM-30FT",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/17",
+            "expected": "ELE-CTI-8IN",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/18",
+            "expected": "GLOBAL-ADH-6474",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/19",
+            "expected": "LUB-MOL-004",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/20",
+            "expected": "FST-HCS-38-16-2",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/21",
+            "expected": "GLOBAL-PAC-5955",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/22",
+            "expected": "ADH-EPX-000",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/23",
+            "expected": "GLOBAL-PAC-2099",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/24",
+            "expected": "GLOBAL-PAC-4301",
+            "extracted": null
+          }
+        ],
+        "llm_calls": 0,
+        "llm_timeouts": 0,
+        "llm_failed": false,
+        "extraction_time_ms": 1,
+        "overall_confidence": 0.0,
+        "decision": {
+          "score": 0.98,
+          "route": "REVIEW",
+          "reasons": [
+            "HDR-02"
+          ]
+        }
+      },
+      {
+        "order_id": "1fdcbe5b-4481-59ce-a7ff-769d9658e31f",
+        "stem": "order_001_TIT-PO-01000",
+        "document_path": "synthetic/documents/xlsx/order_001_TIT-PO-01000.xlsx",
+        "format": "XLSX",
+        "route": "AUTO_POST",
+        "hard_case": false,
+        "hard_case_types": [],
+        "header_accuracy": 1.0,
+        "lines_expected": 4,
+        "lines_matched": 4,
+        "lines_extracted": 4,
+        "extra_lines": 0,
+        "missing_lines": 0,
+        "silent_order": false,
+        "silent_fields": [],
+        "field_mismatches": [],
+        "llm_calls": 0,
+        "llm_timeouts": 0,
+        "llm_failed": false,
+        "extraction_time_ms": 1,
+        "overall_confidence": 0.7,
+        "decision": {
+          "score": 0.98,
+          "route": "AUTO_POST",
+          "reasons": []
+        }
+      },
+      {
+        "order_id": "f34cfb6b-6961-504f-8191-569d04f0b9fa",
+        "stem": "order_084_SW-01083",
+        "document_path": "synthetic/documents/xlsx/order_084_SW-01083.xlsx",
+        "format": "XLSX",
+        "route": "AUTO_POST",
+        "hard_case": false,
+        "hard_case_types": [],
+        "header_accuracy": 1.0,
+        "lines_expected": 8,
+        "lines_matched": 8,
+        "lines_extracted": 8,
+        "extra_lines": 0,
+        "missing_lines": 0,
+        "silent_order": false,
+        "silent_fields": [],
+        "field_mismatches": [],
+        "llm_calls": 0,
+        "llm_timeouts": 0,
+        "llm_failed": false,
+        "extraction_time_ms": 2,
+        "overall_confidence": 0.7,
+        "decision": {
+          "score": 0.98,
+          "route": "AUTO_POST",
+          "reasons": []
+        }
+      },
+      {
+        "order_id": "60c0dd76-8cdc-5324-99a0-fbf21ff4910d",
+        "stem": "order_018_MBM01017",
+        "document_path": "synthetic/documents/eml/order_018_MBM01017.eml",
+        "format": "EML",
+        "route": "REVIEW",
+        "hard_case": false,
+        "hard_case_types": [],
+        "header_accuracy": 0.5,
+        "lines_expected": 17,
+        "lines_matched": 0,
+        "lines_extracted": 0,
+        "extra_lines": 0,
+        "missing_lines": 17,
+        "silent_order": false,
+        "silent_fields": [],
+        "field_mismatches": [
+          {
+            "path": "/header/po_date",
+            "expected": "2/24/26",
+            "extracted": "1970-01-01"
+          },
+          {
+            "path": "/header/requested_delivery_date",
+            "expected": "2026-03-13",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/0",
+            "expected": "APEX-ABR-2885",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/1",
+            "expected": "ELE-TPE-WHI",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/2",
+            "expected": "FST-LWS-516-18",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/3",
+            "expected": "ELE-CTI-8IN",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/4",
+            "expected": "ELE-WNT-34-10",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/5",
+            "expected": "LUB-MPG-074",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/6",
+            "expected": "JAN-TTI-270",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/7",
+            "expected": "JAN-GCL-090",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/8",
+            "expected": "APEX-FAS-2695",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/9",
+            "expected": "ADH-SGG-094",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/10",
+            "expected": "APEX-ABR-4611",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/11",
+            "expected": "APEX-FAS-1580",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/12",
+            "expected": "APEX-JAN-6928",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/13",
+            "expected": "JAN-FTI-167",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/14",
+            "expected": "APEX-JAN-4378",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/15",
+            "expected": "JAN-LNR-4046-12-WH",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/16",
+            "expected": "APEX-JAN-3992",
+            "extracted": null
+          }
+        ],
+        "llm_calls": 0,
+        "llm_timeouts": 0,
+        "llm_failed": false,
+        "extraction_time_ms": 1,
+        "overall_confidence": 0.0,
+        "decision": {
+          "score": 0.98,
+          "route": "REVIEW",
+          "reasons": [
+            "HDR-02"
+          ]
+        }
+      },
+      {
+        "order_id": "d3cfd918-d37b-52ab-8c6b-20eb515ce2a1",
+        "stem": "order_107_NMC-01106",
+        "document_path": "synthetic/documents/xlsx/order_107_NMC-01106.xlsx",
+        "format": "XLSX",
+        "route": "AUTO_POST",
+        "hard_case": false,
+        "hard_case_types": [],
+        "header_accuracy": 1.0,
+        "lines_expected": 5,
+        "lines_matched": 5,
+        "lines_extracted": 5,
+        "extra_lines": 0,
+        "missing_lines": 0,
+        "silent_order": false,
+        "silent_fields": [],
+        "field_mismatches": [],
+        "llm_calls": 0,
+        "llm_timeouts": 0,
+        "llm_failed": false,
+        "extraction_time_ms": 2,
+        "overall_confidence": 0.97,
+        "decision": {
+          "score": 0.98,
+          "route": "AUTO_POST",
+          "reasons": []
+        }
+      },
+      {
+        "order_id": "92b18029-27ca-580c-953b-6808015de0cb",
+        "stem": "order_131_QS-01130",
+        "document_path": "synthetic/documents/eml/order_131_QS-01130.eml",
+        "format": "EML",
+        "route": "AUTO_POST",
+        "hard_case": false,
+        "hard_case_types": [],
+        "header_accuracy": 1.0,
+        "lines_expected": 17,
+        "lines_matched": 17,
+        "lines_extracted": 17,
+        "extra_lines": 0,
+        "missing_lines": 0,
+        "silent_order": false,
+        "silent_fields": [],
+        "field_mismatches": [],
+        "llm_calls": 0,
+        "llm_timeouts": 0,
+        "llm_failed": false,
+        "extraction_time_ms": 8,
+        "overall_confidence": 0.7,
+        "decision": {
+          "score": 0.98,
+          "route": "AUTO_POST",
+          "reasons": []
+        }
+      },
+      {
+        "order_id": "1ac6f235-7844-5818-8bfa-de8cf829da6d",
+        "stem": "order_036_TIT-PO-01035",
+        "document_path": "synthetic/documents/xlsx/order_036_TIT-PO-01035.xlsx",
+        "format": "XLSX",
+        "route": "AUTO_POST",
+        "hard_case": false,
+        "hard_case_types": [],
+        "header_accuracy": 1.0,
+        "lines_expected": 2,
+        "lines_matched": 2,
+        "lines_extracted": 2,
+        "extra_lines": 0,
+        "missing_lines": 0,
+        "silent_order": false,
+        "silent_fields": [],
+        "field_mismatches": [],
+        "llm_calls": 0,
+        "llm_timeouts": 0,
+        "llm_failed": false,
+        "extraction_time_ms": 0,
+        "overall_confidence": 0.7,
+        "decision": {
+          "score": 0.98,
+          "route": "AUTO_POST",
+          "reasons": []
+        }
+      },
+      {
+        "order_id": "0d906e13-cb79-5706-80ab-217df1256d3e",
+        "stem": "order_139_4500001138",
+        "document_path": "synthetic/documents/xlsx/order_139_4500001138.xlsx",
+        "format": "XLSX",
+        "route": "AUTO_POST",
+        "hard_case": false,
+        "hard_case_types": [],
+        "header_accuracy": 1.0,
+        "lines_expected": 6,
+        "lines_matched": 6,
+        "lines_extracted": 6,
+        "extra_lines": 0,
+        "missing_lines": 0,
+        "silent_order": false,
+        "silent_fields": [],
+        "field_mismatches": [],
+        "llm_calls": 0,
+        "llm_timeouts": 0,
+        "llm_failed": false,
+        "extraction_time_ms": 1,
+        "overall_confidence": 0.97,
+        "decision": {
+          "score": 0.98,
+          "route": "AUTO_POST",
+          "reasons": []
+        }
+      },
+      {
+        "order_id": "09c64ed5-f49a-5dd3-bb1a-a207f32af204",
+        "stem": "order_017_BW-01016",
+        "document_path": "synthetic/documents/eml/order_017_BW-01016.eml",
+        "format": "EML",
+        "route": "REVIEW",
+        "hard_case": false,
+        "hard_case_types": [],
+        "header_accuracy": 0.75,
+        "lines_expected": 11,
+        "lines_matched": 0,
+        "lines_extracted": 0,
+        "extra_lines": 0,
+        "missing_lines": 11,
+        "silent_order": false,
+        "silent_fields": [],
+        "field_mismatches": [
+          {
+            "path": "/header/po_date",
+            "expected": "02/12/2026",
+            "extracted": "1970-01-01"
+          },
+          {
+            "path": "/lines/missing/0",
+            "expected": "ADH-SGG-282",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/1",
+            "expected": "ADH-SGG-102",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/2",
+            "expected": "TLS-TPM-30FT",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/3",
+            "expected": "LUB-MOL-109",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/4",
+            "expected": "FST-HCS-M12-3",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/5",
+            "expected": "LUB-POS-256",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/6",
+            "expected": "JAN-DSP-258",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/7",
+            "expected": "TLS-UTK-298",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/8",
+            "expected": "LUB-POS-119",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/9",
+            "expected": "ABR-COW-6IN-3",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/10",
+            "expected": "FST-HCS-38-16-112",
+            "extracted": null
+          }
+        ],
+        "llm_calls": 0,
+        "llm_timeouts": 0,
+        "llm_failed": false,
+        "extraction_time_ms": 0,
+        "overall_confidence": 0.0,
+        "decision": {
+          "score": 0.98,
+          "route": "REVIEW",
+          "reasons": [
+            "HDR-02",
+            "HDR-04"
+          ]
+        }
+      },
+      {
+        "order_id": "c21974cf-0f71-5710-9c1a-15fd777f3c32",
+        "stem": "order_144_QS-01143",
+        "document_path": "synthetic/documents/eml/order_144_QS-01143.eml",
+        "format": "EML",
+        "route": "REVIEW",
+        "hard_case": false,
+        "hard_case_types": [],
+        "header_accuracy": 0.5,
+        "lines_expected": 10,
+        "lines_matched": 0,
+        "lines_extracted": 0,
+        "extra_lines": 0,
+        "missing_lines": 10,
+        "silent_order": false,
+        "silent_fields": [],
+        "field_mismatches": [
+          {
+            "path": "/header/po_date",
+            "expected": "Apr 25, 2026",
+            "extracted": "1970-01-01"
+          },
+          {
+            "path": "/header/requested_delivery_date",
+            "expected": "2026-05-02",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/0",
+            "expected": "PKG-PTC-133",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/1",
+            "expected": "ELE-CTI-8IN",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/2",
+            "expected": "ABR-COW-4IN-2",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/3",
+            "expected": "GLOBAL-JAN-8946",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/4",
+            "expected": "GLOBAL-ELE-7350",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/5",
+            "expected": "GLOBAL-FAS-1606",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/6",
+            "expected": "TLS-UTK-298",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/7",
+            "expected": "JAN-DSP-186",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/8",
+            "expected": "GLOBAL-JAN-7735",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/9",
+            "expected": "GLOBAL-JAN-5551",
+            "extracted": null
+          }
+        ],
+        "llm_calls": 0,
+        "llm_timeouts": 0,
+        "llm_failed": false,
+        "extraction_time_ms": 0,
+        "overall_confidence": 0.0,
+        "decision": {
+          "score": 0.98,
+          "route": "REVIEW",
+          "reasons": [
+            "HDR-02"
+          ]
+        }
+      },
+      {
+        "order_id": "41a34500-1e72-58c1-9f2a-f2be31455753",
+        "stem": "order_083_QS-01082",
+        "document_path": "synthetic/documents/eml/order_083_QS-01082.eml",
+        "format": "EML",
+        "route": "REVIEW",
+        "hard_case": false,
+        "hard_case_types": [],
+        "header_accuracy": 0.5,
+        "lines_expected": 25,
+        "lines_matched": 0,
+        "lines_extracted": 0,
+        "extra_lines": 0,
+        "missing_lines": 25,
+        "silent_order": false,
+        "silent_fields": [],
+        "field_mismatches": [
+          {
+            "path": "/header/po_date",
+            "expected": "Jan 18, 2026",
+            "extracted": "1970-01-01"
+          },
+          {
+            "path": "/header/requested_delivery_date",
+            "expected": "2026-01-30",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/0",
+            "expected": "FST-SHC-12-13-2",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/1",
+            "expected": "ELE-TPE-WHI",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/2",
+            "expected": "PPE-HAT-RED",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/3",
+            "expected": "GLOBAL-PAC-7756",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/4",
+            "expected": "FST-SHC-12-13-4",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/5",
+            "expected": "GLOBAL-FAS-5187",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/6",
+            "expected": "PPE-GLS-AMB-ANTI-FOG-2",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/7",
+            "expected": "GLOBAL-SAF-6125",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/8",
+            "expected": "FST-LWS-516-18",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/9",
+            "expected": "JAN-DGR-224",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/10",
+            "expected": "GLOBAL-JAN-8879",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/11",
+            "expected": "FST-HCS-M10-112",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/12",
+            "expected": "PPE-N95-219",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/13",
+            "expected": "JAN-DSP-200",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/14",
+            "expected": "JAN-GCL-273",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/15",
+            "expected": "FST-FWS-34-10",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/16",
+            "expected": "ABR-COW-412IN-1",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/17",
+            "expected": "JAN-PTR-1P-NAT",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/18",
+            "expected": "GLOBAL-JAN-2983",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/19",
+            "expected": "PPE-GLS-SMO-ANTI-FOG-1",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/20",
+            "expected": "JAN-DSP-128",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/21",
+            "expected": "GLOBAL-LUB-1739",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/22",
+            "expected": "JAN-HSG-145",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/23",
+            "expected": "GLOBAL-TOO-4444",
+            "extracted": null
+          },
+          {
+            "path": "/lines/missing/24",
+            "expected": "GLOBAL-JAN-0712",
+            "extracted": null
+          }
+        ],
+        "llm_calls": 0,
+        "llm_timeouts": 0,
+        "llm_failed": false,
+        "extraction_time_ms": 1,
+        "overall_confidence": 0.0,
+        "decision": {
+          "score": 0.98,
+          "route": "REVIEW",
+          "reasons": [
+            "HDR-02"
+          ]
+        }
+      }
+    ],
+    "errors": [],
+    "total_time_seconds": 0.36615657806396484
+  }
+}

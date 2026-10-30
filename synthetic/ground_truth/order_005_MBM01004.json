@@ -1,0 +1,646 @@
+{
+  "schema_version": "1.0",
+  "order_id": "55b7e9d3-84dc-5d6f-88ec-9dc209df9cfa",
+  "tenant_id": "delta-industrial-supply",
+  "document_type": "ORIGINAL",
+  "status": "NEEDS_REVIEW",
+  "source": {
+    "channel": "EMAIL_IMAP",
+    "message_id": "<po-MBM01004@apex.example>",
+    "from_address": "purchasing@apex.example",
+    "subject": "PO MBM01004 - Order from Apex Corp. (SYNTHETIC)",
+    "received_at": "2026-01-15T10:30:00Z",
+    "documents": [
+      {
+        "document_id": "doc-bae678c7",
+        "kind": "EMAIL_BODY",
+        "filename": null,
+        "mime_type": "text/plain",
+        "sha256": "1eef232df898f7f00cf9474eb2106a28c4b5fbdd8ec0f12ca1bcff51999d9dbb",
+        "page_count": null
+      }
+    ]
+  },
+  "buyer": {
+    "name": "Apex Corp. (SYNTHETIC)",
+    "code_on_document": "C-APEX",
+    "tax_id": "US92-3477824",
+    "gln": null,
+    "peppol_endpoint": null,
+    "address": {
+      "line1": "3971 Commerce Dr",
+      "city": "Columbus",
+      "region": "OH",
+      "postal_code": "43215",
+      "country": "US"
+    },
+    "contact": {
+      "name": "Apex Purchasing",
+      "email": "purchasing@apex.example",
+      "phone": "+1-555-3504"
+    },
+    "resolved": {
+      "erp_partner_id": 51,
+      "erp_partner_ref": "C-APEX",
+      "method": "EMAIL_DOMAIN",
+      "score": 0.99
+    }
+  },
+  "seller": {
+    "name": "Delta Industrial Supply LLC (SYNTHETIC)",
+    "code_on_document": null,
+    "tax_id": null,
+    "address": {
+      "line1": "55 Commerce Dr",
+      "city": "Dayton",
+      "region": "OH",
+      "postal_code": "45402",
+      "country": "US"
+    },
+    "resolved": null
+  },
+  "header": {
+    "po_number": "MBM01004",
+    "po_revision": 0,
+    "po_date": "3/5/26",
+    "requested_delivery_date": "2026-03-20",
+    "currency": "USD",
+    "buyer_reference": "Dept 408",
+    "payment_terms_text": "2% 10 Net 30",
+    "incoterms": null,
+    "ship_via": null,
+    "notes": "Confirm availability",
+    "language": "en"
+  },
+  "lines": [
+    {
+      "line_no": 1,
+      "buyer_item_code": "MB-UNKNOWN-0004",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "N95 Respirator (SYNTHETIC)",
+      "quantity": 12,
+      "uom_raw": "BX",
+      "uom": "BX",
+      "pack": {
+        "raw": "20/BX",
+        "inner_count": 20,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 41.34,
+      "price_uom": "BX",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 496.08,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": null,
+        "erp_product_id": null,
+        "erp_uom": "BX",
+        "erp_uom_id": 43,
+        "erp_quantity": 12,
+        "conversion_factor": 1.0,
+        "method": "UNRESOLVED",
+        "score": 0.0,
+        "candidates": [],
+        "erp_list_price": 41.34
+      }
+    },
+    {
+      "line_no": 2,
+      "buyer_item_code": null,
+      "seller_item_code": "ADH-EPX-215",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Epoxy 2-Part Quick Set (SYNTHETIC)",
+      "quantity": 2,
+      "uom_raw": "PK",
+      "uom": "PK",
+      "pack": {
+        "raw": "6/PK",
+        "inner_count": 6,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 29.98,
+      "price_uom": "PK",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 59.96,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "ADH-EPX-215",
+        "erp_product_id": 1215,
+        "erp_uom": "PK",
+        "erp_uom_id": 20,
+        "erp_quantity": 2,
+        "conversion_factor": 1.0,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 29.98
+      }
+    },
+    {
+      "line_no": 3,
+      "buyer_item_code": null,
+      "seller_item_code": "LUB-POS-168",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Penetrating Oil Spray (SYNTHETIC)",
+      "quantity": 4,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "12/CS",
+        "inner_count": 12,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 57.41,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 229.64,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "LUB-POS-168",
+        "erp_product_id": 1168,
+        "erp_uom": "CS",
+        "erp_uom_id": 19,
+        "erp_quantity": 4,
+        "conversion_factor": 1.0,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 57.41
+      }
+    },
+    {
+      "line_no": 4,
+      "buyer_item_code": null,
+      "seller_item_code": "ELE-TPE-BLU",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Electrical Tape Blue 3/4in (SYNTHETIC)",
+      "quantity": 24,
+      "uom_raw": "RO",
+      "uom": "RO",
+      "pack": null,
+      "unit_price": 2.29,
+      "price_uom": "RO",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 54.96,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "ELE-TPE-BLU",
+        "erp_product_id": 1020,
+        "erp_uom": "RO",
+        "erp_uom_id": 14,
+        "erp_quantity": 24,
+        "conversion_factor": 1.0,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 2.29
+      }
+    },
+    {
+      "line_no": 5,
+      "buyer_item_code": null,
+      "seller_item_code": "JAN-DSP-200",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Disinfectant Spray (SYNTHETIC)",
+      "quantity": 12,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "12/CS",
+        "inner_count": 12,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 45.69,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 548.28,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "JAN-DSP-200",
+        "erp_product_id": 1200,
+        "erp_uom": "CS",
+        "erp_uom_id": 1,
+        "erp_quantity": 12,
+        "conversion_factor": 1.0,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 45.69
+      }
+    },
+    {
+      "line_no": 6,
+      "buyer_item_code": null,
+      "seller_item_code": "JAN-FTI-167",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Facial Tissue Flat Box (SYNTHETIC)",
+      "quantity": 2,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "30BX/CS",
+        "inner_count": 30,
+        "inner_size": 1,
+        "inner_uom": "BX"
+      },
+      "unit_price": 64.7,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 129.4,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "JAN-FTI-167",
+        "erp_product_id": 1167,
+        "erp_uom": "CS",
+        "erp_uom_id": 13,
+        "erp_quantity": 2,
+        "conversion_factor": 1.0,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 64.7
+      }
+    },
+    {
+      "line_no": 7,
+      "buyer_item_code": "APEX-FAS-9744",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Socket Head Cap Screw 1/2-13 x 4 (SYNTHETIC)",
+      "quantity": 12,
+      "uom_raw": "BX",
+      "uom": "BX",
+      "pack": {
+        "raw": "BX/25",
+        "inner_count": 25,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 43.14,
+      "price_uom": "BX",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 517.68,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "FST-SHC-12-13-4",
+        "erp_product_id": 1239,
+        "erp_uom": "BX",
+        "erp_uom_id": 34,
+        "erp_quantity": 12,
+        "conversion_factor": 1.0,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 43.14
+      }
+    },
+    {
+      "line_no": 8,
+      "buyer_item_code": null,
+      "seller_item_code": "PKG-BBW-283",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Bubble Wrap 12in (SYNTHETIC)",
+      "quantity": 4,
+      "uom_raw": "RO",
+      "uom": "RO",
+      "pack": null,
+      "unit_price": 25.87,
+      "price_uom": "RO",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 103.48,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "PKG-BBW-283",
+        "erp_product_id": 1283,
+        "erp_uom": "RO",
+        "erp_uom_id": 21,
+        "erp_quantity": 4,
+        "conversion_factor": 1.0,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 25.87
+      }
+    },
+    {
+      "line_no": 9,
+      "buyer_item_code": "APEX-FAS-6212",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Socket Head Cap Screw 5/16-18 x 1 (SYNTHETIC)",
+      "quantity": 3,
+      "uom_raw": "BX",
+      "uom": "BX",
+      "pack": {
+        "raw": "BX/25",
+        "inner_count": 25,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 30.57,
+      "price_uom": "BX",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 91.71,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "FST-SHC-516-18-1",
+        "erp_product_id": 1275,
+        "erp_uom": "BX",
+        "erp_uom_id": 2,
+        "erp_quantity": 3,
+        "conversion_factor": 1.0,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 30.57
+      }
+    },
+    {
+      "line_no": 10,
+      "buyer_item_code": null,
+      "seller_item_code": "PKG-PTC-133",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Packing Tape Clear 2in (SYNTHETIC)",
+      "quantity": 24,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "36RL/CS",
+        "inner_count": 36,
+        "inner_size": 1,
+        "inner_uom": "RL"
+      },
+      "unit_price": 51.92,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 1246.08,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "PKG-PTC-133",
+        "erp_product_id": 1133,
+        "erp_uom": "CS",
+        "erp_uom_id": 6,
+        "erp_quantity": 24,
+        "conversion_factor": 1.0,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 51.92
+      }
+    },
+    {
+      "line_no": 11,
+      "buyer_item_code": null,
+      "seller_item_code": "PKG-PTC-187",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Packing Tape Clear 2in (SYNTHETIC)",
+      "quantity": 10,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "36RL/CS",
+        "inner_count": 36,
+        "inner_size": 1,
+        "inner_uom": "RL"
+      },
+      "unit_price": 59.41,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 594.1,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "PKG-PTC-187",
+        "erp_product_id": 1187,
+        "erp_uom": "CS",
+        "erp_uom_id": 36,
+        "erp_quantity": 10,
+        "conversion_factor": 1.0,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 59.41
+      }
+    },
+    {
+      "line_no": 12,
+      "buyer_item_code": "APEX-JAN-7359",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Can Liner 38x58 1.2mil Black Roll (SYNTHETIC)",
+      "quantity": 4,
+      "uom_raw": "RO",
+      "uom": "RO",
+      "pack": {
+        "raw": "50/RL",
+        "inner_count": 1,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 17.13,
+      "price_uom": "RO",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 68.52,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "JAN-LNR-3858-12-BL",
+        "erp_product_id": 1081,
+        "erp_uom": "RO",
+        "erp_uom_id": 15,
+        "erp_quantity": 4,
+        "conversion_factor": 1.0,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 17.13
+      }
+    },
+    {
+      "line_no": 13,
+      "buyer_item_code": null,
+      "seller_item_code": "ABR-FLD-5IN",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Flap Disc 5in 180 (SYNTHETIC)",
+      "quantity": 24,
+      "uom_raw": "BX",
+      "uom": "BX",
+      "pack": {
+        "raw": "10/BX",
+        "inner_count": 10,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 74.23,
+      "price_uom": "BX",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 1781.52,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "ABR-FLD-5IN",
+        "erp_product_id": 1021,
+        "erp_uom": "BX",
+        "erp_uom_id": 32,
+        "erp_quantity": 24,
+        "conversion_factor": 1.0,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 74.23
+      }
+    },
+    {
+      "line_no": 14,
+      "buyer_item_code": "APEX-FAS-1562",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Flat Washer M8 Zinc (SYNTHETIC)",
+      "quantity": 5,
+      "uom_raw": "BX",
+      "uom": "BX",
+      "pack": {
+        "raw": "BX/100",
+        "inner_count": 100,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 4.39,
+      "price_uom": "BX",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 21.95,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "FST-FWS-M8",
+        "erp_product_id": 1247,
+        "erp_uom": "BX",
+        "erp_uom_id": 10,
+        "erp_quantity": 5,
+        "conversion_factor": 1.0,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 4.39
+      }
+    }
+  ],
+  "charges": [],
+  "totals": {
+    "lines_amount_declared": 5943.36,
+    "tax_amount_declared": null,
+    "total_amount_declared": 5943.36,
+    "lines_amount_computed": 5943.36
+  },
+  "decision": {
+    "score": 0.75,
+    "route": "REVIEW",
+    "reasons": [
+      "HDR-02",
+      "ITM-01"
+    ]
+  },
+  "processing": {
+    "extractor": "synthetic/generator.py",
+    "prompt_version": null,
+    "created_at": "2026-01-15T10:30:00Z",
+    "updated_at": null
+  },
+  "ship_to": {
+    "name": "Apex Shipping Location 1",
+    "code_on_document": "SHIP-01",
+    "address": {
+      "line1": "3332 Factory Blvd",
+      "city": "Cincinnati",
+      "region": "OH",
+      "postal_code": "45202",
+      "country": "US"
+    },
+    "resolved": {
+      "erp_partner_id": 52,
+      "erp_partner_ref": "SHIP-01",
+      "method": "CODE",
+      "score": 1.0
+    }
+  },
+  "validation": {
+    "issues": [
+      {
+        "code": "HDR-02",
+        "severity": "REVIEW",
+        "path": "/header/po_date",
+        "message": "Data ordine mancante o non plausibile"
+      },
+      {
+        "code": "ITM-01",
+        "severity": "BLOCK",
+        "path": "/lines/0/resolution",
+        "message": "Codice articolo cliente sconosciuto: riga non risolta"
+      }
+    ]
+  },
+  "_synthetic_metadata": {
+    "hard_case_types": [
+      "MISSING_DATE",
+      "UNKNOWN_CUSTOMER_CODE"
+    ],
+    "is_hard_case": true
+  }
+}

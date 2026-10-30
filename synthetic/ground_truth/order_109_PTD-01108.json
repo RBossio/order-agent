@@ -16,7 +16,7 @@
         "kind": "PDF_TEXT",
         "filename": "PTD-01108.pdf",
         "mime_type": "application/pdf",
-        "sha256": "399c52795312a8891f12d913368119752f3ee6de2fc6287245f1d802156cacff",
+        "sha256": "2efcecaa0881744a6c64266ec9b417a3803926d1ebe3f271751fbbb42fc33d75",
         "page_count": 1
       }
     ]
@@ -103,7 +103,7 @@
         "erp_uom": "CS",
         "erp_uom_id": 1,
         "erp_quantity": 6,
-        "conversion_factor": 1,
+        "conversion_factor": 1.0,
         "method": "SELLER_CODE",
         "score": 0.98,
         "candidates": [],
@@ -140,7 +140,7 @@
         "erp_uom": "CS",
         "erp_uom_id": 36,
         "erp_quantity": 2,
-        "conversion_factor": 1,
+        "conversion_factor": 1.0,
         "method": "SELLER_CODE",
         "score": 0.98,
         "candidates": [],
@@ -177,7 +177,7 @@
         "erp_uom": "BX",
         "erp_uom_id": 46,
         "erp_quantity": 5,
-        "conversion_factor": 1,
+        "conversion_factor": 1.0,
         "method": "SELLER_CODE",
         "score": 0.98,
         "candidates": [],

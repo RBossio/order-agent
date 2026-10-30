@@ -1,0 +1,513 @@
+{
+  "schema_version": "1.0",
+  "order_id": "ea978795-fd39-5f8a-bf2a-52cbb1cf9dc9",
+  "tenant_id": "delta-industrial-supply",
+  "document_type": "ORIGINAL",
+  "status": "VALIDATED",
+  "source": {
+    "channel": "EMAIL_IMAP",
+    "message_id": "<po-MBM01137@apex.example>",
+    "from_address": "purchasing@apex.example",
+    "subject": "PO MBM01137 - Order from Apex Corp. (SYNTHETIC)",
+    "received_at": "2026-01-15T10:30:00Z",
+    "documents": [
+      {
+        "document_id": "doc-8ca91324",
+        "kind": "EMAIL_BODY",
+        "filename": null,
+        "mime_type": "text/plain",
+        "sha256": "81f1b4c0237b26f3e68b8a810e9aa411222b900f4723d6461731c677a9db15c0",
+        "page_count": null
+      }
+    ]
+  },
+  "buyer": {
+    "name": "Apex Corp. (SYNTHETIC)",
+    "code_on_document": "C-APEX",
+    "tax_id": "US92-3477824",
+    "gln": null,
+    "peppol_endpoint": null,
+    "address": {
+      "line1": "3971 Commerce Dr",
+      "city": "Columbus",
+      "region": "OH",
+      "postal_code": "43215",
+      "country": "US"
+    },
+    "contact": {
+      "name": "Apex Purchasing",
+      "email": "purchasing@apex.example",
+      "phone": "+1-555-3504"
+    },
+    "resolved": {
+      "erp_partner_id": 51,
+      "erp_partner_ref": "C-APEX",
+      "method": "EMAIL_DOMAIN",
+      "score": 0.99
+    }
+  },
+  "seller": {
+    "name": "Delta Industrial Supply LLC (SYNTHETIC)",
+    "code_on_document": null,
+    "tax_id": null,
+    "address": {
+      "line1": "55 Commerce Dr",
+      "city": "Dayton",
+      "region": "OH",
+      "postal_code": "45402",
+      "country": "US"
+    },
+    "resolved": null
+  },
+  "header": {
+    "po_number": "MBM01137",
+    "po_revision": 0,
+    "po_date": "3/18/26",
+    "requested_delivery_date": "2026-04-02",
+    "currency": "USD",
+    "buyer_reference": "Dept 192",
+    "payment_terms_text": "Net 45",
+    "incoterms": null,
+    "ship_via": "FedEx",
+    "notes": "Call before delivery",
+    "language": "en"
+  },
+  "lines": [
+    {
+      "line_no": 1,
+      "buyer_item_code": "APEX-PAC-0885",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Stretch Wrap 18in (SYNTHETIC)",
+      "quantity": 3,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "4RL/CS",
+        "inner_count": 4,
+        "inner_size": 1,
+        "inner_uom": "RL"
+      },
+      "unit_price": 133.33,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 399.99,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "PKG-STW-138",
+        "erp_product_id": 1138,
+        "erp_uom": "CS",
+        "erp_uom_id": 20,
+        "erp_quantity": 3,
+        "conversion_factor": 1.0,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 133.33
+      }
+    },
+    {
+      "line_no": 2,
+      "buyer_item_code": "APEX-JAN-6442",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Facial Tissue Flat Box (SYNTHETIC)",
+      "quantity": 24,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "30BX/CS",
+        "inner_count": 30,
+        "inner_size": 1,
+        "inner_uom": "BX"
+      },
+      "unit_price": 41.62,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 998.88,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "JAN-FTI-295",
+        "erp_product_id": 1295,
+        "erp_uom": "CS",
+        "erp_uom_id": 23,
+        "erp_quantity": 24,
+        "conversion_factor": 1.0,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 41.62
+      }
+    },
+    {
+      "line_no": 3,
+      "buyer_item_code": "APEX-JAN-9215",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Floor Cleaner Neutral Concentrate (SYNTHETIC)",
+      "quantity": 10,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "4/1GAL",
+        "inner_count": 4,
+        "inner_size": 1,
+        "inner_uom": "GLL"
+      },
+      "unit_price": 47.79,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 477.9,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "JAN-NFC-169",
+        "erp_product_id": 1169,
+        "erp_uom": "CS",
+        "erp_uom_id": 13,
+        "erp_quantity": 10,
+        "conversion_factor": 1.0,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 47.79
+      }
+    },
+    {
+      "line_no": 4,
+      "buyer_item_code": null,
+      "seller_item_code": "PKG-BBW-225",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Bubble Wrap 12in (SYNTHETIC)",
+      "quantity": 1,
+      "uom_raw": "RO",
+      "uom": "RO",
+      "pack": null,
+      "unit_price": 38.71,
+      "price_uom": "RO",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 38.71,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "PKG-BBW-225",
+        "erp_product_id": 1225,
+        "erp_uom": "RO",
+        "erp_uom_id": 13,
+        "erp_quantity": 1,
+        "conversion_factor": 1.0,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 38.71
+      }
+    },
+    {
+      "line_no": 5,
+      "buyer_item_code": "APEX-PAC-3743",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Stretch Wrap 18in (SYNTHETIC)",
+      "quantity": 5,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "4RL/CS",
+        "inner_count": 4,
+        "inner_size": 1,
+        "inner_uom": "RL"
+      },
+      "unit_price": 90.22,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 451.1,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "PKG-STW-002",
+        "erp_product_id": 1002,
+        "erp_uom": "CS",
+        "erp_uom_id": 34,
+        "erp_quantity": 5,
+        "conversion_factor": 1.0,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 90.22
+      }
+    },
+    {
+      "line_no": 6,
+      "buyer_item_code": "APEX-PAC-1424",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Bubble Wrap 12in (SYNTHETIC)",
+      "quantity": 24,
+      "uom_raw": "RO",
+      "uom": "RO",
+      "pack": null,
+      "unit_price": 41.67,
+      "price_uom": "RO",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 1000.08,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "PKG-BBW-147",
+        "erp_product_id": 1147,
+        "erp_uom": "RO",
+        "erp_uom_id": 16,
+        "erp_quantity": 24,
+        "conversion_factor": 1.0,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 41.67
+      }
+    },
+    {
+      "line_no": 7,
+      "buyer_item_code": "APEX-FAS-4939",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Hex Nut 5/8-11 Grade 5 Zinc (SYNTHETIC)",
+      "quantity": 3,
+      "uom_raw": "BX",
+      "uom": "BX",
+      "pack": {
+        "raw": "BX/100",
+        "inner_count": 100,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 5.16,
+      "price_uom": "BX",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 15.48,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "FST-HNT-58-11",
+        "erp_product_id": 1228,
+        "erp_uom": "BX",
+        "erp_uom_id": 41,
+        "erp_quantity": 3,
+        "conversion_factor": 1.0,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 5.16
+      }
+    },
+    {
+      "line_no": 8,
+      "buyer_item_code": null,
+      "seller_item_code": "PPE-GLV-LAT-4-XXL-BLU",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Latex Gloves XXL PF (SYNTHETIC)",
+      "quantity": 5,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "100/BX 10BX/CS",
+        "inner_count": 10,
+        "inner_size": 1,
+        "inner_uom": "BX"
+      },
+      "unit_price": 92.05,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 460.25,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "PPE-GLV-LAT-4-XXL-BLU",
+        "erp_product_id": 1048,
+        "erp_uom": "CS",
+        "erp_uom_id": 7,
+        "erp_quantity": 5,
+        "conversion_factor": 1.0,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 92.05
+      }
+    },
+    {
+      "line_no": 9,
+      "buyer_item_code": "APEX-ADH-9732",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Super Glue Gel (SYNTHETIC)",
+      "quantity": 4,
+      "uom_raw": "PK",
+      "uom": "PK",
+      "pack": {
+        "raw": "12/PK",
+        "inner_count": 12,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 25.28,
+      "price_uom": "PK",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 101.12,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "ADH-SGG-011",
+        "erp_product_id": 1011,
+        "erp_uom": "PK",
+        "erp_uom_id": 2,
+        "erp_quantity": 4,
+        "conversion_factor": 1.0,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 25.28
+      }
+    },
+    {
+      "line_no": 10,
+      "buyer_item_code": null,
+      "seller_item_code": "ADH-EPX-099",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Epoxy 2-Part Quick Set (SYNTHETIC)",
+      "quantity": 1,
+      "uom_raw": "PK",
+      "uom": "PK",
+      "pack": {
+        "raw": "6/PK",
+        "inner_count": 6,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 27.05,
+      "price_uom": "PK",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 27.05,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "ADH-EPX-099",
+        "erp_product_id": 1099,
+        "erp_uom": "PK",
+        "erp_uom_id": 34,
+        "erp_quantity": 1,
+        "conversion_factor": 1.0,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 27.05
+      }
+    },
+    {
+      "line_no": 11,
+      "buyer_item_code": "APEX-FAS-1030",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Socket Head Cap Screw 1/2-13 x 2 (SYNTHETIC)",
+      "quantity": 10,
+      "uom_raw": "BX",
+      "uom": "BX",
+      "pack": {
+        "raw": "BX/25",
+        "inner_count": 25,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 40.77,
+      "price_uom": "BX",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 407.7,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "FST-SHC-12-13-2",
+        "erp_product_id": 1042,
+        "erp_uom": "BX",
+        "erp_uom_id": 32,
+        "erp_quantity": 10,
+        "conversion_factor": 1.0,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 40.77
+      }
+    }
+  ],
+  "charges": [],
+  "totals": {
+    "lines_amount_declared": 4378.26,
+    "tax_amount_declared": null,
+    "total_amount_declared": 4378.26,
+    "lines_amount_computed": 4378.26
+  },
+  "decision": {
+    "score": 0.98,
+    "route": "AUTO_POST",
+    "reasons": []
+  },
+  "processing": {
+    "extractor": "synthetic/generator.py",
+    "prompt_version": null,
+    "created_at": "2026-01-15T10:30:00Z",
+    "updated_at": null
+  },
+  "ship_to": {
+    "name": "Apex Shipping Location 1",
+    "code_on_document": "SHIP-01",
+    "address": {
+      "line1": "3332 Factory Blvd",
+      "city": "Cincinnati",
+      "region": "OH",
+      "postal_code": "45202",
+      "country": "US"
+    },
+    "resolved": {
+      "erp_partner_id": 52,
+      "erp_partner_ref": "SHIP-01",
+      "method": "CODE",
+      "score": 1.0
+    }
+  },
+  "_synthetic_metadata": {
+    "hard_case_types": [],
+    "is_hard_case": false
+  }
+}

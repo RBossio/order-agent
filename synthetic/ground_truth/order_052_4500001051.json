@@ -1,0 +1,425 @@
+{
+  "schema_version": "1.0",
+  "order_id": "8fe095a5-78a0-5b3e-85ff-275e5d292750",
+  "tenant_id": "delta-industrial-supply",
+  "document_type": "ORIGINAL",
+  "status": "NEEDS_REVIEW",
+  "source": {
+    "channel": "FOLDER",
+    "message_id": null,
+    "from_address": null,
+    "subject": null,
+    "received_at": "2026-01-15T10:30:00Z",
+    "documents": [
+      {
+        "document_id": "doc-6c01c939",
+        "kind": "PDF_TEXT",
+        "filename": "4500001051.pdf",
+        "mime_type": "application/pdf",
+        "sha256": "0350c38a515153f9e85da379d43492a456c924b3078966ea912dea0b6bcea6ae",
+        "page_count": 1
+      }
+    ]
+  },
+  "buyer": {
+    "name": "Acme Company (SYNTHETIC)",
+    "code_on_document": "C-ACME",
+    "tax_id": "US12-8713396",
+    "gln": null,
+    "peppol_endpoint": null,
+    "address": {
+      "line1": "1375 Business Park Rd",
+      "city": "Toledo",
+      "region": "OH",
+      "postal_code": "43601",
+      "country": "US"
+    },
+    "contact": {
+      "name": "Acme Purchasing",
+      "email": "purchasing@acme.example",
+      "phone": "+1-555-3815"
+    },
+    "resolved": {
+      "erp_partner_id": 42,
+      "erp_partner_ref": "C-ACME",
+      "method": "CODE",
+      "score": 0.99
+    }
+  },
+  "seller": {
+    "name": "Delta Industrial Supply LLC (SYNTHETIC)",
+    "code_on_document": null,
+    "tax_id": null,
+    "address": {
+      "line1": "55 Commerce Dr",
+      "city": "Dayton",
+      "region": "OH",
+      "postal_code": "45402",
+      "country": "US"
+    },
+    "resolved": null
+  },
+  "header": {
+    "po_number": "4500001051",
+    "po_revision": 0,
+    "po_date": "2026-06-26",
+    "requested_delivery_date": "2026-07-11",
+    "currency": "USD",
+    "buyer_reference": "Dept 421",
+    "payment_terms_text": "Net 45",
+    "incoterms": null,
+    "ship_via": null,
+    "notes": null,
+    "language": "en"
+  },
+  "lines": [
+    {
+      "line_no": 1,
+      "buyer_item_code": "ACME-ABR-3086",
+      "seller_item_code": "FST-HNT-34-10-1",
+      "manufacturer_name": null,
+      "manufacturer_part_number": "SGC-46048",
+      "gtin": "9999900000009",
+      "description": "Hex Nut 3/4-10 Grade 5 Zinc (SYNTHETIC)",
+      "quantity": 10,
+      "uom_raw": "BX",
+      "uom": "BX",
+      "pack": {
+        "raw": "BX/100",
+        "inner_count": 100,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 9.87,
+      "price_uom": "BX",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 98.7,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "FST-HNT-34-10-1",
+        "erp_product_id": 1255,
+        "erp_uom": "BX",
+        "erp_uom_id": 48,
+        "erp_quantity": 10,
+        "conversion_factor": 1.0,
+        "method": "FUZZY",
+        "score": 0.82,
+        "candidates": [
+          {
+            "sku": "FST-HNT-34-10-1",
+            "score": 0.82
+          },
+          {
+            "sku": "ADH-EPX-000",
+            "score": 0.8
+          }
+        ],
+        "erp_list_price": 9.87
+      }
+    },
+    {
+      "line_no": 2,
+      "buyer_item_code": "ACME-JAN-8598",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Toilet Tissue 2P Standard (SYNTHETIC)",
+      "quantity": 4,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "96RL/CS",
+        "inner_count": 96,
+        "inner_size": 1,
+        "inner_uom": "RL"
+      },
+      "unit_price": 88.5,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 354.0,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "JAN-TTI-201",
+        "erp_product_id": 1201,
+        "erp_uom": "CS",
+        "erp_uom_id": 36,
+        "erp_quantity": 4,
+        "conversion_factor": 1.0,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 88.5
+      }
+    },
+    {
+      "line_no": 3,
+      "buyer_item_code": "ACME-JAN-4854",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Floor Stripper Heavy Duty (SYNTHETIC)",
+      "quantity": 2,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "4/1GAL",
+        "inner_count": 4,
+        "inner_size": 1,
+        "inner_uom": "GLL"
+      },
+      "unit_price": 87.26,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 174.52,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "JAN-FST-281",
+        "erp_product_id": 1281,
+        "erp_uom": "CS",
+        "erp_uom_id": 6,
+        "erp_quantity": 2,
+        "conversion_factor": 1.0,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 87.26
+      }
+    },
+    {
+      "line_no": 4,
+      "buyer_item_code": "ACME-JAN-9164",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Floor Finish High Gloss (SYNTHETIC)",
+      "quantity": 24,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "4/1GAL",
+        "inner_count": 4,
+        "inner_size": 1,
+        "inner_uom": "GLL"
+      },
+      "unit_price": 62.67,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 1504.08,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "JAN-FFN-001",
+        "erp_product_id": 1001,
+        "erp_uom": "CS",
+        "erp_uom_id": 11,
+        "erp_quantity": 24,
+        "conversion_factor": 1.0,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 62.67
+      }
+    },
+    {
+      "line_no": 5,
+      "buyer_item_code": "ACME-LUB-5631",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Machine Oil Light (SYNTHETIC)",
+      "quantity": 10,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "12/CS",
+        "inner_count": 12,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 53.66,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 536.6,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "LUB-MOL-031",
+        "erp_product_id": 1031,
+        "erp_uom": "CS",
+        "erp_uom_id": 40,
+        "erp_quantity": 10,
+        "conversion_factor": 1.0,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 53.66
+      }
+    },
+    {
+      "line_no": 6,
+      "buyer_item_code": null,
+      "seller_item_code": "PKG-BBW-149",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Bubble Wrap 12in (SYNTHETIC)",
+      "quantity": 6,
+      "uom_raw": "RO",
+      "uom": "RO",
+      "pack": null,
+      "unit_price": 44.38,
+      "price_uom": "RO",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 266.28,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "PKG-BBW-149",
+        "erp_product_id": 1149,
+        "erp_uom": "RO",
+        "erp_uom_id": 4,
+        "erp_quantity": 6,
+        "conversion_factor": 1.0,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 44.38
+      }
+    },
+    {
+      "line_no": 7,
+      "buyer_item_code": null,
+      "seller_item_code": "TLS-AWR-6IN",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Adjustable Wrench 6in (SYNTHETIC)",
+      "quantity": 2,
+      "uom_raw": "EA",
+      "uom": "EA",
+      "pack": null,
+      "unit_price": 14.94,
+      "price_uom": "EA",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 29.88,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "TLS-AWR-6IN",
+        "erp_product_id": 1190,
+        "erp_uom": "EA",
+        "erp_uom_id": 4,
+        "erp_quantity": 2,
+        "conversion_factor": 1.0,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 14.94
+      }
+    },
+    {
+      "line_no": 8,
+      "buyer_item_code": "ACME-JAN-4806",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Disinfectant Spray (SYNTHETIC)",
+      "quantity": 5,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "12/CS",
+        "inner_count": 12,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 62.71,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 313.55,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "JAN-DSP-211",
+        "erp_product_id": 1211,
+        "erp_uom": "CS",
+        "erp_uom_id": 16,
+        "erp_quantity": 5,
+        "conversion_factor": 1.0,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 62.71
+      }
+    }
+  ],
+  "charges": [],
+  "totals": {
+    "lines_amount_declared": 3277.61,
+    "tax_amount_declared": null,
+    "total_amount_declared": 3277.61,
+    "lines_amount_computed": 3277.61
+  },
+  "decision": {
+    "score": 0.75,
+    "route": "REVIEW",
+    "reasons": [
+      "ITM-04"
+    ]
+  },
+  "processing": {
+    "extractor": "synthetic/generator.py",
+    "prompt_version": null,
+    "created_at": "2026-01-15T10:30:00Z",
+    "updated_at": null
+  },
+  "ship_to": {
+    "name": "Acme Shipping Location 1",
+    "code_on_document": "SHIP-01",
+    "address": {
+      "line1": "9494 Corporate Dr",
+      "city": "Grand Rapids",
+      "region": "MI",
+      "postal_code": "49503",
+      "country": "US"
+    },
+    "resolved": {
+      "erp_partner_id": 43,
+      "erp_partner_ref": "SHIP-01",
+      "method": "CODE",
+      "score": 1.0
+    }
+  },
+  "validation": {
+    "issues": [
+      {
+        "code": "ITM-04",
+        "severity": "REVIEW",
+        "path": "/lines/0",
+        "message": "Codice articolo cliente ambiguo: identificatori in conflitto"
+      }
+    ]
+  },
+  "_synthetic_metadata": {
+    "hard_case_types": [
+      "AMBIGUOUS_CUSTOMER_CODE"
+    ],
+    "is_hard_case": true
+  }
+}

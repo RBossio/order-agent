@@ -7,7 +7,7 @@ from ventureorder.rules.models import Issue, RuleContext, Severity
 from ventureorder.rules.reference import addresses_match, customer_of
 from ventureorder.rules.registry import rule
 
-FUZZY_METHODS = frozenset({"FUZZY_NAME"})
+FUZZY_METHODS = frozenset({"FUZZY_NAME", "CODE"})
 
 
 @rule("CUS-01", Severity.BLOCK)
@@ -45,7 +45,7 @@ def cus_01_buyer_resolved(ctx: RuleContext) -> list[Issue]:
 
 @rule("CUS-02", Severity.REVIEW)
 def cus_02_fuzzy_name(ctx: RuleContext) -> list[Issue]:
-    """Cliente trovato solo per nome fuzzy (score < 0,95)."""
+    """Cliente trovato in modo incerto (nome fuzzy o solo xref, score < 0,95)."""
     info = resolved(ctx.buyer)
     method = str(info.get("method") or "")
     score = info.get("score")
@@ -68,6 +68,14 @@ def cus_02_fuzzy_name(ctx: RuleContext) -> list[Issue]:
     return []
 
 
+def _ship_has_address(ship: dict) -> bool:
+    """True se ``ship_to`` porta un indirizzo confrontabile, non solo un nome."""
+    addr = ship.get("address")
+    if isinstance(addr, dict):
+        return bool(addr.get("line1") or addr.get("city") or addr.get("postal_code"))
+    return bool(addr)
+
+
 @rule("CUS-03", Severity.REVIEW)
 def cus_03_ship_to(ctx: RuleContext) -> list[Issue]:
     """``ship_to`` non corrisponde a nessun indirizzo di consegna del cliente."""
@@ -77,6 +85,9 @@ def cus_03_ship_to(ctx: RuleContext) -> list[Issue]:
     if customer is None:
         return []
     if addresses_match(ctx.ship_to, customer):
+        return []
+    # Solo il nome della sede, senza via: o si collega in anagrafica, o non è errore.
+    if not _ship_has_address(ctx.ship_to):
         return []
     return [
         issue(

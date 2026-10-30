@@ -1,0 +1,222 @@
+{
+  "schema_version": "1.0",
+  "order_id": "73257489-f084-515e-ae6a-91ff7084e7d9",
+  "tenant_id": "delta-industrial-supply",
+  "document_type": "ORIGINAL",
+  "status": "VALIDATED",
+  "source": {
+    "channel": "FOLDER",
+    "message_id": null,
+    "from_address": null,
+    "subject": null,
+    "received_at": "2026-01-15T10:30:00Z",
+    "documents": [
+      {
+        "document_id": "doc-2656e224",
+        "kind": "XLSX",
+        "filename": "TIT-PO-01148.xlsx",
+        "mime_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        "sha256": "3c9c29f47bd349bdb15b72f80971b1d7ef02151e88ad292df973c65fa53d4897",
+        "page_count": null
+      }
+    ]
+  },
+  "buyer": {
+    "name": "Omega Manufacturing Inc. (SYNTHETIC)",
+    "code_on_document": "C-OMEGA",
+    "tax_id": "US60-6205543",
+    "gln": null,
+    "peppol_endpoint": null,
+    "address": {
+      "line1": "5662 Manufacturing Way",
+      "city": "Cleveland",
+      "region": "OH",
+      "postal_code": "44101",
+      "country": "US"
+    },
+    "contact": {
+      "name": "Omega Purchasing",
+      "email": "purchasing@omega.example",
+      "phone": "+1-555-6724"
+    },
+    "resolved": {
+      "erp_partner_id": 48,
+      "erp_partner_ref": "C-OMEGA",
+      "method": "CODE",
+      "score": 0.99
+    }
+  },
+  "seller": {
+    "name": "Delta Industrial Supply LLC (SYNTHETIC)",
+    "code_on_document": null,
+    "tax_id": null,
+    "address": {
+      "line1": "55 Commerce Dr",
+      "city": "Dayton",
+      "region": "OH",
+      "postal_code": "45402",
+      "country": "US"
+    },
+    "resolved": null
+  },
+  "header": {
+    "po_number": "TIT-PO-01148",
+    "po_revision": 0,
+    "po_date": "21-Feb-2026",
+    "requested_delivery_date": "2026-03-08",
+    "currency": "USD",
+    "buyer_reference": "Dept 411",
+    "payment_terms_text": "Net 30",
+    "incoterms": null,
+    "ship_via": "Best Way",
+    "notes": "Call before delivery",
+    "language": "en"
+  },
+  "lines": [
+    {
+      "line_no": 1,
+      "buyer_item_code": "OMEGA-TOO-8550",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Utility Knife Retractable (SYNTHETIC)",
+      "quantity": 10,
+      "uom_raw": "EA",
+      "uom": "EA",
+      "pack": null,
+      "unit_price": 5.11,
+      "price_uom": "EA",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 51.1,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "TLS-UTK-298",
+        "erp_product_id": 1298,
+        "erp_uom": "EA",
+        "erp_uom_id": 45,
+        "erp_quantity": 10,
+        "conversion_factor": 1.0,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 5.11
+      }
+    },
+    {
+      "line_no": 2,
+      "buyer_item_code": null,
+      "seller_item_code": "JAN-TTI-223",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Toilet Tissue 2P Standard (SYNTHETIC)",
+      "quantity": 12,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "96RL/CS",
+        "inner_count": 96,
+        "inner_size": 1,
+        "inner_uom": "RL"
+      },
+      "unit_price": 61.32,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 735.84,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "JAN-TTI-223",
+        "erp_product_id": 1223,
+        "erp_uom": "CS",
+        "erp_uom_id": 27,
+        "erp_quantity": 12,
+        "conversion_factor": 1.0,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 61.32
+      }
+    },
+    {
+      "line_no": 3,
+      "buyer_item_code": null,
+      "seller_item_code": "JAN-FTI-151",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Facial Tissue Flat Box (SYNTHETIC)",
+      "quantity": 6,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "30BX/CS",
+        "inner_count": 30,
+        "inner_size": 1,
+        "inner_uom": "BX"
+      },
+      "unit_price": 46.07,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 276.42,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "JAN-FTI-151",
+        "erp_product_id": 1151,
+        "erp_uom": "CS",
+        "erp_uom_id": 18,
+        "erp_quantity": 6,
+        "conversion_factor": 1.0,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 46.07
+      }
+    }
+  ],
+  "charges": [],
+  "totals": {
+    "lines_amount_declared": 1063.36,
+    "tax_amount_declared": null,
+    "total_amount_declared": 1063.36,
+    "lines_amount_computed": 1063.36
+  },
+  "decision": {
+    "score": 0.98,
+    "route": "AUTO_POST",
+    "reasons": []
+  },
+  "processing": {
+    "extractor": "synthetic/generator.py",
+    "prompt_version": null,
+    "created_at": "2026-01-15T10:30:00Z",
+    "updated_at": null
+  },
+  "ship_to": {
+    "name": "Omega Shipping Location 1",
+    "code_on_document": "SHIP-01",
+    "address": {
+      "line1": "1351 Commerce Dr",
+      "city": "Cleveland",
+      "region": "OH",
+      "postal_code": "44101",
+      "country": "US"
+    },
+    "resolved": {
+      "erp_partner_id": 49,
+      "erp_partner_ref": "SHIP-01",
+      "method": "CODE",
+      "score": 1.0
+    }
+  },
+  "_synthetic_metadata": {
+    "hard_case_types": [],
+    "is_hard_case": false
+  }
+}

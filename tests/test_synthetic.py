@@ -423,6 +423,117 @@ class TestReproducibility:
                     assert l1["quantity"] == l2["quantity"]
 
 
+class TestGroundTruthFixes:
+    """DATE_FORMAT riformatta la data reale; Excel ha la data di consegna; email fuori regex."""
+
+    def test_date_format_keeps_calendar_day(self):
+        from synthetic.orders import reformat_existing_date
+
+        original = "2026-03-07"
+        reformatted = reformat_existing_date(original, "pdf")
+        from synthetic.orders import _parse_display_date
+
+        parsed_orig = _parse_display_date(original)
+        parsed_new = _parse_display_date(reformatted)
+        assert parsed_orig is not None and parsed_new is not None
+        assert parsed_orig.date() == parsed_new.date()
+        assert reformatted != "Jan 15, 2026" or original.startswith("2026-01-15")
+
+    def test_excel_writes_delivery_date(self, tmp_path):
+        from openpyxl import load_workbook
+
+        from synthetic.orders import generate_xlsx_order
+
+        order = {
+            "buyer": {"name": "Acme Company (SYNTHETIC)"},
+            "ship_to": {"name": "Acme Shipping Location 1"},
+            "header": {
+                "po_number": "4500010001",
+                "po_date": "2026-03-07",
+                "requested_delivery_date": "2026-03-20",
+            },
+            "lines": [{
+                "line_no": 1,
+                "seller_item_code": "JAN-DSP-200",
+                "description": "Disinfectant Spray",
+                "quantity": 2,
+                "uom_raw": "CS",
+                "unit_price": 45.69,
+                "line_amount": 91.38,
+            }],
+            "totals": {"lines_amount_declared": 91.38},
+        }
+        path = tmp_path / "po.xlsx"
+        generate_xlsx_order(order, path, [], [], order_idx=0)
+        wb = load_workbook(path)
+        ws = wb.active
+        assert ws["A7"].value == "Delivery Date:"
+        assert str(ws["B7"].value) == "2026-03-20"
+
+    def test_unseen_email_templates_miss_current_regexes(self):
+        from extract.preprocessor import EMAIL_ITEM_RE, EMAIL_QTY_RE, Preprocessor
+        from synthetic.orders import EMAIL_BODY_TEMPLATES, render_email_body
+
+        assert len(EMAIL_BODY_TEMPLATES) >= 5
+        order = {
+            "buyer": {
+                "name": "Acme Company (SYNTHETIC)",
+                "contact": {"name": "Pat", "email": "p@acme.example"},
+            },
+            "ship_to": {"name": "Acme Shipping Location 1"},
+            "header": {
+                "po_number": "4500010002",
+                "po_date": "2026-03-07",
+                "requested_delivery_date": "2026-03-20",
+            },
+            "lines": [{
+                "line_no": 1,
+                "seller_item_code": "JAN-DSP-200",
+                "buyer_item_code": None,
+                "description": "Disinfectant Spray",
+                "quantity": 10,
+                "uom_raw": "CS",
+                "unit_price": 45.69,
+            }],
+        }
+        preprocessor = Preprocessor()
+        for template in EMAIL_BODY_TEMPLATES:
+            body, _subtype = render_email_body(template, order, [], [])
+            assert EMAIL_ITEM_RE.search(body) is None, template
+            assert EMAIL_QTY_RE.search(body) is None, template
+            result = preprocessor.preprocess({
+                "parts": [{"part_type": "EMAIL_BODY", "text": body}],
+            })
+            assert result.lines == [], template
+
+    def test_total_mixed_keeps_expected_total_line(self):
+        from synthetic.orders import render_email_body
+
+        order = {
+            "buyer": {
+                "name": "Acme Company (SYNTHETIC)",
+                "contact": {"name": "Pat", "email": "p@acme.example"},
+            },
+            "ship_to": {"name": "Acme Shipping Location 1"},
+            "header": {
+                "po_number": "4500010002",
+                "po_date": "2026-03-07",
+                "requested_delivery_date": "2026-03-20",
+            },
+            "lines": [{
+                "line_no": 1,
+                "seller_item_code": "JAN-DSP-200",
+                "description": "Disinfectant Spray",
+                "quantity": 10,
+                "uom_raw": "CS",
+                "unit_price": 45.69,
+            }],
+            "totals": {"total_amount_declared": 456.90, "lines_amount_declared": 456.90},
+        }
+        body, _subtype = render_email_body("classic", order, ["TOTAL_MIXED"], [])
+        assert "Expected Total: $456.90" in body
+
+
 class TestDatagenIntegration:
     """Test per l'integrazione con datagen/master/."""
 

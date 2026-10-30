@@ -1,0 +1,296 @@
+{
+  "schema_version": "1.0",
+  "order_id": "f492116c-ac4c-5518-877c-ae9f581c5757",
+  "tenant_id": "delta-industrial-supply",
+  "document_type": "ORIGINAL",
+  "status": "VALIDATED",
+  "source": {
+    "channel": "FOLDER",
+    "message_id": null,
+    "from_address": null,
+    "subject": null,
+    "received_at": "2026-01-15T10:30:00Z",
+    "documents": [
+      {
+        "document_id": "doc-466788f2",
+        "kind": "XLSX",
+        "filename": "TIT-PO-01059.xlsx",
+        "mime_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        "sha256": "452d76b74e26e644f83c83e85217595b4c9da1fdd100ca54276e4f253a29889b",
+        "page_count": null
+      }
+    ]
+  },
+  "buyer": {
+    "name": "Omega Manufacturing Inc. (SYNTHETIC)",
+    "code_on_document": "C-OMEGA",
+    "tax_id": "US60-6205543",
+    "gln": null,
+    "peppol_endpoint": null,
+    "address": {
+      "line1": "5662 Manufacturing Way",
+      "city": "Cleveland",
+      "region": "OH",
+      "postal_code": "44101",
+      "country": "US"
+    },
+    "contact": {
+      "name": "Omega Purchasing",
+      "email": "purchasing@omega.example",
+      "phone": "+1-555-6724"
+    },
+    "resolved": {
+      "erp_partner_id": 48,
+      "erp_partner_ref": "C-OMEGA",
+      "method": "CODE",
+      "score": 0.99
+    }
+  },
+  "seller": {
+    "name": "Delta Industrial Supply LLC (SYNTHETIC)",
+    "code_on_document": null,
+    "tax_id": null,
+    "address": {
+      "line1": "55 Commerce Dr",
+      "city": "Dayton",
+      "region": "OH",
+      "postal_code": "45402",
+      "country": "US"
+    },
+    "resolved": null
+  },
+  "header": {
+    "po_number": "TIT-PO-01059",
+    "po_revision": 0,
+    "po_date": "05-Feb-2026",
+    "requested_delivery_date": "2026-02-23",
+    "currency": "USD",
+    "buyer_reference": "Dept 667",
+    "payment_terms_text": "Net 45",
+    "incoterms": null,
+    "ship_via": null,
+    "notes": "Rush order",
+    "language": "en"
+  },
+  "lines": [
+    {
+      "line_no": 1,
+      "buyer_item_code": null,
+      "seller_item_code": "JAN-PTR-1P-NAT-1",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Paper Towel Roll 1P Natural (SYNTHETIC)",
+      "quantity": 24,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "12RL/CS",
+        "inner_count": 12,
+        "inner_size": 1,
+        "inner_uom": "RL"
+      },
+      "unit_price": 62.39,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 1497.36,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "JAN-PTR-1P-NAT-1",
+        "erp_product_id": 1028,
+        "erp_uom": "CS",
+        "erp_uom_id": 35,
+        "erp_quantity": 24,
+        "conversion_factor": 1.0,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 62.39
+      }
+    },
+    {
+      "line_no": 2,
+      "buyer_item_code": null,
+      "seller_item_code": "PPE-GLS-CLE-ANTI-FOG",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Safety Glasses Clear Anti-Fog (SYNTHETIC)",
+      "quantity": 3,
+      "uom_raw": "EA",
+      "uom": "EA",
+      "pack": null,
+      "unit_price": 5.71,
+      "price_uom": "EA",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 17.13,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "PPE-GLS-CLE-ANTI-FOG",
+        "erp_product_id": 1039,
+        "erp_uom": "EA",
+        "erp_uom_id": 4,
+        "erp_quantity": 3,
+        "conversion_factor": 1.0,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 5.71
+      }
+    },
+    {
+      "line_no": 3,
+      "buyer_item_code": null,
+      "seller_item_code": "JAN-NFC-014",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Floor Cleaner Neutral Concentrate (SYNTHETIC)",
+      "quantity": 4,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "4/1GAL",
+        "inner_count": 4,
+        "inner_size": 1,
+        "inner_uom": "GLL"
+      },
+      "unit_price": 63.97,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 255.88,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "JAN-NFC-014",
+        "erp_product_id": 1014,
+        "erp_uom": "CS",
+        "erp_uom_id": 15,
+        "erp_quantity": 4,
+        "conversion_factor": 1.0,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 63.97
+      }
+    },
+    {
+      "line_no": 4,
+      "buyer_item_code": null,
+      "seller_item_code": "PPE-N95-049",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "N95 Respirator (SYNTHETIC)",
+      "quantity": 4,
+      "uom_raw": "BX",
+      "uom": "BX",
+      "pack": {
+        "raw": "20/BX",
+        "inner_count": 20,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 44.43,
+      "price_uom": "BX",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 177.72,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "PPE-N95-049",
+        "erp_product_id": 1049,
+        "erp_uom": "BX",
+        "erp_uom_id": 47,
+        "erp_quantity": 4,
+        "conversion_factor": 1.0,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 44.43
+      }
+    },
+    {
+      "line_no": 5,
+      "buyer_item_code": "OMEGA-ABR-0994",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Cut-Off Wheel 4-1/2in (SYNTHETIC)",
+      "quantity": 24,
+      "uom_raw": "BX",
+      "uom": "BX",
+      "pack": {
+        "raw": "25/BX",
+        "inner_count": 25,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 40.18,
+      "price_uom": "BX",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 964.32,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "ABR-COW-412IN",
+        "erp_product_id": 1016,
+        "erp_uom": "BX",
+        "erp_uom_id": 20,
+        "erp_quantity": 24,
+        "conversion_factor": 1.0,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 40.18
+      }
+    }
+  ],
+  "charges": [],
+  "totals": {
+    "lines_amount_declared": 2912.41,
+    "tax_amount_declared": null,
+    "total_amount_declared": 2912.41,
+    "lines_amount_computed": 2912.41
+  },
+  "decision": {
+    "score": 0.98,
+    "route": "AUTO_POST",
+    "reasons": []
+  },
+  "processing": {
+    "extractor": "synthetic/generator.py",
+    "prompt_version": null,
+    "created_at": "2026-01-15T10:30:00Z",
+    "updated_at": null
+  },
+  "ship_to": {
+    "name": "Omega Shipping Location 2",
+    "code_on_document": "SHIP-02",
+    "address": {
+      "line1": "8455 Manufacturing Way",
+      "city": "Fort Wayne",
+      "region": "IN",
+      "postal_code": "46802",
+      "country": "US"
+    },
+    "resolved": {
+      "erp_partner_id": 49,
+      "erp_partner_ref": "SHIP-02",
+      "method": "CODE",
+      "score": 1.0
+    }
+  },
+  "_synthetic_metadata": {
+    "hard_case_types": [],
+    "is_hard_case": false
+  }
+}

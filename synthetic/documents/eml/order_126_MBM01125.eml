@@ -1,0 +1,28 @@
+Content-Type: multipart/mixed; boundary="===============2015246170731192678=="
+MIME-Version: 1.0
+From: purchasing@apex.example
+To: orders@delta-industrial.example
+Subject: PO MBM01125 - Order from Apex Corp. (SYNTHETIC)
+Message-ID: <po-MBM01125@apex.example>
+Date: Thu, 15 Jan 2026 10:30:00 +0000
+
+--===============2015246170731192678==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+Hi team, could you please raise this under our purchase order MBM01125 dated 4/7/26? Deliver to Apex Shipping Location 1; we need the goods by 2026-04-12.
+
+We need 4 CS of Toilet Tissue 2P Standard (SYNTHETIC) (catalog APEX-JAN-6771) at 59.97 each.
+We need 3 EA of Adjustable Wrench 10in (SYNTHETIC) (catalog TLS-AWR-10IN) at 43.93 each.
+We need 10 BX of Cut-Off Wheel 4in (SYNTHETIC) (catalog ABR-COW-4IN-3) at 36.04 each.
+We need 2 PK of Utility Blade Standard (SYNTHETIC) (catalog APEX-TOO-8689) at 9.34 each.
+We need 4 CS of Construction Adhesive (SYNTHETIC) (catalog ADH-CON-246) at 59.67 each.
+We need 3 CS of Toilet Tissue 2P Standard (SYNTHETIC) (catalog JAN-TTI-238) at 87.17 each.
+We need 2 RO of Electrical Tape White 3/4in (SYNTHETIC) (catalog APEX-ELE-0574) at 2.24 each.
+We need 24 CS of Disinfectant Spray (SYNTHETIC) (catalog JAN-DSP-186) at 62.75 each.
+We need 24 CS of Construction Adhesive (SYNTHETIC) (catalog ADH-CON-126) at 60.43 each.
+We need 4 CS of Glass Cleaner RTU (SYNTHETIC) (catalog APEX-JAN-7569) at 35.94 each.
+
+Thanks in advance.
+--===============2015246170731192678==--

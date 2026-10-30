@@ -1,0 +1,333 @@
+{
+  "schema_version": "1.0",
+  "order_id": "e97399a2-ee99-5da8-abd4-94568b78cee0",
+  "tenant_id": "delta-industrial-supply",
+  "document_type": "ORIGINAL",
+  "status": "VALIDATED",
+  "source": {
+    "channel": "FOLDER",
+    "message_id": null,
+    "from_address": null,
+    "subject": null,
+    "received_at": "2026-01-15T10:30:00Z",
+    "documents": [
+      {
+        "document_id": "doc-232230f5",
+        "kind": "XLSX",
+        "filename": "NMC-01069.xlsx",
+        "mime_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        "sha256": "37e07a794d7f26d56f831e6bafbc707a9c95047850b81ca6c2a06be1fa2ad269",
+        "page_count": null
+      }
+    ]
+  },
+  "buyer": {
+    "name": "Atlas Group (SYNTHETIC)",
+    "code_on_document": "C-ATLAS",
+    "tax_id": "US21-9507186",
+    "gln": null,
+    "peppol_endpoint": null,
+    "address": {
+      "line1": "6399 Tech Center Blvd",
+      "city": "Grand Rapids",
+      "region": "MI",
+      "postal_code": "49503",
+      "country": "US"
+    },
+    "contact": {
+      "name": "Atlas Purchasing",
+      "email": "purchasing@atlas.example",
+      "phone": "+1-555-2013"
+    },
+    "resolved": {
+      "erp_partner_id": 60,
+      "erp_partner_ref": "C-ATLAS",
+      "method": "CODE",
+      "score": 0.99
+    }
+  },
+  "seller": {
+    "name": "Delta Industrial Supply LLC (SYNTHETIC)",
+    "code_on_document": null,
+    "tax_id": null,
+    "address": {
+      "line1": "55 Commerce Dr",
+      "city": "Dayton",
+      "region": "OH",
+      "postal_code": "45402",
+      "country": "US"
+    },
+    "resolved": null
+  },
+  "header": {
+    "po_number": "NMC-01069",
+    "po_revision": 0,
+    "po_date": "2026-05-13",
+    "requested_delivery_date": "2026-05-18",
+    "currency": "USD",
+    "buyer_reference": "Dept 687",
+    "payment_terms_text": "Net 30",
+    "incoterms": null,
+    "ship_via": "Best Way",
+    "notes": "Confirm availability",
+    "language": "en"
+  },
+  "lines": [
+    {
+      "line_no": 1,
+      "buyer_item_code": null,
+      "seller_item_code": "JAN-FPD-17-BLA",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Floor Pad 17in Black (SYNTHETIC)",
+      "quantity": 2,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "5/CS",
+        "inner_count": 5,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 20.93,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 41.86,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "JAN-FPD-17-BLA",
+        "erp_product_id": 1242,
+        "erp_uom": "CS",
+        "erp_uom_id": 28,
+        "erp_quantity": 2,
+        "conversion_factor": 1.0,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 20.93
+      }
+    },
+    {
+      "line_no": 2,
+      "buyer_item_code": "ATLAS-TOO-8809",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Utility Knife Retractable (SYNTHETIC)",
+      "quantity": 6,
+      "uom_raw": "EA",
+      "uom": "EA",
+      "pack": null,
+      "unit_price": 6.3,
+      "price_uom": "EA",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 37.8,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "TLS-UTK-113",
+        "erp_product_id": 1113,
+        "erp_uom": "EA",
+        "erp_uom_id": 37,
+        "erp_quantity": 6,
+        "conversion_factor": 1.0,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 6.3
+      }
+    },
+    {
+      "line_no": 3,
+      "buyer_item_code": "ATLAS-ABR-6621",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Cut-Off Wheel 6in (SYNTHETIC)",
+      "quantity": 12,
+      "uom_raw": "BX",
+      "uom": "BX",
+      "pack": {
+        "raw": "25/BX",
+        "inner_count": 25,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 47.08,
+      "price_uom": "BX",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 564.96,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "ABR-COW-6IN",
+        "erp_product_id": 1010,
+        "erp_uom": "BX",
+        "erp_uom_id": 30,
+        "erp_quantity": 12,
+        "conversion_factor": 1.0,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 47.08
+      }
+    },
+    {
+      "line_no": 4,
+      "buyer_item_code": "ATLAS-ABR-3408",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Flap Disc 4in 220 (SYNTHETIC)",
+      "quantity": 2,
+      "uom_raw": "BX",
+      "uom": "BX",
+      "pack": {
+        "raw": "10/BX",
+        "inner_count": 10,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 64.73,
+      "price_uom": "BX",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 129.46,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "ABR-FLD-4IN-1",
+        "erp_product_id": 1240,
+        "erp_uom": "BX",
+        "erp_uom_id": 32,
+        "erp_quantity": 2,
+        "conversion_factor": 1.0,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 64.73
+      }
+    },
+    {
+      "line_no": 5,
+      "buyer_item_code": null,
+      "seller_item_code": "FST-LWS-516-18",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Lock Washer 5/16-18 Zinc (SYNTHETIC)",
+      "quantity": 6,
+      "uom_raw": "BX",
+      "uom": "BX",
+      "pack": {
+        "raw": "BX/100",
+        "inner_count": 100,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 16.68,
+      "price_uom": "BX",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 100.08,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "FST-LWS-516-18",
+        "erp_product_id": 1041,
+        "erp_uom": "BX",
+        "erp_uom_id": 31,
+        "erp_quantity": 6,
+        "conversion_factor": 1.0,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 16.68
+      }
+    },
+    {
+      "line_no": 6,
+      "buyer_item_code": "ATLAS-JAN-9318",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Hand Soap Foam (SYNTHETIC)",
+      "quantity": 12,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "6/CS",
+        "inner_count": 6,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 82.47,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 989.64,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "JAN-HSF-274",
+        "erp_product_id": 1274,
+        "erp_uom": "CS",
+        "erp_uom_id": 9,
+        "erp_quantity": 12,
+        "conversion_factor": 1.0,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 82.47
+      }
+    }
+  ],
+  "charges": [],
+  "totals": {
+    "lines_amount_declared": 1863.8,
+    "tax_amount_declared": null,
+    "total_amount_declared": 1863.8,
+    "lines_amount_computed": 1863.8
+  },
+  "decision": {
+    "score": 0.98,
+    "route": "AUTO_POST",
+    "reasons": []
+  },
+  "processing": {
+    "extractor": "synthetic/generator.py",
+    "prompt_version": null,
+    "created_at": "2026-01-15T10:30:00Z",
+    "updated_at": null
+  },
+  "ship_to": {
+    "name": "Atlas Shipping Location 2",
+    "code_on_document": "SHIP-02",
+    "address": {
+      "line1": "3184 Business Park Rd",
+      "city": "Chicago",
+      "region": "IL",
+      "postal_code": "60601",
+      "country": "US"
+    },
+    "resolved": {
+      "erp_partner_id": 61,
+      "erp_partner_ref": "SHIP-02",
+      "method": "CODE",
+      "score": 1.0
+    }
+  },
+  "_synthetic_metadata": {
+    "hard_case_types": [],
+    "is_hard_case": false
+  }
+}

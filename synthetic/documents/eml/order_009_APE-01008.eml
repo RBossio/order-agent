@@ -1,0 +1,26 @@
+Content-Type: multipart/mixed; boundary="===============9010049492671083562=="
+MIME-Version: 1.0
+From: purchasing@summit.example
+To: orders@delta-industrial.example
+Subject: PO APE-01008 - Order from Summit Group (SYNTHETIC)
+Message-ID: <po-APE-01008@summit.example>
+Date: Thu, 15 Jan 2026 10:30:00 +0000
+
+--===============9010049492671083562==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+Kindly arrange shipment against purchase order APE-01008 (2026/05/06).
+Ship the following to Summit Shipping Location 3, needed by 2026-05-12:
+
+- three BX of Cut-Off Wheel 4in (SYNTHETIC), catalog SUMMIT-ABR-8409, unit price 57.68.
+- one CS of Paper Towel Roll 1P White (SYNTHETIC), catalog JAN-PTR-1P-WHI, unit price 62.73.
+- one CS of Penetrating Oil Spray (SYNTHETIC), catalog SUMMIT-LUB-1957, unit price 94.71.
+- two BX of Cut-Off Wheel 6in (SYNTHETIC), catalog SUMMIT-ABR-3758, unit price 33.27.
+- six RO of Electrical Tape Blue 3/4in (SYNTHETIC), catalog ELE-TPE-BLU-1, unit price 4.49.
+- five BX of Ear Plugs Foam Disposable (SYNTHETIC), catalog PPE-EAR-286, unit price 20.48.
+- three RO of Can Liner 24x24 1.5mil Clear Roll (SYNTHETIC), catalog SUMMIT-JAN-6265, unit price 21.74.
+
+Appreciate the help.
+--===============9010049492671083562==--

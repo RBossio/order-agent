@@ -1,0 +1,31 @@
+Content-Type: multipart/mixed; boundary="===============6275794747540637278=="
+MIME-Version: 1.0
+From: purchasing@delta.example
+To: orders@delta-industrial.example
+Subject: PO BW-01005 - Order from Delta Holdings (SYNTHETIC)
+Message-ID: <po-BW-01005@delta.example>
+Date: Thu, 15 Jan 2026 10:30:00 +0000
+
+--===============6275794747540637278==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+Hi team, could you please raise this under our purchase order BW-01005 dated 02/05/2026? Deliver to Delta Shipping Location 1; we need the goods by 2026-02-21.
+
+We need 2 PK of Super Glue Gel (SYNTHETIC) (catalog ADH-SGG-011) at 25.28 each.
+We need 6 RO of Bubble Wrap 12in (SYNTHETIC) (catalog PKG-BBW-205) at 42.15 each.
+We need 5 CS of Floor Stripper Heavy Duty (SYNTHETIC) (catalog JAN-FST-281) at 87.26 each.
+We need 3 BX of Hex Nut 3/4-10 Grade 5 Zinc (SYNTHETIC) (catalog FST-HNT-34-10-1) at 9.87 each.
+We need 12 BX of Cut-Off Wheel 6in (SYNTHETIC) (catalog ABR-COW-6IN-3) at 48.92 each.
+We need 5 RO of Can Liner 38x58 1.2mil Black Roll (SYNTHETIC) (catalog JAN-LNR-3858-12-BL) at 17.13 each.
+We need 5 RO of Bubble Wrap 12in (SYNTHETIC) (catalog PKG-BBW-005) at 37.59 each.
+We need 1 PK of Super Glue Gel (SYNTHETIC) (catalog ADH-SGG-132) at 17.49 each.
+We need 6 CS of Floor Cleaner Neutral Concentrate (SYNTHETIC) (catalog JAN-NFC-251) at 54.45 each.
+We need 10 BX of Cut-Off Wheel 4in (SYNTHETIC) (catalog ABR-COW-4IN-2) at 50.25 each.
+We need 10 RO of Bubble Wrap 12in (SYNTHETIC) (catalog PKG-BBW-017) at 31.59 each.
+We need 2 EA of Safety Glasses Smoke Anti-Fog (SYNTHETIC) (catalog PPE-GLS-SMO-ANTI-FOG-1) at 8.00 each.
+We need 1 CS of Latex Gloves XXL PF (SYNTHETIC) (catalog PPE-GLV-LAT-5-XXL-BLU) at 81.27 each.
+
+Thanks in advance.
+--===============6275794747540637278==--

@@ -1,0 +1,375 @@
+{
+  "schema_version": "1.0",
+  "order_id": "2c4f14b0-780d-5bd9-ba38-67191dd2ef91",
+  "tenant_id": "delta-industrial-supply",
+  "document_type": "ORIGINAL",
+  "status": "VALIDATED",
+  "source": {
+    "channel": "FOLDER",
+    "message_id": null,
+    "from_address": null,
+    "subject": null,
+    "received_at": "2026-01-15T10:30:00Z",
+    "documents": [
+      {
+        "document_id": "doc-6102d28a",
+        "kind": "XLSX",
+        "filename": "SW-01053.xlsx",
+        "mime_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        "sha256": "575da6db1abee3d1695fb80166fcf4476c1279f591c98ef6c72a6d75e1adac23",
+        "page_count": null
+      }
+    ]
+  },
+  "buyer": {
+    "name": "Nova Company (SYNTHETIC)",
+    "code_on_document": "C-NOVA",
+    "tax_id": "US23-6761929",
+    "gln": null,
+    "peppol_endpoint": null,
+    "address": {
+      "line1": "1481 Factory Blvd",
+      "city": "Indianapolis",
+      "region": "IN",
+      "postal_code": "46201",
+      "country": "US"
+    },
+    "contact": {
+      "name": "Nova Purchasing",
+      "email": "purchasing@nova.example",
+      "phone": "+1-555-9586"
+    },
+    "resolved": {
+      "erp_partner_id": 63,
+      "erp_partner_ref": "C-NOVA",
+      "method": "CODE",
+      "score": 0.99
+    }
+  },
+  "seller": {
+    "name": "Delta Industrial Supply LLC (SYNTHETIC)",
+    "code_on_document": null,
+    "tax_id": null,
+    "address": {
+      "line1": "55 Commerce Dr",
+      "city": "Dayton",
+      "region": "OH",
+      "postal_code": "45402",
+      "country": "US"
+    },
+    "resolved": null
+  },
+  "header": {
+    "po_number": "SW-01053",
+    "po_revision": 0,
+    "po_date": "05-25-2026",
+    "requested_delivery_date": "2026-06-09",
+    "currency": "USD",
+    "buyer_reference": "Dept 293",
+    "payment_terms_text": "Net 30",
+    "incoterms": null,
+    "ship_via": "UPS Ground",
+    "notes": "Rush order",
+    "language": "en"
+  },
+  "lines": [
+    {
+      "line_no": 1,
+      "buyer_item_code": null,
+      "seller_item_code": "ABR-COW-4IN",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Cut-Off Wheel 4in (SYNTHETIC)",
+      "quantity": 6,
+      "uom_raw": "BX",
+      "uom": "BX",
+      "pack": {
+        "raw": "25/BX",
+        "inner_count": 25,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 37.97,
+      "price_uom": "BX",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 227.82,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "ABR-COW-4IN",
+        "erp_product_id": 1032,
+        "erp_uom": "BX",
+        "erp_uom_id": 35,
+        "erp_quantity": 6,
+        "conversion_factor": 1.0,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 37.97
+      }
+    },
+    {
+      "line_no": 2,
+      "buyer_item_code": null,
+      "seller_item_code": "LUB-MOL-031",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Machine Oil Light (SYNTHETIC)",
+      "quantity": 6,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "12/CS",
+        "inner_count": 12,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 53.66,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 321.96,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "LUB-MOL-031",
+        "erp_product_id": 1031,
+        "erp_uom": "CS",
+        "erp_uom_id": 1,
+        "erp_quantity": 6,
+        "conversion_factor": 1.0,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 53.66
+      }
+    },
+    {
+      "line_no": 3,
+      "buyer_item_code": "NOVA-PAC-4566",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Stretch Wrap 18in (SYNTHETIC)",
+      "quantity": 10,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "4RL/CS",
+        "inner_count": 4,
+        "inner_size": 1,
+        "inner_uom": "RL"
+      },
+      "unit_price": 133.33,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 1333.3,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "PKG-STW-138",
+        "erp_product_id": 1138,
+        "erp_uom": "CS",
+        "erp_uom_id": 16,
+        "erp_quantity": 10,
+        "conversion_factor": 1.0,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 133.33
+      }
+    },
+    {
+      "line_no": 4,
+      "buyer_item_code": null,
+      "seller_item_code": "ABR-SPS-120G-1",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Sandpaper Sheet 120 Grit (SYNTHETIC)",
+      "quantity": 3,
+      "uom_raw": "PK",
+      "uom": "PK",
+      "pack": {
+        "raw": "50/PK",
+        "inner_count": 50,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 18.94,
+      "price_uom": "PK",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 56.82,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "ABR-SPS-120G-1",
+        "erp_product_id": 1265,
+        "erp_uom": "PK",
+        "erp_uom_id": 34,
+        "erp_quantity": 3,
+        "conversion_factor": 1.0,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 18.94
+      }
+    },
+    {
+      "line_no": 5,
+      "buyer_item_code": null,
+      "seller_item_code": "PPE-GLV-LAT-4-XXL-BLA",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Latex Gloves XXL PF (SYNTHETIC)",
+      "quantity": 10,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "100/BX 10BX/CS",
+        "inner_count": 10,
+        "inner_size": 1,
+        "inner_uom": "BX"
+      },
+      "unit_price": 85.5,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 855.0,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "PPE-GLV-LAT-4-XXL-BLA",
+        "erp_product_id": 1280,
+        "erp_uom": "CS",
+        "erp_uom_id": 12,
+        "erp_quantity": 10,
+        "conversion_factor": 1.0,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 85.5
+      }
+    },
+    {
+      "line_no": 6,
+      "buyer_item_code": null,
+      "seller_item_code": "PPE-GLV-NIT-4-S-WHI",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Nitrile Gloves S White 4mil PF (SYNTHETIC)",
+      "quantity": 3,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "100/BX 10BX/CS",
+        "inner_count": 10,
+        "inner_size": 1,
+        "inner_uom": "BX"
+      },
+      "unit_price": 102.14,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 306.42,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "PPE-GLV-NIT-4-S-WHI",
+        "erp_product_id": 1056,
+        "erp_uom": "CS",
+        "erp_uom_id": 45,
+        "erp_quantity": 3,
+        "conversion_factor": 1.0,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 102.14
+      }
+    },
+    {
+      "line_no": 7,
+      "buyer_item_code": null,
+      "seller_item_code": "LUB-POS-059",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Penetrating Oil Spray (SYNTHETIC)",
+      "quantity": 12,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "12/CS",
+        "inner_count": 12,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 67.65,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 811.8,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "LUB-POS-059",
+        "erp_product_id": 1059,
+        "erp_uom": "CS",
+        "erp_uom_id": 43,
+        "erp_quantity": 12,
+        "conversion_factor": 1.0,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 67.65
+      }
+    }
+  ],
+  "charges": [],
+  "totals": {
+    "lines_amount_declared": 3913.12,
+    "tax_amount_declared": null,
+    "total_amount_declared": 3913.12,
+    "lines_amount_computed": 3913.12
+  },
+  "decision": {
+    "score": 0.98,
+    "route": "AUTO_POST",
+    "reasons": []
+  },
+  "processing": {
+    "extractor": "synthetic/generator.py",
+    "prompt_version": null,
+    "created_at": "2026-01-15T10:30:00Z",
+    "updated_at": null
+  },
+  "ship_to": {
+    "name": "Nova Shipping Location 1",
+    "code_on_document": "SHIP-01",
+    "address": {
+      "line1": "7272 Tech Center Blvd",
+      "city": "Columbus",
+      "region": "OH",
+      "postal_code": "43215",
+      "country": "US"
+    },
+    "resolved": {
+      "erp_partner_id": 64,
+      "erp_partner_ref": "SHIP-01",
+      "method": "CODE",
+      "score": 1.0
+    }
+  },
+  "_synthetic_metadata": {
+    "hard_case_types": [],
+    "is_hard_case": false
+  }
+}

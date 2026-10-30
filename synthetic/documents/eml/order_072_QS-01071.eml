@@ -1,0 +1,15 @@
+Content-Type: multipart/mixed; boundary="===============3609415449781372140=="
+MIME-Version: 1.0
+From: purchasing@global.example
+To: orders@delta-industrial.example
+Subject: PO QS-01071 - Order from Global Corp. (SYNTHETIC)
+Message-ID: <po-QS-01071@global.example>
+Date: Thu, 15 Jan 2026 10:30:00 +0000
+
+--===============3609415449781372140==
+Content-Type: text/html; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Please process purchase order <b>QS-01071</b> dated Apr 04, 2026.</p><p>Deliver to Global Shipping Location 1. Need by 2026-04-14.</p><table border='1' cellpadding='4'><tr><th>Item</th><th>Description</th><th>Quantity</th><th>Unit</th><th>Price</th></tr><tr><td>PPE-GLS-AMB-ANTI-FOG-2</td><td>Safety Glasses Amber Anti-Fog (SYNTHETIC)</td><td>4</td><td>EA</td><td>8.75</td></tr><tr><td>FST-FWS-M10</td><td>Flat Washer M10 Zinc (SYNTHETIC)</td><td>12</td><td>BX</td><td>8.14</td></tr><tr><td>ABR-FLD-4IN-2</td><td>Flap Disc 4in 120 (SYNTHETIC)</td><td>3</td><td>BX</td><td>62.68</td></tr><tr><td>GLOBAL-PAC-0791</td><td>Packing Tape Clear 2in (SYNTHETIC)</td><td>10</td><td>CS</td><td>51.92</td></tr><tr><td>JAN-TTI-238</td><td>Toilet Tissue 2P Standard (SYNTHETIC)</td><td>1</td><td>CS</td><td>87.17</td></tr><tr><td>GLOBAL-JAN-6793</td><td>Hand Soap Foam (SYNTHETIC)</td><td>12</td><td>CS</td><td>82.47</td></tr><tr><td>JAN-DSP-153</td><td>Disinfectant Spray (SYNTHETIC)</td><td>24</td><td>CS</td><td>63.11</td></tr><tr><td>FST-HCS-M10-4</td><td>Hex Cap Screw M10 x 4 Grade 5 Zinc (SYNTHETIC)</td><td>4</td><td>BX</td><td>34.62</td></tr><tr><td>ABR-FLD-412IN-1</td><td>Flap Disc 4-1/2in 180 (SYNTHETIC)</td><td>1</td><td>BX</td><td>88.42</td></tr><tr><td>GLOBAL-TOO-9073</td><td>Tape Measure 30ft (SYNTHETIC)</td><td>4</td><td>EA</td><td>31.64</td></tr><tr><td>GLOBAL-FAS-6888</td><td>Lock Washer 1/4-20 Zinc (SYNTHETIC)</td><td>10</td><td>BX</td><td>4.70</td></tr><tr><td>GLOBAL-JAN-3847</td><td>Hand Soap Foam (SYNTHETIC)</td><td>2</td><td>CS</td><td>94.24</td></tr><tr><td>GLOBAL-SAF-1744</td><td>N95 Respirator (SYNTHETIC)</td><td>3</td><td>BX</td><td>41.34</td></tr></table><p>Thanks</p></body></html>
+--===============3609415449781372140==--

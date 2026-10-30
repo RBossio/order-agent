@@ -118,6 +118,13 @@ def normalize_terms(text: str | None) -> str:
     return compact
 
 
+def normalize_party_name(name: str | None) -> str:
+    """Normalizza un nome di sede/cliente per il confronto."""
+    if not name:
+        return ""
+    return re.sub(r"[^a-z0-9]+", " ", str(name).lower()).strip()
+
+
 def normalize_address(addr: dict[str, Any] | None) -> str:
     """Chiave di confronto indirizzo: line1 + city + CAP, minuscolo."""
     if not isinstance(addr, dict):

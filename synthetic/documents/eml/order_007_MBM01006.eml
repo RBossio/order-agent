@@ -1,0 +1,15 @@
+Content-Type: multipart/mixed; boundary="===============4096518494351921890=="
+MIME-Version: 1.0
+From: purchasing@apex.example
+To: orders@delta-industrial.example
+Subject: PO MBM01006 - Order from Apex Corp. (SYNTHETIC)
+Message-ID: <po-MBM01006@apex.example>
+Date: Thu, 15 Jan 2026 10:30:00 +0000
+
+--===============4096518494351921890==
+Content-Type: text/html; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Please process purchase order <b>MBM01006</b> dated 4/6/26.</p><p>Deliver to Apex Shipping Location 1. Need by 2026-04-22.</p><table border='1' cellpadding='4'><tr><th>Item</th><th>Description</th><th>Quantity</th><th>Unit</th><th>Price</th></tr><tr><td>ABR-COW-6IN</td><td>Cut-Off Wheel 6in (SYNTHETIC)</td><td>24</td><td>BX</td><td>47.08</td></tr><tr><td>PPE-N95-078</td><td>N95 Respirator (SYNTHETIC)</td><td>6</td><td>BX</td><td>60.26</td></tr><tr><td>APEX-ABR-1329</td><td>Flap Disc 4-1/2in 180 (SYNTHETIC)</td><td>12</td><td>BX</td><td>88.42</td></tr><tr><td>APEX-TOO-5714</td><td>Screwdriver {type} 1/2-13 x 3 (SYNTHETIC)</td><td>5</td><td>EA</td><td>4.91</td></tr><tr><td>APEX-ADH-6353</td><td>Construction Adhesive (SYNTHETIC)</td><td>3</td><td>CS</td><td>59.67</td></tr><tr><td>APEX-TOO-4187</td><td>Screwdriver {type} 5/16-18 x 2 (SYNTHETIC)</td><td>2</td><td>EA</td><td>8.65</td></tr><tr><td>APEX-TOO-7746</td><td>Utility Knife Retractable (SYNTHETIC)</td><td>3</td><td>EA</td><td>3.88</td></tr><tr><td>APEX-JAN-5975</td><td>Can Liner 43x47 1.0mil Black Roll (SYNTHETIC)</td><td>10</td><td>RO</td><td>18.35</td></tr><tr><td>APEX-LUB-9429</td><td>Machine Oil Light (SYNTHETIC)</td><td>4</td><td>CS</td><td>62.24</td></tr><tr><td>APEX-JAN-6442</td><td>Facial Tissue Flat Box (SYNTHETIC)</td><td>24</td><td>CS</td><td>41.62</td></tr><tr><td>APEX-TOO-7596</td><td>Utility Knife Retractable (SYNTHETIC)</td><td>1</td><td>EA</td><td>7.67</td></tr><tr><td>APEX-JAN-4508</td><td>Degreaser Industrial (SYNTHETIC)</td><td>6</td><td>CS</td><td>61.81</td></tr><tr><td>APEX-JAN-0245</td><td>Hand Sanitizer Gel 70% (SYNTHETIC)</td><td>4</td><td>CS</td><td>49.06</td></tr><tr><td>APEX-JAN-2267</td><td>Floor Cleaner Neutral Concentrate (SYNTHETIC)</td><td>2</td><td>CS</td><td>41.78</td></tr></table><p>Thanks</p></body></html>
+--===============4096518494351921890==--

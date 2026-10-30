@@ -1,0 +1,296 @@
+{
+  "schema_version": "1.0",
+  "order_id": "bde631fc-b34a-50dc-8922-96addeef2379",
+  "tenant_id": "delta-industrial-supply",
+  "document_type": "ORIGINAL",
+  "status": "VALIDATED",
+  "source": {
+    "channel": "FOLDER",
+    "message_id": null,
+    "from_address": null,
+    "subject": null,
+    "received_at": "2026-01-15T10:30:00Z",
+    "documents": [
+      {
+        "document_id": "doc-b3e8eb28",
+        "kind": "PDF_TEXT",
+        "filename": "NMC-01134.pdf",
+        "mime_type": "application/pdf",
+        "sha256": "131a1583ac1e109ae91ff7a4cd730be37f71adca602e3f97a1889ca6090d21fd",
+        "page_count": 1
+      }
+    ]
+  },
+  "buyer": {
+    "name": "Atlas Group (SYNTHETIC)",
+    "code_on_document": "C-ATLAS",
+    "tax_id": "US21-9507186",
+    "gln": null,
+    "peppol_endpoint": null,
+    "address": {
+      "line1": "6399 Tech Center Blvd",
+      "city": "Grand Rapids",
+      "region": "MI",
+      "postal_code": "49503",
+      "country": "US"
+    },
+    "contact": {
+      "name": "Atlas Purchasing",
+      "email": "purchasing@atlas.example",
+      "phone": "+1-555-2013"
+    },
+    "resolved": {
+      "erp_partner_id": 60,
+      "erp_partner_ref": "C-ATLAS",
+      "method": "CODE",
+      "score": 0.99
+    }
+  },
+  "seller": {
+    "name": "Delta Industrial Supply LLC (SYNTHETIC)",
+    "code_on_document": null,
+    "tax_id": null,
+    "address": {
+      "line1": "55 Commerce Dr",
+      "city": "Dayton",
+      "region": "OH",
+      "postal_code": "45402",
+      "country": "US"
+    },
+    "resolved": null
+  },
+  "header": {
+    "po_number": "NMC-01134",
+    "po_revision": 0,
+    "po_date": "2026-05-17",
+    "requested_delivery_date": "2026-06-05",
+    "currency": "USD",
+    "buyer_reference": "Dept 593",
+    "payment_terms_text": "Net 30",
+    "incoterms": null,
+    "ship_via": "FedEx",
+    "notes": "Call before delivery",
+    "language": "en"
+  },
+  "lines": [
+    {
+      "line_no": 1,
+      "buyer_item_code": "ATLAS-JAN-5218",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Paper Towel Roll 1P White (SYNTHETIC)",
+      "quantity": 2,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "12RL/CS",
+        "inner_count": 12,
+        "inner_size": 1,
+        "inner_uom": "RL"
+      },
+      "unit_price": 62.73,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 125.46,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "JAN-PTR-1P-WHI",
+        "erp_product_id": 1047,
+        "erp_uom": "CS",
+        "erp_uom_id": 40,
+        "erp_quantity": 2,
+        "conversion_factor": 1.0,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 62.73
+      }
+    },
+    {
+      "line_no": 2,
+      "buyer_item_code": null,
+      "seller_item_code": "PPE-GLS-AMB-ANTI-FOG",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Safety Glasses Amber Anti-Fog (SYNTHETIC)",
+      "quantity": 2,
+      "uom_raw": "EA",
+      "uom": "EA",
+      "pack": null,
+      "unit_price": 10.02,
+      "price_uom": "EA",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 20.04,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "PPE-GLS-AMB-ANTI-FOG",
+        "erp_product_id": 1024,
+        "erp_uom": "EA",
+        "erp_uom_id": 48,
+        "erp_quantity": 2,
+        "conversion_factor": 1.0,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 10.02
+      }
+    },
+    {
+      "line_no": 3,
+      "buyer_item_code": null,
+      "seller_item_code": "LUB-POS-103",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Penetrating Oil Spray (SYNTHETIC)",
+      "quantity": 2,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "12/CS",
+        "inner_count": 12,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 83.73,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 167.46,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "LUB-POS-103",
+        "erp_product_id": 1103,
+        "erp_uom": "CS",
+        "erp_uom_id": 11,
+        "erp_quantity": 2,
+        "conversion_factor": 1.0,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 83.73
+      }
+    },
+    {
+      "line_no": 4,
+      "buyer_item_code": null,
+      "seller_item_code": "FST-HCS-38-16-3",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Hex Cap Screw 3/8-16 x 3 Grade 5 Zinc (SYNTHETIC)",
+      "quantity": 24,
+      "uom_raw": "BX",
+      "uom": "BX",
+      "pack": {
+        "raw": "BX/50",
+        "inner_count": 50,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 32.32,
+      "price_uom": "BX",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 775.68,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "FST-HCS-38-16-3",
+        "erp_product_id": 1285,
+        "erp_uom": "BX",
+        "erp_uom_id": 7,
+        "erp_quantity": 24,
+        "conversion_factor": 1.0,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 32.32
+      }
+    },
+    {
+      "line_no": 5,
+      "buyer_item_code": null,
+      "seller_item_code": "ABR-SPS-150G",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Sandpaper Sheet 150 Grit (SYNTHETIC)",
+      "quantity": 24,
+      "uom_raw": "PK",
+      "uom": "PK",
+      "pack": {
+        "raw": "50/PK",
+        "inner_count": 50,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 19.59,
+      "price_uom": "PK",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 470.16,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "ABR-SPS-150G",
+        "erp_product_id": 1218,
+        "erp_uom": "PK",
+        "erp_uom_id": 41,
+        "erp_quantity": 24,
+        "conversion_factor": 1.0,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 19.59
+      }
+    }
+  ],
+  "charges": [],
+  "totals": {
+    "lines_amount_declared": 1558.8,
+    "tax_amount_declared": null,
+    "total_amount_declared": 1558.8,
+    "lines_amount_computed": 1558.8
+  },
+  "decision": {
+    "score": 0.98,
+    "route": "AUTO_POST",
+    "reasons": []
+  },
+  "processing": {
+    "extractor": "synthetic/generator.py",
+    "prompt_version": null,
+    "created_at": "2026-01-15T10:30:00Z",
+    "updated_at": null
+  },
+  "ship_to": {
+    "name": "Atlas Shipping Location 2",
+    "code_on_document": "SHIP-02",
+    "address": {
+      "line1": "3184 Business Park Rd",
+      "city": "Chicago",
+      "region": "IL",
+      "postal_code": "60601",
+      "country": "US"
+    },
+    "resolved": {
+      "erp_partner_id": 61,
+      "erp_partner_ref": "SHIP-02",
+      "method": "CODE",
+      "score": 1.0
+    }
+  },
+  "_synthetic_metadata": {
+    "hard_case_types": [],
+    "is_hard_case": false
+  }
+}

@@ -1,0 +1,222 @@
+{
+  "schema_version": "1.0",
+  "order_id": "c4e108ec-747f-5938-9e54-929c11983164",
+  "tenant_id": "delta-industrial-supply",
+  "document_type": "ORIGINAL",
+  "status": "VALIDATED",
+  "source": {
+    "channel": "FOLDER",
+    "message_id": null,
+    "from_address": null,
+    "subject": null,
+    "received_at": "2026-01-15T10:30:00Z",
+    "documents": [
+      {
+        "document_id": "doc-3738535a",
+        "kind": "XLSX",
+        "filename": "4500001056.xlsx",
+        "mime_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        "sha256": "4b468ff0a3e16140ff7dbdcac74e1bdb5715d8fa0550bf4cf5ba69db2566d506",
+        "page_count": null
+      }
+    ]
+  },
+  "buyer": {
+    "name": "Acme Company (SYNTHETIC)",
+    "code_on_document": "C-ACME",
+    "tax_id": "US12-8713396",
+    "gln": null,
+    "peppol_endpoint": null,
+    "address": {
+      "line1": "1375 Business Park Rd",
+      "city": "Toledo",
+      "region": "OH",
+      "postal_code": "43601",
+      "country": "US"
+    },
+    "contact": {
+      "name": "Acme Purchasing",
+      "email": "purchasing@acme.example",
+      "phone": "+1-555-3815"
+    },
+    "resolved": {
+      "erp_partner_id": 42,
+      "erp_partner_ref": "C-ACME",
+      "method": "CODE",
+      "score": 0.99
+    }
+  },
+  "seller": {
+    "name": "Delta Industrial Supply LLC (SYNTHETIC)",
+    "code_on_document": null,
+    "tax_id": null,
+    "address": {
+      "line1": "55 Commerce Dr",
+      "city": "Dayton",
+      "region": "OH",
+      "postal_code": "45402",
+      "country": "US"
+    },
+    "resolved": null
+  },
+  "header": {
+    "po_number": "4500001056",
+    "po_revision": 0,
+    "po_date": "2026-03-04",
+    "requested_delivery_date": "2026-03-10",
+    "currency": "USD",
+    "buyer_reference": "Dept 311",
+    "payment_terms_text": "2% 10 Net 30",
+    "incoterms": null,
+    "ship_via": "UPS Ground",
+    "notes": null,
+    "language": "en"
+  },
+  "lines": [
+    {
+      "line_no": 1,
+      "buyer_item_code": null,
+      "seller_item_code": "FST-SHC-12-13-4",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Socket Head Cap Screw 1/2-13 x 4 (SYNTHETIC)",
+      "quantity": 10,
+      "uom_raw": "BX",
+      "uom": "BX",
+      "pack": {
+        "raw": "BX/25",
+        "inner_count": 25,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 43.14,
+      "price_uom": "BX",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 431.4,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "FST-SHC-12-13-4",
+        "erp_product_id": 1239,
+        "erp_uom": "BX",
+        "erp_uom_id": 23,
+        "erp_quantity": 10,
+        "conversion_factor": 1.0,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 43.14
+      }
+    },
+    {
+      "line_no": 2,
+      "buyer_item_code": null,
+      "seller_item_code": "TLS-AWR-6IN",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Adjustable Wrench 6in (SYNTHETIC)",
+      "quantity": 3,
+      "uom_raw": "EA",
+      "uom": "EA",
+      "pack": null,
+      "unit_price": 14.94,
+      "price_uom": "EA",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 44.82,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "TLS-AWR-6IN",
+        "erp_product_id": 1190,
+        "erp_uom": "EA",
+        "erp_uom_id": 15,
+        "erp_quantity": 3,
+        "conversion_factor": 1.0,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 14.94
+      }
+    },
+    {
+      "line_no": 3,
+      "buyer_item_code": null,
+      "seller_item_code": "PKG-PTC-066",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Packing Tape Clear 2in (SYNTHETIC)",
+      "quantity": 5,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "36RL/CS",
+        "inner_count": 36,
+        "inner_size": 1,
+        "inner_uom": "RL"
+      },
+      "unit_price": 63.17,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 315.85,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "PKG-PTC-066",
+        "erp_product_id": 1066,
+        "erp_uom": "CS",
+        "erp_uom_id": 24,
+        "erp_quantity": 5,
+        "conversion_factor": 1.0,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 63.17
+      }
+    }
+  ],
+  "charges": [],
+  "totals": {
+    "lines_amount_declared": 792.07,
+    "tax_amount_declared": null,
+    "total_amount_declared": 792.07,
+    "lines_amount_computed": 792.07
+  },
+  "decision": {
+    "score": 0.98,
+    "route": "AUTO_POST",
+    "reasons": []
+  },
+  "processing": {
+    "extractor": "synthetic/generator.py",
+    "prompt_version": null,
+    "created_at": "2026-01-15T10:30:00Z",
+    "updated_at": null
+  },
+  "ship_to": {
+    "name": "Acme Shipping Location 1",
+    "code_on_document": "SHIP-01",
+    "address": {
+      "line1": "9494 Corporate Dr",
+      "city": "Grand Rapids",
+      "region": "MI",
+      "postal_code": "49503",
+      "country": "US"
+    },
+    "resolved": {
+      "erp_partner_id": 43,
+      "erp_partner_ref": "SHIP-01",
+      "method": "CODE",
+      "score": 1.0
+    }
+  },
+  "_synthetic_metadata": {
+    "hard_case_types": [],
+    "is_hard_case": false
+  }
+}

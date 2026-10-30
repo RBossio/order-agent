@@ -3,7 +3,7 @@
   "order_id": "74b0cb67-ac1e-533b-a67f-d316c779ef30",
   "tenant_id": "delta-industrial-supply",
   "document_type": "ORIGINAL",
-  "status": "NEEDS_REVIEW",
+  "status": "VALIDATED",
   "source": {
     "channel": "FOLDER",
     "message_id": null,
@@ -16,7 +16,7 @@
         "kind": "PDF_TEXT",
         "filename": "QS-01097.pdf",
         "mime_type": "application/pdf",
-        "sha256": "5ab3ea1da2ac572aa09121926f76fb00ab09befb996262c28174052fd2092141",
+        "sha256": "e10fe6d9babeb2977a97709e4bd4c3fac5e216857a8ede8bbebe315f62b82bc1",
         "page_count": 1
       }
     ]
@@ -103,7 +103,7 @@
         "erp_uom": "CS",
         "erp_uom_id": 43,
         "erp_quantity": 4,
-        "conversion_factor": 1,
+        "conversion_factor": 1.0,
         "method": "SELLER_CODE",
         "score": 0.98,
         "candidates": [],
@@ -140,7 +140,7 @@
         "erp_uom": "BX",
         "erp_uom_id": 49,
         "erp_quantity": 4,
-        "conversion_factor": 1,
+        "conversion_factor": 1.0,
         "method": "XREF",
         "score": 1.0,
         "candidates": [],
@@ -177,7 +177,7 @@
         "erp_uom": "BX",
         "erp_uom_id": 22,
         "erp_quantity": 10,
-        "conversion_factor": 1,
+        "conversion_factor": 1.0,
         "method": "SELLER_CODE",
         "score": 0.98,
         "candidates": [],
@@ -214,7 +214,7 @@
         "erp_uom": "BG",
         "erp_uom_id": 29,
         "erp_quantity": 12,
-        "conversion_factor": 1,
+        "conversion_factor": 1.0,
         "method": "SELLER_CODE",
         "score": 0.98,
         "candidates": [],
@@ -251,7 +251,7 @@
         "erp_uom": "CS",
         "erp_uom_id": 39,
         "erp_quantity": 3,
-        "conversion_factor": 1,
+        "conversion_factor": 1.0,
         "method": "SELLER_CODE",
         "score": 0.98,
         "candidates": [],
@@ -288,7 +288,7 @@
         "erp_uom": "PK",
         "erp_uom_id": 49,
         "erp_quantity": 3,
-        "conversion_factor": 1,
+        "conversion_factor": 1.0,
         "method": "XREF",
         "score": 1.0,
         "candidates": [],
@@ -325,7 +325,7 @@
         "erp_uom": "BX",
         "erp_uom_id": 17,
         "erp_quantity": 2,
-        "conversion_factor": 1,
+        "conversion_factor": 1.0,
         "method": "XREF",
         "score": 1.0,
         "candidates": [],
@@ -362,7 +362,7 @@
         "erp_uom": "BX",
         "erp_uom_id": 30,
         "erp_quantity": 12,
-        "conversion_factor": 1,
+        "conversion_factor": 1.0,
         "method": "SELLER_CODE",
         "score": 0.98,
         "candidates": [],
@@ -394,7 +394,7 @@
         "erp_uom": "RO",
         "erp_uom_id": 48,
         "erp_quantity": 3,
-        "conversion_factor": 1,
+        "conversion_factor": 1.0,
         "method": "XREF",
         "score": 1.0,
         "candidates": [],
@@ -431,7 +431,7 @@
         "erp_uom": "CS",
         "erp_uom_id": 27,
         "erp_quantity": 3,
-        "conversion_factor": 1,
+        "conversion_factor": 1.0,
         "method": "SELLER_CODE",
         "score": 0.98,
         "candidates": [],
@@ -468,7 +468,7 @@
         "erp_uom": "CS",
         "erp_uom_id": 34,
         "erp_quantity": 24,
-        "conversion_factor": 1,
+        "conversion_factor": 1.0,
         "method": "SELLER_CODE",
         "score": 0.98,
         "candidates": [],
@@ -505,7 +505,7 @@
         "erp_uom": "BX",
         "erp_uom_id": 49,
         "erp_quantity": 4,
-        "conversion_factor": 1,
+        "conversion_factor": 1.0,
         "method": "SELLER_CODE",
         "score": 0.98,
         "candidates": [],
@@ -542,7 +542,7 @@
         "erp_uom": "CS",
         "erp_uom_id": 19,
         "erp_quantity": 24,
-        "conversion_factor": 1,
+        "conversion_factor": 1.0,
         "method": "XREF",
         "score": 1.0,
         "candidates": [],
@@ -579,7 +579,7 @@
         "erp_uom": "BX",
         "erp_uom_id": 49,
         "erp_quantity": 2,
-        "conversion_factor": 1,
+        "conversion_factor": 1.0,
         "method": "SELLER_CODE",
         "score": 0.98,
         "candidates": [],
@@ -616,7 +616,7 @@
         "erp_uom": "BX",
         "erp_uom_id": 46,
         "erp_quantity": 6,
-        "conversion_factor": 1,
+        "conversion_factor": 1.0,
         "method": "XREF",
         "score": 1.0,
         "candidates": [],
@@ -653,7 +653,7 @@
         "erp_uom": "CS",
         "erp_uom_id": 1,
         "erp_quantity": 10,
-        "conversion_factor": 1,
+        "conversion_factor": 1.0,
         "method": "SELLER_CODE",
         "score": 0.98,
         "candidates": [],
@@ -690,7 +690,7 @@
         "erp_uom": "BX",
         "erp_uom_id": 11,
         "erp_quantity": 12,
-        "conversion_factor": 1,
+        "conversion_factor": 1.0,
         "method": "SELLER_CODE",
         "score": 0.98,
         "candidates": [],
@@ -727,7 +727,7 @@
         "erp_uom": "BX",
         "erp_uom_id": 20,
         "erp_quantity": 24,
-        "conversion_factor": 1,
+        "conversion_factor": 1.0,
         "method": "XREF",
         "score": 1.0,
         "candidates": [],
@@ -743,11 +743,9 @@
     "lines_amount_computed": 8346.56
   },
   "decision": {
-    "score": 0.75,
-    "route": "REVIEW",
-    "reasons": [
-      "HDR-02"
-    ]
+    "score": 0.98,
+    "route": "AUTO_POST",
+    "reasons": []
   },
   "processing": {
     "extractor": "synthetic/generator.py",
@@ -772,20 +770,8 @@
       "score": 1.0
     }
   },
-  "validation": {
-    "issues": [
-      {
-        "code": "HDR-02",
-        "severity": "REVIEW",
-        "path": "/header/po_date",
-        "message": "Data ordine mancante o non plausibile"
-      }
-    ]
-  },
   "_synthetic_metadata": {
-    "hard_case_types": [
-      "MISSING_DATE"
-    ],
-    "is_hard_case": true
+    "hard_case_types": [],
+    "is_hard_case": false
   }
 }
