@@ -1000,6 +1000,8 @@ class TestEngineAndDatagen:
         assert result.decision == DecisionRoute.REVIEW
         assert "ALLOWLIST" in result.reasons
         assert result.decision != DecisionRoute.AUTO_POST
+        assert "cliente non in allowlist" in engine.get_decision_explanation(result)
+        assert "cliente non in allowlist" in result.explanation
 
     def test_auto_post_denied_with_short_history(self, ref: MockReferenceDataProvider) -> None:
         customer = ref.get_customer_by_ref("C-ACME")
@@ -1010,6 +1012,9 @@ class TestEngineAndDatagen:
         assert result.decision == DecisionRoute.REVIEW
         assert "HISTORY" in result.reasons
         assert result.decision != DecisionRoute.AUTO_POST
+        explanation = engine.get_decision_explanation(result)
+        assert "storico insufficiente (3/20)" in explanation
+        assert "storico insufficiente (3/20)" in result.explanation
 
     def test_each_warn_reduces_score_by_penalty(self, engine: ValidationEngine) -> None:
         clean = engine.validate(make_vof())

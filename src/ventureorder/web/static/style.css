@@ -121,6 +121,7 @@ table.orders a:hover { text-decoration: underline; }
 
 .draft { margin-left: 0.4rem; font-size: 0.85rem; color: var(--approved); font-weight: 600; }
 .hint { display: block; font-size: 0.75rem; color: var(--muted); font-weight: 500; }
+.decision-reason { color: var(--review); font-weight: 600; }
 
 .cards { display: grid; grid-template-columns: 1fr; gap: 1rem; }
 dl { display: grid; grid-template-columns: 10rem 1fr; gap: 0.35rem 0.75rem; margin: 0; }

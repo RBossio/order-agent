@@ -127,6 +127,8 @@ def _detail_context(order: InboxOrder, *, message: str | None = None) -> dict[st
         "can_act": can_act,
         "message": message or order.error,
         "flash_ok": order.ui_status == STATUS_APPROVED and order.draft_name,
+        "decision_explanation": order.result.explanation,
+        "review_gate_reason": order.review_gate_reason,
     }
 
 
@@ -167,6 +169,7 @@ def create_app(inbox: OrderInbox | None = None) -> FastAPI:
                     "badge_class": _badge_class(item.ui_status),
                     "is_duplicate": item.is_duplicate,
                     "draft_name": item.draft_name,
+                    "review_gate_reason": item.review_gate_reason,
                 }
             )
         return _render(request, "orders.html", {"rows": rows, "count": len(rows)})
