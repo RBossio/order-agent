@@ -1,6 +1,11 @@
 # Configurazione dichiarativa delle regole di validazione.
-# Sovrascrivibile per tenant.
-
+# Sovrascrivibile per tenant (soglie e severità, §7.3).
+#
+# SEC-01, DUP-01 e DUP-02 non sono disattivabili, nemmeno per tenant:
+# §7.1 impone REJECT per quarantena e duplicati esatti. Inserirle in
+# disabled_rules (globale o tenants.<id>.disabled_rules) è un errore
+# di validazione.
+#
 # SEC-02 (SPF/DKIM) è disattivata nel prototipo: niente caselle reali.
 disabled_rules:
   - SEC-02

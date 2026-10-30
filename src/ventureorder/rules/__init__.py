@@ -13,7 +13,13 @@ from ventureorder.rules import qty as qty
 from ventureorder.rules import sec as sec
 from ventureorder.rules import tot as tot
 from ventureorder.rules import uom as uom
-from ventureorder.rules.engine import ValidationEngine
+from ventureorder.rules.engine import (
+    NON_DISABLEABLE_RULES,
+    REJECT_RULES,
+    RulesConfigError,
+    ValidationEngine,
+    validate_rules_config,
+)
 from ventureorder.rules.models import (
     DecisionRoute,
     Issue,
@@ -41,8 +47,11 @@ __all__ = [
     "HistoricalOrder",
     "Issue",
     "MockReferenceDataProvider",
+    "NON_DISABLEABLE_RULES",
     "ProductRecord",
+    "REJECT_RULES",
     "RuleContext",
+    "RulesConfigError",
     "SecurityHints",
     "Severity",
     "SyntheticReferenceDataProvider",
@@ -54,4 +63,5 @@ __all__ = [
     "get_rule",
     "get_rules_by_area",
     "rule",
+    "validate_rules_config",
 ]
