@@ -17,9 +17,9 @@
 
 # Non usare `-include .env` + `export`: Make interpreta `$` e `#` e corrompe le password.
 # scripts/generate_odoo_conf.py (e seed/smoke) leggono `.env` da sé.
-# POSTGRES_USER/DB: presi dal container (compose legge `.env`), non da Make.
-
 PYTHON := python3
+POSTGRES_USER := $(shell $(PYTHON) scripts/generate_odoo_conf.py --get POSTGRES_USER)
+POSTGRES_DB := $(shell $(PYTHON) scripts/generate_odoo_conf.py --get POSTGRES_DB)
 
 # Compose command - usa VM=1 per network_mode: host
 ifeq ($(VM),1)
@@ -70,7 +70,7 @@ init: conf ## Inizializza il database con i moduli (una sola volta)
 	$(COMPOSE) up -d db
 	@echo "$(YELLOW)Attendo che PostgreSQL sia pronto...$(NC)"
 	@for i in $$(seq 1 30); do \
-		if $(COMPOSE) exec -T db sh -c 'pg_isready -U "$$POSTGRES_USER" -d "$$POSTGRES_DB" -h localhost' >/dev/null 2>&1; then \
+		if $(COMPOSE) exec -T db pg_isready -U $(POSTGRES_USER) -d $(POSTGRES_DB) -h localhost >/dev/null 2>&1; then \
 			break; \
 		fi; \
 		sleep 1; \
@@ -158,7 +158,7 @@ shell-odoo: ## Apre una shell nel container Odoo
 	$(COMPOSE) exec odoo bash
 
 shell-db: ## Apre una shell psql nel database
-	$(COMPOSE) exec db sh -c 'psql -U "$$POSTGRES_USER" -d "$$POSTGRES_DB"'
+	$(COMPOSE) exec db psql -U $(POSTGRES_USER) -d $(POSTGRES_DB)
 
 # Target di sviluppo
 test-connection: ## Testa la connessione XML-RPC a Odoo

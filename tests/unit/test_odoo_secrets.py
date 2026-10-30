@@ -125,6 +125,23 @@ class TestGenerateOdooConf:
         assert "virgolette doppie" in result.stderr
         assert "apici singoli" in result.stderr
 
+    def test_rejects_dollar_in_unquoted_dotenv(
+        self, temp_config_dir: Path, monkeypatch: pytest.MonkeyPatch
+    ) -> None:
+        """Senza virgolette `$` viene interpolato da Compose: va in errore."""
+        monkeypatch.delenv("POSTGRES_PASSWORD", raising=False)
+        monkeypatch.delenv("ODOO_ADMIN_PASSWORD", raising=False)
+        (temp_config_dir / ".env").write_text(
+            "POSTGRES_PASSWORD=p$ssw0rd\nODOO_ADMIN_PASSWORD=test\n",
+            encoding="utf-8",
+        )
+
+        result = _run_generate_script(temp_config_dir)
+
+        assert result.returncode == 1
+        assert "POSTGRES_PASSWORD" in result.stderr
+        assert "apici singoli" in result.stderr
+
     def test_rejects_newline_injection_in_password(
         self, temp_config_dir: Path, monkeypatch: pytest.MonkeyPatch
     ) -> None:
@@ -203,8 +220,8 @@ class TestSeedOdooBotPassword:
     """Test per la verifica di ODOO_BOT_PASSWORD in seed_odoo.py."""
 
     @pytest.fixture(autouse=True)
-    def _skip_dotenv(self, monkeypatch: pytest.MonkeyPatch) -> None:
-        monkeypatch.setenv("VO_SKIP_DOTENV", "1")
+    def _isolate_dotenv(self, monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
+        monkeypatch.setenv("VO_ENV_FILE", str(tmp_path / "no.env"))
 
     def test_exits_without_bot_password(self, monkeypatch: pytest.MonkeyPatch) -> None:
         """Verifica che seed_odoo.py esca con errore se ODOO_BOT_PASSWORD mancante."""
@@ -273,8 +290,8 @@ class TestSmokeTestAdminLoginPassword:
     """Test per ODOO_ADMIN_LOGIN_PASSWORD in smoke_test.py."""
 
     @pytest.fixture(autouse=True)
-    def _skip_dotenv(self, monkeypatch: pytest.MonkeyPatch) -> None:
-        monkeypatch.setenv("VO_SKIP_DOTENV", "1")
+    def _isolate_dotenv(self, monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
+        monkeypatch.setenv("VO_ENV_FILE", str(tmp_path / "no.env"))
 
     def test_exits_without_admin_login_password(self, monkeypatch: pytest.MonkeyPatch) -> None:
         """smoke_test.py esce con codice 1 se manca la password di login admin."""

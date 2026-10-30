@@ -23,6 +23,22 @@ class DotenvError(ValueError):
     """File `.env` non allineato a Docker Compose."""
 
 
+DEFAULTS = {
+    "DB_HOST": "db",
+    "DB_PORT": "5432",
+    "POSTGRES_USER": "odoo",
+    "POSTGRES_DB": "vo_demo",
+}
+
+
+def env_file_path(project_dir: Path) -> Path:
+    """Percorso del `.env`: ``VO_ENV_FILE`` se impostata, altrimenti ``project_dir/.env``."""
+    override = os.environ.get("VO_ENV_FILE")
+    if override is not None:
+        return Path(override)
+    return project_dir / ".env"
+
+
 def load_dotenv(path: Path, environ: MutableMapping[str, str] | None = None) -> None:
     """Carica KEY=VALUE da ``path`` senza interpolare `$`.
 
@@ -99,13 +115,26 @@ def write_secure(path: Path, content: str) -> None:
 def main() -> int:
     script_dir = Path(__file__).parent
     project_dir = script_dir.parent
+    args = sys.argv[1:]
+    get_key: str | None = None
+    if "--get" in args:
+        index = args.index("--get")
+        if index + 1 >= len(args) or args[index + 1].startswith("--"):
+            print("Errore: --get richiede un nome di variabile", file=sys.stderr)
+            return 1
+        get_key = args[index + 1]
+
     try:
-        load_dotenv(project_dir / ".env")
+        load_dotenv(env_file_path(project_dir))
     except DotenvError as exc:
         print(f"Errore: {exc}", file=sys.stderr)
         return 1
 
-    check_only = "--check" in sys.argv[1:]
+    if get_key:
+        print(os.environ.get(get_key) or DEFAULTS.get(get_key, ""))
+        return 0
+
+    check_only = "--check" in args
 
     template_path = project_dir / "config" / "odoo.conf.template"
     output_path = project_dir / "config" / "odoo.conf"
@@ -120,10 +149,10 @@ def main() -> int:
         print("Errore: ODOO_ADMIN_PASSWORD non definita", file=sys.stderr)
         return 1
 
-    db_host = os.environ.get("DB_HOST", "db")
-    db_port = os.environ.get("DB_PORT", "5432")
-    postgres_user = os.environ.get("POSTGRES_USER", "odoo")
-    postgres_db = os.environ.get("POSTGRES_DB", "vo_demo")
+    db_host = os.environ.get("DB_HOST", DEFAULTS["DB_HOST"])
+    db_port = os.environ.get("DB_PORT", DEFAULTS["DB_PORT"])
+    postgres_user = os.environ.get("POSTGRES_USER", DEFAULTS["POSTGRES_USER"])
+    postgres_db = os.environ.get("POSTGRES_DB", DEFAULTS["POSTGRES_DB"])
 
     values = (
         ("POSTGRES_PASSWORD", postgres_password),

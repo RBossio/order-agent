@@ -568,16 +568,13 @@ def setup_technical_user(client: OdooClient, bot_password: str) -> None:
 
 def _load_project_dotenv() -> None:
     """Carica `.env` del repo senza passare da Make (`$` e `#` restano intatti)."""
-    if os.environ.get("VO_SKIP_DOTENV") == "1":
-        return
-    env_path = Path(__file__).resolve().parent.parent / ".env"
     scripts_dir = Path(__file__).resolve().parent
     if str(scripts_dir) not in sys.path:
         sys.path.insert(0, str(scripts_dir))
-    from generate_odoo_conf import DotenvError, load_dotenv
+    from generate_odoo_conf import DotenvError, env_file_path, load_dotenv
 
     try:
-        load_dotenv(env_path)
+        load_dotenv(env_file_path(scripts_dir.parent))
     except DotenvError as exc:
         print(f"ERRORE: {exc}", file=sys.stderr)
         sys.exit(1)
