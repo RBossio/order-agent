@@ -49,7 +49,12 @@ NUM_IN_WORDS = {
 
 HARD_CASE_TYPES = [
     "UOM_CONVERSION",
+    "UOM_CARTON",
     "CUSTOMER_CODES",
+    "UNKNOWN_CUSTOMER_CODE",
+    "AMBIGUOUS_CUSTOMER_CODE",
+    "PRICE_OUT_OF_TOLERANCE",
+    "DUP_PO",
     "AMBIGUOUS_DESC",
     "TYPO_DESC",
     "TOTAL_MIXED",
@@ -61,6 +66,71 @@ HARD_CASE_TYPES = [
     "MISSING_QTY",
     "MISSING_DATE",
 ]
+
+
+def assign_hard_cases(
+    num_orders: int,
+    hard_case_pct: float,
+    types: list[str] | None = None,
+    rng: random.Random | None = None,
+) -> list[list[str]]:
+    """Assegna i tipi di caso difficile a un sottoinsieme di ordini.
+
+    Ogni tipo compare almeno una volta se ``num_hard >= len(types)``.
+    """
+    pool = list(types if types is not None else HARD_CASE_TYPES)
+    picker = rng if rng is not None else random
+    num_hard = int(num_orders * hard_case_pct)
+    num_normal = num_orders - num_hard
+    assignments: list[list[str]] = []
+    for hc_type in pool:
+        assignments.append([hc_type])
+    while len(assignments) < num_hard and pool:
+        combo_size = picker.randint(1, min(2, len(pool)))
+        combo = picker.sample(pool, combo_size)
+        assignments.append(combo)
+    picker.shuffle(assignments)
+    assignments = assignments[:num_hard]
+    configs: list[list[str]] = [[] for _ in range(num_normal)]
+    configs.extend(assignments)
+    picker.shuffle(configs)
+    return configs
+
+
+def carton_conversion(item: dict) -> dict | None:
+    """Conversione da cartone (CS) coerente con ``products.json``.
+
+    Preferisce CS → BX, poi le altre unità interne usate dai dati.
+    """
+    conversions = item.get("conversions") or []
+    cs_convs = [
+        conv
+        for conv in conversions
+        if str(conv.get("from_uom") or "").upper() == "CS" and conv.get("factor")
+    ]
+    for target in ("BX", "EA", "RL", "RO", "GLL", "PK"):
+        for conv in cs_convs:
+            if str(conv.get("to_uom") or "").upper() == target:
+                return {
+                    "from_uom": "CS",
+                    "to_uom": conv["to_uom"],
+                    "factor": float(conv["factor"]),
+                }
+    if cs_convs:
+        conv = cs_convs[0]
+        return {
+            "from_uom": "CS",
+            "to_uom": conv["to_uom"],
+            "factor": float(conv["factor"]),
+        }
+    pack = item.get("pack") or {}
+    if str(item.get("uom") or "").upper() == "CS" and pack.get("inner_count"):
+        return {
+            "from_uom": "CS",
+            "to_uom": pack.get("inner_uom") or "EA",
+            "factor": float(pack["inner_count"]),
+        }
+    return None
 
 
 def _sha256(content: bytes) -> str:
@@ -583,12 +653,48 @@ def _create_ground_truth(
             "message": "Descrizione ambigua, richiede conferma articolo"
         })
 
-    if "UOM_CONVERSION" in hard_cases:
+    if "UOM_CONVERSION" in hard_cases or "UOM_CARTON" in hard_cases:
         validation_issues.append({
             "code": "UOM-03",
             "severity": "INFO",
             "path": "/lines/0",
-            "message": "Conversione UoM applicata"
+            "message": "Conversione da cartone applicata"
+        })
+
+    if "UNKNOWN_CUSTOMER_CODE" in hard_cases:
+        status = "NEEDS_REVIEW"
+        validation_issues.append({
+            "code": "ITM-01",
+            "severity": "BLOCK",
+            "path": "/lines/0/resolution",
+            "message": "Codice articolo cliente sconosciuto: riga non risolta"
+        })
+
+    if "AMBIGUOUS_CUSTOMER_CODE" in hard_cases:
+        status = "NEEDS_REVIEW"
+        validation_issues.append({
+            "code": "ITM-04",
+            "severity": "REVIEW",
+            "path": "/lines/0",
+            "message": "Codice articolo cliente ambiguo: identificatori in conflitto"
+        })
+
+    if "PRICE_OUT_OF_TOLERANCE" in hard_cases:
+        status = "NEEDS_REVIEW"
+        validation_issues.append({
+            "code": "PRC-01",
+            "severity": "REVIEW",
+            "path": "/lines/0/unit_price",
+            "message": "Prezzo PO fuori tolleranza rispetto al listino"
+        })
+
+    if "DUP_PO" in hard_cases:
+        status = "NEEDS_REVIEW"
+        validation_issues.append({
+            "code": "DUP-01",
+            "severity": "BLOCK",
+            "path": "/header/po_number",
+            "message": "PO duplicato: stesso cliente, numero e revisione già POSTED"
         })
 
     lines_gt = []
@@ -717,20 +823,7 @@ def generate_orders(
     random.seed(SEED + 2)
 
     num_hard = int(num_orders * hard_case_pct)
-    num_normal = num_orders - num_hard
-
-    hard_case_assignments = []
-    for hc_type in HARD_CASE_TYPES:
-        hard_case_assignments.append([hc_type])
-    while len(hard_case_assignments) < num_hard:
-        combo = random.sample(HARD_CASE_TYPES, random.randint(1, 2))
-        hard_case_assignments.append(combo)
-    random.shuffle(hard_case_assignments)
-    hard_case_assignments = hard_case_assignments[:num_hard]
-
-    order_configs = [[] for _ in range(num_normal)]
-    order_configs.extend(hard_case_assignments)
-    random.shuffle(order_configs)
+    order_configs = assign_hard_cases(num_orders, hard_case_pct)
 
     pdf_dir = output_dir / "documents" / "pdf"
     xlsx_dir = output_dir / "documents" / "xlsx"
@@ -748,9 +841,13 @@ def generate_orders(
 
     formats_count = {"PDF": 0, "XLSX": 0, "EML": 0}
     target_per_format = num_orders // 3
+    last_po_by_customer: dict[str, str] = {}
 
     for order_idx, hard_cases in enumerate(order_configs):
         customer = random.choice(customers)
+        if "DUP_PO" in hard_cases and last_po_by_customer:
+            prior_cust = random.choice(list(last_po_by_customer))
+            customer = next(c for c in customers if c["customer_id"] == prior_cust)
         style = customer["order_style"]
 
         available_formats = []
@@ -771,21 +868,42 @@ def generate_orders(
 
         po_number = f"{style['po_prefix']}{po_counter:05d}"
         po_counter += 1
+        if "DUP_PO" in hard_cases and customer["customer_id"] in last_po_by_customer:
+            po_number = last_po_by_customer[customer["customer_id"]]
 
         order_date = base_date + timedelta(days=random.randint(0, 180))
         delivery_date = order_date + timedelta(days=random.randint(5, 21))
 
         num_lines = random.randint(*style["typical_lines"])
         selected_items = random.sample(catalog, min(num_lines, len(catalog)))
+        if "UOM_CARTON" in hard_cases or "UOM_CONVERSION" in hard_cases:
+            carton_items = [entry for entry in catalog if carton_conversion(entry)]
+            if carton_items:
+                first = random.choice(carton_items)
+                rest = [entry for entry in selected_items if entry["sku"] != first["sku"]]
+                selected_items = [first] + rest[: max(0, len(selected_items) - 1)]
 
         lines = []
         total_amount = 0.0
 
         for line_no, item in enumerate(selected_items, 1):
             qty_base = random.choice([1, 2, 3, 4, 5, 6, 10, 12, 24])
+            line_uom = item["uom"]
+            erp_uom = item["uom"]
+            conversion_factor = 1.0
+            erp_quantity = qty_base
+            gtin = None
+            mpn = None
 
-            if "UOM_CONVERSION" in hard_cases and line_no == 1:
-                if item.get("pack"):
+            if ("UOM_CARTON" in hard_cases or "UOM_CONVERSION" in hard_cases) and line_no == 1:
+                conv = carton_conversion(item)
+                if conv:
+                    uom_raw = conv["from_uom"]
+                    line_uom = "CS"
+                    erp_uom = conv["to_uom"]
+                    conversion_factor = float(conv["factor"])
+                    erp_quantity = qty_base * conversion_factor
+                elif item.get("pack"):
                     pack = item["pack"]
                     uom_raw = f"CS of {pack['inner_count']}"
                 else:
@@ -809,43 +927,89 @@ def generate_orders(
             else:
                 seller_item_code = item["sku"]
 
+            if "UNKNOWN_CUSTOMER_CODE" in hard_cases and line_no == 1:
+                prefix = style.get("code_prefix") or customer["customer_id"].replace("C-", "") + "-"
+                buyer_item_code = f"{prefix}UNKNOWN-{order_idx:04d}"
+                seller_item_code = None
+
+            if "AMBIGUOUS_CUSTOMER_CODE" in hard_cases and line_no == 1:
+                other = next((entry for entry in catalog if entry["sku"] != item["sku"]), None)
+                if other and other.get("gtin"):
+                    gtin = other["gtin"]
+                    mpn = other.get("manufacturer_part_number")
+                if not buyer_item_code:
+                    xref_any = next(iter(customer.get("xref") or []), None)
+                    if xref_any:
+                        buyer_item_code = xref_any["customer_code"]
+                    else:
+                        buyer_item_code = f"{customer['customer_id']}-AMB"
+
             unit_price = item["price"]
+            list_price = item["price"]
+            if "PRICE_OUT_OF_TOLERANCE" in hard_cases and line_no == 1:
+                unit_price = round(float(item["price"]) * 1.15, 2)
             line_amount = round(qty_base * unit_price, 2)
             total_amount += line_amount
+
+            unresolved = "UNKNOWN_CUSTOMER_CODE" in hard_cases and line_no == 1
+            ambiguous = "AMBIGUOUS_CUSTOMER_CODE" in hard_cases and line_no == 1
+            if unresolved:
+                method, score = "UNRESOLVED", 0.0
+            elif ambiguous:
+                method, score = "FUZZY", 0.82
+            elif buyer_item_code:
+                method, score = "XREF", 1.0
+            else:
+                method, score = "SELLER_CODE", 0.98
+            candidates = []
+            if ambiguous:
+                other_sku = item["sku"]
+                if gtin:
+                    other_sku = next(
+                        (entry["sku"] for entry in catalog if entry.get("gtin") == gtin),
+                        item["sku"],
+                    )
+                candidates = [
+                    {"sku": item["sku"], "score": 0.82},
+                    {"sku": other_sku, "score": 0.80},
+                ]
+            resolution = {
+                "sku": None if unresolved else item["sku"],
+                "erp_product_id": None if unresolved else item["erp_product_id"],
+                "erp_uom": erp_uom,
+                "erp_uom_id": random.randint(1, 50),
+                "erp_quantity": erp_quantity,
+                "conversion_factor": conversion_factor,
+                "method": method,
+                "score": score,
+                "candidates": candidates,
+                "erp_list_price": list_price,
+            }
 
             line = {
                 "line_no": line_no,
                 "buyer_item_code": buyer_item_code,
                 "seller_item_code": seller_item_code,
                 "manufacturer_name": None,
-                "manufacturer_part_number": None,
-                "gtin": None,
+                "manufacturer_part_number": mpn,
+                "gtin": gtin,
                 "description": item["description"],
                 "quantity": qty_base,
                 "uom_raw": uom_raw,
-                "uom": item["uom"],
+                "uom": line_uom,
                 "pack": item.get("pack"),
                 "unit_price": unit_price,
-                "price_uom": item["uom"],
+                "price_uom": line_uom,
                 "price_basis_qty": 1,
                 "discount_pct": None,
                 "line_amount": line_amount,
                 "requested_delivery_date": None,
                 "notes": None,
-                "resolution": {
-                    "sku": item["sku"],
-                    "erp_product_id": item["erp_product_id"],
-                    "erp_uom": item["uom"],
-                    "erp_uom_id": random.randint(1, 50),
-                    "erp_quantity": qty_base,
-                    "conversion_factor": 1,
-                    "method": "XREF" if buyer_item_code else "SELLER_CODE",
-                    "score": 1.0 if buyer_item_code else 0.98,
-                    "candidates": [],
-                    "erp_list_price": unit_price
-                }
+                "resolution": resolution,
             }
             lines.append(line)
+
+        last_po_by_customer[customer["customer_id"]] = po_number
 
         ship_to_choice = random.choice(customer["ship_to"])
         ship_to = {

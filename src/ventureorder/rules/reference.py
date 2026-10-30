@@ -8,8 +8,8 @@ from pathlib import Path
 from typing import Any, Protocol, runtime_checkable
 
 from ventureorder.rules.access import (
+    DATAGEN_VALID_UOMS,
     INDIVISIBLE_UOMS,
-    UOM_ALIASES,
     normalize_address,
     normalize_uom,
     parse_date,
@@ -165,7 +165,10 @@ class InMemoryReferenceDataProvider:
         if product.manufacturer_part_number:
             self._products_by_mpn[product.manufacturer_part_number] = product
         if product.sale_uom:
-            self._valid_uoms.add(normalize_uom(product.sale_uom) or product.sale_uom)
+            self._register_uom(product.sale_uom)
+        for conv in product.conversions:
+            self._register_uom(conv.get("from_uom"))
+            self._register_uom(conv.get("to_uom"))
 
     def add_xref(self, xref: XrefRecord) -> None:
         """Registra un cross-reference cliente → SKU."""
@@ -185,18 +188,42 @@ class InMemoryReferenceDataProvider:
         self._charge_products[charge_type] = sku
 
     def set_valid_uoms(self, uoms: set[str]) -> None:
-        """Sostituisce l'insieme di UoM riconosciute."""
-        self._valid_uoms = {normalize_uom(u) or u for u in uoms}
+        """Sostituisce l'insieme di UoM riconosciute (codice grezzo e Rec. 20)."""
+        accepted: set[str] = set()
+        for uom in uoms:
+            raw = str(uom).strip().upper()
+            if raw:
+                accepted.add(raw)
+            normalized = normalize_uom(uom)
+            if normalized:
+                accepted.add(normalized)
+        self._valid_uoms = accepted
 
     def add_uom_export_map(self, uom: str, target: str, mapped: str) -> None:
         """Aggiunge la corrispondenza UoM → codice del formato di export."""
         self._uom_export.setdefault(uom.upper(), {})[target.upper()] = mapped
 
-    def add_conversion(self, from_uom: str, to_uom: str, factor: float, sku: str | None = None) -> None:
+    def add_conversion(
+        self, from_uom: str, to_uom: str, factor: float, sku: str | None = None
+    ) -> None:
         """Aggiunge una conversione UoM (opzionalmente per SKU)."""
         src = normalize_uom(from_uom) or from_uom.upper()
         dst = normalize_uom(to_uom) or to_uom.upper()
         self._extra_conversions[(src, dst, sku)] = factor
+        self._register_uom(from_uom)
+        self._register_uom(to_uom)
+
+    def _register_uom(self, uom: Any) -> None:
+        """Accetta un codice UoM (anche alias RL/CA) tra le unità valide."""
+        if not uom:
+            return
+        raw = str(uom).strip().upper()
+        if not raw:
+            return
+        self._valid_uoms.add(raw)
+        normalized = normalize_uom(raw)
+        if normalized:
+            self._valid_uoms.add(normalized)
 
     def get_customer_by_partner_id(self, erp_partner_id: int) -> CustomerRecord | None:
         return self._customers_by_id.get(erp_partner_id)
@@ -220,12 +247,15 @@ class InMemoryReferenceDataProvider:
         return self._xrefs.get((customer_ref, buyer_item_code))
 
     def is_valid_uom(self, uom: str) -> bool:
+        if not uom:
+            return False
+        raw = str(uom).strip().upper()
+        if raw in self._valid_uoms:
+            return True
         normalized = normalize_uom(uom)
         if not normalized:
             return False
-        if normalized in self._valid_uoms:
-            return True
-        return normalized in UOM_ALIASES.values()
+        return normalized in self._valid_uoms
 
     def get_uom_conversion(
         self, from_uom: str, to_uom: str, sku: str | None = None
@@ -329,8 +359,12 @@ class MockReferenceDataProvider(InMemoryReferenceDataProvider):
     """Provider configurabile per i test: stesse API, dati iniettati a mano."""
 
 
-class SyntheticReferenceDataProvider(InMemoryReferenceDataProvider):
-    """Provider alimentato dai dati master sintetici (DatagenLoader)."""
+class DatagenReferenceDataProvider(InMemoryReferenceDataProvider):
+    """Provider di anagrafica alimentato da ``datagen/master`` via ``DatagenLoader``.
+
+    È il provider predefinito per l'esecuzione del motore su dati sintetici
+    (vedi ``ValidationEngine.for_synthetic``).
+    """
 
     @classmethod
     def from_loader(
@@ -338,7 +372,7 @@ class SyntheticReferenceDataProvider(InMemoryReferenceDataProvider):
         loader: Any,
         uom_path: Path | None = None,
         allowlisted_refs: set[str] | None = None,
-    ) -> SyntheticReferenceDataProvider:
+    ) -> DatagenReferenceDataProvider:
         """Costruisce il provider da un ``MasterDataLoader`` (DatagenLoader)."""
         provider = cls()
         catalog = loader.load_catalog()
@@ -347,6 +381,8 @@ class SyntheticReferenceDataProvider(InMemoryReferenceDataProvider):
         provider._ingest_customers(customers, allowlisted_refs=allowlisted_refs or set())
         if uom_path and uom_path.exists():
             provider._ingest_uom_definitions(uom_path)
+        for code in DATAGEN_VALID_UOMS:
+            provider._register_uom(code)
         return provider
 
     @classmethod
@@ -354,7 +390,7 @@ class SyntheticReferenceDataProvider(InMemoryReferenceDataProvider):
         cls,
         datagen_path: Path | None = None,
         allowlisted_refs: set[str] | None = None,
-    ) -> SyntheticReferenceDataProvider:
+    ) -> DatagenReferenceDataProvider:
         """Carica ``datagen/master/`` tramite ``DatagenLoader``."""
         import importlib
 
@@ -370,11 +406,18 @@ class SyntheticReferenceDataProvider(InMemoryReferenceDataProvider):
 
     def _ingest_catalog(self, catalog: list[dict[str, Any]]) -> None:
         for item in catalog:
-            conversions = []
             pack = item.get("pack")
-            # DatagenLoader non espone conversions sul catalogo adattato:
-            # le ricostruiamo da pack.inner_count quando possibile.
-            if pack and pack.get("inner_count") and pack.get("inner_uom"):
+            conversions = [
+                {
+                    "from_uom": conv.get("from_uom"),
+                    "to_uom": conv.get("to_uom"),
+                    "factor": conv.get("factor"),
+                }
+                for conv in (item.get("conversions") or [])
+                if conv.get("from_uom") and conv.get("to_uom") and conv.get("factor")
+            ]
+            # Fallback se il loader non espone conversions (catalogo embedded).
+            if not conversions and pack and pack.get("inner_count") and pack.get("inner_uom"):
                 conversions.append(
                     {
                         "from_uom": item.get("uom"),
@@ -433,6 +476,7 @@ class SyntheticReferenceDataProvider(InMemoryReferenceDataProvider):
                         status=xref.get("status") or "TRUSTED",
                     )
                 )
+
     def _ingest_uom_definitions(self, path: Path) -> None:
         import json
 
@@ -458,6 +502,10 @@ class SyntheticReferenceDataProvider(InMemoryReferenceDataProvider):
         self.set_valid_uoms(codes)
 
 
+# Alias conservato: il provider sintetico è quello Datagen.
+SyntheticReferenceDataProvider = DatagenReferenceDataProvider
+
+
 def _default_datagen_path() -> Path:
     """Percorso di ``datagen/master/`` rispetto al repo o al CWD."""
     candidates = [
@@ -467,9 +515,7 @@ def _default_datagen_path() -> Path:
     for candidate in candidates:
         if (candidate / "products.json").exists():
             return candidate
-    raise FileNotFoundError(
-        "datagen/master/ non trovato: generare i dati master sintetici."
-    )
+    raise FileNotFoundError("datagen/master/ non trovato: generare i dati master sintetici.")
 
 
 def customer_of(
@@ -545,4 +591,3 @@ def line_overlap(current: list[dict[str, Any]], historical: HistoricalOrder) -> 
                 used.add(idx)
                 break
     return matched / len(current)
-

@@ -17,7 +17,11 @@ from ventureorder.rules.models import (
     Severity,
     ValidationResult,
 )
-from ventureorder.rules.reference import ReferenceDataProvider, customer_of
+from ventureorder.rules.reference import (
+    DatagenReferenceDataProvider,
+    ReferenceDataProvider,
+    customer_of,
+)
 from ventureorder.rules.registry import get_all_rules
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
@@ -71,6 +75,24 @@ class ValidationEngine:
         self.thresholds = self._load_yaml("thresholds.yaml", DEFAULT_THRESHOLDS)
         self.rules_config = self._load_yaml("rules.yaml", {})
         validate_rules_config(self.rules_config)
+
+    @classmethod
+    def for_synthetic(
+        cls,
+        config_dir: Path | str | None = None,
+        as_of: date | None = None,
+        allowlisted_refs: set[str] | None = None,
+        datagen_path: Path | None = None,
+    ) -> ValidationEngine:
+        """Motore con ``DatagenReferenceDataProvider`` (esecuzione su dati sintetici)."""
+        return cls(
+            config_dir=config_dir,
+            reference_data=DatagenReferenceDataProvider.from_datagen(
+                datagen_path=datagen_path,
+                allowlisted_refs=allowlisted_refs,
+            ),
+            as_of=as_of,
+        )
 
     def _load_yaml(self, name: str, fallback: dict[str, Any]) -> dict[str, Any]:
         path = self.config_dir / name

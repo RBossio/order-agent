@@ -170,6 +170,15 @@ class DatagenLoader:
                 "gtin": prod.get("gtin"),
                 "manufacturer_part_number": prod.get("manufacturer_code"),
                 "manufacturer_name": prod.get("manufacturer_name"),
+                "conversions": [
+                    {
+                        "from_uom": conv["from_uom"],
+                        "to_uom": conv["to_uom"],
+                        "factor": conv["factor"],
+                    }
+                    for conv in prod.get("conversions", [])
+                    if conv.get("from_uom") and conv.get("to_uom") and conv.get("factor")
+                ],
             }
             catalog.append(item)
 

@@ -28,7 +28,12 @@ Generatore di dati sintetici per il prototipo VentureOrder. Produce un dataset c
 | Tipo | Descrizione | Riferimento |
 |------|-------------|-------------|
 | `UOM_CONVERSION` | Confezioni con conversione UoM (4/1 GAL, 100/BX) | §6.4 arch. |
+| `UOM_CARTON` | Conversione da cartone (CS → BX/EA/RL) allineata a products.json | §7.2 UOM-03 |
 | `CUSTOMER_CODES` | Codici articolo del cliente invece che interni | §6.2 arch. |
+| `UNKNOWN_CUSTOMER_CODE` | Codice articolo cliente assente in xref (ITM-01) | §7.2 ITM |
+| `AMBIGUOUS_CUSTOMER_CODE` | Codice cliente in conflitto con GTIN/MPN (ITM-04) | §7.2 ITM |
+| `PRICE_OUT_OF_TOLERANCE` | Prezzo PO oltre ±2% rispetto al listino (PRC-01) | §7.2 PRC |
+| `DUP_PO` | Stesso PO già POSTED per il cliente (DUP-01) | §7.2 DUP |
 | `AMBIGUOUS_DESC` | Descrizioni ambigue senza attributi chiave | §6.3 arch. |
 | `TYPO_DESC` | Descrizioni con refusi | §6.3 arch. |
 | `TOTAL_MIXED` | Righe di totale/note mescolate con articoli | - |
