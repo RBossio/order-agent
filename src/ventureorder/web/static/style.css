@@ -1,0 +1,151 @@
+:root {
+  --ink: #14231c;
+  --paper: #f3efe4;
+  --panel: #fffdf8;
+  --line: #d7cebb;
+  --forest: #1f5c45;
+  --forest-dark: #0f3d2e;
+  --auto: #1b7a4a;
+  --review: #c46a12;
+  --reject: #b42318;
+  --approved: #1d4e89;
+  --muted: #5c675f;
+}
+
+* { box-sizing: border-box; }
+
+.demo-banner {
+  margin: 0;
+  padding: 0.55rem 1rem;
+  text-align: center;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  background: #f5d76e;
+  color: #3d2e00;
+  border-bottom: 2px solid #c9a227;
+}
+
+body {
+  margin: 0;
+  font-family: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  color: var(--ink);
+  background:
+    radial-gradient(1200px 400px at 0% -10%, #d7eadc 0%, transparent 55%),
+    var(--paper);
+  min-height: 100vh;
+}
+
+.topbar {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  background: var(--forest-dark);
+  color: #e8f4ee;
+}
+
+.brand {
+  color: #fff;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  font-size: 1.15rem;
+}
+
+.tagline { color: #b7d0c4; font-size: 0.9rem; }
+
+.page { padding: 1.5rem; max-width: 1200px; margin: 0 auto; }
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 1.25rem 1.4rem 1.6rem;
+  box-shadow: 0 10px 30px rgba(20, 35, 28, 0.06);
+}
+
+.panel-head {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+h1 { margin: 0; font-size: 1.45rem; }
+h2 { margin: 1.4rem 0 0.6rem; font-size: 1.05rem; }
+
+.muted { color: var(--muted); margin: 0; }
+
+.crumb { margin: 0 0 0.8rem; }
+.crumb a { color: var(--forest); text-decoration: none; font-weight: 600; }
+
+table.orders {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+table.orders th,
+table.orders td {
+  text-align: left;
+  padding: 0.55rem 0.6rem;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+}
+
+table.orders th { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); }
+
+.num { text-align: right; font-variant-numeric: tabular-nums; }
+.mono { font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 0.9rem; }
+
+table.orders tbody tr:hover { background: #f6f1e6; }
+table.orders a { color: var(--forest-dark); font-weight: 600; text-decoration: none; }
+table.orders a:hover { text-decoration: underline; }
+
+.badge {
+  display: inline-block;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.badge-auto { background: #d8f3e3; color: var(--auto); }
+.badge-review { background: #fde7cc; color: var(--review); }
+.badge-reject { background: #f8d4d0; color: var(--reject); }
+.badge-approved { background: #d7e6f8; color: var(--approved); }
+.badge-rejected { background: #ececec; color: #5a5a5a; }
+
+.draft { margin-left: 0.4rem; font-size: 0.85rem; color: var(--approved); font-weight: 600; }
+.hint { display: block; font-size: 0.75rem; color: var(--muted); font-weight: 500; }
+
+.cards { display: grid; grid-template-columns: 1fr; gap: 1rem; }
+dl { display: grid; grid-template-columns: 10rem 1fr; gap: 0.35rem 0.75rem; margin: 0; }
+dt { color: var(--muted); font-size: 0.85rem; }
+dd { margin: 0; }
+
+.sev { font-weight: 700; font-size: 0.8rem; }
+.sev-block, .sev-reject { color: var(--reject); }
+.sev-review { color: var(--review); }
+.sev-warn { color: #9a6b00; }
+.sev-info { color: var(--muted); }
+
+.actions { display: flex; gap: 0.6rem; margin-top: 1.4rem; }
+.btn {
+  border: 0;
+  border-radius: 8px;
+  padding: 0.55rem 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+.btn-primary { background: var(--forest); color: #fff; }
+.btn-primary:hover { background: var(--forest-dark); }
+.btn-ghost { background: transparent; color: var(--reject); border: 1px solid var(--reject); }
+
+.flash { padding: 0.7rem 0.85rem; border-radius: 8px; margin: 0 0 1rem; }
+.flash-ok { background: #d8f3e3; color: var(--auto); }
+.flash-warn { background: #fde7cc; color: #7a3e00; }

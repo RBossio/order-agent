@@ -179,6 +179,14 @@ class InMemoryReferenceDataProvider:
         """Registra un ordine storico per le regole DUP."""
         self._orders.append(order)
 
+    def iter_customers(self) -> list[CustomerRecord]:
+        """Clienti in anagrafica (seed FakeOdoo; non è un matcher)."""
+        return list(self._customers_by_ref.values())
+
+    def iter_products(self) -> list[ProductRecord]:
+        """Prodotti in anagrafica (seed FakeOdoo; non è un matcher)."""
+        return list(self._products_by_sku.values())
+
     def set_qty_p99(self, customer_ref: str, sku: str, value: float) -> None:
         """Imposta il 99° percentile storico di quantità."""
         self._qty_p99[(customer_ref, sku)] = value

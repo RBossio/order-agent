@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}VentureOrder{% endblock %}</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <p class="demo-banner" role="status">{{ demo_banner }}</p>
+  <header class="topbar">
+    <a class="brand" href="/orders">VentureOrder</a>
+    <span class="tagline">Console di revisione · 2026-04-02</span>
+  </header>
+  <main class="page">
+    {% block content %}{% endblock %}
+  </main>
+</body>
+</html>
