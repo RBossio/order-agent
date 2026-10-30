@@ -82,7 +82,8 @@ class ItemMatch:
     """Esito del riconoscimento di una riga.
 
     In caso ambiguo su metodo forte (XREF/SKU/GTIN) non si assegna lo SKU.
-    In caso FUZZY ambiguo si restituisce il primo prodotto e i primi 3 candidati.
+    In caso FUZZY ambiguo si propongono i primi 3 candidati e la confidenza
+    resta sotto la soglia di revisione (mai ≥ 0,9).
     """
 
     product: ProductRecord | None

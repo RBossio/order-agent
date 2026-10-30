@@ -35,8 +35,16 @@ Per ciascun set riporta:
 - **copertura** (risolti univoci / totale)
 - **percentuale di ambigui**
 - **errori con confidenza ≥ 0,9** (scelte sbagliate ad alta confidenza)
+- **errori ≥ REVIEW (0,92)** e **≥ AUTO (0,97)**
 
-Il set rumoroso (seed 42) usa i casi difficili e varianti: niente P.IVA,
-email su dominio generico, nome con refusi/abbreviazioni, codici cliente
-sconosciuti, codici con spazi/trattini, descrizioni parafrasate, UoM diverse.
-I test in `tests/test_match_eval.py` rieseguono lo stesso calcolo.
+Il set rumoroso (seed 42, taratura seed 7) usa i casi difficili e varianti:
+niente P.IVA, email su dominio generico, nome con refusi/abbreviazioni,
+codici cliente sconosciuti, codici con spazi/trattini, descrizioni
+parafrasate, UoM diverse. Un esito ambiguo non ha mai confidenza alta;
+il FUZZY è limitato a 0,85 salvo conferme indipendenti (UoM, prezzo,
+misura/colore). I test in `tests/test_match_eval.py` rieseguono lo stesso
+calcolo e impongono errori articoli ≥ 0,9 ≤ 1% sul rumoroso.
+
+```bash
+python eval/match_eval.py --calibrate   # soglie sul seed 7
+```

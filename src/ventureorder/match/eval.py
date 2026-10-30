@@ -7,11 +7,14 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
 
+import yaml  # type: ignore[import-untyped]
+
 from ventureorder.match.customer import CustomerMatcher
 from ventureorder.match.fields import sanitize_extracted_order
 from ventureorder.match.items import ItemMatcher
 from ventureorder.match.models import CustomerMatch, ItemMatch
 from ventureorder.match.noise import (
+    NOISY_CALIBRATION_SEED,
     NOISY_EVAL_SEED,
     apply_variants,
     is_hard_case,
@@ -22,6 +25,8 @@ from ventureorder.rules.reference import DatagenReferenceDataProvider, Reference
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 HIGH_CONFIDENCE = 0.9
+REVIEW_THRESHOLD = 0.92  # soglia FUZZY alto / revisione matching
+AUTO_THRESHOLD = 0.97  # auto_post_min_score
 
 
 @dataclass
@@ -35,13 +40,18 @@ class MatchEvalReport:
     customer_incorrect: int = 0
     customer_ambiguous: int = 0
     customer_high_conf_errors: int = 0
+    customer_review_errors: int = 0
+    customer_auto_errors: int = 0
     item_total: int = 0
     item_resolved: int = 0
     item_correct: int = 0
     item_incorrect: int = 0
     item_ambiguous: int = 0
     item_high_conf_errors: int = 0
+    item_review_errors: int = 0
+    item_auto_errors: int = 0
     orders: int = 0
+    seed: int | None = None
     methods_customer: dict[str, int] = field(default_factory=dict)
     methods_item: dict[str, int] = field(default_factory=dict)
 
@@ -79,6 +89,22 @@ class MatchEvalReport:
     def item_high_conf_error_rate(self) -> float:
         return self.item_high_conf_errors / self.item_total if self.item_total else 0.0
 
+    @property
+    def customer_review_error_rate(self) -> float:
+        return self.customer_review_errors / self.customer_total if self.customer_total else 0.0
+
+    @property
+    def item_review_error_rate(self) -> float:
+        return self.item_review_errors / self.item_total if self.item_total else 0.0
+
+    @property
+    def customer_auto_error_rate(self) -> float:
+        return self.customer_auto_errors / self.customer_total if self.customer_total else 0.0
+
+    @property
+    def item_auto_error_rate(self) -> float:
+        return self.item_auto_errors / self.item_total if self.item_total else 0.0
+
     def as_percentages(self) -> dict[str, float]:
         """Percentuali arrotondate da riportare in CLI e test."""
         return {
@@ -90,6 +116,10 @@ class MatchEvalReport:
             "item_ambiguous_pct": round(self.item_ambiguous_rate * 100.0, 2),
             "customer_high_conf_error_pct": round(self.customer_high_conf_error_rate * 100.0, 2),
             "item_high_conf_error_pct": round(self.item_high_conf_error_rate * 100.0, 2),
+            "customer_review_error_pct": round(self.customer_review_error_rate * 100.0, 2),
+            "item_review_error_pct": round(self.item_review_error_rate * 100.0, 2),
+            "customer_auto_error_pct": round(self.customer_auto_error_rate * 100.0, 2),
+            "item_auto_error_pct": round(self.item_auto_error_rate * 100.0, 2),
         }
 
     def summary_text(self) -> str:
@@ -99,12 +129,26 @@ class MatchEvalReport:
             f"cop {pct['customer_coverage_pct']:.2f}% "
             f"amb {pct['customer_ambiguous_pct']:.2f}% "
             f"err≥0.9 {pct['customer_high_conf_error_pct']:.2f}% "
+            f"err≥REVIEW {pct['customer_review_error_pct']:.2f}% "
+            f"err≥AUTO {pct['customer_auto_error_pct']:.2f}% "
             f"| articoli prec {pct['item_precision_pct']:.2f}% "
             f"cop {pct['item_coverage_pct']:.2f}% "
             f"amb {pct['item_ambiguous_pct']:.2f}% "
             f"err≥0.9 {pct['item_high_conf_error_pct']:.2f}% "
-            f"| {self.orders} ordini"
+            f"err≥REVIEW {pct['item_review_error_pct']:.2f}% "
+            f"err≥AUTO {pct['item_auto_error_pct']:.2f}% "
+            f"| {self.orders} ordini" + (f" seed={self.seed}" if self.seed is not None else "")
         )
+
+
+def load_match_thresholds() -> dict[str, Any]:
+    """Soglie da ``config/thresholds.yaml`` (fallback: default del matcher)."""
+    path = REPO_ROOT / "config" / "thresholds.yaml"
+    if not path.is_file():
+        return {}
+    with path.open(encoding="utf-8") as handle:
+        loaded = yaml.safe_load(handle) or {}
+    return loaded if isinstance(loaded, dict) else {}
 
 
 def evaluate_synthetic_dataset(
@@ -112,10 +156,11 @@ def evaluate_synthetic_dataset(
     datagen_path: Path | str | None = None,
     *,
     limit: int | None = None,
+    thresholds: dict[str, Any] | None = None,
 ) -> MatchEvalReport:
     """Set pulito: campi estratti sanitizzati, senza ID attesi."""
     truths, provider = _load(ground_truth_dir, datagen_path, limit)
-    return _evaluate_truths(truths, provider, name="clean")
+    return _evaluate_truths(truths, provider, name="clean", thresholds=thresholds)
 
 
 def evaluate_noisy_dataset(
@@ -124,18 +169,64 @@ def evaluate_noisy_dataset(
     *,
     seed: int = NOISY_EVAL_SEED,
     limit: int | None = None,
+    thresholds: dict[str, Any] | None = None,
 ) -> MatchEvalReport:
     """Set rumoroso: casi difficili + varianti a seed fisso."""
     truths, provider = _load(ground_truth_dir, datagen_path, limit=None)
-    customer_matcher = CustomerMatcher(provider)
-    item_matcher = ItemMatcher(provider)
-    report = MatchEvalReport(name="noisy")
+    merged = {**load_match_thresholds(), **(thresholds or {})}
+    customer_matcher = CustomerMatcher(provider, merged)
+    item_matcher = ItemMatcher(provider, merged)
+    report = MatchEvalReport(name="noisy", seed=seed)
     cases = list(_iter_noisy_cases(truths, seed=seed))
     if limit is not None:
         cases = cases[:limit]
     for truth, extracted, _kinds in cases:
         _evaluate_one(report, truth, extracted, customer_matcher, item_matcher)
     return report
+
+
+FUZZY_CALIBRATION_GRID: tuple[dict[str, float], ...] = (
+    {"item_fuzzy_cap": 0.85, "item_fuzzy_confirm_min": 2, "item_fuzzy_margin": 0.08},
+    {"item_fuzzy_cap": 0.85, "item_fuzzy_confirm_min": 1, "item_fuzzy_margin": 0.08},
+    {"item_fuzzy_cap": 0.80, "item_fuzzy_confirm_min": 2, "item_fuzzy_margin": 0.08},
+    {"item_fuzzy_cap": 0.85, "item_fuzzy_confirm_min": 2, "item_fuzzy_margin": 0.10},
+)
+
+
+def calibrate_fuzzy_thresholds(
+    ground_truth_dir: Path | str | None = None,
+    datagen_path: Path | str | None = None,
+    *,
+    seed: int = NOISY_CALIBRATION_SEED,
+) -> tuple[dict[str, float], MatchEvalReport, list[tuple[dict[str, float], MatchEvalReport]]]:
+    """Sceglie le soglie FUZZY sul set rumoroso di taratura (seed 7).
+
+    Criterio: errori ≥ 0,9 ≤ 1%, poi massima copertura articoli, poi precisione.
+    """
+    base = load_match_thresholds()
+    ranked: list[tuple[dict[str, float], MatchEvalReport]] = []
+    for extra in FUZZY_CALIBRATION_GRID:
+        merged = {**base, **extra}
+        report = evaluate_noisy_dataset(
+            ground_truth_dir=ground_truth_dir,
+            datagen_path=datagen_path,
+            seed=seed,
+            thresholds=merged,
+        )
+        ranked.append((dict(extra), report))
+    ranked.sort(
+        key=lambda item: (
+            item[1].item_high_conf_error_rate,
+            -item[1].item_coverage,
+            -item[1].item_precision,
+        )
+    )
+    chosen, report = ranked[0]
+    if report.item_high_conf_error_rate > 0.01:
+        # Nessuna combinazione sotto l'1%: si tiene il cap più conservativo.
+        chosen = dict(FUZZY_CALIBRATION_GRID[0])
+        report = ranked[0][1]
+    return chosen, report, ranked
 
 
 def _load(
@@ -161,9 +252,11 @@ def _evaluate_truths(
     provider: ReferenceDataProvider,
     *,
     name: str,
+    thresholds: dict[str, Any] | None = None,
 ) -> MatchEvalReport:
-    customer_matcher = CustomerMatcher(provider)
-    item_matcher = ItemMatcher(provider)
+    merged = {**load_match_thresholds(), **(thresholds or {})}
+    customer_matcher = CustomerMatcher(provider, merged)
+    item_matcher = ItemMatcher(provider, merged)
     report = MatchEvalReport(name=name)
     for truth in truths:
         extracted = sanitize_extracted_order(truth)
@@ -239,8 +332,7 @@ def _score_customer(report: MatchEvalReport, expected_ref: Any, match: CustomerM
         report.customer_correct += 1
     else:
         report.customer_incorrect += 1
-        if match.score >= HIGH_CONFIDENCE:
-            report.customer_high_conf_errors += 1
+        _tally_threshold_errors(report, match.score, kind="customer")
 
 
 def _score_item(report: MatchEvalReport, expected_sku: Any, match: ItemMatch) -> None:
@@ -250,8 +342,8 @@ def _score_item(report: MatchEvalReport, expected_sku: Any, match: ItemMatch) ->
     if match.ambiguous:
         report.item_ambiguous += 1
         report.methods_item["AMBIGUOUS"] = report.methods_item.get("AMBIGUOUS", 0) + 1
-        if wrong and match.score >= HIGH_CONFIDENCE:
-            report.item_high_conf_errors += 1
+        if wrong:
+            _tally_threshold_errors(report, match.score, kind="item")
         return
     if match.method == "UNRESOLVED" or predicted is None:
         report.methods_item["UNRESOLVED"] = report.methods_item.get("UNRESOLVED", 0) + 1
@@ -262,8 +354,25 @@ def _score_item(report: MatchEvalReport, expected_sku: Any, match: ItemMatch) ->
         report.item_correct += 1
     else:
         report.item_incorrect += 1
-        if match.score >= HIGH_CONFIDENCE:
+        _tally_threshold_errors(report, match.score, kind="item")
+
+
+def _tally_threshold_errors(report: MatchEvalReport, score: float, *, kind: str) -> None:
+    """Conta errori ≥0,9, ≥REVIEW (0,92) e ≥AUTO (0,97)."""
+    if kind == "item":
+        if score >= HIGH_CONFIDENCE:
             report.item_high_conf_errors += 1
+        if score >= REVIEW_THRESHOLD:
+            report.item_review_errors += 1
+        if score >= AUTO_THRESHOLD:
+            report.item_auto_errors += 1
+        return
+    if score >= HIGH_CONFIDENCE:
+        report.customer_high_conf_errors += 1
+    if score >= REVIEW_THRESHOLD:
+        report.customer_review_errors += 1
+    if score >= AUTO_THRESHOLD:
+        report.customer_auto_errors += 1
 
 
 def _default_gt_dir() -> Path:

@@ -26,13 +26,18 @@ DEFAULT_THRESHOLDS: dict[str, float] = {
     "item_unresolved_min": 0.75,
     "item_fuzzy_high": 0.92,
     "item_fuzzy_margin": 0.08,
+    "item_fuzzy_cap": 0.85,
+    "item_fuzzy_confirm_min": 2,
     "item_xref_trusted": 1.00,
     "item_xref_candidate": 0.95,
     "item_seller_code": 0.98,
     "item_gtin": 0.99,
     "item_mpn": 0.97,
     "item_mpn_solo": 0.93,
+    "price_tolerance_pct": 2.0,
 }
+
+_MEASURE_KEYS = ("dim", "inch", "mil", "thread", "metric", "size")
 
 
 class ItemMatcher:
@@ -132,7 +137,7 @@ class ItemMatcher:
         if len(skus) > 1:
             return ItemMatch(
                 product=None,
-                score=min(trusted, candidate),
+                score=self._ambiguous_score(min(trusted, candidate)),
                 method="XREF",
                 ambiguous=True,
                 candidates=[
@@ -179,7 +184,7 @@ class ItemMatcher:
         if len(unique) > 1:
             return ItemMatch(
                 product=None,
-                score=score,
+                score=self._ambiguous_score(score),
                 method="GTIN",
                 ambiguous=True,
                 candidates=[
@@ -206,7 +211,10 @@ class ItemMatcher:
         line_uom = normalize_uom(line.get("uom")) or normalize_uom(line.get("uom_raw"))
         unresolved_min = float(self.thresholds.get("item_unresolved_min", 0.75))
         margin = float(self.thresholds.get("item_fuzzy_margin", 0.08))
-        ranked: list[tuple[float, ProductRecord]] = []
+        fuzzy_cap = float(self.thresholds.get("item_fuzzy_cap", 0.85))
+        fuzzy_high = float(self.thresholds.get("item_fuzzy_high", 0.92))
+        confirm_min = int(self.thresholds.get("item_fuzzy_confirm_min", 2))
+        ranked: list[tuple[float, ProductRecord, float, bool, dict[str, str]]] = []
         for product in self._products:
             catalog = expand_abbreviations(normalize_description(product.name))
             s_text = token_set_ratio(query, catalog) / 100.0
@@ -221,24 +229,70 @@ class ItemMatcher:
                 score = min(score - 0.30, 0.80)
             score = max(0.0, min(0.95, score))
             if score >= unresolved_min * 0.8:
-                ranked.append((score, product))
+                ranked.append((score, product, s_uom, discordant, prod_attrs))
         if not ranked:
             return None
         ranked.sort(key=lambda item: item[0], reverse=True)
-        best_score, best = ranked[0]
+        best_score, best, best_uom, discordant, prod_attrs = ranked[0]
         if best_score < unresolved_min:
             return ItemMatch(
                 product=None,
                 score=best_score,
                 method="UNRESOLVED",
-                candidates=[_candidate(item, score) for score, item in ranked[:3]],
+                candidates=[_candidate(item, score) for score, item, *_rest in ranked[:3]],
             )
-        close = [(score, item) for score, item in ranked if best_score - score < margin]
-        ambiguous = len(close) > 1
-        match = self._decorate(best, best_score, "FUZZY", line)
+        second = ranked[1][0] if len(ranked) > 1 else 0.0
+        ambiguous = len(ranked) > 1 and (best_score - second) < margin
+        confirmations = (
+            0
+            if discordant
+            else self._independent_confirmations(line, best, query_attrs, prod_attrs, best_uom)
+        )
+        # Ambiguo o senza conferme indipendenti: mai confidenza alta (§6.6).
+        if ambiguous or confirmations < confirm_min:
+            score = min(best_score, fuzzy_cap)
+        else:
+            score = min(best_score, fuzzy_high)
+        match = self._decorate(best, score, "FUZZY", line)
         match.ambiguous = ambiguous
-        match.candidates = [_candidate(item, score) for score, item in ranked[:3]]
+        match.candidates = [_candidate(item, raw) for raw, item, *_rest in ranked[:3]]
         return match
+
+    def _ambiguous_score(self, score: float) -> float:
+        """Un esito ambiguo non può mai avere confidenza alta (≥ 0,9)."""
+        cap = float(self.thresholds.get("item_fuzzy_cap", 0.85))
+        return min(float(score), cap)
+
+    def _independent_confirmations(
+        self,
+        line: dict[str, Any],
+        product: ProductRecord,
+        query_attrs: dict[str, str],
+        catalog_attrs: dict[str, str],
+        s_uom: float,
+    ) -> int:
+        """Conferme indipendenti dalla sola similarità testuale.
+
+        UoM compatibile, prezzo entro il listino, misura o colore uguali.
+        """
+        count = 0
+        if s_uom >= 1.0:
+            count += 1
+        if self._price_within_list(line, product):
+            count += 1
+        if _measure_or_color_match(query_attrs, catalog_attrs):
+            count += 1
+        return count
+
+    def _price_within_list(self, line: dict[str, Any], product: ProductRecord) -> bool:
+        raw = line.get("unit_price")
+        if not isinstance(raw, int | float):
+            return False
+        list_price = float(product.list_price)
+        if list_price == 0:
+            return float(raw) == 0.0
+        tol = float(self.thresholds.get("price_tolerance_pct", 2.0)) / 100.0
+        return abs(float(raw) - list_price) / abs(list_price) <= tol
 
     def _uom_signal(self, line_uom: str | None, product: ProductRecord) -> float:
         sale = normalize_uom(product.sale_uom)
@@ -249,6 +303,13 @@ class ItemMatcher:
         if self.provider.get_uom_conversion(line_uom, sale, product.sku) is not None:
             return 0.5
         return 0.0
+
+
+def _measure_or_color_match(query: dict[str, str], catalog: dict[str, str]) -> bool:
+    """True se misura o colore coincidono tra documento e catalogo."""
+    if query.get("color") and catalog.get("color") == query["color"]:
+        return True
+    return any(key in query and catalog.get(key) == query[key] for key in _MEASURE_KEYS)
 
 
 def _candidate(product: ProductRecord, score: float) -> ItemCandidate:

@@ -511,6 +511,26 @@ class TestItemFuzzy:
         assert match.product.sku == "TOOL-WRN-10IN"
         assert match.score >= 0.75
         assert not match.ambiguous
+        # UoM + misura: conferme indipendenti, può superare il cap 0,85.
+        assert match.score > 0.85
+
+    def test_fuzzy_without_confirmation_is_capped(self, items: ItemMatcher) -> None:
+        match = items.resolve(
+            _line(
+                buyer_item_code=None,
+                seller_item_code=None,
+                gtin=None,
+                description="Adjustable Wrench",
+                uom=None,
+                uom_raw=None,
+                unit_price=None,
+            ),
+            None,
+        )
+        assert match.method == "FUZZY"
+        assert match.product is not None
+        assert match.score <= 0.85 + 1e-9
+        assert match.score < 0.9
 
     def test_fuzzy_color_and_measure_tokens(self, items: ItemMatcher) -> None:
         match = items.resolve(
@@ -546,12 +566,16 @@ class TestItemEdge:
         )
         assert match.ambiguous
         assert match.method == "FUZZY"
+        assert match.score < 0.9
+        assert match.score <= 0.85 + 1e-9
         assert len(match.candidates) >= 2
+        assert len(match.candidates) <= 3
         skus = {c.sku for c in match.candidates}
         assert "ABR-COW-6IN-A" in skus
         assert "ABR-COW-6IN-B" in skus
         payload = match.to_vof()
         assert payload["method"] == "FUZZY"
+        assert payload["score"] < 0.9
         assert len(payload["candidates"]) <= 3
 
     def test_unknown_item(self, items: ItemMatcher) -> None:

@@ -8,6 +8,7 @@ import re
 from typing import Any
 
 NOISY_EVAL_SEED = 42
+NOISY_CALIBRATION_SEED = 7
 
 GENERIC_EMAIL_DOMAINS: tuple[str, ...] = (
     "gmail.example",

@@ -52,10 +52,14 @@ customer_fuzzy_name_review: 0.95
 customer_ambiguous_margin: 0.08
 customer_address_min: 0.90
 
-# Matching articoli (§6.6).
+# Matching articoli (§6.6). Tarate sul set rumoroso seed 7, validate sul seed 42.
 item_unresolved_min: 0.75
 item_fuzzy_high: 0.92
 item_fuzzy_margin: 0.08
+# Cap FUZZY senza conferme indipendenti (UoM, prezzo listino, misura/colore).
+# Un esito ambiguo non supera mai questo cap (mai confidenza ≥ 0,9).
+item_fuzzy_cap: 0.85
+item_fuzzy_confirm_min: 2
 item_xref_trusted: 1.00
 item_xref_candidate: 0.95
 item_seller_code: 0.98

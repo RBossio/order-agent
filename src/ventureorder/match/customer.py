@@ -145,7 +145,7 @@ class CustomerMatcher:
         if len(close) > 1:
             return CustomerMatch(
                 customer=None,
-                score=best_score,
+                score=min(best_score, float(self.thresholds.get("customer_fuzzy_name_min", 0.85))),
                 method="FUZZY_NAME",
                 ambiguous=True,
                 candidates=[
@@ -234,7 +234,7 @@ class CustomerMatcher:
         if len(unique) > 1:
             return CustomerMatch(
                 customer=None,
-                score=score,
+                score=min(score, float(self.thresholds.get("customer_fuzzy_name_min", 0.85))),
                 method=method,
                 ambiguous=True,
                 candidates=candidates,

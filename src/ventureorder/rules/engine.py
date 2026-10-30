@@ -51,6 +51,8 @@ DEFAULT_THRESHOLDS: dict[str, Any] = {
     "item_unresolved_min": 0.75,
     "item_fuzzy_high": 0.92,
     "item_fuzzy_margin": 0.08,
+    "item_fuzzy_cap": 0.85,
+    "item_fuzzy_confirm_min": 2,
     "item_xref_trusted": 1.00,
     "item_xref_candidate": 0.95,
     "item_seller_code": 0.98,

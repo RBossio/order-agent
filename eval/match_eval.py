@@ -27,10 +27,14 @@ if str(REPO_ROOT) not in sys.path:
 
 from ventureorder.match.eval import (  # noqa: E402
     MatchEvalReport,
+    calibrate_fuzzy_thresholds,
     evaluate_noisy_dataset,
     evaluate_synthetic_dataset,
 )
-from ventureorder.match.noise import NOISY_EVAL_SEED  # noqa: E402
+from ventureorder.match.noise import (  # noqa: E402
+    NOISY_CALIBRATION_SEED,
+    NOISY_EVAL_SEED,
+)
 
 
 def _payload(report: MatchEvalReport) -> dict:
@@ -43,11 +47,16 @@ def _payload(report: MatchEvalReport) -> dict:
         "customer_correct": report.customer_correct,
         "customer_ambiguous": report.customer_ambiguous,
         "customer_high_conf_errors": report.customer_high_conf_errors,
+        "customer_review_errors": report.customer_review_errors,
+        "customer_auto_errors": report.customer_auto_errors,
         "item_total": report.item_total,
         "item_resolved": report.item_resolved,
         "item_correct": report.item_correct,
         "item_ambiguous": report.item_ambiguous,
         "item_high_conf_errors": report.item_high_conf_errors,
+        "item_review_errors": report.item_review_errors,
+        "item_auto_errors": report.item_auto_errors,
+        "seed": report.seed,
         "methods_customer": report.methods_customer,
         "methods_item": report.methods_item,
     }
@@ -77,13 +86,53 @@ def main() -> int:
         dest="which",
         choices=["clean", "noisy", "both"],
         default="both",
-        help="Quale evaluation eseguire (default: entrambe).",
+        help="Quale evaluation eseguire (default: pulito + rumoroso 42 e 7).",
     )
     parser.add_argument(
         "--seed", type=int, default=NOISY_EVAL_SEED, help="Seed delle varianti rumorose."
     )
+    parser.add_argument(
+        "--calibrate-seed",
+        type=int,
+        default=NOISY_CALIBRATION_SEED,
+        help="Seed di taratura (default 7).",
+    )
+    parser.add_argument(
+        "--calibrate",
+        action="store_true",
+        help="Sceglie le soglie FUZZY sul seed di taratura e stampa la griglia.",
+    )
     parser.add_argument("--json", action="store_true", help="Stampa il report in JSON.")
     args = parser.parse_args()
+
+    if args.calibrate:
+        chosen, cal_report, grid = calibrate_fuzzy_thresholds(
+            ground_truth_dir=args.ground_truth,
+            datagen_path=args.datagen,
+            seed=args.calibrate_seed,
+        )
+        if args.json:
+            print(
+                json.dumps(
+                    {
+                        "chosen": chosen,
+                        "calibration": _payload(cal_report),
+                        "grid": [{"thresholds": extra, **_payload(rep)} for extra, rep in grid],
+                    },
+                    indent=2,
+                    ensure_ascii=False,
+                )
+            )
+        else:
+            print(f"soglie scelte sul seed {args.calibrate_seed}: {chosen}")
+            print(cal_report.summary_text())
+            for extra, rep in grid:
+                pct = rep.as_percentages()
+                print(
+                    f"  {extra} → err≥0.9 {pct['item_high_conf_error_pct']:.2f}% "
+                    f"cop {pct['item_coverage_pct']:.2f}%"
+                )
+        return 0
 
     reports: list[MatchEvalReport] = []
     if args.which in {"clean", "both"}:
@@ -94,6 +143,7 @@ def main() -> int:
                 limit=args.limit,
             )
         )
+
     if args.which in {"noisy", "both"}:
         reports.append(
             evaluate_noisy_dataset(
@@ -102,6 +152,14 @@ def main() -> int:
                 seed=args.seed,
             )
         )
+        if args.which == "both" and args.seed != args.calibrate_seed:
+            reports.append(
+                evaluate_noisy_dataset(
+                    ground_truth_dir=args.ground_truth,
+                    datagen_path=args.datagen,
+                    seed=args.calibrate_seed,
+                )
+            )
 
     if args.json:
         print(json.dumps([_payload(r) for r in reports], indent=2, ensure_ascii=False))
@@ -115,7 +173,11 @@ def main() -> int:
                 f"copertura {pct['customer_coverage_pct']:.2f}% / {pct['item_coverage_pct']:.2f}%  |  "
                 f"ambigui {pct['customer_ambiguous_pct']:.2f}% / {pct['item_ambiguous_pct']:.2f}%  |  "
                 f"errori ≥0.9 {pct['customer_high_conf_error_pct']:.2f}% / "
-                f"{pct['item_high_conf_error_pct']:.2f}%"
+                f"{pct['item_high_conf_error_pct']:.2f}%  |  "
+                f"err≥REVIEW {pct['customer_review_error_pct']:.2f}% / "
+                f"{pct['item_review_error_pct']:.2f}%  |  "
+                f"err≥AUTO {pct['customer_auto_error_pct']:.2f}% / "
+                f"{pct['item_auto_error_pct']:.2f}%"
             )
     return 0
 
