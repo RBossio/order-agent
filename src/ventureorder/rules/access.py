@@ -32,7 +32,9 @@ UOM_ALIASES: dict[str, str] = {
     "EACH": "EA",
 }
 
-INDIVISIBLE_UOMS = frozenset({"EA", "BX", "CS", "PK", "DZN", "PR", "CT", "BG", "DR", "RO"})
+INDIVISIBLE_UOMS = frozenset(
+    {"EA", "BX", "CS", "PK", "DZN", "PR", "CT", "BG", "DR", "RO"}
+)
 
 # Unità usate da datagen/master/products.json, in aggiunta a Rec. 20 / alias MRO.
 DATAGEN_VALID_UOMS = frozenset({"CS", "BX", "RO", "PK", "BG", "RL", "GLL", "DZN"})

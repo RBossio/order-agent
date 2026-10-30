@@ -200,7 +200,9 @@ class ValidationEngine:
         score -= penalty * warn_count
         return max(0.0, min(1.0, score))
 
-    def _route(self, ctx: RuleContext, result: ValidationResult) -> tuple[DecisionRoute, list[str]]:
+    def _route(
+        self, ctx: RuleContext, result: ValidationResult
+    ) -> tuple[DecisionRoute, list[str]]:
         """Applica §7.1: REJECT (SEC/DUP), REVIEW, AUTO_POST simulato."""
         reject_codes = [
             issue.rule_id
