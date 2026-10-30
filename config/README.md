@@ -2,8 +2,9 @@
 
 Questa cartella contiene i file di configurazione YAML:
 
-- `thresholds.yaml` — soglie per score e decisioni
-- `rules.yaml` — configurazione delle regole di validazione
-- `uom_crosswalk.yaml` — mapping delle unità di misura
-- `edi_partners.yaml` — profili EDI per partner
-- `mro_lexicon.yaml` — lessico MRO/JanSan per il matching
+- `thresholds.yaml` — soglie per score e decisioni (tolleranza prezzi, date PO, AUTO_POST, …)
+- `rules.yaml` — regole disabilitate, override di severità, mappa spese → SKU servizio
+- `odoo.conf.template` — template di configurazione Odoo (segreti da ambiente)
+- `uom_crosswalk.yaml` — mapping delle unità di misura (previsto)
+- `edi_partners.yaml` — profili EDI per partner (previsto)
+- `mro_lexicon.yaml` — lessico MRO/JanSan per il matching (previsto)
