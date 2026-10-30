@@ -1,0 +1,57 @@
+# Lessico MRO / JanSan per il matching fuzzy delle descrizioni (§6.3).
+# Versionato: le abbreviazioni si espandono prima del confronto testuale.
+
+abbreviations:
+  HCS: hex cap screw
+  SHCS: socket head cap screw
+  GR5: grade 5
+  GR8: grade 8
+  ZN: zinc
+  ZP: zinc
+  SS: stainless
+  NIT: nitrile
+  PF: powder free
+  AF: anti fog
+  CLR: clear
+  BLK: black
+  BLU: blue
+  WHT: white
+  LNR: liner
+  RTU: ready to use
+  CONC: concentrate
+  NEUT: neutral
+  MIC: micron
+  GAL: gallon
+  GL: gallon
+  QT: quart
+  OZ: ounce
+  BX: box
+  CS: case
+  PK: pack
+  RL: roll
+  EA: each
+  LG: large
+  MD: medium
+  SM: small
+
+colors:
+  blk: black
+  black: black
+  blu: blue
+  blue: blue
+  clr: clear
+  clear: clear
+  wht: white
+  white: white
+  amber: amber
+  smoke: smoke
+  nat: natural
+  natural: natural
+  grn: green
+  green: green
+  red: red
+  ylw: yellow
+  yellow: yellow
+  zn: zinc
+  zinc: zinc
+  zp: zinc

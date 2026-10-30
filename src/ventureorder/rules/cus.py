@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from ventureorder.rules.access import email_domain, issue, resolved
+from ventureorder.rules.access import email_domain, issue, resolved, threshold
 from ventureorder.rules.models import Issue, RuleContext, Severity
 from ventureorder.rules.reference import addresses_match, customer_of
 from ventureorder.rules.registry import rule
@@ -50,7 +50,8 @@ def cus_02_fuzzy_name(ctx: RuleContext) -> list[Issue]:
     method = str(info.get("method") or "")
     score = info.get("score")
     score_f = float(score) if isinstance(score, int | float) else 0.0
-    if method in FUZZY_METHODS and score_f < 0.95:
+    review_min = float(threshold(ctx, "customer_fuzzy_name_review", 0.95))
+    if method in FUZZY_METHODS and score_f < review_min:
         return [
             issue(
                 "CUS-02",

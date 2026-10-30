@@ -44,6 +44,19 @@ DEFAULT_THRESHOLDS: dict[str, Any] = {
     "warn_score_penalty": 0.05,
     "max_attachment_bytes": 20 * 1024 * 1024,
     "x12_imd_max_length": 35,
+    "customer_fuzzy_name_min": 0.85,
+    "customer_fuzzy_name_review": 0.95,
+    "customer_ambiguous_margin": 0.08,
+    "customer_address_min": 0.90,
+    "item_unresolved_min": 0.75,
+    "item_fuzzy_high": 0.92,
+    "item_fuzzy_margin": 0.08,
+    "item_xref_trusted": 1.00,
+    "item_xref_candidate": 0.95,
+    "item_seller_code": 0.98,
+    "item_gtin": 0.99,
+    "item_mpn": 0.97,
+    "item_mpn_solo": 0.93,
 }
 
 REJECT_RULES = frozenset({"SEC-01", "DUP-01", "DUP-02"})
@@ -127,9 +140,17 @@ class ValidationEngine:
         llm_schema_attempts: int = 0,
         llm_schema_valid: bool = True,
         as_of: date | None = None,
+        apply_matching: bool = False,
     ) -> ValidationResult:
-        """Valida un VOF e restituisce issue, score e route."""
+        """Valida un VOF e restituisce issue, score e route.
+
+        Se ``apply_matching`` è vero, prima riconosce cliente e articoli
+        (§6) e scrive ``buyer.resolved`` / ``line.resolution``: le regole
+        CUS/ITM e lo score minimo usano queste confidenze.
+        """
         validate_rules_config(self.rules_config)
+        if apply_matching:
+            self._apply_matching(vof)
         context = RuleContext(
             vof=vof,
             as_of=as_of or self.as_of,
@@ -174,6 +195,26 @@ class ValidationEngine:
         result.decision, result.reasons = self._route(context, result)
         return result
 
+    def match_and_validate(
+        self,
+        vof: dict[str, Any],
+        **kwargs: Any,
+    ) -> ValidationResult:
+        """Riconosce cliente/articoli e poi valida. Lo score usa le confidenze del match."""
+        kwargs.pop("apply_matching", None)
+        return self.validate(vof, apply_matching=True, **kwargs)
+
+    def _apply_matching(self, vof: dict[str, Any]) -> None:
+        """Popola il VOF con il riconoscimento cliente/articoli."""
+        from ventureorder.match.pipeline import apply_matches
+
+        if self.reference_data is None:
+            raise ValueError(
+                "apply_matching richiede un ReferenceDataProvider "
+                "(usare ValidationEngine.for_synthetic o passarne uno)."
+            )
+        apply_matches(vof, self.reference_data, thresholds=self.thresholds)
+
     def _compute_score(self, ctx: RuleContext, result: ValidationResult) -> float:
         """Minimo delle confidenze critiche e degli score riga, −0,05 per WARN."""
         values: list[float] = []
@@ -200,9 +241,7 @@ class ValidationEngine:
         score -= penalty * warn_count
         return max(0.0, min(1.0, score))
 
-    def _route(
-        self, ctx: RuleContext, result: ValidationResult
-    ) -> tuple[DecisionRoute, list[str]]:
+    def _route(self, ctx: RuleContext, result: ValidationResult) -> tuple[DecisionRoute, list[str]]:
         """Applica §7.1: REJECT (SEC/DUP), REVIEW, AUTO_POST simulato."""
         reject_codes = [
             issue.rule_id

@@ -2,7 +2,13 @@
 
 from __future__ import annotations
 
-from ventureorder.rules.access import gtin_is_valid, issue, line_pointer, line_resolution
+from ventureorder.rules.access import (
+    gtin_is_valid,
+    issue,
+    line_pointer,
+    line_resolution,
+    threshold,
+)
 from ventureorder.rules.models import Issue, RuleContext, Severity
 from ventureorder.rules.reference import customer_of, product_of
 from ventureorder.rules.registry import rule
@@ -23,18 +29,22 @@ def itm_01_unresolved(ctx: RuleContext) -> list[Issue]:
         score_f = float(score) if isinstance(score, int | float) else None
         sku = resolution.get("sku")
         product_id = resolution.get("erp_product_id")
+        score_min = float(threshold(ctx, "item_unresolved_min", ITM01_SCORE_MIN))
         unresolved = (
             not resolution
             or method in UNRESOLVED_METHODS
             or (sku is None and product_id is None)
-            or (score_f is not None and score_f < ITM01_SCORE_MIN)
+            or (score_f is not None and score_f < score_min)
         )
         if unresolved:
             issues.append(
                 issue(
                     "ITM-01",
                     Severity.BLOCK,
-                    f"Riga {line.get('line_no', index + 1)}: articolo non risolto (score < 0,75)",
+                    (
+                        f"Riga {line.get('line_no', index + 1)}: articolo non risolto "
+                        f"(score < {score_min:.2f})"
+                    ),
                     line_pointer(index, "resolution"),
                     suggestion="Associare lo SKU del distributore (xref, GTIN, MPN o manuale)",
                 )

@@ -14,3 +14,14 @@ Script per misurare i KPI del prototipo:
 - Righe completamente corrette (target ≥ 90%)
 - Errori silenziosi (target ≤ 1%)
 - Latenza email → bozza (target < 60s p95)
+
+## Riconoscimento clienti e articoli
+
+Valutazione offline sul dataset sintetico (nessuna rete, nessun LLM):
+
+```bash
+python eval/match_eval.py
+python eval/match_eval.py --json
+```
+
+Riporta la **precisione** (percentuale di clienti/articoli risolti correttamente) e la copertura. I test in `tests/test_match_eval.py` rieseguono lo stesso calcolo.

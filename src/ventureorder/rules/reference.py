@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import re
 from dataclasses import dataclass, field
 from datetime import date
 from pathlib import Path
@@ -36,6 +37,9 @@ class CustomerRecord:
     allowlisted: bool = False
     approved_orders_without_corrections: int = 0
     delivery_partner_ids: list[int] = field(default_factory=list)
+    tax_id: str | None = None
+    address: dict[str, Any] = field(default_factory=dict)
+    email: str | None = None
 
 
 @dataclass
@@ -55,6 +59,7 @@ class ProductRecord:
     sale_ok: bool = True
     sale_multiple: float | None = None
     min_order_qty: float | None = None
+    manufacturer_name: str | None = None
 
 
 @dataclass
@@ -140,6 +145,7 @@ class InMemoryReferenceDataProvider:
         self._products_by_gtin: dict[str, ProductRecord] = {}
         self._products_by_mpn: dict[str, ProductRecord] = {}
         self._xrefs: dict[tuple[str, str], XrefRecord] = {}
+        self._xrefs_norm: dict[tuple[str, str], list[XrefRecord]] = {}
         self._orders: list[HistoricalOrder] = []
         self._qty_p99: dict[tuple[str, str], float] = {}
         self._charge_products: dict[str, str] = {}
@@ -162,9 +168,15 @@ class InMemoryReferenceDataProvider:
         self._products_by_sku[product.sku] = product
         self._products_by_id[product.erp_product_id] = product
         if product.gtin:
+            digits = "".join(c for c in str(product.gtin) if c.isdigit())
             self._products_by_gtin[str(product.gtin)] = product
+            if digits:
+                self._products_by_gtin[digits] = product
+                self._products_by_gtin[digits.zfill(14)] = product
         if product.manufacturer_part_number:
+            mpn = str(product.manufacturer_part_number).strip().upper()
             self._products_by_mpn[product.manufacturer_part_number] = product
+            self._products_by_mpn[mpn] = product
         if product.sale_uom:
             self._register_uom(product.sale_uom)
         for conv in product.conversions:
@@ -172,9 +184,12 @@ class InMemoryReferenceDataProvider:
             self._register_uom(conv.get("to_uom"))
 
     def add_xref(self, xref: XrefRecord) -> None:
-        """Registra un cross-reference cliente → SKU."""
+        """Registra un cross-reference cliente → SKU (chiave grezza e normalizzata)."""
         key = (xref.customer_ref, xref.customer_item_code)
         self._xrefs[key] = xref
+        norm = _normalize_item_code(xref.customer_item_code)
+        if norm:
+            self._xrefs_norm.setdefault((xref.customer_ref, norm), []).append(xref)
 
     def add_order(self, order: HistoricalOrder) -> None:
         """Registra un ordine storico per le regole DUP."""
@@ -241,19 +256,53 @@ class InMemoryReferenceDataProvider:
         return self._customers_by_ref.get(erp_partner_ref)
 
     def get_product_by_sku(self, sku: str) -> ProductRecord | None:
-        return self._products_by_sku.get(sku)
+        found = self._products_by_sku.get(sku)
+        if found:
+            return found
+        if sku:
+            return self._products_by_sku.get(str(sku).strip().upper())
+        return None
 
     def get_product_by_id(self, erp_product_id: int) -> ProductRecord | None:
         return self._products_by_id.get(erp_product_id)
 
     def get_product_by_gtin(self, gtin: str) -> ProductRecord | None:
-        return self._products_by_gtin.get(str(gtin))
+        key = str(gtin)
+        found = self._products_by_gtin.get(key)
+        if found:
+            return found
+        digits = "".join(c for c in key if c.isdigit())
+        if not digits:
+            return None
+        return self._products_by_gtin.get(digits) or self._products_by_gtin.get(digits.zfill(14))
 
     def get_product_by_mpn(self, mpn: str) -> ProductRecord | None:
-        return self._products_by_mpn.get(mpn)
+        found = self._products_by_mpn.get(mpn)
+        if found:
+            return found
+        if mpn:
+            return self._products_by_mpn.get(str(mpn).strip().upper())
+        return None
 
     def get_xref(self, customer_ref: str, buyer_item_code: str) -> XrefRecord | None:
-        return self._xrefs.get((customer_ref, buyer_item_code))
+        found = self._xrefs.get((customer_ref, buyer_item_code))
+        if found:
+            return found
+        norm = _normalize_item_code(buyer_item_code)
+        hits = self._xrefs_norm.get((customer_ref, norm), []) if norm else []
+        return hits[0] if len(hits) == 1 else None
+
+    def iter_customers(self) -> list[CustomerRecord]:
+        """Elenco clienti (per il matching)."""
+        return list(self._customers_by_ref.values())
+
+    def iter_products(self) -> list[ProductRecord]:
+        """Elenco prodotti (per il matching)."""
+        return list(self._products_by_sku.values())
+
+    def iter_xrefs(self) -> list[XrefRecord]:
+        """Elenco xref cliente → SKU (per il matching)."""
+        return list(self._xrefs.values())
 
     def is_valid_uom(self, uom: str) -> bool:
         if not uom:
@@ -442,6 +491,7 @@ class DatagenReferenceDataProvider(InMemoryReferenceDataProvider):
                 list_price=float(item.get("price") or 0),
                 gtin=item.get("gtin"),
                 manufacturer_part_number=item.get("manufacturer_part_number"),
+                manufacturer_name=item.get("manufacturer_name"),
                 pack=pack,
                 conversions=conversions,
                 active=True,
@@ -460,6 +510,7 @@ class DatagenReferenceDataProvider(InMemoryReferenceDataProvider):
             ship_to = raw.get("ship_to") or []
             # Id fittizi per gli indirizzi di consegna, distinti dal partner principale.
             delivery_ids = [raw["erp_partner_id"] + i + 1 for i in range(len(ship_to))]
+            contact = raw.get("contact") or {}
             customer = CustomerRecord(
                 erp_partner_id=int(raw["erp_partner_id"]),
                 erp_partner_ref=ref,
@@ -472,6 +523,9 @@ class DatagenReferenceDataProvider(InMemoryReferenceDataProvider):
                 allowlisted=ref in allowlisted_refs,
                 approved_orders_without_corrections=25 if ref in allowlisted_refs else 0,
                 delivery_partner_ids=delivery_ids,
+                tax_id=raw.get("tax_id"),
+                address=raw.get("address") or {},
+                email=contact.get("email") if isinstance(contact, dict) else None,
             )
             self.add_customer(customer)
             for xref in raw.get("xref") or []:
@@ -525,6 +579,14 @@ def _default_datagen_path() -> Path:
         if (candidate / "products.json").exists():
             return candidate
     raise FileNotFoundError("datagen/master/ non trovato: generare i dati master sintetici.")
+
+
+def _normalize_item_code(value: str | None) -> str:
+    """Normalizza un codice articolo: maiuscole, senza spazi ``-``.``/`` e zeri iniziali."""
+    if not value:
+        return ""
+    compact = re.sub(r"[\s\-\./]+", "", str(value).upper())
+    return compact.lstrip("0")
 
 
 def customer_of(

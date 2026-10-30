@@ -45,3 +45,20 @@ max_attachment_bytes: 20971520
 
 # EXP-02: lunghezza massima descrizione X12 IMD.
 x12_imd_max_length: 35
+
+# Matching clienti (§6 + cascata TAX_ID → EMAIL_DOMAIN → FUZZY_NAME → ADDRESS).
+customer_fuzzy_name_min: 0.85
+customer_fuzzy_name_review: 0.95
+customer_ambiguous_margin: 0.08
+customer_address_min: 0.90
+
+# Matching articoli (§6.6).
+item_unresolved_min: 0.75
+item_fuzzy_high: 0.92
+item_fuzzy_margin: 0.08
+item_xref_trusted: 1.00
+item_xref_candidate: 0.95
+item_seller_code: 0.98
+item_gtin: 0.99
+item_mpn: 0.97
+item_mpn_solo: 0.93
