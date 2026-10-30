@@ -1,0 +1,41 @@
+# Soglie del motore di validazione VentureOrder (§7 architettura v0.2).
+# Sovrascrivibili per tenant.
+
+# Tolleranza prezzo PO vs listino Odoo (percentuale).
+price_tolerance_pct: 2.0
+
+# Confidenza minima sui campi critici (EXT-01).
+confidence_min: 0.90
+
+# HDR-02: po_date oltre N giorni nel futuro / nel passato.
+po_date_future_days: 7
+po_date_past_days: 90
+
+# QTY-02: moltiplicatore sul 99° percentile storico (architettura: 3×).
+qty_anomaly_multiple: 3.0
+
+# QTY-02: massimo assoluto di quantità per riga.
+max_line_qty: 10000
+
+# PRC-03: scostamento importo riga = max(assoluto, percentuale).
+line_amount_abs_tol: 0.01
+line_amount_pct_tol: 0.5
+
+# TOT-01: scostamento totale = max(assoluto, percentuale).
+total_abs_tol: 0.02
+total_pct_tol: 0.1
+
+# DUP-03: finestra in giorni e sovrapposizione minima delle righe.
+similar_order_days: 3
+similar_line_overlap: 0.80
+
+# AUTO_POST: score minimo e storico cliente.
+auto_post_min_score: 0.97
+auto_post_min_approved_orders: 20
+warn_score_penalty: 0.05
+
+# SEC-01: dimensione massima allegato (20 MB, §7.2).
+max_attachment_bytes: 20971520
+
+# EXP-02: lunghezza massima descrizione X12 IMD.
+x12_imd_max_length: 35

@@ -1,0 +1,15 @@
+# Configurazione dichiarativa delle regole di validazione.
+# Sovrascrivibile per tenant.
+
+# SEC-02 (SPF/DKIM) è disattivata nel prototipo: niente caselle reali.
+disabled_rules:
+  - SEC-02
+
+# Override di severità (esempi, commentati):
+# severity_overrides:
+#   HDR-04: WARN
+#   CUS-02: BLOCK
+
+# Mappatura spese documento → SKU servizio Odoo (TOT-03).
+# Se assente, le spese FREIGHT/HANDLING restano senza riga ERP.
+charge_product_map: {}
