@@ -39,6 +39,15 @@ ruff check .
 mypy src/ventureorder
 ```
 
+## Console di revisione
+
+```bash
+make ui
+```
+
+Apre FastAPI+Jinja2 su http://127.0.0.1:8000/orders (dati sintetici, FakeOdooClient).
+Oppure: `python -m ventureorder.web`.
+
 ## Variabili d'ambiente Odoo
 
 Copia `.env.example` in `.env` e imposta i segreti. Make **non** include `.env`

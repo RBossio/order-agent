@@ -13,7 +13,7 @@
 # Per VM con problemi di rete Docker:
 #   make up VM=1   - Usa network_mode: host
 
-.PHONY: help conf up down logs seed smoke reset clean datagen env-check wait-odoo init test lint
+.PHONY: help conf up down logs seed smoke reset clean datagen env-check wait-odoo init test lint ui
 
 # Non usare `-include .env` + `export`: Make interpreta `$` e `#` e corrompe le password.
 # scripts/generate_odoo_conf.py (e seed/smoke) leggono `.env` da sé.
@@ -172,3 +172,6 @@ lint: ## Esegue ruff su tutto il repo
 
 test: ## Esegue i test unitari
 	pytest tests -q
+
+ui: ## Avvia la console di revisione (FastAPI + Jinja2)
+	uvicorn ventureorder.web.app:create_app --factory --host 0.0.0.0 --port 8000
