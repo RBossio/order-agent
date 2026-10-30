@@ -54,14 +54,10 @@
     "order_110_APE-01109",
     "order_102_PTD-01101"
   ],
-  "total_time_seconds": 2811.3292224407196,
+  "total_time_seconds": 1866.1876904964447,
   "errors": [
     [
-      "order_019_MBM01018",
-      "Errore LLM: timed out"
-    ],
-    [
-      "order_028_SW-01027",
+      "order_016_BW-01015",
       "Errore LLM: timed out"
     ],
     [
@@ -73,15 +69,19 @@
       "Errore LLM: timed out"
     ],
     [
+      "order_068_QS-01067",
+      "Errore LLM: timed out"
+    ],
+    [
       "order_069_QS-01068",
       "Errore LLM: timed out"
     ],
     [
-      "order_078_FCH-01077",
+      "order_089_QS-01088",
       "Errore LLM: timed out"
     ],
     [
-      "order_098_QS-01097",
+      "order_133_QS-01132",
       "Errore LLM: timed out"
     ],
     [
@@ -93,52 +93,86 @@
       "Errore LLM: timed out"
     ],
     [
-      "order_149_SW-01148",
+      "order_004_SW-01003",
       "Errore LLM: timed out"
     ],
     [
-      "order_035_SW-01034",
+      "order_041_BW-01040",
       "Errore LLM: timed out"
     ],
     [
-      "order_079_FCH-01078",
+      "order_150_MBM01149",
       "Errore LLM: timed out"
     ],
     [
-      "order_110_APE-01109",
+      "order_148_BW-01147",
+      "Errore LLM: timed out"
+    ],
+    [
+      "order_143_MBM01142",
+      "Errore LLM: timed out"
+    ],
+    [
+      "order_136_QS-01135",
+      "Errore LLM: timed out"
+    ],
+    [
+      "order_085_MBM01084",
+      "Errore LLM: timed out"
+    ],
+    [
+      "order_032_BW-01031",
+      "Errore LLM: timed out"
+    ],
+    [
+      "order_094_APE-01093",
       "Errore LLM: timed out"
     ]
   ],
   "metrics": {
-    "header_accuracy": 0.56,
-    "lines_accuracy": 0.36923076923076925,
-    "silent_errors_count": 149,
-    "silent_error_rate": 0.13423423423423422,
+    "header_accuracy": 0.91,
+    "lines_accuracy": 0.8505494505494505,
+    "silent_errors_count": 0,
+    "silent_error_rate": 0.0,
     "total_orders": 50,
     "hard_cases": 22,
-    "extraction_failures": 13
+    "extraction_failures": 18,
+    "orders_in_review": 50,
+    "review_rate": 1.0,
+    "mean_time_seconds": 37.323753809928895,
+    "llm_timeouts": 18,
+    "llm_calls": 4
   },
   "format_scores": {
     "PDF": {
       "count": 18,
-      "header_correct": 48,
+      "header_correct": 70,
       "header_total": 72,
       "lines_expected": 126,
-      "lines_matched": 56
+      "lines_matched": 60,
+      "silent_errors": 0,
+      "review": 18,
+      "time_ms": 82390
     },
     "EML": {
       "count": 19,
-      "header_correct": 33,
+      "header_correct": 76,
       "header_total": 76,
       "lines_expected": 242,
-      "lines_matched": 26
+      "lines_matched": 241,
+      "silent_errors": 0,
+      "review": 19,
+      "time_ms": 1692149
     },
     "XLSX": {
       "count": 13,
-      "header_correct": 31,
+      "header_correct": 36,
       "header_total": 52,
       "lines_expected": 87,
-      "lines_matched": 86
+      "lines_matched": 86,
+      "silent_errors": 0,
+      "review": 13,
+      "time_ms": 90131
     }
   }
 }

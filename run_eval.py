@@ -83,11 +83,14 @@ def main() -> int:
             order_score = evaluate_order(extracted, ground_truth, str(doc_path))
             order_score.extraction_time_ms = extraction_result.extraction_time_ms
             order_score.llm_calls = extraction_result.llm_calls
-            llm_failed = any(w.code == "EXT-02" for w in extraction_result.warnings)
+            llm_failed = any(
+                w.message.startswith("Errore LLM:") for w in extraction_result.warnings
+            )
             if llm_failed:
                 order_score.extraction_failed = True
                 order_score.failure_reason = next(
-                    w.message for w in extraction_result.warnings if w.code == "EXT-02"
+                    w.message for w in extraction_result.warnings
+                    if w.message.startswith("Errore LLM:")
                 )
                 errors.append((order_name, order_score.failure_reason))
             _update_results(results, order_score, ground_truth)
