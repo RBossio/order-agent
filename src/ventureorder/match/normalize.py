@@ -109,6 +109,37 @@ def normalize_description(value: str | None) -> str:
     return re.sub(r"\s+", " ", text).strip()
 
 
+GENERIC_EMAIL_LABELS: frozenset[str] = frozenset(
+    {
+        "gmail",
+        "googlemail",
+        "outlook",
+        "hotmail",
+        "live",
+        "msn",
+        "yahoo",
+        "ymail",
+        "libero",
+        "icloud",
+        "me",
+        "mac",
+        "aol",
+        "proton",
+        "protonmail",
+        "gmx",
+        "zoho",
+    }
+)
+
+
+def is_generic_email_domain(domain: str | None) -> bool:
+    """True per webmail (gmail, outlook, yahoo, libero, icloud, …)."""
+    if not domain:
+        return False
+    labels = str(domain).strip().lower().replace("www.", "").split(".")
+    return any(label in GENERIC_EMAIL_LABELS for label in labels if label)
+
+
 def sender_domain(vof: dict[str, Any]) -> str | None:
     """Dominio del mittente, poi email di contatto buyer."""
     source = vof.get("source") if isinstance(vof.get("source"), dict) else {}
@@ -124,6 +155,7 @@ def sender_domain(vof: dict[str, Any]) -> str | None:
 
 __all__ = [
     "email_domain",
+    "is_generic_email_domain",
     "normalize_address",
     "normalize_description",
     "normalize_gtin",

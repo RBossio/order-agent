@@ -203,6 +203,10 @@ class InMemoryReferenceDataProvider:
         """Prodotti in anagrafica (seed FakeOdoo; non è un matcher)."""
         return list(self._products_by_sku.values())
 
+    def iter_xrefs(self) -> list[XrefRecord]:
+        """Elenco xref cliente → SKU (per il matching)."""
+        return list(self._xrefs.values())
+
     def set_qty_p99(self, customer_ref: str, sku: str, value: float) -> None:
         """Imposta il 99° percentile storico di quantità."""
         self._qty_p99[(customer_ref, sku)] = value
@@ -291,18 +295,6 @@ class InMemoryReferenceDataProvider:
         norm = _normalize_item_code(buyer_item_code)
         hits = self._xrefs_norm.get((customer_ref, norm), []) if norm else []
         return hits[0] if len(hits) == 1 else None
-
-    def iter_customers(self) -> list[CustomerRecord]:
-        """Elenco clienti (per il matching)."""
-        return list(self._customers_by_ref.values())
-
-    def iter_products(self) -> list[ProductRecord]:
-        """Elenco prodotti (per il matching)."""
-        return list(self._products_by_sku.values())
-
-    def iter_xrefs(self) -> list[XrefRecord]:
-        """Elenco xref cliente → SKU (per il matching)."""
-        return list(self._xrefs.values())
 
     def is_valid_uom(self, uom: str) -> bool:
         if not uom:

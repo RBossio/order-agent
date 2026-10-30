@@ -24,6 +24,7 @@ from ventureorder.match.noise import (
     variant_rng,
 )
 from ventureorder.match.normalize import (
+    is_generic_email_domain,
     normalize_gtin,
     normalize_item_code,
     normalize_sku,
@@ -38,6 +39,7 @@ from ventureorder.rules import (
     ValidationEngine,
     XrefRecord,
 )
+from ventureorder.rules.reference import HistoricalOrder
 
 REPO = Path(__file__).resolve().parent.parent
 CONFIG = REPO / "config"
@@ -105,6 +107,7 @@ def seed_provider() -> MockReferenceDataProvider:
             list_price=18.75,
             gtin="9999900000009",
             manufacturer_part_number="HCS-12-13X2",
+            manufacturer_name="Fastenal",
             pack={"raw": "BX/50", "inner_count": 50, "inner_uom": "EA"},
             conversions=[
                 {"from_uom": "BX", "to_uom": "EA", "factor": 50.0},
@@ -145,6 +148,7 @@ def seed_provider() -> MockReferenceDataProvider:
             sale_uom="EA",
             list_price=18.82,
             gtin="9999900001839",
+            manufacturer_part_number="WRN-10",
         )
     )
     ref.add_product(
@@ -155,6 +159,7 @@ def seed_provider() -> MockReferenceDataProvider:
             sale_uom="BX",
             list_price=20.0,
             gtin="9999900001846",
+            manufacturer_part_number="COW-6IN",
         )
     )
     ref.add_product(
@@ -165,6 +170,7 @@ def seed_provider() -> MockReferenceDataProvider:
             sale_uom="BX",
             list_price=21.0,
             gtin="9999900000016",
+            manufacturer_part_number="COW-6IN",
         )
     )
     ref.add_xref(
@@ -307,6 +313,35 @@ class TestCustomerEmail:
         assert match.customer is not None
         assert match.customer.erp_partner_ref == "C-ACME"
 
+    def test_generic_email_domain_is_ignored(self, provider: MockReferenceDataProvider) -> None:
+        assert is_generic_email_domain("gmail.com")
+        assert is_generic_email_domain("outlook.com")
+        assert is_generic_email_domain("hotmail.com")
+        assert is_generic_email_domain("purchasing@outlook.example".split("@")[-1])
+        provider.add_customer(
+            _customer(
+                erp_partner_id=99,
+                erp_partner_ref="C-GMAIL",
+                name="Generic Mail Co (SYNTHETIC)",
+                email_domain="gmail.com",
+                tax_id="00-1111111",
+                address={"line1": "1 Mail", "city": "Nowhere", "postal_code": "00000"},
+                email="user@gmail.com",
+                ship_to=[],
+            )
+        )
+        matcher = CustomerMatcher(provider)
+        match = matcher.resolve(
+            {
+                "source": {"from_address": "buyer@gmail.com"},
+                "buyer": {"name": "Zeta Unknown GmbH", "tax_id": None, "contact": {}},
+            }
+        )
+        assert match.method != "EMAIL_DOMAIN"
+        assert not match.resolved or (
+            match.customer is not None and match.customer.erp_partner_ref != "C-GMAIL"
+        )
+
 
 # ---------------------------------------------------------------------------
 # Cliente — FUZZY_NAME
@@ -322,7 +357,8 @@ class TestCustomerName:
             )
         )
         assert match.method == "FUZZY_NAME"
-        assert match.score >= 0.95
+        assert match.score == pytest.approx(0.95)
+        assert match.score < 0.97
         assert match.customer is not None
         assert match.customer.erp_partner_ref == "C-ACME"
 
@@ -490,6 +526,86 @@ class TestItemGtin:
 
 
 # ---------------------------------------------------------------------------
+# Articoli — MPN
+# ---------------------------------------------------------------------------
+
+
+class TestItemMpn:
+    def test_mpn_with_brand(self, items: ItemMatcher) -> None:
+        match = items.resolve(
+            _line(
+                buyer_item_code=None,
+                seller_item_code=None,
+                gtin=None,
+                manufacturer_part_number="HCS-12-13X2",
+                manufacturer_name="Fastenal",
+            ),
+            None,
+        )
+        assert match.method == "MPN"
+        assert match.score == pytest.approx(0.97)
+        assert match.product is not None
+        assert match.product.sku == "FST-HCS-12-13X2-G5Z-B50"
+
+    def test_mpn_solo_unique(self, items: ItemMatcher) -> None:
+        match = items.resolve(
+            _line(
+                buyer_item_code=None,
+                seller_item_code=None,
+                gtin=None,
+                manufacturer_part_number="WRN-10",
+                manufacturer_name=None,
+                description="Adjustable Wrench 10in",
+                uom="EA",
+            ),
+            None,
+        )
+        assert match.method == "MPN"
+        assert match.score == pytest.approx(0.93)
+        assert match.product is not None
+        assert match.product.sku == "TOOL-WRN-10IN"
+
+    def test_mpn_discordant_description_is_ignored(self, items: ItemMatcher) -> None:
+        match = items.resolve(
+            _line(
+                buyer_item_code=None,
+                seller_item_code=None,
+                gtin=None,
+                manufacturer_part_number="WRN-10",
+                manufacturer_name=None,
+                description="Hex Cap Screw 1/2-13 x 2 Grade 5 Zinc",
+                uom="BX",
+            ),
+            None,
+        )
+        assert match.method != "MPN" or (
+            match.product is not None and match.product.sku != "TOOL-WRN-10IN"
+        )
+        if match.product is not None:
+            assert match.product.sku == "FST-HCS-12-13X2-G5Z-B50"
+        assert match.score < 0.9
+
+    def test_mpn_duplicate_is_ambiguous(self, items: ItemMatcher) -> None:
+        match = items.resolve(
+            _line(
+                buyer_item_code=None,
+                seller_item_code=None,
+                gtin=None,
+                manufacturer_part_number="COW-6IN",
+                manufacturer_name=None,
+            ),
+            None,
+        )
+        assert match.method == "MPN"
+        assert match.ambiguous
+        assert match.product is None
+        assert match.score < 0.9
+        skus = {c.sku for c in match.candidates}
+        assert "ABR-COW-6IN-A" in skus
+        assert "ABR-COW-6IN-B" in skus
+
+
+# ---------------------------------------------------------------------------
 # Articoli — descrizione fuzzy (misura e colore)
 # ---------------------------------------------------------------------------
 
@@ -512,7 +628,9 @@ class TestItemFuzzy:
         assert match.score >= 0.75
         assert not match.ambiguous
         # UoM + misura: conferme indipendenti, può superare il cap 0,85.
+        # Resta sotto 0,9 (e quindi sotto AUTO_POST 0,97): ITM-03 manda in REVIEW.
         assert match.score > 0.85
+        assert match.score < 0.9
 
     def test_fuzzy_without_confirmation_is_capped(self, items: ItemMatcher) -> None:
         match = items.resolve(
@@ -668,9 +786,30 @@ class TestMatchRulesIntegration:
         assert vof["buyer"]["resolved"]["method"] == "FUZZY_NAME"
         buyer_score = float(vof["buyer"]["resolved"]["score"])
         codes = {item.rule_id for item in result.issues}
-        if buyer_score < 0.95:
-            assert "CUS-02" in codes
+        assert "CUS-02" in codes
         assert result.score <= buyer_score + 1e-9
+        assert result.decision == DecisionRoute.REVIEW
+
+    def test_cus_02_exact_name_is_review(self, provider: MockReferenceDataProvider) -> None:
+        engine = ValidationEngine(config_dir=CONFIG, reference_data=provider, as_of=AS_OF)
+        vof = {
+            "schema_version": "1.0",
+            "order_id": "match-exact-name",
+            "tenant_id": "delta-industrial-supply",
+            "document_type": "ORIGINAL",
+            "status": "EXTRACTED",
+            "source": {"channel": "EMAIL_IMAP"},
+            "buyer": {"name": "Acme Company (SYNTHETIC)"},
+            "header": {"po_number": "PO-2B", "po_date": "2026-11-03", "currency": "USD"},
+            "lines": [_line(seller_item_code="TOOL-WRN-10IN", uom="EA")],
+            "evidence": {"/header/po_number": {"confidence": 0.99}},
+        }
+        result = engine.match_and_validate(vof)
+        assert vof["buyer"]["resolved"]["method"] == "FUZZY_NAME"
+        assert float(vof["buyer"]["resolved"]["score"]) == pytest.approx(0.95)
+        codes = {item.rule_id for item in result.issues}
+        assert "CUS-02" in codes
+        assert result.decision == DecisionRoute.REVIEW
 
     def test_itm_01_on_unresolved_line(self, provider: MockReferenceDataProvider) -> None:
         engine = ValidationEngine(config_dir=CONFIG, reference_data=provider, as_of=AS_OF)
@@ -762,6 +901,88 @@ class TestMatchRulesIntegration:
         assert vof["lines"][0]["resolution"]["score"] == pytest.approx(0.95)
         codes = {item.rule_id for item in result.issues}
         assert "ITM-07" in codes
+
+    def test_match_and_validate_overwrites_false_resolution(
+        self, provider: MockReferenceDataProvider
+    ) -> None:
+        engine = ValidationEngine(config_dir=CONFIG, reference_data=provider, as_of=AS_OF)
+        vof = {
+            "schema_version": "1.0",
+            "order_id": "match-overwrite",
+            "tenant_id": "delta-industrial-supply",
+            "document_type": "ORIGINAL",
+            "status": "EXTRACTED",
+            "source": {"from_address": "purchasing@acme.example", "channel": "EMAIL_IMAP"},
+            "buyer": {
+                "tax_id": "12-8713396",
+                "name": "Zeta Unknown GmbH",
+                "resolved": {
+                    "erp_partner_id": 45,
+                    "erp_partner_ref": "C-DELTA",
+                    "method": "MANUAL",
+                    "score": 1.0,
+                },
+            },
+            "header": {"po_number": "PO-OW", "po_date": "2026-11-03", "currency": "USD"},
+            "lines": [
+                {
+                    **_line(seller_item_code="TOOL-WRN-10IN", uom="EA"),
+                    "sku": "FST-HCS-12-13X2-G5Z-B50",
+                    "resolution": {
+                        "sku": "FST-HCS-12-13X2-G5Z-B50",
+                        "erp_product_id": 1012,
+                        "method": "MANUAL",
+                        "score": 1.0,
+                    },
+                }
+            ],
+            "evidence": {"/header/po_number": {"confidence": 0.99}},
+        }
+        engine.match_and_validate(vof)
+        assert vof["buyer"]["resolved"]["erp_partner_ref"] == "C-ACME"
+        assert vof["lines"][0]["resolution"]["sku"] == "TOOL-WRN-10IN"
+        assert vof["lines"][0]["resolution"]["method"] == "SELLER_CODE"
+
+    def test_method_conflict_applies_penalty(self, items: ItemMatcher) -> None:
+        match = items.resolve(
+            _line(
+                buyer_item_code="ACME-HW-00412",
+                seller_item_code="TOOL-WRN-10IN",
+                gtin=None,
+            ),
+            "C-ACME",
+        )
+        assert match.product is not None
+        assert match.product.sku == "FST-HCS-12-13X2-G5Z-B50"
+        assert match.method == "XREF"
+        assert match.score == pytest.approx(0.80)
+
+    def test_storico_reaches_fuzzy_high(self, provider: MockReferenceDataProvider) -> None:
+        provider.add_order(
+            HistoricalOrder(
+                order_id="past-1",
+                customer_ref="C-ACME",
+                po_number="PO-PAST",
+                po_date="2026-01-01",
+                status="POSTED",
+                lines=[{"sku": "TOOL-WRN-10IN", "quantity": 1}],
+            )
+        )
+        matcher = ItemMatcher(provider)
+        match = matcher.resolve(
+            _line(
+                buyer_item_code=None,
+                seller_item_code=None,
+                gtin=None,
+                description="Adjustable Wrench 10 inch",
+                uom="EA",
+            ),
+            "C-ACME",
+            order_id="current",
+        )
+        assert match.method == "FUZZY"
+        assert match.score > 0.85
+        assert match.score < 0.9
 
 
 # ---------------------------------------------------------------------------
@@ -953,10 +1174,16 @@ class TestNoisyVariants:
         assert normalize_sku(out["lines"][0]["seller_item_code"]) == normalize_sku("TOOL-WRN-10IN")
 
     def test_paraphrased_description_drops_codes(self) -> None:
-        out = apply_variants(_sample_extracted(), ["paraphrase"], variant_rng(42, "p"))
+        sample = _sample_extracted()
+        sample["lines"][0]["manufacturer_part_number"] = "HCS-12-13X2"
+        sample["lines"][0]["manufacturer_name"] = "Fastenal"
+        out = apply_variants(sample, ["paraphrase"], variant_rng(42, "p"))
         assert out["lines"][0]["description"] != "Hex Cap Screw 1/2-13 x 2 Grade 5 Zinc"
         assert out["lines"][0]["buyer_item_code"] is None
         assert out["lines"][0]["seller_item_code"] is None
+        assert out["lines"][0]["gtin"] is None
+        assert out["lines"][0]["manufacturer_part_number"] is None
+        assert out["lines"][0]["manufacturer_name"] is None
 
     def test_alt_uom(self) -> None:
         out = apply_variants(_sample_extracted(), ["alt_uom"], variant_rng(42, "a"))

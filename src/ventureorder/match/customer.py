@@ -7,6 +7,7 @@ from typing import Any
 from ventureorder.match.fields import strip_forbidden_from_buyer
 from ventureorder.match.models import CustomerCandidate, CustomerMatch
 from ventureorder.match.normalize import (
+    is_generic_email_domain,
     normalize_address,
     normalize_name,
     normalize_tax_id,
@@ -47,7 +48,7 @@ class CustomerMatcher:
             if tax:
                 self._by_tax.setdefault(tax, []).append(customer)
             domain = (customer.email_domain or "").strip().lower()
-            if domain:
+            if domain and not is_generic_email_domain(domain):
                 self._by_domain.setdefault(domain, []).append(customer)
             name = normalize_name(customer.name)
             if name:
@@ -111,6 +112,8 @@ class CustomerMatcher:
         if not domain:
             return []
         needle = domain.strip().lower()
+        if is_generic_email_domain(needle):
+            return []
         hits = list(self._by_domain.get(needle, []))
         if hits:
             return hits
@@ -125,7 +128,9 @@ class CustomerMatcher:
             return None
         exact = list(self._by_name.get(normalized, []))
         if exact:
-            return self._finish(exact, "FUZZY_NAME", 0.97)
+            # Sotto AUTO_POST (0,97): il solo nome non basta per il post automatico.
+            review = float(self.thresholds.get("customer_fuzzy_name_review", 0.95))
+            return self._finish(exact, "FUZZY_NAME", review)
 
         min_score = float(self.thresholds.get("customer_fuzzy_name_min", 0.85))
         margin = float(self.thresholds.get("customer_ambiguous_margin", 0.08))

@@ -11,6 +11,7 @@ from ventureorder.match.normalize import (
     normalize_description,
     normalize_gtin,
     normalize_item_code,
+    normalize_name,
     normalize_sku,
     token_set_ratio,
 )
@@ -24,7 +25,7 @@ from ventureorder.rules.reference import (
 
 DEFAULT_THRESHOLDS: dict[str, float] = {
     "item_unresolved_min": 0.75,
-    "item_fuzzy_high": 0.92,
+    "item_fuzzy_high": 0.89,
     "item_fuzzy_margin": 0.08,
     "item_fuzzy_cap": 0.85,
     "item_fuzzy_confirm_min": 2,
@@ -34,6 +35,7 @@ DEFAULT_THRESHOLDS: dict[str, float] = {
     "item_gtin": 0.99,
     "item_mpn": 0.97,
     "item_mpn_solo": 0.93,
+    "item_conflict_penalty": 0.20,
     "price_tolerance_pct": 2.0,
 }
 
@@ -41,10 +43,11 @@ _MEASURE_KEYS = ("dim", "inch", "mil", "thread", "metric", "size")
 
 
 class ItemMatcher:
-    """Cascata XREF → SKU interno → GTIN/EAN → descrizione fuzzy.
+    """Cascata XREF → SKU interno → GTIN/EAN → MPN → descrizione fuzzy.
 
-    Si ferma al primo risultato forte. Se più candidati coincidono, l'esito
-    è ambiguo e si espongono i primi 3.
+    Si ferma al primo risultato forte. Se due metodi forti indicano SKU
+    diversi, si applica la penalità di conflitto (−0,20) senza scegliere
+    in silenzio. Se più candidati coincidono, l'esito è ambiguo (top 3).
     """
 
     def __init__(
@@ -59,17 +62,32 @@ class ItemMatcher:
             normalize_sku(product.sku): product for product in self._products if product.sku
         }
         self._by_gtin: dict[str, list[ProductRecord]] = {}
+        self._by_mpn: dict[str, list[ProductRecord]] = {}
+        self._by_mfr_mpn: dict[tuple[str, str], list[ProductRecord]] = {}
+        self._purchased: dict[tuple[str, str], set[str]] = _purchased_index(provider)
         self._xref_norm: dict[tuple[str, str], list[XrefRecord]] = {}
         for product in self._products:
             padded = normalize_gtin(product.gtin) if product.gtin else None
             if padded:
                 self._by_gtin.setdefault(padded, []).append(product)
+            mpn = normalize_item_code(product.manufacturer_part_number)
+            if mpn:
+                self._by_mpn.setdefault(mpn, []).append(product)
+                brand = normalize_name(product.manufacturer_name)
+                if brand:
+                    self._by_mfr_mpn.setdefault((brand, mpn), []).append(product)
         for xref in _iter_xrefs(provider):
             norm = normalize_item_code(xref.customer_item_code)
             if norm:
                 self._xref_norm.setdefault((xref.customer_ref, norm), []).append(xref)
 
-    def resolve(self, line: dict[str, Any], customer_ref: str | None) -> ItemMatch:
+    def resolve(
+        self,
+        line: dict[str, Any],
+        customer_ref: str | None,
+        *,
+        order_id: str | None = None,
+    ) -> ItemMatch:
         """Riconosce il prodotto di una riga VOF.
 
         Non legge ``resolution``, ``sku`` né ``erp_product_id`` già risolti
@@ -77,22 +95,37 @@ class ItemMatcher:
         non dal ground truth.
         """
         line = strip_forbidden_from_line(line)
-        xref_match = self._match_xref(line, customer_ref)
-        if xref_match is not None:
-            return xref_match
+        strong: list[ItemMatch] = []
+        for hit in (
+            self._match_xref(line, customer_ref),
+            self._match_sku(line),
+            self._match_gtin(line),
+            self._match_mpn(line),
+        ):
+            if hit is not None:
+                strong.append(hit)
+        if strong:
+            return self._apply_method_conflict(strong)
 
-        sku_match = self._match_sku(line)
-        if sku_match is not None:
-            return sku_match
-
-        gtin_match = self._match_gtin(line)
-        if gtin_match is not None:
-            return gtin_match
-
-        fuzzy = self._match_fuzzy(line)
+        fuzzy = self._match_fuzzy(line, customer_ref, order_id)
         if fuzzy is not None:
             return fuzzy
         return ItemMatch(product=None, score=0.0, method="UNRESOLVED")
+
+    def _apply_method_conflict(self, hits: list[ItemMatch]) -> ItemMatch:
+        """Primo metodo forte; se un altro indica uno SKU diverso, −0,20 (§6.2)."""
+        chosen = hits[0]
+        if chosen.ambiguous or chosen.product is None:
+            return chosen
+        penalty = float(self.thresholds.get("item_conflict_penalty", 0.20))
+        chosen_sku = chosen.product.sku
+        for other in hits[1:]:
+            if other.ambiguous or other.product is None:
+                continue
+            if other.product.sku != chosen_sku:
+                chosen.score = max(0.0, chosen.score - penalty)
+                break
+        return chosen
 
     def _decorate(
         self, product: ProductRecord, score: float, method: str, line: dict[str, Any]
@@ -200,7 +233,59 @@ class ItemMatcher:
             )
         return self._decorate(unique[0], score, "GTIN", line)
 
-    def _match_fuzzy(self, line: dict[str, Any]) -> ItemMatch | None:
+    def _match_mpn(self, line: dict[str, Any]) -> ItemMatch | None:
+        raw = line.get("manufacturer_part_number")
+        if not raw:
+            return None
+        mpn = normalize_item_code(str(raw))
+        if not mpn:
+            return None
+        brand_raw = line.get("manufacturer_name")
+        brand = normalize_name(str(brand_raw)) if brand_raw else ""
+        with_brand = list(self._by_mfr_mpn.get((brand, mpn), [])) if brand else []
+        branded_score = float(self.thresholds.get("item_mpn", 0.97))
+        solo_score = float(self.thresholds.get("item_mpn_solo", 0.93))
+        if with_brand:
+            unique = _unique_products(with_brand)
+            if len(unique) > 1:
+                return self._ambiguous_mpn(unique, branded_score)
+            if not self._description_supports(line, unique[0]):
+                return None
+            return self._decorate(unique[0], branded_score, "MPN", line)
+        hits = list(self._by_mpn.get(mpn, []))
+        unique = _unique_products(hits)
+        if not unique:
+            return None
+        if len(unique) > 1:
+            return self._ambiguous_mpn(unique, solo_score)
+        if not self._description_supports(line, unique[0]):
+            return None
+        return self._decorate(unique[0], solo_score, "MPN", line)
+
+    def _ambiguous_mpn(self, unique: list[ProductRecord], score: float) -> ItemMatch:
+        return ItemMatch(
+            product=None,
+            score=self._ambiguous_score(score),
+            method="MPN",
+            ambiguous=True,
+            candidates=[
+                ItemCandidate(
+                    sku=item.sku,
+                    score=score,
+                    erp_product_id=item.erp_product_id,
+                    description=item.name,
+                    method="MPN",
+                )
+                for item in unique[:3]
+            ],
+        )
+
+    def _match_fuzzy(
+        self,
+        line: dict[str, Any],
+        customer_ref: str | None = None,
+        order_id: str | None = None,
+    ) -> ItemMatch | None:
         description = line.get("description")
         if not description:
             return None
@@ -212,7 +297,7 @@ class ItemMatcher:
         unresolved_min = float(self.thresholds.get("item_unresolved_min", 0.75))
         margin = float(self.thresholds.get("item_fuzzy_margin", 0.08))
         fuzzy_cap = float(self.thresholds.get("item_fuzzy_cap", 0.85))
-        fuzzy_high = float(self.thresholds.get("item_fuzzy_high", 0.92))
+        fuzzy_high = float(self.thresholds.get("item_fuzzy_high", 0.89))
         confirm_min = int(self.thresholds.get("item_fuzzy_confirm_min", 2))
         ranked: list[tuple[float, ProductRecord, float, bool, dict[str, str]]] = []
         for product in self._products:
@@ -223,8 +308,9 @@ class ItemMatcher:
             prod_attrs = extract_attributes(product.name)
             s_attr, discordant = attribute_score(query_attrs, prod_attrs)
             s_uom = self._uom_signal(line_uom, product)
-            # Peso semantico assente → va su S_testo (§6.3). S_storico = 0 nel prototipo.
-            score = 0.50 * s_text + 0.25 * s_attr + 0.15 * s_uom
+            s_hist = self._storico_signal(customer_ref, product.sku, order_id)
+            # Embeddings spenti: il 0,05 di S_semantico va su S_testo (§6.3).
+            score = 0.50 * s_text + 0.25 * s_attr + 0.15 * s_uom + 0.10 * s_hist
             if discordant:
                 score = min(score - 0.30, 0.80)
             score = max(0.0, min(0.95, score))
@@ -294,6 +380,32 @@ class ItemMatcher:
         tol = float(self.thresholds.get("price_tolerance_pct", 2.0)) / 100.0
         return abs(float(raw) - list_price) / abs(list_price) <= tol
 
+    def _storico_signal(
+        self, customer_ref: str | None, sku: str | None, order_id: str | None
+    ) -> float:
+        """1 se il cliente ha già comprato lo SKU in un altro ordine."""
+        if not customer_ref or not sku:
+            return 0.0
+        past = self._purchased.get((customer_ref, sku), set())
+        if order_id:
+            past = {oid for oid in past if oid != str(order_id)}
+        return 1.0 if past else 0.0
+
+    def _description_supports(self, line: dict[str, Any], product: ProductRecord) -> bool:
+        """False se la descrizione contraddice in modo netto il prodotto MPN.
+
+        Un MPN unico non deve sovrascrivere in silenzio una riga il cui testo
+        indica un articolo diverso (casi difficili sintetici, PO sporchi).
+        """
+        raw = line.get("description")
+        if not raw:
+            return True
+        query = expand_abbreviations(normalize_description(str(raw)))
+        catalog = expand_abbreviations(normalize_description(product.name))
+        if not query or not catalog:
+            return True
+        return token_set_ratio(query, catalog) >= 40.0
+
     def _uom_signal(self, line_uom: str | None, product: ProductRecord) -> float:
         sale = normalize_uom(product.sale_uom)
         if not line_uom or not sale:
@@ -303,6 +415,24 @@ class ItemMatcher:
         if self.provider.get_uom_conversion(line_uom, sale, product.sku) is not None:
             return 0.5
         return 0.0
+
+
+def _purchased_index(provider: ReferenceDataProvider) -> dict[tuple[str, str], set[str]]:
+    """Indice (customer_ref, sku) → id ordini storici, se il provider li espone."""
+    index: dict[tuple[str, str], set[str]] = {}
+    orders = getattr(provider, "_orders", None)
+    if not orders:
+        return index
+    for order in orders:
+        ref = getattr(order, "customer_ref", None)
+        oid = str(getattr(order, "order_id", "") or "")
+        for raw_line in getattr(order, "lines", None) or []:
+            if not isinstance(raw_line, dict):
+                continue
+            sku = raw_line.get("sku")
+            if ref and sku:
+                index.setdefault((str(ref), str(sku)), set()).add(oid)
+    return index
 
 
 def _measure_or_color_match(query: dict[str, str], catalog: dict[str, str]) -> bool:

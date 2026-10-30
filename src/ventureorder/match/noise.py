@@ -9,6 +9,7 @@ from typing import Any
 
 NOISY_EVAL_SEED = 42
 NOISY_CALIBRATION_SEED = 7
+NOISY_CALIBRATION_SEEDS: tuple[int, ...] = (7, 13, 99)
 
 GENERIC_EMAIL_DOMAINS: tuple[str, ...] = (
     "gmail.example",
@@ -214,6 +215,8 @@ def _paraphrase_lines(extracted: dict[str, Any], rng: random.Random) -> None:
         line["buyer_item_code"] = None
         line["seller_item_code"] = None
         line["gtin"] = None
+        line["manufacturer_part_number"] = None
+        line["manufacturer_name"] = None
 
 
 def _paraphrase(desc: str, rng: random.Random) -> str:

@@ -329,11 +329,7 @@ class TestCatalog:
 
         source = Path(__file__).read_text(encoding="utf-8")
         tree = ast.parse(source)
-        names = {
-            node.name.lower()
-            for node in ast.walk(tree)
-            if isinstance(node, ast.FunctionDef)
-        }
+        names = {node.name.lower() for node in ast.walk(tree) if isinstance(node, ast.FunctionDef)}
         missing = []
         for code in CATALOG_RULES:
             slug = code.lower().replace("-", "_")
@@ -428,6 +424,16 @@ class TestCus:
             "erp_partner_ref": "C-ACME",
             "method": "CODE",
             "score": 0.70,
+        }
+        assert_hit(engine.validate(order), "CUS-02", Severity.REVIEW)
+
+    def test_cus_02_exact_name_is_review(self, engine: ValidationEngine) -> None:
+        order = make_vof()
+        order["buyer"]["resolved"] = {
+            "erp_partner_id": 42,
+            "erp_partner_ref": "C-ACME",
+            "method": "FUZZY_NAME",
+            "score": 0.95,
         }
         assert_hit(engine.validate(order), "CUS-02", Severity.REVIEW)
 
@@ -1023,7 +1029,9 @@ class TestEngineAndDatagen:
             "disabled_rules:\n  - SEC-01\n  - SEC-02\n",
             encoding="utf-8",
         )
-        with pytest.raises(RulesConfigError, match=r"SEC-01.*non possono essere disattivate") as exc:
+        with pytest.raises(
+            RulesConfigError, match=r"SEC-01.*non possono essere disattivate"
+        ) as exc:
             ValidationEngine(config_dir=tmp_path, reference_data=ref, as_of=AS_OF)
         assert "SEC-01" in exc.value.codes
         assert "DUP-01" not in exc.value.codes
@@ -1071,9 +1079,7 @@ class TestEngineAndDatagen:
         with pytest.raises(RulesConfigError, match="DUP-02"):
             engine.validate(make_vof())
 
-    def test_tenant_runtime_overlay_cannot_disable_sec_01(
-        self, engine: ValidationEngine
-    ) -> None:
+    def test_tenant_runtime_overlay_cannot_disable_sec_01(self, engine: ValidationEngine) -> None:
         engine.rules_config["tenants"] = {
             "delta-industrial-supply": {"disabled_rules": ["SEC-01", "SEC-02"]}
         }
@@ -1082,9 +1088,7 @@ class TestEngineAndDatagen:
 
     def test_non_protected_rule_still_disableable(self, engine: ValidationEngine) -> None:
         engine.rules_config["disabled_rules"] = ["SEC-02", "HDR-01"]
-        order = make_vof(
-            header={"po_number": "", "po_date": "2026-11-03", "currency": "USD"}
-        )
+        order = make_vof(header={"po_number": "", "po_date": "2026-11-03", "currency": "USD"})
         result = engine.validate(order)
         assert_clean(result, "HDR-01")
         assert result.decision != DecisionRoute.REJECT

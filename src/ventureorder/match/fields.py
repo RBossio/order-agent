@@ -17,7 +17,8 @@ Articolo (per riga)
     ``buyer_item_code``           Codice articolo del cliente
     ``seller_item_code``          Codice stampato come SKU distributore
     ``gtin``                      GTIN/EAN
-    ``manufacturer_part_number``  MPN (non usato nella cascata attuale)
+    ``manufacturer_part_number``  MPN (passo 4 della cascata)
+    ``manufacturer_name``         Marca, per MPN a 0,97
     ``description``               Descrizione riga
     ``uom`` / ``uom_raw``         Unità di misura
     ``quantity``                  Quantità (conversione UoM)

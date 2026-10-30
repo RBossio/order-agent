@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from ventureorder.rules.access import email_domain, issue, resolved, threshold
+from ventureorder.rules.access import email_domain, issue, resolved
 from ventureorder.rules.models import Issue, RuleContext, Severity
 from ventureorder.rules.reference import addresses_match, customer_of
 from ventureorder.rules.registry import rule
@@ -45,19 +45,22 @@ def cus_01_buyer_resolved(ctx: RuleContext) -> list[Issue]:
 
 @rule("CUS-02", Severity.REVIEW)
 def cus_02_fuzzy_name(ctx: RuleContext) -> list[Issue]:
-    """Cliente trovato in modo incerto (nome fuzzy o solo xref, score < 0,95)."""
+    """Cliente trovato solo per nome (anche esatto): sempre revisione.
+
+    Impedisce AUTO_POST quando l'identificazione è solo FUZZY_NAME,
+    anche con score 0,95 (sotto la soglia 0,97).
+    """
     info = resolved(ctx.buyer)
     method = str(info.get("method") or "")
     score = info.get("score")
     score_f = float(score) if isinstance(score, int | float) else 0.0
-    review_min = float(threshold(ctx, "customer_fuzzy_name_review", 0.95))
-    if method in FUZZY_METHODS and score_f < review_min:
+    if method in FUZZY_METHODS:
         return [
             issue(
                 "CUS-02",
                 Severity.REVIEW,
                 (
-                    f"Cliente riconosciuto in modo incerto "
+                    f"Cliente riconosciuto solo per nome "
                     f"(metodo {method or 'n/d'}, score {score_f:.2f})"
                 ),
                 "/buyer/resolved",

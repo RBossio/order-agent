@@ -56,7 +56,8 @@ def apply_matches(
         if not overwrite and _has_sku(resolution if isinstance(resolution, dict) else None):
             continue
         sanitized = view_lines.get(line.get("line_no")) or {}
-        item_match = item_matcher.resolve(sanitized, customer_ref)
+        order_id = str(vof.get("order_id") or "") or None
+        item_match = item_matcher.resolve(sanitized, customer_ref, order_id=order_id)
         line["resolution"] = item_match.to_vof()
     return vof
 

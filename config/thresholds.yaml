@@ -46,15 +46,24 @@ max_attachment_bytes: 20971520
 # EXP-02: lunghezza massima descrizione X12 IMD.
 x12_imd_max_length: 35
 
-# Matching clienti (§6 + cascata TAX_ID → EMAIL_DOMAIN → FUZZY_NAME → ADDRESS).
+# Matching clienti (cascata TAX_ID 1,00 → EMAIL_DOMAIN 0,99 → FUZZY_NAME → ADDRESS).
+# Non sono nel §6.6 (quello è sugli articoli). Scelte conservative per AUTO_POST 0,97:
+# - 0,85: minimo fuzzy nome, allineato al cap articoli senza conferme
+# - 0,95: nome esatto / soglia REVIEW (CUS-02). Sotto 0,97 così il solo nome
+#   non abilita AUTO_POST; CUS-02 scatta su ogni FUZZY_NAME
+# - 0,08: margine di ambiguità, uguale a item_fuzzy_margin (§6.6)
+# - 0,90: match indirizzo (stesso ordine di grandezza di confidence_min / EXT-01)
 customer_fuzzy_name_min: 0.85
 customer_fuzzy_name_review: 0.95
 customer_ambiguous_margin: 0.08
 customer_address_min: 0.90
 
-# Matching articoli (§6.6). Tarate sul set rumoroso seed 7, validate sul seed 42.
+# Matching articoli (§6.6). Tarate sui seed 7/13/99 (varianti + ordini extra
+# generati con quegli seed) e validate sul seed 42.
 item_unresolved_min: 0.75
-item_fuzzy_high: 0.92
+# §6.6 indica 0,92 per FUZZY alto; si resta a 0,89 per non raggiungere
+# la soglia 0,9 (1 punto di margine sul target ≤ 1% di errori silenziosi).
+item_fuzzy_high: 0.89
 item_fuzzy_margin: 0.08
 # Cap FUZZY senza conferme indipendenti (UoM, prezzo listino, misura/colore).
 # Un esito ambiguo non supera mai questo cap (mai confidenza ≥ 0,9).
@@ -66,3 +75,5 @@ item_seller_code: 0.98
 item_gtin: 0.99
 item_mpn: 0.97
 item_mpn_solo: 0.93
+# Conflitto tra metodi forti (§6.2): min(score) − 0,20, più ITM-04 REVIEW.
+item_conflict_penalty: 0.20

@@ -31,20 +31,23 @@ python eval/match_eval.py --json
 
 Per ciascun set riporta:
 
-- **precisione** tra i risolti univoci
+- **precisione esclusi gli ambigui** (risolti univoci: correct / (correct + incorrect))
+- **accuratezza top-1 su tutte le righe con uno SKU proposto** (`to_vof()` scrive
+  lo SKU anche sul FUZZY ambiguo)
+- **ambigue sbagliate** (top-1 diverso dal ground truth)
+- **recall@3** (codice giusto tra i primi 3 candidati, o SKU univoco corretto)
 - **copertura** (risolti univoci / totale)
 - **percentuale di ambigui**
-- **errori con confidenza ≥ 0,9** (scelte sbagliate ad alta confidenza)
-- **errori ≥ REVIEW (0,92)** e **≥ AUTO (0,97)**
+- **errori con confidenza ≥ 0,9**, **≥ REVIEW (0,92)** e **≥ AUTO (0,97)**
 
-Il set rumoroso (seed 42, taratura seed 7) usa i casi difficili e varianti:
-niente P.IVA, email su dominio generico, nome con refusi/abbreviazioni,
-codici cliente sconosciuti, codici con spazi/trattini, descrizioni
-parafrasate, UoM diverse. Un esito ambiguo non ha mai confidenza alta;
-il FUZZY è limitato a 0,85 salvo conferme indipendenti (UoM, prezzo,
-misura/colore). I test in `tests/test_match_eval.py` rieseguono lo stesso
-calcolo e impongono errori articoli ≥ 0,9 ≤ 1% sul rumoroso.
+Il set rumoroso (validazione seed 42, taratura seed 7/13/99) usa i casi
+difficili, varianti e **ordini extra generati con quegli seed**: niente P.IVA,
+email su dominio generico, nome con refusi/abbreviazioni, codici cliente
+sconosciuti, codici con spazi/trattini, descrizioni parafrasate, UoM diverse.
+Un esito ambiguo non ha mai confidenza alta; il FUZZY è limitato a 0,85 salvo
+conferme indipendenti (UoM, prezzo, misura/colore). I test impongono errori
+articoli ≥ 0,9 = 0% (1 punto di margine sul target ≤ 1%).
 
 ```bash
-python eval/match_eval.py --calibrate   # soglie sul seed 7
+python eval/match_eval.py --calibrate   # soglie sui seed 7, 13, 99
 ```

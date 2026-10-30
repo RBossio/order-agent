@@ -49,7 +49,7 @@ DEFAULT_THRESHOLDS: dict[str, Any] = {
     "customer_ambiguous_margin": 0.08,
     "customer_address_min": 0.90,
     "item_unresolved_min": 0.75,
-    "item_fuzzy_high": 0.92,
+    "item_fuzzy_high": 0.89,
     "item_fuzzy_margin": 0.08,
     "item_fuzzy_cap": 0.85,
     "item_fuzzy_confirm_min": 2,
@@ -59,6 +59,7 @@ DEFAULT_THRESHOLDS: dict[str, Any] = {
     "item_gtin": 0.99,
     "item_mpn": 0.97,
     "item_mpn_solo": 0.93,
+    "item_conflict_penalty": 0.20,
 }
 
 REJECT_RULES = frozenset({"SEC-01", "DUP-01", "DUP-02"})
@@ -215,7 +216,12 @@ class ValidationEngine:
                 "apply_matching richiede un ReferenceDataProvider "
                 "(usare ValidationEngine.for_synthetic o passarne uno)."
             )
-        apply_matches(vof, self.reference_data, thresholds=self.thresholds)
+        apply_matches(
+            vof,
+            self.reference_data,
+            thresholds=self.thresholds,
+            overwrite=True,
+        )
 
     def _compute_score(self, ctx: RuleContext, result: ValidationResult) -> float:
         """Minimo delle confidenze critiche e degli score riga, −0,05 per WARN."""

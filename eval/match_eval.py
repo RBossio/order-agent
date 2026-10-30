@@ -56,6 +56,9 @@ def _payload(report: MatchEvalReport) -> dict:
         "item_high_conf_errors": report.item_high_conf_errors,
         "item_review_errors": report.item_review_errors,
         "item_auto_errors": report.item_auto_errors,
+        "item_proposed": report.item_proposed,
+        "item_proposed_correct": report.item_proposed_correct,
+        "item_ambiguous_wrong": report.item_ambiguous_wrong,
         "seed": report.seed,
         "methods_customer": report.methods_customer,
         "methods_item": report.methods_item,
@@ -172,12 +175,16 @@ def main() -> int:
                 f"articoli {pct['item_precision_pct']:.2f}%  |  "
                 f"copertura {pct['customer_coverage_pct']:.2f}% / {pct['item_coverage_pct']:.2f}%  |  "
                 f"ambigui {pct['customer_ambiguous_pct']:.2f}% / {pct['item_ambiguous_pct']:.2f}%  |  "
+                f"prec.escl.amb {pct['item_precision_excl_ambiguous_pct']:.2f}%  "
+                f"acc.proposti {pct['item_proposed_accuracy_pct']:.2f}%  |  "
                 f"errori ≥0.9 {pct['customer_high_conf_error_pct']:.2f}% / "
                 f"{pct['item_high_conf_error_pct']:.2f}%  |  "
                 f"err≥REVIEW {pct['customer_review_error_pct']:.2f}% / "
                 f"{pct['item_review_error_pct']:.2f}%  |  "
                 f"err≥AUTO {pct['customer_auto_error_pct']:.2f}% / "
-                f"{pct['item_auto_error_pct']:.2f}%"
+                f"{pct['item_auto_error_pct']:.2f}%  |  "
+                f"amb.sbagliate {report.item_ambiguous_wrong} "
+                f"recall@3 {pct['item_recall_at_3_pct']:.2f}%"
             )
     return 0
 
