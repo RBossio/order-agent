@@ -43,6 +43,17 @@ DEFAULT_THRESHOLDS: dict[str, Any] = {
 }
 
 REJECT_RULES = frozenset({"SEC-01", "DUP-01", "DUP-02"})
+# §7.1: REJECT è obbligatorio per quarantena (SEC-01) e duplicati esatti (DUP-01/02).
+# §7.3 consente di ridefinire soglie e severità per tenant, non di disattivare queste regole.
+NON_DISABLEABLE_RULES = REJECT_RULES
+
+
+class RulesConfigError(ValueError):
+    """Configurazione di regole non valida rispetto al §7."""
+
+    def __init__(self, message: str, *, codes: tuple[str, ...] = ()) -> None:
+        super().__init__(message)
+        self.codes = codes
 
 
 class ValidationEngine:
@@ -59,6 +70,7 @@ class ValidationEngine:
         self.as_of = as_of or date.today()
         self.thresholds = self._load_yaml("thresholds.yaml", DEFAULT_THRESHOLDS)
         self.rules_config = self._load_yaml("rules.yaml", {})
+        validate_rules_config(self.rules_config)
 
     def _load_yaml(self, name: str, fallback: dict[str, Any]) -> dict[str, Any]:
         path = self.config_dir / name
@@ -73,7 +85,7 @@ class ValidationEngine:
         return merged
 
     def _is_enabled(self, code: str) -> bool:
-        disabled = self.rules_config.get("disabled_rules") or []
+        disabled = _as_code_list(self.rules_config.get("disabled_rules"))
         return code not in disabled
 
     def _effective_severity(self, code: str, default: Severity) -> Severity:
@@ -95,6 +107,7 @@ class ValidationEngine:
         as_of: date | None = None,
     ) -> ValidationResult:
         """Valida un VOF e restituisce issue, score e route."""
+        validate_rules_config(self.rules_config)
         context = RuleContext(
             vof=vof,
             as_of=as_of or self.as_of,
@@ -212,6 +225,69 @@ class ValidationEngine:
                 f"{', '.join(result.reasons) or 'issue BLOCK/REVIEW o AUTO_POST non ammissibile'}."
             )
         return "Ordine ammissibile per AUTO_POST (simulato nel prototipo)."
+
+
+def validate_rules_config(config: dict[str, Any]) -> None:
+    """Rifiuta ``disabled_rules`` che tentano di spegnere SEC-01, DUP-01 o DUP-02.
+
+    Coerente con §7.1 (REJECT obbligatorio) e §7.3 (per tenant si possono
+    ridefinire solo soglie e severità). Vale per la lista globale e per
+    eventuali overlay ``tenants.<id>.disabled_rules``.
+    """
+    if not isinstance(config, dict):
+        return
+    locations = _forbidden_disabled_rule_locations(config)
+    if not locations:
+        return
+    codes = tuple(sorted(locations))
+    details = "; ".join(
+        f"{code} in {', '.join(paths)}" for code, paths in sorted(locations.items())
+    )
+    raise RulesConfigError(
+        "Configurazione regole non valida: "
+        f"{', '.join(codes)} non possono essere disattivate "
+        "(§7.1: REJECT obbligatorio per quarantena SEC-01 e duplicati esatti "
+        f"DUP-01/DUP-02). Trovate in: {details}.",
+        codes=codes,
+    )
+
+
+def _forbidden_disabled_rule_locations(config: dict[str, Any]) -> dict[str, list[str]]:
+    """Mappa codice non disattivabile → percorsi YAML in cui compare."""
+    found: dict[str, list[str]] = {}
+    for path, codes in _disabled_rule_entries(config):
+        for code in codes:
+            if code in NON_DISABLEABLE_RULES:
+                found.setdefault(code, []).append(path)
+    return found
+
+
+def _disabled_rule_entries(config: dict[str, Any]) -> list[tuple[str, list[str]]]:
+    """Liste ``disabled_rules`` globali e per tenant, con percorso YAML."""
+    entries: list[tuple[str, list[str]]] = []
+    top = _as_code_list(config.get("disabled_rules"))
+    if top:
+        entries.append(("disabled_rules", top))
+    tenants = config.get("tenants")
+    if isinstance(tenants, dict):
+        for tenant_id, tenant_cfg in tenants.items():
+            if not isinstance(tenant_cfg, dict):
+                continue
+            codes = _as_code_list(tenant_cfg.get("disabled_rules"))
+            if codes:
+                entries.append((f"tenants.{tenant_id}.disabled_rules", codes))
+    return entries
+
+
+def _as_code_list(value: Any) -> list[str]:
+    """Normalizza ``disabled_rules`` a lista di codici."""
+    if value is None:
+        return []
+    if isinstance(value, str):
+        return [value] if value else []
+    if isinstance(value, list | tuple | set | frozenset):
+        return [str(item) for item in value if item is not None and str(item)]
+    return []
 
 
 def _ensure_rules_loaded() -> None:

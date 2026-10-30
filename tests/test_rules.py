@@ -10,11 +10,13 @@ from pathlib import Path
 import pytest
 
 from ventureorder.rules import (
+    NON_DISABLEABLE_RULES,
     CustomerRecord,
     DecisionRoute,
     HistoricalOrder,
     MockReferenceDataProvider,
     ProductRecord,
+    RulesConfigError,
     SecurityHints,
     Severity,
     SyntheticReferenceDataProvider,
@@ -22,6 +24,7 @@ from ventureorder.rules import (
     ValidationResult,
     XrefRecord,
     get_all_rules,
+    validate_rules_config,
 )
 from ventureorder.rules import registry as rules_registry
 
@@ -911,6 +914,97 @@ class TestEngineAndDatagen:
         two_warns = sum(1 for item in two.issues if item.severity == Severity.WARN)
         assert two_warns == 2
         assert two.score == pytest.approx(clean.score - 0.05 * two_warns)
+
+    def test_disabled_reject_rules_rejected_at_init(
+        self, tmp_path: Path, ref: MockReferenceDataProvider
+    ) -> None:
+        (tmp_path / "rules.yaml").write_text(
+            "disabled_rules:\n  - SEC-01\n  - SEC-02\n",
+            encoding="utf-8",
+        )
+        with pytest.raises(RulesConfigError, match=r"SEC-01.*non possono essere disattivate") as exc:
+            ValidationEngine(config_dir=tmp_path, reference_data=ref, as_of=AS_OF)
+        assert "SEC-01" in exc.value.codes
+        assert "DUP-01" not in exc.value.codes
+
+    @pytest.mark.parametrize("code", sorted(NON_DISABLEABLE_RULES))
+    def test_each_non_disableable_rule_rejected_in_disabled_rules(
+        self, code: str, tmp_path: Path, ref: MockReferenceDataProvider
+    ) -> None:
+        (tmp_path / "rules.yaml").write_text(
+            f"disabled_rules:\n  - {code}\n",
+            encoding="utf-8",
+        )
+        with pytest.raises(RulesConfigError, match=code) as exc:
+            ValidationEngine(config_dir=tmp_path, reference_data=ref, as_of=AS_OF)
+        assert code in exc.value.codes
+        assert "§7.1" in str(exc.value)
+
+    def test_tenant_disabled_reject_rules_rejected_at_init(
+        self, tmp_path: Path, ref: MockReferenceDataProvider
+    ) -> None:
+        (tmp_path / "rules.yaml").write_text(
+            "\n".join(
+                [
+                    "disabled_rules:",
+                    "  - SEC-02",
+                    "tenants:",
+                    "  acme-mfg:",
+                    "    disabled_rules:",
+                    "      - DUP-01",
+                    "      - HDR-06",
+                ]
+            )
+            + "\n",
+            encoding="utf-8",
+        )
+        with pytest.raises(RulesConfigError, match=r"DUP-01") as exc:
+            ValidationEngine(config_dir=tmp_path, reference_data=ref, as_of=AS_OF)
+        assert exc.value.codes == ("DUP-01",)
+        assert "tenants.acme-mfg.disabled_rules" in str(exc.value)
+
+    def test_runtime_disabled_reject_rules_rejected_on_validate(
+        self, engine: ValidationEngine
+    ) -> None:
+        engine.rules_config["disabled_rules"] = ["SEC-02", "DUP-02"]
+        with pytest.raises(RulesConfigError, match="DUP-02"):
+            engine.validate(make_vof())
+
+    def test_tenant_runtime_overlay_cannot_disable_sec_01(
+        self, engine: ValidationEngine
+    ) -> None:
+        engine.rules_config["tenants"] = {
+            "delta-industrial-supply": {"disabled_rules": ["SEC-01", "SEC-02"]}
+        }
+        with pytest.raises(RulesConfigError, match="SEC-01"):
+            engine.validate(make_vof(), security=SecurityHints(filename="payload.exe"))
+
+    def test_non_protected_rule_still_disableable(self, engine: ValidationEngine) -> None:
+        engine.rules_config["disabled_rules"] = ["SEC-02", "HDR-01"]
+        order = make_vof(
+            header={"po_number": "", "po_date": "2026-11-03", "currency": "USD"}
+        )
+        result = engine.validate(order)
+        assert_clean(result, "HDR-01")
+        assert result.decision != DecisionRoute.REJECT
+
+    def test_validate_rules_config_accepts_sec_02_only(self) -> None:
+        validate_rules_config({"disabled_rules": ["SEC-02"]})
+
+    def test_validate_rules_config_lists_all_forbidden_codes(self) -> None:
+        with pytest.raises(RulesConfigError) as exc:
+            validate_rules_config(
+                {
+                    "disabled_rules": ["SEC-01", "HDR-06"],
+                    "tenants": {
+                        "beta": {"disabled_rules": ["DUP-02", "DUP-01"]},
+                    },
+                }
+            )
+        assert exc.value.codes == ("DUP-01", "DUP-02", "SEC-01")
+        message = str(exc.value)
+        assert "disabled_rules" in message
+        assert "tenants.beta.disabled_rules" in message
 
     def test_tenant_override_does_not_lift_dup_or_sec_reject(
         self, ref: MockReferenceDataProvider
