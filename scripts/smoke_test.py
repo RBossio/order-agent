@@ -14,13 +14,35 @@ Esito: 0 = successo, 1 = fallimento
 import os
 import sys
 import xmlrpc.client
+from pathlib import Path
+
+
+def _load_project_dotenv() -> None:
+    """Carica `.env` del repo senza passare da Make (`$` e `#` restano intatti)."""
+    env_path = Path(__file__).resolve().parent.parent / ".env"
+    scripts_dir = Path(__file__).resolve().parent
+    if str(scripts_dir) not in sys.path:
+        sys.path.insert(0, str(scripts_dir))
+    from generate_odoo_conf import load_dotenv
+
+    load_dotenv(env_path)
 
 
 def main():
+    _load_project_dotenv()
+
     url = os.getenv("ODOO_URL", "http://localhost:8069")
     db = os.getenv("ODOO_DB", "vo_demo")
     username = os.getenv("ODOO_USER", "admin")
-    password = os.getenv("ODOO_PASSWORD", os.getenv("ODOO_ADMIN_PASSWORD", "admin"))
+    password = os.getenv("ODOO_ADMIN_LOGIN_PASSWORD")
+    if not password:
+        print("ERRORE: ODOO_ADMIN_LOGIN_PASSWORD non definita.", file=sys.stderr)
+        print(
+            "Impostare la password di accesso dell'utente admin "
+            "(non usare la master password ODOO_ADMIN_PASSWORD).",
+            file=sys.stderr,
+        )
+        sys.exit(1)
 
     print("=" * 60)
     print("VentureOrder - Smoke Test Odoo")

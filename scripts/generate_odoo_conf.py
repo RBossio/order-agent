@@ -3,25 +3,85 @@
 
 A differenza di sed, questo script gestisce correttamente password con
 caratteri speciali come | & \\ $ etc.
+
+Legge `.env` da sé (senza interpolare `$` e senza tagliare `#` nei valori),
+così Make non deve fare `-include .env` con `export`.
 """
 
 import os
-import stat
 import sys
+from collections.abc import MutableMapping
 from pathlib import Path
+
+
+def load_dotenv(path: Path, environ: MutableMapping[str, str] | None = None) -> None:
+    """Carica KEY=VALUE da ``path`` senza interpolare `$`.
+
+    I commenti `#` valgono solo a inizio riga o dopo uno spazio in un valore
+    non quotato; `p$ss#w0rd` resta intatto. Non sovrascrive chiavi già presenti.
+    """
+    env = os.environ if environ is None else environ
+    if not path.is_file():
+        return
+    for raw_line in path.read_text(encoding="utf-8").splitlines():
+        line = raw_line.strip()
+        if not line or line.startswith("#"):
+            continue
+        if line.startswith("export "):
+            line = line[7:].lstrip()
+        if "=" not in line:
+            continue
+        key, _, value = line.partition("=")
+        key = key.strip()
+        if not key or key in env:
+            continue
+        value = value.strip()
+        if len(value) >= 2 and value[0] == value[-1] and value[0] in {'"', "'"}:
+            value = value[1:-1]
+        else:
+            value = _unquoted_env_value(value)
+        env[key] = value
+
+
+def _unquoted_env_value(value: str) -> str:
+    """Mantiene `#` attaccato al valore; taglia solo un commento dopo uno spazio."""
+    for index, char in enumerate(value):
+        if char == "#" and (index == 0 or value[index - 1].isspace()):
+            return value[:index].rstrip()
+    return value
+
+
+def _reject_newlines(name: str, value: str) -> bool:
+    if "\n" in value or "\r" in value:
+        print(
+            f"Errore: il valore di {name} contiene caratteri di nuova riga (\\n o \\r)",
+            file=sys.stderr,
+        )
+        return True
+    return False
+
+
+def write_secure(path: Path, content: str) -> None:
+    """Crea o sovrascrive ``path`` con permessi 0o600 fin dall'apertura."""
+    flags = os.O_WRONLY | os.O_CREAT | os.O_TRUNC
+    fd = os.open(path, flags, 0o600)
+    try:
+        os.fchmod(fd, 0o600)
+        os.write(fd, content.encode("utf-8"))
+    finally:
+        os.close(fd)
 
 
 def main() -> int:
     script_dir = Path(__file__).parent
     project_dir = script_dir.parent
+    load_dotenv(project_dir / ".env")
+
+    check_only = "--check" in sys.argv[1:]
+
     template_path = project_dir / "config" / "odoo.conf.template"
     output_path = project_dir / "config" / "odoo.conf"
 
-    if not template_path.exists():
-        print(f"Errore: template non trovato: {template_path}", file=sys.stderr)
-        return 1
-
-    # Verifica variabili obbligatorie
     postgres_password = os.environ.get("POSTGRES_PASSWORD")
     if not postgres_password:
         print("Errore: POSTGRES_PASSWORD non definita", file=sys.stderr)
@@ -32,13 +92,29 @@ def main() -> int:
         print("Errore: ODOO_ADMIN_PASSWORD non definita", file=sys.stderr)
         return 1
 
-    # Valori con default
     db_host = os.environ.get("DB_HOST", "db")
     db_port = os.environ.get("DB_PORT", "5432")
     postgres_user = os.environ.get("POSTGRES_USER", "odoo")
     postgres_db = os.environ.get("POSTGRES_DB", "vo_demo")
 
-    # Leggi template e sostituisci
+    values = (
+        ("POSTGRES_PASSWORD", postgres_password),
+        ("ODOO_ADMIN_PASSWORD", odoo_admin_password),
+        ("DB_HOST", db_host),
+        ("DB_PORT", db_port),
+        ("POSTGRES_USER", postgres_user),
+        ("POSTGRES_DB", postgres_db),
+    )
+    if any(_reject_newlines(name, value) for name, value in values):
+        return 1
+
+    if check_only:
+        return 0
+
+    if not template_path.exists():
+        print(f"Errore: template non trovato: {template_path}", file=sys.stderr)
+        return 1
+
     template_content = template_path.read_text()
 
     # Usa sostituzione manuale per evitare problemi con caratteri speciali
@@ -50,9 +126,8 @@ def main() -> int:
     config_content = config_content.replace("${POSTGRES_DB:-vo_demo}", postgres_db)
     config_content = config_content.replace("${ODOO_ADMIN_PASSWORD}", odoo_admin_password)
 
-    # Scrivi file con permessi restrittivi (600)
-    output_path.write_text(config_content)
-    os.chmod(output_path, stat.S_IRUSR | stat.S_IWUSR)  # 600
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    write_secure(output_path, config_content)
 
     print(f"Generato: {output_path} (permessi: 600)")
     return 0

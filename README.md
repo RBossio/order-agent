@@ -39,6 +39,19 @@ ruff check .
 mypy src/ventureorder
 ```
 
+## Variabili d'ambiente Odoo
+
+Copia `.env.example` in `.env` e imposta i segreti. Make **non** include `.env`
+(interpreterebbe `$` e `#` nelle password): `scripts/generate_odoo_conf.py`,
+`scripts/seed_odoo.py` e `scripts/smoke_test.py` lo leggono da sé.
+
+| Variabile | Uso |
+|-----------|-----|
+| `POSTGRES_PASSWORD` | Password PostgreSQL (obbligatoria per `make conf`) |
+| `ODOO_ADMIN_PASSWORD` | Master password di Odoo (`admin_passwd` in `odoo.conf`) |
+| `ODOO_ADMIN_LOGIN_PASSWORD` | Password di **accesso** dell'utente admin per seed e smoke test. Non è la master password: se manca, gli script escono con codice 1 |
+| `ODOO_BOT_PASSWORD` | Password dell'utente tecnico `ventureorder-bot` (obbligatoria per `make seed`; se manca, exit 1) |
+
 ## Struttura del repository
 
 ```

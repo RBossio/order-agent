@@ -15,9 +15,10 @@
 
 .PHONY: help conf up down logs seed smoke reset clean datagen env-check wait-odoo init test lint
 
-# Carica variabili da .env
--include .env
-export
+# Non usare `-include .env` + `export`: Make interpreta `$` e `#` e corrompe le password.
+# scripts/generate_odoo_conf.py (e seed/smoke) leggono `.env` da sé.
+POSTGRES_USER ?= odoo
+POSTGRES_DB ?= vo_demo
 
 PYTHON := python3
 
@@ -58,14 +59,7 @@ env-check: ## Verifica che Docker sia disponibile e .env esista
 		echo "Esegui: cp .env.example .env && nano .env"; \
 		exit 1; \
 	fi
-	@if [ -z "$(POSTGRES_PASSWORD)" ]; then \
-		echo "$(RED)Errore: POSTGRES_PASSWORD non definita in .env$(NC)"; \
-		exit 1; \
-	fi
-	@if [ -z "$(ODOO_ADMIN_PASSWORD)" ]; then \
-		echo "$(RED)Errore: ODOO_ADMIN_PASSWORD non definita in .env$(NC)"; \
-		exit 1; \
-	fi
+	@$(PYTHON) scripts/generate_odoo_conf.py --check
 	@echo "$(GREEN)Ambiente OK$(NC)"
 
 conf: env-check ## Genera config/odoo.conf dal template

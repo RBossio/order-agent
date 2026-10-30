@@ -247,12 +247,12 @@ class TestHardCasesWithDatagenProvider:
         assert result.decision != DecisionRoute.AUTO_POST
         assert result.decision != DecisionRoute.REJECT
 
-    def test_uom_carton_conversion(
-        self,
-        engine: ValidationEngine,
-        provider: DatagenReferenceDataProvider,
-        products: list[dict],
-    ) -> None:
+    def test_uom_carton_conversion(self, products: list[dict]) -> None:
+        provider = DatagenReferenceDataProvider.from_datagen(allowlisted_refs={"C-ACME"})
+        engine = ValidationEngine(config_dir=CONFIG, reference_data=provider, as_of=AS_OF)
+        customer = provider.get_customer_by_ref("C-ACME")
+        assert customer is not None
+        assert customer.allowlisted
         factor = provider.get_uom_conversion("CS", "BX", "PPE-GLV-LAT-6-L-WHI")
         assert factor == 10.0
         gloves = _product_by_sku(products, "PPE-GLV-LAT-6-L-WHI")
@@ -267,10 +267,20 @@ class TestHardCasesWithDatagenProvider:
             erp_uom="BX",
             erp_quantity=20,
         )
+        order["source"]["from_address"] = f"purchasing@{customer.email_domain}"
+        order["buyer"]["contact"]["email"] = f"purchasing@{customer.email_domain}"
+        if customer.delivery_partner_ids:
+            order["ship_to"]["resolved"]["erp_partner_id"] = customer.delivery_partner_ids[0]
+        # Pack documento ≠ catalogo (es. 250/CS vs 100/BX 10BX/CS) → UOM-04 REVIEW.
+        order["lines"][0]["pack"] = {"raw": "250/CS", "inner_count": 250, "inner_uom": "EA"}
         result = engine.validate(order)
         assert_hit(result, "UOM-03", Severity.INFO)
+        assert_hit(result, "UOM-04", Severity.REVIEW)
         assert not [item for item in result.issues if item.rule_id == "UOM-02"]
         assert result.decision == DecisionRoute.REVIEW
+        assert "UOM-04" in result.reasons
+        assert "ALLOWLIST" not in result.reasons
+        assert "CUS-04" not in result.reasons
         assert result.decision != DecisionRoute.AUTO_POST
         assert result.decision != DecisionRoute.REJECT
 
