@@ -7,7 +7,9 @@ from ventureorder.rules.models import Issue, RuleContext, Severity
 from ventureorder.rules.reference import addresses_match, customer_of
 from ventureorder.rules.registry import rule
 
-FUZZY_METHODS = frozenset({"FUZZY_NAME", "CODE"})
+FUZZY_NAME_METHODS = frozenset({"FUZZY_NAME"})
+CODE_METHODS = frozenset({"CODE"})
+CODE_REVIEW_MAX = 0.95
 
 
 @rule("CUS-01", Severity.BLOCK)
@@ -45,27 +47,34 @@ def cus_01_buyer_resolved(ctx: RuleContext) -> list[Issue]:
 
 @rule("CUS-02", Severity.REVIEW)
 def cus_02_fuzzy_name(ctx: RuleContext) -> list[Issue]:
-    """Cliente trovato in modo incerto (nome fuzzy o solo xref, score < 0,95)."""
+    """Cliente trovato solo per nome fuzzy: sempre revisione.
+
+    ``FUZZY_NAME`` (anche esatto a 0,95) va in REVIEW. ``CODE`` resta
+    come su main: scatta solo se lo score è sotto 0,95 (xref senza
+    ragione sociale). Un CODE a 0,98 con nome presente non blocca AUTO_POST.
+    """
     info = resolved(ctx.buyer)
     method = str(info.get("method") or "")
     score = info.get("score")
     score_f = float(score) if isinstance(score, int | float) else 0.0
-    if method in FUZZY_METHODS and score_f < 0.95:
-        return [
-            issue(
-                "CUS-02",
-                Severity.REVIEW,
-                (
-                    f"Cliente riconosciuto in modo incerto "
-                    f"(metodo {method or 'n/d'}, score {score_f:.2f})"
-                ),
-                "/buyer/resolved",
-                suggestion="Verificare l'associazione con l'anagrafica",
-                method=method,
-                score=score_f,
-            )
-        ]
-    return []
+    fuzzy = method in FUZZY_NAME_METHODS
+    code_uncertain = method in CODE_METHODS and score_f < CODE_REVIEW_MAX
+    if not (fuzzy or code_uncertain):
+        return []
+    return [
+        issue(
+            "CUS-02",
+            Severity.REVIEW,
+            (
+                f"Cliente riconosciuto solo per nome "
+                f"(metodo {method or 'n/d'}, score {score_f:.2f})"
+            ),
+            "/buyer/resolved",
+            suggestion="Verificare l'associazione con l'anagrafica",
+            method=method,
+            score=score_f,
+        )
+    ]
 
 
 def _ship_has_address(ship: dict) -> bool:

@@ -81,12 +81,25 @@ def _detail_context(order: InboxOrder, *, message: str | None = None) -> dict[st
     lines = []
     for index, line in enumerate(order.vof.get("lines") or []):
         resolution = line.get("resolution") or {}
-        sku = resolution.get("sku") or line.get("seller_item_code") or line.get("buyer_item_code")
+        candidates = [
+            str(item.get("sku"))
+            for item in (resolution.get("candidates") or [])
+            if isinstance(item, dict) and item.get("sku")
+        ]
+        recognized = bool(resolution.get("sku") or resolution.get("erp_product_id"))
+        # FUZZY ambiguo: niente SKU precompilato, solo candidati.
+        if recognized:
+            sku = resolution.get("sku")
+        elif candidates:
+            sku = None
+        else:
+            sku = line.get("seller_item_code") or line.get("buyer_item_code")
         lines.append(
             {
                 "line_no": line.get("line_no") or index + 1,
                 "sku": sku or "n/d",
-                "recognized": bool(resolution.get("sku") or resolution.get("erp_product_id")),
+                "recognized": recognized,
+                "candidates": candidates[:3],
                 "description": line.get("description") or "n/d",
                 "quantity": line.get("quantity"),
                 "uom": line.get("uom") or line.get("uom_raw") or "n/d",

@@ -36,11 +36,25 @@ class TestHonestPipeline:
         assert customers
         assert all(not customer.allowlisted for customer in customers)
 
-    def test_match_is_noop_without_resolver(self) -> None:
-        vof = {"buyer": {"name": "Omega"}, "lines": [{"description": "x"}]}
+    def test_unknown_buyer_stays_unresolved(self) -> None:
+        vof = {
+            "buyer": {"name": "Zeta Unknown GmbH"},
+            "lines": [{"line_no": 1, "description": "x"}],
+        }
         matched = apply_match_if_available(vof, build_reference_provider())
         assert not (matched.get("buyer") or {}).get("resolved")
-        assert not (matched.get("lines") or [])[0].get("resolution")
+        resolution = ((matched.get("lines") or [{}])[0].get("resolution") or {})
+        assert not resolution.get("sku")
+
+    def test_match_resolves_known_customer(self) -> None:
+        vof = {
+            "source": {"from_address": "purchasing@acme.example"},
+            "buyer": {"name": "Acme Company (SYNTHETIC)", "tax_id": "12-8713396"},
+            "lines": [{"line_no": 1, "description": "unknown widget"}],
+        }
+        matched = apply_match_if_available(vof, build_reference_provider())
+        resolved = (matched.get("buyer") or {}).get("resolved") or {}
+        assert resolved.get("erp_partner_ref") == "C-ACME"
 
     def test_demo_orders_are_unresolved_and_mostly_review(self) -> None:
         inbox = OrderInbox.for_demo()
@@ -143,6 +157,37 @@ class TestApproveReject:
         assert updated is not None
         assert updated.ui_status == "REVIEW"
         assert updated.draft_name is None
+
+    def test_approve_resolved_creates_a_draft(self) -> None:
+        client, inbox = _client()
+        before = len(inbox.odoo.created_orders())
+        target = next(
+            item
+            for item in inbox.list_orders()
+            if item.customer_resolved
+            and not item.is_duplicate
+            and item.ui_status == "REVIEW"
+            and all(
+                (line.get("resolution") or {}).get("sku")
+                or (line.get("resolution") or {}).get("erp_product_id")
+                or line.get("seller_item_code")
+                for line in (item.vof.get("lines") or [])
+            )
+        )
+        token = _csrf(client)
+        response = client.post(
+            f"/orders/{target.id}/approve",
+            data={"csrf_token": token},
+            follow_redirects=True,
+        )
+        assert response.status_code == 200
+        updated = inbox.get(target.id)
+        assert updated is not None
+        assert updated.ui_status == STATUS_APPROVED
+        assert updated.draft_name
+        assert updated.error is None
+        assert len(inbox.odoo.created_orders()) == before + 1
+        assert "Bozza Odoo creata" in response.text
 
     def test_approve_unresolved_does_not_invent_a_draft(self) -> None:
         client, inbox = _client()
