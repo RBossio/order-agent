@@ -89,14 +89,14 @@ class TestGenerateOdooConf:
         assert f"db_password = {special_password}" in content
         assert "admin_passwd = admin|test&pass" in content
 
-    def test_reads_dollar_and_hash_from_dotenv(
+    def test_reads_dollar_and_hash_from_single_quoted_dotenv(
         self, temp_config_dir: Path, monkeypatch: pytest.MonkeyPatch
     ) -> None:
-        """Password con `$` e `#` restano intatte se lette da `.env`, non da Make."""
+        """Apici singoli: `$` e `#` restano letterali, come in Docker Compose."""
         monkeypatch.delenv("POSTGRES_PASSWORD", raising=False)
         monkeypatch.delenv("ODOO_ADMIN_PASSWORD", raising=False)
         (temp_config_dir / ".env").write_text(
-            "POSTGRES_PASSWORD=p$ss#w0rd\nODOO_ADMIN_PASSWORD=adm$in#123\n",
+            "POSTGRES_PASSWORD='p$ss#w0rd'\nODOO_ADMIN_PASSWORD='adm$in#123'\n",
             encoding="utf-8",
         )
 
@@ -106,6 +106,24 @@ class TestGenerateOdooConf:
         content = (temp_config_dir / "config" / "odoo.conf").read_text()
         assert "db_password = p$ss#w0rd" in content
         assert "admin_passwd = adm$in#123" in content
+
+    def test_rejects_dollar_in_double_quoted_dotenv(
+        self, temp_config_dir: Path, monkeypatch: pytest.MonkeyPatch
+    ) -> None:
+        """Virgolette doppie con `$` non sono supportate (Compose interpola)."""
+        monkeypatch.delenv("POSTGRES_PASSWORD", raising=False)
+        monkeypatch.delenv("ODOO_ADMIN_PASSWORD", raising=False)
+        (temp_config_dir / ".env").write_text(
+            'POSTGRES_PASSWORD="p$ss#w0rd"\nODOO_ADMIN_PASSWORD=test\n',
+            encoding="utf-8",
+        )
+
+        result = _run_generate_script(temp_config_dir)
+
+        assert result.returncode == 1
+        assert "POSTGRES_PASSWORD" in result.stderr
+        assert "virgolette doppie" in result.stderr
+        assert "apici singoli" in result.stderr
 
     def test_rejects_newline_injection_in_password(
         self, temp_config_dir: Path, monkeypatch: pytest.MonkeyPatch
@@ -118,7 +136,7 @@ class TestGenerateOdooConf:
 
         assert result.returncode == 1
         assert "ODOO_ADMIN_PASSWORD" in result.stderr
-        assert "nuova riga" in result.stderr
+        assert "controllo" in result.stderr
         output_file = temp_config_dir / "config" / "odoo.conf"
         if output_file.exists():
             assert "list_db = True" not in output_file.read_text()
@@ -184,6 +202,10 @@ class TestGenerateOdooConf:
 class TestSeedOdooBotPassword:
     """Test per la verifica di ODOO_BOT_PASSWORD in seed_odoo.py."""
 
+    @pytest.fixture(autouse=True)
+    def _skip_dotenv(self, monkeypatch: pytest.MonkeyPatch) -> None:
+        monkeypatch.setenv("VO_SKIP_DOTENV", "1")
+
     def test_exits_without_bot_password(self, monkeypatch: pytest.MonkeyPatch) -> None:
         """Verifica che seed_odoo.py esca con errore se ODOO_BOT_PASSWORD mancante."""
         # Rimuovi ODOO_BOT_PASSWORD se presente
@@ -230,9 +252,29 @@ class TestSeedOdooBotPassword:
         assert "ODOO_ADMIN_LOGIN_PASSWORD" in result.stderr
         assert "ODOO_ADMIN_PASSWORD" in result.stderr
 
+    def test_exits_if_login_password_equals_master(self, monkeypatch: pytest.MonkeyPatch) -> None:
+        """Login e master password devono essere distinte."""
+        monkeypatch.setenv("ODOO_BOT_PASSWORD", "bot-secret")
+        monkeypatch.setenv("ODOO_ADMIN_PASSWORD", "same-secret")
+        monkeypatch.setenv("ODOO_ADMIN_LOGIN_PASSWORD", "same-secret")
+
+        result = subprocess.run(
+            [sys.executable, str(SCRIPTS_DIR / "seed_odoo.py")],
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+
+        assert result.returncode == 1
+        assert "distinta" in result.stderr
+
 
 class TestSmokeTestAdminLoginPassword:
     """Test per ODOO_ADMIN_LOGIN_PASSWORD in smoke_test.py."""
+
+    @pytest.fixture(autouse=True)
+    def _skip_dotenv(self, monkeypatch: pytest.MonkeyPatch) -> None:
+        monkeypatch.setenv("VO_SKIP_DOTENV", "1")
 
     def test_exits_without_admin_login_password(self, monkeypatch: pytest.MonkeyPatch) -> None:
         """smoke_test.py esce con codice 1 se manca la password di login admin."""
@@ -249,3 +291,18 @@ class TestSmokeTestAdminLoginPassword:
         assert result.returncode == 1
         assert "ODOO_ADMIN_LOGIN_PASSWORD" in result.stderr
         assert "ODOO_ADMIN_PASSWORD" in result.stderr
+
+    def test_exits_if_login_password_equals_master(self, monkeypatch: pytest.MonkeyPatch) -> None:
+        """Login e master password devono essere distinte."""
+        monkeypatch.setenv("ODOO_ADMIN_PASSWORD", "same-secret")
+        monkeypatch.setenv("ODOO_ADMIN_LOGIN_PASSWORD", "same-secret")
+
+        result = subprocess.run(
+            [sys.executable, str(SCRIPTS_DIR / "smoke_test.py")],
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+
+        assert result.returncode == 1
+        assert "distinta" in result.stderr

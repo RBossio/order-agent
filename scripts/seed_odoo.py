@@ -568,13 +568,19 @@ def setup_technical_user(client: OdooClient, bot_password: str) -> None:
 
 def _load_project_dotenv() -> None:
     """Carica `.env` del repo senza passare da Make (`$` e `#` restano intatti)."""
+    if os.environ.get("VO_SKIP_DOTENV") == "1":
+        return
     env_path = Path(__file__).resolve().parent.parent / ".env"
     scripts_dir = Path(__file__).resolve().parent
     if str(scripts_dir) not in sys.path:
         sys.path.insert(0, str(scripts_dir))
-    from generate_odoo_conf import load_dotenv
+    from generate_odoo_conf import DotenvError, load_dotenv
 
-    load_dotenv(env_path)
+    try:
+        load_dotenv(env_path)
+    except DotenvError as exc:
+        print(f"ERRORE: {exc}", file=sys.stderr)
+        sys.exit(1)
 
 
 def main():
@@ -594,6 +600,13 @@ def main():
         print(
             "Impostare la password di accesso dell'utente admin "
             "(non usare la master password ODOO_ADMIN_PASSWORD).",
+            file=sys.stderr,
+        )
+        sys.exit(1)
+    master_password = os.getenv("ODOO_ADMIN_PASSWORD")
+    if master_password and login_password == master_password:
+        print(
+            "ERRORE: ODOO_ADMIN_LOGIN_PASSWORD deve essere distinta da ODOO_ADMIN_PASSWORD.",
             file=sys.stderr,
         )
         sys.exit(1)

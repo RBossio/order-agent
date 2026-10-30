@@ -6,6 +6,11 @@ caratteri speciali come | & \\ $ etc.
 
 Legge `.env` da sé (senza interpolare `$` e senza tagliare `#` nei valori),
 così Make non deve fare `-include .env` con `export`.
+
+I valori con `$` vanno tra apici singoli (`POSTGRES_PASSWORD='p$ss#w0rd'`):
+Docker Compose interpola `$` se il valore è senza virgolette o tra virgolette
+doppie. Questo parser toglie gli apici singoli e tiene il valore letterale,
+allineato a Compose.
 """
 
 import os
@@ -14,11 +19,16 @@ from collections.abc import MutableMapping
 from pathlib import Path
 
 
+class DotenvError(ValueError):
+    """File `.env` non allineato a Docker Compose."""
+
+
 def load_dotenv(path: Path, environ: MutableMapping[str, str] | None = None) -> None:
     """Carica KEY=VALUE da ``path`` senza interpolare `$`.
 
     I commenti `#` valgono solo a inizio riga o dopo uno spazio in un valore
-    non quotato; `p$ss#w0rd` resta intatto. Non sovrascrive chiavi già presenti.
+    non quotato. I valori con `$` devono usare apici singoli, come Compose.
+    Non sovrascrive chiavi già presenti.
     """
     env = os.environ if environ is None else environ
     if not path.is_file():
@@ -36,10 +46,24 @@ def load_dotenv(path: Path, environ: MutableMapping[str, str] | None = None) -> 
         if not key or key in env:
             continue
         value = value.strip()
-        if len(value) >= 2 and value[0] == value[-1] and value[0] in {'"', "'"}:
+        quote = ""
+        if len(value) >= 2 and value[0] == value[-1] and value[0] in {"'", '"'}:
+            quote = value[0]
             value = value[1:-1]
         else:
             value = _unquoted_env_value(value)
+        if "$" in value and quote != "'":
+            if quote == '"':
+                raise DotenvError(
+                    f"{key} usa virgolette doppie e contiene $. "
+                    "Docker Compose interpola $. Usare apici singoli, "
+                    f"es. {key}='...'"
+                )
+            raise DotenvError(
+                f"{key} contiene $ senza apici singoli. "
+                "Docker Compose interpola $. "
+                f"Usare {key}='...'"
+            )
         env[key] = value
 
 
@@ -51,10 +75,10 @@ def _unquoted_env_value(value: str) -> str:
     return value
 
 
-def _reject_newlines(name: str, value: str) -> bool:
-    if "\n" in value or "\r" in value:
+def _reject_control_chars(name: str, value: str) -> bool:
+    if any(ord(c) < 32 or ord(c) == 127 for c in value):
         print(
-            f"Errore: il valore di {name} contiene caratteri di nuova riga (\\n o \\r)",
+            f"Errore: il valore di {name} contiene caratteri di controllo",
             file=sys.stderr,
         )
         return True
@@ -75,7 +99,11 @@ def write_secure(path: Path, content: str) -> None:
 def main() -> int:
     script_dir = Path(__file__).parent
     project_dir = script_dir.parent
-    load_dotenv(project_dir / ".env")
+    try:
+        load_dotenv(project_dir / ".env")
+    except DotenvError as exc:
+        print(f"Errore: {exc}", file=sys.stderr)
+        return 1
 
     check_only = "--check" in sys.argv[1:]
 
@@ -105,7 +133,7 @@ def main() -> int:
         ("POSTGRES_USER", postgres_user),
         ("POSTGRES_DB", postgres_db),
     )
-    if any(_reject_newlines(name, value) for name, value in values):
+    if any(_reject_control_chars(name, value) for name, value in values):
         return 1
 
     if check_only:

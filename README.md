@@ -45,6 +45,12 @@ Copia `.env.example` in `.env` e imposta i segreti. Make **non** include `.env`
 (interpreterebbe `$` e `#` nelle password): `scripts/generate_odoo_conf.py`,
 `scripts/seed_odoo.py` e `scripts/smoke_test.py` lo leggono da sé.
 
+I valori con `$` vanno tra **apici singoli** (`POSTGRES_PASSWORD='p$ss#w0rd'`):
+Docker Compose interpola `$` se il valore è senza virgolette o tra virgolette
+doppie. Il generatore toglie gli apici singoli e tiene il valore letterale, così
+`odoo.conf` e Postgres ricevono la stessa password. Le virgolette doppie con `$`
+non sono supportate.
+
 | Variabile | Uso |
 |-----------|-----|
 | `POSTGRES_PASSWORD` | Password PostgreSQL (obbligatoria per `make conf`) |
