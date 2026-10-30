@@ -1,0 +1,29 @@
+Content-Type: multipart/mixed; boundary="===============8480424082594456680=="
+MIME-Version: 1.0
+From: purchasing@global.example
+To: orders@delta-industrial.example
+Subject: PO QS-01143 - Order from Global Corp. (SYNTHETIC)
+Message-ID: <po-QS-01143@global.example>
+Date: Thu, 15 Jan 2026 10:30:00 +0000
+
+--===============8480424082594456680==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+Kindly arrange shipment against purchase order QS-01143 (Apr 25, 2026).
+Ship the following to Global Shipping Location 2, needed by 2026-05-02:
+
+- one CS of Packing Tape Clear 2in (SYNTHETIC), catalog PKG-PTC-133, unit price 51.92.
+- three BG of Cable Tie 8in Black (SYNTHETIC), catalog ELE-CTI-8IN, unit price 15.45.
+- twenty-four BX of Cut-Off Wheel 4in (SYNTHETIC), catalog ABR-COW-4IN-2, unit price 50.25.
+- twelve RO of Can Liner 43x47 1.2mil White Roll (SYNTHETIC), catalog GLOBAL-JAN-8946, unit price 23.54.
+- twenty-four RO of Electrical Tape White 3/4in (SYNTHETIC), catalog GLOBAL-ELE-7350, unit price 2.24.
+- two BX of Lock Washer 1/2-13 Zinc (SYNTHETIC), catalog GLOBAL-FAS-1606, unit price 8.22.
+- four EA of Utility Knife Retractable (SYNTHETIC), catalog TLS-UTK-298, unit price 5.11.
+- twelve CS of Disinfectant Spray (SYNTHETIC), catalog JAN-DSP-186, unit price 62.75.
+- twelve CS of Floor Cleaner Neutral Concentrate (SYNTHETIC), catalog GLOBAL-JAN-7735, unit price 53.35.
+- two CS of Facial Tissue Flat Box (SYNTHETIC), catalog GLOBAL-JAN-5551, unit price 46.07.
+
+Appreciate the help.
+--===============8480424082594456680==--

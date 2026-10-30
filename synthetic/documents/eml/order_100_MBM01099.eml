@@ -7,43 +7,27 @@ Message-ID: <po-MBM01099@apex.example>
 Date: Thu, 15 Jan 2026 10:30:00 +0000
 
 --===============2332508742066950336==
-Content-Type: text/plain; charset="us-ascii"
+Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: base64
 
-Hello,
+T24gTW9uLCAxMiBKYW4gMjAyNiBhdCAwOToxNCwgV2FyZWhvdXNlIDxvcHNAZXhhbXBsZS5jb20+
+IHdyb3RlOgo+IHN1cmUsIHBsZWFzZSBwcm9jZWVkIHdpdGggdGhlIHJlcGxlbmlzaG1lbnQKCi0t
+LS0tLS0tLS0gRm9yd2FyZGVkIG1lc3NhZ2UgLS0tLS0tLS0tCkZyb206IEFwZXggUHVyY2hhc2lu
+ZyA8cHVyY2hhc2luZ0BhcGV4LmV4YW1wbGU+CkRhdGU6IE1vbiwgMTIgSmFuIDIwMjYgMDg6MDI6
+MTEgKzAwMDAKU3ViamVjdDogUmU6IE1CTTAxMDk5CgpDb3VsZCB5b3UgZnVsZmlsbCBNQk0wMTA5
+OSBkYXRlZCA2LzEvMjY/CkRlbGl2ZXIgdG8gQXBleCBTaGlwcGluZyBMb2NhdGlvbiAxIGJ5IDIw
+MjYtMDYtMTQuCkxpbmUgaXRlbXM6CkFQRVgtSkFOLTk2NjEgeCAxMCBDUyBAIDgyLjUyIOKAlCBI
+YW5kIFNhbml0aXplciBHZWwgNzAlIChTWU5USEVUSUMpCkFQRVgtQUJSLTkyNDYgeCAxMiBCWCBA
+IDM5Ljg0IOKAlCBDdXQtT2ZmIFdoZWVsIDZpbiAoU1lOVEhFVElDKQpBUEVYLVBBQy0wODg1IHgg
+MiBDUyBAIDEzMy4zMyDigJQgU3RyZXRjaCBXcmFwIDE4aW4gKFNZTlRIRVRJQykKQVBFWC1UT08t
+NDMzNyB4IDYgUEsgQCA2Ljc2IOKAlCBVdGlsaXR5IEJsYWRlIFN0YW5kYXJkIChTWU5USEVUSUMp
+CkFQRVgtSkFOLTM5OTIgeCA0IENTIEAgNDEuOTIg4oCUIEZhY2lhbCBUaXNzdWUgRmxhdCBCb3gg
+KFNZTlRIRVRJQykKSkFOLURTUC0xMjggeCAxIENTIEAgNDYuMTMg4oCUIERpc2luZmVjdGFudCBT
+cHJheSAoU1lOVEhFVElDKQpBUEVYLVNBRi01NDI3IHggMyBCWCBAIDIwLjQ4IOKAlCBFYXIgUGx1
+Z3MgRm9hbSBEaXNwb3NhYmxlIChTWU5USEVUSUMpClBLRy1CQlctMjI1IHggNiBSTyBAIDM4Ljcx
+IOKAlCBCdWJibGUgV3JhcCAxMmluIChTWU5USEVUSUMpCkZTVC1IQ1MtNTgtMTEtMTEyIHggNSBC
+WCBAIDIzLjkxIOKAlCBIZXggQ2FwIFNjcmV3IDUvOC0xMSB4IDEtMS8yIEdyYWRlIDUgWmluYyAo
+U1lOVEhFVElDKQ==
 
-Please process the following order:
-
-PO Number: MBM01099
-Date: 6/1/26
-Ship To: Apex Shipping Location 1
-
-Items:
-------
-  1. [APEX-JAN-9661] Hand Sanitizer Gel 70% (SYNTHETIC)
-     Qty: 10 CS @ $82.52
-  2. [APEX-ABR-9246] Cut-Off Wheel 6in (SYNTHETIC)
-     Qty: 12 BX @ $39.84
-  3. [APEX-PAC-0885] Stretch Wrap 18in (SYNTHETIC)
-     Qty: 2 CS @ $133.33
-  4. [APEX-TOO-4337] Utility Blade Standard (SYNTHETIC)
-     Qty: 6 PK @ $6.76
-  5. [APEX-JAN-3992] Facial Tissue Flat Box (SYNTHETIC)
-     Qty: 4 CS @ $41.92
-  6. [JAN-DSP-128] Disinfectant Spray (SYNTHETIC)
-     Qty: 1 CS @ $46.13
-  7. [APEX-SAF-5427] Ear Plugs Foam Disposable (SYNTHETIC)
-     Qty: 3 BX @ $20.48
-  8. [PKG-BBW-225] Bubble Wrap 12in (SYNTHETIC)
-     Qty: 6 RO @ $38.71
-  9. [FST-HCS-58-11-112] Hex Cap Screw 5/8-11 x 1-1/2 Grade 5 Zinc (SYNTHETIC)
-     Qty: 5 BX @ $23.91
-
-Delivery requested by: 2026-06-14
-
-Thank you,
-Apex Purchasing
-Apex Corp. (SYNTHETIC)
-+1-555-3504
 --===============2332508742066950336==--

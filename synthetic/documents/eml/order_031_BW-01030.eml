@@ -1,0 +1,27 @@
+Content-Type: multipart/mixed; boundary="===============6655323238492175028=="
+MIME-Version: 1.0
+From: purchasing@delta.example
+To: orders@delta-industrial.example
+Subject: PO BW-01030 - Order from Delta Holdings (SYNTHETIC)
+Message-ID: <po-BW-01030@delta.example>
+Date: Thu, 15 Jan 2026 10:30:00 +0000
+
+--===============6655323238492175028==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+Hi team, could you please raise this under our purchase order BW-01030 dated 02/02/2026? Deliver to Delta Shipping Location 1; we need the goods by 2026-02-21.
+
+We need 1 BX of Hex Nut 5/8-11 Grade 5 Zinc (SYNTHETIC) (catalog FST-HNT-58-11) at 5.16 each.
+We need 3 CS of Hand Sanitizer Gel 70% (SYNTHETIC) (catalog JAN-HSG-080) at 79.77 each.
+We need 10 BX of Hex Cap Screw M10 x 1-1/2 Grade 5 Zinc (SYNTHETIC) (catalog FST-HCS-M10-112) at 26.78 each.
+We need 4 CS of Toilet Tissue 2P Standard (SYNTHETIC) (catalog JAN-TTI-270) at 75.22 each.
+We need 24 RO of Can Liner 43x47 1.2mil White Roll (SYNTHETIC) (catalog JAN-LNR-4347-12-WH) at 23.54 each.
+We need 4 CS of Disinfectant Spray (SYNTHETIC) (catalog JAN-DSP-084) at 39.61 each.
+We need 3 CS of Stretch Wrap 18in (SYNTHETIC) (catalog PKG-STW-097) at 115.67 each.
+We need 1 RO of Bubble Wrap 12in (SYNTHETIC) (catalog PKG-BBW-225) at 38.71 each.
+We need 3 RO of Bubble Wrap 12in (SYNTHETIC) (catalog PKG-BBW-149) at 44.38 each.
+
+Thanks in advance.
+--===============6655323238492175028==--

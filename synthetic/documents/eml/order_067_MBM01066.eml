@@ -1,0 +1,15 @@
+Content-Type: multipart/mixed; boundary="===============2430071904677725022=="
+MIME-Version: 1.0
+From: purchasing@apex.example
+To: orders@delta-industrial.example
+Subject: PO MBM01066 - Order from Apex Corp. (SYNTHETIC)
+Message-ID: <po-MBM01066@apex.example>
+Date: Thu, 15 Jan 2026 10:30:00 +0000
+
+--===============2430071904677725022==
+Content-Type: text/html; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Please process purchase order <b>MBM01066</b> dated 6/15/26.</p><p>Deliver to Apex Shipping Location 1. Need by 2026-06-21.</p><table border='1' cellpadding='4'><tr><th>Item</th><th>Description</th><th>Quantity</th><th>Unit</th><th>Price</th></tr><tr><td>APEX-ABR-3960</td><td>Flap Disc 4in 120 (SYNTHETIC)</td><td>24</td><td>BX</td><td>62.68</td></tr><tr><td>JAN-DGR-130</td><td>Degreaser Industrial (SYNTHETIC)</td><td>4</td><td>CS</td><td>71.91</td></tr><tr><td>JAN-DSP-258</td><td>Disinfectant Spray (SYNTHETIC)</td><td>1</td><td>CS</td><td>66.55</td></tr><tr><td>FST-HNT-58-11</td><td>Hex Nut 5/8-11 Grade 5 Zinc (SYNTHETIC)</td><td>2</td><td>BX</td><td>5.16</td></tr><tr><td>APEX-JAN-8154</td><td>Toilet Tissue 2P Standard (SYNTHETIC)</td><td>1</td><td>CS</td><td>61.32</td></tr><tr><td>APEX-FAS-1030</td><td>Socket Head Cap Screw 1/2-13 x 2 (SYNTHETIC)</td><td>3</td><td>BX</td><td>40.77</td></tr><tr><td>LUB-MPG-006</td><td>Multi-Purpose Grease (SYNTHETIC)</td><td>6</td><td>CS</td><td>113.57</td></tr><tr><td>APEX-JAN-1818</td><td>Floor Stripper Heavy Duty (SYNTHETIC)</td><td>4</td><td>CS</td><td>66.70</td></tr><tr><td>APEX-SAF-7935</td><td>N95 Respirator (SYNTHETIC)</td><td>6</td><td>BX</td><td>44.43</td></tr><tr><td>APEX-JAN-6771</td><td>Toilet Tissue 2P Standard (SYNTHETIC)</td><td>1</td><td>CS</td><td>59.97</td></tr><tr><td>APEX-JAN-0920</td><td>Floor Stripper Heavy Duty (SYNTHETIC)</td><td>1</td><td>CS</td><td>87.26</td></tr><tr><td>APEX-SAF-6974</td><td>Nitrile Gloves S White 8mil PF (SYNTHETIC)</td><td>24</td><td>CS</td><td>98.35</td></tr><tr><td>PKG-BBW-147</td><td>Bubble Wrap 12in (SYNTHETIC)</td><td>4</td><td>RO</td><td>41.67</td></tr><tr><td>APEX-LUB-2704</td><td>Machine Oil Light (SYNTHETIC)</td><td>10</td><td>CS</td><td>84.28</td></tr><tr><td>TLS-TPM-30FT-1</td><td>Tape Measure 30ft (SYNTHETIC)</td><td>24</td><td>EA</td><td>31.64</td></tr><tr><td>LUB-POS-227</td><td>Penetrating Oil Spray (SYNTHETIC)</td><td>2</td><td>CS</td><td>94.71</td></tr><tr><td>TLS-UTK-113</td><td>Utility Knife Retractable (SYNTHETIC)</td><td>10</td><td>EA</td><td>6.30</td></tr><tr><td>APEX-JAN-9319</td><td>Toilet Tissue 2P Standard (SYNTHETIC)</td><td>3</td><td>CS</td><td>74.47</td></tr><tr><td>PPE-EAR-221</td><td>Ear Plugs Foam Disposable (SYNTHETIC)</td><td>3</td><td>BX</td><td>30.45</td></tr></table><p>Thanks</p></body></html>
+--===============2430071904677725022==--

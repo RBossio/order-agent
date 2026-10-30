@@ -1,0 +1,38 @@
+Content-Type: multipart/mixed; boundary="===============3675909704676361332=="
+MIME-Version: 1.0
+From: purchasing@apex.example
+To: orders@delta-industrial.example
+Subject: PO MBM01015 - Order from Apex Corp. (SYNTHETIC)
+Message-ID: <po-MBM01015@apex.example>
+Date: Thu, 15 Jan 2026 10:30:00 +0000
+
+--===============3675909704676361332==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+Hi team, could you please raise this under our purchase order MBM01015 dated 6/15/26? Deliver to Apex Shipping Location 1; we need the goods by 2026-06-28.
+
+We need 12 CS of Floor Pad 17in Black (SYNTHETIC) (catalog JAN-FPD-17-BLA) at 20.93 each.
+We need 10 CS of Stretch Wrap 18in (SYNTHETIC) (catalog APEX-PAC-6202) at 115.32 each.
+We need 2 CS of Penetrating Oil Spray (SYNTHETIC) (catalog LUB-POS-289) at 58.40 each.
+We need 10 CS of Glass Cleaner RTU (SYNTHETIC) (catalog JAN-GCL-180) at 27.76 each.
+We need 10 PK of Utility Blade Standard (SYNTHETIC) (catalog TLS-UTB-197) at 7.32 each.
+We need 2 CS of Disinfectant Spray (SYNTHETIC) (catalog APEX-JAN-5733) at 62.75 each.
+We need 1 CS of Machine Oil Light (SYNTHETIC) (catalog LUB-MOL-004) at 68.77 each.
+We need 12 BX of Lock Washer 1/4-20 Zinc (SYNTHETIC) (catalog APEX-FAS-3372) at 4.70 each.
+We need 1 BX of Socket Head Cap Screw 3/4-10 x 1 (SYNTHETIC) (catalog APEX-FAS-1169) at 48.53 each.
+We need 3 CS of Toilet Tissue 2P Standard (SYNTHETIC) (catalog JAN-TTI-235) at 84.90 each.
+We need 1 CS of Nitrile Gloves S White 8mil PF (SYNTHETIC) (catalog APEX-SAF-6974) at 98.35 each.
+We need 5 CS of Latex Gloves XXL PF (SYNTHETIC) (catalog PPE-GLV-LAT-5-XXL-BLU) at 81.27 each.
+We need 24 CS of Machine Oil Light (SYNTHETIC) (catalog APEX-LUB-9429) at 62.24 each.
+We need 3 CS of Toilet Tissue 2P Standard (SYNTHETIC) (catalog APEX-JAN-6771) at 59.97 each.
+We need 2 PK of Sandpaper Sheet 120 Grit (SYNTHETIC) (catalog ABR-SPS-120G-1) at 18.94 each.
+We need 1 PK of Super Glue Gel (SYNTHETIC) (catalog APEX-ADH-9778) at 18.92 each.
+We need 2 CS of Multi-Purpose Grease (SYNTHETIC) (catalog LUB-MPG-261) at 65.95 each.
+We need 10 BX of Flat Washer M10 Zinc (SYNTHETIC) (catalog APEX-FAS-2350) at 8.14 each.
+We need 12 RO of Electrical Tape Blue 3/4in (SYNTHETIC) (catalog ELE-TPE-BLU-2) at 2.64 each.
+We need 2 PK of Super Glue Gel (SYNTHETIC) (catalog APEX-ADH-2292) at 21.82 each.
+
+Thanks in advance.
+--===============3675909704676361332==--

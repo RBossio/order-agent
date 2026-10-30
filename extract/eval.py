@@ -59,12 +59,12 @@ class LineScore:
 
 @dataclass
 class SilentError:
-    """Campo sbagliato con confidenza alta e senza avviso."""
+    """Campo sbagliato su un ordine in AUTO_POST (definizione onesta)."""
     order_id: str
     field_path: str
     expected: Any
     extracted: Any
-    confidence: float
+    confidence: float = 0.0
 
 
 @dataclass
@@ -85,11 +85,17 @@ class OrderScore:
 
     extraction_time_ms: int = 0
     llm_calls: int = 0
+    llm_timeouts: int = 0
     warnings_count: int = 0
     silent_errors: list[SilentError] = field(default_factory=list)
+    field_mismatches: list[SilentError] = field(default_factory=list)
     extraction_failed: bool = False
     failure_reason: str | None = None
     in_review: bool = False
+    route: str = "REVIEW"
+    silent_order: bool = False
+    extra_lines: int = 0
+    missing_lines: int = 0
 
     def header_accuracy(self) -> float:
         if not self.header_fields:
@@ -126,6 +132,12 @@ class EvalResults:
     total_header_fields: int = 0
     total_line_key_fields: int = 0
     orders_in_review: int = 0
+    auto_post_orders: int = 0
+    reject_orders: int = 0
+    silent_orders: int = 0
+    silent_field_errors: int = 0
+    llm_timeouts: int = 0
+    auto_post_field_total: int = 0
 
     def overall_header_accuracy(self) -> float:
         total_correct = sum(f.correct for f in self.header_scores.values())
@@ -224,6 +236,93 @@ def detect_format(document_path: str) -> str:
 
 
 HIGH_CONFIDENCE_THRESHOLD = 0.8
+HEADER_EVAL_FIELDS = ("po_number", "po_date", "currency", "requested_delivery_date")
+DATE_EVAL_FIELDS = {"po_date", "requested_delivery_date"}
+LINE_EVAL_FIELDS = (
+    ("seller_item_code", True),
+    ("buyer_item_code", True),
+    ("quantity", False),
+    ("uom", True),
+    ("unit_price", False),
+)
+
+
+def _is_empty(value: Any) -> bool:
+    return value is None or value == ""
+
+
+def _field_equal(extracted: Any, expected: Any, *, is_date: bool = False, fuzzy: bool = False) -> bool:
+    """Confronta un campo: GT vuota + valore estratto = allucinazione."""
+    if _is_empty(expected) and _is_empty(extracted):
+        return True
+    if _is_empty(expected) and not _is_empty(extracted):
+        return False
+    if _is_empty(extracted):
+        return False
+    if is_date:
+        return compare_dates(extracted, expected)
+    return compare_values(extracted, expected, fuzzy=fuzzy)
+
+
+def _uom_of(line: dict) -> Any:
+    return line.get("uom_raw") or line.get("uom")
+
+
+def _code_field_ok(extracted: Any, expected: Any, other_extracted: Any, other_expected: Any) -> bool:
+    """Confronta un codice riga: GT vuota accetta vuoto o l'altro codice stampato."""
+    if _field_equal(extracted, expected, fuzzy=True):
+        return True
+    if _is_empty(expected):
+        return (
+            _is_empty(extracted)
+            or _field_equal(extracted, other_expected, fuzzy=True)
+            or _field_equal(extracted, other_extracted, fuzzy=True)
+        )
+    return (
+        _field_equal(extracted, other_expected, fuzzy=True)
+        or _field_equal(other_extracted, expected, fuzzy=True)
+    )
+
+
+def _match_lines_unique(gt_lines: list[dict], ext_lines: list[dict]) -> tuple[list[tuple[int, int | None]], list[int]]:
+    """Abbina le righe 1-1 (codice, poi descrizione). Nessun riuso."""
+    used: set[int] = set()
+    pairs: list[tuple[int, int | None]] = []
+
+    def find_match(gt_line: dict) -> int | None:
+        keys: list[tuple[str, str]] = []
+        seller = normalize_string(gt_line.get("seller_item_code") or "")
+        buyer = normalize_string(gt_line.get("buyer_item_code") or "")
+        if seller:
+            keys.append(("seller", seller))
+        if buyer:
+            keys.append(("buyer", buyer))
+        for index, extracted in enumerate(ext_lines):
+            if index in used:
+                continue
+            ext_seller = normalize_string(extracted.get("seller_item_code") or "")
+            ext_buyer = normalize_string(extracted.get("buyer_item_code") or "")
+            for kind, key in keys:
+                if kind == "seller" and key and key in {ext_seller, ext_buyer}:
+                    return index
+                if kind == "buyer" and key and key in {ext_seller, ext_buyer}:
+                    return index
+        gt_desc = normalize_string(gt_line.get("description") or "")
+        if gt_desc:
+            for index, extracted in enumerate(ext_lines):
+                if index in used:
+                    continue
+                if normalize_string(extracted.get("description") or "") == gt_desc:
+                    return index
+        return None
+
+    for gt_index, gt_line in enumerate(gt_lines):
+        matched = find_match(gt_line)
+        if matched is not None:
+            used.add(matched)
+        pairs.append((gt_index, matched))
+    extra = [index for index in range(len(ext_lines)) if index not in used]
+    return pairs, extra
 
 
 def evaluate_order(
@@ -244,8 +343,8 @@ def evaluate_order(
 
     evidence = extracted.get("evidence", {})
     issues = extracted.get("validation", {}).get("issues", [])
-    warned_paths = {issue.get("path") for issue in issues if issue.get("path")}
-    route = (extracted.get("decision") or {}).get("route")
+    route = (extracted.get("decision") or {}).get("route") or "REVIEW"
+    score.route = route
     score.in_review = (
         extracted.get("status") in {"NEEDS_REVIEW", "REJECTED"}
         or route in {"REVIEW", "REJECT"}
@@ -254,36 +353,26 @@ def evaluate_order(
 
     ext_header = extracted.get("header", {})
     gt_header = ground_truth.get("header", {})
+    mismatches: list[SilentError] = []
 
-    header_fields = ["po_number", "po_date", "currency", "requested_delivery_date"]
-    date_fields = {"po_date", "requested_delivery_date"}
-    for field_name in header_fields:
+    for field_name in HEADER_EVAL_FIELDS:
         fs = FieldScore(total=1)
         ext_val = ext_header.get(field_name)
         gt_val = gt_header.get(field_name)
         field_path = f"/header/{field_name}"
-        is_correct = False
-
-        if gt_val is not None:
-            matcher = compare_dates if field_name in date_fields else compare_values
-            if matcher(ext_val, gt_val):
-                fs.correct = 1
-                is_correct = True
-        elif ext_val is None:
+        is_correct = _field_equal(
+            ext_val, gt_val, is_date=field_name in DATE_EVAL_FIELDS, fuzzy=True,
+        )
+        if is_correct:
             fs.correct = 1
-            is_correct = True
-
-        if not is_correct and gt_val is not None:
-            confidence = evidence.get(field_path, {}).get("confidence", 0)
-            if confidence >= HIGH_CONFIDENCE_THRESHOLD and field_path not in warned_paths:
-                score.silent_errors.append(SilentError(
-                    order_id=score.order_id,
-                    field_path=field_path,
-                    expected=gt_val,
-                    extracted=ext_val,
-                    confidence=confidence,
-                ))
-
+        else:
+            mismatches.append(SilentError(
+                order_id=score.order_id,
+                field_path=field_path,
+                expected=gt_val,
+                extracted=ext_val,
+                confidence=float((evidence.get(field_path) or {}).get("confidence") or 0),
+            ))
         score.header_fields[field_name] = fs
 
     gt_lines = ground_truth.get("lines", [])
@@ -292,97 +381,111 @@ def evaluate_order(
     score.lines_expected = len(gt_lines)
     score.lines_extracted = len(ext_lines)
 
-    ext_by_code: dict[str, dict] = {}
-    for el in ext_lines:
-        code = el.get("seller_item_code") or el.get("buyer_item_code") or ""
-        if code:
-            ext_by_code[normalize_string(code)] = el
+    pairs, extra_indices = _match_lines_unique(gt_lines, ext_lines)
+    score.extra_lines = len(extra_indices)
+    score.missing_lines = sum(1 for _, matched in pairs if matched is None)
 
-    for gt_line in gt_lines:
-        gt_seller = gt_line.get("seller_item_code", "")
-        gt_buyer = gt_line.get("buyer_item_code", "")
+    for ext_index in extra_indices:
+        mismatches.append(SilentError(
+            order_id=score.order_id,
+            field_path=f"/lines/{ext_index}",
+            expected=None,
+            extracted=ext_lines[ext_index].get("seller_item_code")
+            or ext_lines[ext_index].get("buyer_item_code")
+            or ext_lines[ext_index].get("description"),
+            confidence=float((evidence.get(f"/lines/{ext_index}") or {}).get("confidence") or 0),
+        ))
 
-        matched_ext = None
+    for gt_index, ext_index in pairs:
+        gt_line = gt_lines[gt_index]
+        line_score = LineScore(line_no=gt_line.get("line_no", gt_index + 1))
+        if ext_index is None:
+            mismatches.append(SilentError(
+                order_id=score.order_id,
+                field_path=f"/lines/missing/{gt_index}",
+                expected=gt_line.get("seller_item_code") or gt_line.get("buyer_item_code"),
+                extracted=None,
+            ))
+            score.line_scores.append(line_score)
+            continue
 
-        if gt_seller:
-            matched_ext = ext_by_code.get(normalize_string(gt_seller))
-        if not matched_ext and gt_buyer:
-            matched_ext = ext_by_code.get(normalize_string(gt_buyer))
+        matched_ext = ext_lines[ext_index]
+        extracted_values = {
+            "seller_item_code": matched_ext.get("seller_item_code"),
+            "buyer_item_code": matched_ext.get("buyer_item_code"),
+            "quantity": matched_ext.get("quantity"),
+            "uom": _uom_of(matched_ext),
+            "unit_price": matched_ext.get("unit_price"),
+        }
+        expected_values = {
+            "seller_item_code": gt_line.get("seller_item_code"),
+            "buyer_item_code": gt_line.get("buyer_item_code"),
+            "quantity": gt_line.get("quantity"),
+            "uom": _uom_of(gt_line),
+            "unit_price": gt_line.get("unit_price"),
+        }
+        line_score.description_match = _field_equal(
+            matched_ext.get("description"), gt_line.get("description"), fuzzy=True,
+        )
+        line_score.quantity_match = _field_equal(
+            extracted_values["quantity"], expected_values["quantity"],
+        )
+        line_score.seller_code_match = _code_field_ok(
+            extracted_values["seller_item_code"],
+            expected_values["seller_item_code"],
+            extracted_values["buyer_item_code"],
+            expected_values["buyer_item_code"],
+        )
+        line_score.buyer_code_match = _code_field_ok(
+            extracted_values["buyer_item_code"],
+            expected_values["buyer_item_code"],
+            extracted_values["seller_item_code"],
+            expected_values["seller_item_code"],
+        )
+        line_score.uom_match = _field_equal(
+            extracted_values["uom"], expected_values["uom"], fuzzy=True,
+        )
+        line_score.price_match = _field_equal(
+            extracted_values["unit_price"], expected_values["unit_price"],
+        )
 
-        if not matched_ext:
-            gt_desc = normalize_string(gt_line.get("description", ""))
-            for el in ext_lines:
-                if normalize_string(el.get("description", "")) == gt_desc:
-                    matched_ext = el
-                    break
+        gt_seller = expected_values["seller_item_code"]
+        key_fields_ok = (
+            line_score.description_match
+            and line_score.quantity_match
+            and (line_score.seller_code_match or line_score.buyer_code_match or _is_empty(gt_seller))
+        )
+        if key_fields_ok:
+            score.lines_matched += 1
 
-        if not matched_ext and gt_line.get("line_no"):
-            line_no = gt_line["line_no"]
-            if line_no <= len(ext_lines):
-                matched_ext = ext_lines[line_no - 1]
-
-        line_score = LineScore(line_no=gt_line.get("line_no", 0))
-
-        if matched_ext:
-            line_score.description_match = compare_values(
-                matched_ext.get("description"),
-                gt_line.get("description"),
-                fuzzy=True,
-            )
-            line_score.quantity_match = compare_values(
-                matched_ext.get("quantity"),
-                gt_line.get("quantity"),
-            )
-            line_score.seller_code_match = compare_values(
-                matched_ext.get("seller_item_code"),
-                gt_line.get("seller_item_code"),
-                fuzzy=True,
-            )
-            line_score.buyer_code_match = compare_values(
-                matched_ext.get("buyer_item_code"),
-                gt_line.get("buyer_item_code"),
-                fuzzy=True,
-            )
-            line_score.uom_match = compare_values(
-                matched_ext.get("uom_raw") or matched_ext.get("uom"),
-                gt_line.get("uom_raw") or gt_line.get("uom"),
-                fuzzy=True,
-            )
-            line_score.price_match = compare_values(
-                matched_ext.get("unit_price"),
-                gt_line.get("unit_price"),
-            )
-
-            key_fields_ok = (
-                line_score.description_match and
-                line_score.quantity_match and
-                (line_score.seller_code_match or line_score.buyer_code_match or not gt_seller)
-            )
-            if key_fields_ok:
-                score.lines_matched += 1
-
-            line_idx = gt_line.get("line_no", 1) - 1
-            for check_field, is_match, gt_field in [
-                ("quantity", line_score.quantity_match, "quantity"),
-                ("seller_item_code", line_score.seller_code_match, "seller_item_code"),
-            ]:
-                if not is_match and gt_line.get(gt_field) is not None:
-                    line_path = f"/lines/{line_idx}/{check_field}"
-                    confidence = evidence.get(line_path, {}).get(
-                        "confidence",
-                        evidence.get(f"/lines/{line_idx}", {}).get("confidence", 0),
-                    )
-                    if confidence >= HIGH_CONFIDENCE_THRESHOLD and line_path not in warned_paths:
-                        score.silent_errors.append(SilentError(
-                            order_id=score.order_id,
-                            field_path=line_path,
-                            expected=gt_line.get(gt_field),
-                            extracted=matched_ext.get(check_field),
-                            confidence=confidence,
-                        ))
+        match_flags = {
+            "seller_item_code": line_score.seller_code_match,
+            "buyer_item_code": line_score.buyer_code_match,
+            "quantity": line_score.quantity_match,
+            "uom": line_score.uom_match,
+            "unit_price": line_score.price_match,
+        }
+        for field_name, _fuzzy in LINE_EVAL_FIELDS:
+            if match_flags[field_name]:
+                continue
+            mismatches.append(SilentError(
+                order_id=score.order_id,
+                field_path=f"/lines/{ext_index}/{field_name}",
+                expected=expected_values[field_name],
+                extracted=extracted_values[field_name],
+                confidence=float(
+                    (evidence.get(f"/lines/{ext_index}/{field_name}") or {}).get("confidence")
+                    or (evidence.get(f"/lines/{ext_index}") or {}).get("confidence")
+                    or 0
+                ),
+            ))
 
         score.line_scores.append(line_score)
 
+    score.field_mismatches = mismatches
+    if route == "AUTO_POST" and mismatches:
+        score.silent_order = True
+        score.silent_errors = list(mismatches)
     return score
 
 
@@ -405,10 +508,16 @@ def generate_report(
 
     header_acc = results.overall_header_accuracy()
     lines_acc = results.overall_lines_accuracy()
-    field_denom = max(results.total_header_fields + results.total_line_key_fields, 1)
-    silent_pct = 100 * len(results.all_silent_errors) / field_denom
     n = max(results.total_orders, 1)
+    auto_n = max(results.auto_post_orders, 1)
+    silent_order_pct = 100 * results.silent_orders / auto_n if results.auto_post_orders else 0.0
+    silent_field_pct = (
+        100 * results.silent_field_errors / max(results.auto_post_field_total, 1)
+        if results.auto_post_orders else 0.0
+    )
     review_pct = 100 * results.orders_in_review / n
+    auto_pct = 100 * results.auto_post_orders / n
+    reject_pct = 100 * results.reject_orders / n
     avg_time_s = (results.total_time_ms / n / 1000) if results.total_time_ms else 0
 
     lines.append("## Riepilogo vs target")
@@ -417,29 +526,54 @@ def generate_report(
     lines.append("|---------|--------|--------|")
     lines.append(f"| Accuratezza testata | **{100*header_acc:.1f}%** | ≥98% {'✅' if header_acc >= 0.98 else '❌'} |")
     lines.append(f"| Accuratezza righe | **{100*lines_acc:.1f}%** | ≥90% {'✅' if lines_acc >= 0.90 else '❌'} |")
-    lines.append(f"| Errori silenziosi | **{len(results.all_silent_errors)}** ({silent_pct:.2f}%) | ≤1% {'✅' if silent_pct <= 1.0 else '❌'} |")
-    lines.append(f"| Ordini in revisione | **{results.orders_in_review}/{results.total_orders}** ({review_pct:.1f}%) | - |")
+    lines.append(
+        f"| Errori silenziosi (ordini AUTO_POST) | **{results.silent_orders}/{results.auto_post_orders}** "
+        f"({silent_order_pct:.2f}%) | ≤1% {'✅' if silent_order_pct <= 1.0 else '❌'} |"
+    )
+    lines.append(
+        f"| Errori silenziosi (campi, solo AUTO_POST) | **{results.silent_field_errors}** "
+        f"({silent_field_pct:.2f}%) | metrica separata |"
+    )
+    lines.append(f"| AUTO_POST | **{results.auto_post_orders}/{results.total_orders}** ({auto_pct:.1f}%) | - |")
+    lines.append(f"| REVIEW | **{results.orders_in_review}/{results.total_orders}** ({review_pct:.1f}%) | - |")
+    lines.append(f"| REJECT | **{results.reject_orders}/{results.total_orders}** ({reject_pct:.1f}%) | - |")
     lines.append(f"| Tempo medio/ordine | **{avg_time_s:.1f}s** | - |")
     lines.append(f"| Ordini valutati | {results.total_orders} | - |")
     lines.append(f"| Fallimenti estrazione | {results.extraction_failures} | - |")
+    lines.append(f"| Timeout LLM | {results.llm_timeouts} | - |")
+    lines.append(f"| Chiamate LLM | {results.total_llm_calls} | - |")
     lines.append(f"| Casi difficili | {results.hard_cases} ({100*results.hard_cases/n:.1f}%) | - |")
+    lines.append("")
+    lines.append(
+        "Errore silenzioso = ordine in **AUTO_POST** con almeno un campo sbagliato "
+        "(testata, codice/qty/UoM/prezzo/codice cliente di riga, righe in più o mancanti, "
+        "valori inventati se la ground truth è vuota). La percentuale a livello di campo "
+        "è una metrica separata, calcolata solo sugli ordini AUTO_POST."
+    )
     lines.append("")
 
     if results.format_scores:
         lines.append("## Accuratezza per Formato")
         lines.append("")
-        lines.append("| Formato | Ordini | Testata | Righe | Errori silenziosi | Revisione | Tempo medio |")
-        lines.append("|---------|--------|---------|-------|-------------------|-----------|-------------|")
+        lines.append(
+            "| Formato | Ordini | Testata | Righe | Silent ordini | Silent campi | "
+            "AUTO_POST | REVIEW | REJECT |"
+        )
+        lines.append(
+            "|---------|--------|---------|-------|---------------|--------------|"
+            "-----------|--------|--------|"
+        )
         for fmt, data in sorted(results.format_scores.items()):
             if data.get("count", 0) > 0:
                 h_acc = 100 * data.get("header_correct", 0) / max(data.get("header_total", 1), 1)
                 l_acc = 100 * data.get("lines_matched", 0) / max(data.get("lines_expected", 1), 1)
-                silent_n = data.get("silent_errors", 0)
-                review_n = data.get("review", 0)
-                avg = data.get("time_ms", 0) / max(data.get("count", 1), 1) / 1000
+                count = data["count"]
                 lines.append(
-                    f"| {fmt} | {data['count']} | {h_acc:.1f}% | {l_acc:.1f}% | "
-                    f"{silent_n} | {review_n}/{data['count']} | {avg:.1f}s |"
+                    f"| {fmt} | {count} | {h_acc:.1f}% | {l_acc:.1f}% | "
+                    f"{data.get('silent_orders', 0)} | {data.get('silent_fields', 0)} | "
+                    f"{data.get('auto_post', 0)}/{count} | "
+                    f"{data.get('review', 0)}/{count} | "
+                    f"{data.get('reject', 0)}/{count} |"
                 )
         lines.append("")
 
@@ -465,7 +599,10 @@ def generate_report(
     if results.all_silent_errors:
         lines.append("## Errori silenziosi")
         lines.append("")
-        lines.append("Campi errati con confidenza ≥80% e senza avviso di validazione.")
+        lines.append(
+            "Ordini AUTO_POST con almeno un campo sbagliato "
+            "(testata, righe, extra/mancanti, allucinazioni)."
+        )
         lines.append("")
         lines.append("| Ordine | Campo | Atteso | Estratto | Confidenza |")
         lines.append("|--------|-------|--------|----------|------------|")
@@ -638,7 +775,12 @@ def _update_results(results: EvalResults, order_score: OrderScore, ground_truth:
         results.hard_cases += 1
     if order_score.extraction_failed:
         results.extraction_failures += 1
-    if order_score.in_review:
+    if order_score.route == "REJECT":
+        results.reject_orders += 1
+        results.orders_in_review += 1
+    elif order_score.route == "AUTO_POST":
+        results.auto_post_orders += 1
+    else:
         results.orders_in_review += 1
 
     results.total_lines_expected += order_score.lines_expected
@@ -655,7 +797,15 @@ def _update_results(results: EvalResults, order_score: OrderScore, ground_truth:
     results.total_line_key_fields += order_score.lines_expected * 2
     results.total_time_ms += order_score.extraction_time_ms
     results.total_llm_calls += order_score.llm_calls
+    results.llm_timeouts += order_score.llm_timeouts
     results.all_silent_errors.extend(order_score.silent_errors)
+    if order_score.silent_order:
+        results.silent_orders += 1
+    if order_score.route == "AUTO_POST":
+        results.silent_field_errors += len(order_score.silent_errors)
+        header_n = len(order_score.header_fields)
+        line_n = order_score.lines_expected * len(LINE_EVAL_FIELDS)
+        results.auto_post_field_total += header_n + line_n + order_score.extra_lines
 
     fmt = order_score.document_format
     if fmt not in results.format_scores:
@@ -666,12 +816,22 @@ def _update_results(results: EvalResults, order_score: OrderScore, ground_truth:
             "lines_expected": 0,
             "lines_matched": 0,
             "silent_errors": 0,
+            "silent_orders": 0,
+            "silent_fields": 0,
+            "auto_post": 0,
             "review": 0,
+            "reject": 0,
             "time_ms": 0,
         }
     results.format_scores[fmt]["count"] += 1
     results.format_scores[fmt]["silent_errors"] += len(order_score.silent_errors)
-    results.format_scores[fmt]["review"] += 1 if order_score.in_review else 0
+    results.format_scores[fmt]["silent_orders"] += 1 if order_score.silent_order else 0
+    results.format_scores[fmt]["silent_fields"] += (
+        len(order_score.silent_errors) if order_score.route == "AUTO_POST" else 0
+    )
+    results.format_scores[fmt]["auto_post"] += 1 if order_score.route == "AUTO_POST" else 0
+    results.format_scores[fmt]["review"] += 1 if order_score.route == "REVIEW" else 0
+    results.format_scores[fmt]["reject"] += 1 if order_score.route == "REJECT" else 0
     results.format_scores[fmt]["time_ms"] += order_score.extraction_time_ms
     results.format_scores[fmt]["header_correct"] += sum(
         f.correct for f in order_score.header_fields.values()

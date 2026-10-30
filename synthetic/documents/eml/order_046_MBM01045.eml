@@ -1,0 +1,28 @@
+Content-Type: multipart/mixed; boundary="===============0703659558803009141=="
+MIME-Version: 1.0
+From: purchasing@apex.example
+To: orders@delta-industrial.example
+Subject: PO MBM01045 - Order from Apex Corp. (SYNTHETIC)
+Message-ID: <po-MBM01045@apex.example>
+Date: Thu, 15 Jan 2026 10:30:00 +0000
+
+--===============0703659558803009141==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+Hi team, could you please raise this under our purchase order MBM01045 dated 4/5/26? Deliver to Apex Shipping Location 1; we need the goods by 2026-04-17.
+
+We need 4 CS of Floor Stripper Heavy Duty (SYNTHETIC) (catalog APEX-JAN-0920) at 87.26 each.
+We need 24 CS of Latex Gloves M PF (SYNTHETIC) (catalog APEX-SAF-7457) at 60.61 each.
+We need 12 BX of Flat Washer 3/4-10 Zinc (SYNTHETIC) (catalog FST-FWS-34-10) at 13.79 each.
+We need 6 PK of Super Glue Gel (SYNTHETIC) (catalog ADH-SGG-094) at 18.92 each.
+We need 1 RO of Can Liner 24x24 1.5mil Clear Roll (SYNTHETIC) (catalog JAN-LNR-2424-15-CL) at 21.74 each.
+We need 24 CS of Nitrile Gloves XXL Black 6mil PF (SYNTHETIC) (catalog PPE-GLV-NIT-6-XXL-BLA) at 99.47 each.
+We need 2 PK of Super Glue Gel (SYNTHETIC) (catalog APEX-ADH-9693) at 12.60 each.
+We need 6 CS of Nitrile Gloves S White 8mil PF (SYNTHETIC) (catalog APEX-SAF-6974) at 98.35 each.
+We need 5 CS of Disinfectant Spray (SYNTHETIC) (catalog APEX-JAN-2711) at 63.11 each.
+We need 12 CS of Penetrating Oil Spray (SYNTHETIC) (catalog LUB-POS-256) at 57.74 each.
+
+Thanks in advance.
+--===============0703659558803009141==--

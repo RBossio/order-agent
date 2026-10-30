@@ -1,0 +1,490 @@
+{
+  "schema_version": "1.0",
+  "order_id": "ed19ba0b-b800-59ad-87d9-138f941869d6",
+  "tenant_id": "delta-industrial-supply",
+  "document_type": "ORIGINAL",
+  "status": "VALIDATED",
+  "source": {
+    "channel": "EMAIL_IMAP",
+    "message_id": "<po-MBM01125@apex.example>",
+    "from_address": "purchasing@apex.example",
+    "subject": "PO MBM01125 - Order from Apex Corp. (SYNTHETIC)",
+    "received_at": "2026-01-15T10:30:00Z",
+    "documents": [
+      {
+        "document_id": "doc-372e0b15",
+        "kind": "EMAIL_BODY",
+        "filename": null,
+        "mime_type": "text/plain",
+        "sha256": "ed1bf23eab10d7a195b6899ec824df7d5af062daf1a1ea959fd35b191eb8d067",
+        "page_count": null
+      }
+    ]
+  },
+  "buyer": {
+    "name": "Apex Corp. (SYNTHETIC)",
+    "code_on_document": "C-APEX",
+    "tax_id": "US92-3477824",
+    "gln": null,
+    "peppol_endpoint": null,
+    "address": {
+      "line1": "3971 Commerce Dr",
+      "city": "Columbus",
+      "region": "OH",
+      "postal_code": "43215",
+      "country": "US"
+    },
+    "contact": {
+      "name": "Apex Purchasing",
+      "email": "purchasing@apex.example",
+      "phone": "+1-555-3504"
+    },
+    "resolved": {
+      "erp_partner_id": 51,
+      "erp_partner_ref": "C-APEX",
+      "method": "EMAIL_DOMAIN",
+      "score": 0.99
+    }
+  },
+  "seller": {
+    "name": "Delta Industrial Supply LLC (SYNTHETIC)",
+    "code_on_document": null,
+    "tax_id": null,
+    "address": {
+      "line1": "55 Commerce Dr",
+      "city": "Dayton",
+      "region": "OH",
+      "postal_code": "45402",
+      "country": "US"
+    },
+    "resolved": null
+  },
+  "header": {
+    "po_number": "MBM01125",
+    "po_revision": 0,
+    "po_date": "4/7/26",
+    "requested_delivery_date": "2026-04-12",
+    "currency": "USD",
+    "buyer_reference": "Dept 193",
+    "payment_terms_text": "Net 30",
+    "incoterms": null,
+    "ship_via": "Best Way",
+    "notes": "Call before delivery",
+    "language": "en"
+  },
+  "lines": [
+    {
+      "line_no": 1,
+      "buyer_item_code": "APEX-JAN-6771",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Toilet Tissue 2P Standard (SYNTHETIC)",
+      "quantity": 4,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "96RL/CS",
+        "inner_count": 96,
+        "inner_size": 1,
+        "inner_uom": "RL"
+      },
+      "unit_price": 59.97,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 239.88,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "JAN-TTI-177",
+        "erp_product_id": 1177,
+        "erp_uom": "RL",
+        "erp_uom_id": 42,
+        "erp_quantity": 384.0,
+        "conversion_factor": 96.0,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 59.97
+      }
+    },
+    {
+      "line_no": 2,
+      "buyer_item_code": null,
+      "seller_item_code": "TLS-AWR-10IN",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Adjustable Wrench 10in (SYNTHETIC)",
+      "quantity": 3,
+      "uom_raw": "EA",
+      "uom": "EA",
+      "pack": null,
+      "unit_price": 43.93,
+      "price_uom": "EA",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 131.79,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "TLS-AWR-10IN",
+        "erp_product_id": 1026,
+        "erp_uom": "EA",
+        "erp_uom_id": 47,
+        "erp_quantity": 3,
+        "conversion_factor": 1.0,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 43.93
+      }
+    },
+    {
+      "line_no": 3,
+      "buyer_item_code": null,
+      "seller_item_code": "ABR-COW-4IN-3",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Cut-Off Wheel 4in (SYNTHETIC)",
+      "quantity": 10,
+      "uom_raw": "BX",
+      "uom": "BX",
+      "pack": {
+        "raw": "25/BX",
+        "inner_count": 25,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 36.04,
+      "price_uom": "BX",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 360.4,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "ABR-COW-4IN-3",
+        "erp_product_id": 1253,
+        "erp_uom": "BX",
+        "erp_uom_id": 32,
+        "erp_quantity": 10,
+        "conversion_factor": 1.0,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 36.04
+      }
+    },
+    {
+      "line_no": 4,
+      "buyer_item_code": "APEX-TOO-8689",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Utility Blade Standard (SYNTHETIC)",
+      "quantity": 2,
+      "uom_raw": "PK",
+      "uom": "PK",
+      "pack": {
+        "raw": "100/PK",
+        "inner_count": 100,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 9.34,
+      "price_uom": "PK",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 18.68,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "TLS-UTB-091",
+        "erp_product_id": 1091,
+        "erp_uom": "PK",
+        "erp_uom_id": 7,
+        "erp_quantity": 2,
+        "conversion_factor": 1.0,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 9.34
+      }
+    },
+    {
+      "line_no": 5,
+      "buyer_item_code": null,
+      "seller_item_code": "ADH-CON-246",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Construction Adhesive (SYNTHETIC)",
+      "quantity": 4,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "12/CS",
+        "inner_count": 12,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 59.67,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 238.68,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "ADH-CON-246",
+        "erp_product_id": 1246,
+        "erp_uom": "CS",
+        "erp_uom_id": 13,
+        "erp_quantity": 4,
+        "conversion_factor": 1.0,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 59.67
+      }
+    },
+    {
+      "line_no": 6,
+      "buyer_item_code": null,
+      "seller_item_code": "JAN-TTI-238",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Toilet Tissue 2P Standard (SYNTHETIC)",
+      "quantity": 3,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "96RL/CS",
+        "inner_count": 96,
+        "inner_size": 1,
+        "inner_uom": "RL"
+      },
+      "unit_price": 87.17,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 261.51,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "JAN-TTI-238",
+        "erp_product_id": 1238,
+        "erp_uom": "CS",
+        "erp_uom_id": 2,
+        "erp_quantity": 3,
+        "conversion_factor": 1.0,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 87.17
+      }
+    },
+    {
+      "line_no": 7,
+      "buyer_item_code": "APEX-ELE-0574",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Electrical Tape White 3/4in (SYNTHETIC)",
+      "quantity": 2,
+      "uom_raw": "RO",
+      "uom": "RO",
+      "pack": null,
+      "unit_price": 2.24,
+      "price_uom": "RO",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 4.48,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "ELE-TPE-WHI",
+        "erp_product_id": 1057,
+        "erp_uom": "RO",
+        "erp_uom_id": 14,
+        "erp_quantity": 2,
+        "conversion_factor": 1.0,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 2.24
+      }
+    },
+    {
+      "line_no": 8,
+      "buyer_item_code": null,
+      "seller_item_code": "JAN-DSP-186",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Disinfectant Spray (SYNTHETIC)",
+      "quantity": 24,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "12/CS",
+        "inner_count": 12,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 62.75,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 1506.0,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "JAN-DSP-186",
+        "erp_product_id": 1186,
+        "erp_uom": "CS",
+        "erp_uom_id": 40,
+        "erp_quantity": 24,
+        "conversion_factor": 1.0,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 62.75
+      }
+    },
+    {
+      "line_no": 9,
+      "buyer_item_code": null,
+      "seller_item_code": "ADH-CON-126",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Construction Adhesive (SYNTHETIC)",
+      "quantity": 24,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "12/CS",
+        "inner_count": 12,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 60.43,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 1450.32,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "ADH-CON-126",
+        "erp_product_id": 1126,
+        "erp_uom": "CS",
+        "erp_uom_id": 12,
+        "erp_quantity": 24,
+        "conversion_factor": 1.0,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 60.43
+      }
+    },
+    {
+      "line_no": 10,
+      "buyer_item_code": "APEX-JAN-7569",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Glass Cleaner RTU (SYNTHETIC)",
+      "quantity": 4,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "12/CS",
+        "inner_count": 12,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 35.94,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 143.76,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "JAN-GCL-086",
+        "erp_product_id": 1086,
+        "erp_uom": "CS",
+        "erp_uom_id": 45,
+        "erp_quantity": 4,
+        "conversion_factor": 1.0,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 35.94
+      }
+    }
+  ],
+  "charges": [],
+  "totals": {
+    "lines_amount_declared": 4355.5,
+    "tax_amount_declared": null,
+    "total_amount_declared": 4355.5,
+    "lines_amount_computed": 4355.5
+  },
+  "decision": {
+    "score": 0.75,
+    "route": "AUTO_POST",
+    "reasons": [
+      "UOM-03"
+    ]
+  },
+  "processing": {
+    "extractor": "synthetic/generator.py",
+    "prompt_version": null,
+    "created_at": "2026-01-15T10:30:00Z",
+    "updated_at": null
+  },
+  "ship_to": {
+    "name": "Apex Shipping Location 1",
+    "code_on_document": "SHIP-01",
+    "address": {
+      "line1": "3332 Factory Blvd",
+      "city": "Cincinnati",
+      "region": "OH",
+      "postal_code": "45202",
+      "country": "US"
+    },
+    "resolved": {
+      "erp_partner_id": 52,
+      "erp_partner_ref": "SHIP-01",
+      "method": "CODE",
+      "score": 1.0
+    }
+  },
+  "validation": {
+    "issues": [
+      {
+        "code": "UOM-03",
+        "severity": "INFO",
+        "path": "/lines/0",
+        "message": "Conversione da cartone applicata"
+      }
+    ]
+  },
+  "_synthetic_metadata": {
+    "hard_case_types": [
+      "UOM_CONVERSION"
+    ],
+    "is_hard_case": true
+  }
+}

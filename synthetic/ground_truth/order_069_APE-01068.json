@@ -1,0 +1,374 @@
+{
+  "schema_version": "1.0",
+  "order_id": "0bcf5cc6-eccc-5a14-8cf5-a52d792ba30c",
+  "tenant_id": "delta-industrial-supply",
+  "document_type": "ORIGINAL",
+  "status": "VALIDATED",
+  "source": {
+    "channel": "FOLDER",
+    "message_id": null,
+    "from_address": null,
+    "subject": null,
+    "received_at": "2026-01-15T10:30:00Z",
+    "documents": [
+      {
+        "document_id": "doc-66c3caee",
+        "kind": "PDF_TEXT",
+        "filename": "APE-01068.pdf",
+        "mime_type": "application/pdf",
+        "sha256": "0326ffac7976b8740371aa40f16ddc637c6bcf42645b6c4197c4756cdea1b6e8",
+        "page_count": 1
+      }
+    ]
+  },
+  "buyer": {
+    "name": "Summit Group (SYNTHETIC)",
+    "code_on_document": "C-SUMMIT",
+    "tax_id": "US19-3972018",
+    "gln": null,
+    "peppol_endpoint": null,
+    "address": {
+      "line1": "8195 Tech Center Blvd",
+      "city": "Cincinnati",
+      "region": "OH",
+      "postal_code": "45202",
+      "country": "US"
+    },
+    "contact": {
+      "name": "Summit Purchasing",
+      "email": "purchasing@summit.example",
+      "phone": "+1-555-5961"
+    },
+    "resolved": {
+      "erp_partner_id": 54,
+      "erp_partner_ref": "C-SUMMIT",
+      "method": "CODE",
+      "score": 0.99
+    }
+  },
+  "seller": {
+    "name": "Delta Industrial Supply LLC (SYNTHETIC)",
+    "code_on_document": null,
+    "tax_id": null,
+    "address": {
+      "line1": "55 Commerce Dr",
+      "city": "Dayton",
+      "region": "OH",
+      "postal_code": "45402",
+      "country": "US"
+    },
+    "resolved": null
+  },
+  "header": {
+    "po_number": "APE-01068",
+    "po_revision": 0,
+    "po_date": "2026/06/29",
+    "requested_delivery_date": "2026-07-05",
+    "currency": "USD",
+    "buyer_reference": "Dept 223",
+    "payment_terms_text": "2% 10 Net 30",
+    "incoterms": null,
+    "ship_via": "Best Way",
+    "notes": "Rush order",
+    "language": "en"
+  },
+  "lines": [
+    {
+      "line_no": 1,
+      "buyer_item_code": "SUMMIT-JAN-9539",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Floor Stripper Heavy Duty (SYNTHETIC)",
+      "quantity": 24,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "4/1GAL",
+        "inner_count": 4,
+        "inner_size": 1,
+        "inner_uom": "GLL"
+      },
+      "unit_price": 85.1,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 2042.4,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "JAN-FST-230",
+        "erp_product_id": 1230,
+        "erp_uom": "GLL",
+        "erp_uom_id": 8,
+        "erp_quantity": 96.0,
+        "conversion_factor": 4.0,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 85.1
+      }
+    },
+    {
+      "line_no": 2,
+      "buyer_item_code": null,
+      "seller_item_code": "PKG-BBW-205",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Bubble Wrap 12in (SYNTHETIC)",
+      "quantity": 5,
+      "uom_raw": "RO",
+      "uom": "RO",
+      "pack": null,
+      "unit_price": 42.15,
+      "price_uom": "RO",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 210.75,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "PKG-BBW-205",
+        "erp_product_id": 1205,
+        "erp_uom": "RO",
+        "erp_uom_id": 37,
+        "erp_quantity": 5,
+        "conversion_factor": 1.0,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 42.15
+      }
+    },
+    {
+      "line_no": 3,
+      "buyer_item_code": "SUMMIT-JAN-6742",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Floor Cleaner Neutral Concentrate (SYNTHETIC)",
+      "quantity": 1,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "4/1GAL",
+        "inner_count": 4,
+        "inner_size": 1,
+        "inner_uom": "GLL"
+      },
+      "unit_price": 59.43,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 59.43,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "JAN-NFC-053",
+        "erp_product_id": 1053,
+        "erp_uom": "CS",
+        "erp_uom_id": 35,
+        "erp_quantity": 1,
+        "conversion_factor": 1.0,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 59.43
+      }
+    },
+    {
+      "line_no": 4,
+      "buyer_item_code": "SUMMIT-ELE-1846",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Electrical Tape Blue 3/4in (SYNTHETIC)",
+      "quantity": 3,
+      "uom_raw": "RO",
+      "uom": "RO",
+      "pack": null,
+      "unit_price": 2.29,
+      "price_uom": "RO",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 6.87,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "ELE-TPE-BLU",
+        "erp_product_id": 1020,
+        "erp_uom": "RO",
+        "erp_uom_id": 32,
+        "erp_quantity": 3,
+        "conversion_factor": 1.0,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 2.29
+      }
+    },
+    {
+      "line_no": 5,
+      "buyer_item_code": null,
+      "seller_item_code": "ELE-CTI-14IN",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Cable Tie 14in Black (SYNTHETIC)",
+      "quantity": 24,
+      "uom_raw": "BG",
+      "uom": "BG",
+      "pack": {
+        "raw": "100/BG",
+        "inner_count": 100,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 10.38,
+      "price_uom": "BG",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 249.12,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "ELE-CTI-14IN",
+        "erp_product_id": 1292,
+        "erp_uom": "BG",
+        "erp_uom_id": 1,
+        "erp_quantity": 24,
+        "conversion_factor": 1.0,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 10.38
+      }
+    },
+    {
+      "line_no": 6,
+      "buyer_item_code": null,
+      "seller_item_code": "ADH-CON-015",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Construction Adhesive (SYNTHETIC)",
+      "quantity": 1,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "12/CS",
+        "inner_count": 12,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 79.37,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 79.37,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "ADH-CON-015",
+        "erp_product_id": 1015,
+        "erp_uom": "CS",
+        "erp_uom_id": 20,
+        "erp_quantity": 1,
+        "conversion_factor": 1.0,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 79.37
+      }
+    },
+    {
+      "line_no": 7,
+      "buyer_item_code": null,
+      "seller_item_code": "TLS-SDR-12-13-3",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Screwdriver {type} 1/2-13 x 3 (SYNTHETIC)",
+      "quantity": 4,
+      "uom_raw": "EA",
+      "uom": "EA",
+      "pack": null,
+      "unit_price": 4.91,
+      "price_uom": "EA",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 19.64,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "TLS-SDR-12-13-3",
+        "erp_product_id": 1264,
+        "erp_uom": "EA",
+        "erp_uom_id": 38,
+        "erp_quantity": 4,
+        "conversion_factor": 1.0,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 4.91
+      }
+    }
+  ],
+  "charges": [],
+  "totals": {
+    "lines_amount_declared": 2667.58,
+    "tax_amount_declared": null,
+    "total_amount_declared": 2667.58,
+    "lines_amount_computed": 2667.58
+  },
+  "decision": {
+    "score": 0.75,
+    "route": "AUTO_POST",
+    "reasons": [
+      "UOM-03"
+    ]
+  },
+  "processing": {
+    "extractor": "synthetic/generator.py",
+    "prompt_version": null,
+    "created_at": "2026-01-15T10:30:00Z",
+    "updated_at": null
+  },
+  "ship_to": {
+    "name": "Summit Shipping Location 1",
+    "code_on_document": "SHIP-01",
+    "address": {
+      "line1": "7454 Business Park Rd",
+      "city": "Chicago",
+      "region": "IL",
+      "postal_code": "60601",
+      "country": "US"
+    },
+    "resolved": {
+      "erp_partner_id": 55,
+      "erp_partner_ref": "SHIP-01",
+      "method": "CODE",
+      "score": 1.0
+    }
+  },
+  "validation": {
+    "issues": [
+      {
+        "code": "UOM-03",
+        "severity": "INFO",
+        "path": "/lines/0",
+        "message": "Conversione da cartone applicata"
+      }
+    ]
+  },
+  "_synthetic_metadata": {
+    "hard_case_types": [
+      "UOM_CARTON"
+    ],
+    "is_hard_case": true
+  }
+}

@@ -16,7 +16,7 @@
         "kind": "PDF_TEXT",
         "filename": "FCH-01078.pdf",
         "mime_type": "application/pdf",
-        "sha256": "c5089517bbe5b9c3f3dde39ef0d40204acf095dd62c9865fca286413c387a087",
+        "sha256": "4e5aa161acd5ef63e409c29053051e7b5ec1142a6fdf543c25b2c8e751ff6a5f",
         "page_count": 1
       }
     ]
@@ -103,7 +103,7 @@
         "erp_uom": "CS",
         "erp_uom_id": 12,
         "erp_quantity": 10,
-        "conversion_factor": 1,
+        "conversion_factor": 1.0,
         "method": "SELLER_CODE",
         "score": 0.98,
         "candidates": [],
@@ -140,7 +140,7 @@
         "erp_uom": "RO",
         "erp_uom_id": 17,
         "erp_quantity": 24,
-        "conversion_factor": 1,
+        "conversion_factor": 1.0,
         "method": "SELLER_CODE",
         "score": 0.98,
         "candidates": [],
@@ -177,7 +177,7 @@
         "erp_uom": "BX",
         "erp_uom_id": 20,
         "erp_quantity": 2,
-        "conversion_factor": 1,
+        "conversion_factor": 1.0,
         "method": "SELLER_CODE",
         "score": 0.98,
         "candidates": [],
@@ -214,7 +214,7 @@
         "erp_uom": "CS",
         "erp_uom_id": 15,
         "erp_quantity": 5,
-        "conversion_factor": 1,
+        "conversion_factor": 1.0,
         "method": "SELLER_CODE",
         "score": 0.98,
         "candidates": [],
@@ -251,7 +251,7 @@
         "erp_uom": "CS",
         "erp_uom_id": 7,
         "erp_quantity": 24,
-        "conversion_factor": 1,
+        "conversion_factor": 1.0,
         "method": "SELLER_CODE",
         "score": 0.98,
         "candidates": [],
@@ -288,7 +288,7 @@
         "erp_uom": "PK",
         "erp_uom_id": 3,
         "erp_quantity": 10,
-        "conversion_factor": 1,
+        "conversion_factor": 1.0,
         "method": "SELLER_CODE",
         "score": 0.98,
         "candidates": [],
@@ -325,7 +325,7 @@
         "erp_uom": "CS",
         "erp_uom_id": 15,
         "erp_quantity": 24,
-        "conversion_factor": 1,
+        "conversion_factor": 1.0,
         "method": "SELLER_CODE",
         "score": 0.98,
         "candidates": [],
@@ -357,7 +357,7 @@
         "erp_uom": "EA",
         "erp_uom_id": 22,
         "erp_quantity": 1,
-        "conversion_factor": 1,
+        "conversion_factor": 1.0,
         "method": "SELLER_CODE",
         "score": 0.98,
         "candidates": [],
@@ -389,7 +389,7 @@
         "erp_uom": "RO",
         "erp_uom_id": 4,
         "erp_quantity": 4,
-        "conversion_factor": 1,
+        "conversion_factor": 1.0,
         "method": "SELLER_CODE",
         "score": 0.98,
         "candidates": [],
@@ -426,7 +426,7 @@
         "erp_uom": "BX",
         "erp_uom_id": 7,
         "erp_quantity": 1,
-        "conversion_factor": 1,
+        "conversion_factor": 1.0,
         "method": "SELLER_CODE",
         "score": 0.98,
         "candidates": [],
@@ -463,7 +463,7 @@
         "erp_uom": "BX",
         "erp_uom_id": 34,
         "erp_quantity": 2,
-        "conversion_factor": 1,
+        "conversion_factor": 1.0,
         "method": "SELLER_CODE",
         "score": 0.98,
         "candidates": [],
@@ -507,7 +507,9 @@
     }
   },
   "_synthetic_metadata": {
-    "hard_case_types": [],
-    "is_hard_case": false
+    "hard_case_types": [
+      "TYPO_DESC"
+    ],
+    "is_hard_case": true
   }
 }

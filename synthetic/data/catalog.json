@@ -14,7 +14,14 @@
     "category": "Adhesives",
     "gtin": "9999900000009",
     "manufacturer_part_number": "SGC-46048",
-    "manufacturer_name": "SafeGuard Corp (fictitious)"
+    "manufacturer_name": "SafeGuard Corp (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "PK",
+        "to_uom": "EA",
+        "factor": 6.0
+      }
+    ]
   },
   {
     "sku": "JAN-FFN-001",
@@ -31,7 +38,14 @@
     "category": "Janitorial",
     "gtin": "9999900000016",
     "manufacturer_part_number": "FAL-23434",
-    "manufacturer_name": "FastenAll LLC (fictitious)"
+    "manufacturer_name": "FastenAll LLC (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "GLL",
+        "factor": 4.0
+      }
+    ]
   },
   {
     "sku": "PKG-STW-002",
@@ -48,7 +62,14 @@
     "category": "Packaging",
     "gtin": "9999900000023",
     "manufacturer_part_number": "TFS-65302",
-    "manufacturer_name": "TechFast Systems (fictitious)"
+    "manufacturer_name": "TechFast Systems (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "RL",
+        "factor": 4.0
+      }
+    ]
   },
   {
     "sku": "FST-FWS-516-18",
@@ -65,7 +86,14 @@
     "category": "Fasteners",
     "gtin": "9999900000030",
     "manufacturer_part_number": "ACME-76237",
-    "manufacturer_name": "ACME Industrial (fictitious)"
+    "manufacturer_name": "ACME Industrial (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "BX",
+        "to_uom": "EA",
+        "factor": 100.0
+      }
+    ]
   },
   {
     "sku": "LUB-MOL-004",
@@ -82,7 +110,14 @@
     "category": "Lubricants",
     "gtin": "9999900000047",
     "manufacturer_part_number": "ACME-95181",
-    "manufacturer_name": "ACME Industrial (fictitious)"
+    "manufacturer_name": "ACME Industrial (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "EA",
+        "factor": 12.0
+      }
+    ]
   },
   {
     "sku": "PKG-BBW-005",
@@ -94,7 +129,8 @@
     "category": "Packaging",
     "gtin": "9999900000054",
     "manufacturer_part_number": "TFS-68878",
-    "manufacturer_name": "TechFast Systems (fictitious)"
+    "manufacturer_name": "TechFast Systems (fictitious)",
+    "conversions": []
   },
   {
     "sku": "LUB-MPG-006",
@@ -111,7 +147,14 @@
     "category": "Lubricants",
     "gtin": "9999900000061",
     "manufacturer_part_number": "PTI-10851",
-    "manufacturer_name": "PowerTools Inc (fictitious)"
+    "manufacturer_name": "PowerTools Inc (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "EA",
+        "factor": 10.0
+      }
+    ]
   },
   {
     "sku": "PPE-N95-007",
@@ -128,7 +171,14 @@
     "category": "Safety/PPE",
     "gtin": "9999900000078",
     "manufacturer_part_number": "ECP-30379",
-    "manufacturer_name": "EcoClean Products (fictitious)"
+    "manufacturer_name": "EcoClean Products (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "BX",
+        "to_uom": "EA",
+        "factor": 20.0
+      }
+    ]
   },
   {
     "sku": "JAN-NFC-008",
@@ -145,7 +195,14 @@
     "category": "Janitorial",
     "gtin": "9999900000085",
     "manufacturer_part_number": "CSS-59797",
-    "manufacturer_name": "ChemSafe Solutions (fictitious)"
+    "manufacturer_name": "ChemSafe Solutions (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "GLL",
+        "factor": 4.0
+      }
+    ]
   },
   {
     "sku": "PPE-GLV-LAT-6-L-WHI",
@@ -162,7 +219,24 @@
     "category": "Safety/PPE",
     "gtin": "9999900000092",
     "manufacturer_part_number": "CSS-70217",
-    "manufacturer_name": "ChemSafe Solutions (fictitious)"
+    "manufacturer_name": "ChemSafe Solutions (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "BX",
+        "to_uom": "EA",
+        "factor": 100.0
+      },
+      {
+        "from_uom": "CS",
+        "to_uom": "BX",
+        "factor": 10.0
+      },
+      {
+        "from_uom": "CS",
+        "to_uom": "EA",
+        "factor": 1000.0
+      }
+    ]
   },
   {
     "sku": "ABR-COW-6IN",
@@ -179,7 +253,14 @@
     "category": "Abrasives",
     "gtin": "9999900000108",
     "manufacturer_part_number": "SGC-92397",
-    "manufacturer_name": "SafeGuard Corp (fictitious)"
+    "manufacturer_name": "SafeGuard Corp (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "BX",
+        "to_uom": "EA",
+        "factor": 25.0
+      }
+    ]
   },
   {
     "sku": "ADH-SGG-011",
@@ -196,7 +277,14 @@
     "category": "Adhesives",
     "gtin": "9999900000115",
     "manufacturer_part_number": "CSS-19116",
-    "manufacturer_name": "ChemSafe Solutions (fictitious)"
+    "manufacturer_name": "ChemSafe Solutions (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "PK",
+        "to_uom": "EA",
+        "factor": 12.0
+      }
+    ]
   },
   {
     "sku": "FST-FWS-58-11",
@@ -213,7 +301,14 @@
     "category": "Fasteners",
     "gtin": "9999900000122",
     "manufacturer_part_number": "FAL-40512",
-    "manufacturer_name": "FastenAll LLC (fictitious)"
+    "manufacturer_name": "FastenAll LLC (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "BX",
+        "to_uom": "EA",
+        "factor": 100.0
+      }
+    ]
   },
   {
     "sku": "PPE-GLV-LAT-6-L-BLA",
@@ -230,7 +325,24 @@
     "category": "Safety/PPE",
     "gtin": "9999900000139",
     "manufacturer_part_number": "ECP-56566",
-    "manufacturer_name": "EcoClean Products (fictitious)"
+    "manufacturer_name": "EcoClean Products (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "BX",
+        "to_uom": "EA",
+        "factor": 100.0
+      },
+      {
+        "from_uom": "CS",
+        "to_uom": "BX",
+        "factor": 10.0
+      },
+      {
+        "from_uom": "CS",
+        "to_uom": "EA",
+        "factor": 1000.0
+      }
+    ]
   },
   {
     "sku": "JAN-NFC-014",
@@ -247,7 +359,14 @@
     "category": "Janitorial",
     "gtin": "9999900000146",
     "manufacturer_part_number": "PTI-99593",
-    "manufacturer_name": "PowerTools Inc (fictitious)"
+    "manufacturer_name": "PowerTools Inc (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "GLL",
+        "factor": 4.0
+      }
+    ]
   },
   {
     "sku": "ADH-CON-015",
@@ -264,7 +383,14 @@
     "category": "Adhesives",
     "gtin": "9999900000153",
     "manufacturer_part_number": "SGC-32431",
-    "manufacturer_name": "SafeGuard Corp (fictitious)"
+    "manufacturer_name": "SafeGuard Corp (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "EA",
+        "factor": 12.0
+      }
+    ]
   },
   {
     "sku": "ABR-COW-412IN",
@@ -281,7 +407,14 @@
     "category": "Abrasives",
     "gtin": "9999900000160",
     "manufacturer_part_number": "FAL-93886",
-    "manufacturer_name": "FastenAll LLC (fictitious)"
+    "manufacturer_name": "FastenAll LLC (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "BX",
+        "to_uom": "EA",
+        "factor": 25.0
+      }
+    ]
   },
   {
     "sku": "PKG-BBW-017",
@@ -293,7 +426,8 @@
     "category": "Packaging",
     "gtin": "9999900000177",
     "manufacturer_part_number": "TFS-52504",
-    "manufacturer_name": "TechFast Systems (fictitious)"
+    "manufacturer_name": "TechFast Systems (fictitious)",
+    "conversions": []
   },
   {
     "sku": "FST-LWS-14-20",
@@ -310,7 +444,14 @@
     "category": "Fasteners",
     "gtin": "9999900000184",
     "manufacturer_part_number": "FAL-62581",
-    "manufacturer_name": "FastenAll LLC (fictitious)"
+    "manufacturer_name": "FastenAll LLC (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "BX",
+        "to_uom": "EA",
+        "factor": 100.0
+      }
+    ]
   },
   {
     "sku": "JAN-PTR-1P-NAT",
@@ -327,7 +468,14 @@
     "category": "Janitorial",
     "gtin": "9999900000191",
     "manufacturer_part_number": "SGC-75435",
-    "manufacturer_name": "SafeGuard Corp (fictitious)"
+    "manufacturer_name": "SafeGuard Corp (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "RL",
+        "factor": 12.0
+      }
+    ]
   },
   {
     "sku": "ELE-TPE-BLU",
@@ -339,7 +487,8 @@
     "category": "Electrical",
     "gtin": "9999900000207",
     "manufacturer_part_number": "PGS-42325",
-    "manufacturer_name": "ProGrade Supply (fictitious)"
+    "manufacturer_name": "ProGrade Supply (fictitious)",
+    "conversions": []
   },
   {
     "sku": "ABR-FLD-5IN",
@@ -356,7 +505,14 @@
     "category": "Abrasives",
     "gtin": "9999900000214",
     "manufacturer_part_number": "TFS-86484",
-    "manufacturer_name": "TechFast Systems (fictitious)"
+    "manufacturer_name": "TechFast Systems (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "BX",
+        "to_uom": "EA",
+        "factor": 10.0
+      }
+    ]
   },
   {
     "sku": "ELE-TPE-BLU-1",
@@ -368,7 +524,8 @@
     "category": "Electrical",
     "gtin": "9999900000221",
     "manufacturer_part_number": "CSS-28131",
-    "manufacturer_name": "ChemSafe Solutions (fictitious)"
+    "manufacturer_name": "ChemSafe Solutions (fictitious)",
+    "conversions": []
   },
   {
     "sku": "TLS-UTB-023",
@@ -385,7 +542,14 @@
     "category": "Tools",
     "gtin": "9999900000238",
     "manufacturer_part_number": "PGS-16175",
-    "manufacturer_name": "ProGrade Supply (fictitious)"
+    "manufacturer_name": "ProGrade Supply (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "PK",
+        "to_uom": "EA",
+        "factor": 100.0
+      }
+    ]
   },
   {
     "sku": "PPE-GLS-AMB-ANTI-FOG",
@@ -397,7 +561,8 @@
     "category": "Safety/PPE",
     "gtin": "9999900000245",
     "manufacturer_part_number": "CPI-65333",
-    "manufacturer_name": "CleanPro Industries (fictitious)"
+    "manufacturer_name": "CleanPro Industries (fictitious)",
+    "conversions": []
   },
   {
     "sku": "LUB-MOL-025",
@@ -414,7 +579,14 @@
     "category": "Lubricants",
     "gtin": "9999900000252",
     "manufacturer_part_number": "SGC-88104",
-    "manufacturer_name": "SafeGuard Corp (fictitious)"
+    "manufacturer_name": "SafeGuard Corp (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "EA",
+        "factor": 12.0
+      }
+    ]
   },
   {
     "sku": "TLS-AWR-10IN",
@@ -426,7 +598,8 @@
     "category": "Tools",
     "gtin": "9999900000269",
     "manufacturer_part_number": "TFS-11504",
-    "manufacturer_name": "TechFast Systems (fictitious)"
+    "manufacturer_name": "TechFast Systems (fictitious)",
+    "conversions": []
   },
   {
     "sku": "PKG-STW-027",
@@ -443,7 +616,14 @@
     "category": "Packaging",
     "gtin": "9999900000276",
     "manufacturer_part_number": "SGC-80381",
-    "manufacturer_name": "SafeGuard Corp (fictitious)"
+    "manufacturer_name": "SafeGuard Corp (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "RL",
+        "factor": 4.0
+      }
+    ]
   },
   {
     "sku": "JAN-PTR-1P-NAT-1",
@@ -460,7 +640,14 @@
     "category": "Janitorial",
     "gtin": "9999900000283",
     "manufacturer_part_number": "CSS-69470",
-    "manufacturer_name": "ChemSafe Solutions (fictitious)"
+    "manufacturer_name": "ChemSafe Solutions (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "RL",
+        "factor": 12.0
+      }
+    ]
   },
   {
     "sku": "FST-HCS-M10-112",
@@ -477,7 +664,14 @@
     "category": "Fasteners",
     "gtin": "9999900000290",
     "manufacturer_part_number": "PTI-23947",
-    "manufacturer_name": "PowerTools Inc (fictitious)"
+    "manufacturer_name": "PowerTools Inc (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "BX",
+        "to_uom": "EA",
+        "factor": 50.0
+      }
+    ]
   },
   {
     "sku": "ADH-EPX-030",
@@ -494,7 +688,14 @@
     "category": "Adhesives",
     "gtin": "9999900000306",
     "manufacturer_part_number": "PTI-76540",
-    "manufacturer_name": "PowerTools Inc (fictitious)"
+    "manufacturer_name": "PowerTools Inc (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "PK",
+        "to_uom": "EA",
+        "factor": 6.0
+      }
+    ]
   },
   {
     "sku": "LUB-MOL-031",
@@ -511,7 +712,14 @@
     "category": "Lubricants",
     "gtin": "9999900000313",
     "manufacturer_part_number": "FAL-31174",
-    "manufacturer_name": "FastenAll LLC (fictitious)"
+    "manufacturer_name": "FastenAll LLC (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "EA",
+        "factor": 12.0
+      }
+    ]
   },
   {
     "sku": "ABR-COW-4IN",
@@ -528,7 +736,14 @@
     "category": "Abrasives",
     "gtin": "9999900000320",
     "manufacturer_part_number": "TFS-12552",
-    "manufacturer_name": "TechFast Systems (fictitious)"
+    "manufacturer_name": "TechFast Systems (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "BX",
+        "to_uom": "EA",
+        "factor": 25.0
+      }
+    ]
   },
   {
     "sku": "PPE-GLS-SMO-ANTI-FOG",
@@ -540,7 +755,8 @@
     "category": "Safety/PPE",
     "gtin": "9999900000337",
     "manufacturer_part_number": "CSS-84364",
-    "manufacturer_name": "ChemSafe Solutions (fictitious)"
+    "manufacturer_name": "ChemSafe Solutions (fictitious)",
+    "conversions": []
   },
   {
     "sku": "PPE-GLV-NIT-5-XL-BLU",
@@ -557,7 +773,24 @@
     "category": "Safety/PPE",
     "gtin": "9999900000344",
     "manufacturer_part_number": "SGC-72296",
-    "manufacturer_name": "SafeGuard Corp (fictitious)"
+    "manufacturer_name": "SafeGuard Corp (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "BX",
+        "to_uom": "EA",
+        "factor": 100.0
+      },
+      {
+        "from_uom": "CS",
+        "to_uom": "BX",
+        "factor": 10.0
+      },
+      {
+        "from_uom": "CS",
+        "to_uom": "EA",
+        "factor": 1000.0
+      }
+    ]
   },
   {
     "sku": "ABR-FLD-5IN-1",
@@ -574,7 +807,14 @@
     "category": "Abrasives",
     "gtin": "9999900000351",
     "manufacturer_part_number": "CPI-65461",
-    "manufacturer_name": "CleanPro Industries (fictitious)"
+    "manufacturer_name": "CleanPro Industries (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "BX",
+        "to_uom": "EA",
+        "factor": 10.0
+      }
+    ]
   },
   {
     "sku": "JAN-NFC-036",
@@ -591,7 +831,14 @@
     "category": "Janitorial",
     "gtin": "9999900000368",
     "manufacturer_part_number": "TFS-36365",
-    "manufacturer_name": "TechFast Systems (fictitious)"
+    "manufacturer_name": "TechFast Systems (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "GLL",
+        "factor": 4.0
+      }
+    ]
   },
   {
     "sku": "JAN-FTI-037",
@@ -608,7 +855,14 @@
     "category": "Janitorial",
     "gtin": "9999900000375",
     "manufacturer_part_number": "ECP-95180",
-    "manufacturer_name": "EcoClean Products (fictitious)"
+    "manufacturer_name": "EcoClean Products (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "BX",
+        "factor": 30.0
+      }
+    ]
   },
   {
     "sku": "JAN-HSF-038",
@@ -625,7 +879,14 @@
     "category": "Janitorial",
     "gtin": "9999900000382",
     "manufacturer_part_number": "PGS-69177",
-    "manufacturer_name": "ProGrade Supply (fictitious)"
+    "manufacturer_name": "ProGrade Supply (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "EA",
+        "factor": 6.0
+      }
+    ]
   },
   {
     "sku": "PPE-GLS-CLE-ANTI-FOG",
@@ -637,7 +898,8 @@
     "category": "Safety/PPE",
     "gtin": "9999900000399",
     "manufacturer_part_number": "FAL-87110",
-    "manufacturer_name": "FastenAll LLC (fictitious)"
+    "manufacturer_name": "FastenAll LLC (fictitious)",
+    "conversions": []
   },
   {
     "sku": "ABR-FLD-412IN",
@@ -654,7 +916,14 @@
     "category": "Abrasives",
     "gtin": "9999900000405",
     "manufacturer_part_number": "FAL-92719",
-    "manufacturer_name": "FastenAll LLC (fictitious)"
+    "manufacturer_name": "FastenAll LLC (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "BX",
+        "to_uom": "EA",
+        "factor": 10.0
+      }
+    ]
   },
   {
     "sku": "FST-LWS-516-18",
@@ -671,7 +940,14 @@
     "category": "Fasteners",
     "gtin": "9999900000412",
     "manufacturer_part_number": "FAL-53309",
-    "manufacturer_name": "FastenAll LLC (fictitious)"
+    "manufacturer_name": "FastenAll LLC (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "BX",
+        "to_uom": "EA",
+        "factor": 100.0
+      }
+    ]
   },
   {
     "sku": "FST-SHC-12-13-2",
@@ -688,7 +964,14 @@
     "category": "Fasteners",
     "gtin": "9999900000429",
     "manufacturer_part_number": "TFS-38080",
-    "manufacturer_name": "TechFast Systems (fictitious)"
+    "manufacturer_name": "TechFast Systems (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "BX",
+        "to_uom": "EA",
+        "factor": 25.0
+      }
+    ]
   },
   {
     "sku": "ABR-COW-6IN-1",
@@ -705,7 +988,14 @@
     "category": "Abrasives",
     "gtin": "9999900000436",
     "manufacturer_part_number": "CPI-63354",
-    "manufacturer_name": "CleanPro Industries (fictitious)"
+    "manufacturer_name": "CleanPro Industries (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "BX",
+        "to_uom": "EA",
+        "factor": 25.0
+      }
+    ]
   },
   {
     "sku": "JAN-LNR-2424-15-CL",
@@ -722,7 +1012,14 @@
     "category": "Janitorial",
     "gtin": "9999900000443",
     "manufacturer_part_number": "SGC-71213",
-    "manufacturer_name": "SafeGuard Corp (fictitious)"
+    "manufacturer_name": "SafeGuard Corp (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "RL",
+        "to_uom": "EA",
+        "factor": 50.0
+      }
+    ]
   },
   {
     "sku": "FST-LWS-14-20-1",
@@ -739,7 +1036,14 @@
     "category": "Fasteners",
     "gtin": "9999900000450",
     "manufacturer_part_number": "SGC-54473",
-    "manufacturer_name": "SafeGuard Corp (fictitious)"
+    "manufacturer_name": "SafeGuard Corp (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "BX",
+        "to_uom": "EA",
+        "factor": 100.0
+      }
+    ]
   },
   {
     "sku": "PPE-GLV-LAT-8-M-BLU",
@@ -756,7 +1060,24 @@
     "category": "Safety/PPE",
     "gtin": "9999900000467",
     "manufacturer_part_number": "FAL-34050",
-    "manufacturer_name": "FastenAll LLC (fictitious)"
+    "manufacturer_name": "FastenAll LLC (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "BX",
+        "to_uom": "EA",
+        "factor": 100.0
+      },
+      {
+        "from_uom": "CS",
+        "to_uom": "BX",
+        "factor": 10.0
+      },
+      {
+        "from_uom": "CS",
+        "to_uom": "EA",
+        "factor": 1000.0
+      }
+    ]
   },
   {
     "sku": "JAN-PTR-1P-WHI",
@@ -773,7 +1094,14 @@
     "category": "Janitorial",
     "gtin": "9999900000474",
     "manufacturer_part_number": "PGS-82132",
-    "manufacturer_name": "ProGrade Supply (fictitious)"
+    "manufacturer_name": "ProGrade Supply (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "RL",
+        "factor": 12.0
+      }
+    ]
   },
   {
     "sku": "PPE-GLV-LAT-4-XXL-BLU",
@@ -790,7 +1118,24 @@
     "category": "Safety/PPE",
     "gtin": "9999900000481",
     "manufacturer_part_number": "ACME-40982",
-    "manufacturer_name": "ACME Industrial (fictitious)"
+    "manufacturer_name": "ACME Industrial (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "BX",
+        "to_uom": "EA",
+        "factor": 100.0
+      },
+      {
+        "from_uom": "CS",
+        "to_uom": "BX",
+        "factor": 10.0
+      },
+      {
+        "from_uom": "CS",
+        "to_uom": "EA",
+        "factor": 1000.0
+      }
+    ]
   },
   {
     "sku": "PPE-N95-049",
@@ -807,7 +1152,14 @@
     "category": "Safety/PPE",
     "gtin": "9999900000498",
     "manufacturer_part_number": "ECP-38016",
-    "manufacturer_name": "EcoClean Products (fictitious)"
+    "manufacturer_name": "EcoClean Products (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "BX",
+        "to_uom": "EA",
+        "factor": 20.0
+      }
+    ]
   },
   {
     "sku": "ELE-TPE-BLU-2",
@@ -819,7 +1171,8 @@
     "category": "Electrical",
     "gtin": "9999900000504",
     "manufacturer_part_number": "ACME-61173",
-    "manufacturer_name": "ACME Industrial (fictitious)"
+    "manufacturer_name": "ACME Industrial (fictitious)",
+    "conversions": []
   },
   {
     "sku": "JAN-FPD-17-WHI",
@@ -836,7 +1189,14 @@
     "category": "Janitorial",
     "gtin": "9999900000511",
     "manufacturer_part_number": "PGS-82845",
-    "manufacturer_name": "ProGrade Supply (fictitious)"
+    "manufacturer_name": "ProGrade Supply (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "EA",
+        "factor": 5.0
+      }
+    ]
   },
   {
     "sku": "PKG-PTC-052",
@@ -853,7 +1213,14 @@
     "category": "Packaging",
     "gtin": "9999900000528",
     "manufacturer_part_number": "PGS-48890",
-    "manufacturer_name": "ProGrade Supply (fictitious)"
+    "manufacturer_name": "ProGrade Supply (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "RL",
+        "factor": 36.0
+      }
+    ]
   },
   {
     "sku": "JAN-NFC-053",
@@ -870,7 +1237,14 @@
     "category": "Janitorial",
     "gtin": "9999900000535",
     "manufacturer_part_number": "ACME-81066",
-    "manufacturer_name": "ACME Industrial (fictitious)"
+    "manufacturer_name": "ACME Industrial (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "GLL",
+        "factor": 4.0
+      }
+    ]
   },
   {
     "sku": "FST-LWS-14-20-2",
@@ -887,7 +1261,14 @@
     "category": "Fasteners",
     "gtin": "9999900000542",
     "manufacturer_part_number": "CSS-72493",
-    "manufacturer_name": "ChemSafe Solutions (fictitious)"
+    "manufacturer_name": "ChemSafe Solutions (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "BX",
+        "to_uom": "EA",
+        "factor": 100.0
+      }
+    ]
   },
   {
     "sku": "TLS-UTB-055",
@@ -904,7 +1285,14 @@
     "category": "Tools",
     "gtin": "9999900000559",
     "manufacturer_part_number": "TFS-76562",
-    "manufacturer_name": "TechFast Systems (fictitious)"
+    "manufacturer_name": "TechFast Systems (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "PK",
+        "to_uom": "EA",
+        "factor": 100.0
+      }
+    ]
   },
   {
     "sku": "PPE-GLV-NIT-4-S-WHI",
@@ -921,7 +1309,24 @@
     "category": "Safety/PPE",
     "gtin": "9999900000566",
     "manufacturer_part_number": "CPI-40828",
-    "manufacturer_name": "CleanPro Industries (fictitious)"
+    "manufacturer_name": "CleanPro Industries (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "BX",
+        "to_uom": "EA",
+        "factor": 100.0
+      },
+      {
+        "from_uom": "CS",
+        "to_uom": "BX",
+        "factor": 10.0
+      },
+      {
+        "from_uom": "CS",
+        "to_uom": "EA",
+        "factor": 1000.0
+      }
+    ]
   },
   {
     "sku": "ELE-TPE-WHI",
@@ -933,7 +1338,8 @@
     "category": "Electrical",
     "gtin": "9999900000573",
     "manufacturer_part_number": "SGC-87924",
-    "manufacturer_name": "SafeGuard Corp (fictitious)"
+    "manufacturer_name": "SafeGuard Corp (fictitious)",
+    "conversions": []
   },
   {
     "sku": "FST-FWS-516-18-1",
@@ -950,7 +1356,14 @@
     "category": "Fasteners",
     "gtin": "9999900000580",
     "manufacturer_part_number": "GCC-86503",
-    "manufacturer_name": "GreenClean Co (fictitious)"
+    "manufacturer_name": "GreenClean Co (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "BX",
+        "to_uom": "EA",
+        "factor": 100.0
+      }
+    ]
   },
   {
     "sku": "LUB-POS-059",
@@ -967,7 +1380,14 @@
     "category": "Lubricants",
     "gtin": "9999900000597",
     "manufacturer_part_number": "TFS-44179",
-    "manufacturer_name": "TechFast Systems (fictitious)"
+    "manufacturer_name": "TechFast Systems (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "EA",
+        "factor": 12.0
+      }
+    ]
   },
   {
     "sku": "JAN-NFC-060",
@@ -984,7 +1404,14 @@
     "category": "Janitorial",
     "gtin": "9999900000603",
     "manufacturer_part_number": "CSS-61876",
-    "manufacturer_name": "ChemSafe Solutions (fictitious)"
+    "manufacturer_name": "ChemSafe Solutions (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "GLL",
+        "factor": 4.0
+      }
+    ]
   },
   {
     "sku": "PPE-HAT-RED",
@@ -996,7 +1423,8 @@
     "category": "Safety/PPE",
     "gtin": "9999900000610",
     "manufacturer_part_number": "PTI-19508",
-    "manufacturer_name": "PowerTools Inc (fictitious)"
+    "manufacturer_name": "PowerTools Inc (fictitious)",
+    "conversions": []
   },
   {
     "sku": "FST-HCS-M12-3",
@@ -1013,7 +1441,14 @@
     "category": "Fasteners",
     "gtin": "9999900000627",
     "manufacturer_part_number": "PGS-19602",
-    "manufacturer_name": "ProGrade Supply (fictitious)"
+    "manufacturer_name": "ProGrade Supply (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "BX",
+        "to_uom": "EA",
+        "factor": 50.0
+      }
+    ]
   },
   {
     "sku": "ABR-COW-5IN",
@@ -1030,7 +1465,14 @@
     "category": "Abrasives",
     "gtin": "9999900000634",
     "manufacturer_part_number": "FAL-19016",
-    "manufacturer_name": "FastenAll LLC (fictitious)"
+    "manufacturer_name": "FastenAll LLC (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "BX",
+        "to_uom": "EA",
+        "factor": 25.0
+      }
+    ]
   },
   {
     "sku": "JAN-FFN-064",
@@ -1047,7 +1489,14 @@
     "category": "Janitorial",
     "gtin": "9999900000641",
     "manufacturer_part_number": "CSS-67433",
-    "manufacturer_name": "ChemSafe Solutions (fictitious)"
+    "manufacturer_name": "ChemSafe Solutions (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "GLL",
+        "factor": 4.0
+      }
+    ]
   },
   {
     "sku": "ABR-COW-4IN-1",
@@ -1064,7 +1513,14 @@
     "category": "Abrasives",
     "gtin": "9999900000658",
     "manufacturer_part_number": "PTI-49240",
-    "manufacturer_name": "PowerTools Inc (fictitious)"
+    "manufacturer_name": "PowerTools Inc (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "BX",
+        "to_uom": "EA",
+        "factor": 25.0
+      }
+    ]
   },
   {
     "sku": "PKG-PTC-066",
@@ -1081,7 +1537,14 @@
     "category": "Packaging",
     "gtin": "9999900000665",
     "manufacturer_part_number": "SGC-27601",
-    "manufacturer_name": "SafeGuard Corp (fictitious)"
+    "manufacturer_name": "SafeGuard Corp (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "RL",
+        "factor": 36.0
+      }
+    ]
   },
   {
     "sku": "JAN-FPD-13-TAN",
@@ -1098,7 +1561,14 @@
     "category": "Janitorial",
     "gtin": "9999900000672",
     "manufacturer_part_number": "SGC-46930",
-    "manufacturer_name": "SafeGuard Corp (fictitious)"
+    "manufacturer_name": "SafeGuard Corp (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "EA",
+        "factor": 5.0
+      }
+    ]
   },
   {
     "sku": "LUB-MOL-068",
@@ -1115,7 +1585,14 @@
     "category": "Lubricants",
     "gtin": "9999900000689",
     "manufacturer_part_number": "FAL-36685",
-    "manufacturer_name": "FastenAll LLC (fictitious)"
+    "manufacturer_name": "FastenAll LLC (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "EA",
+        "factor": 12.0
+      }
+    ]
   },
   {
     "sku": "PKG-STW-069",
@@ -1132,7 +1609,14 @@
     "category": "Packaging",
     "gtin": "9999900000696",
     "manufacturer_part_number": "PTI-42914",
-    "manufacturer_name": "PowerTools Inc (fictitious)"
+    "manufacturer_name": "PowerTools Inc (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "RL",
+        "factor": 4.0
+      }
+    ]
   },
   {
     "sku": "FST-LWS-M6",
@@ -1149,7 +1633,14 @@
     "category": "Fasteners",
     "gtin": "9999900000702",
     "manufacturer_part_number": "SGC-15778",
-    "manufacturer_name": "SafeGuard Corp (fictitious)"
+    "manufacturer_name": "SafeGuard Corp (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "BX",
+        "to_uom": "EA",
+        "factor": 100.0
+      }
+    ]
   },
   {
     "sku": "FST-HCS-38-16-4",
@@ -1166,7 +1657,14 @@
     "category": "Fasteners",
     "gtin": "9999900000719",
     "manufacturer_part_number": "CSS-31178",
-    "manufacturer_name": "ChemSafe Solutions (fictitious)"
+    "manufacturer_name": "ChemSafe Solutions (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "BX",
+        "to_uom": "EA",
+        "factor": 50.0
+      }
+    ]
   },
   {
     "sku": "TLS-SDR-M6-3",
@@ -1178,7 +1676,8 @@
     "category": "Tools",
     "gtin": "9999900000726",
     "manufacturer_part_number": "TFS-19862",
-    "manufacturer_name": "TechFast Systems (fictitious)"
+    "manufacturer_name": "TechFast Systems (fictitious)",
+    "conversions": []
   },
   {
     "sku": "PKG-BBW-073",
@@ -1190,7 +1689,8 @@
     "category": "Packaging",
     "gtin": "9999900000733",
     "manufacturer_part_number": "CPI-58393",
-    "manufacturer_name": "CleanPro Industries (fictitious)"
+    "manufacturer_name": "CleanPro Industries (fictitious)",
+    "conversions": []
   },
   {
     "sku": "LUB-MPG-074",
@@ -1207,7 +1707,14 @@
     "category": "Lubricants",
     "gtin": "9999900000740",
     "manufacturer_part_number": "TFS-26704",
-    "manufacturer_name": "TechFast Systems (fictitious)"
+    "manufacturer_name": "TechFast Systems (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "EA",
+        "factor": 10.0
+      }
+    ]
   },
   {
     "sku": "FST-FWS-34-10",
@@ -1224,7 +1731,14 @@
     "category": "Fasteners",
     "gtin": "9999900000757",
     "manufacturer_part_number": "PTI-15229",
-    "manufacturer_name": "PowerTools Inc (fictitious)"
+    "manufacturer_name": "PowerTools Inc (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "BX",
+        "to_uom": "EA",
+        "factor": 100.0
+      }
+    ]
   },
   {
     "sku": "JAN-DGR-076",
@@ -1241,7 +1755,14 @@
     "category": "Janitorial",
     "gtin": "9999900000764",
     "manufacturer_part_number": "FAL-97416",
-    "manufacturer_name": "FastenAll LLC (fictitious)"
+    "manufacturer_name": "FastenAll LLC (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "GLL",
+        "factor": 4.0
+      }
+    ]
   },
   {
     "sku": "PPE-GLV-LAT-5-XXL-BLA",
@@ -1258,7 +1779,24 @@
     "category": "Safety/PPE",
     "gtin": "9999900000771",
     "manufacturer_part_number": "CSS-41029",
-    "manufacturer_name": "ChemSafe Solutions (fictitious)"
+    "manufacturer_name": "ChemSafe Solutions (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "BX",
+        "to_uom": "EA",
+        "factor": 100.0
+      },
+      {
+        "from_uom": "CS",
+        "to_uom": "BX",
+        "factor": 10.0
+      },
+      {
+        "from_uom": "CS",
+        "to_uom": "EA",
+        "factor": 1000.0
+      }
+    ]
   },
   {
     "sku": "PPE-N95-078",
@@ -1275,7 +1813,14 @@
     "category": "Safety/PPE",
     "gtin": "9999900000788",
     "manufacturer_part_number": "CPI-13248",
-    "manufacturer_name": "CleanPro Industries (fictitious)"
+    "manufacturer_name": "CleanPro Industries (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "BX",
+        "to_uom": "EA",
+        "factor": 20.0
+      }
+    ]
   },
   {
     "sku": "JAN-LNR-4046-10-CL",
@@ -1292,7 +1837,14 @@
     "category": "Janitorial",
     "gtin": "9999900000795",
     "manufacturer_part_number": "CSS-24168",
-    "manufacturer_name": "ChemSafe Solutions (fictitious)"
+    "manufacturer_name": "ChemSafe Solutions (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "EA",
+        "factor": 100.0
+      }
+    ]
   },
   {
     "sku": "JAN-HSG-080",
@@ -1309,7 +1861,14 @@
     "category": "Janitorial",
     "gtin": "9999900000801",
     "manufacturer_part_number": "ACME-39154",
-    "manufacturer_name": "ACME Industrial (fictitious)"
+    "manufacturer_name": "ACME Industrial (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "EA",
+        "factor": 12.0
+      }
+    ]
   },
   {
     "sku": "JAN-LNR-3858-12-BL",
@@ -1326,7 +1885,14 @@
     "category": "Janitorial",
     "gtin": "9999900000818",
     "manufacturer_part_number": "PGS-96511",
-    "manufacturer_name": "ProGrade Supply (fictitious)"
+    "manufacturer_name": "ProGrade Supply (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "RL",
+        "to_uom": "EA",
+        "factor": 50.0
+      }
+    ]
   },
   {
     "sku": "JAN-LNR-3858-12-BL-1",
@@ -1343,7 +1909,14 @@
     "category": "Janitorial",
     "gtin": "9999900000825",
     "manufacturer_part_number": "ECP-46585",
-    "manufacturer_name": "EcoClean Products (fictitious)"
+    "manufacturer_name": "EcoClean Products (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "RL",
+        "to_uom": "EA",
+        "factor": 50.0
+      }
+    ]
   },
   {
     "sku": "JAN-DGR-083",
@@ -1360,7 +1933,14 @@
     "category": "Janitorial",
     "gtin": "9999900000832",
     "manufacturer_part_number": "TFS-80282",
-    "manufacturer_name": "TechFast Systems (fictitious)"
+    "manufacturer_name": "TechFast Systems (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "GLL",
+        "factor": 4.0
+      }
+    ]
   },
   {
     "sku": "JAN-DSP-084",
@@ -1377,7 +1957,14 @@
     "category": "Janitorial",
     "gtin": "9999900000849",
     "manufacturer_part_number": "ACME-44237",
-    "manufacturer_name": "ACME Industrial (fictitious)"
+    "manufacturer_name": "ACME Industrial (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "EA",
+        "factor": 12.0
+      }
+    ]
   },
   {
     "sku": "JAN-LNR-3858-07-BL",
@@ -1394,7 +1981,14 @@
     "category": "Janitorial",
     "gtin": "9999900000856",
     "manufacturer_part_number": "GCC-55309",
-    "manufacturer_name": "GreenClean Co (fictitious)"
+    "manufacturer_name": "GreenClean Co (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "EA",
+        "factor": 100.0
+      }
+    ]
   },
   {
     "sku": "JAN-GCL-086",
@@ -1411,7 +2005,14 @@
     "category": "Janitorial",
     "gtin": "9999900000863",
     "manufacturer_part_number": "ECP-77033",
-    "manufacturer_name": "EcoClean Products (fictitious)"
+    "manufacturer_name": "EcoClean Products (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "EA",
+        "factor": 12.0
+      }
+    ]
   },
   {
     "sku": "PPE-GLS-AMB-ANTI-FOG-1",
@@ -1423,7 +2024,8 @@
     "category": "Safety/PPE",
     "gtin": "9999900000870",
     "manufacturer_part_number": "ECP-67154",
-    "manufacturer_name": "EcoClean Products (fictitious)"
+    "manufacturer_name": "EcoClean Products (fictitious)",
+    "conversions": []
   },
   {
     "sku": "FST-HCS-M10-4",
@@ -1440,7 +2042,14 @@
     "category": "Fasteners",
     "gtin": "9999900000887",
     "manufacturer_part_number": "TFS-97900",
-    "manufacturer_name": "TechFast Systems (fictitious)"
+    "manufacturer_name": "TechFast Systems (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "BX",
+        "to_uom": "EA",
+        "factor": 50.0
+      }
+    ]
   },
   {
     "sku": "JAN-LNR-4046-07-WH",
@@ -1457,7 +2066,14 @@
     "category": "Janitorial",
     "gtin": "9999900000894",
     "manufacturer_part_number": "CSS-91678",
-    "manufacturer_name": "ChemSafe Solutions (fictitious)"
+    "manufacturer_name": "ChemSafe Solutions (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "RL",
+        "to_uom": "EA",
+        "factor": 50.0
+      }
+    ]
   },
   {
     "sku": "JAN-GCL-090",
@@ -1474,7 +2090,14 @@
     "category": "Janitorial",
     "gtin": "9999900000900",
     "manufacturer_part_number": "SGC-49363",
-    "manufacturer_name": "SafeGuard Corp (fictitious)"
+    "manufacturer_name": "SafeGuard Corp (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "EA",
+        "factor": 12.0
+      }
+    ]
   },
   {
     "sku": "TLS-UTB-091",
@@ -1491,7 +2114,14 @@
     "category": "Tools",
     "gtin": "9999900000917",
     "manufacturer_part_number": "PTI-52753",
-    "manufacturer_name": "PowerTools Inc (fictitious)"
+    "manufacturer_name": "PowerTools Inc (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "PK",
+        "to_uom": "EA",
+        "factor": 100.0
+      }
+    ]
   },
   {
     "sku": "ELE-TPE-WHI-1",
@@ -1503,7 +2133,8 @@
     "category": "Electrical",
     "gtin": "9999900000924",
     "manufacturer_part_number": "PTI-65108",
-    "manufacturer_name": "PowerTools Inc (fictitious)"
+    "manufacturer_name": "PowerTools Inc (fictitious)",
+    "conversions": []
   },
   {
     "sku": "PKG-PTC-093",
@@ -1520,7 +2151,14 @@
     "category": "Packaging",
     "gtin": "9999900000931",
     "manufacturer_part_number": "ECP-32810",
-    "manufacturer_name": "EcoClean Products (fictitious)"
+    "manufacturer_name": "EcoClean Products (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "RL",
+        "factor": 36.0
+      }
+    ]
   },
   {
     "sku": "ADH-SGG-094",
@@ -1537,7 +2175,14 @@
     "category": "Adhesives",
     "gtin": "9999900000948",
     "manufacturer_part_number": "GCC-81819",
-    "manufacturer_name": "GreenClean Co (fictitious)"
+    "manufacturer_name": "GreenClean Co (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "PK",
+        "to_uom": "EA",
+        "factor": 12.0
+      }
+    ]
   },
   {
     "sku": "FST-HCS-58-11-112",
@@ -1554,7 +2199,14 @@
     "category": "Fasteners",
     "gtin": "9999900000955",
     "manufacturer_part_number": "PTI-86019",
-    "manufacturer_name": "PowerTools Inc (fictitious)"
+    "manufacturer_name": "PowerTools Inc (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "BX",
+        "to_uom": "EA",
+        "factor": 50.0
+      }
+    ]
   },
   {
     "sku": "LUB-MOL-096",
@@ -1571,7 +2223,14 @@
     "category": "Lubricants",
     "gtin": "9999900000962",
     "manufacturer_part_number": "CSS-67954",
-    "manufacturer_name": "ChemSafe Solutions (fictitious)"
+    "manufacturer_name": "ChemSafe Solutions (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "EA",
+        "factor": 12.0
+      }
+    ]
   },
   {
     "sku": "PKG-STW-097",
@@ -1588,7 +2247,14 @@
     "category": "Packaging",
     "gtin": "9999900000979",
     "manufacturer_part_number": "FAL-32241",
-    "manufacturer_name": "FastenAll LLC (fictitious)"
+    "manufacturer_name": "FastenAll LLC (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "RL",
+        "factor": 4.0
+      }
+    ]
   },
   {
     "sku": "PKG-PTC-098",
@@ -1605,7 +2271,14 @@
     "category": "Packaging",
     "gtin": "9999900000986",
     "manufacturer_part_number": "SGC-97012",
-    "manufacturer_name": "SafeGuard Corp (fictitious)"
+    "manufacturer_name": "SafeGuard Corp (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "RL",
+        "factor": 36.0
+      }
+    ]
   },
   {
     "sku": "ADH-EPX-099",
@@ -1622,7 +2295,14 @@
     "category": "Adhesives",
     "gtin": "9999900000993",
     "manufacturer_part_number": "GCC-40784",
-    "manufacturer_name": "GreenClean Co (fictitious)"
+    "manufacturer_name": "GreenClean Co (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "PK",
+        "to_uom": "EA",
+        "factor": 6.0
+      }
+    ]
   },
   {
     "sku": "PKG-STW-100",
@@ -1639,7 +2319,14 @@
     "category": "Packaging",
     "gtin": "9999900001006",
     "manufacturer_part_number": "PTI-36100",
-    "manufacturer_name": "PowerTools Inc (fictitious)"
+    "manufacturer_name": "PowerTools Inc (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "RL",
+        "factor": 4.0
+      }
+    ]
   },
   {
     "sku": "PPE-EAR-101",
@@ -1656,7 +2343,14 @@
     "category": "Safety/PPE",
     "gtin": "9999900001013",
     "manufacturer_part_number": "ACME-72277",
-    "manufacturer_name": "ACME Industrial (fictitious)"
+    "manufacturer_name": "ACME Industrial (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "BX",
+        "to_uom": "PR",
+        "factor": 200.0
+      }
+    ]
   },
   {
     "sku": "ADH-SGG-102",
@@ -1673,7 +2367,14 @@
     "category": "Adhesives",
     "gtin": "9999900001020",
     "manufacturer_part_number": "SGC-92544",
-    "manufacturer_name": "SafeGuard Corp (fictitious)"
+    "manufacturer_name": "SafeGuard Corp (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "PK",
+        "to_uom": "EA",
+        "factor": 12.0
+      }
+    ]
   },
   {
     "sku": "LUB-POS-103",
@@ -1690,7 +2391,14 @@
     "category": "Lubricants",
     "gtin": "9999900001037",
     "manufacturer_part_number": "FAL-60328",
-    "manufacturer_name": "FastenAll LLC (fictitious)"
+    "manufacturer_name": "FastenAll LLC (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "EA",
+        "factor": 12.0
+      }
+    ]
   },
   {
     "sku": "TLS-UTK-104",
@@ -1702,7 +2410,8 @@
     "category": "Tools",
     "gtin": "9999900001044",
     "manufacturer_part_number": "ECP-95990",
-    "manufacturer_name": "EcoClean Products (fictitious)"
+    "manufacturer_name": "EcoClean Products (fictitious)",
+    "conversions": []
   },
   {
     "sku": "PKG-BBW-105",
@@ -1714,7 +2423,8 @@
     "category": "Packaging",
     "gtin": "9999900001051",
     "manufacturer_part_number": "ACME-23970",
-    "manufacturer_name": "ACME Industrial (fictitious)"
+    "manufacturer_name": "ACME Industrial (fictitious)",
+    "conversions": []
   },
   {
     "sku": "ELE-CTI-8IN",
@@ -1731,7 +2441,14 @@
     "category": "Electrical",
     "gtin": "9999900001068",
     "manufacturer_part_number": "FAL-77889",
-    "manufacturer_name": "FastenAll LLC (fictitious)"
+    "manufacturer_name": "FastenAll LLC (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "BG",
+        "to_uom": "EA",
+        "factor": 100.0
+      }
+    ]
   },
   {
     "sku": "TLS-AWR-8IN",
@@ -1743,7 +2460,8 @@
     "category": "Tools",
     "gtin": "9999900001075",
     "manufacturer_part_number": "ACME-25906",
-    "manufacturer_name": "ACME Industrial (fictitious)"
+    "manufacturer_name": "ACME Industrial (fictitious)",
+    "conversions": []
   },
   {
     "sku": "TLS-AWR-12IN",
@@ -1755,7 +2473,8 @@
     "category": "Tools",
     "gtin": "9999900001082",
     "manufacturer_part_number": "CPI-83259",
-    "manufacturer_name": "CleanPro Industries (fictitious)"
+    "manufacturer_name": "CleanPro Industries (fictitious)",
+    "conversions": []
   },
   {
     "sku": "LUB-MOL-109",
@@ -1772,7 +2491,14 @@
     "category": "Lubricants",
     "gtin": "9999900001099",
     "manufacturer_part_number": "CSS-68008",
-    "manufacturer_name": "ChemSafe Solutions (fictitious)"
+    "manufacturer_name": "ChemSafe Solutions (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "EA",
+        "factor": 12.0
+      }
+    ]
   },
   {
     "sku": "ADH-SGG-110",
@@ -1789,7 +2515,14 @@
     "category": "Adhesives",
     "gtin": "9999900001105",
     "manufacturer_part_number": "TFS-81810",
-    "manufacturer_name": "TechFast Systems (fictitious)"
+    "manufacturer_name": "TechFast Systems (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "PK",
+        "to_uom": "EA",
+        "factor": 12.0
+      }
+    ]
   },
   {
     "sku": "TLS-SDR-M8-212",
@@ -1801,7 +2534,8 @@
     "category": "Tools",
     "gtin": "9999900001112",
     "manufacturer_part_number": "CPI-42406",
-    "manufacturer_name": "CleanPro Industries (fictitious)"
+    "manufacturer_name": "CleanPro Industries (fictitious)",
+    "conversions": []
   },
   {
     "sku": "ADH-EPX-112",
@@ -1818,7 +2552,14 @@
     "category": "Adhesives",
     "gtin": "9999900001129",
     "manufacturer_part_number": "PTI-78327",
-    "manufacturer_name": "PowerTools Inc (fictitious)"
+    "manufacturer_name": "PowerTools Inc (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "PK",
+        "to_uom": "EA",
+        "factor": 6.0
+      }
+    ]
   },
   {
     "sku": "TLS-UTK-113",
@@ -1830,7 +2571,8 @@
     "category": "Tools",
     "gtin": "9999900001136",
     "manufacturer_part_number": "FAL-20155",
-    "manufacturer_name": "FastenAll LLC (fictitious)"
+    "manufacturer_name": "FastenAll LLC (fictitious)",
+    "conversions": []
   },
   {
     "sku": "JAN-TTI-114",
@@ -1847,7 +2589,14 @@
     "category": "Janitorial",
     "gtin": "9999900001143",
     "manufacturer_part_number": "FAL-51904",
-    "manufacturer_name": "FastenAll LLC (fictitious)"
+    "manufacturer_name": "FastenAll LLC (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "RL",
+        "factor": 96.0
+      }
+    ]
   },
   {
     "sku": "ABR-COW-412IN-1",
@@ -1864,7 +2613,14 @@
     "category": "Abrasives",
     "gtin": "9999900001150",
     "manufacturer_part_number": "SGC-30028",
-    "manufacturer_name": "SafeGuard Corp (fictitious)"
+    "manufacturer_name": "SafeGuard Corp (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "BX",
+        "to_uom": "EA",
+        "factor": 25.0
+      }
+    ]
   },
   {
     "sku": "JAN-NFC-116",
@@ -1881,7 +2637,14 @@
     "category": "Janitorial",
     "gtin": "9999900001167",
     "manufacturer_part_number": "SGC-53369",
-    "manufacturer_name": "SafeGuard Corp (fictitious)"
+    "manufacturer_name": "SafeGuard Corp (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "GLL",
+        "factor": 4.0
+      }
+    ]
   },
   {
     "sku": "ABR-COW-6IN-2",
@@ -1898,7 +2661,14 @@
     "category": "Abrasives",
     "gtin": "9999900001174",
     "manufacturer_part_number": "PGS-65069",
-    "manufacturer_name": "ProGrade Supply (fictitious)"
+    "manufacturer_name": "ProGrade Supply (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "BX",
+        "to_uom": "EA",
+        "factor": 25.0
+      }
+    ]
   },
   {
     "sku": "JAN-HSG-118",
@@ -1915,7 +2685,14 @@
     "category": "Janitorial",
     "gtin": "9999900001181",
     "manufacturer_part_number": "GCC-12560",
-    "manufacturer_name": "GreenClean Co (fictitious)"
+    "manufacturer_name": "GreenClean Co (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "EA",
+        "factor": 12.0
+      }
+    ]
   },
   {
     "sku": "LUB-POS-119",
@@ -1932,7 +2709,14 @@
     "category": "Lubricants",
     "gtin": "9999900001198",
     "manufacturer_part_number": "ECP-56105",
-    "manufacturer_name": "EcoClean Products (fictitious)"
+    "manufacturer_name": "EcoClean Products (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "EA",
+        "factor": 12.0
+      }
+    ]
   },
   {
     "sku": "JAN-FTI-120",
@@ -1949,7 +2733,14 @@
     "category": "Janitorial",
     "gtin": "9999900001204",
     "manufacturer_part_number": "ECP-64921",
-    "manufacturer_name": "EcoClean Products (fictitious)"
+    "manufacturer_name": "EcoClean Products (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "BX",
+        "factor": 30.0
+      }
+    ]
   },
   {
     "sku": "ABR-COW-412IN-2",
@@ -1966,7 +2757,14 @@
     "category": "Abrasives",
     "gtin": "9999900001211",
     "manufacturer_part_number": "TFS-67125",
-    "manufacturer_name": "TechFast Systems (fictitious)"
+    "manufacturer_name": "TechFast Systems (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "BX",
+        "to_uom": "EA",
+        "factor": 25.0
+      }
+    ]
   },
   {
     "sku": "TLS-UTK-122",
@@ -1978,7 +2776,8 @@
     "category": "Tools",
     "gtin": "9999900001228",
     "manufacturer_part_number": "ACME-97670",
-    "manufacturer_name": "ACME Industrial (fictitious)"
+    "manufacturer_name": "ACME Industrial (fictitious)",
+    "conversions": []
   },
   {
     "sku": "PKG-STW-123",
@@ -1995,7 +2794,14 @@
     "category": "Packaging",
     "gtin": "9999900001235",
     "manufacturer_part_number": "ECP-71261",
-    "manufacturer_name": "EcoClean Products (fictitious)"
+    "manufacturer_name": "EcoClean Products (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "RL",
+        "factor": 4.0
+      }
+    ]
   },
   {
     "sku": "PPE-HAT-ORA",
@@ -2007,7 +2813,8 @@
     "category": "Safety/PPE",
     "gtin": "9999900001242",
     "manufacturer_part_number": "GCC-61645",
-    "manufacturer_name": "GreenClean Co (fictitious)"
+    "manufacturer_name": "GreenClean Co (fictitious)",
+    "conversions": []
   },
   {
     "sku": "LUB-MPG-125",
@@ -2024,7 +2831,14 @@
     "category": "Lubricants",
     "gtin": "9999900001259",
     "manufacturer_part_number": "GCC-21003",
-    "manufacturer_name": "GreenClean Co (fictitious)"
+    "manufacturer_name": "GreenClean Co (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "EA",
+        "factor": 10.0
+      }
+    ]
   },
   {
     "sku": "ADH-CON-126",
@@ -2041,7 +2855,14 @@
     "category": "Adhesives",
     "gtin": "9999900001266",
     "manufacturer_part_number": "ECP-70515",
-    "manufacturer_name": "EcoClean Products (fictitious)"
+    "manufacturer_name": "EcoClean Products (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "EA",
+        "factor": 12.0
+      }
+    ]
   },
   {
     "sku": "JAN-LNR-3858-15-CL",
@@ -2058,7 +2879,14 @@
     "category": "Janitorial",
     "gtin": "9999900001273",
     "manufacturer_part_number": "ACME-52840",
-    "manufacturer_name": "ACME Industrial (fictitious)"
+    "manufacturer_name": "ACME Industrial (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "EA",
+        "factor": 100.0
+      }
+    ]
   },
   {
     "sku": "JAN-DSP-128",
@@ -2075,7 +2903,14 @@
     "category": "Janitorial",
     "gtin": "9999900001280",
     "manufacturer_part_number": "ECP-65255",
-    "manufacturer_name": "EcoClean Products (fictitious)"
+    "manufacturer_name": "EcoClean Products (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "EA",
+        "factor": 12.0
+      }
+    ]
   },
   {
     "sku": "JAN-FPD-17-RED",
@@ -2092,7 +2927,14 @@
     "category": "Janitorial",
     "gtin": "9999900001297",
     "manufacturer_part_number": "SGC-16826",
-    "manufacturer_name": "SafeGuard Corp (fictitious)"
+    "manufacturer_name": "SafeGuard Corp (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "EA",
+        "factor": 5.0
+      }
+    ]
   },
   {
     "sku": "JAN-DGR-130",
@@ -2109,7 +2951,14 @@
     "category": "Janitorial",
     "gtin": "9999900001303",
     "manufacturer_part_number": "FAL-95426",
-    "manufacturer_name": "FastenAll LLC (fictitious)"
+    "manufacturer_name": "FastenAll LLC (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "GLL",
+        "factor": 4.0
+      }
+    ]
   },
   {
     "sku": "FST-FWS-12-13",
@@ -2126,7 +2975,14 @@
     "category": "Fasteners",
     "gtin": "9999900001310",
     "manufacturer_part_number": "ACME-12671",
-    "manufacturer_name": "ACME Industrial (fictitious)"
+    "manufacturer_name": "ACME Industrial (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "BX",
+        "to_uom": "EA",
+        "factor": 100.0
+      }
+    ]
   },
   {
     "sku": "ADH-SGG-132",
@@ -2143,7 +2999,14 @@
     "category": "Adhesives",
     "gtin": "9999900001327",
     "manufacturer_part_number": "CPI-72070",
-    "manufacturer_name": "CleanPro Industries (fictitious)"
+    "manufacturer_name": "CleanPro Industries (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "PK",
+        "to_uom": "EA",
+        "factor": 12.0
+      }
+    ]
   },
   {
     "sku": "PKG-PTC-133",
@@ -2160,7 +3023,14 @@
     "category": "Packaging",
     "gtin": "9999900001334",
     "manufacturer_part_number": "SGC-38569",
-    "manufacturer_name": "SafeGuard Corp (fictitious)"
+    "manufacturer_name": "SafeGuard Corp (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "RL",
+        "factor": 36.0
+      }
+    ]
   },
   {
     "sku": "TLS-AWR-10IN-1",
@@ -2172,7 +3042,8 @@
     "category": "Tools",
     "gtin": "9999900001341",
     "manufacturer_part_number": "PTI-89593",
-    "manufacturer_name": "PowerTools Inc (fictitious)"
+    "manufacturer_name": "PowerTools Inc (fictitious)",
+    "conversions": []
   },
   {
     "sku": "PPE-GLS-SMO-ANTI-FOG-1",
@@ -2184,7 +3055,8 @@
     "category": "Safety/PPE",
     "gtin": "9999900001358",
     "manufacturer_part_number": "CPI-50888",
-    "manufacturer_name": "CleanPro Industries (fictitious)"
+    "manufacturer_name": "CleanPro Industries (fictitious)",
+    "conversions": []
   },
   {
     "sku": "LUB-POS-136",
@@ -2201,7 +3073,14 @@
     "category": "Lubricants",
     "gtin": "9999900001365",
     "manufacturer_part_number": "ECP-35995",
-    "manufacturer_name": "EcoClean Products (fictitious)"
+    "manufacturer_name": "EcoClean Products (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "EA",
+        "factor": 12.0
+      }
+    ]
   },
   {
     "sku": "FST-SHC-12-13-1",
@@ -2218,7 +3097,14 @@
     "category": "Fasteners",
     "gtin": "9999900001372",
     "manufacturer_part_number": "GCC-49529",
-    "manufacturer_name": "GreenClean Co (fictitious)"
+    "manufacturer_name": "GreenClean Co (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "BX",
+        "to_uom": "EA",
+        "factor": 25.0
+      }
+    ]
   },
   {
     "sku": "PKG-STW-138",
@@ -2235,7 +3121,14 @@
     "category": "Packaging",
     "gtin": "9999900001389",
     "manufacturer_part_number": "GCC-84177",
-    "manufacturer_name": "GreenClean Co (fictitious)"
+    "manufacturer_name": "GreenClean Co (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "RL",
+        "factor": 4.0
+      }
+    ]
   },
   {
     "sku": "FST-FWS-M10",
@@ -2252,7 +3145,14 @@
     "category": "Fasteners",
     "gtin": "9999900001396",
     "manufacturer_part_number": "CSS-58571",
-    "manufacturer_name": "ChemSafe Solutions (fictitious)"
+    "manufacturer_name": "ChemSafe Solutions (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "BX",
+        "to_uom": "EA",
+        "factor": 100.0
+      }
+    ]
   },
   {
     "sku": "FST-SHC-34-10-1",
@@ -2269,7 +3169,14 @@
     "category": "Fasteners",
     "gtin": "9999900001402",
     "manufacturer_part_number": "TFS-74251",
-    "manufacturer_name": "TechFast Systems (fictitious)"
+    "manufacturer_name": "TechFast Systems (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "BX",
+        "to_uom": "EA",
+        "factor": 25.0
+      }
+    ]
   },
   {
     "sku": "PPE-GLV-LAT-8-L-WHI",
@@ -2286,7 +3193,24 @@
     "category": "Safety/PPE",
     "gtin": "9999900001419",
     "manufacturer_part_number": "ECP-67080",
-    "manufacturer_name": "EcoClean Products (fictitious)"
+    "manufacturer_name": "EcoClean Products (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "BX",
+        "to_uom": "EA",
+        "factor": 100.0
+      },
+      {
+        "from_uom": "CS",
+        "to_uom": "BX",
+        "factor": 10.0
+      },
+      {
+        "from_uom": "CS",
+        "to_uom": "EA",
+        "factor": 1000.0
+      }
+    ]
   },
   {
     "sku": "JAN-LNR-3858-20-WH",
@@ -2303,7 +3227,14 @@
     "category": "Janitorial",
     "gtin": "9999900001426",
     "manufacturer_part_number": "TFS-70931",
-    "manufacturer_name": "TechFast Systems (fictitious)"
+    "manufacturer_name": "TechFast Systems (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "EA",
+        "factor": 100.0
+      }
+    ]
   },
   {
     "sku": "ELE-CTI-11IN",
@@ -2320,7 +3251,14 @@
     "category": "Electrical",
     "gtin": "9999900001433",
     "manufacturer_part_number": "GCC-42177",
-    "manufacturer_name": "GreenClean Co (fictitious)"
+    "manufacturer_name": "GreenClean Co (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "BG",
+        "to_uom": "EA",
+        "factor": 100.0
+      }
+    ]
   },
   {
     "sku": "PPE-GLV-NIT-8-XL-BLU",
@@ -2337,7 +3275,24 @@
     "category": "Safety/PPE",
     "gtin": "9999900001440",
     "manufacturer_part_number": "PTI-97580",
-    "manufacturer_name": "PowerTools Inc (fictitious)"
+    "manufacturer_name": "PowerTools Inc (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "BX",
+        "to_uom": "EA",
+        "factor": 100.0
+      },
+      {
+        "from_uom": "CS",
+        "to_uom": "BX",
+        "factor": 10.0
+      },
+      {
+        "from_uom": "CS",
+        "to_uom": "EA",
+        "factor": 1000.0
+      }
+    ]
   },
   {
     "sku": "JAN-HSG-145",
@@ -2354,7 +3309,14 @@
     "category": "Janitorial",
     "gtin": "9999900001457",
     "manufacturer_part_number": "CSS-52600",
-    "manufacturer_name": "ChemSafe Solutions (fictitious)"
+    "manufacturer_name": "ChemSafe Solutions (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "EA",
+        "factor": 12.0
+      }
+    ]
   },
   {
     "sku": "JAN-LNR-3339-12-CL",
@@ -2371,7 +3333,14 @@
     "category": "Janitorial",
     "gtin": "9999900001464",
     "manufacturer_part_number": "PGS-88139",
-    "manufacturer_name": "ProGrade Supply (fictitious)"
+    "manufacturer_name": "ProGrade Supply (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "EA",
+        "factor": 100.0
+      }
+    ]
   },
   {
     "sku": "PKG-BBW-147",
@@ -2383,7 +3352,8 @@
     "category": "Packaging",
     "gtin": "9999900001471",
     "manufacturer_part_number": "PTI-77715",
-    "manufacturer_name": "PowerTools Inc (fictitious)"
+    "manufacturer_name": "PowerTools Inc (fictitious)",
+    "conversions": []
   },
   {
     "sku": "JAN-LNR-3339-15-CL",
@@ -2400,7 +3370,14 @@
     "category": "Janitorial",
     "gtin": "9999900001488",
     "manufacturer_part_number": "SGC-41499",
-    "manufacturer_name": "SafeGuard Corp (fictitious)"
+    "manufacturer_name": "SafeGuard Corp (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "RL",
+        "to_uom": "EA",
+        "factor": 50.0
+      }
+    ]
   },
   {
     "sku": "PKG-BBW-149",
@@ -2412,7 +3389,8 @@
     "category": "Packaging",
     "gtin": "9999900001495",
     "manufacturer_part_number": "PGS-74332",
-    "manufacturer_name": "ProGrade Supply (fictitious)"
+    "manufacturer_name": "ProGrade Supply (fictitious)",
+    "conversions": []
   },
   {
     "sku": "TLS-SDR-516-18-2",
@@ -2424,7 +3402,8 @@
     "category": "Tools",
     "gtin": "9999900001501",
     "manufacturer_part_number": "ACME-41890",
-    "manufacturer_name": "ACME Industrial (fictitious)"
+    "manufacturer_name": "ACME Industrial (fictitious)",
+    "conversions": []
   },
   {
     "sku": "JAN-FTI-151",
@@ -2441,7 +3420,14 @@
     "category": "Janitorial",
     "gtin": "9999900001518",
     "manufacturer_part_number": "GCC-82544",
-    "manufacturer_name": "GreenClean Co (fictitious)"
+    "manufacturer_name": "GreenClean Co (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "BX",
+        "factor": 30.0
+      }
+    ]
   },
   {
     "sku": "ABR-SPS-120G",
@@ -2458,7 +3444,14 @@
     "category": "Abrasives",
     "gtin": "9999900001525",
     "manufacturer_part_number": "CSS-82140",
-    "manufacturer_name": "ChemSafe Solutions (fictitious)"
+    "manufacturer_name": "ChemSafe Solutions (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "PK",
+        "to_uom": "EA",
+        "factor": 50.0
+      }
+    ]
   },
   {
     "sku": "JAN-DSP-153",
@@ -2475,7 +3468,14 @@
     "category": "Janitorial",
     "gtin": "9999900001532",
     "manufacturer_part_number": "CSS-45509",
-    "manufacturer_name": "ChemSafe Solutions (fictitious)"
+    "manufacturer_name": "ChemSafe Solutions (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "EA",
+        "factor": 12.0
+      }
+    ]
   },
   {
     "sku": "JAN-FTI-154",
@@ -2492,7 +3492,14 @@
     "category": "Janitorial",
     "gtin": "9999900001549",
     "manufacturer_part_number": "PTI-35242",
-    "manufacturer_name": "PowerTools Inc (fictitious)"
+    "manufacturer_name": "PowerTools Inc (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "BX",
+        "factor": 30.0
+      }
+    ]
   },
   {
     "sku": "JAN-GCL-155",
@@ -2509,7 +3516,14 @@
     "category": "Janitorial",
     "gtin": "9999900001556",
     "manufacturer_part_number": "SGC-34267",
-    "manufacturer_name": "SafeGuard Corp (fictitious)"
+    "manufacturer_name": "SafeGuard Corp (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "EA",
+        "factor": 12.0
+      }
+    ]
   },
   {
     "sku": "JAN-LNR-4046-12-WH",
@@ -2526,7 +3540,14 @@
     "category": "Janitorial",
     "gtin": "9999900001563",
     "manufacturer_part_number": "FAL-78765",
-    "manufacturer_name": "FastenAll LLC (fictitious)"
+    "manufacturer_name": "FastenAll LLC (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "RL",
+        "to_uom": "EA",
+        "factor": 50.0
+      }
+    ]
   },
   {
     "sku": "LUB-MOL-157",
@@ -2543,7 +3564,14 @@
     "category": "Lubricants",
     "gtin": "9999900001570",
     "manufacturer_part_number": "PTI-35443",
-    "manufacturer_name": "PowerTools Inc (fictitious)"
+    "manufacturer_name": "PowerTools Inc (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "EA",
+        "factor": 12.0
+      }
+    ]
   },
   {
     "sku": "JAN-TTI-158",
@@ -2560,7 +3588,14 @@
     "category": "Janitorial",
     "gtin": "9999900001587",
     "manufacturer_part_number": "FAL-49618",
-    "manufacturer_name": "FastenAll LLC (fictitious)"
+    "manufacturer_name": "FastenAll LLC (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "RL",
+        "factor": 96.0
+      }
+    ]
   },
   {
     "sku": "FST-HCS-38-16-2",
@@ -2577,7 +3612,14 @@
     "category": "Fasteners",
     "gtin": "9999900001594",
     "manufacturer_part_number": "TFS-17146",
-    "manufacturer_name": "TechFast Systems (fictitious)"
+    "manufacturer_name": "TechFast Systems (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "BX",
+        "to_uom": "EA",
+        "factor": 50.0
+      }
+    ]
   },
   {
     "sku": "ABR-FLD-412IN-1",
@@ -2594,7 +3636,14 @@
     "category": "Abrasives",
     "gtin": "9999900001600",
     "manufacturer_part_number": "PTI-74340",
-    "manufacturer_name": "PowerTools Inc (fictitious)"
+    "manufacturer_name": "PowerTools Inc (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "BX",
+        "to_uom": "EA",
+        "factor": 10.0
+      }
+    ]
   },
   {
     "sku": "PPE-GLV-LAT-8-XXL-BLA",
@@ -2611,7 +3660,24 @@
     "category": "Safety/PPE",
     "gtin": "9999900001617",
     "manufacturer_part_number": "ACME-54657",
-    "manufacturer_name": "ACME Industrial (fictitious)"
+    "manufacturer_name": "ACME Industrial (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "BX",
+        "to_uom": "EA",
+        "factor": 100.0
+      },
+      {
+        "from_uom": "CS",
+        "to_uom": "BX",
+        "factor": 10.0
+      },
+      {
+        "from_uom": "CS",
+        "to_uom": "EA",
+        "factor": 1000.0
+      }
+    ]
   },
   {
     "sku": "JAN-LNR-3858-15-BL",
@@ -2628,7 +3694,14 @@
     "category": "Janitorial",
     "gtin": "9999900001624",
     "manufacturer_part_number": "ACME-62521",
-    "manufacturer_name": "ACME Industrial (fictitious)"
+    "manufacturer_name": "ACME Industrial (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "EA",
+        "factor": 100.0
+      }
+    ]
   },
   {
     "sku": "TLS-UTK-163",
@@ -2640,7 +3713,8 @@
     "category": "Tools",
     "gtin": "9999900001631",
     "manufacturer_part_number": "SGC-99974",
-    "manufacturer_name": "SafeGuard Corp (fictitious)"
+    "manufacturer_name": "SafeGuard Corp (fictitious)",
+    "conversions": []
   },
   {
     "sku": "FST-LWS-38-16",
@@ -2657,7 +3731,14 @@
     "category": "Fasteners",
     "gtin": "9999900001648",
     "manufacturer_part_number": "CPI-49824",
-    "manufacturer_name": "CleanPro Industries (fictitious)"
+    "manufacturer_name": "CleanPro Industries (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "BX",
+        "to_uom": "EA",
+        "factor": 100.0
+      }
+    ]
   },
   {
     "sku": "PPE-GLV-NIT-8-S-WHI",
@@ -2674,7 +3755,24 @@
     "category": "Safety/PPE",
     "gtin": "9999900001655",
     "manufacturer_part_number": "FAL-91057",
-    "manufacturer_name": "FastenAll LLC (fictitious)"
+    "manufacturer_name": "FastenAll LLC (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "BX",
+        "to_uom": "EA",
+        "factor": 100.0
+      },
+      {
+        "from_uom": "CS",
+        "to_uom": "BX",
+        "factor": 10.0
+      },
+      {
+        "from_uom": "CS",
+        "to_uom": "EA",
+        "factor": 1000.0
+      }
+    ]
   },
   {
     "sku": "JAN-FST-166",
@@ -2691,7 +3789,14 @@
     "category": "Janitorial",
     "gtin": "9999900001662",
     "manufacturer_part_number": "TFS-68028",
-    "manufacturer_name": "TechFast Systems (fictitious)"
+    "manufacturer_name": "TechFast Systems (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "GLL",
+        "factor": 4.0
+      }
+    ]
   },
   {
     "sku": "JAN-FTI-167",
@@ -2708,7 +3813,14 @@
     "category": "Janitorial",
     "gtin": "9999900001679",
     "manufacturer_part_number": "GCC-50026",
-    "manufacturer_name": "GreenClean Co (fictitious)"
+    "manufacturer_name": "GreenClean Co (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "BX",
+        "factor": 30.0
+      }
+    ]
   },
   {
     "sku": "LUB-POS-168",
@@ -2725,7 +3837,14 @@
     "category": "Lubricants",
     "gtin": "9999900001686",
     "manufacturer_part_number": "GCC-23006",
-    "manufacturer_name": "GreenClean Co (fictitious)"
+    "manufacturer_name": "GreenClean Co (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "EA",
+        "factor": 12.0
+      }
+    ]
   },
   {
     "sku": "JAN-NFC-169",
@@ -2742,7 +3861,14 @@
     "category": "Janitorial",
     "gtin": "9999900001693",
     "manufacturer_part_number": "FAL-20641",
-    "manufacturer_name": "FastenAll LLC (fictitious)"
+    "manufacturer_name": "FastenAll LLC (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "GLL",
+        "factor": 4.0
+      }
+    ]
   },
   {
     "sku": "PPE-N95-170",
@@ -2759,7 +3885,14 @@
     "category": "Safety/PPE",
     "gtin": "9999900001709",
     "manufacturer_part_number": "FAL-19838",
-    "manufacturer_name": "FastenAll LLC (fictitious)"
+    "manufacturer_name": "FastenAll LLC (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "BX",
+        "to_uom": "EA",
+        "factor": 20.0
+      }
+    ]
   },
   {
     "sku": "PPE-N95-171",
@@ -2776,7 +3909,14 @@
     "category": "Safety/PPE",
     "gtin": "9999900001716",
     "manufacturer_part_number": "ACME-87832",
-    "manufacturer_name": "ACME Industrial (fictitious)"
+    "manufacturer_name": "ACME Industrial (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "BX",
+        "to_uom": "EA",
+        "factor": 20.0
+      }
+    ]
   },
   {
     "sku": "TLS-TPM-16FT",
@@ -2788,7 +3928,8 @@
     "category": "Tools",
     "gtin": "9999900001723",
     "manufacturer_part_number": "PTI-47056",
-    "manufacturer_name": "PowerTools Inc (fictitious)"
+    "manufacturer_name": "PowerTools Inc (fictitious)",
+    "conversions": []
   },
   {
     "sku": "PKG-BBW-173",
@@ -2800,7 +3941,8 @@
     "category": "Packaging",
     "gtin": "9999900001730",
     "manufacturer_part_number": "PGS-40595",
-    "manufacturer_name": "ProGrade Supply (fictitious)"
+    "manufacturer_name": "ProGrade Supply (fictitious)",
+    "conversions": []
   },
   {
     "sku": "JAN-FPD-20-BLU",
@@ -2817,7 +3959,14 @@
     "category": "Janitorial",
     "gtin": "9999900001747",
     "manufacturer_part_number": "GCC-81376",
-    "manufacturer_name": "GreenClean Co (fictitious)"
+    "manufacturer_name": "GreenClean Co (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "EA",
+        "factor": 5.0
+      }
+    ]
   },
   {
     "sku": "JAN-FST-175",
@@ -2834,7 +3983,14 @@
     "category": "Janitorial",
     "gtin": "9999900001754",
     "manufacturer_part_number": "CPI-28643",
-    "manufacturer_name": "CleanPro Industries (fictitious)"
+    "manufacturer_name": "CleanPro Industries (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "GLL",
+        "factor": 4.0
+      }
+    ]
   },
   {
     "sku": "FST-SHC-38-16-2",
@@ -2851,7 +4007,14 @@
     "category": "Fasteners",
     "gtin": "9999900001761",
     "manufacturer_part_number": "ACME-84607",
-    "manufacturer_name": "ACME Industrial (fictitious)"
+    "manufacturer_name": "ACME Industrial (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "BX",
+        "to_uom": "EA",
+        "factor": 25.0
+      }
+    ]
   },
   {
     "sku": "JAN-TTI-177",
@@ -2868,7 +4031,14 @@
     "category": "Janitorial",
     "gtin": "9999900001778",
     "manufacturer_part_number": "PGS-49857",
-    "manufacturer_name": "ProGrade Supply (fictitious)"
+    "manufacturer_name": "ProGrade Supply (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "RL",
+        "factor": 96.0
+      }
+    ]
   },
   {
     "sku": "PKG-BBW-178",
@@ -2880,7 +4050,8 @@
     "category": "Packaging",
     "gtin": "9999900001785",
     "manufacturer_part_number": "ECP-75597",
-    "manufacturer_name": "EcoClean Products (fictitious)"
+    "manufacturer_name": "EcoClean Products (fictitious)",
+    "conversions": []
   },
   {
     "sku": "ABR-COW-6IN-3",
@@ -2897,7 +4068,14 @@
     "category": "Abrasives",
     "gtin": "9999900001792",
     "manufacturer_part_number": "PGS-66626",
-    "manufacturer_name": "ProGrade Supply (fictitious)"
+    "manufacturer_name": "ProGrade Supply (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "BX",
+        "to_uom": "EA",
+        "factor": 25.0
+      }
+    ]
   },
   {
     "sku": "JAN-GCL-180",
@@ -2914,7 +4092,14 @@
     "category": "Janitorial",
     "gtin": "9999900001808",
     "manufacturer_part_number": "GCC-21970",
-    "manufacturer_name": "GreenClean Co (fictitious)"
+    "manufacturer_name": "GreenClean Co (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "EA",
+        "factor": 12.0
+      }
+    ]
   },
   {
     "sku": "JAN-FST-181",
@@ -2931,7 +4116,14 @@
     "category": "Janitorial",
     "gtin": "9999900001815",
     "manufacturer_part_number": "GCC-12719",
-    "manufacturer_name": "GreenClean Co (fictitious)"
+    "manufacturer_name": "GreenClean Co (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "GLL",
+        "factor": 4.0
+      }
+    ]
   },
   {
     "sku": "PKG-STW-182",
@@ -2948,7 +4140,14 @@
     "category": "Packaging",
     "gtin": "9999900001822",
     "manufacturer_part_number": "PTI-32962",
-    "manufacturer_name": "PowerTools Inc (fictitious)"
+    "manufacturer_name": "PowerTools Inc (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "RL",
+        "factor": 4.0
+      }
+    ]
   },
   {
     "sku": "TLS-TPM-30FT",
@@ -2960,7 +4159,8 @@
     "category": "Tools",
     "gtin": "9999900001839",
     "manufacturer_part_number": "TFS-46458",
-    "manufacturer_name": "TechFast Systems (fictitious)"
+    "manufacturer_name": "TechFast Systems (fictitious)",
+    "conversions": []
   },
   {
     "sku": "JAN-LNR-4046-15-BL",
@@ -2977,7 +4177,14 @@
     "category": "Janitorial",
     "gtin": "9999900001846",
     "manufacturer_part_number": "GCC-63523",
-    "manufacturer_name": "GreenClean Co (fictitious)"
+    "manufacturer_name": "GreenClean Co (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "EA",
+        "factor": 100.0
+      }
+    ]
   },
   {
     "sku": "JAN-DSP-185",
@@ -2994,7 +4201,14 @@
     "category": "Janitorial",
     "gtin": "9999900001853",
     "manufacturer_part_number": "CSS-31079",
-    "manufacturer_name": "ChemSafe Solutions (fictitious)"
+    "manufacturer_name": "ChemSafe Solutions (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "EA",
+        "factor": 12.0
+      }
+    ]
   },
   {
     "sku": "JAN-DSP-186",
@@ -3011,7 +4225,14 @@
     "category": "Janitorial",
     "gtin": "9999900001860",
     "manufacturer_part_number": "ECP-47777",
-    "manufacturer_name": "EcoClean Products (fictitious)"
+    "manufacturer_name": "EcoClean Products (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "EA",
+        "factor": 12.0
+      }
+    ]
   },
   {
     "sku": "PKG-PTC-187",
@@ -3028,7 +4249,14 @@
     "category": "Packaging",
     "gtin": "9999900001877",
     "manufacturer_part_number": "ECP-82102",
-    "manufacturer_name": "EcoClean Products (fictitious)"
+    "manufacturer_name": "EcoClean Products (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "RL",
+        "factor": 36.0
+      }
+    ]
   },
   {
     "sku": "FST-FWS-516-18-2",
@@ -3045,7 +4273,14 @@
     "category": "Fasteners",
     "gtin": "9999900001884",
     "manufacturer_part_number": "PGS-52372",
-    "manufacturer_name": "ProGrade Supply (fictitious)"
+    "manufacturer_name": "ProGrade Supply (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "BX",
+        "to_uom": "EA",
+        "factor": 100.0
+      }
+    ]
   },
   {
     "sku": "PPE-GLS-AMB-ANTI-FOG-2",
@@ -3057,7 +4292,8 @@
     "category": "Safety/PPE",
     "gtin": "9999900001891",
     "manufacturer_part_number": "ECP-81118",
-    "manufacturer_name": "EcoClean Products (fictitious)"
+    "manufacturer_name": "EcoClean Products (fictitious)",
+    "conversions": []
   },
   {
     "sku": "TLS-AWR-6IN",
@@ -3069,7 +4305,8 @@
     "category": "Tools",
     "gtin": "9999900001907",
     "manufacturer_part_number": "ECP-57419",
-    "manufacturer_name": "EcoClean Products (fictitious)"
+    "manufacturer_name": "EcoClean Products (fictitious)",
+    "conversions": []
   },
   {
     "sku": "ADH-SGG-191",
@@ -3086,7 +4323,14 @@
     "category": "Adhesives",
     "gtin": "9999900001914",
     "manufacturer_part_number": "PGS-16764",
-    "manufacturer_name": "ProGrade Supply (fictitious)"
+    "manufacturer_name": "ProGrade Supply (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "PK",
+        "to_uom": "EA",
+        "factor": 12.0
+      }
+    ]
   },
   {
     "sku": "JAN-NFC-192",
@@ -3103,7 +4347,14 @@
     "category": "Janitorial",
     "gtin": "9999900001921",
     "manufacturer_part_number": "PTI-47752",
-    "manufacturer_name": "PowerTools Inc (fictitious)"
+    "manufacturer_name": "PowerTools Inc (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "GLL",
+        "factor": 4.0
+      }
+    ]
   },
   {
     "sku": "TLS-SDR-516-18-1",
@@ -3115,7 +4366,8 @@
     "category": "Tools",
     "gtin": "9999900001938",
     "manufacturer_part_number": "PGS-89806",
-    "manufacturer_name": "ProGrade Supply (fictitious)"
+    "manufacturer_name": "ProGrade Supply (fictitious)",
+    "conversions": []
   },
   {
     "sku": "JAN-FFN-194",
@@ -3132,7 +4384,14 @@
     "category": "Janitorial",
     "gtin": "9999900001945",
     "manufacturer_part_number": "CPI-11792",
-    "manufacturer_name": "CleanPro Industries (fictitious)"
+    "manufacturer_name": "CleanPro Industries (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "GLL",
+        "factor": 4.0
+      }
+    ]
   },
   {
     "sku": "ABR-FLD-4IN",
@@ -3149,7 +4408,14 @@
     "category": "Abrasives",
     "gtin": "9999900001952",
     "manufacturer_part_number": "ECP-24871",
-    "manufacturer_name": "EcoClean Products (fictitious)"
+    "manufacturer_name": "EcoClean Products (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "BX",
+        "to_uom": "EA",
+        "factor": 10.0
+      }
+    ]
   },
   {
     "sku": "TLS-AWR-8IN-1",
@@ -3161,7 +4427,8 @@
     "category": "Tools",
     "gtin": "9999900001969",
     "manufacturer_part_number": "SGC-48254",
-    "manufacturer_name": "SafeGuard Corp (fictitious)"
+    "manufacturer_name": "SafeGuard Corp (fictitious)",
+    "conversions": []
   },
   {
     "sku": "TLS-UTB-197",
@@ -3178,7 +4445,14 @@
     "category": "Tools",
     "gtin": "9999900001976",
     "manufacturer_part_number": "PTI-73242",
-    "manufacturer_name": "PowerTools Inc (fictitious)"
+    "manufacturer_name": "PowerTools Inc (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "PK",
+        "to_uom": "EA",
+        "factor": 100.0
+      }
+    ]
   },
   {
     "sku": "TLS-TPM-25FT",
@@ -3190,7 +4464,8 @@
     "category": "Tools",
     "gtin": "9999900001983",
     "manufacturer_part_number": "FAL-60277",
-    "manufacturer_name": "FastenAll LLC (fictitious)"
+    "manufacturer_name": "FastenAll LLC (fictitious)",
+    "conversions": []
   },
   {
     "sku": "JAN-LNR-4347-10-BL",
@@ -3207,7 +4482,14 @@
     "category": "Janitorial",
     "gtin": "9999900001990",
     "manufacturer_part_number": "GCC-64387",
-    "manufacturer_name": "GreenClean Co (fictitious)"
+    "manufacturer_name": "GreenClean Co (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "RL",
+        "to_uom": "EA",
+        "factor": 50.0
+      }
+    ]
   },
   {
     "sku": "JAN-DSP-200",
@@ -3224,7 +4506,14 @@
     "category": "Janitorial",
     "gtin": "9999900002003",
     "manufacturer_part_number": "TFS-10336",
-    "manufacturer_name": "TechFast Systems (fictitious)"
+    "manufacturer_name": "TechFast Systems (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "EA",
+        "factor": 12.0
+      }
+    ]
   },
   {
     "sku": "JAN-TTI-201",
@@ -3241,7 +4530,14 @@
     "category": "Janitorial",
     "gtin": "9999900002010",
     "manufacturer_part_number": "PTI-86011",
-    "manufacturer_name": "PowerTools Inc (fictitious)"
+    "manufacturer_name": "PowerTools Inc (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "RL",
+        "factor": 96.0
+      }
+    ]
   },
   {
     "sku": "PKG-PTC-202",
@@ -3258,7 +4554,14 @@
     "category": "Packaging",
     "gtin": "9999900002027",
     "manufacturer_part_number": "PGS-68529",
-    "manufacturer_name": "ProGrade Supply (fictitious)"
+    "manufacturer_name": "ProGrade Supply (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "RL",
+        "factor": 36.0
+      }
+    ]
   },
   {
     "sku": "ABR-COW-5IN-1",
@@ -3275,7 +4578,14 @@
     "category": "Abrasives",
     "gtin": "9999900002034",
     "manufacturer_part_number": "PGS-81228",
-    "manufacturer_name": "ProGrade Supply (fictitious)"
+    "manufacturer_name": "ProGrade Supply (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "BX",
+        "to_uom": "EA",
+        "factor": 25.0
+      }
+    ]
   },
   {
     "sku": "JAN-HSG-204",
@@ -3292,7 +4602,14 @@
     "category": "Janitorial",
     "gtin": "9999900002041",
     "manufacturer_part_number": "PGS-34727",
-    "manufacturer_name": "ProGrade Supply (fictitious)"
+    "manufacturer_name": "ProGrade Supply (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "EA",
+        "factor": 12.0
+      }
+    ]
   },
   {
     "sku": "PKG-BBW-205",
@@ -3304,7 +4621,8 @@
     "category": "Packaging",
     "gtin": "9999900002058",
     "manufacturer_part_number": "FAL-40613",
-    "manufacturer_name": "FastenAll LLC (fictitious)"
+    "manufacturer_name": "FastenAll LLC (fictitious)",
+    "conversions": []
   },
   {
     "sku": "ELE-WNT-34-10",
@@ -3321,7 +4639,14 @@
     "category": "Electrical",
     "gtin": "9999900002065",
     "manufacturer_part_number": "ACME-59968",
-    "manufacturer_name": "ACME Industrial (fictitious)"
+    "manufacturer_name": "ACME Industrial (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "BX",
+        "to_uom": "EA",
+        "factor": 100.0
+      }
+    ]
   },
   {
     "sku": "JAN-HSG-207",
@@ -3338,7 +4663,14 @@
     "category": "Janitorial",
     "gtin": "9999900002072",
     "manufacturer_part_number": "CPI-14852",
-    "manufacturer_name": "CleanPro Industries (fictitious)"
+    "manufacturer_name": "CleanPro Industries (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "EA",
+        "factor": 12.0
+      }
+    ]
   },
   {
     "sku": "PPE-HAT-ORA-1",
@@ -3350,7 +4682,8 @@
     "category": "Safety/PPE",
     "gtin": "9999900002089",
     "manufacturer_part_number": "TFS-23154",
-    "manufacturer_name": "TechFast Systems (fictitious)"
+    "manufacturer_name": "TechFast Systems (fictitious)",
+    "conversions": []
   },
   {
     "sku": "TLS-SDR-M10-212",
@@ -3362,7 +4695,8 @@
     "category": "Tools",
     "gtin": "9999900002096",
     "manufacturer_part_number": "SGC-28894",
-    "manufacturer_name": "SafeGuard Corp (fictitious)"
+    "manufacturer_name": "SafeGuard Corp (fictitious)",
+    "conversions": []
   },
   {
     "sku": "ELE-WNT-516-18",
@@ -3379,7 +4713,14 @@
     "category": "Electrical",
     "gtin": "9999900002102",
     "manufacturer_part_number": "CPI-44737",
-    "manufacturer_name": "CleanPro Industries (fictitious)"
+    "manufacturer_name": "CleanPro Industries (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "BX",
+        "to_uom": "EA",
+        "factor": 100.0
+      }
+    ]
   },
   {
     "sku": "JAN-DSP-211",
@@ -3396,7 +4737,14 @@
     "category": "Janitorial",
     "gtin": "9999900002119",
     "manufacturer_part_number": "GCC-95175",
-    "manufacturer_name": "GreenClean Co (fictitious)"
+    "manufacturer_name": "GreenClean Co (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "EA",
+        "factor": 12.0
+      }
+    ]
   },
   {
     "sku": "PPE-GLV-NIT-6-XXL-BLA",
@@ -3413,7 +4761,24 @@
     "category": "Safety/PPE",
     "gtin": "9999900002126",
     "manufacturer_part_number": "CSS-73956",
-    "manufacturer_name": "ChemSafe Solutions (fictitious)"
+    "manufacturer_name": "ChemSafe Solutions (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "BX",
+        "to_uom": "EA",
+        "factor": 100.0
+      },
+      {
+        "from_uom": "CS",
+        "to_uom": "BX",
+        "factor": 10.0
+      },
+      {
+        "from_uom": "CS",
+        "to_uom": "EA",
+        "factor": 1000.0
+      }
+    ]
   },
   {
     "sku": "ABR-COW-4IN-2",
@@ -3430,7 +4795,14 @@
     "category": "Abrasives",
     "gtin": "9999900002133",
     "manufacturer_part_number": "ACME-47667",
-    "manufacturer_name": "ACME Industrial (fictitious)"
+    "manufacturer_name": "ACME Industrial (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "BX",
+        "to_uom": "EA",
+        "factor": 25.0
+      }
+    ]
   },
   {
     "sku": "JAN-FST-214",
@@ -3447,7 +4819,14 @@
     "category": "Janitorial",
     "gtin": "9999900002140",
     "manufacturer_part_number": "SGC-22903",
-    "manufacturer_name": "SafeGuard Corp (fictitious)"
+    "manufacturer_name": "SafeGuard Corp (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "GLL",
+        "factor": 4.0
+      }
+    ]
   },
   {
     "sku": "ADH-EPX-215",
@@ -3464,7 +4843,14 @@
     "category": "Adhesives",
     "gtin": "9999900002157",
     "manufacturer_part_number": "SGC-49251",
-    "manufacturer_name": "SafeGuard Corp (fictitious)"
+    "manufacturer_name": "SafeGuard Corp (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "PK",
+        "to_uom": "EA",
+        "factor": 6.0
+      }
+    ]
   },
   {
     "sku": "FST-HNT-34-10",
@@ -3481,7 +4867,14 @@
     "category": "Fasteners",
     "gtin": "9999900002164",
     "manufacturer_part_number": "ACME-48452",
-    "manufacturer_name": "ACME Industrial (fictitious)"
+    "manufacturer_name": "ACME Industrial (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "BX",
+        "to_uom": "EA",
+        "factor": 100.0
+      }
+    ]
   },
   {
     "sku": "JAN-DGR-217",
@@ -3498,7 +4891,14 @@
     "category": "Janitorial",
     "gtin": "9999900002171",
     "manufacturer_part_number": "CSS-42007",
-    "manufacturer_name": "ChemSafe Solutions (fictitious)"
+    "manufacturer_name": "ChemSafe Solutions (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "GLL",
+        "factor": 4.0
+      }
+    ]
   },
   {
     "sku": "ABR-SPS-150G",
@@ -3515,7 +4915,14 @@
     "category": "Abrasives",
     "gtin": "9999900002188",
     "manufacturer_part_number": "ECP-33600",
-    "manufacturer_name": "EcoClean Products (fictitious)"
+    "manufacturer_name": "EcoClean Products (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "PK",
+        "to_uom": "EA",
+        "factor": 50.0
+      }
+    ]
   },
   {
     "sku": "PPE-N95-219",
@@ -3532,7 +4939,14 @@
     "category": "Safety/PPE",
     "gtin": "9999900002195",
     "manufacturer_part_number": "CPI-60140",
-    "manufacturer_name": "CleanPro Industries (fictitious)"
+    "manufacturer_name": "CleanPro Industries (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "BX",
+        "to_uom": "EA",
+        "factor": 20.0
+      }
+    ]
   },
   {
     "sku": "ADH-SGG-220",
@@ -3549,7 +4963,14 @@
     "category": "Adhesives",
     "gtin": "9999900002201",
     "manufacturer_part_number": "FAL-86435",
-    "manufacturer_name": "FastenAll LLC (fictitious)"
+    "manufacturer_name": "FastenAll LLC (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "PK",
+        "to_uom": "EA",
+        "factor": 12.0
+      }
+    ]
   },
   {
     "sku": "PPE-EAR-221",
@@ -3566,7 +4987,14 @@
     "category": "Safety/PPE",
     "gtin": "9999900002218",
     "manufacturer_part_number": "FAL-43289",
-    "manufacturer_name": "FastenAll LLC (fictitious)"
+    "manufacturer_name": "FastenAll LLC (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "BX",
+        "to_uom": "PR",
+        "factor": 200.0
+      }
+    ]
   },
   {
     "sku": "TLS-AWR-6IN-1",
@@ -3578,7 +5006,8 @@
     "category": "Tools",
     "gtin": "9999900002225",
     "manufacturer_part_number": "PTI-70981",
-    "manufacturer_name": "PowerTools Inc (fictitious)"
+    "manufacturer_name": "PowerTools Inc (fictitious)",
+    "conversions": []
   },
   {
     "sku": "JAN-TTI-223",
@@ -3595,7 +5024,14 @@
     "category": "Janitorial",
     "gtin": "9999900002232",
     "manufacturer_part_number": "TFS-67898",
-    "manufacturer_name": "TechFast Systems (fictitious)"
+    "manufacturer_name": "TechFast Systems (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "RL",
+        "factor": 96.0
+      }
+    ]
   },
   {
     "sku": "JAN-DGR-224",
@@ -3612,7 +5048,14 @@
     "category": "Janitorial",
     "gtin": "9999900002249",
     "manufacturer_part_number": "GCC-65615",
-    "manufacturer_name": "GreenClean Co (fictitious)"
+    "manufacturer_name": "GreenClean Co (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "GLL",
+        "factor": 4.0
+      }
+    ]
   },
   {
     "sku": "PKG-BBW-225",
@@ -3624,7 +5067,8 @@
     "category": "Packaging",
     "gtin": "9999900002256",
     "manufacturer_part_number": "PTI-49599",
-    "manufacturer_name": "PowerTools Inc (fictitious)"
+    "manufacturer_name": "PowerTools Inc (fictitious)",
+    "conversions": []
   },
   {
     "sku": "JAN-LNR-4046-07-BL",
@@ -3641,7 +5085,14 @@
     "category": "Janitorial",
     "gtin": "9999900002263",
     "manufacturer_part_number": "ECP-57049",
-    "manufacturer_name": "EcoClean Products (fictitious)"
+    "manufacturer_name": "EcoClean Products (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "RL",
+        "to_uom": "EA",
+        "factor": 50.0
+      }
+    ]
   },
   {
     "sku": "LUB-POS-227",
@@ -3658,7 +5109,14 @@
     "category": "Lubricants",
     "gtin": "9999900002270",
     "manufacturer_part_number": "PTI-48696",
-    "manufacturer_name": "PowerTools Inc (fictitious)"
+    "manufacturer_name": "PowerTools Inc (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "EA",
+        "factor": 12.0
+      }
+    ]
   },
   {
     "sku": "FST-HNT-58-11",
@@ -3675,7 +5133,14 @@
     "category": "Fasteners",
     "gtin": "9999900002287",
     "manufacturer_part_number": "ECP-99889",
-    "manufacturer_name": "EcoClean Products (fictitious)"
+    "manufacturer_name": "EcoClean Products (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "BX",
+        "to_uom": "EA",
+        "factor": 100.0
+      }
+    ]
   },
   {
     "sku": "FST-LWS-M8",
@@ -3692,7 +5157,14 @@
     "category": "Fasteners",
     "gtin": "9999900002294",
     "manufacturer_part_number": "GCC-47512",
-    "manufacturer_name": "GreenClean Co (fictitious)"
+    "manufacturer_name": "GreenClean Co (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "BX",
+        "to_uom": "EA",
+        "factor": 100.0
+      }
+    ]
   },
   {
     "sku": "JAN-FST-230",
@@ -3709,7 +5181,14 @@
     "category": "Janitorial",
     "gtin": "9999900002300",
     "manufacturer_part_number": "GCC-38705",
-    "manufacturer_name": "GreenClean Co (fictitious)"
+    "manufacturer_name": "GreenClean Co (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "GLL",
+        "factor": 4.0
+      }
+    ]
   },
   {
     "sku": "ADH-EPX-231",
@@ -3726,7 +5205,14 @@
     "category": "Adhesives",
     "gtin": "9999900002317",
     "manufacturer_part_number": "FAL-98835",
-    "manufacturer_name": "FastenAll LLC (fictitious)"
+    "manufacturer_name": "FastenAll LLC (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "PK",
+        "to_uom": "EA",
+        "factor": 6.0
+      }
+    ]
   },
   {
     "sku": "PKG-PTC-232",
@@ -3743,7 +5229,14 @@
     "category": "Packaging",
     "gtin": "9999900002324",
     "manufacturer_part_number": "CPI-92242",
-    "manufacturer_name": "CleanPro Industries (fictitious)"
+    "manufacturer_name": "CleanPro Industries (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "RL",
+        "factor": 36.0
+      }
+    ]
   },
   {
     "sku": "ADH-CON-233",
@@ -3760,7 +5253,14 @@
     "category": "Adhesives",
     "gtin": "9999900002331",
     "manufacturer_part_number": "ACME-67779",
-    "manufacturer_name": "ACME Industrial (fictitious)"
+    "manufacturer_name": "ACME Industrial (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "EA",
+        "factor": 12.0
+      }
+    ]
   },
   {
     "sku": "FST-FWS-34-10-1",
@@ -3777,7 +5277,14 @@
     "category": "Fasteners",
     "gtin": "9999900002348",
     "manufacturer_part_number": "GCC-21813",
-    "manufacturer_name": "GreenClean Co (fictitious)"
+    "manufacturer_name": "GreenClean Co (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "BX",
+        "to_uom": "EA",
+        "factor": 100.0
+      }
+    ]
   },
   {
     "sku": "JAN-TTI-235",
@@ -3794,7 +5301,14 @@
     "category": "Janitorial",
     "gtin": "9999900002355",
     "manufacturer_part_number": "CSS-33021",
-    "manufacturer_name": "ChemSafe Solutions (fictitious)"
+    "manufacturer_name": "ChemSafe Solutions (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "RL",
+        "factor": 96.0
+      }
+    ]
   },
   {
     "sku": "JAN-LNR-4347-12-WH",
@@ -3811,7 +5325,14 @@
     "category": "Janitorial",
     "gtin": "9999900002362",
     "manufacturer_part_number": "CPI-45720",
-    "manufacturer_name": "CleanPro Industries (fictitious)"
+    "manufacturer_name": "CleanPro Industries (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "RL",
+        "to_uom": "EA",
+        "factor": 50.0
+      }
+    ]
   },
   {
     "sku": "PPE-N95-237",
@@ -3828,7 +5349,14 @@
     "category": "Safety/PPE",
     "gtin": "9999900002379",
     "manufacturer_part_number": "PTI-73156",
-    "manufacturer_name": "PowerTools Inc (fictitious)"
+    "manufacturer_name": "PowerTools Inc (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "BX",
+        "to_uom": "EA",
+        "factor": 20.0
+      }
+    ]
   },
   {
     "sku": "JAN-TTI-238",
@@ -3845,7 +5373,14 @@
     "category": "Janitorial",
     "gtin": "9999900002386",
     "manufacturer_part_number": "CSS-71385",
-    "manufacturer_name": "ChemSafe Solutions (fictitious)"
+    "manufacturer_name": "ChemSafe Solutions (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "RL",
+        "factor": 96.0
+      }
+    ]
   },
   {
     "sku": "FST-SHC-12-13-4",
@@ -3862,7 +5397,14 @@
     "category": "Fasteners",
     "gtin": "9999900002393",
     "manufacturer_part_number": "CPI-62089",
-    "manufacturer_name": "CleanPro Industries (fictitious)"
+    "manufacturer_name": "CleanPro Industries (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "BX",
+        "to_uom": "EA",
+        "factor": 25.0
+      }
+    ]
   },
   {
     "sku": "ABR-FLD-4IN-1",
@@ -3879,7 +5421,14 @@
     "category": "Abrasives",
     "gtin": "9999900002409",
     "manufacturer_part_number": "CSS-44663",
-    "manufacturer_name": "ChemSafe Solutions (fictitious)"
+    "manufacturer_name": "ChemSafe Solutions (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "BX",
+        "to_uom": "EA",
+        "factor": 10.0
+      }
+    ]
   },
   {
     "sku": "ABR-COW-6IN-4",
@@ -3896,7 +5445,14 @@
     "category": "Abrasives",
     "gtin": "9999900002416",
     "manufacturer_part_number": "SGC-98125",
-    "manufacturer_name": "SafeGuard Corp (fictitious)"
+    "manufacturer_name": "SafeGuard Corp (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "BX",
+        "to_uom": "EA",
+        "factor": 25.0
+      }
+    ]
   },
   {
     "sku": "JAN-FPD-17-BLA",
@@ -3913,7 +5469,14 @@
     "category": "Janitorial",
     "gtin": "9999900002423",
     "manufacturer_part_number": "GCC-40647",
-    "manufacturer_name": "GreenClean Co (fictitious)"
+    "manufacturer_name": "GreenClean Co (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "EA",
+        "factor": 5.0
+      }
+    ]
   },
   {
     "sku": "TLS-TPM-30FT-1",
@@ -3925,7 +5488,8 @@
     "category": "Tools",
     "gtin": "9999900002430",
     "manufacturer_part_number": "ACME-83584",
-    "manufacturer_name": "ACME Industrial (fictitious)"
+    "manufacturer_name": "ACME Industrial (fictitious)",
+    "conversions": []
   },
   {
     "sku": "JAN-GCL-244",
@@ -3942,7 +5506,14 @@
     "category": "Janitorial",
     "gtin": "9999900002447",
     "manufacturer_part_number": "GCC-18285",
-    "manufacturer_name": "GreenClean Co (fictitious)"
+    "manufacturer_name": "GreenClean Co (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "EA",
+        "factor": 12.0
+      }
+    ]
   },
   {
     "sku": "ADH-EPX-245",
@@ -3959,7 +5530,14 @@
     "category": "Adhesives",
     "gtin": "9999900002454",
     "manufacturer_part_number": "PGS-49608",
-    "manufacturer_name": "ProGrade Supply (fictitious)"
+    "manufacturer_name": "ProGrade Supply (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "PK",
+        "to_uom": "EA",
+        "factor": 6.0
+      }
+    ]
   },
   {
     "sku": "ADH-CON-246",
@@ -3976,7 +5554,14 @@
     "category": "Adhesives",
     "gtin": "9999900002461",
     "manufacturer_part_number": "ECP-15943",
-    "manufacturer_name": "EcoClean Products (fictitious)"
+    "manufacturer_name": "EcoClean Products (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "EA",
+        "factor": 12.0
+      }
+    ]
   },
   {
     "sku": "FST-FWS-M8",
@@ -3993,7 +5578,14 @@
     "category": "Fasteners",
     "gtin": "9999900002478",
     "manufacturer_part_number": "PTI-40775",
-    "manufacturer_name": "PowerTools Inc (fictitious)"
+    "manufacturer_name": "PowerTools Inc (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "BX",
+        "to_uom": "EA",
+        "factor": 100.0
+      }
+    ]
   },
   {
     "sku": "ABR-COW-6IN-5",
@@ -4010,7 +5602,14 @@
     "category": "Abrasives",
     "gtin": "9999900002485",
     "manufacturer_part_number": "CPI-80804",
-    "manufacturer_name": "CleanPro Industries (fictitious)"
+    "manufacturer_name": "CleanPro Industries (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "BX",
+        "to_uom": "EA",
+        "factor": 25.0
+      }
+    ]
   },
   {
     "sku": "ELE-WNT-38-16",
@@ -4027,7 +5626,14 @@
     "category": "Electrical",
     "gtin": "9999900002492",
     "manufacturer_part_number": "GCC-95841",
-    "manufacturer_name": "GreenClean Co (fictitious)"
+    "manufacturer_name": "GreenClean Co (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "BX",
+        "to_uom": "EA",
+        "factor": 100.0
+      }
+    ]
   },
   {
     "sku": "PPE-GLV-LAT-6-XXL-BLA",
@@ -4044,7 +5650,24 @@
     "category": "Safety/PPE",
     "gtin": "9999900002508",
     "manufacturer_part_number": "PGS-58566",
-    "manufacturer_name": "ProGrade Supply (fictitious)"
+    "manufacturer_name": "ProGrade Supply (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "BX",
+        "to_uom": "EA",
+        "factor": 100.0
+      },
+      {
+        "from_uom": "CS",
+        "to_uom": "BX",
+        "factor": 10.0
+      },
+      {
+        "from_uom": "CS",
+        "to_uom": "EA",
+        "factor": 1000.0
+      }
+    ]
   },
   {
     "sku": "JAN-NFC-251",
@@ -4061,7 +5684,14 @@
     "category": "Janitorial",
     "gtin": "9999900002515",
     "manufacturer_part_number": "PGS-40947",
-    "manufacturer_name": "ProGrade Supply (fictitious)"
+    "manufacturer_name": "ProGrade Supply (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "GLL",
+        "factor": 4.0
+      }
+    ]
   },
   {
     "sku": "JAN-HSF-252",
@@ -4078,7 +5708,14 @@
     "category": "Janitorial",
     "gtin": "9999900002522",
     "manufacturer_part_number": "SGC-58147",
-    "manufacturer_name": "SafeGuard Corp (fictitious)"
+    "manufacturer_name": "SafeGuard Corp (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "EA",
+        "factor": 6.0
+      }
+    ]
   },
   {
     "sku": "ABR-COW-4IN-3",
@@ -4095,7 +5732,14 @@
     "category": "Abrasives",
     "gtin": "9999900002539",
     "manufacturer_part_number": "CSS-26011",
-    "manufacturer_name": "ChemSafe Solutions (fictitious)"
+    "manufacturer_name": "ChemSafe Solutions (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "BX",
+        "to_uom": "EA",
+        "factor": 25.0
+      }
+    ]
   },
   {
     "sku": "TLS-AWR-8IN-2",
@@ -4107,7 +5751,8 @@
     "category": "Tools",
     "gtin": "9999900002546",
     "manufacturer_part_number": "SGC-88269",
-    "manufacturer_name": "SafeGuard Corp (fictitious)"
+    "manufacturer_name": "SafeGuard Corp (fictitious)",
+    "conversions": []
   },
   {
     "sku": "FST-HNT-34-10-1",
@@ -4124,7 +5769,14 @@
     "category": "Fasteners",
     "gtin": "9999900002553",
     "manufacturer_part_number": "ACME-26505",
-    "manufacturer_name": "ACME Industrial (fictitious)"
+    "manufacturer_name": "ACME Industrial (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "BX",
+        "to_uom": "EA",
+        "factor": 100.0
+      }
+    ]
   },
   {
     "sku": "LUB-POS-256",
@@ -4141,7 +5793,14 @@
     "category": "Lubricants",
     "gtin": "9999900002560",
     "manufacturer_part_number": "FAL-82641",
-    "manufacturer_name": "FastenAll LLC (fictitious)"
+    "manufacturer_name": "FastenAll LLC (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "EA",
+        "factor": 12.0
+      }
+    ]
   },
   {
     "sku": "JAN-NFC-257",
@@ -4158,7 +5817,14 @@
     "category": "Janitorial",
     "gtin": "9999900002577",
     "manufacturer_part_number": "GCC-40539",
-    "manufacturer_name": "GreenClean Co (fictitious)"
+    "manufacturer_name": "GreenClean Co (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "GLL",
+        "factor": 4.0
+      }
+    ]
   },
   {
     "sku": "JAN-DSP-258",
@@ -4175,7 +5841,14 @@
     "category": "Janitorial",
     "gtin": "9999900002584",
     "manufacturer_part_number": "CPI-88116",
-    "manufacturer_name": "CleanPro Industries (fictitious)"
+    "manufacturer_name": "CleanPro Industries (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "EA",
+        "factor": 12.0
+      }
+    ]
   },
   {
     "sku": "FST-HCS-38-16-112",
@@ -4192,7 +5865,14 @@
     "category": "Fasteners",
     "gtin": "9999900002591",
     "manufacturer_part_number": "PTI-32871",
-    "manufacturer_name": "PowerTools Inc (fictitious)"
+    "manufacturer_name": "PowerTools Inc (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "BX",
+        "to_uom": "EA",
+        "factor": 50.0
+      }
+    ]
   },
   {
     "sku": "PPE-GLS-CLE-ANTI-FOG-1",
@@ -4204,7 +5884,8 @@
     "category": "Safety/PPE",
     "gtin": "9999900002607",
     "manufacturer_part_number": "ACME-41186",
-    "manufacturer_name": "ACME Industrial (fictitious)"
+    "manufacturer_name": "ACME Industrial (fictitious)",
+    "conversions": []
   },
   {
     "sku": "LUB-MPG-261",
@@ -4221,7 +5902,14 @@
     "category": "Lubricants",
     "gtin": "9999900002614",
     "manufacturer_part_number": "CSS-44782",
-    "manufacturer_name": "ChemSafe Solutions (fictitious)"
+    "manufacturer_name": "ChemSafe Solutions (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "EA",
+        "factor": 10.0
+      }
+    ]
   },
   {
     "sku": "FST-LWS-M6-1",
@@ -4238,7 +5926,14 @@
     "category": "Fasteners",
     "gtin": "9999900002621",
     "manufacturer_part_number": "CPI-18330",
-    "manufacturer_name": "CleanPro Industries (fictitious)"
+    "manufacturer_name": "CleanPro Industries (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "BX",
+        "to_uom": "EA",
+        "factor": 100.0
+      }
+    ]
   },
   {
     "sku": "TLS-TPM-25FT-1",
@@ -4250,7 +5945,8 @@
     "category": "Tools",
     "gtin": "9999900002638",
     "manufacturer_part_number": "PGS-24293",
-    "manufacturer_name": "ProGrade Supply (fictitious)"
+    "manufacturer_name": "ProGrade Supply (fictitious)",
+    "conversions": []
   },
   {
     "sku": "TLS-SDR-12-13-3",
@@ -4262,7 +5958,8 @@
     "category": "Tools",
     "gtin": "9999900002645",
     "manufacturer_part_number": "TFS-96363",
-    "manufacturer_name": "TechFast Systems (fictitious)"
+    "manufacturer_name": "TechFast Systems (fictitious)",
+    "conversions": []
   },
   {
     "sku": "ABR-SPS-120G-1",
@@ -4279,7 +5976,14 @@
     "category": "Abrasives",
     "gtin": "9999900002652",
     "manufacturer_part_number": "PTI-14082",
-    "manufacturer_name": "PowerTools Inc (fictitious)"
+    "manufacturer_name": "PowerTools Inc (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "PK",
+        "to_uom": "EA",
+        "factor": 50.0
+      }
+    ]
   },
   {
     "sku": "FST-LWS-M6-2",
@@ -4296,7 +6000,14 @@
     "category": "Fasteners",
     "gtin": "9999900002669",
     "manufacturer_part_number": "PGS-24150",
-    "manufacturer_name": "ProGrade Supply (fictitious)"
+    "manufacturer_name": "ProGrade Supply (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "BX",
+        "to_uom": "EA",
+        "factor": 100.0
+      }
+    ]
   },
   {
     "sku": "TLS-UTK-267",
@@ -4308,7 +6019,8 @@
     "category": "Tools",
     "gtin": "9999900002676",
     "manufacturer_part_number": "PGS-20589",
-    "manufacturer_name": "ProGrade Supply (fictitious)"
+    "manufacturer_name": "ProGrade Supply (fictitious)",
+    "conversions": []
   },
   {
     "sku": "JAN-GCL-268",
@@ -4325,7 +6037,14 @@
     "category": "Janitorial",
     "gtin": "9999900002683",
     "manufacturer_part_number": "GCC-26540",
-    "manufacturer_name": "GreenClean Co (fictitious)"
+    "manufacturer_name": "GreenClean Co (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "EA",
+        "factor": 12.0
+      }
+    ]
   },
   {
     "sku": "JAN-PTR-2P-NAT",
@@ -4342,7 +6061,14 @@
     "category": "Janitorial",
     "gtin": "9999900002690",
     "manufacturer_part_number": "GCC-79541",
-    "manufacturer_name": "GreenClean Co (fictitious)"
+    "manufacturer_name": "GreenClean Co (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "RL",
+        "factor": 12.0
+      }
+    ]
   },
   {
     "sku": "JAN-TTI-270",
@@ -4359,7 +6085,14 @@
     "category": "Janitorial",
     "gtin": "9999900002706",
     "manufacturer_part_number": "PGS-66387",
-    "manufacturer_name": "ProGrade Supply (fictitious)"
+    "manufacturer_name": "ProGrade Supply (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "RL",
+        "factor": 96.0
+      }
+    ]
   },
   {
     "sku": "PPE-GLV-LAT-5-XXL-WHI",
@@ -4376,7 +6109,24 @@
     "category": "Safety/PPE",
     "gtin": "9999900002713",
     "manufacturer_part_number": "SGC-39949",
-    "manufacturer_name": "SafeGuard Corp (fictitious)"
+    "manufacturer_name": "SafeGuard Corp (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "BX",
+        "to_uom": "EA",
+        "factor": 100.0
+      },
+      {
+        "from_uom": "CS",
+        "to_uom": "BX",
+        "factor": 10.0
+      },
+      {
+        "from_uom": "CS",
+        "to_uom": "EA",
+        "factor": 1000.0
+      }
+    ]
   },
   {
     "sku": "ELE-WNT-M8",
@@ -4393,7 +6143,14 @@
     "category": "Electrical",
     "gtin": "9999900002720",
     "manufacturer_part_number": "CSS-22463",
-    "manufacturer_name": "ChemSafe Solutions (fictitious)"
+    "manufacturer_name": "ChemSafe Solutions (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "BX",
+        "to_uom": "EA",
+        "factor": 100.0
+      }
+    ]
   },
   {
     "sku": "JAN-GCL-273",
@@ -4410,7 +6167,14 @@
     "category": "Janitorial",
     "gtin": "9999900002737",
     "manufacturer_part_number": "ECP-43408",
-    "manufacturer_name": "EcoClean Products (fictitious)"
+    "manufacturer_name": "EcoClean Products (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "EA",
+        "factor": 12.0
+      }
+    ]
   },
   {
     "sku": "JAN-HSF-274",
@@ -4427,7 +6191,14 @@
     "category": "Janitorial",
     "gtin": "9999900002744",
     "manufacturer_part_number": "CPI-72163",
-    "manufacturer_name": "CleanPro Industries (fictitious)"
+    "manufacturer_name": "CleanPro Industries (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "EA",
+        "factor": 6.0
+      }
+    ]
   },
   {
     "sku": "FST-SHC-516-18-1",
@@ -4444,7 +6215,14 @@
     "category": "Fasteners",
     "gtin": "9999900002751",
     "manufacturer_part_number": "SGC-58843",
-    "manufacturer_name": "SafeGuard Corp (fictitious)"
+    "manufacturer_name": "SafeGuard Corp (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "BX",
+        "to_uom": "EA",
+        "factor": 25.0
+      }
+    ]
   },
   {
     "sku": "PPE-HAT-WHI",
@@ -4456,7 +6234,8 @@
     "category": "Safety/PPE",
     "gtin": "9999900002768",
     "manufacturer_part_number": "TFS-83608",
-    "manufacturer_name": "TechFast Systems (fictitious)"
+    "manufacturer_name": "TechFast Systems (fictitious)",
+    "conversions": []
   },
   {
     "sku": "ABR-FLD-4IN-2",
@@ -4473,7 +6252,14 @@
     "category": "Abrasives",
     "gtin": "9999900002775",
     "manufacturer_part_number": "CSS-97207",
-    "manufacturer_name": "ChemSafe Solutions (fictitious)"
+    "manufacturer_name": "ChemSafe Solutions (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "BX",
+        "to_uom": "EA",
+        "factor": 10.0
+      }
+    ]
   },
   {
     "sku": "ELE-CTI-11IN-1",
@@ -4490,7 +6276,14 @@
     "category": "Electrical",
     "gtin": "9999900002782",
     "manufacturer_part_number": "ACME-56090",
-    "manufacturer_name": "ACME Industrial (fictitious)"
+    "manufacturer_name": "ACME Industrial (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "BG",
+        "to_uom": "EA",
+        "factor": 100.0
+      }
+    ]
   },
   {
     "sku": "PPE-GLV-LAT-5-XXL-BLU",
@@ -4507,7 +6300,24 @@
     "category": "Safety/PPE",
     "gtin": "9999900002799",
     "manufacturer_part_number": "GCC-39392",
-    "manufacturer_name": "GreenClean Co (fictitious)"
+    "manufacturer_name": "GreenClean Co (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "BX",
+        "to_uom": "EA",
+        "factor": 100.0
+      },
+      {
+        "from_uom": "CS",
+        "to_uom": "BX",
+        "factor": 10.0
+      },
+      {
+        "from_uom": "CS",
+        "to_uom": "EA",
+        "factor": 1000.0
+      }
+    ]
   },
   {
     "sku": "PPE-GLV-LAT-4-XXL-BLA",
@@ -4524,7 +6334,24 @@
     "category": "Safety/PPE",
     "gtin": "9999900002805",
     "manufacturer_part_number": "CSS-85248",
-    "manufacturer_name": "ChemSafe Solutions (fictitious)"
+    "manufacturer_name": "ChemSafe Solutions (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "BX",
+        "to_uom": "EA",
+        "factor": 100.0
+      },
+      {
+        "from_uom": "CS",
+        "to_uom": "BX",
+        "factor": 10.0
+      },
+      {
+        "from_uom": "CS",
+        "to_uom": "EA",
+        "factor": 1000.0
+      }
+    ]
   },
   {
     "sku": "JAN-FST-281",
@@ -4541,7 +6368,14 @@
     "category": "Janitorial",
     "gtin": "9999900002812",
     "manufacturer_part_number": "ECP-91490",
-    "manufacturer_name": "EcoClean Products (fictitious)"
+    "manufacturer_name": "EcoClean Products (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "GLL",
+        "factor": 4.0
+      }
+    ]
   },
   {
     "sku": "ADH-SGG-282",
@@ -4558,7 +6392,14 @@
     "category": "Adhesives",
     "gtin": "9999900002829",
     "manufacturer_part_number": "TFS-96223",
-    "manufacturer_name": "TechFast Systems (fictitious)"
+    "manufacturer_name": "TechFast Systems (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "PK",
+        "to_uom": "EA",
+        "factor": 12.0
+      }
+    ]
   },
   {
     "sku": "PKG-BBW-283",
@@ -4570,7 +6411,8 @@
     "category": "Packaging",
     "gtin": "9999900002836",
     "manufacturer_part_number": "PTI-45818",
-    "manufacturer_name": "PowerTools Inc (fictitious)"
+    "manufacturer_name": "PowerTools Inc (fictitious)",
+    "conversions": []
   },
   {
     "sku": "PKG-BBW-284",
@@ -4582,7 +6424,8 @@
     "category": "Packaging",
     "gtin": "9999900002843",
     "manufacturer_part_number": "PTI-56009",
-    "manufacturer_name": "PowerTools Inc (fictitious)"
+    "manufacturer_name": "PowerTools Inc (fictitious)",
+    "conversions": []
   },
   {
     "sku": "FST-HCS-38-16-3",
@@ -4599,7 +6442,14 @@
     "category": "Fasteners",
     "gtin": "9999900002850",
     "manufacturer_part_number": "CPI-19120",
-    "manufacturer_name": "CleanPro Industries (fictitious)"
+    "manufacturer_name": "CleanPro Industries (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "BX",
+        "to_uom": "EA",
+        "factor": 50.0
+      }
+    ]
   },
   {
     "sku": "PPE-EAR-286",
@@ -4616,7 +6466,14 @@
     "category": "Safety/PPE",
     "gtin": "9999900002867",
     "manufacturer_part_number": "ACME-79531",
-    "manufacturer_name": "ACME Industrial (fictitious)"
+    "manufacturer_name": "ACME Industrial (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "BX",
+        "to_uom": "PR",
+        "factor": 200.0
+      }
+    ]
   },
   {
     "sku": "JAN-NFC-287",
@@ -4633,7 +6490,14 @@
     "category": "Janitorial",
     "gtin": "9999900002874",
     "manufacturer_part_number": "ECP-54681",
-    "manufacturer_name": "EcoClean Products (fictitious)"
+    "manufacturer_name": "EcoClean Products (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "GLL",
+        "factor": 4.0
+      }
+    ]
   },
   {
     "sku": "PPE-N95-288",
@@ -4650,7 +6514,14 @@
     "category": "Safety/PPE",
     "gtin": "9999900002881",
     "manufacturer_part_number": "CSS-52517",
-    "manufacturer_name": "ChemSafe Solutions (fictitious)"
+    "manufacturer_name": "ChemSafe Solutions (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "BX",
+        "to_uom": "EA",
+        "factor": 20.0
+      }
+    ]
   },
   {
     "sku": "LUB-POS-289",
@@ -4667,7 +6538,14 @@
     "category": "Lubricants",
     "gtin": "9999900002898",
     "manufacturer_part_number": "GCC-16895",
-    "manufacturer_name": "GreenClean Co (fictitious)"
+    "manufacturer_name": "GreenClean Co (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "EA",
+        "factor": 12.0
+      }
+    ]
   },
   {
     "sku": "PPE-EAR-290",
@@ -4684,7 +6562,14 @@
     "category": "Safety/PPE",
     "gtin": "9999900002904",
     "manufacturer_part_number": "CPI-16522",
-    "manufacturer_name": "CleanPro Industries (fictitious)"
+    "manufacturer_name": "CleanPro Industries (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "BX",
+        "to_uom": "PR",
+        "factor": 200.0
+      }
+    ]
   },
   {
     "sku": "PKG-STW-291",
@@ -4701,7 +6586,14 @@
     "category": "Packaging",
     "gtin": "9999900002911",
     "manufacturer_part_number": "SGC-96761",
-    "manufacturer_name": "SafeGuard Corp (fictitious)"
+    "manufacturer_name": "SafeGuard Corp (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "RL",
+        "factor": 4.0
+      }
+    ]
   },
   {
     "sku": "ELE-CTI-14IN",
@@ -4718,7 +6610,14 @@
     "category": "Electrical",
     "gtin": "9999900002928",
     "manufacturer_part_number": "PGS-38255",
-    "manufacturer_name": "ProGrade Supply (fictitious)"
+    "manufacturer_name": "ProGrade Supply (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "BG",
+        "to_uom": "EA",
+        "factor": 100.0
+      }
+    ]
   },
   {
     "sku": "TLS-UTB-293",
@@ -4735,7 +6634,14 @@
     "category": "Tools",
     "gtin": "9999900002935",
     "manufacturer_part_number": "SGC-24534",
-    "manufacturer_name": "SafeGuard Corp (fictitious)"
+    "manufacturer_name": "SafeGuard Corp (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "PK",
+        "to_uom": "EA",
+        "factor": 100.0
+      }
+    ]
   },
   {
     "sku": "JAN-TTI-294",
@@ -4752,7 +6658,14 @@
     "category": "Janitorial",
     "gtin": "9999900002942",
     "manufacturer_part_number": "GCC-97442",
-    "manufacturer_name": "GreenClean Co (fictitious)"
+    "manufacturer_name": "GreenClean Co (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "RL",
+        "factor": 96.0
+      }
+    ]
   },
   {
     "sku": "JAN-FTI-295",
@@ -4769,7 +6682,14 @@
     "category": "Janitorial",
     "gtin": "9999900002959",
     "manufacturer_part_number": "ACME-88554",
-    "manufacturer_name": "ACME Industrial (fictitious)"
+    "manufacturer_name": "ACME Industrial (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "CS",
+        "to_uom": "BX",
+        "factor": 30.0
+      }
+    ]
   },
   {
     "sku": "FST-LWS-12-13",
@@ -4786,7 +6706,14 @@
     "category": "Fasteners",
     "gtin": "9999900002966",
     "manufacturer_part_number": "ACME-37686",
-    "manufacturer_name": "ACME Industrial (fictitious)"
+    "manufacturer_name": "ACME Industrial (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "BX",
+        "to_uom": "EA",
+        "factor": 100.0
+      }
+    ]
   },
   {
     "sku": "PPE-HAT-BLU",
@@ -4798,7 +6725,8 @@
     "category": "Safety/PPE",
     "gtin": "9999900002973",
     "manufacturer_part_number": "PTI-11013",
-    "manufacturer_name": "PowerTools Inc (fictitious)"
+    "manufacturer_name": "PowerTools Inc (fictitious)",
+    "conversions": []
   },
   {
     "sku": "TLS-UTK-298",
@@ -4810,7 +6738,8 @@
     "category": "Tools",
     "gtin": "9999900002980",
     "manufacturer_part_number": "ECP-59834",
-    "manufacturer_name": "EcoClean Products (fictitious)"
+    "manufacturer_name": "EcoClean Products (fictitious)",
+    "conversions": []
   },
   {
     "sku": "ABR-COW-5IN-2",
@@ -4827,6 +6756,13 @@
     "category": "Abrasives",
     "gtin": "9999900002997",
     "manufacturer_part_number": "FAL-15544",
-    "manufacturer_name": "FastenAll LLC (fictitious)"
+    "manufacturer_name": "FastenAll LLC (fictitious)",
+    "conversions": [
+      {
+        "from_uom": "BX",
+        "to_uom": "EA",
+        "factor": 25.0
+      }
+    ]
   }
 ]

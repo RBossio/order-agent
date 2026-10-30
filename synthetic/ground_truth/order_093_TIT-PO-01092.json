@@ -16,7 +16,7 @@
         "kind": "XLSX",
         "filename": "TIT-PO-01092.xlsx",
         "mime_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-        "sha256": "78161aaf031c965d6cf87350fbf2aeb29639c3da826cf4b38fb48ba75e715267",
+        "sha256": "1111a4a4c6e6762c9d58a164159088b0c8a6e722fb6946d68d2fec6fc8b5cc8b",
         "page_count": null
       }
     ]
@@ -103,7 +103,7 @@
         "erp_uom": "PK",
         "erp_uom_id": 36,
         "erp_quantity": 24,
-        "conversion_factor": 1,
+        "conversion_factor": 1.0,
         "method": "XREF",
         "score": 1.0,
         "candidates": [],
@@ -140,7 +140,7 @@
         "erp_uom": "PK",
         "erp_uom_id": 47,
         "erp_quantity": 24,
-        "conversion_factor": 1,
+        "conversion_factor": 1.0,
         "method": "SELLER_CODE",
         "score": 0.98,
         "candidates": [],
@@ -177,7 +177,7 @@
         "erp_uom": "BX",
         "erp_uom_id": 50,
         "erp_quantity": 2,
-        "conversion_factor": 1,
+        "conversion_factor": 1.0,
         "method": "XREF",
         "score": 1.0,
         "candidates": [],

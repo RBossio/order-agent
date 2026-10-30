@@ -7,41 +7,23 @@ Message-ID: <po-SW-01087@nova.example>
 Date: Thu, 15 Jan 2026 10:30:00 +0000
 
 --===============4713023946110808363==
-Content-Type: text/plain; charset="us-ascii"
+Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: base64
 
-Hello,
+UGxlYXNlIGdvIGFoZWFkIHdpdGggdGhlIHJlcGxlbmlzaG1lbnQgYmVsb3cgbXkgc2lnbmF0dXJl
+LgoKQmVzdCByZWdhcmRzLApOb3ZhIFB1cmNoYXNpbmcKTm92YSBDb21wYW55IChTWU5USEVUSUMp
+Ci0tClJlcXVlc3RlZCBpdGVtczoKQUJSLUZMRC01SU4gIHwgIEZsYXAgRGlzYyA1aW4gMTgwIChT
+WU5USEVUSUMpICB8ICAxMCBCWCAvIDc0LjIzCk5PVkEtVE9PLTkxNDQgIHwgIEFkanVzdGFibGUg
+V3JlbmNoIDEwaW4gKFNZTlRIRVRJQykgIHwgIDEwIEVBIC8gMTQuMjEKUFBFLUhBVC1PUkEtMSAg
+fCAgSGFyZCBIYXQgT3JhbmdlIEFOU0kgVHlwZSBJIChTWU5USEVUSUMpICB8ICAxMiBFQSAvIDE2
+Ljk2Ck5PVkEtQURILTk2NDcgIHwgIFN1cGVyIEdsdWUgR2VsIChTWU5USEVUSUMpICB8ICA1IFBL
+IC8gMjEuODIKVExTLVVUSy0yOTggIHwgIFV0aWxpdHkgS25pZmUgUmV0cmFjdGFibGUgKFNZTlRI
+RVRJQykgIHwgIDUgRUEgLyA1LjExCk5PVkEtU0FGLTUyNzIgIHwgIEhhcmQgSGF0IFdoaXRlIEFO
+U0kgVHlwZSBJIChTWU5USEVUSUMpICB8ICAxMiBFQSAvIDIzLjgzCk5PVkEtSkFOLTY3NDggIHwg
+IERpc2luZmVjdGFudCBTcHJheSAoU1lOVEhFVElDKSAgfCAgMTIgQ1MgLyAzOS42MQpOT1ZBLVBB
+Qy01NDIwICB8ICBTdHJldGNoIFdyYXAgMThpbiAoU1lOVEhFVElDKSAgfCAgNSBDUyAvIDExNS4z
+MgpQTyBTVy0wMTA4NyDCtyAwNS0wNy0yMDI2IMK3IGRlbGl2ZXIgTm92YSBTaGlwcGluZyBMb2Nh
+dGlvbiAxIGJ5IDIwMjYtMDUtMTg=
 
-Please process the following order:
-
-PO Number: SW-01087
-Date: 05-07-2026
-Ship To: Nova Shipping Location 1
-
-Items:
-------
-  1. [ABR-FLD-5IN] Flap Disc 5in 180 (SYNTHETIC)
-     Qty: 10 BX @ $74.23
-  2. [NOVA-TOO-9144] Adjustable Wrench 10in (SYNTHETIC)
-     Qty: 10 EA @ $14.21
-  3. [PPE-HAT-ORA-1] Hard Hat Orange ANSI Type I (SYNTHETIC)
-     Qty: 12 EA @ $16.96
-  4. [NOVA-ADH-9647] Super Glue Gel (SYNTHETIC)
-     Qty: 5 PK @ $21.82
-  5. [TLS-UTK-298] Utility Knife Retractable (SYNTHETIC)
-     Qty: 5 EA @ $5.11
-  6. [NOVA-SAF-5272] Hard Hat White ANSI Type I (SYNTHETIC)
-     Qty: 12 EA @ $23.83
-  7. [NOVA-JAN-6748] Disinfectant Spray (SYNTHETIC)
-     Qty: 12 CS @ $39.61
-  8. [NOVA-PAC-5420] Stretch Wrap 18in (SYNTHETIC)
-     Qty: 5 CS @ $115.32
-
-Delivery requested by: 2026-05-18
-
-Thank you,
-Nova Purchasing
-Nova Company (SYNTHETIC)
-+1-555-9586
 --===============4713023946110808363==--

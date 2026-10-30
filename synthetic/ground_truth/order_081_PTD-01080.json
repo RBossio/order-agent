@@ -16,7 +16,7 @@
         "kind": "PDF_TEXT",
         "filename": "PTD-01080.pdf",
         "mime_type": "application/pdf",
-        "sha256": "814f8a719f6e0b6cd61821f6a7f902626fa69f3a0c344c3c18e8ad6c7bf56196",
+        "sha256": "e7aa66be849fbfd5ce6381098703d53b3b1e2413f9f38e6078812de1e6870854",
         "page_count": 1
       }
     ]
@@ -75,8 +75,8 @@
   "lines": [
     {
       "line_no": 1,
-      "buyer_item_code": null,
-      "seller_item_code": "JAN-LNR-3858-15-CL",
+      "buyer_item_code": "TITAN-UNKNOWN-0080",
+      "seller_item_code": null,
       "manufacturer_name": null,
       "manufacturer_part_number": null,
       "gtin": null,
@@ -98,14 +98,14 @@
       "requested_delivery_date": null,
       "notes": null,
       "resolution": {
-        "sku": "JAN-LNR-3858-15-CL",
-        "erp_product_id": 1127,
+        "sku": null,
+        "erp_product_id": null,
         "erp_uom": "CS",
         "erp_uom_id": 8,
         "erp_quantity": 10,
-        "conversion_factor": 1,
-        "method": "SELLER_CODE",
-        "score": 0.98,
+        "conversion_factor": 1.0,
+        "method": "UNRESOLVED",
+        "score": 0.0,
         "candidates": [],
         "erp_list_price": 40.06
       }
@@ -140,7 +140,7 @@
         "erp_uom": "CS",
         "erp_uom_id": 24,
         "erp_quantity": 2,
-        "conversion_factor": 1,
+        "conversion_factor": 1.0,
         "method": "SELLER_CODE",
         "score": 0.98,
         "candidates": [],
@@ -177,7 +177,7 @@
         "erp_uom": "BX",
         "erp_uom_id": 37,
         "erp_quantity": 2,
-        "conversion_factor": 1,
+        "conversion_factor": 1.0,
         "method": "SELLER_CODE",
         "score": 0.98,
         "candidates": [],
@@ -196,7 +196,7 @@
     "score": 0.75,
     "route": "REVIEW",
     "reasons": [
-      "HDR-01"
+      "ITM-01"
     ]
   },
   "processing": {
@@ -225,16 +225,16 @@
   "validation": {
     "issues": [
       {
-        "code": "HDR-01",
+        "code": "ITM-01",
         "severity": "BLOCK",
-        "path": "/header/po_number",
-        "message": "Manca il numero d'ordine (PO number)"
+        "path": "/lines/0/resolution",
+        "message": "Codice articolo cliente sconosciuto: riga non risolta"
       }
     ]
   },
   "_synthetic_metadata": {
     "hard_case_types": [
-      "MISSING_PO_NUMBER"
+      "UNKNOWN_CUSTOMER_CODE"
     ],
     "is_hard_case": true
   }

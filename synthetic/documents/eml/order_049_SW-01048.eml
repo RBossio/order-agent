@@ -1,0 +1,27 @@
+Content-Type: multipart/mixed; boundary="===============7802908117334094957=="
+MIME-Version: 1.0
+From: purchasing@nova.example
+To: orders@delta-industrial.example
+Subject: PO SW-01048 - Order from Nova Company (SYNTHETIC)
+Message-ID: <po-SW-01048@nova.example>
+Date: Thu, 15 Jan 2026 10:30:00 +0000
+
+--===============7802908117334094957==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+Kindly arrange shipment against purchase order SW-01048 (05-30-2026).
+Ship the following to Nova Shipping Location 1, needed by 2026-06-08:
+
+- three BX of Lock Washer 1/2-13 Zinc (SYNTHETIC), catalog NOVA-FAS-7702, unit price 8.22.
+- two BX of Lock Washer 1/4-20 Zinc (SYNTHETIC), catalog NOVA-FAS-5512, unit price 15.27.
+- one CS of Disinfectant Spray (SYNTHETIC), catalog NOVA-JAN-0113, unit price 45.69.
+- ten CS of Degreaser Industrial (SYNTHETIC), catalog JAN-DGR-224, unit price 55.76.
+- twelve RO of Bubble Wrap 12in (SYNTHETIC), catalog PKG-BBW-284, unit price 52.65.
+- twenty-four EA of Adjustable Wrench 8in (SYNTHETIC), catalog NOVA-TOO-3469, unit price 31.74.
+- twenty-four CS of Disinfectant Spray (SYNTHETIC), catalog NOVA-JAN-3387, unit price 62.75.
+- twelve BX of Hex Cap Screw 3/8-16 x 4 Grade 5 Zinc (SYNTHETIC), catalog FST-HCS-38-16-4, unit price 44.25.
+
+Appreciate the help.
+--===============7802908117334094957==--

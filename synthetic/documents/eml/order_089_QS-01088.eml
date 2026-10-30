@@ -11,71 +11,34 @@ Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
 
-Hello,
+Kindly arrange shipment against purchase order QS-01088 (Jul 01, 2026).
+Ship the following to Global Shipping Location 2, needed by 2026-07-21:
 
-Please process the following order:
+- four CS of Penetrating Oil Spray (SYNTHETIC), catalog LUB-POS-256, unit price 57.74.
+- six EA of Hard Hat Red ANSI Type I (SYNTHETIC), catalog PPE-HAT-RED, unit price 16.54.
+- twelve EA of Tape Measure 25ft (SYNTHETIC), catalog GLOBAL-TOO-1155, unit price 20.88.
+- two BX of Flap Disc 5in 180 (SYNTHETIC), catalog ABR-FLD-5IN, unit price 74.23.
+- six CS of Can Liner 33x39 1.2mil Clear (SYNTHETIC), catalog JAN-LNR-3339-12-CL, unit price 47.40.
+- one CS of Degreaser Industrial (SYNTHETIC), catalog GLOBAL-JAN-8705, unit price 60.39.
+- five RO of Bubble Wrap 12in (SYNTHETIC), catalog GLOBAL-PAC-1579, unit price 41.37.
+- two BX of Hex Cap Screw 3/8-16 x 3 Grade 5 Zinc (SYNTHETIC), catalog FST-HCS-38-16-3, unit price 32.32.
+- one PK of Utility Blade Standard (SYNTHETIC), catalog GLOBAL-TOO-8937, unit price 5.26.
+- six BX of Hex Cap Screw 3/8-16 x 1-1/2 Grade 5 Zinc (SYNTHETIC), catalog GLOBAL-FAS-6768, unit price 27.99.
+- four CS of Degreaser Industrial (SYNTHETIC), catalog JAN-DGR-076, unit price 73.38.
+- three CS of Degreaser Industrial (SYNTHETIC), catalog GLOBAL-JAN-5253, unit price 61.81.
+- one CS of Can Liner 38x58 1.5mil Black (SYNTHETIC), catalog GLOBAL-JAN-7533, unit price 74.86.
+- twenty-four EA of Adjustable Wrench 12in (SYNTHETIC), catalog TLS-AWR-12IN, unit price 32.70.
+- one CS of Floor Finish High Gloss (SYNTHETIC), catalog GLOBAL-JAN-0706, unit price 72.09.
+- four PK of Super Glue Gel (SYNTHETIC), catalog ADH-SGG-102, unit price 22.47.
+- six EA of Tape Measure 30ft (SYNTHETIC), catalog TLS-TPM-30FT, unit price 18.82.
+- five BG of Cable Tie 8in Black (SYNTHETIC), catalog ELE-CTI-8IN, unit price 15.45.
+- ten PK of Super Glue Gel (SYNTHETIC), catalog GLOBAL-ADH-6474, unit price 23.45.
+- twenty-four CS of Machine Oil Light (SYNTHETIC), catalog LUB-MOL-004, unit price 68.77.
+- three BX of Hex Cap Screw 3/8-16 x 2 Grade 5 Zinc (SYNTHETIC), catalog FST-HCS-38-16-2, unit price 9.68.
+- three RO of Bubble Wrap 12in (SYNTHETIC), catalog GLOBAL-PAC-5955, unit price 51.78.
+- six PK of Epoxy 2-Part Quick Set (SYNTHETIC), catalog ADH-EPX-000, unit price 18.68.
+- two RO of Bubble Wrap 12in (SYNTHETIC), catalog GLOBAL-PAC-2099, unit price 38.71.
+- four CS of Stretch Wrap 18in (SYNTHETIC), catalog GLOBAL-PAC-4301, unit price 115.67.
 
-PO Number: QS-01088
-Date: Jul 01, 2026
-Ship To: Global Shipping Location 2
-
-Items:
-------
-  1. [LUB-POS-256] Penetrating Oil Spray (SYNTHETIC)
-     Qty: 4 CS @ $57.74
-  2. [PPE-HAT-RED] Hard Red ANSI Type I (SYNTHETIC)
-     Qty: 6 EA @ $16.54
-  3. [GLOBAL-TOO-1155] Tape Measure 25ft (SYNTHETIC)
-     Qty: 12 EA @ $20.88
-  4. [ABR-FLD-5IN] Flap Disc 5in 180 (SYNTHETIC)
-     Qty: 2 BX @ $74.23
-  5. [JAN-LNR-3339-12-CL] Can Liner 33x39 1.2mil Clear (SYNTHETIC)
-     Qty: 6 CS @ $47.40
-  6. [GLOBAL-JAN-8705] Degreaser Industrial (SYNTHETIC)
-     Qty: 1 CS @ $60.39
-  7. [GLOBAL-PAC-1579] Bubble Wrap 12in (SYNTHETIC)
-     Qty: 5 RO @ $41.37
-  8. [FST-HCS-38-16-3] Hex Cap Screw 3/8-16 x 3 Grade 5 Zinc (SYNTHETIC)
-     Qty: 2 BX @ $32.32
-  9. [GLOBAL-TOO-8937] Utility Blade Standard (SYNTHETIC)
-     Qty: 1 PK @ $5.26
-  10. [GLOBAL-FAS-6768] Hex Cap Screw 3/8-16 x 1-1/2 Grade 5 Zinc (SYNTHETIC)
-     Qty: 6 BX @ $27.99
-  11. [JAN-DGR-076] Degreaser Industrial (SYNTHETIC)
-     Qty: 4 CS @ $73.38
-  12. [GLOBAL-JAN-5253] Degreaser Industrial (SYNTHETIC)
-     Qty: 3 CS @ $61.81
-  13. [GLOBAL-JAN-7533] Can Liner 38x58 1.5mil Black (SYNTHETIC)
-     Qty: 1 CS @ $74.86
-  14. [TLS-AWR-12IN] Adjustable Wrench 12in (SYNTHETIC)
-     Qty: 24 EA @ $32.70
-  15. [GLOBAL-JAN-0706] Floor Finish High Gloss (SYNTHETIC)
-     Qty: 1 CS @ $72.09
-  16. [ADH-SGG-102] Super Glue Gel (SYNTHETIC)
-     Qty: 4 PK @ $22.47
-  17. [TLS-TPM-30FT] Tape Measure 30ft (SYNTHETIC)
-     Qty: 6 EA @ $18.82
-  18. [ELE-CTI-8IN] Cable Tie 8in Black (SYNTHETIC)
-     Qty: 5 BG @ $15.45
-  19. [GLOBAL-ADH-6474] Super Glue Gel (SYNTHETIC)
-     Qty: 10 PK @ $23.45
-  20. [LUB-MOL-004] Machine Oil Light (SYNTHETIC)
-     Qty: 24 CS @ $68.77
-  21. [FST-HCS-38-16-2] Hex Cap Screw 3/8-16 x 2 Grade 5 Zinc (SYNTHETIC)
-     Qty: 3 BX @ $9.68
-  22. [GLOBAL-PAC-5955] Bubble Wrap 12in (SYNTHETIC)
-     Qty: 3 RO @ $51.78
-  23. [ADH-EPX-000] Epoxy 2-Part Quick Set (SYNTHETIC)
-     Qty: 6 PK @ $18.68
-  24. [GLOBAL-PAC-2099] Bubble Wrap 12in (SYNTHETIC)
-     Qty: 2 RO @ $38.71
-  25. [GLOBAL-PAC-4301] Stretch Wrap 18in (SYNTHETIC)
-     Qty: 4 CS @ $115.67
-
-Delivery requested by: 2026-07-21
-
-Thank you,
-Global Purchasing
-Global Corp. (SYNTHETIC)
-+1-555-3112
+Appreciate the help.
 --===============4029170228622768707==--

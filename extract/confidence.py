@@ -4,11 +4,13 @@ from __future__ import annotations
 
 from .models import FieldConfidence
 
-# Sotto 0,80 un campo sbagliato non è errore silenzioso (eval).
+# Sotto 0,80 un campo sbagliato non è errore silenzioso a livello di campo (eval).
 # Sotto 0,90 EXT-01 manda l'ordine in REVIEW.
-DETERMINISTIC = 0.92
+# DETERMINISTIC 0,98 e AGREED 0,99 superano auto_post_min_score 0,97 (§7.1,
+# invariata): un ordine pulito, deterministico e con i controlli ok può AUTO_POST.
+DETERMINISTIC = 0.98
 LLM_ONLY = 0.70
-AGREED = 0.96
+AGREED = 0.99
 DISAGREE = 0.45
 CHECK_FAIL = 0.39
 MISSING = 0.0

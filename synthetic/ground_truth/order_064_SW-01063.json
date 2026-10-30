@@ -1,0 +1,304 @@
+{
+  "schema_version": "1.0",
+  "order_id": "6530d57f-c9a6-5d49-9bfe-4b28226919a5",
+  "tenant_id": "delta-industrial-supply",
+  "document_type": "ORIGINAL",
+  "status": "VALIDATED",
+  "source": {
+    "channel": "EMAIL_IMAP",
+    "message_id": "<po-SW-01063@nova.example>",
+    "from_address": "purchasing@nova.example",
+    "subject": "PO SW-01063 - Order from Nova Company (SYNTHETIC)",
+    "received_at": "2026-01-15T10:30:00Z",
+    "documents": [
+      {
+        "document_id": "doc-643858b3",
+        "kind": "EMAIL_BODY",
+        "filename": null,
+        "mime_type": "text/plain",
+        "sha256": "7050fe56a2e7cbba280fd1fbc82d42651ba08f4ef610c6d397c250d2be4bdf7f",
+        "page_count": null
+      },
+      {
+        "document_id": "doc-85fe9ab7",
+        "kind": "XLSX",
+        "filename": "SW-01063.xlsx",
+        "mime_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        "sha256": "a7247882bb125012f15ac2a8937902435b9c7784857608a704d0634d5949f4fe",
+        "page_count": null
+      }
+    ]
+  },
+  "buyer": {
+    "name": "Nova Company (SYNTHETIC)",
+    "code_on_document": "C-NOVA",
+    "tax_id": "US23-6761929",
+    "gln": null,
+    "peppol_endpoint": null,
+    "address": {
+      "line1": "1481 Factory Blvd",
+      "city": "Indianapolis",
+      "region": "IN",
+      "postal_code": "46201",
+      "country": "US"
+    },
+    "contact": {
+      "name": "Nova Purchasing",
+      "email": "purchasing@nova.example",
+      "phone": "+1-555-9586"
+    },
+    "resolved": {
+      "erp_partner_id": 63,
+      "erp_partner_ref": "C-NOVA",
+      "method": "EMAIL_DOMAIN",
+      "score": 0.99
+    }
+  },
+  "seller": {
+    "name": "Delta Industrial Supply LLC (SYNTHETIC)",
+    "code_on_document": null,
+    "tax_id": null,
+    "address": {
+      "line1": "55 Commerce Dr",
+      "city": "Dayton",
+      "region": "OH",
+      "postal_code": "45402",
+      "country": "US"
+    },
+    "resolved": null
+  },
+  "header": {
+    "po_number": "SW-01063",
+    "po_revision": 0,
+    "po_date": "02-07-2026",
+    "requested_delivery_date": "2026-02-15",
+    "currency": "USD",
+    "buyer_reference": "Dept 985",
+    "payment_terms_text": "Net 30",
+    "incoterms": null,
+    "ship_via": "UPS Ground",
+    "notes": null,
+    "language": "en"
+  },
+  "lines": [
+    {
+      "line_no": 1,
+      "buyer_item_code": "NOVA-SAF-4061",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Latex Gloves XXL PF (SYNTHETIC)",
+      "quantity": 6,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "100/BX 10BX/CS",
+        "inner_count": 10,
+        "inner_size": 1,
+        "inner_uom": "BX"
+      },
+      "unit_price": 81.27,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 487.62,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "PPE-GLV-LAT-5-XXL-BLU",
+        "erp_product_id": 1279,
+        "erp_uom": "CS",
+        "erp_uom_id": 34,
+        "erp_quantity": 6,
+        "conversion_factor": 1.0,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 81.27
+      }
+    },
+    {
+      "line_no": 2,
+      "buyer_item_code": "NOVA-TOO-3469",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Adjustable Wrench 8in (SYNTHETIC)",
+      "quantity": 6,
+      "uom_raw": "EA",
+      "uom": "EA",
+      "pack": null,
+      "unit_price": 31.74,
+      "price_uom": "EA",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 190.44,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "TLS-AWR-8IN-2",
+        "erp_product_id": 1254,
+        "erp_uom": "EA",
+        "erp_uom_id": 32,
+        "erp_quantity": 6,
+        "conversion_factor": 1.0,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 31.74
+      }
+    },
+    {
+      "line_no": 3,
+      "buyer_item_code": "NOVA-JAN-0113",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Disinfectant Spray (SYNTHETIC)",
+      "quantity": 1,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "12/CS",
+        "inner_count": 12,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 45.69,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 45.69,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "JAN-DSP-200",
+        "erp_product_id": 1200,
+        "erp_uom": "CS",
+        "erp_uom_id": 5,
+        "erp_quantity": 1,
+        "conversion_factor": 1.0,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 45.69
+      }
+    },
+    {
+      "line_no": 4,
+      "buyer_item_code": "NOVA-PAC-5420",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Stretch Wrap 18in (SYNTHETIC)",
+      "quantity": 5,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "4RL/CS",
+        "inner_count": 4,
+        "inner_size": 1,
+        "inner_uom": "RL"
+      },
+      "unit_price": 115.32,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 576.6,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "PKG-STW-069",
+        "erp_product_id": 1069,
+        "erp_uom": "CS",
+        "erp_uom_id": 15,
+        "erp_quantity": 5,
+        "conversion_factor": 1.0,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 115.32
+      }
+    },
+    {
+      "line_no": 5,
+      "buyer_item_code": null,
+      "seller_item_code": "TLS-UTB-055",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Utility Blade Standard (SYNTHETIC)",
+      "quantity": 24,
+      "uom_raw": "PK",
+      "uom": "PK",
+      "pack": {
+        "raw": "100/PK",
+        "inner_count": 100,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 5.26,
+      "price_uom": "PK",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 126.24,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "TLS-UTB-055",
+        "erp_product_id": 1055,
+        "erp_uom": "PK",
+        "erp_uom_id": 2,
+        "erp_quantity": 24,
+        "conversion_factor": 1.0,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 5.26
+      }
+    }
+  ],
+  "charges": [],
+  "totals": {
+    "lines_amount_declared": 1426.59,
+    "tax_amount_declared": null,
+    "total_amount_declared": 1426.59,
+    "lines_amount_computed": 1426.59
+  },
+  "decision": {
+    "score": 0.98,
+    "route": "AUTO_POST",
+    "reasons": []
+  },
+  "processing": {
+    "extractor": "synthetic/generator.py",
+    "prompt_version": null,
+    "created_at": "2026-01-15T10:30:00Z",
+    "updated_at": null
+  },
+  "ship_to": {
+    "name": "Nova Shipping Location 1",
+    "code_on_document": "SHIP-01",
+    "address": {
+      "line1": "7272 Tech Center Blvd",
+      "city": "Columbus",
+      "region": "OH",
+      "postal_code": "43215",
+      "country": "US"
+    },
+    "resolved": {
+      "erp_partner_id": 64,
+      "erp_partner_ref": "SHIP-01",
+      "method": "CODE",
+      "score": 1.0
+    }
+  },
+  "_synthetic_metadata": {
+    "hard_case_types": [],
+    "is_hard_case": false
+  }
+}

@@ -7,47 +7,9 @@ Message-ID: <po-BW-01111@delta.example>
 Date: Thu, 15 Jan 2026 10:30:00 +0000
 
 --===============1230790862298318810==
-Content-Type: text/plain; charset="us-ascii"
+Content-Type: text/html; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
 
-Hello,
-
-Please process the following order:
-
-PO Number: BW-01111
-Date: 04/20/2026
-Ship To: Delta Shipping Location 1
-
-Items:
-------
-  1. [PKG-BBW-173] Bubble Wrap 12in (SYNTHETIC)
-     Qty: 3 RO @ $27.14
-  2. [PKG-BBW-283] Bubble Wrap 12in (SYNTHETIC)
-     Qty: 12 RO @ $25.87
-  3. [TLS-UTB-293] Utility Blade Standard (SYNTHETIC)
-     Qty: 2 PK @ $6.76
-  4. [ABR-COW-4IN-2] Cut-Off Wheel 4in (SYNTHETIC)
-     Qty: 24 BX @ $50.25
-  5. [PPE-GLV-NIT-5-XL-BLU] Nitrile Gloves XL Blue 5mil PF (SYNTHETIC)
-     Qty: 10 CS @ $72.06
-  6. [JAN-PTR-1P-NAT] Paper Towel Roll 1P Natural (SYNTHETIC)
-     Qty: 10 CS @ $53.51
-  7. [JAN-DGR-217] Degreaser Industrial (SYNTHETIC)
-     Qty: 6 CS @ $61.81
-  8. [LUB-POS-168] Penetrating Oil Spray (SYNTHETIC)
-     Qty: 24 CS @ $57.41
-  9. [PPE-GLS-SMO-ANTI-FOG] Safety Glasses Smoke Anti-Fog (SYNTHETIC)
-     Qty: 12 EA @ $3.05
-  10. [ABR-COW-412IN-1] Cut-Off Wheel 4-1/2in (SYNTHETIC)
-     Qty: 10 BX @ $34.25
-  11. [ADH-EPX-099] Epoxy 2-Part Quick Set (SYNTHETIC)
-     Qty: 2 PK @ $27.05
-
-Delivery requested by: 2026-05-06
-
-Thank you,
-Delta Purchasing
-Delta Holdings (SYNTHETIC)
-+1-555-9584
+<html><body><p>Please process purchase order <b>BW-01111</b> dated 04/20/2026.</p><p>Deliver to Delta Shipping Location 1. Need by 2026-05-06.</p><table border='1' cellpadding='4'><tr><th>Item</th><th>Description</th><th>Quantity</th><th>Unit</th><th>Price</th></tr><tr><td>PKG-BBW-173</td><td>Bubble Wrap 12in (SYNTHETIC)</td><td>3</td><td>RO</td><td>27.14</td></tr><tr><td>PKG-BBW-283</td><td>Bubble Wrap 12in (SYNTHETIC)</td><td>12</td><td>RO</td><td>25.87</td></tr><tr><td>TLS-UTB-293</td><td>Utility Blade Standard (SYNTHETIC)</td><td>2</td><td>PK</td><td>6.76</td></tr><tr><td>ABR-COW-4IN-2</td><td>Cut-Off Wheel 4in (SYNTHETIC)</td><td>24</td><td>BX</td><td>50.25</td></tr><tr><td>PPE-GLV-NIT-5-XL-BLU</td><td>Nitrile Gloves XL Blue 5mil PF (SYNTHETIC)</td><td>10</td><td>CS</td><td>72.06</td></tr><tr><td>JAN-PTR-1P-NAT</td><td>Paper Towel Roll 1P Natural (SYNTHETIC)</td><td>10</td><td>CS</td><td>53.51</td></tr><tr><td>JAN-DGR-217</td><td>Degreaser Industrial (SYNTHETIC)</td><td>6</td><td>CS</td><td>61.81</td></tr><tr><td>LUB-POS-168</td><td>Penetrating Oil Spray (SYNTHETIC)</td><td>24</td><td>CS</td><td>57.41</td></tr><tr><td>PPE-GLS-SMO-ANTI-FOG</td><td>Safety Glasses Smoke Anti-Fog (SYNTHETIC)</td><td>12</td><td>EA</td><td>3.05</td></tr><tr><td>ABR-COW-412IN-1</td><td>Cut-Off Wheel 4-1/2in (SYNTHETIC)</td><td>10</td><td>BX</td><td>34.25</td></tr><tr><td>ADH-EPX-099</td><td>Epoxy 2-Part Quick Set (SYNTHETIC)</td><td>2</td><td>PK</td><td>27.05</td></tr></table><p>Thanks</p></body></html>
 --===============1230790862298318810==--

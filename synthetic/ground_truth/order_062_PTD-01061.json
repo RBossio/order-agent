@@ -1,0 +1,190 @@
+{
+  "schema_version": "1.0",
+  "order_id": "31627149-965e-5c19-84e1-d4bb65d17a65",
+  "tenant_id": "delta-industrial-supply",
+  "document_type": "ORIGINAL",
+  "status": "VALIDATED",
+  "source": {
+    "channel": "FOLDER",
+    "message_id": null,
+    "from_address": null,
+    "subject": null,
+    "received_at": "2026-01-15T10:30:00Z",
+    "documents": [
+      {
+        "document_id": "doc-6ac5abf5",
+        "kind": "PDF_TEXT",
+        "filename": "PTD-01061.pdf",
+        "mime_type": "application/pdf",
+        "sha256": "eac6e98e7509af558a868d6c7b13e67900bec7309c6f89b3565bee99dd4ae5ff",
+        "page_count": 1
+      }
+    ]
+  },
+  "buyer": {
+    "name": "Titan Holdings (SYNTHETIC)",
+    "code_on_document": "C-TITAN",
+    "tax_id": "US88-3663319",
+    "gln": null,
+    "peppol_endpoint": null,
+    "address": {
+      "line1": "6062 Business Park Rd",
+      "city": "Fort Wayne",
+      "region": "IN",
+      "postal_code": "46802",
+      "country": "US"
+    },
+    "contact": {
+      "name": "Titan Purchasing",
+      "email": "purchasing@titan.example",
+      "phone": "+1-555-2079"
+    },
+    "resolved": {
+      "erp_partner_id": 66,
+      "erp_partner_ref": "C-TITAN",
+      "method": "CODE",
+      "score": 0.99
+    }
+  },
+  "seller": {
+    "name": "Delta Industrial Supply LLC (SYNTHETIC)",
+    "code_on_document": null,
+    "tax_id": null,
+    "address": {
+      "line1": "55 Commerce Dr",
+      "city": "Dayton",
+      "region": "OH",
+      "postal_code": "45402",
+      "country": "US"
+    },
+    "resolved": null
+  },
+  "header": {
+    "po_number": "PTD-01061",
+    "po_revision": 0,
+    "po_date": "14.03.2026",
+    "requested_delivery_date": "2026-03-22",
+    "currency": "USD",
+    "buyer_reference": "Dept 375",
+    "payment_terms_text": "2% 10 Net 30",
+    "incoterms": null,
+    "ship_via": null,
+    "notes": null,
+    "language": "en"
+  },
+  "lines": [
+    {
+      "line_no": 1,
+      "buyer_item_code": null,
+      "seller_item_code": "ABR-FLD-5IN-1",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Flap Disc 5in 150 (SYNTHETIC)",
+      "quantity": 6,
+      "uom_raw": "BX",
+      "uom": "BX",
+      "pack": {
+        "raw": "10/BX",
+        "inner_count": 10,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 88.62,
+      "price_uom": "BX",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 531.72,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "ABR-FLD-5IN-1",
+        "erp_product_id": 1035,
+        "erp_uom": "BX",
+        "erp_uom_id": 41,
+        "erp_quantity": 6,
+        "conversion_factor": 1.0,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 88.62
+      }
+    },
+    {
+      "line_no": 2,
+      "buyer_item_code": null,
+      "seller_item_code": "PPE-GLV-LAT-8-XXL-BLA",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Latex Gloves XXL PF (SYNTHETIC)",
+      "quantity": 2,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "100/BX 10BX/CS",
+        "inner_count": 10,
+        "inner_size": 1,
+        "inner_uom": "BX"
+      },
+      "unit_price": 74.15,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 148.3,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "PPE-GLV-LAT-8-XXL-BLA",
+        "erp_product_id": 1161,
+        "erp_uom": "CS",
+        "erp_uom_id": 43,
+        "erp_quantity": 2,
+        "conversion_factor": 1.0,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 74.15
+      }
+    }
+  ],
+  "charges": [],
+  "totals": {
+    "lines_amount_declared": 680.02,
+    "tax_amount_declared": null,
+    "total_amount_declared": 680.02,
+    "lines_amount_computed": 680.02
+  },
+  "decision": {
+    "score": 0.98,
+    "route": "AUTO_POST",
+    "reasons": []
+  },
+  "processing": {
+    "extractor": "synthetic/generator.py",
+    "prompt_version": null,
+    "created_at": "2026-01-15T10:30:00Z",
+    "updated_at": null
+  },
+  "ship_to": {
+    "name": "Titan Shipping Location 2",
+    "code_on_document": "SHIP-02",
+    "address": {
+      "line1": "957 Business Park Rd",
+      "city": "Chicago",
+      "region": "IL",
+      "postal_code": "60601",
+      "country": "US"
+    },
+    "resolved": {
+      "erp_partner_id": 67,
+      "erp_partner_ref": "SHIP-02",
+      "method": "CODE",
+      "score": 1.0
+    }
+  },
+  "_synthetic_metadata": {
+    "hard_case_types": [],
+    "is_hard_case": false
+  }
+}

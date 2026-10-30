@@ -503,8 +503,78 @@ class TestEvaluation:
             "lines": [],
             "_synthetic_metadata": {"is_hard_case": False},
         }
+        extracted["decision"] = {"route": "AUTO_POST", "score": 0.99}
         score = evaluate_order(extracted, ground_truth)
+        assert score.silent_order is True
         assert any(e.field_path == "/header/po_number" for e in score.silent_errors)
+
+    def test_review_wrong_field_is_not_silent(self):
+        from extract.eval import evaluate_order
+
+        extracted = {
+            "header": {"po_number": "WRONG", "po_date": "2026-01-15", "currency": "USD"},
+            "lines": [],
+            "decision": {"route": "REVIEW"},
+            "evidence": {"/header/po_number": {"confidence": 0.99}},
+        }
+        ground_truth = {
+            "order_id": "gt-review",
+            "header": {"po_number": "RIGHT", "po_date": "2026-01-15", "currency": "USD"},
+            "lines": [],
+        }
+        score = evaluate_order(extracted, ground_truth)
+        assert score.silent_order is False
+        assert score.silent_errors == []
+        assert any(e.field_path == "/header/po_number" for e in score.field_mismatches)
+
+    def test_auto_post_extra_line_is_silent(self):
+        from extract.eval import evaluate_order
+
+        extracted = {
+            "header": {"po_number": "PO-1", "po_date": "2026-01-15", "currency": "USD"},
+            "lines": [
+                {"seller_item_code": "SKU-001", "description": "A", "quantity": 1, "uom_raw": "EA"},
+                {"seller_item_code": "SKU-999", "description": "Hallucinated", "quantity": 1, "uom_raw": "EA"},
+            ],
+            "decision": {"route": "AUTO_POST"},
+        }
+        ground_truth = {
+            "order_id": "gt-extra",
+            "header": {"po_number": "PO-1", "po_date": "2026-01-15", "currency": "USD"},
+            "lines": [
+                {"seller_item_code": "SKU-001", "description": "A", "quantity": 1, "uom_raw": "EA"},
+            ],
+        }
+        score = evaluate_order(extracted, ground_truth)
+        assert score.silent_order is True
+        assert score.extra_lines == 1
+
+    def test_hallucinated_empty_gt_field_is_silent_on_auto_post(self):
+        from extract.eval import evaluate_order
+
+        extracted = {
+            "header": {
+                "po_number": "PO-1",
+                "po_date": "2026-01-15",
+                "currency": "USD",
+                "requested_delivery_date": "2026-02-01",
+            },
+            "lines": [],
+            "decision": {"route": "AUTO_POST"},
+        }
+        ground_truth = {
+            "order_id": "gt-halluc",
+            "header": {
+                "po_number": "PO-1",
+                "po_date": "2026-01-15",
+                "currency": "USD",
+                "requested_delivery_date": None,
+            },
+            "lines": [],
+        }
+        score = evaluate_order(extracted, ground_truth)
+        assert score.silent_order is True
+        assert any(e.field_path == "/header/requested_delivery_date" for e in score.silent_errors)
 
     def test_email_body_line_extraction(self):
         """Estrae righe dal corpo email strutturato."""
@@ -844,3 +914,134 @@ class TestCalibratedConfidenceAndReview:
         payload = result.to_dict()
         assert "decision" in payload
         assert "evidence" in payload
+
+    def test_clean_order_auto_posts(self):
+        """Ordine pulito deterministico con controlli ok arriva ad AUTO_POST."""
+        from extract.confidence import DETERMINISTIC
+
+        assert DETERMINISTIC >= 0.98
+        backend = MockBackend()
+        extractor = OrderExtractor(backend=backend, validate_output=False)
+        normalized = {
+            "input_id": "auto-post",
+            "source": {"filename": "po.xlsx", "sha256": "a" * 64, "file_type": "XLSX"},
+            "ingested_at": "2026-02-01T00:00:00Z",
+            "parts": [{
+                "part_id": "p1",
+                "part_type": "EXCEL_SHEET",
+                "sha256": "b" * 64,
+                "text": (
+                    "Company: Acme Company (SYNTHETIC)\n"
+                    "PO Number: 4500010999\n"
+                    "Date: 2026-02-01\n"
+                    "Ship To: Acme Shipping Location 1\n"
+                    "Delivery Date: 2026-02-15\n"
+                    "Currency: USD\n"
+                ),
+                "tables": [{
+                    "header_row_index": 0,
+                    "rows": [
+                        [
+                            {"value": "Item Code"}, {"value": "Description"},
+                            {"value": "Quantity"}, {"value": "UoM"},
+                            {"value": "Unit Price"}, {"value": "Amount"},
+                        ],
+                        [
+                            {"value": "JAN-DSP-200"}, {"value": "Disinfectant Spray"},
+                            {"value": 2}, {"value": "CS"}, {"value": 45.69}, {"value": 91.38},
+                        ],
+                    ],
+                }],
+            }],
+        }
+        result = extractor.extract(normalized)
+        assert result.llm_calls == 0
+        assert result.decision is not None
+        assert result.decision["route"] == "AUTO_POST", result.decision
+        assert result.decision["score"] >= 0.97
+        buyer_code = next(
+            (fc for fc in result.field_confidences if fc.path == "/lines/0/buyer_item_code"),
+            None,
+        )
+        assert buyer_code is None
+
+    def test_ship_to_name_only_skips_cus03(self):
+        backend = MockBackend()
+        extractor = OrderExtractor(backend=backend, validate_output=False)
+        normalized = {
+            "input_id": "ship-name",
+            "source": {"filename": "po.xlsx", "sha256": "a" * 64, "file_type": "XLSX"},
+            "ingested_at": "2026-02-01T00:00:00Z",
+            "parts": [{
+                "part_id": "p1",
+                "part_type": "EXCEL_SHEET",
+                "sha256": "b" * 64,
+                "text": (
+                    "Company: Acme Company (SYNTHETIC)\n"
+                    "PO Number: 4500010888\n"
+                    "Date: 2026-02-01\n"
+                    "Ship To: Magazzino Nord\n"
+                    "Currency: USD\n"
+                ),
+                "tables": [{
+                    "header_row_index": 0,
+                    "rows": [
+                        [
+                            {"value": "Item Code"}, {"value": "Description"},
+                            {"value": "Quantity"}, {"value": "UoM"},
+                            {"value": "Unit Price"}, {"value": "Amount"},
+                        ],
+                        [
+                            {"value": "JAN-DSP-200"}, {"value": "Disinfectant Spray"},
+                            {"value": 2}, {"value": "CS"}, {"value": 45.69}, {"value": 91.38},
+                        ],
+                    ],
+                }],
+            }],
+        }
+        result = extractor.extract(normalized)
+        assert not any(w.code == "CUS-03" for w in result.warnings)
+
+    def test_missing_buyer_item_code_has_no_zero_confidence(self):
+        backend = MockBackend()
+        extractor = OrderExtractor(backend=backend, validate_output=False, run_rules=False)
+        normalized = {
+            "input_id": "no-buyer-code",
+            "source": {"filename": "po.xlsx", "sha256": "a" * 64, "file_type": "XLSX"},
+            "ingested_at": "2026-02-01T00:00:00Z",
+            "parts": [{
+                "part_id": "p1",
+                "part_type": "EXCEL_SHEET",
+                "sha256": "b" * 64,
+                "text": "PO Number: SW-01050\nDate: 2026-02-01\n",
+                "tables": [{
+                    "header_row_index": 0,
+                    "rows": [
+                        [
+                            {"value": "Item Code"}, {"value": "Description"},
+                            {"value": "Quantity"}, {"value": "UoM"},
+                            {"value": "Unit Price"},
+                        ],
+                        [
+                            {"value": "JAN-DSP-200"}, {"value": "Disinfectant Spray"},
+                            {"value": 2}, {"value": "CS"}, {"value": 45.69},
+                        ],
+                    ],
+                }],
+            }],
+        }
+        result = extractor.extract(normalized)
+        paths = {fc.path: fc.confidence for fc in result.field_confidences}
+        assert "/lines/0/buyer_item_code" not in paths
+        assert paths["/lines/0/seller_item_code"] > 0
+        assert not any(
+            w.code == "EXT-01" and w.path == "/lines/0/buyer_item_code"
+            for w in result.warnings
+        )
+
+    def test_ext02_tolerant_of_float_and_dollar_currency(self):
+        from ventureorder.rules.ext import snippet_in_document
+
+        assert snippet_in_document("24.0", "qty 24 cs")
+        assert snippet_in_document("USD", "total $12.00")
+        assert not snippet_in_document("EUR", "total $12.00")

@@ -3,7 +3,7 @@
   "order_id": "e5b2065c-fd05-5ccb-9b91-1c1d1d50d38f",
   "tenant_id": "delta-industrial-supply",
   "document_type": "ORIGINAL",
-  "status": "VALIDATED",
+  "status": "NEEDS_REVIEW",
   "source": {
     "channel": "FOLDER",
     "message_id": null,
@@ -16,7 +16,7 @@
         "kind": "XLSX",
         "filename": "TIT-PO-01038.xlsx",
         "mime_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-        "sha256": "4f13149703c7ea8aa41ed0acc43bec86e080235fad98d20561d0d7a45e58dc12",
+        "sha256": "76aafcdb2415dd2377e5023314c64e2d2e93998963dd17d4bb01c3e720d3eeed",
         "page_count": null
       }
     ]
@@ -62,98 +62,174 @@
   "header": {
     "po_number": "TIT-PO-01038",
     "po_revision": 0,
-    "po_date": "01-Jul-2026",
-    "requested_delivery_date": "2026-07-12",
+    "po_date": "23-Jun-2026",
+    "requested_delivery_date": "2026-07-07",
     "currency": "USD",
-    "buyer_reference": "Dept 557",
-    "payment_terms_text": "Net 30",
+    "buyer_reference": "Dept 419",
+    "payment_terms_text": "2% 10 Net 30",
     "incoterms": null,
     "ship_via": "Best Way",
-    "notes": null,
+    "notes": "Rush order",
     "language": "en"
   },
   "lines": [
     {
       "line_no": 1,
       "buyer_item_code": null,
-      "seller_item_code": "ADH-SGG-011",
+      "seller_item_code": "TLS-AWR-6IN",
       "manufacturer_name": null,
       "manufacturer_part_number": null,
       "gtin": null,
-      "description": "Super Glue Gel (SYNTHETIC)",
-      "quantity": 10,
-      "uom_raw": "PK",
-      "uom": "PK",
-      "pack": {
-        "raw": "12/PK",
-        "inner_count": 12,
-        "inner_size": 1,
-        "inner_uom": "EA"
-      },
-      "unit_price": 25.28,
-      "price_uom": "PK",
+      "description": "Adjustable Wrench 6in (SYNTHETIC)",
+      "quantity": 4,
+      "uom_raw": "EA",
+      "uom": "EA",
+      "pack": null,
+      "unit_price": 14.94,
+      "price_uom": "EA",
       "price_basis_qty": 1,
       "discount_pct": null,
-      "line_amount": 252.8,
+      "line_amount": 59.76,
       "requested_delivery_date": null,
       "notes": null,
       "resolution": {
-        "sku": "ADH-SGG-011",
-        "erp_product_id": 1011,
-        "erp_uom": "PK",
+        "sku": "TLS-AWR-6IN",
+        "erp_product_id": 1190,
+        "erp_uom": "EA",
         "erp_uom_id": 4,
-        "erp_quantity": 10,
-        "conversion_factor": 1,
+        "erp_quantity": 4,
+        "conversion_factor": 1.0,
         "method": "SELLER_CODE",
         "score": 0.98,
         "candidates": [],
-        "erp_list_price": 25.28
+        "erp_list_price": 14.94
       }
     },
     {
       "line_no": 2,
       "buyer_item_code": null,
-      "seller_item_code": "TLS-UTK-163",
+      "seller_item_code": "FST-HNT-34-10",
       "manufacturer_name": null,
       "manufacturer_part_number": null,
       "gtin": null,
-      "description": "Utility Knife Retractable (SYNTHETIC)",
+      "description": "Hex Nut 3/4-10 Grade 5 Zinc (SYNTHETIC)",
       "quantity": 5,
-      "uom_raw": "EA",
-      "uom": "EA",
-      "pack": null,
-      "unit_price": 9.92,
-      "price_uom": "EA",
+      "uom_raw": "BX",
+      "uom": "BX",
+      "pack": {
+        "raw": "BX/100",
+        "inner_count": 100,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 20.92,
+      "price_uom": "BX",
       "price_basis_qty": 1,
       "discount_pct": null,
-      "line_amount": 49.6,
+      "line_amount": 104.6,
       "requested_delivery_date": null,
       "notes": null,
       "resolution": {
-        "sku": "TLS-UTK-163",
-        "erp_product_id": 1163,
-        "erp_uom": "EA",
-        "erp_uom_id": 47,
+        "sku": "FST-HNT-34-10",
+        "erp_product_id": 1216,
+        "erp_uom": "BX",
+        "erp_uom_id": 42,
         "erp_quantity": 5,
-        "conversion_factor": 1,
+        "conversion_factor": 1.0,
         "method": "SELLER_CODE",
         "score": 0.98,
         "candidates": [],
-        "erp_list_price": 9.92
+        "erp_list_price": 20.92
+      }
+    },
+    {
+      "line_no": 3,
+      "buyer_item_code": null,
+      "seller_item_code": "JAN-DSP-258",
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Disinfectant Spray (SYNTHETIC)",
+      "quantity": 2,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "12/CS",
+        "inner_count": 12,
+        "inner_size": 1,
+        "inner_uom": "EA"
+      },
+      "unit_price": 66.55,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 133.1,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "JAN-DSP-258",
+        "erp_product_id": 1258,
+        "erp_uom": "CS",
+        "erp_uom_id": 48,
+        "erp_quantity": 2,
+        "conversion_factor": 1.0,
+        "method": "SELLER_CODE",
+        "score": 0.98,
+        "candidates": [],
+        "erp_list_price": 66.55
+      }
+    },
+    {
+      "line_no": 4,
+      "buyer_item_code": "OMEGA-JAN-4074",
+      "seller_item_code": null,
+      "manufacturer_name": null,
+      "manufacturer_part_number": null,
+      "gtin": null,
+      "description": "Paper Towel Roll 1P Natural (SYNTHETIC)",
+      "quantity": 12,
+      "uom_raw": "CS",
+      "uom": "CS",
+      "pack": {
+        "raw": "12RL/CS",
+        "inner_count": 12,
+        "inner_size": 1,
+        "inner_uom": "RL"
+      },
+      "unit_price": 53.51,
+      "price_uom": "CS",
+      "price_basis_qty": 1,
+      "discount_pct": null,
+      "line_amount": 642.12,
+      "requested_delivery_date": null,
+      "notes": null,
+      "resolution": {
+        "sku": "JAN-PTR-1P-NAT",
+        "erp_product_id": 1019,
+        "erp_uom": "CS",
+        "erp_uom_id": 6,
+        "erp_quantity": 12,
+        "conversion_factor": 1.0,
+        "method": "XREF",
+        "score": 1.0,
+        "candidates": [],
+        "erp_list_price": 53.51
       }
     }
   ],
   "charges": [],
   "totals": {
-    "lines_amount_declared": 302.4,
+    "lines_amount_declared": 939.58,
     "tax_amount_declared": null,
-    "total_amount_declared": 302.4,
-    "lines_amount_computed": 302.4
+    "total_amount_declared": 939.58,
+    "lines_amount_computed": 939.58
   },
   "decision": {
-    "score": 0.98,
-    "route": "AUTO_POST",
-    "reasons": []
+    "score": 0.75,
+    "route": "REVIEW",
+    "reasons": [
+      "ITM-03"
+    ]
   },
   "processing": {
     "extractor": "synthetic/generator.py",
@@ -162,24 +238,36 @@
     "updated_at": null
   },
   "ship_to": {
-    "name": "Omega Shipping Location 2",
-    "code_on_document": "SHIP-02",
+    "name": "Omega Shipping Location 1",
+    "code_on_document": "SHIP-01",
     "address": {
-      "line1": "8455 Manufacturing Way",
-      "city": "Fort Wayne",
-      "region": "IN",
-      "postal_code": "46802",
+      "line1": "1351 Commerce Dr",
+      "city": "Cleveland",
+      "region": "OH",
+      "postal_code": "44101",
       "country": "US"
     },
     "resolved": {
       "erp_partner_id": 49,
-      "erp_partner_ref": "SHIP-02",
+      "erp_partner_ref": "SHIP-01",
       "method": "CODE",
       "score": 1.0
     }
   },
+  "validation": {
+    "issues": [
+      {
+        "code": "ITM-03",
+        "severity": "REVIEW",
+        "path": "/lines/1/description",
+        "message": "Descrizione ambigua, richiede conferma articolo"
+      }
+    ]
+  },
   "_synthetic_metadata": {
-    "hard_case_types": [],
-    "is_hard_case": false
+    "hard_case_types": [
+      "AMBIGUOUS_DESC"
+    ],
+    "is_hard_case": true
   }
 }

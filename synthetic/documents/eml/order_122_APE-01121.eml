@@ -1,0 +1,15 @@
+Content-Type: multipart/mixed; boundary="===============7759328426737739569=="
+MIME-Version: 1.0
+From: purchasing@summit.example
+To: orders@delta-industrial.example
+Subject: PO APE-01121 - Order from Summit Group (SYNTHETIC)
+Message-ID: <po-APE-01121@summit.example>
+Date: Thu, 15 Jan 2026 10:30:00 +0000
+
+--===============7759328426737739569==
+Content-Type: text/html; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+<html><body><p>Please process purchase order <b>APE-01121</b> dated 2026/03/13.</p><p>Deliver to Summit Shipping Location 1. Need by 2026-03-27.</p><table border='1' cellpadding='4'><tr><th>Item</th><th>Description</th><th>Quantity</th><th>Unit</th><th>Price</th></tr><tr><td>FST-FWS-12-13</td><td>Flat Washer 1/2-13 Zinc (SYNTHETIC)</td><td>10</td><td>BX</td><td>5.39</td></tr><tr><td>JAN-FPD-13-TAN</td><td>Floor Pad 13in Tan (SYNTHETIC)</td><td>10</td><td>CS</td><td>22.20</td></tr><tr><td>PKG-PTC-187</td><td>Packing Tape Clear 2in (SYNTHETIC)</td><td>24</td><td>CS</td><td>59.41</td></tr><tr><td>SUMMIT-JAN-8363</td><td>Can Liner 38x58 0.7mil Black (SYNTHETIC)</td><td>5</td><td>CS</td><td>62.00</td></tr><tr><td>SUMMIT-FAS-6213</td><td>Flat Washer 3/4-10 Zinc (SYNTHETIC)</td><td>12</td><td>BX</td><td>11.79</td></tr><tr><td>PPE-EAR-221</td><td>Ear Plugs Foam Disposable (SYNTHETIC)</td><td>10</td><td>BX</td><td>30.45</td></tr><tr><td>PKG-BBW-147</td><td>Bubble Wrap 12in (SYNTHETIC)</td><td>10</td><td>RO</td><td>41.67</td></tr><tr><td>LUB-MOL-109</td><td>Machine Oil Light (SYNTHETIC)</td><td>12</td><td>CS</td><td>83.15</td></tr></table><p>Thanks</p></body></html>
+--===============7759328426737739569==--

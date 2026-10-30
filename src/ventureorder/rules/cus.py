@@ -68,6 +68,14 @@ def cus_02_fuzzy_name(ctx: RuleContext) -> list[Issue]:
     return []
 
 
+def _ship_has_address(ship: dict) -> bool:
+    """True se ``ship_to`` porta un indirizzo confrontabile, non solo un nome."""
+    addr = ship.get("address")
+    if isinstance(addr, dict):
+        return bool(addr.get("line1") or addr.get("city") or addr.get("postal_code"))
+    return bool(addr)
+
+
 @rule("CUS-03", Severity.REVIEW)
 def cus_03_ship_to(ctx: RuleContext) -> list[Issue]:
     """``ship_to`` non corrisponde a nessun indirizzo di consegna del cliente."""
@@ -77,6 +85,9 @@ def cus_03_ship_to(ctx: RuleContext) -> list[Issue]:
     if customer is None:
         return []
     if addresses_match(ctx.ship_to, customer):
+        return []
+    # Solo il nome della sede, senza via: o si collega in anagrafica, o non è errore.
+    if not _ship_has_address(ctx.ship_to):
         return []
     return [
         issue(

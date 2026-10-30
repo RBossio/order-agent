@@ -137,6 +137,238 @@ def _sha256(content: bytes) -> str:
     return hashlib.sha256(content).hexdigest()
 
 
+_DATE_PARSE_FORMATS = (
+    "%Y-%m-%d",
+    "%m/%d/%Y",
+    "%d-%b-%Y",
+    "%m-%d-%Y",
+    "%d/%m/%Y",
+    "%d.%m.%Y",
+    "%b %d, %Y",
+    "%Y/%m/%d",
+    "%d-%b-%y",
+    "%m/%d/%y",
+    "%B %d, %Y",
+    "%Y.%m.%d",
+)
+
+EMAIL_BODY_TEMPLATES = (
+    "free_text",
+    "html_table",
+    "signature_list",
+    "qty_words",
+    "forwarded_reply",
+)
+
+
+def _parse_display_date(text: str) -> datetime | None:
+    """Parsa una data già formattata dal generatore."""
+    raw = (text or "").strip()
+    if not raw:
+        return None
+    for fmt in _DATE_PARSE_FORMATS:
+        try:
+            return datetime.strptime(raw, fmt)
+        except ValueError:
+            continue
+    return None
+
+
+def _ordinal_day(day: int) -> str:
+    if 10 <= day % 100 <= 20:
+        suffix = "th"
+    else:
+        suffix = {1: "st", 2: "nd", 3: "rd"}.get(day % 10, "th")
+    return f"{day}{suffix}"
+
+
+def reformat_existing_date(date_display: str, kind: str) -> str:
+    """Riformatta la data reale (DATE_FORMAT), senza sostituirla con un valore a caso."""
+    parsed = _parse_display_date(date_display)
+    if parsed is None:
+        return date_display
+    variants = {
+        "pdf": ["%b %d, %Y", "%d-%b-%y", "%m/%d/%y", "%d.%m.%Y"],
+        "xlsx": ["%d-%b-%Y", "%m/%d/%y", "%B %d, %Y"],
+        "eml": ["ordinal", "%d/%m/%Y", "%Y.%m.%d"],
+    }
+    fmt = random.choice(variants.get(kind, ["%Y-%m-%d"]))
+    if fmt == "ordinal":
+        return f"{parsed.strftime('%b')} {_ordinal_day(parsed.day)}, {parsed.year}"
+    return parsed.strftime(fmt)
+
+
+def _qty_word(qty: object) -> str:
+    try:
+        number = int(qty)  # type: ignore[arg-type]
+    except (TypeError, ValueError):
+        return str(qty)
+    return NUM_IN_WORDS.get(number, str(number))
+
+
+def render_email_body(
+    template: str,
+    order_data: dict,
+    hard_cases: list[str],
+    catalog: list[dict],
+) -> tuple[str, str]:
+    """Costruisce il corpo di un'email. Ritorna (body, subtype plain|html).
+
+    I cinque template sono volutamente fuori dalle regex ``EMAIL_ITEM_RE`` /
+    ``EMAIL_QTY_RE`` (niente ``1. [SKU]`` né ``Qty: N UoM @ $``).
+    """
+    header = order_data["header"]
+    buyer = order_data["buyer"]
+    ship = order_data.get("ship_to") or {}
+    po = header["po_number"] if "MISSING_PO_NUMBER" not in hard_cases else "[see attached]"
+    date_display = header["po_date"]
+    if "DATE_FORMAT" in hard_cases:
+        date_display = reformat_existing_date(date_display, "eml")
+    if "MISSING_DATE" in hard_cases:
+        date_display = ""
+    delivery = header.get("requested_delivery_date") or "ASAP"
+    ship_name = ship.get("name") or ""
+    lines = order_data["lines"]
+
+    def line_bits(index: int, line: dict) -> tuple[str, object, str, str, str]:
+        desc = line["description"]
+        qty: object = line["quantity"]
+        if "TYPO_DESC" in hard_cases and index == 0:
+            desc = _add_typos(desc)
+        if "AMBIGUOUS_DESC" in hard_cases and index == 1 and len(lines) > 1:
+            desc = _make_ambiguous(desc, catalog)
+        if "QTY_WORDS" in hard_cases and index == 0:
+            qty = NUM_IN_WORDS.get(int(line["quantity"]), str(line["quantity"]))
+        if "MISSING_QTY" in hard_cases and index == len(lines) - 1:
+            qty = "TBD"
+        code = line.get("buyer_item_code") or line.get("seller_item_code") or "N/A"
+        price = f"{line['unit_price']:.2f}" if line.get("unit_price") else ""
+        return code, qty, line["uom_raw"], desc, price
+
+    if template == "classic":
+        po_display = header["po_number"] if "MISSING_PO_NUMBER" not in hard_cases else "[see attached]"
+        chunks = [
+            "Hello,",
+            "",
+            "Please process the following order:",
+            "",
+            f"PO Number: {po_display}",
+            f"Date: {date_display}",
+            f"Ship To: {ship_name}",
+            "",
+            "Items:",
+            "------",
+        ]
+        for index, line in enumerate(lines):
+            code, qty, uom, desc, price = line_bits(index, line)
+            price_str = f"@ ${price}" if price else ""
+            chunks.append(f"  {line['line_no']}. [{code}] {desc}")
+            chunks.append(f"     Qty: {qty} {uom} {price_str}")
+        chunks.extend([
+            "",
+            f"Delivery requested by: {delivery}",
+            "",
+            "Thank you,",
+            buyer.get("contact", {}).get("name") or "Purchasing Dept",
+            buyer["name"],
+        ])
+        return "\n".join(chunks), "plain"
+
+    if template == "html_table":
+        rows = []
+        for index, line in enumerate(lines):
+            code, qty, uom, desc, price = line_bits(index, line)
+            rows.append(
+                f"<tr><td>{code}</td><td>{desc}</td><td>{qty}</td>"
+                f"<td>{uom}</td><td>{price}</td></tr>"
+            )
+        body = (
+            "<html><body>"
+            f"<p>Please process purchase order <b>{po}</b> dated {date_display}.</p>"
+            f"<p>Deliver to {ship_name}. Need by {delivery}.</p>"
+            "<table border='1' cellpadding='4'>"
+            "<tr><th>Item</th><th>Description</th><th>Quantity</th>"
+            "<th>Unit</th><th>Price</th></tr>"
+            + "".join(rows)
+            + "</table>"
+            "<p>Thanks</p></body></html>"
+        )
+        return body, "html"
+
+    if template == "free_text":
+        chunks = [
+            f"Hi team, could you please raise this under our purchase order {po} "
+            f"dated {date_display}? Deliver to {ship_name}; we need the goods by {delivery}.",
+            "",
+        ]
+        for index, line in enumerate(lines):
+            code, qty, uom, desc, price = line_bits(index, line)
+            price_bit = f" at {price} each" if price else ""
+            chunks.append(
+                f"We need {qty} {uom} of {desc} (catalog {code}){price_bit}."
+            )
+        chunks.append("")
+        chunks.append("Thanks in advance.")
+        return "\n".join(chunks), "plain"
+
+    if template == "signature_list":
+        chunks = [
+            "Please go ahead with the replenishment below my signature.",
+            "",
+            "Best regards,",
+            buyer.get("contact", {}).get("name") or "Purchasing",
+            buyer["name"],
+            "--",
+            "Requested items:",
+        ]
+        for index, line in enumerate(lines):
+            code, qty, uom, desc, price = line_bits(index, line)
+            price_bit = f" / {price}" if price else ""
+            chunks.append(f"{code}  |  {desc}  |  {qty} {uom}{price_bit}")
+        chunks.append(f"PO {po} · {date_display} · deliver {ship_name} by {delivery}")
+        return "\n".join(chunks), "plain"
+
+    if template == "qty_words":
+        chunks = [
+            f"Kindly arrange shipment against purchase order {po} ({date_display}).",
+            f"Ship the following to {ship_name}, needed by {delivery}:",
+            "",
+        ]
+        for index, line in enumerate(lines):
+            code, qty, uom, desc, price = line_bits(index, line)
+            word = _qty_word(qty if qty != "TBD" else 0) if qty != "TBD" else "an unspecified quantity of"
+            price_bit = f", unit price {price}" if price else ""
+            chunks.append(
+                f"- {word} {uom} of {desc}, catalog {code}{price_bit}."
+            )
+        chunks.append("")
+        chunks.append("Appreciate the help.")
+        return "\n".join(chunks), "plain"
+
+    # forwarded_reply
+    original_lines = []
+    for index, line in enumerate(lines):
+        code, qty, uom, desc, price = line_bits(index, line)
+        price_bit = f" @ {price}" if price else ""
+        original_lines.append(f"{code} x {qty} {uom}{price_bit} — {desc}")
+    body = "\n".join([
+        "On Mon, 12 Jan 2026 at 09:14, Warehouse <ops@example.com> wrote:",
+        "> sure, please proceed with the replenishment",
+        "",
+        "---------- Forwarded message ---------",
+        f"From: {buyer.get('contact', {}).get('name', 'Purchasing')} "
+        f"<{buyer.get('contact', {}).get('email', 'orders@example.com')}>",
+        "Date: Mon, 12 Jan 2026 08:02:11 +0000",
+        f"Subject: Re: {po}",
+        "",
+        f"Could you fulfill {po} dated {date_display}?",
+        f"Deliver to {ship_name} by {delivery}.",
+        "Line items:",
+        *original_lines,
+    ])
+    return body, "plain"
+
+
 def _format_date(dt: datetime, fmt: str) -> str:
     mapping = {
         "YYYY-MM-DD": "%Y-%m-%d",
@@ -233,8 +465,7 @@ def generate_pdf_order(
         date_display = header["po_date"]
 
         if "DATE_FORMAT" in hard_cases:
-            formats = ["Jan 15, 2026", "15-Jan-26", "1/15/26", "15.01.2026"]
-            date_display = random.choice(formats)
+            date_display = reformat_existing_date(date_display, "pdf")
 
         header_data = [
             ["From:", buyer["name"]],
@@ -369,8 +600,7 @@ def generate_xlsx_order(
     po_display = header["po_number"] if "MISSING_PO_NUMBER" not in hard_cases else ""
     date_display = header["po_date"]
     if "DATE_FORMAT" in hard_cases:
-        formats = ["15-Jan-2026", "01/15/26", "January 15, 2026"]
-        date_display = random.choice(formats)
+        date_display = reformat_existing_date(date_display, "xlsx")
 
     ws["A3"] = "Company:"
     ws["B3"] = buyer["name"]
@@ -391,7 +621,11 @@ def generate_xlsx_order(
     ws["B6"] = order_data.get("ship_to", {}).get("name", "")
     ws["A6"].font = label_font
 
-    start_row = 8
+    ws["A7"] = "Delivery Date:"
+    ws["B7"] = header.get("requested_delivery_date") or ""
+    ws["A7"].font = label_font
+
+    start_row = 9
     headers_row = ["Line", "Item Code", "Description", "Quantity", "UoM", "Unit Price", "Amount"]
     for col, h in enumerate(headers_row, 1):
         cell = ws.cell(row=start_row, column=col, value=h)
@@ -485,64 +719,15 @@ def generate_eml_order(
     msg["Message-ID"] = f"<po-{header['po_number']}@{buyer.get('email_domain', 'example.com')}>"
     msg["Date"] = _fixed_email_date()
 
-    date_display = header["po_date"]
-    if "DATE_FORMAT" in hard_cases:
-        formats = ["Jan 15th, 2026", "15/01/2026", "2026.01.15"]
-        date_display = random.choice(formats)
-    if "MISSING_DATE" in hard_cases:
-        date_display = ""
-
-    po_display = header["po_number"] if "MISSING_PO_NUMBER" not in hard_cases else "[see attached]"
-
-    body_lines = [
-        "Hello,",
-        "",
-        "Please process the following order:",
-        "",
-        f"PO Number: {po_display}",
-        f"Date: {date_display}",
-        f"Ship To: {order_data.get('ship_to', {}).get('name', '')}",
-        "",
-        "Items:",
-        "------",
-    ]
-
-    lines = order_data["lines"]
-    for i, line in enumerate(lines):
-        desc = line["description"]
-        qty = line["quantity"]
-
-        if "TYPO_DESC" in hard_cases and i == 0:
-            desc = _add_typos(desc)
-        if "AMBIGUOUS_DESC" in hard_cases and i == 1 and len(lines) > 1:
-            desc = _make_ambiguous(desc, catalog)
-        if "QTY_WORDS" in hard_cases and i == 0:
-            qty = NUM_IN_WORDS.get(int(qty), str(qty))
-        if "MISSING_QTY" in hard_cases and i == len(lines) - 1:
-            qty = "TBD"
-
-        item_code = line.get("buyer_item_code") or line.get("seller_item_code") or "N/A"
-        price_str = f"@ ${line['unit_price']:.2f}" if line.get("unit_price") else ""
-        body_lines.append(f"  {line['line_no']}. [{item_code}] {desc}")
-        body_lines.append(f"     Qty: {qty} {line['uom_raw']} {price_str}")
-
-    if "TOTAL_MIXED" in hard_cases:
-        body_lines.append("")
-        body_lines.append("Please confirm stock availability before shipping.")
-        body_lines.append(f"Expected Total: ${order_data.get('totals', {}).get('lines_amount_declared', 0):.2f}")
-
-    body_lines.extend([
-        "",
-        f"Delivery requested by: {header.get('requested_delivery_date', 'ASAP')}",
-        "",
-        "Thank you,",
-        contact.get("name", "Purchasing Dept"),
-        buyer["name"],
-        contact.get("phone", ""),
-    ])
-
-    body_text = "\n".join(body_lines)
-    msg.attach(MIMEText(body_text, "plain"))
+    if "EMAIL_CONTRADICTORY" in hard_cases:
+        # Serve il formato noto alle regex, altrimenti il preprocessor
+        # non vede le righe email e prende l'allegato (quantità raddoppiate)
+        # senza marcare il disaccordo.
+        template = "classic"
+    else:
+        template = EMAIL_BODY_TEMPLATES[order_idx % len(EMAIL_BODY_TEMPLATES)]
+    body_text, subtype = render_email_body(template, order_data, hard_cases, catalog)
+    msg.attach(MIMEText(body_text, subtype))
 
     docs = []
 
@@ -830,8 +1015,11 @@ def generate_orders(
     eml_dir = output_dir / "documents" / "eml"
     gt_dir = output_dir / "ground_truth"
 
-    for d in [pdf_dir, xlsx_dir, eml_dir, gt_dir]:
-        d.mkdir(parents=True, exist_ok=True)
+    for folder in [pdf_dir, xlsx_dir, eml_dir, gt_dir]:
+        folder.mkdir(parents=True, exist_ok=True)
+        for old in folder.iterdir():
+            if old.is_file():
+                old.unlink()
 
     ground_truths = []
     manifest_entries = []

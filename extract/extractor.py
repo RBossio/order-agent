@@ -67,6 +67,7 @@ class OrderExtractor:
         validate_output: bool = True,
         catalog: CatalogMatcher | None = None,
         run_rules: bool = True,
+        use_llm: bool = True,
     ):
         self.backend = backend or MockBackend()
         self.preprocessor = Preprocessor()
@@ -74,6 +75,7 @@ class OrderExtractor:
         self.validate_output = validate_output
         self.catalog = catalog if catalog is not None else CatalogMatcher()
         self.run_rules = run_rules
+        self.use_llm = use_llm
         self._engine = None
         self._schema_path = Path(__file__).parent.parent / "schema" / "venture-order.v1.schema.json"
 
@@ -83,10 +85,10 @@ class OrderExtractor:
         warnings: list[ExtractionWarning] = []
         field_confidences: list[FieldConfidence] = []
         llm_calls = 0
+        llm_timeouts = 0
         total_tokens = 0
         preprocessed_fields: list[str] = []
         extracted_json: dict = {"header": {}, "lines": []}
-        parse_error: str | None = None
         llm_used = False
 
         preprocessed = self.preprocessor.preprocess(normalized_input)
@@ -98,62 +100,13 @@ class OrderExtractor:
 
         file_type = (normalized_input.get("source") or {}).get("file_type", "")
         is_email = file_type == "EML" or bool(normalized_input.get("email_metadata"))
-        skip_llm = (not is_email) and self._preprocessor_complete(preprocessed)
+        skip_llm = (not self.use_llm) or ((not is_email) and self._preprocessor_complete(preprocessed))
 
         if not skip_llm:
             llm_used = True
-            document_content = self._build_document_content(normalized_input, preprocessed)
-            prompt = build_extraction_prompt(
-                document_content,
-                preprocessed_lines=self._lines_as_prompt(preprocessed.lines),
-                preprocessed_header=self._header_as_prompt(preprocessed.header),
+            extracted_json, llm_calls, llm_timeouts, total_tokens = self._invoke_llm(
+                normalized_input, preprocessed, warnings,
             )
-            try:
-                llm_response = self.backend.generate(
-                    prompt=prompt,
-                    system_prompt=EXTRACTION_SYSTEM_PROMPT,
-                    json_schema=EXTRACTION_JSON_SCHEMA,
-                    temperature=0.0,
-                    max_tokens=2048,
-                )
-                llm_calls += 1
-                total_tokens += llm_response.total_tokens
-                extracted_json, parse_error = self._parse_json_response(llm_response.content)
-
-                if parse_error and self.max_retries > 0:
-                    retry_prompt = build_retry_prompt(
-                        error_message=parse_error,
-                        document_summary=document_content[:2000],
-                    )
-                    retry_response = self.backend.generate(
-                        prompt=retry_prompt,
-                        system_prompt=EXTRACTION_SYSTEM_PROMPT,
-                        json_schema=EXTRACTION_JSON_SCHEMA,
-                        temperature=0.0,
-                        max_tokens=2048,
-                    )
-                    llm_calls += 1
-                    total_tokens += retry_response.total_tokens
-                    extracted_json, parse_error = self._parse_json_response(retry_response.content)
-            except Exception as exc:
-                parse_error = str(exc)
-                warnings.append(ExtractionWarning(
-                    code="EXT-02",
-                    severity=WarningSeverity.BLOCK,
-                    message=f"Errore LLM: {exc}",
-                ))
-                extracted_json = {"header": {}, "lines": []}
-
-            if parse_error:
-                warnings.append(ExtractionWarning(
-                    code="EXT-01",
-                    severity=WarningSeverity.REVIEW,
-                    message=f"Errore parsing JSON: {parse_error}",
-                ))
-                if not extracted_json:
-                    extracted_json = {"header": {}, "lines": []}
-        else:
-            extracted_json = {"header": {}, "lines": []}
 
         if preprocessed.source_disagreement:
             warnings.append(ExtractionWarning(
@@ -183,7 +136,10 @@ class OrderExtractor:
         if self.validate_output:
             warnings.extend(self._validate_order(order))
 
-        decision = self._run_rules(order, field_confidences, warnings, preprocessed)
+        document_text = self._build_document_content(normalized_input, preprocessed)
+        decision = self._run_rules(
+            order, field_confidences, warnings, preprocessed, document_text=document_text,
+        )
 
         if any(w.severity in {WarningSeverity.BLOCK, WarningSeverity.REVIEW} for w in warnings):
             order.status = "NEEDS_REVIEW"
@@ -201,11 +157,78 @@ class OrderExtractor:
             field_confidences=field_confidences,
             warnings=warnings,
             llm_calls=llm_calls,
+            llm_timeouts=llm_timeouts,
             llm_tokens_used=total_tokens,
             extraction_time_ms=extraction_time,
             preprocessed_fields=preprocessed_fields,
             decision=decision,
         )
+
+    def _invoke_llm(
+        self,
+        normalized_input: dict,
+        preprocessed: PreprocessedData,
+        warnings: list[ExtractionWarning],
+    ) -> tuple[dict, int, int, int]:
+        """Chiama l'LLM (con un retry) e restituisce JSON, chiamate, timeout, token."""
+        extracted_json: dict = {"header": {}, "lines": []}
+        llm_calls = 0
+        llm_timeouts = 0
+        total_tokens = 0
+        parse_error: str | None = None
+        document_content = self._build_document_content(normalized_input, preprocessed)
+        prompt = build_extraction_prompt(
+            document_content,
+            preprocessed_lines=self._lines_as_prompt(preprocessed.lines),
+            preprocessed_header=self._header_as_prompt(preprocessed.header),
+        )
+        try:
+            llm_response = self.backend.generate(
+                prompt=prompt,
+                system_prompt=EXTRACTION_SYSTEM_PROMPT,
+                json_schema=EXTRACTION_JSON_SCHEMA,
+                temperature=0.0,
+                max_tokens=2048,
+            )
+            llm_calls += 1
+            total_tokens += llm_response.total_tokens
+            extracted_json, parse_error = self._parse_json_response(llm_response.content)
+
+            if parse_error and self.max_retries > 0:
+                retry_prompt = build_retry_prompt(
+                    error_message=parse_error,
+                    document_summary=document_content[:2000],
+                )
+                retry_response = self.backend.generate(
+                    prompt=retry_prompt,
+                    system_prompt=EXTRACTION_SYSTEM_PROMPT,
+                    json_schema=EXTRACTION_JSON_SCHEMA,
+                    temperature=0.0,
+                    max_tokens=2048,
+                )
+                llm_calls += 1
+                total_tokens += retry_response.total_tokens
+                extracted_json, parse_error = self._parse_json_response(retry_response.content)
+        except Exception as exc:
+            parse_error = str(exc)
+            if _is_timeout(exc):
+                llm_timeouts += 1
+            warnings.append(ExtractionWarning(
+                code="EXT-02",
+                severity=WarningSeverity.BLOCK,
+                message=f"Errore LLM: {exc}",
+            ))
+            extracted_json = {"header": {}, "lines": []}
+
+        if parse_error:
+            warnings.append(ExtractionWarning(
+                code="EXT-01",
+                severity=WarningSeverity.REVIEW,
+                message=f"Errore parsing JSON: {parse_error}",
+            ))
+            if not extracted_json:
+                extracted_json = {"header": {}, "lines": []}
+        return extracted_json or {"header": {}, "lines": []}, llm_calls, llm_timeouts, total_tokens
 
     def extract_from_file(self, file_path: Path | str) -> ExtractionResult:
         file_path = Path(file_path)
@@ -364,6 +387,7 @@ class OrderExtractor:
             llm_header.get("currency"),
             llm_used=llm_used,
         )
+        currency_from_doc = currency not in (None, "")
         delivery_raw, del_src, del_agreed = _pick_value(
             pre_header.delivery_date if pre_header else None,
             llm_header.get("requested_delivery_date"),
@@ -433,7 +457,8 @@ class OrderExtractor:
             _cap_confidence(field_confidences, "/header/po_date", LLM_ONLY)
         _add_conf(
             field_confidences, "/header/currency", cur_src, cur_agreed,
-            present=bool(currency), snippet=currency,
+            present=bool(currency),
+            snippet=currency if currency_from_doc else None,
         )
         _add_conf(
             field_confidences, "/header/requested_delivery_date", del_src, del_agreed,
@@ -462,7 +487,14 @@ class OrderExtractor:
         if ship_name or ship_to_data:
             order.ship_to = ExtractedParty(name=ship_name)
             if ship_to_data.get("address"):
-                order.ship_to.address_line1 = ship_to_data["address"]
+                addr = ship_to_data["address"]
+                if isinstance(addr, dict):
+                    order.ship_to.address_line1 = addr.get("line1")
+                    order.ship_to.address_city = addr.get("city")
+                    order.ship_to.address_postal_code = addr.get("postal_code")
+                    order.ship_to.address_country = addr.get("country")
+                else:
+                    order.ship_to.address_line1 = str(addr)
 
         order.lines = self._build_lines(
             (extracted_json or {}).get("lines") or [],
@@ -511,6 +543,12 @@ class OrderExtractor:
                 field_confidences, "/buyer", "llm" if llm_buyer else "preprocessor", None,
                 present=bool(buyer_name), snippet=buyer_name,
             )
+
+        if order.ship_to:
+            customer_ref = (resolved or {}).get("erp_partner_ref")
+            ship_resolved = self.catalog.resolve_ship_to(order.ship_to.name, customer_ref)
+            if ship_resolved:
+                order.ship_to.resolved = ship_resolved
 
         totals_data = (extracted_json or {}).get("totals") or {}
         total = (
@@ -742,6 +780,9 @@ class OrderExtractor:
             ("uom_raw", line.uom_raw),
             ("unit_price", line.unit_price),
         ):
+            # buyer_item_code è opzionale: assente ≠ confidenza 0 (EXT-01).
+            if field_name == "buyer_item_code" and value in (None, ""):
+                continue
             field_confidences.append(FieldConfidence(
                 path=f"/lines/{idx}/{field_name}",
                 confidence=conf if value not in (None, "") else 0.0,
@@ -773,6 +814,7 @@ class OrderExtractor:
         field_confidences: list[FieldConfidence],
         warnings: list[ExtractionWarning],
         preprocessed: PreprocessedData,
+        document_text: str | None = None,
     ) -> dict | None:
         if not self.run_rules:
             return None
@@ -797,7 +839,7 @@ class OrderExtractor:
         try:
             result = self._engine.validate(
                 vof,
-                document_text=preprocessed.unstructured_text or None,
+                document_text=document_text or preprocessed.unstructured_text or None,
                 as_of=as_of,
                 llm_schema_valid=True,
             )
@@ -987,6 +1029,11 @@ def _cap_confidence(fields: list[FieldConfidence], path: str, maximum: float) ->
         if field.path == path:
             field.confidence = min(field.confidence, maximum)
             return
+
+
+def _is_timeout(exc: BaseException) -> bool:
+    text = str(exc).lower()
+    return "timed out" in text or "timeout" in text
 
 
 def _is_critical_path(path: str) -> bool:

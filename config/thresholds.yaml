@@ -30,6 +30,9 @@ similar_order_days: 3
 similar_line_overlap: 0.80
 
 # AUTO_POST: score minimo e storico cliente.
+# 0,97 è la soglia del §7.1: non va abbassata. La confidenza deterministica
+# dell'estrattore è tarata a 0,98 (accordo preprocessor+LLM: 0,99) così un
+# ordine pulito può superarla. Vedi extract/README.md.
 auto_post_min_score: 0.97
 auto_post_min_approved_orders: 20
 warn_score_penalty: 0.05

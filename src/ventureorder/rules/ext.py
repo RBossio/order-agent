@@ -29,6 +29,46 @@ def _normalize_text(value: str) -> str:
     return re.sub(r"\s+", " ", value).strip().lower()
 
 
+_CURRENCY_ALIASES: dict[str, tuple[str, ...]] = {
+    "usd": ("usd", "$", "us$", "dollar", "dollars"),
+    "eur": ("eur", "€", "euro", "euros"),
+    "gbp": ("gbp", "£", "pound", "pounds"),
+    "cad": ("cad", "c$", "ca$"),
+    "chf": ("chf", "fr."),
+}
+
+
+def _numeric_variants(token: str) -> list[str]:
+    """Varianti testuali di un numero (24.0 → 24, 24.00, $24)."""
+    cleaned = token.replace(",", "").replace(" ", "")
+    try:
+        number = float(cleaned)
+    except ValueError:
+        return []
+    variants = {f"{number:g}", f"{number:.1f}", f"{number:.2f}"}
+    if number == int(number):
+        variants.add(str(int(number)))
+    return [item for item in variants if item]
+
+
+def snippet_in_document(snippet: str, haystack: str) -> bool:
+    """True se lo snippet compare nel testo, con tolleranza su numeri e valuta."""
+    needle = _normalize_text(snippet)
+    if not needle:
+        return True
+    if needle in haystack:
+        return True
+    aliases = _CURRENCY_ALIASES.get(needle)
+    if aliases and any(alias in haystack for alias in aliases):
+        return True
+    for variant in _numeric_variants(needle):
+        if variant in haystack:
+            return True
+        if f"${variant}" in haystack:
+            return True
+    return False
+
+
 @rule("EXT-01", Severity.REVIEW)
 def ext_01_low_confidence(ctx: RuleContext) -> list[Issue]:
     """Confidenza < 0,90 su un campo critico (PO, cliente, codice, qty, UoM, prezzo)."""
@@ -80,8 +120,7 @@ def ext_02_unanchored(ctx: RuleContext) -> list[Issue]:
         snippet = payload.get("snippet")
         if not snippet:
             continue
-        needle = _normalize_text(str(snippet))
-        if needle and needle not in haystack:
+        if not snippet_in_document(str(snippet), haystack):
             issues.append(
                 issue(
                     "EXT-02",

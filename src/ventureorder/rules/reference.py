@@ -11,6 +11,7 @@ from ventureorder.rules.access import (
     DATAGEN_VALID_UOMS,
     INDIVISIBLE_UOMS,
     normalize_address,
+    normalize_party_name,
     normalize_uom,
     parse_date,
 )
@@ -567,12 +568,19 @@ def addresses_match(ship: dict[str, Any], customer: CustomerRecord) -> bool:
     if partner_id is not None and int(partner_id) in customer.delivery_partner_ids:
         return True
     needle = normalize_address(ship.get("address"))
-    if not needle:
-        return False
-    for entry in customer.ship_to:
-        addr = entry.get("address") if isinstance(entry, dict) else None
-        if needle == normalize_address(addr):
-            return True
+    if needle:
+        for entry in customer.ship_to:
+            addr = entry.get("address") if isinstance(entry, dict) else None
+            if needle == normalize_address(addr):
+                return True
+    name = normalize_party_name(ship.get("name") if isinstance(ship.get("name"), str) else None)
+    if name:
+        for entry in customer.ship_to:
+            if not isinstance(entry, dict):
+                continue
+            entry_name = normalize_party_name(str(entry.get("name") or ""))
+            if entry_name and (name == entry_name or name in entry_name or entry_name in name):
+                return True
     return False
 
 

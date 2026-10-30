@@ -1,0 +1,34 @@
+Content-Type: multipart/mixed; boundary="===============2322731341365518645=="
+MIME-Version: 1.0
+From: purchasing@apex.example
+To: orders@delta-industrial.example
+Subject: PO MBM01033 - Order from Apex Corp. (SYNTHETIC)
+Message-ID: <po-MBM01033@apex.example>
+Date: Thu, 15 Jan 2026 10:30:00 +0000
+
+--===============2322731341365518645==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+Kindly arrange shipment against purchase order MBM01033 (5/1/26).
+Ship the following to Apex Shipping Location 1, needed by 2026-05-17:
+
+- twelve RO of Bubble Wrap 12in (SYNTHETIC), catalog PKG-BBW-073, unit price 41.37.
+- ten BX of Hex Nut 3/4-10 Grade 5 Zinc (SYNTHETIC), catalog FST-HNT-34-10, unit price 20.92.
+- two CS of Floor Pad 20in Blue (SYNTHETIC), catalog APEX-JAN-0302, unit price 29.48.
+- two PK of Super Glue Gel (SYNTHETIC), catalog ADH-SGG-102, unit price 22.47.
+- six EA of Safety Glasses Amber Anti-Fog (SYNTHETIC), catalog APEX-SAF-2608, unit price 10.02.
+- four BX of Hex Cap Screw 5/8-11 x 1-1/2 Grade 5 Zinc (SYNTHETIC), catalog APEX-FAS-9421, unit price 23.91.
+- two PK of Utility Blade Standard (SYNTHETIC), catalog TLS-UTB-023, unit price 4.73.
+- twelve EA of Hard Hat Orange ANSI Type I (SYNTHETIC), catalog APEX-SAF-5715, unit price 8.73.
+- twenty-four CS of Construction Adhesive (SYNTHETIC), catalog ADH-CON-233, unit price 67.36.
+- five BX of Hex Cap Screw 3/8-16 x 2 Grade 5 Zinc (SYNTHETIC), catalog FST-HCS-38-16-2, unit price 9.68.
+- twenty-four CS of Multi-Purpose Grease (SYNTHETIC), catalog APEX-LUB-2240, unit price 65.95.
+- four CS of Disinfectant Spray (SYNTHETIC), catalog JAN-DSP-200, unit price 45.69.
+- six CS of Latex Gloves L PF (SYNTHETIC), catalog PPE-GLV-LAT-8-L-WHI, unit price 83.29.
+- two EA of Hard Hat Orange ANSI Type I (SYNTHETIC), catalog APEX-SAF-6004, unit price 16.96.
+- one CS of Stretch Wrap 18in (SYNTHETIC), catalog PKG-STW-097, unit price 115.67.
+
+Appreciate the help.
+--===============2322731341365518645==--

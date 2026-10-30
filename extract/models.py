@@ -330,6 +330,7 @@ class ExtractionResult:
     field_confidences: list[FieldConfidence] = field(default_factory=list)
     warnings: list[ExtractionWarning] = field(default_factory=list)
     llm_calls: int = 0
+    llm_timeouts: int = 0
     llm_tokens_used: int = 0
     extraction_time_ms: int = 0
     preprocessed_fields: list[str] = field(default_factory=list)

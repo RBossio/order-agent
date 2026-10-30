@@ -1,0 +1,36 @@
+Content-Type: multipart/mixed; boundary="===============6416218039096549284=="
+MIME-Version: 1.0
+From: purchasing@apex.example
+To: orders@delta-industrial.example
+Subject: PO MBM01023 - Order from Apex Corp. (SYNTHETIC)
+Message-ID: <po-MBM01023@apex.example>
+Date: Thu, 15 Jan 2026 10:30:00 +0000
+
+--===============6416218039096549284==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+Kindly arrange shipment against purchase order MBM01023 (4/1/26).
+Ship the following to Apex Shipping Location 1, needed by 2026-04-16:
+
+- five CS of Packing Tape Clear 2in (SYNTHETIC), catalog PKG-PTC-202, unit price 60.96.
+- five BX of Cut-Off Wheel 4-1/2in (SYNTHETIC), catalog APEX-ABR-4495, unit price 33.78.
+- three CS of Glass Cleaner RTU (SYNTHETIC), catalog JAN-GCL-273, unit price 29.19.
+- twenty-four CS of Facial Tissue Flat Box (SYNTHETIC), catalog JAN-FTI-167, unit price 64.70.
+- ten PK of Epoxy 2-Part Quick Set (SYNTHETIC), catalog APEX-ADH-1197, unit price 18.68.
+- ten BX of Flap Disc 4-1/2in 180 (SYNTHETIC), catalog ABR-FLD-412IN-1, unit price 88.42.
+- five CS of Floor Cleaner Neutral Concentrate (SYNTHETIC), catalog APEX-JAN-9828, unit price 65.94.
+- one BX of Hex Cap Screw 5/8-11 x 1-1/2 Grade 5 Zinc (SYNTHETIC), catalog APEX-FAS-9421, unit price 23.91.
+- one CS of Penetrating Oil Spray (SYNTHETIC), catalog LUB-POS-059, unit price 67.65.
+- five BX of Lock Washer 3/8-16 Zinc (SYNTHETIC), catalog FST-LWS-38-16, unit price 15.36.
+- six EA of Screwdriver {type} M8 x 2-1/2 (SYNTHETIC), catalog APEX-TOO-3187, unit price 9.44.
+- twenty-four CS of Paper Towel Roll 2P Natural (SYNTHETIC), catalog APEX-JAN-2522, unit price 84.79.
+- twenty-four CS of Packing Tape Clear 2in (SYNTHETIC), catalog PKG-PTC-187, unit price 59.41.
+- three BX of Lock Washer M6 Zinc (SYNTHETIC), catalog FST-LWS-M6-1, unit price 11.37.
+- two BX of Ear Plugs Foam Disposable (SYNTHETIC), catalog PPE-EAR-101, unit price 19.25.
+- six CS of Hand Soap Foam (SYNTHETIC), catalog APEX-JAN-5741, unit price 82.47.
+- twelve CS of Floor Pad 17in Black (SYNTHETIC), catalog JAN-FPD-17-BLA, unit price 20.93.
+
+Appreciate the help.
+--===============6416218039096549284==--

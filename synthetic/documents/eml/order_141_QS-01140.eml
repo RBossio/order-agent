@@ -1,0 +1,37 @@
+Content-Type: multipart/mixed; boundary="===============3912954682438218977=="
+MIME-Version: 1.0
+From: purchasing@global.example
+To: orders@delta-industrial.example
+Subject: PO QS-01140 - Order from Global Corp. (SYNTHETIC)
+Message-ID: <po-QS-01140@global.example>
+Date: Thu, 15 Jan 2026 10:30:00 +0000
+
+--===============3912954682438218977==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+Hi team, could you please raise this under our purchase order QS-01140 dated Feb 13, 2026? Deliver to Global Shipping Location 2; we need the goods by 2026-02-20.
+
+We need 6 CS of Latex Gloves XXL PF (SYNTHETIC) (catalog GLOBAL-SAF-6125) at 92.05 each.
+We need 3 EA of Safety Glasses Smoke Anti-Fog (SYNTHETIC) (catalog PPE-GLS-SMO-ANTI-FOG) at 3.05 each.
+We need 5 EA of Utility Knife Retractable (SYNTHETIC) (catalog TLS-UTK-122) at 7.67 each.
+We need 1 CS of Floor Cleaner Neutral Concentrate (SYNTHETIC) (catalog JAN-NFC-287) at 53.53 each.
+We need 5 CS of Hand Sanitizer Gel 70% (SYNTHETIC) (catalog JAN-HSG-145) at 49.06 each.
+We need 4 BX of Socket Head Cap Screw 1/2-13 x 1 (SYNTHETIC) (catalog GLOBAL-FAS-7886) at 41.98 each.
+We need 2 CS of Machine Oil Light (SYNTHETIC) (catalog LUB-MOL-031) at 53.66 each.
+We need 2 CS of Toilet Tissue 2P Standard (SYNTHETIC) (catalog GLOBAL-JAN-8543) at 84.90 each.
+We need 10 CS of Hand Sanitizer Gel 70% (SYNTHETIC) (catalog JAN-HSG-207) at 66.33 each.
+We need 24 BX of Cut-Off Wheel 6in (SYNTHETIC) (catalog ABR-COW-6IN-5) at 39.84 each.
+We need 5 RO of Electrical Tape Blue 3/4in (SYNTHETIC) (catalog ELE-TPE-BLU) at 2.29 each.
+We need 5 BX of Cut-Off Wheel 4-1/2in (SYNTHETIC) (catalog GLOBAL-ABR-7897) at 40.18 each.
+We need 4 CS of Stretch Wrap 18in (SYNTHETIC) (catalog PKG-STW-002) at 90.22 each.
+We need 24 CS of Stretch Wrap 18in (SYNTHETIC) (catalog PKG-STW-123) at 128.45 each.
+We need 10 BX of Flap Disc 4-1/2in 180 (SYNTHETIC) (catalog ABR-FLD-412IN-1) at 88.42 each.
+We need 24 PK of Epoxy 2-Part Quick Set (SYNTHETIC) (catalog GLOBAL-ADH-9673) at 42.55 each.
+We need 3 BX of Cut-Off Wheel 6in (SYNTHETIC) (catalog GLOBAL-ABR-5213) at 48.92 each.
+We need 2 EA of Hard Hat White ANSI Type I (SYNTHETIC) (catalog PPE-HAT-WHI) at 23.83 each.
+We need 2 BX of Hex Nut 3/4-10 Grade 5 Zinc (SYNTHETIC) (catalog FST-HNT-34-10-1) at 9.87 each.
+
+Thanks in advance.
+--===============3912954682438218977==--

@@ -221,7 +221,11 @@ def seed_ref() -> MockReferenceDataProvider:
             currency="USD",
             payment_terms="Net 30",
             sale_warn="no-message",
-            ship_to=[{"code": "PLANT-02", "address": copy.deepcopy(SHIP_ADDRESS)}],
+            ship_to=[{
+                "code": "PLANT-02",
+                "name": "Acme Plant 2",
+                "address": copy.deepcopy(SHIP_ADDRESS),
+            }],
             delivery_partner_ids=[44],
             allowlisted=True,
             approved_orders_without_corrections=25,
@@ -432,6 +436,16 @@ class TestCus:
             "resolved": {"erp_partner_id": 99, "method": "ADDRESS", "score": 0.7},
         }
         assert_hit(engine.validate(order), "CUS-03", Severity.REVIEW)
+
+    def test_cus_03_name_only_not_error(self, engine: ValidationEngine) -> None:
+        order = make_vof()
+        order["ship_to"] = {"name": "Sede non in anagrafica"}
+        assert_clean(engine.validate(order), "CUS-03")
+
+    def test_cus_03_name_matches_anagrafica(self, engine: ValidationEngine) -> None:
+        order = make_vof()
+        order["ship_to"] = {"name": "Acme Plant 2"}
+        assert_clean(engine.validate(order), "CUS-03")
 
     def test_cus_04_pass(self, engine: ValidationEngine) -> None:
         assert_clean(engine.validate(make_vof()), "CUS-04")
@@ -753,6 +767,24 @@ class TestDupExtSecExp:
     def test_ext_02_fail(self, engine: ValidationEngine) -> None:
         result = engine.validate(make_vof(), document_text="nessuno snippet qui")
         assert_hit(result, "EXT-02", Severity.REVIEW)
+
+    def test_ext_02_numeric_alias(self, engine: ValidationEngine) -> None:
+        order = make_vof()
+        order["evidence"]["/lines/0/quantity"] = {"confidence": 0.99, "snippet": "24.0"}
+        result = engine.validate(
+            order,
+            document_text="PO Number: 4500012345 HEX CAP SCREW Qty 24 CS",
+        )
+        assert_clean(result, "EXT-02")
+
+    def test_ext_02_currency_from_dollar(self, engine: ValidationEngine) -> None:
+        order = make_vof()
+        order["evidence"]["/header/currency"] = {"confidence": 0.99, "snippet": "USD"}
+        result = engine.validate(
+            order,
+            document_text="PO Number: 4500012345 total $75.00 HEX CAP SCREW",
+        )
+        assert_clean(result, "EXT-02")
 
     def test_ext_03_pass(self, engine: ValidationEngine) -> None:
         assert_clean(engine.validate(make_vof()), "EXT-03")

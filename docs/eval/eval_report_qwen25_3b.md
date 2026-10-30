@@ -1,45 +1,49 @@
 # Report Valutazione Estrazione Ordini
 
-**Data:** 2026-10-30 10:23:04
-**Modello:** ollama/qwen2.5:3b-instruct (Q4_K_M)
-**Hardware:** Intel Xeon 4 cores, 15 GB RAM, CPU-only (no GPU)
-**Pipeline:** ingest → preprocessor deterministico (Excel/PDF) → LLM solo ripiego/email → controlli incrociati + motore regole
-**Campione:** 50/150 ordini stratificati, seed 42 (tutti i 22 casi difficili + 28 normali). Stesso modello e stessi parametri della misura precedente (`temperature=0`, `repeat_penalty=1.1`, `num_predict=2048`, `format=json`).
+**Data:** 2026-10-30 12:03:32
+**Modello:** ollama/qwen2.5:3b-instruct
+**Hardware:** Intel Xeon 4 cores, 15GB RAM, CPU-only (no GPU)
 
 ## Riepilogo vs target
 
 | Metrica | Valore | Target |
 |---------|--------|--------|
-| Accuratezza testata | **91.0%** | ≥98% ❌ |
-| Accuratezza righe | **85.1%** | ≥90% ❌ |
-| Errori silenziosi | **0** (0.00%) | ≤1% ✅ |
-| Ordini in revisione | **50/50** (100.0%) | - |
-| Tempo medio/ordine | **37.3s** | - |
+| Accuratezza testata | **85.0%** | ≥98% ❌ |
+| Accuratezza righe | **47.3%** | ≥90% ❌ |
+| Errori silenziosi (ordini AUTO_POST) | **0/28** (0.00%) | ≤1% ✅ |
+| Errori silenziosi (campi, solo AUTO_POST) | **0** (0.00%) | metrica separata |
+| AUTO_POST | **28/50** (56.0%) | - |
+| REVIEW | **22/50** (44.0%) | - |
+| REJECT | **0/50** (0.0%) | - |
+| Tempo medio/ordine | **43.0s** | - |
 | Ordini valutati | 50 | - |
-| Timeout LLM | 18 (email/PDF incompleti; fallback preprocessor) | - |
-| Casi difficili | 22 (44.0%) | - |
+| Fallimenti estrazione | 21 | - |
+| Timeout LLM | 21 | - |
+| Chiamate LLM | 4 | - |
+| Casi difficili | 12 (24.0%) | - |
+
+Errore silenzioso = ordine in **AUTO_POST** con almeno un campo sbagliato (testata, codice/qty/UoM/prezzo/codice cliente di riga, righe in più o mancanti, valori inventati se la ground truth è vuota). La percentuale a livello di campo è una metrica separata, calcolata solo sugli ordini AUTO_POST.
 
 ## Accuratezza per Formato
 
-| Formato | Ordini | Testata | Righe | Errori silenziosi | Revisione | Tempo medio |
-|---------|--------|---------|-------|-------------------|-----------|-------------|
-| EML | 19 | 100.0% | 99.6% | 0 | 19/19 | 89.1s |
-| PDF | 18 | 97.2% | 47.6% | 0 | 18/18 | 4.6s |
-| XLSX | 13 | 69.2% | 98.9% | 0 | 13/13 | 6.9s |
+| Formato | Ordini | Testata | Righe | Silent ordini | Silent campi | AUTO_POST | REVIEW | REJECT |
+|---------|--------|---------|-------|---------------|--------------|-----------|--------|--------|
+| EML | 25 | 70.0% | 24.8% | 0 | 0 | 3/25 | 22/25 | 0/25 |
+| XLSX | 25 | 100.0% | 98.7% | 0 | 0 | 25/25 | 0/25 | 0/25 |
 
 ## Accuratezza per Tipo di Caso
 
 | Tipo | Ordini | Testata | Righe |
 |------|--------|---------|-------|
-| Normali | 28 | 92.0% | 85.6% |
-| Difficili | 22 | 89.8% | 84.6% |
+| Normali | 38 | 83.6% | 39.1% |
+| Difficili | 12 | 89.6% | 76.3% |
 
 ## Accuratezza Campi Testata
 
 | Campo | Corretti | Totali | Accuratezza |
 |-------|----------|--------|-------------|
-| po_number | 47 | 50 | 94.0% |
-| po_date | 48 | 50 | 96.0% |
+| po_number | 50 | 50 | 100.0% |
+| po_date | 33 | 50 | 66.0% |
 | currency | 50 | 50 | 100.0% |
 | requested_delivery_date | 37 | 50 | 74.0% |
 
@@ -47,58 +51,70 @@
 
 | Ordine | Tipo | Testata | Righe GT | Righe Match |
 |--------|------|---------|----------|-------------|
-| 42b2b9fb... | MISSING_DATE, MISSING_QTY | 100% | 7 | 4 |
-| f4403793... | QTY_WORDS | 100% | 11 | 11 |
-| 06a6174f... | MULTIPAGE_PDF | 100% | 15 | 7 |
-| 343c9ff6... | DATE_FORMAT | 50% | 9 | 9 |
-| c6779f2b... | MISSING_PO_NUMBER | 75% | 2 | 2 |
-| 0349b447... | TYPO_DESC | 100% | 4 | 3 |
-| 55f0fd82... | MISSING_PO_NUMBER, DATE_FORMAT | 25% | 17 | 17 |
-| 367884f8... | UOM_CONVERSION | 75% | 6 | 6 |
-| 6530d57f... | EMAIL_CONTRADICTORY | 100% | 12 | 12 |
-| 36137ae4... | MULTIPAGE_PDF, CUSTOMER_CODES | 100% | 2 | 2 |
-| 47cfb927... | CUSTOMER_CODES | 100% | 22 | 22 |
-| 0bcf5cc6... | EMAIL_CONTRADICTORY, MISSING_DATE | 100% | 11 | 11 |
-| 4d5faf75... | TOTAL_MIXED | 100% | 7 | 3 |
-| 708c2e7d... | MISSING_QTY | 100% | 11 | 7 |
-| 5a5c9563... | MISSING_PO_NUMBER | 75% | 3 | 1 |
-| 5d391dd4... | AMBIGUOUS_DESC | 100% | 25 | 24 |
-| 4d78ca32... | CUSTOMER_CODES | 100% | 4 | 2 |
-| 74b0cb67... | MISSING_DATE | 100% | 18 | 7 |
-| 0214ff9f... | TYPO_DESC, TOTAL_MIXED | 75% | 3 | 2 |
-| 5f2b3be7... | TYPO_DESC | 100% | 21 | 21 |
+| e735b08f... | QTY_WORDS | 100% | 20 | 20 |
+| 55b7e9d3... | MISSING_DATE, UNKNOWN_CUSTOMER_CODE | 50% | 14 | 0 |
+| d04956bd... | QTY_WORDS | 75% | 7 | 6 |
+| 06a6174f... | CUSTOMER_CODES | 100% | 9 | 9 |
+| a3f01208... | MISSING_DATE | 100% | 15 | 15 |
+| 13c628cc... | TOTAL_MIXED | 100% | 5 | 5 |
+| e5b2065c... | AMBIGUOUS_DESC | 100% | 4 | 3 |
+| b88bea77... | EMAIL_CONTRADICTORY | 100% | 12 | 12 |
+| 367884f8... | PRICE_OUT_OF_TOLERANCE | 100% | 13 | 13 |
+| 00c240fa... | AMBIGUOUS_DESC | 100% | 3 | 2 |
+| 9c75d2a9... | TOTAL_MIXED | 100% | 2 | 2 |
+| ed19ba0b... | UOM_CONVERSION | 50% | 10 | 0 |
 
 ## Performance
 
-- Tempo totale: 1864.7s
-- Tempo medio per ordine: 37293ms
+- Tempo totale: 2151.2s
+- Tempo medio per ordine: 43024ms
 - Chiamate LLM totali: 4
 
-## Prima / dopo (stesso campione, stesso modello)
+## Prima / dopo
 
-Campione: 50 ordini, seed 42, `qwen2.5:3b-instruct`, temperature=0, repeat_penalty=1.1, num_predict=2048, format=json.
+Prima: metriche regenerate con `git show 380c7bbe674192113b8460a93a7bc2d706bff716:docs/eval/eval_results.json` (commit di partenza, non copiate a mano).
+Dopo: questo commit, stesso seed e stesso modello. Campione senza PDF.
 
 | Metrica | Prima | Dopo |
 |---------|-------|------|
-| Testata | 56.0% | 91.0% |
-| Righe | 36.9% | 85.1% |
-| Errori silenziosi | 149 (13.42%) | 0 (0.00%) |
-| Ordini in revisione | n/d | 50/50 (100.0%) |
-| Tempo medio | 56.2s | 37.3s |
+| Testata | 56.0% | 85.0% |
+| Righe | 36.9% | 47.3% |
+| Errori silenziosi (ordini AUTO_POST) | n/d (def. precedente) | 0/28 (0.00%) |
+| Errori silenziosi (campi AUTO_POST) | 149 (13.42%, def. precedente) | 0 (0.00%) |
+| AUTO_POST | n/d | 28/50 (56.0%) |
+| REVIEW | n/d | 22/50 (44.0%) |
+| REJECT | n/d | 0/50 (0.0%) |
+| Tempo medio | 56.2s | 43.0s |
 
 ### Per formato
 
-| Formato | Testata prima | Testata dopo | Righe prima | Righe dopo | Errori silenziosi dopo |
-|---------|---------------|--------------|-------------|------------|------------------------|
-| EML | 43.4% | 100.0% | 10.7% | 99.6% | 0 |
-| PDF | 66.7% | 97.2% | 44.4% | 47.6% | 0 |
-| XLSX | 59.6% | 69.2% | 98.9% | 98.9% | 0 |
+| Formato | Testata prima | Testata dopo | Righe prima | Righe dopo | AUTO_POST dopo | REVIEW dopo | REJECT dopo | Silent ordini dopo |
+|---------|---------------|--------------|-------------|------------|----------------|--------------|--------------|--------------------|
+| EML | 43.4% | 70.0% | 10.7% | 24.8% | 3/25 | 22/25 | 0/25 | 0 |
+| XLSX | 59.6% | 100.0% | 98.9% | 98.7% | 25/25 | 0/25 | 0/25 | 0 |
+| PDF | 66.7% | — | 44.4% | — | — | — | — | 0 |
 
-## Note
+## Contributo LLM
 
-1. **Priorità 1 raggiunta:** 0 errori silenziosi (campo sbagliato con confidenza ≥80% e senza avviso). Gli ordini inceri vanno in REVIEW (100%), non in auto-post.
-2. **Excel/PDF:** l'LLM non viene chiamato se preprocessor ha PO + almeno una riga con quantità. Tempo PDF/XLSX ~0–7 s/ordine.
-3. **Email:** liste in `EMAIL_SIGNATURE` e quantità in lettere (`twenty-four`) estratte in deterministico. 18 timeout Ollama su 90 s; si usa il preprocessor, confidenza LLM-only sotto soglia.
-4. **Testata XLSX 69%:** il gap è quasi tutto `requested_delivery_date` assente dal foglio (il PO e la data sono al 94–96%).
-5. **PDF righe 47.6%:** tabelle pdfplumber spezzate sulle pagine successive (MULTIPAGE_PDF); le righe estratte non sono silenziose — SKU non in anagrafica o qty×prezzo abbassano la confidenza.
-6. **Revisione 100%:** motore regole (EXT-01 sotto 0,90, ITM/UOM/PRC, allowlist AUTO_POST). Un ordine in revisione è il comportamento voluto.
+Stessa run (stesso campione, stessi documenti) con LLM disattivato: solo preprocessor.
+
+| Metrica | Con LLM | Senza LLM |
+|---------|---------|-----------|
+| Testata | 85.0% | 83.0% |
+| Righe | 47.3% | 44.4% |
+| AUTO_POST | 28/50 | 29/50 |
+| REVIEW | 22/50 | 21/50 |
+| Chiamate LLM | 4 | 0 |
+| Timeout LLM | 21 | 0 |
+
+## (b) Cosa aspettarsi su documenti reali
+
+I numeri sopra sono su **PO sintetici**: Excel con colonne etichettate, email generate da cinque template noti a questo repo, anagrafica completa, prezzi allineati al listino. Non sono un campione di PO veri.
+
+**Excel/CSV strutturati.** È la fascia in cui il prototipo è già utile: testata e righe escono dal preprocessor, AUTO_POST è raggiungibile se cliente e articoli sono in anagrafica. Su file reali manca lo sporco che qui non c'è (fogli multipli, intestazioni su due righe, colonne fuori ordine, prezzi in millesimi, UoM inventate).
+
+**Email di testo libero.** Le regex attuali riconoscono solo `N. [SKU]` + `Qty:`. I cinque template nuovi (prosa, tabella HTML, elenco in firma, quantità in lettere, inoltro) sono volutamente fuori da quelle regex: servono all'LLM. Su questa macchina `qwen2.5:3b-instruct` in CPU va in timeout sulla maggior parte delle email (21/25 in questo campione). Senza un modello che risponda in tempo, quelle email restano in REVIEW con testata/righe incomplete. Su documenti veri (inoltri, firme, HTML di Outlook) l'accuratezza sarà quella dell'LLM, non quella dell'Excel.
+
+**PDF.** Esclusi da questo run. Il preprocessor legge tabelle pdfplumber; i PDF scansionati (`needs_ocr`) non sono supportati.
+
+**Limiti noti.** Matching articoli solo SKU/xref esatto; niente fuzzy. AUTO_POST nel prototipo assume i clienti sintetici già in allowlist (§7.1 ALLOWLIST+HISTORY). In produzione l'allowlist è quella reale: un ordine pulito di un cliente nuovo va in REVIEW. Confidenza deterministica 0,98, soglia AUTO_POST 0,97 invariata.

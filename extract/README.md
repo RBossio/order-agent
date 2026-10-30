@@ -114,7 +114,32 @@ export OLLAMA_MODEL="llama3.1:8b"
 python -m extract input.json -o output.json --backend ollama
 ```
 
+## Confidenza e AUTO_POST
+
+La soglia `auto_post_min_score` resta **0,97** come da §7.1 (`config/thresholds.yaml`).
+Non è stata abbassata: è la confidenza dell'estrattore a essere tarata sopra quella soglia.
+
+| Fonte | Valore | Perché |
+|-------|--------|--------|
+| preprocessor solo, controlli ok | 0,98 | un ordine Excel/PDF pulito può AUTO_POST |
+| preprocessor e LLM d'accordo | 0,99 | doppia fonte coincidente |
+| solo LLM | 0,70 | sotto EXT-01 (0,90) → REVIEW |
+| disaccordo o controllo fallito | 0,45 / 0,39 | REVIEW |
+
+Nel prototipo i clienti sintetici sono in **allowlist** con storico 25: senza ALLOWLIST+HISTORY del §7.1 AUTO_POST resterebbe impossibile anche con score 1,0. In produzione l'allowlist è quella reale.
+
+Errore silenzioso (eval): ordine in **AUTO_POST** con almeno un campo sbagliato (testata, codice/qty/UoM/prezzo/codice cliente, righe in più o mancanti, valori inventati se la GT è vuota). La percentuale a livello di campo è una metrica separata.
+
 ## Valutazione
+
+Comando unico, seed/modello/parametri fissi:
+
+```bash
+make eval
+# equivalente: python -m extract.eval_run
+```
+
+Produce `docs/eval/eval_results.json` (dettaglio ordine per ordine, chiamate/timeout LLM, numeri «prima» da `git show 380c7bb:docs/eval/eval_results.json`) e la stessa run con LLM spento (`no_llm`). Nessun PDF in questo campione.
 
 Lo script `eval.py` confronta gli ordini estratti con il ground truth e produce un report Markdown.
 
